@@ -1,0 +1,227 @@
+@firstproductid = 1
+@secondproductid = 2
+@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJJc0FkbWluIjoiVHJ1ZSIsIklzU3VwZXJBZG1pbiI6IlRydWUiLCJWZW51ZU5vIjoiMSIsIlZlbnVlQnJhbmNoTm8iOiIxIiwiVXNlck5vIjoiMiIsIlVzZXJOYW1lIjoiTGltcyIsIklzUHJvdmlzaW9uYWwiOiJUcnVlIiwicm9sZSI6WyIiLCJCbG9vZEJhbmtNYXN0ZXJzIiwiQmxvb2RCYW5rTWdtdCIsIkxJTVNGUk9OVE9GRklDRSIsIkxJTVNNYXN0ZXJzIiwiTElNU1NBTVBMRU1OVEMiLCJMSU1TVXNlck1nbXQiXSwibmJmIjoxNzA1OTQxNDU1LCJleHAiOjE3MDU5NDMyNTUsImlhdCI6MTcwNTk0MTQ1NX0.edJtF00TCIz4ZNZ_knCh3a5d73qfIIRJNDvV2v7fxe0
+
+
+
+POST https://localhost:5403/BloodBankRegistration/filters
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+  "statuses": [
+    "SampleReceived"
+  ]
+}
+###
+POST https://localhost:5403/BloodBankRegistration/testdetails
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+  "deptNo": 0,
+  "VenueNo": 1,
+  "VenueBranchNo": 1,
+  "TestNo": 100
+}
+
+###
+GET https://localhost:5403/BloodBankRegistration/bloodbanktests
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+###
+GET https://localhost:5403/BloodBankRegistration/bloodbanksubtests
+Content-Type: application/json
+Authorization: Bearer {{token}}
+###
+POST https://localhost:5403/BloodBankRegistration
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+  "identifier": 0,
+  "nricNumber": "NINE",
+  "patientName": "NINE",
+  "patientDOB": "1904-01-02",
+  "genderId": 13,
+  "raceId": 16,
+  "nationalityId": 10,
+  "residenceStatusId": 20,
+  "clinicalDiagnosisId": 23,
+  "indicationOfTransfusionId": "28",
+  "clinicalDiagnosisOthers": "",
+  "indicationOfTransfusionOthers": "",
+  "isEmergency": false,
+  "caseOrVisitNumber": "TEST",
+  "wardId": "36",
+  "isActive": true,
+  "productTotal": 200,
+  "products": [
+    {
+      "productId": 1,
+      "mrp": 200,
+      "unit": 1,
+      "price": 200
+    },
+    {
+      "productId": 5,
+      "mrp": 50,
+      "unit": 1,
+      "price": 50
+    }    
+  ],
+  "results": [
+    {
+      "containerId": 0,
+      "testId": 16948,
+      "parentTestId": 0,
+      "inventoryId": 0,
+      "testName": "Crossmatch AHG (Automated)",
+      "unit": "",
+      "testValue": "",
+      "comments": "",
+      "barCode": "",
+      "status": "Registered",
+      "isRejected": false,
+      "modifiedBy": 2,
+      "modifiedByUserName": "Lims",
+      "interfaceispicked": false
+    },
+    {
+      "containerId": 0,
+      "testId": 68982,
+      "parentTestId": 16948,
+      "testName": "AHG",
+      "unit": "",
+      "testValue": "",
+      "comments": "",
+      "barCode": "",
+      "status": "Registered",
+      "isRejected": false,
+      "modifiedBy": 2,
+      "modifiedByUserName": "Lims",
+      "interfaceispicked": false
+    },
+    {
+      "containerId": 0,
+      "testId": 68983,
+      "parentTestId": 16948,
+      "testName": "Intepretation",
+      "unit": "",
+      "testValue": "",
+      "comments": "",
+      "barCode": "",
+      "status": "Registered",
+      "isRejected": false,
+      "modifiedBy": 2,
+      "modifiedByUserName": "Lims",
+      "interfaceispicked": false
+    }
+  ],
+  "specialRequirements": [
+    {
+      "identifier": 0,
+      "registrationId": 0,
+      "specialRequirementId": 6,
+      "validity": "2024-01-05",
+      "modifiedBy": 2,
+      "modifiedByUserName": "Lims"
+    }
+  ],
+  "issuingComments": "=",
+  "status": "Registered",
+  "modifiedBy": 2,
+  "modifiedByUserName": "Lims",
+  "lastModifiedDateTime": "2024-01-05T07:24:37",
+  "labAccessionNumber": ""
+}
+
+
+###
+POST https://localhost:5403/BloodBankRegistration
+Content-Type: application/json
+Authorization: Bearer {{token}}
+{
+  "identifier": 0,
+  "nricNumber": "NINE",
+  "patientName": "NINE",
+  "patientDOB": "2023-10-04",
+  "genderId": 13,
+  "raceId": 16,
+  "nationalityId": 10,
+  "residenceStatusId": 20,
+  "clinicalDiagnosisId": "23",
+  "indicationOfTransfusionId": "26",
+  "clinicalDiagnosisOthers": "",
+  "indicationOfTransfusionOthers": "",
+  "isEmergency": false,
+  "caseOrVisitNumber": "TEST",
+  "wardId": "34",
+  "isActive": true,
+  "productTotal": 50,
+  "products": [
+    {
+      "productId": 5,
+      "mrp": 50,
+      "unit": 1,
+      "price": 50
+    }
+  ],
+  "results": [],
+  "specialRequirements": [
+    {
+      "identifier": 0,
+      "registrationId": 0,
+      "specialRequirementId": 7,
+      "validity": "2024-01-11",
+      "modifiedBy": 2,
+      "modifiedByUserName": "Lims"
+    }
+  ],
+  "issuingComments": "",
+  "status": "Registered",
+  "modifiedBy": 2,
+  "modifiedByUserName": "Lims",
+  "lastModifiedDateTime": "2024-01-05T08:16:09",
+  "labAccessionNumber": ""
+}
+
+###
+POST https://localhost:5403/BloodBankRegistration/update
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+  "action": "",
+  "registrations": [
+    {
+      "registrationId": 367,
+      "registrationStatus": "SampleReceived",
+      "rejectedReason": "",
+      "sampleReceivedDateTime": "2024-01-07T22:03:45.6620047",
+      "modifiedBy": 2,
+      "lastModifiedDateTime": "2024-01-08T08:45:44",
+      "modifiedByUserName": "Lims"
+    }
+  ]
+}
+
+
+###
+POST https://localhost:5403/BloodBankRegistration/update
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+  "registrations": [
+    {
+      "registrationId": 366,
+      "rejectedReason": "tested",
+      "registrationStatus": "Rejected",
+      "modifiedBy": 2,
+      "lastModifiedDateTime": "2024-01-08T09:22:57",
+      "modifiedByUserName": "Lims"
+    }
+  ]
+}

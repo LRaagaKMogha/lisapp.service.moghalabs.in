@@ -1,0 +1,39 @@
+1) supplier master to be eanbled. 
+
+=======
+Control master (screen1)
+2) QC sera is control master 
+	form (lypholized, liquid, liquid frozen form)
+	type -  Assayed-Pre-determined Target Value  & Unassayed -Values needs to be established
+	QC Sera Name, Manufacturer Name, Supplier Name, Lot ID/Batch ID, Expiry Date, Level (01,02,03)
+3) analyzer to parameter to test mapping 
+
+=========
+4) (screen 2) scheduing for 1 test against 1 analyzer with frequency (to be shown in different ways, to begin with basic view) 
+
+
+
+
+==========
+QC Run Preparation (screen 3) 
+control selection (show these when selected. - name, expiry date, batch )
+Date Timestamp, of QC Sample Preparation, 
+Prepared by, 
+Temperature at which qC sample is being stored 
+and how many sample
+
+on edit show all the eliquotes (how many small samples) and one or more can be discarded. 
+also discard on expiry date of control master 
+
+
+====
+in analyzer master (equipment) - add manufacturer/supplier mapping 
+
+
+=======
+give the table details for qc result entry
+
+===
+result entry screen for a particular date and time. 
+
+====

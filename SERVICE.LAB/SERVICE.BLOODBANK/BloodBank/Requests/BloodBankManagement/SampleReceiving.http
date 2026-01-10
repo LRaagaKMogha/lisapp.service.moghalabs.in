@@ -1,0 +1,42 @@
+@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJJc0FkbWluIjoiVHJ1ZSIsIklzU3VwZXJBZG1pbiI6IlRydWUiLCJWZW51ZU5vIjoiMSIsIlZlbnVlQnJhbmNoTm8iOiIxIiwiVXNlck5vIjoiMiIsIlVzZXJOYW1lIjoiTGltcyIsIklzUHJvdmlzaW9uYWwiOiJUcnVlIiwicm9sZSI6WyIiLCJCbG9vZEJhbmtNYXN0ZXJzIiwiQmxvb2RCYW5rTWdtdCIsIkxJTVNGUk9OVE9GRklDRSIsIkxJTVNNYXN0ZXJzIiwiTElNU1NBTVBMRU1OVEMiLCJMSU1TVXNlck1nbXQiXSwibmJmIjoxNzA1OTQxNDU1LCJleHAiOjE3MDU5NDMyNTUsImlhdCI6MTcwNTk0MTQ1NX0.edJtF00TCIz4ZNZ_knCh3a5d73qfIIRJNDvV2v7fxe0
+GET https://localhost:5403/SampleReceiving
+Content-Type: application/json
+
+
+###
+PUT https://localhost:5403/SampleReceiving
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+  "samples": [
+    {
+      "barCode": "",
+      "isActive": true,
+      "registrationId": 368,
+      "sampleTypeId": "1",
+      "tubeNo": "Tube 1",
+      "unitCount": 1,
+      "patientId": 46,
+      "tests": "EXMAT",
+      "modifiedBy": 2,
+      "lastModifiedDateTime": "2024-01-07T22:03:45",
+      "modifiedByUserName": "Lims"
+    }
+  ]
+}
+
+###
+POST https://localhost:5403/BloodBankInventory/filters
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+    "statuses": [
+        "available",
+        "OnHold"
+    ],
+    "startDate": "1970-01-01T00:00:00",
+    "endDate": "2024-01-22T23:59:59",
+    "expirationDate": "2024-01-22T20:23:49"
+}

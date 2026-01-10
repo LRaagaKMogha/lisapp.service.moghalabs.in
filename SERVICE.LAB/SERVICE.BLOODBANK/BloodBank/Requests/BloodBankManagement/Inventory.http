@@ -1,0 +1,89 @@
+@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJJc0FkbWluIjoiVHJ1ZSIsIklzU3VwZXJBZG1pbiI6IlRydWUiLCJWZW51ZU5vIjoiMSIsIlZlbnVlQnJhbmNoTm8iOiIxIiwiVXNlck5vIjoiMiIsIlVzZXJOYW1lIjoiTGltcyIsIklzUHJvdmlzaW9uYWwiOiJUcnVlIiwicm9sZSI6WyIiLCJCbG9vZEJhbmtNYXN0ZXJzIiwiQmxvb2RCYW5rTWdtdCIsIkxJTVNNYXN0ZXIiLCJMSU1TVXNlck1nbXQiXSwibmJmIjoxNzA0NzIyNjY5LCJleHAiOjE3MDQ3MjQ0NjksImlhdCI6MTcwNDcyMjY2OX0.NVI0gB7UU5JpWSpGy3OOGxxkyRoKTtw76pIbOsmwSgA
+
+PUT https://localhost:5403/BloodBankInventory
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+  "inventories": [
+    {
+      "identifier": 0,
+      "batchId": "",
+      "donationId": "APITEST300H",
+      "calculatedDonationId": "APITEST300H",
+      "productCode": "1",
+      "expirationDateAndTime": "2024-01-07T17:39:00",
+      "aboOnLabel": "A Pos",
+      "volume": "11",
+      "status": "uncheck",
+      "antiAGrading": "",
+      "antiBGrading": "",
+      "antiABGrading": "",
+      "aboResult": "",
+      "isRejected": false,
+      "isVisualInspectionPassed": true,
+      "comments": "",
+      "temprature": "1",
+      "antibodies": "",
+      "modifiedBy": 2,
+      "lastModifiedDateTime": "2024-01-06T14:25:36",
+      "aboPerformedByUserName": "Lims",
+      "modifiedByUserName": "Lims"
+    }
+  ]
+}
+
+###
+PUT https://localhost:5403/BloodBankInventory
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+
+{
+  "inventories": [
+    {
+      "identifier": 207,
+      "batchId": "15",
+      "donationId": "APITEST2",
+      "calculatedDonationId": "APITEST200H",
+      "productCode": 1,
+      "expirationDateAndTime": "2024-01-12T14:28:00",
+      "aboOnLabel": "A Pos",
+      "volume": "11",
+      "modifiedBy": 2,
+      "aboPerformedByUserName": "Lims",
+      "lastModifiedDateTime": "2024-01-06T17:50:13",
+      "status": "Acknowledged",
+      "antiAGrading": "4+",
+      "antiBGrading": "0",
+      "antiABGrading": "-",
+      "aboResult": "A",
+      "isRejected": false,
+      "isVisualInspectionPassed": true,
+      "comments": "",
+      "temprature": "1",
+      "antibodies": "",
+      "modifiedByUserName": "Lims"
+    }
+  ]
+}
+
+
+###
+PUT https://localhost:5403/BloodBankInventory/updatestatus
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+  "inventoryId": 207,
+  "status": "ReturnedtoBSG2",
+  "modifiedBy": 2,
+  "comments": "",
+  "lastModifiedDateTime": "2024-01-07T10:33:39",
+  "modifiedByUserName": "Lims"
+}
+
+###
+GET https://localhost:5403/BloodBankPrint
+Content-Type: application/json
+Authorization: Bearer {{token}}

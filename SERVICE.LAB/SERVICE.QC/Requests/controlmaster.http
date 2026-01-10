@@ -1,0 +1,74 @@
+@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJJc0FkbWluIjoiVHJ1ZSIsIklzU3VwZXJBZG1pbiI6IlRydWUiLCJWZW51ZU5vIjoiMSIsIlZlbnVlQnJhbmNoTm8iOiIxIiwiVXNlck5vIjoiMiIsIlVzZXJOYW1lIjoiTGltcyIsIklzUHJvdmlzaW9uYWwiOiJUcnVlIiwicm9sZSI6WyIiLCJCbG9vZEJhbmtNYXN0ZXJzIiwiQmxvb2RCYW5rTWdtdCIsIkxJTVNGUk9OVE9GRklDRSIsIkxJTVNNYXN0ZXJzIiwiTElNU1NBTVBMRU1OVEMiLCJMSU1TVXNlck1nbXQiXSwibmJmIjoxNzA4MDgwNTYwLCJleHAiOjE3MDgxNjY5NjAsImlhdCI6MTcwODA4MDU2MH0.Tzd8obIuG2qFDTha5vA5TkJoiqwVz5QpybiStSb6MdI
+
+GET https://localhost:5406/ControlMaster/1
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+###
+POST https://localhost:5406/ControlMaster
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+  "identifier": 2,
+  "controlType": "UnAssayed",
+  "lotNumber": "LOT2",
+  "expirationDate": "2024-02-20T16:05:10.731Z",
+  "manufacturerID": 10,
+  "distributorID": 20,
+  "notes": "comments2",
+  "form": "lypholized",
+  "level": 1,
+  "modifiedBy": 1,
+  "modifiedByUserName": "lims",
+  "lastModifiedDateTime": "2024-02-20T16:05:10.732Z",
+  "testControlSamples": [
+    {
+      "identifier": 0,
+      "testID": 30,
+      "targetRangeMin": 111,
+      "targetRangeMax": 555,
+      "sampleTypeId": 1111,
+      "uoMId": 2222,
+      "mean": 333,
+      "sd": 0.111,
+      "modifiedBy": 1,
+      "modifiedByUserName": "lims",
+      "lastModifiedDateTime": "2024-02-20T16:05:10.732Z"
+    }
+  ]
+}
+###
+PUT https://localhost:5406/ControlMaster
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+  "identifier": 2,
+  "controlType": "UnAssayed",
+  "lotNumber": "LOT2",
+  "expirationDate": "2024-02-20T16:05:10.731Z",
+  "manufacturerID": 10,
+  "distributorID": 20,
+  "notes": "comments2",
+  "form": "lypholized",
+  "level": 1,
+  "modifiedBy": 1,
+  "modifiedByUserName": "lims",
+  "lastModifiedDateTime": "2024-02-20T16:05:10.732Z",
+  "testControlSamples": [
+    {
+      "identifier": 3,
+      "testID": 30,
+      "targetRangeMin": 222,
+      "targetRangeMax": 222,
+      "sampleTypeId": 222,
+      "uoMId": 2222,
+      "mean": 222,
+      "sd": 0.222,
+      "modifiedBy": 1,
+      "modifiedByUserName": "lims",
+      "lastModifiedDateTime": "2024-02-20T16:05:10.732Z"
+    }
+  ]
+}

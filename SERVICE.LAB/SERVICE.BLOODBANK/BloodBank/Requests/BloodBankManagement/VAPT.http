@@ -1,0 +1,82 @@
+@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJJc0FkbWluIjoiVHJ1ZSIsIklzU3VwZXJBZG1pbiI6IlRydWUiLCJWZW51ZU5vIjoiMSIsIlZlbnVlQnJhbmNoTm8iOiIxIiwiVXNlck5vIjoiMiIsIlVzZXJOYW1lIjoiTGltcyIsIklzUHJvdmlzaW9uYWwiOiJUcnVlIiwicm9sZSI6WyIiLCJCbG9vZEJhbmtNYXN0ZXJzIiwiQmxvb2RCYW5rTWdtdCIsIkxJTVNGUk9OVE9GRklDRSIsIkxJTVNNYXN0ZXJzIiwiTElNU1NBTVBMRU1OVEMiLCJMSU1TVXNlck1nbXQiXSwibmJmIjoxNzA1OTIzMDY3LCJleHAiOjE3MDU5MjQ4NjcsImlhdCI6MTcwNTkyMzA2N30.yDrdnllKBNdau_ycrWbAlXDpUaYw-TRLYqkZSjSb_-c
+POST https://localhost:5403/BloodBankRegistration/filters
+Content-Type:  application/json
+Authorization: Bearer {{token}}
+
+{
+    "statuses":["Registered"],
+    "startDate":"2023-10-10T00:00:00",
+    "endDate":"2023-11-09T23:59:59"
+}
+
+###
+POST http://localhost:53473/api/Physician/InsertPhysicianDetails
+Content-Type:  application/json
+Authorization: Bearer {{token}}
+
+{
+    "tblphysician": {
+        "totalRecords": 56,
+        "pageIndex": "sdfs",
+        "physicianNo": "2323",
+        "physicianName": "Test NEW 2",
+        "qualification": "BE",
+        "physicianEmail": "Test@mail.com",
+        "physicianMobileNo": "98765432",
+        "status": true,
+        "activeDate": "2020-07-04T14:29:40.817",
+        "speciality": "",
+        "signature": "",
+        "customerNo": 0,
+        "isReportSms": true,
+        "isReportEmail": true,
+        "venueBranchNo": 1,
+        "venueNo": 1,
+        "createdOn": "2020-07-04T20:01:44.243",
+        "createdBy": 2,
+        "modifiedOn": "2023-05-26T18:02:50.737",
+        "modifiedBy": 2,
+        "marketingNo": 0,
+        "riderNo": 0,
+        "rcNo": 7,
+        "routeNo": 12,
+        "routeName": "kanchipuram",
+        "isBillEmail": false,
+        "isBillSMS": false,
+        "specification": "",
+        "registrationNo": "",
+        "address": "",
+        "chamberaddress": "",
+        "pincode": "",
+        "area": "",
+        "dob": "",
+        "dom": "",
+        "isReportWhatsApp": false,
+        "isBillWhatsApp": false,
+        "whatsAppNo": "",
+        "isReportSMS": true
+    },
+    "documentUploadlst": [
+        {
+            "documentTypeCode": 1,
+            "documentNo": "12345678901234567890",
+            "typeOfEntity": "P"
+        },
+        {
+            "documentTypeCode": 2,
+            "documentNo": "11223344556677889900",
+            "typeOfEntity": "P"
+        },
+        {
+            "documentTypeCode": 3,
+            "documentNo": "11223344556677889900",
+            "typeOfEntity": "P"
+        },
+        {
+            "documentTypeCode": 4,
+            "documentNo": "11223344556677889900",
+            "typeOfEntity": "P"
+        }
+    ],
+    "physicianMapping": []
+}

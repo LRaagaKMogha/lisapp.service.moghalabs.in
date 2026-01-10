@@ -1,0 +1,21 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Text;
+
+namespace DEV.Model
+{
+    public class ReportDTO
+    {
+        public string ReportKey { get; set; }
+        public string fileType { get; set; }
+        public int venueNo { get; set; }
+        public int venueBranchNo { get; set; }
+        public int userID { get; set; }
+        public List<ReportKeyParamDTO> ReportParamitem { get; set; }
+    }
+    public class ReportKeyParamDTO
+    {
+        public string key { get; set; }
+        public string value { get; set; }
+    }
+}

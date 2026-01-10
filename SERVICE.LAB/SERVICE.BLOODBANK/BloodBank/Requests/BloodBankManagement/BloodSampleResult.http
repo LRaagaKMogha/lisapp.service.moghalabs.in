@@ -1,0 +1,48 @@
+@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJJc0FkbWluIjoiVHJ1ZSIsIklzU3VwZXJBZG1pbiI6IlRydWUiLCJWZW51ZU5vIjoiMSIsIlZlbnVlQnJhbmNoTm8iOiIxIiwiVXNlck5vIjoiMiIsIlVzZXJOYW1lIjoiTGltcyIsIklzUHJvdmlzaW9uYWwiOiJUcnVlIiwicm9sZSI6WyIiLCJCbG9vZEJhbmtNYXN0ZXJzIiwiQmxvb2RCYW5rTWdtdCIsIkxJTVNNYXN0ZXIiLCJMSU1TVXNlck1nbXQiXSwibmJmIjoxNzA0OTUyNDYxLCJleHAiOjE3MDQ5NTQyNjEsImlhdCI6MTcwNDk1MjQ2MX0.7PxU-DhsddXupcFrV-A1IASqhAznvPnnnHp2VIz1wFI
+
+PUT https://localhost:5403/BloodSampleResult
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+  "bloodSampleResults": [
+    {
+      "identifier": 4238,
+      "registrationId": 368,
+      "containerId": 0,
+      "testId": 68982,
+      "testName": "AHG",
+      "parentTestId": 16948,      
+      "inventoryId": 206,
+      "testValue": "0",
+      "comments": "",
+      "unit": "",
+      "isRejected": false,
+      "barCode": "",
+      "status": "SampleProcessed",
+      "modifiedBy": 2,
+      "reCheck": false,
+      "lastModifiedDateTime": "2024-01-10T15:47:50",
+      "modifiedByUserName": "Lims"
+    },
+    {
+      "identifier": 4239,
+      "registrationId": 368,
+      "containerId": 0,
+      "testId": 68983,
+      "testName": "Intepretation",
+      "inventoryId": 206,
+      "parentTestId": 16948,
+      "testValue": "Compatible",
+      "comments": "",
+      "unit": "",
+      "isRejected": false,
+      "barCode": "",
+      "status": "SampleProcessed",
+      "modifiedBy": 2,
+      "reCheck": false,
+      "lastModifiedDateTime": "2024-01-10T15:47:50",
+      "modifiedByUserName": "Lims"
+    }
+  ]
+}

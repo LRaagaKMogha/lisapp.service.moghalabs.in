@@ -1,0 +1,25 @@
+@id= 0
+@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJJc0FkbWluIjoiVHJ1ZSIsIklzU3VwZXJBZG1pbiI6IlRydWUiLCJWZW51ZU5vIjoiMSIsIlZlbnVlQnJhbmNoTm8iOiIxIiwiVXNlck5vIjoiMiIsIlVzZXJOYW1lIjoiTGltcyIsIklzUHJvdmlzaW9uYWwiOiJUcnVlIiwicm9sZSI6WyIiLCJCbG9vZEJhbmtNYXN0ZXJzIiwiQmxvb2RCYW5rTWdtdCIsIkxJTVNNYXN0ZXIiLCJMSU1TVXNlck1nbXQiXSwibmJmIjoxNzA0OTg5NTAyLCJleHAiOjE3MDQ5OTEzMDIsImlhdCI6MTcwNDk4OTUwMn0.23SZ_aBWq9fueTZsSJpPjl7fmd-4Rt6SubbNrP7JXCo
+
+
+GET https://localhost:5401/Tariffs
+Accept: application/json
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+###
+GET https://localhost:5401/Tariffs/{{id}}
+Accept: application/json
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+###
+POST https://localhost:5401/Tariffs
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+
+
+###
+DELETE https://localhost:5401/Tariffs/{{id}}
+Content-Type: application/json

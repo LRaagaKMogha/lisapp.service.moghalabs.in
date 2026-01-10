@@ -1,0 +1,62 @@
+@id= 33
+@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJJc0FkbWluIjoiVHJ1ZSIsIklzU3VwZXJBZG1pbiI6IlRydWUiLCJWZW51ZU5vIjoiMSIsIlZlbnVlQnJhbmNoTm8iOiIxIiwiVXNlck5vIjoiMiIsIlVzZXJOYW1lIjoiTGltcyIsIklzUHJvdmlzaW9uYWwiOiJUcnVlIiwicm9sZSI6WyIiLCJCbG9vZEJhbmtNYXN0ZXJzIiwiQmxvb2RCYW5rTWdtdCIsIkxJTVNGUk9OVE9GRklDRSIsIkxJTVNNYXN0ZXJzIiwiTElNU1NBTVBMRU1OVEMiLCJMSU1TVXNlck1nbXQiXSwibmJmIjoxNzA1OTQzOTkwLCJleHAiOjE3MDU5NDU3OTAsImlhdCI6MTcwNTk0Mzk5MH0.VBYFeq9Y6pHrvj1UHE2lQh0ftgY0Y-oGbto1cvlNtz4
+
+
+
+###
+POST  https://localhost:5401/Lookups
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+
+{
+    "description": "MEXICO",
+    "code": "=MEX",
+    "name": "=MEXICO",
+    "isActive": true,
+    "type": "nationality"
+}
+
+
+###
+GET https://localhost:5401/Lookups
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+###
+
+GET https://localhost:5401/Lookups/{{id}}
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+###
+PUT https://localhost:5401/Lookups/{{id}}
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+    "description": "MEXICO",
+    "code": "MEX",
+    "name": "MEXICO",
+    "isActive": true,
+    "type": "nationality"
+}
+
+###
+DELETE https://localhost:5401/Lookups/{{id}}
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+
+###
+POST http://localhost:53473/api/Test/GetTestList
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+    "deptNo": "sdf",
+    "venueNo": 1,
+    "venueBranchNo": 1,
+    "testNo": 0,
+    "pageIndex": 1
+}

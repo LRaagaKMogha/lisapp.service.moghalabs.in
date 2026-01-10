@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        body {
+            margin: 0;
+        }
+
+        iframe {
+            height: calc(100vh - 4px);
+            width: calc(100vw - 4px);
+            box-sizing: border-box;
+        }
+    </style>
+    <!--Add jQuery library-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script>
+        //$(document).ready(function () {
+        //    $('#Button1').trigger('click');
+        //});
+        //execute code after DOM is ready
+        $(function () {
+         
+
+        });
+        function onf() {
+            debugger;
+            //find iframe
+           // let iframe = $('#main_iframe');
+
+            //find button inside iframe
+           // let button = iframe.contents().find('#Button1');
+
+            //trigger button click
+           // button.trigger("click");
+            //window.parent.$("#Button1").trigger('click');
+            //var fi = document.getElementById('main_iframe');
+            //console.log(fi);
+            //figetElementById("Button1").click();
+            //window.frames('main_iframe').getElementById('lnkSave').click();
+            var iframe = document.getElementById("main_iframe");
+          iframe.contentWindow.document.getElementById("Button1").click();
+          
+        }
+    </script>
+</head>
+<body>
+    <input type="button" value="click" onclick="onf();" /> 
+    <div class="container">
+        <iframe src="http://localhost:61665/Editor/Editor.aspx?data=NyY3JjM1MzQzNiYzNzg0OTEmMjk0NSZP" id="main_iframe" frameborder="0" allowfullscreen></iframe>
+    </div>
+
+</body>
+</html>

@@ -1,0 +1,100 @@
+
+  {
+    "sourcesystem": 1,
+    "visitdetails": {
+      "visitno": "V006",
+      "casenumber": "",
+      "idtype": "P",
+      "idnumber": "P0001",
+      "registrationdttm": "2024-03-18T12:44:37.189Z",
+      "sourcerequestId": "1",
+      "rccasenumber": "R001",
+      "rcordernumber": "RC001",
+      "contractcode": "",
+      "lisreferenceno": "A0001"
+    },
+    "patientdetails": {
+      "patientid": "P001",
+      "firstname": "Prabhu",
+      "lastname": "R",
+      "alternateIdtype": "P",
+      "alternateIdnumber": "P0001-1",
+      "gender": 1,
+      "dateofbirth": "2024-03-18T12:44:37.189Z",
+      "isVIP": true,
+      "diagnosiscode": "",
+      "diagnosisdescription": "",
+      "transfusionindication": "",
+      "height": "180",
+      "weight": "80",
+      "patientno": "P0001"
+    },
+    "clientdetails": {
+      "clientcode": "C001",
+      "clientname": "RMG",
+      "cliniccode": "C002",
+      "clinicname": "RMG Clinic",
+      "institutioncode": ""
+    },
+    "doctordetails": {
+      "doctormcr": "T001",
+      "doctorname": "Dr Seth"
+    },
+    "labdetails": {
+      "orderid": "O111",
+      "isDowntimeOrder": false,
+      "orderitems": [
+        {
+          "code": "MHP",
+          "itemtype": 2,
+          "description": "Mothers Health Package",
+          "quantity": "1",
+          "natureofrequest": 1,
+          "natureofspecimen": 1,
+          "collectiondttm": "2024-03-18T12:44:37.189Z",
+          "sourceofspecimen": "1",
+          "remarks": "Rearks",
+          "createddttm": "2024-03-18T12:44:37.190Z",
+          "barcodenumber": "B00012"
+        },
+        {
+          "code": "CBCW",
+          "itemtype": 1,
+          "description": "Full Blood Count (CBC)",
+          "quantity": "1",
+          "natureofrequest": 1,
+          "natureofspecimen": 1,
+          "collectiondttm": "2024-03-18T12:44:37.189Z",
+          "sourceofspecimen": "1",
+          "remarks": "Rearks",
+          "createddttm": "2024-03-18T12:44:37.190Z",
+          "barcodenumber": "B00012"
+        },
+		{
+          "code": "ABOT(M)",
+          "itemtype": 1,
+          "description": "Test1",
+          "quantity": "1",
+          "natureofrequest": 1,
+          "natureofspecimen": 1,
+          "collectiondttm": "2024-03-18T12:44:37.189Z",
+          "sourceofspecimen": "1",
+          "remarks": "Rearks",
+          "createddttm": "2024-03-18T12:44:37.190Z",
+          "barcodenumber": "B00012"
+        }
+      ]
+    },
+    "warddetails": {
+      "nursingOU": "N001",
+      "room": "11",
+      "bed": "1",
+      "ward": "1"
+    },
+    "allergydetails": [
+      {
+        "isallergy": true,
+        "allergy": "Fish"
+      }
+    ]
+  }

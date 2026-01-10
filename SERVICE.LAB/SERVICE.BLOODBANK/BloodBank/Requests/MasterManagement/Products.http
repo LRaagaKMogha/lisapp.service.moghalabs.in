@@ -1,0 +1,33 @@
+@id = 0
+@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJJc0FkbWluIjoiVHJ1ZSIsIklzU3VwZXJBZG1pbiI6IlRydWUiLCJWZW51ZU5vIjoiMSIsIlZlbnVlQnJhbmNoTm8iOiIxIiwiVXNlck5vIjoiMiIsIlVzZXJOYW1lIjoiTGltcyIsIklzUHJvdmlzaW9uYWwiOiJUcnVlIiwicm9sZSI6WyIiLCJCbG9vZEJhbmtNYXN0ZXJzIiwiQmxvb2RCYW5rTWdtdCIsIkxJTVNNYXN0ZXIiLCJMSU1TVXNlck1nbXQiXSwibmJmIjoxNzA0OTg5NTAyLCJleHAiOjE3MDQ5OTEzMDIsImlhdCI6MTcwNDk4OTUwMn0.23SZ_aBWq9fueTZsSJpPjl7fmd-4Rt6SubbNrP7JXCo
+
+GET https://localhost:5401/Products
+Accept: application/json
+Content-Type: application/json
+Authorization: Bearer {{token}}
+###
+GET https://localhost:5401/Products/{{id}}
+Accept: application/json
+Content-Type: application/json
+Authorization: Bearer {{token}}
+###
+POST https://localhost:5401/Products
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+    "code": "CHECK",
+    "description": "CHECKed",
+    "categoryId": "0",
+    "effectiveFromDate": "2024-01-11",
+    "maxCount": "2",
+    "minCount": "2",
+    "thresholdCount": "2",
+    "specialRequirementIds": [],
+    "isActive": true,
+    "isThawed": false
+}
+
+###
+DELETE https://localhost:5401/Products/{{id}}
+Content-Type: application/json

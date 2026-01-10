@@ -1,0 +1,44 @@
+﻿
+
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>Display</title>
+    <meta http-equiv="refresh" content="60">
+    <link rel="stylesheet" href="Script/bootstrap.min.css">
+    <script src="Script/angular.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="script/displaystyle.css" />
+    <script src="Script/jquery-2.2.3.min.js"></script>
+    <script src="Script/materialize.min.js"></script>  
+    <script src="Script/moment-with-locales.js"></script>
+    <script src="Script/jquery.totemticker.js"></script>
+    <script src="Script/app.js"></script>
+</head>
+<body ng-app="app" ng-controller="DisplayQueueController" ng-init="LoadTokenList()">
+<div id="wrapper">
+        <ul class="vertical-Header">
+            <li>
+                <div class="row">
+                    <div class="col-md-2 col-xs-2 divTableCell">
+                        ROOM NO 
+                    </div>
+                    <div class="col-md-4 col-xs-4 divTableCell" >
+                        DOCTOR NAME
+                    </div>
+                    <div class="col-md-2 col-xs-2 divTableCell">
+                        TOKEN 
+                    </div>                   
+                    <div class="col-md-4 col-xs-4 divTableCell">
+                        PATIENT NAME
+                    </div>
+                </div>
+            </li>
+        </ul>
+        <ul id="vertical-ticker">
+           
+        </ul>
+
+    </div>
+</div>
+</body>
+</html>

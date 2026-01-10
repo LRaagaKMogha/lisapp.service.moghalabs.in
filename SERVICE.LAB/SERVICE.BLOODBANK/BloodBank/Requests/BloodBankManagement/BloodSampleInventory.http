@@ -1,0 +1,40 @@
+@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJJc0FkbWluIjoiVHJ1ZSIsIklzU3VwZXJBZG1pbiI6IlRydWUiLCJWZW51ZU5vIjoiMSIsIlZlbnVlQnJhbmNoTm8iOiIxIiwiVXNlck5vIjoiMiIsIlVzZXJOYW1lIjoiTGltcyIsIklzUHJvdmlzaW9uYWwiOiJUcnVlIiwicm9sZSI6WyIiLCJCbG9vZEJhbmtNYXN0ZXJzIiwiQmxvb2RCYW5rTWdtdCIsIkxJTVNNYXN0ZXIiLCJMSU1TVXNlck1nbXQiXSwibmJmIjoxNzA0OTc1MTk5LCJleHAiOjE3MDQ5NzY5OTksImlhdCI6MTcwNDk3NTE5OX0.Hsh7hd7Byoqn7449IOv7T2gj4ih5cqgTGBzns1rSWgI
+
+PUT https://localhost:5403/BloodSampleInventory
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+  "bloodSampleInventories": [
+    {
+      "identifier": 447,
+      "bloodSampleResultId": 4240,
+      "registrationId": 369,
+      "inventoryId": 206,
+      "productId": "1222",
+      "comments": "Registered",
+      "isMatched": false,
+      "isComplete": false,
+      "crossMatchingTestId": 16948,
+      "status": "OnHold",
+      "modifiedBy": 2,      
+      "lastModifiedDateTime": "2024-01-06T18:02:16",
+      "modifiedByUserName": "Lims"
+    }
+  ]
+}
+
+
+###
+PUT https://localhost:5403/BloodSampleInventory/removeinventoryassociation
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+  "inventoryId": 206,
+  "registrationId": 371,
+  "deleteEntry": true,
+  "lastModifiedDateTime": "2024-01-11T14:19:31",
+  "modifiedBy": 2,
+  "modifiedByUserName": "Lims"
+}

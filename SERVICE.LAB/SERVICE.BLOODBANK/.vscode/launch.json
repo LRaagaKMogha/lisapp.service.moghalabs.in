@@ -1,0 +1,58 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Master Management",
+      "type": "coreclr",
+      "request": "launch",
+      "preLaunchTask": "build",
+      "program": "${workspaceFolder}/BloodBank/MasterManagement/bin/Debug/net6.0/MasterManagement.dll",
+      "args": [],
+      "cwd": "${workspaceFolder}/BloodBank/MasterManagement",
+      "stopAtEntry": false,
+      "serverReadyAction": {
+        "action": "openExternally",
+        "pattern": "\\bNow listening on:\\s+(https?://\\S+)"
+      },
+      "env": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      },
+      "sourceFileMap": {
+        "/Views": "${workspaceFolder}/Views"
+      }
+    },
+    {
+      "name": "BloodBank Management",
+      "type": "coreclr",
+      "request": "launch",
+      "preLaunchTask": "buildbb",
+      "program": "${workspaceFolder}/BloodBank/BloodBankManagement/bin/Debug/net6.0/BloodBankManagement.dll",
+      "args": [],
+      "cwd": "${workspaceFolder}/BloodBank/BloodBankManagement",
+      "stopAtEntry": false,
+      "serverReadyAction": {
+        "action": "openExternally",
+        "pattern": "\\bNow listening on:\\s+(https?://\\S+)"
+      },
+      "env": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      },
+      "sourceFileMap": {
+        "/Views": "${workspaceFolder}/Views"
+      }
+    },
+    {
+      "name": ".NET Core Attach",
+      "type": "coreclr",
+      "request": "attach"
+    }
+  ],
+
+  // ✅ Compound: Debug both projects together
+  "compounds": [
+    {
+      "name": "Debug Both Projects",
+      "configurations": ["Master Management", "BloodBank Management"]
+    }
+  ]
+}

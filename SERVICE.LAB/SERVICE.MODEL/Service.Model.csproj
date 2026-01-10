@@ -1,0 +1,24 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<TargetFramework>net8.0</TargetFramework>
+		<Nullable>disable</Nullable>
+		<LangVersion>8.0</LangVersion>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<Compile Remove="ResultEntry\**" />
+		<EmbeddedResource Remove="ResultEntry\**" />
+		<None Remove="ResultEntry\**" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<PackageReference Include="Microsoft.AspNetCore.Mvc.DataAnnotations" Version="2.2.0" />
+		<PackageReference Include="System.ComponentModel.Annotations" Version="5.0.0" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <ProjectReference Include="..\BloodBank\BloodBank\Shared\Shared.csproj" />
+	</ItemGroup>
+
+</Project>
