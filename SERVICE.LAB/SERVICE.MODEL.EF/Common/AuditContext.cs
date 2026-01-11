@@ -1,5 +1,5 @@
 ﻿using DEV.Common;
-using DEV.Model.Integration;
+using Service.Model.Integration;
 using Microsoft.EntityFrameworkCore;
 using Shared.Audit;
 using System;
@@ -8,7 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DEV.Model.EF.Common
+namespace Service.Model.EF.Common
 {
     public partial class AuditContext : DbContext
     {

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace DEV.Model.Master
+namespace Service.Model.Master
 {
     public partial class TreatmentPlanMaster
     {

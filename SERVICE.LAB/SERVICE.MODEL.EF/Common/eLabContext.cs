@@ -1,5 +1,5 @@
 ﻿using DEV.Common;
-using DEV.Model.PatientInfo;
+using Service.Model.PatientInfo;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DEV.Model.EF.Common
+namespace Service.Model.EF.Common
 {
     public partial class eLabContext : DbContext
     {

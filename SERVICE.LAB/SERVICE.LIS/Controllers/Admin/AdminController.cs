@@ -5,13 +5,13 @@ using System.Threading.Tasks;
 using Dev.IRepository;
 using Dev.Repository;
 using DEV.Common;
-using DEV.Model;
-using DEV.Model.PatientInfo;
+using Service.Model;
+using Service.Model.PatientInfo;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Serilog;
-using DEV.Model.Admin;
+using Service.Model.Admin;
 using Microsoft.Extensions.Configuration;
 
 namespace DEV.API.SERVICE.Controllers.Admin

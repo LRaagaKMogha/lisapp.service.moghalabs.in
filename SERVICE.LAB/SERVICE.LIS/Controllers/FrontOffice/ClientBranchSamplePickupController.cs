@@ -2,8 +2,8 @@
 using Dev.IRepository.FrontOffice;
 using Dev.Repository;
 using DEV.Common;
-using DEV.Model;
-using DEV.Model.FrontOffice;
+using Service.Model;
+using Service.Model.FrontOffice;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;

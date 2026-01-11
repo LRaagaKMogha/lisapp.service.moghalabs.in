@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Shared.Audit;
 
-namespace DEV.Model.Audit
+namespace Service.Model.Audit
 {
     [DtoMapping(typeof(InsTariffReq))]
     public class TblClientTariffMapping : DtoToTableMapping<InsTariffReq> 

@@ -1,7 +1,7 @@
 ﻿using Dev.IRepository.UserManagement;
 using DEV.Common;
 using Dev.Repository.UserManagement;
-using DEV.Model.UserManagement;
+using Service.Model.UserManagement;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;

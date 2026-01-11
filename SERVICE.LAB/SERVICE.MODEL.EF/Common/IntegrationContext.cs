@@ -1,10 +1,10 @@
 ﻿using DEV.Common;
-using DEV.Model.Integration;
+using Service.Model.Integration;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using System.Diagnostics.Contracts;
 
-namespace DEV.Model.EF
+namespace Service.Model.EF
 {
     public partial class IntegrationContext : DbContext
     {

@@ -1,6 +1,6 @@
 ﻿using Dev.IRepository;
 using DEV.Common;
-using DEV.Model;
+using Service.Model;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
@@ -8,7 +8,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Serilog;
 using Microsoft.AspNetCore.Authorization;
-using DEV.Model.Master;
+using Service.Model.Master;
 
 namespace DEV.API.SERVICE.Controllers
 {

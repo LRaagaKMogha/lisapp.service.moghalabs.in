@@ -31,7 +31,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\..\DEV.Common\DEV.Common.csproj" />
+    <ProjectReference Include="..\..\..\Service.Common\Service.Common.csproj" />
     <ProjectReference Include="..\MasterManagement.Contracts\MasterManagement.Contracts.csproj" />
     <ProjectReference Include="..\Shared\Shared.csproj" />
   </ItemGroup>

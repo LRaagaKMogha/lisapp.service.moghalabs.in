@@ -1,9 +1,9 @@
 ﻿using Dev.IRepository;
 using Dev.Repository;
 using DEV.Common;
-using DEV.Model;
-using DEV.Model.Integration;
-using DEV.Model.Sample;
+using Service.Model;
+using Service.Model.Integration;
+using Service.Model.Sample;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;

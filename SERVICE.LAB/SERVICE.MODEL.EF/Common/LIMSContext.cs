@@ -1,11 +1,11 @@
 ﻿using DEV.Common;
-using DEV.Model.Admin;
-using DEV.Model.FrontOffice.PatientDue;
-using DEV.Model.PatientInfo;
-using DEV.Model.Sample;
+using Service.Model.Admin;
+using Service.Model.FrontOffice.PatientDue;
+using Service.Model.PatientInfo;
+using Service.Model.Sample;
 using Microsoft.EntityFrameworkCore;
 
-namespace DEV.Model.EF
+namespace Service.Model.EF
 {
     public partial class LIMSContext : DbContext
     {

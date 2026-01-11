@@ -1,4 +1,4 @@
-﻿using DEV.Model.External.WhatsAppChatBot;
+﻿using Service.Model.External.WhatsAppChatBot;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -6,7 +6,7 @@ using System.Text;
 using Microsoft.EntityFrameworkCore.Metadata;
 using DEV.Common;
 
-namespace DEV.Model.EF.External.WhatsAppChatBot
+namespace Service.Model.EF.External.WhatsAppChatBot
 {
     public partial class PatientContext : DbContext
     {

@@ -1,8 +1,8 @@
 ﻿using DEV.Common;
 using Microsoft.EntityFrameworkCore;
-using static DEV.Model.DocumentUploadDTO;
+using static Service.Model.DocumentUploadDTO;
 
-namespace DEV.Model.EF.DocumentUpload
+namespace Service.Model.EF.DocumentUpload
 {
     public partial class DocumentContext : DbContext
     {

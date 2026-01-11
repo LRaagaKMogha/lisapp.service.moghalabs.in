@@ -1,6 +1,6 @@
 ﻿using Dev.IRepository.FrontOffice;
 using DEV.Common;
-using DEV.Model;
+using Service.Model;
 using ErrorOr;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;

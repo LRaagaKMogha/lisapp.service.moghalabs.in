@@ -1,11 +1,11 @@
 ﻿using DEV.Common;
-using DEV.Model.External.WhatsAppChatBot;
+using Service.Model.External.WhatsAppChatBot;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace DEV.Model.EF.External.WhatsAppChatBot
+namespace Service.Model.EF.External.WhatsAppChatBot
 {
     public partial class LogContext : DbContext
     {

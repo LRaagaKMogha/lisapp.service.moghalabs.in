@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Shared.Audit;
 
-namespace DEV.Model.Audit
+namespace Service.Model.Audit
 {
     [DtoMapping(typeof(InsertRoleReq))]
     public class TblRoleMasterMapping : DtoToTableMapping<InsertRoleReq>

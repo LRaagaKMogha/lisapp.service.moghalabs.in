@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Numerics;
 using System.Text;
 
-namespace DEV.Model
+namespace Service.Model
 {
     public class GetProductsByPOResponse
     {

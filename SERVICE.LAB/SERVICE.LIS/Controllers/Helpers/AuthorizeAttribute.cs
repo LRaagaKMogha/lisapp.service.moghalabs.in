@@ -12,7 +12,7 @@ namespace DEV.API.SERVICE
     using System;
     using System.Security.Claims;
     using System.Threading.Tasks;
-    using DEV.Model;
+    using Service.Model;
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.Extensions.DependencyInjection;

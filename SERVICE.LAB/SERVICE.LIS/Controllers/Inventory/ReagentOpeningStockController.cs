@@ -1,6 +1,6 @@
 ﻿using Dev.IRepository.Inventory;
 using DEV.Common;
-using DEV.Model;
+using Service.Model;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;

@@ -1,5 +1,5 @@
-﻿using DEV.Model;
-using DEV.Model.Common;
+﻿using Service.Model;
+using Service.Model.Common;
 using DEV.Common;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 using System;
@@ -10,7 +10,7 @@ using Microsoft.IdentityModel.Tokens;
 using System.Data;
 using System.Linq;
 using Microsoft.AspNetCore.Mvc;
-using DEV.Model.PatientInfo;
+using Service.Model.PatientInfo;
 
 namespace DEV.API.SERVICE.Controllers
 {

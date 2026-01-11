@@ -1,9 +1,9 @@
-﻿using DEV.Model.Sample;
+﻿using Service.Model.Sample;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace DEV.Model.PatientInfo
+namespace Service.Model.PatientInfo
 {
     public class EditPatientRequest
     {

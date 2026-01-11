@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace DEV.Model.FrontOffice
+namespace Service.Model.FrontOffice
 {
     public class ClientBranchSamplePickupRequest
     {

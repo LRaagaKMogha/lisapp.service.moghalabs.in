@@ -1,9 +1,9 @@
-﻿using DEV.Model.Sample;
+﻿using Service.Model.Sample;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
-namespace DEV.Model.Integration
+namespace Service.Model.Integration
 {
 
     public class WaitingListMessage : PatientNotifyLog

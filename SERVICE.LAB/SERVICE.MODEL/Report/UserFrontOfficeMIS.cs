@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DEV.Model.Report
+namespace Service.Model.Report
 {
     public class UserFrontOfficeMIS
     {

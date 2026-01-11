@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace DEV.Model.External.WhatsAppChatBot
+namespace Service.Model.External.WhatsAppChatBot
 {
     public partial class PatientReportRequest
     {

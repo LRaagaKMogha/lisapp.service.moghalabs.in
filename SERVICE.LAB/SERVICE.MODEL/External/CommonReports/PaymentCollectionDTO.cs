@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace DEV.Model.External.CommonReports
+namespace Service.Model.External.CommonReports
 {
    
     public partial class LstPaidInformation

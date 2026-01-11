@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Shared.Audit;
 
-namespace DEV.Model.Audit
+namespace Service.Model.Audit
 {
     [DtoMapping(typeof(objgrppkg), "GRPMAS")]
     public class TblGroupMasterMapping : DtoToTableMapping<objgrppkg>

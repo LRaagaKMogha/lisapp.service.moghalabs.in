@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DEV.Model.UserManagement
+namespace Service.Model.UserManagement
 {
     public class VenueVsMenuRequestDTO
     {

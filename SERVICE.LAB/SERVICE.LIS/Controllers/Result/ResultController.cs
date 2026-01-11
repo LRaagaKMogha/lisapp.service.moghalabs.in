@@ -4,13 +4,13 @@ using System.Linq;
 using System.Threading.Tasks;
 using Dev.IRepository;
 using DEV.Common;
-using DEV.Model;
+using Service.Model;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Serilog;
 using Microsoft.Extensions.Configuration;
 using System.IO;
-using DEV.Model.Sample;
+using Service.Model.Sample;
 using Microsoft.AspNetCore.Authorization;
 
 namespace DEV.API.SERVICE.Controllers

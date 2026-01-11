@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 
-namespace DEV.Model
+namespace Service.Model
 {
     public class CommentGetReq
     {

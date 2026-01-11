@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace DEV.Model.Integration
+namespace Service.Model.Integration
 {
     public class IntegrationVisitDetails
     {

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace DEV.Model.FrontOffice.PatientDue
+namespace Service.Model.FrontOffice.PatientDue
 {
    public class CreatePatientDueResponse
     {

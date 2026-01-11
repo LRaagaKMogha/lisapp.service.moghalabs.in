@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DEV.Model.PatientInfo
+namespace Service.Model.PatientInfo
 {
     public class PatientInfoeLab
     {

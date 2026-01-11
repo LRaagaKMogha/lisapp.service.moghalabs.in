@@ -1,11 +1,11 @@
 ﻿using DEV.Common;
-using DEV.Model.External.CommonReports;
+using Service.Model.External.CommonReports;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace DEV.Model.EF.External.CommonReports
+namespace Service.Model.EF.External.CommonReports
 {
     public class MISReportContext : DbContext
     {

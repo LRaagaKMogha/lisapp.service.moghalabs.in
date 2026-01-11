@@ -1,0 +1,21 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="ResultEntry\**" />
+    <EmbeddedResource Remove="ResultEntry\**" />
+    <None Remove="ResultEntry\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Samples\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Service.Model\Service.Model.csproj" />
+  </ItemGroup>
+
+</Project>

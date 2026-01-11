@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using Dev.IRepository;
 using DEV.Common;
-using DEV.Model;
-using DEV.Model.Sample;
+using Service.Model;
+using Service.Model.Sample;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Serilog;

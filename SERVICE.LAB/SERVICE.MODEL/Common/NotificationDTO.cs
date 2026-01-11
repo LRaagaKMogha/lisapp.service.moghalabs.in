@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
-namespace DEV.Model
+namespace Service.Model
 {
     public class NotificationDto
     {

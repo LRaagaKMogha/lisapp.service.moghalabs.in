@@ -1,5 +1,5 @@
-﻿using DEV.Model;
-using DEV.Model.Common;
+﻿using Service.Model;
+using Service.Model.Common;
 using DEV.Common;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 using System;
@@ -9,7 +9,7 @@ using System.Text.RegularExpressions;
 using Microsoft.IdentityModel.Tokens;
 using System.Data;
 using System.Linq;
-using DEV.Model.Sample;
+using Service.Model.Sample;
 using RtfPipe.Tokens;
 
 namespace DEV.API.SERVICE.Controllers

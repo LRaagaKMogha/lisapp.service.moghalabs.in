@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DEV.Model.Master
+namespace Service.Model.Master
 {
     public class GetTestTemplateMasterReq
     {

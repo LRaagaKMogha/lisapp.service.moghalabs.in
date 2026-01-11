@@ -1,11 +1,11 @@
-using DEV.Model.Sample;
+using Service.Model.Sample;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace DEV.Model
+namespace Service.Model
 {
 
     public partial class requestsearchresultvisit

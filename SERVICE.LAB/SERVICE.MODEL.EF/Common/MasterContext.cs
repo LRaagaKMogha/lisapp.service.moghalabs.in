@@ -1,16 +1,16 @@
 ﻿using DEV.Common;
-using DEV.Model.Common;
-using DEV.Model.Inventory;
-using DEV.Model.Master;
-using DEV.Model.Sample;
-using DEV.Model.UserManagement;
+using Service.Model.Common;
+using Service.Model.Inventory;
+using Service.Model.Master;
+using Service.Model.Sample;
+using Service.Model.UserManagement;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
 using System;
 using System.Collections;
 using static Dapper.SqlMapper;
 
-namespace DEV.Model.EF
+namespace Service.Model.EF
 {
     public partial class MasterContext : DbContext
     {

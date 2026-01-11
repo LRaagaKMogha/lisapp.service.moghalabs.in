@@ -5,7 +5,7 @@ using System.Reflection;
 using System.Text.Json.Serialization;
 using System.Xml.Linq;
 
-namespace DEV.Model.Integration
+namespace Service.Model.Integration
 {
     public class reportrequestdetails
     {

@@ -1,13 +1,13 @@
 ﻿using DEV.Common;
-using DEV.Model.FrontOffice;
-using DEV.Model.Sample;
+using Service.Model.FrontOffice;
+using Service.Model.Sample;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.Extensions.Configuration;
 using System;
 using System.Data;
 
-namespace DEV.Model.EF
+namespace Service.Model.EF
 {
     public partial class FrontOfficeContext : DbContext
     {

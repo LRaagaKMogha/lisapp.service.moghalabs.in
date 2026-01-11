@@ -1,7 +1,7 @@
 ﻿using Dev.IRepository.Master;
 using DEV.Common;
-using DEV.Model.Inventory;
-using DEV.Model.Master;
+using Service.Model.Inventory;
+using Service.Model.Master;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;

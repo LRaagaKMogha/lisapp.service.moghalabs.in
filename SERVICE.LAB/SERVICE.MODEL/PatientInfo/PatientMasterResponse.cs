@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace DEV.Model.PatientInfo
+namespace Service.Model.PatientInfo
 {
     public class PatientsMasterResponse
     {

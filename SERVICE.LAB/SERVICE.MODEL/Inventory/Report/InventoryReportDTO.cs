@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace DEV.Model.Inventory.Report
+namespace Service.Model.Inventory.Report
 {
     public class InventoryReportDTO
     {

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Runtime.Serialization;
 using System.Text;
 
-namespace DEV.Model.External.Billing
+namespace Service.Model.External.Billing
 {
   
     public partial class LstPatientBillingInfo

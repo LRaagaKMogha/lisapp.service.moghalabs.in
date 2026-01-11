@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using Dev.IRepository;
 using DEV.Common;
-using DEV.Model;
+using Service.Model;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Serilog;

@@ -1,5 +1,5 @@
 ﻿using Dev.Repository;
-using DEV.Model;
+using Service.Model;
 using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;

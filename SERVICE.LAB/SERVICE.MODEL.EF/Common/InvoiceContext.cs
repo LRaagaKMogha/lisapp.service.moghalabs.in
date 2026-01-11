@@ -1,10 +1,10 @@
 ﻿using System;
 using DEV.Common;
-using DEV.Model.Sample;
+using Service.Model.Sample;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
 
-namespace DEV.Model.EF
+namespace Service.Model.EF
 {
     public partial class InvoiceContext : DbContext
     {

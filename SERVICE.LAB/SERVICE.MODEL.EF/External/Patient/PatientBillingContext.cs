@@ -1,12 +1,12 @@
 ﻿using DEV.Common;
-using DEV.Model.External.Billing;
-using DEV.Model.External.Patient;
+using Service.Model.External.Billing;
+using Service.Model.External.Patient;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace DEV.Model.EF.External.Patient
+namespace Service.Model.EF.External.Patient
 {
     public class PatientBillingContext : DbContext
     {

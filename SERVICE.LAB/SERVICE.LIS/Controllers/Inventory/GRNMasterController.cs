@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using Dev.IRepository.Inventory;
 using DEV.Common;
-using DEV.Model;
-using DEV.Model.Inventory;
+using Service.Model;
+using Service.Model.Inventory;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Authorization;
 

@@ -1,13 +1,13 @@
 ﻿using Dev.IRepository;
-using DEV.Model.Sample;
+using Service.Model.Sample;
 using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using Serilog;
-using DEV.Model;
-using DEV.Model.FrontOffice.PatientDue;
+using Service.Model;
+using Service.Model.FrontOffice.PatientDue;
 using System.IO;
 using System.Net.Http.Headers;
 using Microsoft.AspNetCore.Hosting;

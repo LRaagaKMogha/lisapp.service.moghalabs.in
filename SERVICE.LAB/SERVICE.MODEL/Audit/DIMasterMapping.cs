@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DEV.Model.Audit
+namespace Service.Model.Audit
 {
     [DtoMapping(typeof(TblAnalyzerresponse))]
     public class TblAnalyzerMasterMapping : DtoToTableMapping<TblAnalyzerresponse>

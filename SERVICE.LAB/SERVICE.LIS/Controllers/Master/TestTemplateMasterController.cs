@@ -1,8 +1,8 @@
 ﻿using Dev.IRepository.Master;
 using Dev.Repository.Master;
 using DEV.Common;
-using DEV.Model;
-using DEV.Model.Master;
+using Service.Model;
+using Service.Model.Master;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;

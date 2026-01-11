@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace DEV.Model.Common
+namespace Service.Model.Common
 {
     public class CommonResponse
     {

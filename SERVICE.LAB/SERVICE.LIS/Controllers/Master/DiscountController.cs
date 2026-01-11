@@ -2,7 +2,7 @@
 using Dev.IRepository.Master;
 using Dev.Repository.Inventory;
 using DEV.Common;
-using DEV.Model;
+using Service.Model;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;

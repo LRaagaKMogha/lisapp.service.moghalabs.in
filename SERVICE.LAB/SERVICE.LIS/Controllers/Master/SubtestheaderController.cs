@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using DEV.Model;
+using Service.Model;
 using Dev.IRepository;
 using Microsoft.Extensions.Logging;
 using DEV.Common;

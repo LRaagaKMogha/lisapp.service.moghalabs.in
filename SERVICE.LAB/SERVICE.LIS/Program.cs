@@ -24,7 +24,7 @@ using DEV.API.SERVICE;
 using DEV.API.SERVICE.InvoiceGeneration;
 using DEV.API.SERVICE.Shared;
 using DEV.Common;
-using DEV.Model.EF;
+using Service.Model.EF;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;

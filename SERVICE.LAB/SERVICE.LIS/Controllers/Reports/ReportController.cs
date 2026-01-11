@@ -1,8 +1,8 @@
 ﻿using Dev.IRepository;
 using DEV.Common;
-using DEV.Model;
-using DEV.Model.Report;
-using DEV.Model.Sample;
+using Service.Model;
+using Service.Model.Report;
+using Service.Model.Sample;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;

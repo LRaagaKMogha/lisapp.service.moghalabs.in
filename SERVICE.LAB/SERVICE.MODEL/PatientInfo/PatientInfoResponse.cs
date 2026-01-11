@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Text;
 
-namespace DEV.Model.PatientInfo
+namespace Service.Model.PatientInfo
 {
     public class PatientInfoResponse
     {

@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using Dev.IRepository.Inventory.Report;
 using DEV.Common;
-using DEV.Model.Inventory;
-using DEV.Model.Inventory.Report;
-using DEV.Model.Sample;
+using Service.Model.Inventory;
+using Service.Model.Inventory.Report;
+using Service.Model.Sample;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Serilog;

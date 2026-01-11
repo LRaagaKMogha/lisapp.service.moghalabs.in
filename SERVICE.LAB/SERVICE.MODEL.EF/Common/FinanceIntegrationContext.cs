@@ -1,9 +1,9 @@
 ﻿using DEV.Common;
-using DEV.Model.Integration;
+using Service.Model.Integration;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
 
-namespace DEV.Model.EF
+namespace Service.Model.EF
 {
     public partial class FinanceIntegrationContext : DbContext
     {

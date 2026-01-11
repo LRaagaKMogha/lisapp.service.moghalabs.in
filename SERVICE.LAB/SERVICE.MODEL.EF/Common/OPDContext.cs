@@ -1,13 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using DEV.Common;
-using DEV.Model.FrontOffice.PatientDue;
-using DEV.Model.PatientInfo;
-using DEV.Model.Sample;
+using Service.Model.FrontOffice.PatientDue;
+using Service.Model.PatientInfo;
+using Service.Model.Sample;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
 
-namespace DEV.Model.EF
+namespace Service.Model.EF
 {
     public partial class OPDContext : DbContext
     {

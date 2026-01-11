@@ -1,5 +1,5 @@
 ﻿using System;
-using DEV.Model;
+using Service.Model;
 using DEV.Common;
 using Dev.IRepository;
 using Microsoft.AspNetCore.Mvc;

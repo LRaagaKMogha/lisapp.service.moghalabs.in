@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace DEV.Model.Inventory
+namespace Service.Model.Inventory
 {
     public class GetPOBySupplierResponse
     {

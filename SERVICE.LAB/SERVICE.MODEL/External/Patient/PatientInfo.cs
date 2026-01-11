@@ -1,10 +1,10 @@
-﻿using DEV.Model.External.Billing;
+﻿using Service.Model.External.Billing;
 using System;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
 using System.Text;
 
-namespace DEV.Model.External.Patient
+namespace Service.Model.External.Patient
 {
     
     public partial class LstPatientInfo

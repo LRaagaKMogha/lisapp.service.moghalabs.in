@@ -6,7 +6,7 @@ using System.Text;
 using DEV.Common;
 using Serilog;
 
-namespace DEV.Model.EF
+namespace Service.Model.EF
 {
     public class ReportContext
     {

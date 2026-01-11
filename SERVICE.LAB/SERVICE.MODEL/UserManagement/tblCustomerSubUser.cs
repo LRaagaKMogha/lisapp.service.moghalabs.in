@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace DEV.Model
+namespace Service.Model
 {
     public partial class tblCustomerSubUser
     {

@@ -28,7 +28,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\..\DEV.Common\DEV.Common.csproj" />
+    <ProjectReference Include="..\..\..\Service.Common\Service.Common.csproj" />
     <ProjectReference Include="..\BloodBankManagement.Contracts\BloodBankManagement.Contracts.csproj" />
     <ProjectReference Include="..\Shared\Shared.csproj" />
   </ItemGroup>

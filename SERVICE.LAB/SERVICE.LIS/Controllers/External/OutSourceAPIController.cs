@@ -1,8 +1,8 @@
 using Dev.IRepository;
 using Dev.Repository;
 using DEV.Common;
-using DEV.Model;
-using DEV.Model.Integration;
+using Service.Model;
+using Service.Model.Integration;
 using Didstopia.PDFSharp.Drawing.BarCodes;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;

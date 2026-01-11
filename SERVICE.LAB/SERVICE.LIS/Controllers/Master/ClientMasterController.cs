@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Dev.IRepository;
 using DEV.Common;
-using DEV.Model;
+using Service.Model;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
@@ -14,8 +14,8 @@ using System.IO;
 using System.Configuration;
 using Microsoft.Extensions.Configuration;
 using Dev.Repository;
-using DEV.Model.EF;
-using DEV.Model.EF.External.CommonMasters;
+using Service.Model.EF;
+using Service.Model.EF.External.CommonMasters;
 using Shared.Audit;
 
 namespace DEV.API.SERVICE.Controllers

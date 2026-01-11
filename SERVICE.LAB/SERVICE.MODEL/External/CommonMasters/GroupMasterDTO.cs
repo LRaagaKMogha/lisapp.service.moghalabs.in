@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace DEV.Model.External.CommonMasters
+namespace Service.Model.External.CommonMasters
 { 
     public partial class LstGroupInfo
     {

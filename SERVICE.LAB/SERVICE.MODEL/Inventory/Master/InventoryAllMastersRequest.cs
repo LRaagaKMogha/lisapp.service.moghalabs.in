@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace DEV.Model.Inventory.Master
+namespace Service.Model.Inventory.Master
 {
     public class InventoryAllMastersRequest
     {

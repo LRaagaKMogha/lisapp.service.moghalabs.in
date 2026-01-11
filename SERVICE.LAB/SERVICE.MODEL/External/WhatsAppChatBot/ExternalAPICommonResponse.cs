@@ -1,9 +1,9 @@
-﻿using DEV.Model.External.CommonMasters;
+﻿using Service.Model.External.CommonMasters;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace DEV.Model.External.WhatsAppChatBot
+namespace Service.Model.External.WhatsAppChatBot
 {
     public class ExternalAPICommonResponse
     {

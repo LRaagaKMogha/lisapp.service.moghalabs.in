@@ -1,6 +1,6 @@
 using Dev.IRepository;
 using DEV.Common;
-using DEV.Model;
+using Service.Model;
 using Didstopia.PDFSharp.Pdf;
 using Didstopia.PDFSharp.Pdf.IO;
 using Microsoft.AspNetCore.Authorization;

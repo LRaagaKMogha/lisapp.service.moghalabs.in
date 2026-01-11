@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Diagnostics.Metrics;
 
-namespace DEV.Model
+namespace Service.Model
 {
     public partial class TblUser
     {

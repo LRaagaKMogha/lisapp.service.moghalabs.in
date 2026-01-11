@@ -1,9 +1,9 @@
-﻿using DEV.Model.Integration;
-using DEV.Model;
+﻿using Service.Model.Integration;
+using Service.Model;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
-using DEV.Model.Audit;
+using Service.Model.Audit;
 using Microsoft.Office.Interop.Word;
 using Shared.Audit;
 using AutoMapper;

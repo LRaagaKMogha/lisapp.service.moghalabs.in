@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using Dev.IRepository.Samples;
 using DEV.Common;
-using DEV.Model.Sample;
+using Service.Model.Sample;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Authorization;
 

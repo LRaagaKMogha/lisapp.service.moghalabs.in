@@ -1,11 +1,11 @@
 ﻿using DEV.Common;
-using DEV.Model.External.CommonMasters;
+using Service.Model.External.CommonMasters;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace DEV.Model.EF.External.CommonMasters
+namespace Service.Model.EF.External.CommonMasters
 {
     public class GroupMastContext : DbContext
     {

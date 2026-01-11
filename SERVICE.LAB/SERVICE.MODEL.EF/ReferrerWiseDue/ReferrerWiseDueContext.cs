@@ -1,7 +1,7 @@
 ﻿using DEV.Common;
 using Microsoft.EntityFrameworkCore;
 
-namespace DEV.Model.EF.ReferrerWiseDue
+namespace Service.Model.EF.ReferrerWiseDue
 {
     public partial class ReferrerWiseDueContext : DbContext
     {

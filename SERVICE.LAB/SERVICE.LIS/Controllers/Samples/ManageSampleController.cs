@@ -1,10 +1,10 @@
 ﻿using Dev.IRepository;
-using DEV.Model.Sample;
+using Service.Model.Sample;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using Serilog;
-using DEV.Model;
+using Service.Model;
 using System.IO;
 using DEV.Common;
 using System.Linq;

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace DEV.Model.Sample
+namespace Service.Model.Sample
 {
     public class WorkListResponse
     {

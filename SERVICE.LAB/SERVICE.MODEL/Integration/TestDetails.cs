@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Text.Json.Serialization;
 
-namespace DEV.Model.Integration
+namespace Service.Model.Integration
 {
     public class TestMasterDetails
     {      

@@ -1,5 +1,5 @@
-﻿using DEV.Model;
-using DEV.Model.Common;
+﻿using Service.Model;
+using Service.Model.Common;
 using DEV.Common;
 using System;
 using System.Collections.Generic;

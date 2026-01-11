@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace DEV.Model.Inventory
+namespace Service.Model.Inventory
 {
     public class tbl_IV_ProductSupplierMapping
     {

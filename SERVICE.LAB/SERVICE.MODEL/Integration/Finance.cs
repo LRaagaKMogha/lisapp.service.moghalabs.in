@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 using System.Xml.Linq;
 using System.Xml;
 
-namespace DEV.Model.Integration
+namespace Service.Model.Integration
 {
     public class FinanceIntegrationMaster
     {
