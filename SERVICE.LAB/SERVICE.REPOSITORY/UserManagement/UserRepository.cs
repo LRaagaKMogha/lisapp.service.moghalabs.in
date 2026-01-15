@@ -137,7 +137,7 @@ namespace Dev.Repository
                 {
                     using (var context = new FrontOfficeContext(_config.GetConnectionString(ConfigKeys.DefaultConnection)))
                     {
-                        var userresult = context.TblUser.Where(a => a.LoginName == req.LoginName && a.Status == true && a.IsLogin == true).Select(x => new { x.UserName, x.UserNo, x.Password, x.VenueBranchNo, x.VenueNo, x.IsSuperAdmin, x.IsAdmin, x.IsProvisional, x.IsEditLabResults, x.IsResultEntryHIV, x.IsResultEntryVIP, x.IsPriceShow, x.isLock, x.IsadmultifactorAccess, x.ladpsecretkey, x.PhoneNo, x.Isadaccess, x.IsAbnormalAvail, x.IsPOApproval, x.IsGrnApproval, x.IsGrnReturnApproval, x.IsStockAdjustmentApproval, x.IsConsumptionApproval, x.IsClientApproval }).FirstOrDefault();
+                        var userresult = context.TblUser.Where(a => a.LoginName == req.LoginName && a.Status == true && a.IsLogin == true).Select(x => new { x.UserName, x.UserNo, x.Password, x.VenueBranchNo, x.VenueNo, x.IsSuperAdmin, x.IsAdmin, x.IsProvisional, x.IsEditLabResults, x.IsResultEntryHIV, x.IsResultEntryVIP, x.IsPriceShow, x.isLock, x.IsadmultifactorAccess, x.ladpsecretkey, x.PhoneNo, x.Isadaccess, x.IsAbnormalAvail, x.IsPOApproval, x.IsGrnApproval, x.IsGrnReturnApproval, x.IsStockAdjustmentApproval, x.IsConsumptionApproval, x.IsClientApproval, x.Gender }).FirstOrDefault();
                        
                         if (userresult != null)
                         {
@@ -248,6 +248,7 @@ namespace Dev.Repository
                                     var token = _jWTManagerRepository.Authenticate(result);
                                     result.Token = token.Token;
                                     result.RefreshToken = token.RefreshToken;
+                                    result.Gender = userresult.Gender == null ? "" : userresult.Gender;
                                     var userdata = context.TblUser.Where(user => user.UserNo == userresult.UserNo).FirstOrDefault();
                                     userdata.LoginAttempt = 0;
                                     userdata.RefreshToken = result.RefreshToken;
@@ -695,6 +696,7 @@ namespace Dev.Repository
                     var _dob = new SqlParameter("dob", Useritem?.dob);
                     var _doj = new SqlParameter("doj", Useritem?.doj);
                     var _dor = new SqlParameter("dor", Useritem?.dor);
+                    var _Gender = new SqlParameter("Gender", Useritem?.Gender.ValidateEmpty());
                     var _IsEditResults = new SqlParameter("IsEditResults", Useritem?.IsEditResults);
                     var _IsSuperAdmin = new SqlParameter("IsSuperAdmin", Useritem?.IsSuperAdmin);
                     var _IsResultsEntryVIP = new SqlParameter("IsResultsEntryVIP", Useritem?.IsResultsEntryVIP);
@@ -723,12 +725,12 @@ namespace Dev.Repository
 
                     var resultdata = context.UserResponseEF.FromSqlRaw(
                     "Execute dbo.Pro_InsertUserMaster @UserNo,@UserName,@LoginName,@Address,@PinCode,@Discount,@Email,@PhoneNo,@IsLogin,@IsRider,@IsMarketing,@IsMobile" +
-                    ",@Status,@VenueBranchNo,@VenueNo,@Createdby,@deptJson,@PatientEdit,@DuePrint,@dashBoardJson,@branchJson,@roleId,@dob,@doj,@dor,@IsEditResults," +
+                    ",@Status,@VenueBranchNo,@VenueNo,@Createdby,@deptJson,@PatientEdit,@DuePrint,@dashBoardJson,@branchJson,@roleId,@dob,@doj,@dor,@Gender,@IsEditResults," +
                     "@IsSuperAdmin,@IsResultsEntryVIP,@IsResultsEntryHIV,@IsPathologist,@isLock,@isPriceShow,@IsadmultifactorAccess,@Isadaccess,@IsEditGrn,@IsPOApproval," +
                     "@IsGrnApproval,@IsGrnReturnApproval,@IsStockTransferApproval,@IsStockAdjustmentApproval,@IsConsumptionApproval,@IsEditPO,@IsEditGrnReturn,@IsEditStockTransfer," +
                     "@IsEditStockAdjustment,@IsEditConsumption, @IsApproveClient,@IsProvisional,@SuppressSCDtTm",
                     _UserNo, _UserName, _LoginName, _Address, _PinCode, _Discount, _Email, _PhoneNo, _IsLogin, _IsRider, _IsMarketing, _IsMobile, _Status,
-                    _VenueBranchNo, _VenueNo, _Createdby, _deptJson, _patientEdit, _duePrint, _dashBoardJson, _branchJson, _roleId, _dob, _doj, _dor, _IsEditResults,
+                    _VenueBranchNo, _VenueNo, _Createdby, _deptJson, _patientEdit, _duePrint, _dashBoardJson, _branchJson, _roleId, _dob, _doj, _dor, _Gender, _IsEditResults,
                     _IsSuperAdmin, _IsResultsEntryVIP, _IsResultsEntryHIV, _IsPathologist, _isLock, _isPriceShow, _IsadmultifactorAccess, _Isadaccess, _IsEditGrn,_IsPOApproval, 
                     _IsGrnApproval,_IsGrnReturnApproval,_IsStockTransferApproval,_IsStockAdjustmentApproval,_IsConsumptionApproval, _IsEditPO, _IsEditGrnReturn, _IsEditStockTransfer, 
                     _IsEditStockAdjustment, _IsEditConsumption, _IsApproveClient,_IsProvisional,_SuppressSCDtTm).AsEnumerable().FirstOrDefault();

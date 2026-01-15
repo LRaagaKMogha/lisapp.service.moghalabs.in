@@ -45,6 +45,7 @@ namespace Service.Model
         public bool? IsStockAdjustmentApproval { get; set; }
         public bool? IsConsumptionApproval { get; set; }
         public bool? IsClientApproval { get; set; }
+        public string? Gender { get; set; }
     }
     public class ChangePasswordEntity
     {
@@ -93,6 +94,7 @@ namespace Service.Model
         public string dob { get; set; }
         public string doj { get; set; }
         public string dor { get; set; }
+        public string Gender { get; set; }
         public bool IsEditResults { get; set; }
         public bool IsSuperAdmin { get; set; }
         public bool IsResultsEntryVIP { get; set; }

@@ -48,5 +48,6 @@ namespace Service.Model
         public bool? IsStockAdjustmentApproval { get; set; }
         public bool? IsConsumptionApproval { get; set; }
         public bool? IsClientApproval { get; set; }
+        public string? Gender { get; set; }
     }
 }
