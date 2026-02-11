@@ -181,12 +181,12 @@ namespace DEV.Common
         public const int VenueBranchNo = 1;
     }
     public enum LoginType
-    {
-        CUSTOMER = 1,
+    {        
         LABORATORY = 2,
         PATIENT = 3,
         FRANCHISEE = 4,
-        CUSTOMERSUBUSER = 5,
+        CUSTOMER = 5,
+        CUSTOMERSUBUSER = 6,
         PHYSICIAN = 7
     }
     public static class CommonExtension

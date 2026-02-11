@@ -69,16 +69,20 @@ Log.Logger = new LoggerConfiguration()
 builder.Host.UseSerilog();
 
 // CORS
-var policyName = "CorsPolicy";
+var corsOrigins = builder.Configuration
+    .GetSection("Cors:AllowedOrigins")
+    .Get<string[]>();
+
 builder.Services.AddCors(options =>
 {
-    options.AddPolicy(policyName, builder =>
+    options.AddPolicy("CorsPolicy", policy =>
     {
-        builder.WithOrigins(config["X-Frame-Options"])
-               .AllowAnyHeader()
-               .AllowAnyMethod();
+        policy
+            .WithOrigins(corsOrigins!)
+            .AllowAnyHeader()
+            .AllowAnyMethod()
+            .AllowCredentials();
     });
-    options.AddPolicy("AllowAll", p => p.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
 });
 
 // Swagger + API Key Security
@@ -270,8 +274,11 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
-app.UseCors(policyName);
+app.UseRouting();
+app.UseCors("CorsPolicy");
 app.UseIpRateLimiting();
+app.UseAuthentication();
+app.UseAuthorization();
 
 app.UseSwagger();
 
@@ -285,9 +292,6 @@ app.UseSwaggerUI(c =>
     c.RoutePrefix = "swagger";
 });
 
-
-app.UseAuthentication();
-app.UseAuthorization();
 app.UseMiddleware<JwtMiddleware>();
 app.UseMiddleware<SecurityMiddleWare>();
 app.MapControllers();
