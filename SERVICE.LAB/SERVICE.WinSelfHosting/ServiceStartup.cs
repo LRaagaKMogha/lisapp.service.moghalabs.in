@@ -4,7 +4,7 @@ using System.Web.Http.SelfHost;
 using System.Configuration;
 using System.ServiceModel.Channels;
 using System.Web.Http.SelfHost.Channels;
-using Service.Win.Common;
+using Service.Common;
 
 namespace Service.WinSelfHosting
 {
@@ -14,8 +14,9 @@ namespace Service.WinSelfHosting
         {
             try
             {
-                Logger.LogWrite("StartupAPI - " + DateTime.Now.ToString());
+                Logger.LogFileWrite("StartupAPI - " + DateTime.Now.ToString());
                 string PortNumber = ConfigurationManager.AppSettings["PortNo"].ToString();
+
                 var config = new HttpSelfHostConfiguration("https://localhost:" + PortNumber + "");
                 config.MaxReceivedMessageSize = 2147483647; // use config for this value
                 config.EnableCors();
@@ -27,11 +28,10 @@ namespace Service.WinSelfHosting
                );
                 HttpSelfHostServer server = new HttpSelfHostServer(config);
                 server.OpenAsync().Wait();
-
             }
             catch (Exception ex)
             {
-                Logger.LogWrite("StartupAPI - " + ex.ToString());
+                Logger.LogFileWrite("StartupAPI - " + ex.ToString());
                 throw;
             }
         }

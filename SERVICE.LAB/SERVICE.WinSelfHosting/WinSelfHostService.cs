@@ -11,12 +11,10 @@ namespace Service.WinSelfHosting
         }
        
         #region Gets invoked when a service is started
-
         protected override void OnStart(string[] args)
         {
             try
-            {
-                
+            {                
                 ServiceStartup objstartup = new ServiceStartup();
                 objstartup.StartupAPI();
             }
@@ -25,7 +23,6 @@ namespace Service.WinSelfHosting
                
             }
         }
-
         #endregion
 
         #region Gets invoked when a service is stopped
@@ -43,8 +40,6 @@ namespace Service.WinSelfHosting
                
             }
         }
-
         #endregion
-
     }
 }
