@@ -1,5 +1,5 @@
-﻿using Dev.IRepository.Inventory;
-using DEV.Common;
+﻿using Service.IRepository.Inventory;
+using Service.Common;
 using Service.Model;
 using Service.Model.EF;
 using Service.Model.Inventory;
@@ -10,10 +10,8 @@ using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
-namespace Dev.Repository
+namespace Service.Repository
 {
     public class AssetManagementRepository : IAssetManagementRepository
     {

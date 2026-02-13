@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace Service.Model.Integration
 {
@@ -12,8 +9,6 @@ namespace Service.Model.Integration
         public string StatusCode { get; set;  }
         public T Data { get; set; }
     }
-        
-
     public class UpsertBloodBankRegistrationRequest
     {
         public string NRICNumber { get; set; }
@@ -46,9 +41,6 @@ namespace Service.Model.Integration
         public Int64? Identifier { get; set; }
         public DateTime LastModifiedDateTime { get; set; }
     }
-
-
-
     public class PatientRegisteredProducts
     {
         public Int64 Identifier { get; set; }

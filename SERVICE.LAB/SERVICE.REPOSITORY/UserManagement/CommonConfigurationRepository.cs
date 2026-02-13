@@ -1,17 +1,16 @@
-﻿using Dev.IRepository.UserManagement;
-using DEV.Common;
+﻿using Service.IRepository.UserManagement;
+using Service.Common;
 using Service.Model;
 using Service.Model.EF;
 using Service.Model.UserManagement;
 using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
-using Shared;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Dev.Repository.UserManagement
+namespace Service.Repository.UserManagement
 {
     public class CommonConfigurationRepository: ICommonConfigurationRepository
     {

@@ -1,12 +1,8 @@
-﻿using System;
-using DEV.Common;
-
-using DEV.Model.Integration;
-
+﻿using Service.Common;
+using Service.Model.Integration;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata;
 
-namespace DEV.Model.EF
+namespace Service.Model.EF
 {
     public partial class IntegrationContext : DbContext
     {

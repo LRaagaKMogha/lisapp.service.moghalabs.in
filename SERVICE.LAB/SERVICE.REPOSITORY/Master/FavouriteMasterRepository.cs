@@ -3,18 +3,17 @@ using Service.Model.EF;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Dev.IRepository;
+using Service.IRepository;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
-using DEV.Common;
+using Service.Common;
 
-namespace Dev.Repository
+namespace Service.Repository
 {
     public class FavouriteMasterRepository : IFavouriteMasterRepository
     {
         private IConfiguration _config;
         public FavouriteMasterRepository(IConfiguration config) { _config = config; }
-
         public List<Tblfav> GetFavouriteMasterDetails(GetCommonMasterRequest getfav)
         {
             List<Tblfav> objresult = new List<Tblfav>();
@@ -37,8 +36,7 @@ namespace Dev.Repository
                 MyDevException.Error(ex, "FavouriteMasterRepository.GetFavouriteMasterDetails", ExceptionPriority.Low, ApplicationType.REPOSITORY, getfav.venueno, getfav.venuebranchno, 0);
             }
             return objresult;
-        }
-       
+        }       
         public List<Tblgroup> GetGroupDetails(int VenueNo, int VenueBranchNo)
         {
             List<Tblgroup> objresult = new List<Tblgroup>();

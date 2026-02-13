@@ -1,14 +1,12 @@
 ﻿using System;
 using Service.Model;
-using DEV.Common;
-using Dev.IRepository;
+using Service.Common;
+using Service.IRepository;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Shared.Audit;
 
-namespace DEV.API.SERVICE.Controllers.qcmodule
+namespace Service.API.SERVICE.Controllers.qcmodule
 {
     [ApiController]
     public class AnalyzParamController : ControllerBase

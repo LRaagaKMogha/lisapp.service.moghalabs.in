@@ -1,5 +1,5 @@
-﻿using Dev.IRepository.Inventory;
-using DEV.Common;
+﻿using Service.IRepository.Inventory;
+using Service.Common;
 using Service.Model.Inventory;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -7,7 +7,7 @@ using Microsoft.Extensions.Configuration;
 using System;
 using System.Threading.Tasks;
 
-namespace DEV.API.SERVICE.Controllers.Inventory
+namespace Service.API.SERVICE.Controllers.Inventory
 {
     [Authorize(AuthenticationSchemes = "Bearer")]
     [ApiController]
@@ -15,7 +15,6 @@ namespace DEV.API.SERVICE.Controllers.Inventory
     {
         private readonly IConfiguration _config;
         private readonly ICommonProductSupplierMappingRepository _repository;
-
         public CommonProductSupplierMappingController(ICommonProductSupplierMappingRepository repository, IConfiguration config)
         {
             _repository = repository;

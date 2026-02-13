@@ -1,10 +1,7 @@
-﻿using Service.Model.External.Billing;
-using Service.Model.External.Patient;
-using System;
+﻿using Service.Model.External.Patient;
 using System.Collections.Generic;
-using System.Text;
 
-namespace Dev.IRepository.External.Patient
+namespace Service.IRepository.External.Patient
 {
     public interface IPatientInformationRepository
     {

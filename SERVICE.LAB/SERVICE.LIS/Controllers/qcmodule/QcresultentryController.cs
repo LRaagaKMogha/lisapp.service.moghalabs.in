@@ -1,14 +1,12 @@
-﻿using Dev.IRepository;
-using DEV.Common;
+﻿using Service.IRepository;
+using Service.Common;
 using Service.Model;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
-using Serilog;
 using Microsoft.AspNetCore.Authorization;
 
-namespace DEV.API.SERVICE.Controllers
+namespace Service.API.SERVICE.Controllers
 {
     [Authorize(AuthenticationSchemes = "Bearer")]
     [ApiController]
@@ -19,9 +17,7 @@ namespace DEV.API.SERVICE.Controllers
         public QcresultentryController(IQcresultentryRepository noteRepository)
         {
             _QcresultentryRepository = noteRepository;
-
         }
-
 
         [HttpPost]
         [Route("api/Qcresult/GetqcresultDetails")]
@@ -31,7 +27,6 @@ namespace DEV.API.SERVICE.Controllers
             try
             {
                 objresult = _QcresultentryRepository.GetqcresultDetails(req);
-
             }
             catch (Exception ex)
             {
@@ -48,7 +43,6 @@ namespace DEV.API.SERVICE.Controllers
             try
             {
                 objresult = _QcresultentryRepository.InsertqcresultDetails(req);
-
             }
             catch (Exception ex)
             {
@@ -65,7 +59,6 @@ namespace DEV.API.SERVICE.Controllers
             try
             {
                 lstv = _QcresultentryRepository.EditqcresultDetails(req);
-
             }
             catch (Exception ex)
             {
@@ -73,8 +66,5 @@ namespace DEV.API.SERVICE.Controllers
             }
             return lstv;
         }
-
-
-
     }
 }

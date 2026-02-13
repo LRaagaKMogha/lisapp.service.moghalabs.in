@@ -1,22 +1,14 @@
 ﻿using Newtonsoft.Json;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.IO;
-using System.Net;
 using System.Text;
 using System.Xml;
 using System.Xml.Serialization;
 using HtmlAgilityPack;
-using SixLabors.ImageSharp;
-using SixLabors.ImageSharp.Formats.Png;
-using SixLabors.ImageSharp.Processing;
 using System.Net.Http;
 using System.Threading.Tasks;
-using System.Configuration;
 
-namespace DEV.Common
+namespace Service.Common
 {
     public class CommonHelper
     {
@@ -130,7 +122,6 @@ namespace DEV.Common
                             string styleoutput = "width:" + widthd + "px";
                             node.SetAttributeValue("style", styleoutput);
                         }
-
                     }
                 }
                 var repeaters = htmlDoc.DocumentNode.SelectNodes("//figure");

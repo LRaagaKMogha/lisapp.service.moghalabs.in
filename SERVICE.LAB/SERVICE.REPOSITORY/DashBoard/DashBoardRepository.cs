@@ -1,5 +1,5 @@
-﻿using Dev.IRepository;
-using DEV.Common;
+﻿using Service.IRepository;
+using Service.Common;
 using Service.Model;
 using Service.Model.EF;
 using Microsoft.EntityFrameworkCore;
@@ -10,7 +10,7 @@ using Microsoft.Data.SqlClient;
 using System.Linq;
 using System.Text;
 
-namespace Dev.Repository
+namespace Service.Repository
 {
    public class DashBoardRepository : IDashBoardRepository
     {

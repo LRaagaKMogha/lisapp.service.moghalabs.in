@@ -1,17 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Dev.IRepository.Inventory;
-using DEV.Common;
+using Service.IRepository.Inventory;
+using Service.Common;
 using Service.Model;
 using Service.Model.Inventory.Master;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.Extensions.Configuration;
 
-namespace DEV.API.SERVICE.Controllers.Inventory
+namespace Service.API.SERVICE.Controllers.Inventory
 {
     [Authorize(AuthenticationSchemes = "Bearer")]
     [ApiController]
@@ -28,7 +25,6 @@ namespace DEV.API.SERVICE.Controllers.Inventory
         [CustomAuthorize("INVMASTERS")]
         [HttpPost]
         [Route("api/Manufacturer/InsertManufacturerDetails")]
-
         public int InsertManufacturerDetails(postManufacturerMasterDTO objManufacturer)
         {
             int result = 0;

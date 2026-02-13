@@ -1,5 +1,5 @@
-﻿using Dev.IRepository.Inventory;
-using DEV.Common;
+﻿using Service.IRepository.Inventory;
+using Service.Common;
 using Service.Model;
 using Service.Model.EF;
 using Service.Model.Inventory;
@@ -9,15 +9,13 @@ using System;
 using System.Collections.Generic;
 using Microsoft.Data.SqlClient;
 using System.Linq;
-using System.Text;
 
-namespace Dev.Repository.Inventory
+namespace Service.Repository.Inventory
 {
     public class PurchaseOrderReposistory: IPurchaseOrderReposistory
     {
         private IConfiguration _config;
         public PurchaseOrderReposistory(IConfiguration config) { _config = config; }
-
 
         public List<GetPurchaseOrderResponse> GetPurchaseOrders(GetAllPORequest masterRequest)
         {
@@ -49,7 +47,6 @@ namespace Dev.Repository.Inventory
             }
             return objresult;
         }
-
         public List<GetSupplierServiceDTO> GetSupplierServiceDetails(int venueNo, int venueBranchNo, int supplierNo, int StoreNo, string type)
         {
             List<GetSupplierServiceDTO> objresult = new List<GetSupplierServiceDTO>();
@@ -74,7 +71,6 @@ namespace Dev.Repository.Inventory
             }
             return objresult;
         }
-
         public CommonAdminResponse InsertPurchaseOrder(InsertPurchaseOrder insertPurchaseOrder)
         {
             CommonAdminResponse response = new CommonAdminResponse();
@@ -106,7 +102,6 @@ namespace Dev.Repository.Inventory
             }
             return response;
         }
-
         public List<GetPurchaseDetailsDTO> GetPurchaseDetailsById(int venueNo, int venueBranchNo, int PurchaseNo)
         {
             List<GetPurchaseDetailsDTO> objresult = new List<GetPurchaseDetailsDTO>();
@@ -129,7 +124,6 @@ namespace Dev.Repository.Inventory
             }
             return objresult;
         }
-
         public List<POProductDetailsDTO> GetPOProductDetailsById(int venueNo, int venueBranchNo, int PurchaseNo)
         {
             List<POProductDetailsDTO> objresult = new List<POProductDetailsDTO>();
@@ -152,7 +146,6 @@ namespace Dev.Repository.Inventory
             }
             return objresult;
         }
-
         public List<GetTaxDatilsResponse> GetPOTaxDetailsById(int venueNo, int venueBranchNo, int PurchaseNo)
         {
             List<GetTaxDatilsResponse> objresult = new List<GetTaxDatilsResponse>();
@@ -175,7 +168,6 @@ namespace Dev.Repository.Inventory
             }
             return objresult;
         }
-
         public List<otherChargeModal> GetPOOCDetailsById(int venueNo, int venueBranchNo, int PurchaseNo)
         {
             List<otherChargeModal> objresult = new List<otherChargeModal>();
@@ -198,7 +190,6 @@ namespace Dev.Repository.Inventory
             }
             return objresult;
         }
-
         public List<Termsconditionlist> GetPOTermsDetailsById(int venueNo, int venueBranchNo, int PurchaseNo)
         {
             List<Termsconditionlist> objresult = new List<Termsconditionlist>();

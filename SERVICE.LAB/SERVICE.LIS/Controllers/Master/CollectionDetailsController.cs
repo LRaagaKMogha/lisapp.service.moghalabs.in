@@ -1,18 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Dev.IRepository.Inventory;
-using DEV.Common;
+using Service.Common;
 using Service.Model;
-using Service.Model.Inventory.Master;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.Extensions.Configuration;
-using Dev.IRepository;
+using Service.IRepository;
 
-namespace DEV.API.SERVICE.Controllers.Inventory
+namespace Service.API.SERVICE.Controllers.Inventory
 {
     [Authorize(AuthenticationSchemes = "Bearer")]
     [ApiController]
@@ -28,7 +23,6 @@ namespace DEV.API.SERVICE.Controllers.Inventory
 
         [HttpPost]
         [Route("api/CollectionDetails/UpdateCollectionDetails")]
-
         public resCollectDTS UpdateCollectionDetails(updateCollectDTS collectupd)
         {
             resCollectDTS lst = new resCollectDTS();
@@ -45,7 +39,6 @@ namespace DEV.API.SERVICE.Controllers.Inventory
             return lst;
         }
 
-
         [HttpPost]
         [Route("api/CollectionDetails/GetCollectionDetails")]
         public List<lstCollectDTS> GetCollectionDetails(reqCollectDTS collectreq)
@@ -60,7 +53,6 @@ namespace DEV.API.SERVICE.Controllers.Inventory
                 MyDevException.Error(ex, "GetCollectionDetails", ExceptionPriority.Low, ApplicationType.APPSERVICE, collectreq.VenueNo, collectreq.VenueBranchNo, 0);
             }
             return lst;
-        }
-        
+        }        
     }
 }

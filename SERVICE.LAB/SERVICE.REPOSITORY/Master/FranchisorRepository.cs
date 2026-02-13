@@ -1,5 +1,5 @@
-﻿using Dev.IRepository.Master;
-using DEV.Common;
+﻿using Service.IRepository.Master;
+using Service.Common;
 using Service.Model.EF;
 using Service.Model.Inventory;
 using Service.Model.Master;
@@ -9,10 +9,9 @@ using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
-namespace Dev.Repository.Master
+namespace Service.Repository.Master
 {
     public  class FranchisorRepository:IFranchisorRepository
     {
@@ -30,7 +29,7 @@ namespace Dev.Repository.Master
                     var _VenueNo = new SqlParameter("VenueNo", VenueNo.ToString());
                     var _VenueBranchNo = new SqlParameter("VenueBranchNo", VenueBranchNo.ToString());
                     objresult = context.GetFranchises.FromSqlRaw
-                        ("Execute dbo.pro_GetIsFranchise @venueNo,@VenueBranchNo", _VenueNo, _VenueBranchNo).ToList();
+                    ("Execute dbo.pro_GetIsFranchise @venueNo,@VenueBranchNo", _VenueNo, _VenueBranchNo).ToList();
                 }
             }
             catch (Exception ex)
@@ -56,16 +55,14 @@ namespace Dev.Repository.Master
                     var franchisorNo = new SqlParameter("@FranchisorNo", request.FranchisorNo);
 
                     result = context.FranchiseRevenueSharingServiceDto
-                        .FromSqlRaw("EXEC dbo.pro_GetIsFranchiseRevenueSharingbyService @VenueNo, @VenueBranchNo, @DepartmentNo, @ServiceType, @ServiceNo, @FranchiseNo, @FranchisorNo",
-                                    venueNo, venueBranchNo, departmentNo, serviceType, serviceNo, franchiseNo, franchisorNo)
-                        .ToList();
+                    .FromSqlRaw("EXEC dbo.pro_GetIsFranchiseRevenueSharingbyService @VenueNo, @VenueBranchNo, @DepartmentNo, @ServiceType, @ServiceNo, @FranchiseNo, @FranchisorNo",
+                    venueNo, venueBranchNo, departmentNo, serviceType, serviceNo, franchiseNo, franchisorNo).ToList();
                 }
             }
             catch (Exception ex)
             {
                 MyDevException.Error(ex, "FranchisorRepository.GetFranchiseRevenueSharingByService", ExceptionPriority.High, ApplicationType.REPOSITORY, request.VenueNo, 0, 0);
             }
-
             return result;
         }
         public async Task<int> InsertFranchiseRevenueSharingAsync(FranchiseRevenueSharingInsertDTO dto)
@@ -98,6 +95,5 @@ namespace Dev.Repository.Master
                 return 0;
             }
         }
-
     }
 }

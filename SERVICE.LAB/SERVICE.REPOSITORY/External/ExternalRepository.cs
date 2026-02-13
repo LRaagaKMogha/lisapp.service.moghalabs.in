@@ -1,5 +1,5 @@
-﻿using Dev.IRepository;
-using DEV.Common;
+﻿using Service.IRepository;
+using Service.Common;
 using Service.Model;
 using Service.Model.EF;
 using Microsoft.EntityFrameworkCore;
@@ -12,9 +12,8 @@ using Microsoft.Data.SqlClient;
 using System.IO;
 using System.Linq;
 using System.Xml.Linq;
-using Serilog;
 
-namespace Dev.Repository
+namespace Service.Repository
 {
     public class ExternalRepository : IExternalRepository
     {
@@ -40,9 +39,10 @@ namespace Dev.Repository
                     var _Lvalue = new SqlParameter("Lvalue", results.Lvalue);
                     var _Rerun = new SqlParameter("IsReRun", results.IsReRun);
                     var _IsCalculationInput = new SqlParameter("IsCalculationInput", results.IsCalculationInput);
+                    
                     var objresult = context.InsertExternalResult.FromSqlRaw(
-                         "Execute dbo.pro_InsertExternalResults @MachineId,@BarcodeNo,@TestSubtesttNo,@Result,@VenueNo,@VenueBranchNo,@Comment,@Ivalue,@Hvalue,@Lvalue,@IsReRun,@IsCalculationInput",
-                      _MachineId, _BarcodeNo, _TestSubtesttNo, _Result, _VenueNo, _VenueBranchNo, _Comment, _Ivalue, _Hvalue, _Lvalue, _Rerun, _IsCalculationInput).ToList();
+                    "Execute dbo.pro_InsertExternalResults @MachineId,@BarcodeNo,@TestSubtesttNo,@Result,@VenueNo,@VenueBranchNo,@Comment,@Ivalue,@Hvalue,@Lvalue,@IsReRun,@IsCalculationInput",
+                    _MachineId, _BarcodeNo, _TestSubtesttNo, _Result, _VenueNo, _VenueBranchNo, _Comment, _Ivalue, _Hvalue, _Lvalue, _Rerun, _IsCalculationInput).ToList();
 
                     var rtnresult = objresult[0].Status;
 
@@ -67,7 +67,6 @@ namespace Dev.Repository
             }
             return result;
         }
-
         public int CreateTemplateResult(int PatientResultTemplateNo, int VenueNo, int VenueBranchNo)
         {
             int result = 0;
@@ -166,7 +165,6 @@ namespace Dev.Repository
             }
             return iOutput;
         }
-
         public int PostCultureResult(ExternalBulkCultureResultDTO results)
         {
             int result = 0;
@@ -237,7 +235,6 @@ namespace Dev.Repository
             }
             return result;
         }
-
         public Boolean CheckFormulaIsAvailable_ForCalculation(ExternalResultCalculationRequest req)
         {
             CheckFormulaIsAvailable objResult = new CheckFormulaIsAvailable();
@@ -266,7 +263,6 @@ namespace Dev.Repository
             }
             return result;
         }
-
         public List<ExternalResultCalculation> GetExternalFormulaOrderDetails(ExternalResultCalculationRequest req)
         {
             List <ExternalResultCalculation> result = new List<ExternalResultCalculation>();
@@ -281,8 +277,8 @@ namespace Dev.Repository
                     var _VenueBranchNo = new SqlParameter("VenueBranchNo", req.VenueBranchNo);
 
                     var rtnResult = context.GetExternalFormulaOrderDetails.FromSqlRaw(
-                         "Execute dbo.pro_Get_OrderDetails_FormulaCalculation @VenueNo, @VenueBranchNo, @BarcodeNo, @TestSubtesttNo",
-                        _VenueNo, _VenueBranchNo, _BarcodeNo, _TestSubtesttNo).ToList();
+                    "Execute dbo.pro_Get_OrderDetails_FormulaCalculation @VenueNo, @VenueBranchNo, @BarcodeNo, @TestSubtesttNo",
+                    _VenueNo, _VenueBranchNo, _BarcodeNo, _TestSubtesttNo).ToList();
 
                     foreach (var r in rtnResult)
                     {
@@ -320,7 +316,6 @@ namespace Dev.Repository
             }
             return result;
         }
-
         public int ValidateAutoApporval(ExternalResultDTO req)
         {
             int result = 0;
@@ -363,7 +358,6 @@ namespace Dev.Repository
             }
             return result;
         }
-
         public int PostDifCultureResult(ExternalDifBulkCultureResultDTO results)
         {
             int result = 0;

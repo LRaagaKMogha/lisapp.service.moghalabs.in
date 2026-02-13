@@ -1,5 +1,5 @@
-﻿using Dev.IRepository.Inventory;
-using DEV.Common;
+﻿using Service.IRepository.Inventory;
+using Service.Common;
 using Service.Model;
 using Service.Model.EF;
 using Service.Model.Inventory;
@@ -10,7 +10,7 @@ using System.Collections.Generic;
 using Microsoft.Data.SqlClient;
 using System.Linq;
 
-namespace Dev.Repository.Inventory
+namespace Service.Repository.Inventory
 {
     public class GRNMasterReposistory: IGRNMasterReposistory
     {

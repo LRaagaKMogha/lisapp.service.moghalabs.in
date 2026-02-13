@@ -1,11 +1,12 @@
-﻿using Dev.Repository;
-using Service.Model;
+﻿using Service.Model;
 using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Service.IRepository;
+using Service.Repository;
 
-namespace DEV.API.SERVICE.InvoiceGeneration
+namespace Service.API.SERVICE.InvoiceGeneration
 {
     public class AutoInvoicePdfGen
     {
@@ -13,6 +14,7 @@ namespace DEV.API.SERVICE.InvoiceGeneration
         {
             FrontOfficeRepository _frontOffice = new FrontOfficeRepository(_config);
             InvoiceRepository _invoiceRepo = new InvoiceRepository(_config);
+
             var lstvenueDetails = _invoiceRepo.InvoiceVenueDetails();
             if (lstvenueDetails != null && lstvenueDetails.Count() > 0)
             {
@@ -37,10 +39,10 @@ namespace DEV.API.SERVICE.InvoiceGeneration
                         if (_lstcstVisit != null && _lstcstVisit.Count() > 0)
                         {
                             _lstcstVisit.ForEach(x => x.isChecked = true);
-                            decimal _billGross = 0, _billDiscount = 0, _billNet = 0, _billCollected = 0, _invoiceGross = 0, _invoiceDiscount = 0,
-                               discountPercentage = 0;
+                            decimal _billGross = 0, _billDiscount = 0, _billNet = 0, _billCollected = 0, _invoiceGross = 0, _invoiceDiscount = 0;
                             int _discountNo = 0;
                             string _discountType = "";
+                            
                             foreach (var x in _lstcstVisit)
                             {
                                 _billGross += x.grossAmount;

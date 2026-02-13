@@ -1,16 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.IO;
-using System.Security.Cryptography;
-using System.Text;
 
-namespace Dev.Win.Common
+namespace Service.Win.Common
 {
     public static class CommonSecurity
-    {      
-      
+    {            
         public static string base64Encode(string sData) // Encode    
         {
             try
@@ -68,7 +64,5 @@ namespace Dev.Win.Common
             }
             return result;
         }
-
     }
-
 }

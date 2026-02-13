@@ -1,16 +1,12 @@
-﻿using Dev.IRepository.FrontOffice;
-using DEV.Common;
+﻿using Service.IRepository.FrontOffice;
+using Service.Common;
 using Service.Model;
-using ErrorOr;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Routing;
-using Microsoft.Office.Interop.Word;
 using System;
-using System.Collections.Generic;
 
-namespace DEV.API.SERVICE.Controllers
+namespace Service.API.SERVICE.Controllers
 {
     [Authorize(AuthenticationSchemes = "Bearer")]
     [ApiController]

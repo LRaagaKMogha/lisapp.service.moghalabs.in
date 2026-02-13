@@ -1,11 +1,10 @@
 ﻿using System;
 using System.Runtime.Caching;
 
-namespace DEV.Common
+namespace Service.Common
 {
     public sealed  class MemoryCacheRepository
     {
-
         private MemoryCacheRepository()
         {
         }
@@ -67,6 +66,5 @@ namespace DEV.Common
                 cache.Remove(Key);
             }
         }
-
     }
 }

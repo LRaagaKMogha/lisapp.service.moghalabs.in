@@ -1,20 +1,15 @@
-﻿using Dev.IRepository;
-using DEV.Common;
+﻿using Service.IRepository;
+using Service.Common;
 using Service.Model;
 using Service.Model.EF;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
-using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
-using System.Data;
 using Microsoft.Data.SqlClient;
-using System.IO;
 using System.Linq;
-using System.Xml.Linq;
-using Serilog;
 
-namespace Dev.Repository
+namespace Service.Repository
 {
     public class OutSourceAPIRepository : IOutSourceAPIRepository
     {
@@ -30,9 +25,10 @@ namespace Dev.Repository
                 {                    
                     var _VenueNo = new SqlParameter("VenueNo", results.VenueNo);
                     var _VenueBranchNo = new SqlParameter("VenueBranchNo", results.VenueBranchNo);
+                    
                     lst = context.GetOutsourceDetailsAPI.FromSqlRaw(
-                         "Execute dbo.pro_GetOutsourceDetails_API @VenueNo,@VenueBranchNo",
-                      _VenueNo, _VenueBranchNo).ToList();
+                    "Execute dbo.pro_GetOutsourceDetails_API @VenueNo,@VenueBranchNo",
+                    _VenueNo, _VenueBranchNo).ToList();
                 }
             }
             catch (Exception ex)
@@ -53,9 +49,11 @@ namespace Dev.Repository
                 {
                     var _APIOutsourceSendNo = new SqlParameter("APIOutsourceSendNo", results.APIOutsourceSendNo);
                     var _Ackstatus = new SqlParameter("Ackstatus", results.Ackstatus);
+                    
                     var obj = context.AckOutSourceAPIList.FromSqlRaw(
-                         "Execute dbo.pro_AckOutsourceDetails_API @APIOutsourceSendNo,@ackstatus",
-                      _APIOutsourceSendNo, _Ackstatus).ToList();
+                    "Execute dbo.pro_AckOutsourceDetails_API @APIOutsourceSendNo,@ackstatus",
+                    _APIOutsourceSendNo, _Ackstatus).ToList();
+                    
                     OutStatus = obj != null && obj.Count>0 ? obj[0].OutStatus : 0;
                 }
             }

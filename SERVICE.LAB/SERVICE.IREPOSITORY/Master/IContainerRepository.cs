@@ -1,17 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
 using Service.Model;
 
-namespace Dev.IRepository
+namespace Service.IRepository
 {
     public interface IContainerRepository
     {
-
         List<TblContainer> Getcontainermaster(ContainerMasterRequest containerRequest);
         ContainerMasterResponse Insertcontainermaster(TblContainer tblContainer);
-
-        //int CheckMasterNameExists(CheckMasterNameExistsRequest checkMasterNameExistsRequest);
     }
-
 }

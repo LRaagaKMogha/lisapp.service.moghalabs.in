@@ -1,12 +1,10 @@
-﻿using DEV.Windows.Repository;
+﻿using Service.Win.Repository;
 using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
-using System.Text;
 
-
-namespace DEV.Model.EF
+namespace Service.Model.EF
 {
     public class ReportContext
     {
@@ -32,8 +30,7 @@ namespace DEV.Model.EF
                             oCommand.Parameters.AddWithValue(item.Key, item.Value);
                         }
                         SqlDataAdapter da = new SqlDataAdapter(oCommand);                    
-                        da.Fill(result);
-                     
+                        da.Fill(result);                     
                     }
                 }
             }
@@ -43,6 +40,5 @@ namespace DEV.Model.EF
             }         
             return result;
         }
-
     }
 }

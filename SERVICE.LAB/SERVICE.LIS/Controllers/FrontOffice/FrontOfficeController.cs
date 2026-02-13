@@ -1,6 +1,5 @@
-﻿using Dev.IRepository;
-using Dev.Repository;
-using DEV.Common;
+﻿using Service.IRepository;
+using Service.Common;
 using Service.Model;
 using Service.Model.Sample;
 using Microsoft.AspNetCore.Authorization;
@@ -12,8 +11,9 @@ using System.IO;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+using SixLabors.ImageSharp;
 
-namespace DEV.API.SERVICE.Controllers
+namespace Service.API.SERVICE.Controllers
 {
     [Authorize(AuthenticationSchemes = "Bearer")]
     [ApiController]
@@ -21,10 +21,12 @@ namespace DEV.API.SERVICE.Controllers
     {
         private readonly IConfiguration _config;
         private readonly IFrontOfficeRepository _IFrontOfficeRepository;
-        public FrontOfficeController(IFrontOfficeRepository noteRepository, IConfiguration config)
+        private readonly IMasterRepository _IMasterRepository;
+        public FrontOfficeController(IFrontOfficeRepository noteRepository, IConfiguration config, IMasterRepository iMasterRepository)
         {
             _IFrontOfficeRepository = noteRepository;
             _config = config;
+            _IMasterRepository = iMasterRepository;
         }
 
         /// <summary>
@@ -331,8 +333,8 @@ namespace DEV.API.SERVICE.Controllers
         public FrontOffficeResponse BulkFrontOfficeMaster([FromBody] List<FrontOffficeDTO> objDTO)
         {
             FrontOffficeResponse result = new FrontOffficeResponse();
-            MasterRepository _IMasterRepository = new MasterRepository(_config);
             AppSettingResponse objAppSettingResponse = new AppSettingResponse();
+
             try
             {
                 foreach (var item in objDTO)
@@ -375,6 +377,7 @@ namespace DEV.API.SERVICE.Controllers
             }
             return Ok(result);
         }
+
         [HttpPost]
         [Route("api/FrontOffice/GetMassFileRegistration")]
         public List<MassFileDTO> GetMassFileRegistration(CommonFilterRequestDTO RequestItem)
@@ -464,8 +467,8 @@ namespace DEV.API.SERVICE.Controllers
         {
             List<BulkFileUpload> lstresult = new List<BulkFileUpload>();
             BulkFileUpload result = new BulkFileUpload();
-            MasterRepository _IMasterRepository = new MasterRepository(_config);
             AppSettingResponse objAppSettingResponse = new AppSettingResponse();
+
             try
             {
                 //
@@ -517,8 +520,8 @@ namespace DEV.API.SERVICE.Controllers
         public FrontOffficeResponse UploadFile([FromBody] FrontOffficeDTO objDTO)
         {
             FrontOffficeResponse result = new FrontOffficeResponse();
-            MasterRepository _IMasterRepository = new MasterRepository(_config);
             AppSettingResponse objAppSettingResponse = new AppSettingResponse();
+
             try
             {
                 var base64data = objDTO.Base64Data;
@@ -561,10 +564,10 @@ namespace DEV.API.SERVICE.Controllers
         public ActionResult<FrontOffficeResponse> BulkUploadFile([FromBody] List<BulkFileUpload> lstjDTO)
         {
             FrontOffficeResponse result = new FrontOffficeResponse();
-            MasterRepository _IMasterRepository = new MasterRepository(_config);
             AppSettingResponse objAppSettingResponse = new AppSettingResponse();
             int venueno = 0;
             int venuebno = 0;
+
             try
             {
                 var _errormsg = BulkFileUploadValidation.BulkUploadFile(lstjDTO);
@@ -646,11 +649,23 @@ namespace DEV.API.SERVICE.Controllers
                 string path = ApplicationConstants.ConnectScannerPath;
                 if (OperatingSystem.IsWindows())
                 {
-                    using (System.Drawing.Image image = System.Drawing.Image.FromFile(path))
+                    using var image = Image.Load(path);
                     {
                         using (MemoryStream m = new MemoryStream())
                         {
-                            image.Save(m, image.RawFormat);
+                            var extension = Path.GetExtension(path).ToLowerInvariant();
+                            SixLabors.ImageSharp.Formats.IImageEncoder encoder = extension switch
+                            {
+                                ".jpg" or ".jpeg" => new SixLabors.ImageSharp.Formats.Jpeg.JpegEncoder(),
+                                ".png" => new SixLabors.ImageSharp.Formats.Png.PngEncoder(),
+                                ".bmp" => new SixLabors.ImageSharp.Formats.Bmp.BmpEncoder(),
+                                ".gif" => new SixLabors.ImageSharp.Formats.Gif.GifEncoder(),
+                                ".tga" => new SixLabors.ImageSharp.Formats.Tga.TgaEncoder(),
+                                ".webp" => new SixLabors.ImageSharp.Formats.Webp.WebpEncoder(),
+                                _ => new SixLabors.ImageSharp.Formats.Png.PngEncoder(), // Default to PNG
+                            };
+                            image.Save(m, encoder);
+
                             byte[] imageBytes = m.ToArray();
                             result = Convert.ToBase64String(imageBytes);
                             result = result.ToString();
@@ -921,7 +936,6 @@ namespace DEV.API.SERVICE.Controllers
         {
             FrontOffficeResponse result = new FrontOffficeResponse();
             AppSettingResponse objAppSettingResponse = new AppSettingResponse();
-            MasterRepository _IMasterRepository = new MasterRepository(_config);
 
             string AppUploadPathInit = "UploadPathInit";
             int venueno = 0;
@@ -978,11 +992,11 @@ namespace DEV.API.SERVICE.Controllers
         {
             FrontOffficeResponse result = new FrontOffficeResponse();
             AppSettingResponse objAppSettingResponse = new AppSettingResponse();
-            MasterRepository _IMasterRepository = new MasterRepository(_config);
 
             string AppUploadPathInit = "UploadPathInit";
             int venueno = 0;
             int venuebno = 0;
+
             try
             {
                 foreach (var objDTO in lstjDTO)
@@ -1035,6 +1049,7 @@ namespace DEV.API.SERVICE.Controllers
             }
             return patientAssessment;
         }
+
         [HttpPost]
         [Route("api/FrontOffice/InsertClinicalHistory")]
         public CommonAdminResponse InsertClinicalHistory(InsertClinicalHistory insertClinicalHistory)

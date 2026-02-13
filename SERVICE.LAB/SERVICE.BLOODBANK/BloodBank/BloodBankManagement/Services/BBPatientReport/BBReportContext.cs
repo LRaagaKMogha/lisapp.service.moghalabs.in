@@ -1,6 +1,6 @@
 using AutoMapper;
 using BloodBankManagement.Helpers;
-using DEV.Common;
+using Service.Common;
 using Serilog;
 using System.Data;
 using Microsoft.Data.SqlClient;

@@ -1,14 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Configuration;
-using System.Text;
 using System.IO;
-using DEV.Common;
-using System.Web.Http;
-using System.Web.Http.Cors;
-using Dev.Win.Common.Model;
 
-namespace DEV.WinSelfHosting
+namespace Service.WinSelfHosting
 {
     [EnableCors(origins: "*", headers: "*", methods: "*", exposedHeaders: "X-Custom-Header")]
     //[EnableCors("MyPolicy")]

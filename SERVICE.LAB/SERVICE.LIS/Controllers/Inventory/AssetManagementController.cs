@@ -1,6 +1,6 @@
-﻿using Dev.IRepository;
-using Dev.IRepository.Inventory;
-using DEV.Common;
+﻿using Service.IRepository;
+using Service.IRepository.Inventory;
+using Service.Common;
 using Service.Model;
 using Service.Model.Inventory.Master;
 using Microsoft.AspNetCore.Authorization;
@@ -11,7 +11,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 
-namespace DEV.API.SERVICE.Controllers.Inventory
+namespace Service.API.SERVICE.Controllers.Inventory
 {
     [Authorize(AuthenticationSchemes = "Bearer")]
     [ApiController]

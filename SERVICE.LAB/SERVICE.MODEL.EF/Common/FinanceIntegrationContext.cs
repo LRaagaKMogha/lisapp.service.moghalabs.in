@@ -1,7 +1,6 @@
-﻿using DEV.Common;
+﻿using Service.Common;
 using Service.Model.Integration;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata.Internal;
 
 namespace Service.Model.EF
 {

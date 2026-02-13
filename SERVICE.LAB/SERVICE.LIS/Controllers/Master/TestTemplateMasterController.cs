@@ -1,16 +1,13 @@
-﻿using Dev.IRepository.Master;
-using Dev.Repository.Master;
-using DEV.Common;
-using Service.Model;
+﻿using Service.IRepository.Master;
+using Service.Common;
 using Service.Model.Master;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
 
-namespace DEV.API.SERVICE.Controllers.Master
+namespace Service.API.SERVICE.Controllers.Master
 {
     [Authorize(AuthenticationSchemes = "Bearer")]
     [ApiController]
@@ -30,9 +27,7 @@ namespace DEV.API.SERVICE.Controllers.Master
             List<GetTestTemplateMasterRes> GetTestTemplateMasterListResult = new List<GetTestTemplateMasterRes>();
             try
             {
-
                 GetTestTemplateMasterListResult = _TestTemplateMasterRepository.GetTestTemplateMasterList(req);
-
             }
             catch (Exception ex)
             {
@@ -40,6 +35,7 @@ namespace DEV.API.SERVICE.Controllers.Master
             }
             return GetTestTemplateMasterListResult;
         }
+
         [HttpPost]
         [Route("api/TestTemplateMaster/GetEditTemplateTestMaster")]
         public GetEditTemplateTestMasterResponseDto GetEditTemplateTestMaster(GetEditTemplateTestMasterRequestDto req)

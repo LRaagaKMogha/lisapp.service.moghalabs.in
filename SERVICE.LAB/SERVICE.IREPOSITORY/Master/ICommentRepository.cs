@@ -1,9 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
 using Service.Model;
 
-namespace Dev.IRepository
+namespace Service.IRepository
 {
     public interface ICommentRepository
     {
@@ -14,13 +12,9 @@ namespace Dev.IRepository
         List<TemplateCommentRes> TemplateInsertcomment(TemplateComment Req);
         CommentSubCatyInsResponse InsertCommentSubCategory(InsertCommentSubCategoryReqest Req);
         List<FetchCommentSubCategoryResponse> GetCommentSubCategory(FetchCommentSubCategoryReqest getReq);
-
         BankMasterResponse InsertBankMaster(InsertBankMastereq getReq);
         List<BankMasterResponse> GetBankMaster(InsertBankMasterr getReq);
         BankBranchResponse InsertBankBranch(InsertBankbranchreq getReq);
         List<BankBranchResponse> GetBankBranch(GetBankbranchreq getReq);
-
-
     }
-
 }

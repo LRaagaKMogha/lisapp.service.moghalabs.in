@@ -1,16 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Service.Model;
-using Dev.IRepository;
-using Microsoft.Extensions.Logging;
-using DEV.Common;
+using Service.Common;
 using Microsoft.AspNetCore.Authorization;
+using Service.IRepository;
 
-namespace DEV.API.SERVICE.Controllers
+namespace Service.API.SERVICE.Controllers
 {
     [Authorize(AuthenticationSchemes = "Bearer")]
     [ApiController]

@@ -1,10 +1,8 @@
 ﻿using Service.Model;
 using Service.Model.Inventory;
-using System;
 using System.Collections.Generic;
-using System.Text;
 
-namespace Dev.IRepository.Inventory
+namespace Service.IRepository.Inventory
 {
     public interface IGRNReturnReposistory
     {

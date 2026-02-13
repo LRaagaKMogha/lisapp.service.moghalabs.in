@@ -1,5 +1,5 @@
-﻿using Dev.IRepository.UserManagement;
-using DEV.Common;
+﻿using Service.IRepository.UserManagement;
+using Service.Common;
 using Service.Model.EF;
 using Service.Model.UserManagement;
 using Microsoft.Data.SqlClient;
@@ -10,7 +10,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Dev.Repository.UserManagement
+namespace Service.Repository.UserManagement
 {
     public class VenueVsMenuRepository : IVenueVsMenuRepository
     {
@@ -20,7 +20,6 @@ namespace Dev.Repository.UserManagement
         {
             _config = config;
         }
-
         public List<VenueVsMenuResponseDTO> GetVenueVsMenu(VenueVsMenuRequestDTO request)
         {
             List<VenueVsMenuResponseDTO> objResult = new List<VenueVsMenuResponseDTO>();
@@ -33,8 +32,8 @@ namespace Dev.Repository.UserManagement
                     var _UserNo = new SqlParameter("@UserNo", request.UserNo);
 
                     objResult = context.GetVenueVsMenu.FromSqlRaw(
-                        "EXEC dbo.pro_GetVenueVsMenu @ModuleId, @VenueNo, @UserNo",
-                        _ModuleId, _VenueNo, _UserNo
+                    "EXEC dbo.pro_GetVenueVsMenu @ModuleId, @VenueNo, @UserNo",
+                    _ModuleId, _VenueNo, _UserNo
                     ).ToList();
                 }
             }
@@ -44,7 +43,6 @@ namespace Dev.Repository.UserManagement
             }
             return objResult;
         }
-
         public int InsertVenueVsMenu(VenueVsMenuInsertDTO dto)
         {
             try
@@ -58,8 +56,8 @@ namespace Dev.Repository.UserManagement
                     var _UserNo = new SqlParameter("@UserNo", dto.UserNo);
 
                     context.Database.ExecuteSqlRaw(
-                        "EXEC dbo.pro_InsertVenueVsMenu @VenueVsMenu, @UserNo",
-                        _VenueVsMenu, _UserNo
+                    "EXEC dbo.pro_InsertVenueVsMenu @VenueVsMenu, @UserNo",
+                    _VenueVsMenu, _UserNo
                     );
 
                     return 1;
@@ -67,8 +65,7 @@ namespace Dev.Repository.UserManagement
             }
             catch (Exception ex)
             {
-                MyDevException.Error(ex, "VenueVsMenuRepository.InsertVenueVsMenu",
-                    ExceptionPriority.High, ApplicationType.REPOSITORY, 0, 0, 0);
+                MyDevException.Error(ex, "VenueVsMenuRepository.InsertVenueVsMenu",ExceptionPriority.High, ApplicationType.REPOSITORY, 0, 0, 0);
                 return 0;
             }
         }

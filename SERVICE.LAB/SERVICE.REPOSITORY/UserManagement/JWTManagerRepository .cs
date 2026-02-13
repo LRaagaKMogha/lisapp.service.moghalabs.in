@@ -3,21 +3,14 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Linq;
-using Dev.IRepository;
-using Microsoft.EntityFrameworkCore;
-using Service.Model.EF;
-using Microsoft.Data.SqlClient;
-using Newtonsoft.Json;
-using System.IO;
-using DEV.Common;
+using Service.IRepository;
 using Microsoft.Extensions.Configuration;
-using Serilog;
 using System.IdentityModel.Tokens.Jwt;
 using Microsoft.IdentityModel.Tokens;
 using System.Security.Claims;
 using System.Security.Cryptography;
 
-namespace Dev.Repository
+namespace Service.Repository
 {
     public class JWTManagerRepository : IJWTManagerRepository
     {
@@ -49,7 +42,6 @@ namespace Dev.Repository
 
             var token = tokenHandler.CreateToken(tokenDescriptor);
             return new Tokens { Token = tokenHandler.WriteToken(token), RefreshToken = refreshToken, RefreshTokenExpiryTime = DateTime.Now.AddDays(7) };
-
         }
         public string GenerateRefreshToken()
         {
@@ -60,7 +52,6 @@ namespace Dev.Repository
                 return Convert.ToBase64String(randomNumber);
             }
         }
-
         public UserClaimsIdentity ValidateToken(string token)
         {
             if (token == null)

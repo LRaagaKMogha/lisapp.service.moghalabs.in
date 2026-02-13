@@ -1,17 +1,13 @@
 ﻿using System;
-using System.Collections.Generic;
-using Dev.IRepository.Inventory.Report;
-using DEV.Common;
+using Service.Common;
 using Service.Model.Inventory;
 using Service.Model.Inventory.Report;
-using Service.Model.Sample;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
-using Serilog;
 using Microsoft.AspNetCore.Authorization;
 using System.Threading.Tasks;
+using Service.IRepository.Inventory.Report;
 
-namespace DEV.API.SERVICE.Controllers.Inventory.Reports
+namespace Service.API.SERVICE.Controllers.Inventory.Reports
 {
     [Authorize(AuthenticationSchemes = "Bearer")]
     [ApiController]

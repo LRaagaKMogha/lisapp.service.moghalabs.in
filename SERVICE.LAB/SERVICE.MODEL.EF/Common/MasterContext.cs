@@ -1,4 +1,4 @@
-﻿using DEV.Common;
+﻿using Service.Common;
 using Service.Model.Common;
 using Service.Model.Inventory;
 using Service.Model.Master;

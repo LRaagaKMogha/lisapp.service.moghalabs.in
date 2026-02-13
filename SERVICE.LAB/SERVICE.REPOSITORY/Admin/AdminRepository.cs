@@ -2,19 +2,16 @@
 using System.Collections.Generic;
 using Microsoft.Data.SqlClient;
 using System.Linq;
-using System.Text;
-using Dev.IRepository;
-using DEV.Common;
+using Service.IRepository;
+using Service.Common;
 using Service.Model;
 using Service.Model.Admin;
 using Service.Model.EF;
-using Service.Model.PatientInfo;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
-using Serilog;
 using System.Xml.Linq;
 
-namespace Dev.Repository
+namespace Service.Repository
 {
     public class AdminRepository : IAdminRepository
     {

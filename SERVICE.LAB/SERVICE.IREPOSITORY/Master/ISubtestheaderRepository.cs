@@ -1,18 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
 using Service.Model;
 
-namespace Dev.IRepository
+namespace Service.IRepository
 {
     public interface ISubtestheaderRepository
     {
-
         List<TblSubtestheader> GetSubtestheadermaster(SubtestheaderMasterRequest subtestheaderMasterRequest);
         SubtestheaderMasterResponse InsertSubtestheadermaster(TblSubtestheader testheader);
-
-        //SpecializationMasterResponse Insertspecializatiomaster(Tblspecialization tblspecialization);
-        //int CheckMasterNameExists(CheckMasterNameExistsRequest checkMasterNameExistsRequest);
     }
-
 }

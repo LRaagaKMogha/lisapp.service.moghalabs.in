@@ -1,16 +1,14 @@
-﻿using Dev.IRepository.Master;
-using DEV.Common;
-using Service.Model.Inventory;
+﻿using Service.IRepository.Master;
+using Service.Common;
 using Service.Model.Master;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace DEV.API.SERVICE.Controllers.Master
+namespace Service.API.SERVICE.Controllers.Master
 {
     [Authorize(AuthenticationSchemes = "Bearer")]
     [ApiController]
@@ -18,7 +16,6 @@ namespace DEV.API.SERVICE.Controllers.Master
     {
         private readonly IConfiguration _config;
         private readonly IFranchisorRepository _FranchisorRepository;
-
         public FranchisorController(IConfiguration config, IFranchisorRepository FranchisorRepository)
         {
             _config = config;

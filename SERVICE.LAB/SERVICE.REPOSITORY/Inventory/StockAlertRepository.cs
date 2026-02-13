@@ -1,19 +1,15 @@
-﻿using Dev.IRepository.Inventory;
-using DEV.Common;
-using Service.Model;
+﻿using Service.IRepository.Inventory;
+using Service.Common;
 using Service.Model.EF;
 using Service.Model.Inventory;
-using Service.Model.Inventory.Master;
-using ErrorOr;
 using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 
-namespace Dev.Repository.Inventory
+namespace Service.Repository.Inventory
 {
     public class StockAlertRepository:IStockAlertRepository
     {
@@ -43,7 +39,6 @@ namespace Dev.Repository.Inventory
                 MyDevException.Error(ex, "GetStockAlertsDetails", ExceptionPriority.Low, ApplicationType.REPOSITORY, stockAlertRequest.VenueNo, 0, 0);
             }
             return objResult;
-
         }
     }
 }

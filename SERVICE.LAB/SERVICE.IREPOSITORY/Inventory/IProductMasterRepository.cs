@@ -1,10 +1,8 @@
 ﻿using Service.Model;
 using Service.Model.Inventory;
-using System;
 using System.Collections.Generic;
-using System.Text;
 
-namespace Dev.IRepository.Inventory
+namespace Service.IRepository.Inventory
 {
     public interface IProductMasterRepository
     {
@@ -21,7 +19,6 @@ namespace Dev.IRepository.Inventory
         SaveIssueProductResponse InsertIssueReceivedProductlst(IssueProductRequest issue);
         List<FetchProductListResponse> FetchProductList(ProductMasterRequest masterRequest);
         List<Fetchlookalike> Getlookalike(Getlookalikeresponse obj);
-
         List<Fetchsoundalike> GetSoundalike(GetSoundalikeresponse obj);
         List<GetDeptIssueProductResponse> GetDeptIssueProductlst(GetDeptIssueProductRequest issue);
         List<SubProductRes> GetSubProduct(SubProductReq obj); 
@@ -30,6 +27,5 @@ namespace Dev.IRepository.Inventory
         List<ProductUnitDTO> GetProductUnitList(int VenueNo);
         List<BOMMappingDTO> GetBOMMapping(int VenueNo, int TestNo, string TestType);
         BOMMappingResponse InsertBOMMapping(List<BOMMappingRequest> req);
-
     }
 }

@@ -1,22 +1,16 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Net.Http.Headers;
 using System.Net.Security;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
-using System.Threading.Tasks;
-using AutoMapper;
 using BloodBankManagement.Helpers;
 using BloodBankManagement.Models;
 using BloodBankManagement.Services.Integration;
 using BloodBankManagement.Services.StartupServices;
-using DEV.Common;
-using DEV.Model.EF;
-using DEV.Model.Integration;
+using Service.Common;
+using Service.Model.EF;
+using Service.Model.Integration;
 using ErrorOr;
 using Microsoft.EntityFrameworkCore;
-using Newtonsoft.Json;
 using Shared;
 
 namespace BloodBankManagement.Services.BloodBankPatients

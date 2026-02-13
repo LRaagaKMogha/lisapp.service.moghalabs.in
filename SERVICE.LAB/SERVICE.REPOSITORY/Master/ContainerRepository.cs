@@ -1,16 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
-using Dev.IRepository;
+using Service.IRepository;
 using Service.Model;
 using Service.Model.EF;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using System.Linq;
-using DEV.Common;
+using Service.Common;
 using Microsoft.Data.SqlClient;
 
-namespace Dev.Repository
+namespace Service.Repository
 {
     public class ContainerRepository : IContainerRepository
     {
@@ -28,9 +27,10 @@ namespace Dev.Repository
                     var _venueNo = new SqlParameter("venueNo", containerRequest?.venueNo);
                     var _venueBranchno = new SqlParameter("venueBranchno", containerRequest?.venueBranchno);
                     var _pageIndex = new SqlParameter("pageIndex", containerRequest?.pageIndex);
+                    
                     objresult = context.Getcontainer.FromSqlRaw(
-                        "Execute dbo.pro_GetContainermaster @containerNo, @venueNo, @venueBranchno,@pageIndex",
-                         _containerNo, _venueNo, _venueBranchno, _pageIndex).ToList();
+                    "Execute dbo.pro_GetContainermaster @containerNo, @venueNo, @venueBranchno,@pageIndex",
+                    _containerNo, _venueNo, _venueBranchno, _pageIndex).ToList();
                 }
             }
             catch (Exception ex)
@@ -39,7 +39,6 @@ namespace Dev.Repository
             }
             return objresult;
         }
-
         public ContainerMasterResponse Insertcontainermaster(TblContainer tblContainer)
         {
             ContainerMasterResponse objresult = new ContainerMasterResponse();
@@ -62,12 +61,10 @@ namespace Dev.Repository
                     var _imageColor = new SqlParameter("imageColor", tblContainer?.imageColor);
 
                     objresult = context.Insertcontainer.FromSqlRaw(
-                        "Execute dbo.pro_InsertContainer @containerNo,@containerCode,@containerName,@description," +
-                        "@containerVolume,@isContainerimage,@containerImagename,@status,@venueNo,@venueBranchno,@userNo,@imageColor",
-                         _containerNo, _containerCode, _containerName, _description, _containerVolume,
-                         _isContainerimage, _containerImagename, _status, _venueno, _venueBranchno, _userNo, _imageColor).AsEnumerable().FirstOrDefault();
-                   
-
+                    "Execute dbo.pro_InsertContainer @containerNo,@containerCode,@containerName,@description," +
+                    "@containerVolume,@isContainerimage,@containerImagename,@status,@venueNo,@venueBranchno,@userNo,@imageColor",
+                    _containerNo, _containerCode, _containerName, _description, _containerVolume,
+                    _isContainerimage, _containerImagename, _status, _venueno, _venueBranchno, _userNo, _imageColor).AsEnumerable().FirstOrDefault();
                 }
             }
             catch (Exception ex)
@@ -76,6 +73,5 @@ namespace Dev.Repository
             }
             return objresult;
         }
-
     }
 }

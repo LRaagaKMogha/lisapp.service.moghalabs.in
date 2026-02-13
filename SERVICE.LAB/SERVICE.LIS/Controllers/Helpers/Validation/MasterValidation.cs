@@ -1,16 +1,10 @@
 ﻿using Service.Model;
 using Service.Model.Common;
-using DEV.Common;
-using Microsoft.AspNetCore.Mvc.ModelBinding;
-using System;
+using Service.Common;
 using System.Collections.Generic;
-using System.Resources;
 using System.Text.RegularExpressions;
-using Microsoft.IdentityModel.Tokens;
-using System.Data;
-using System.Linq;
 
-namespace DEV.API.SERVICE.Controllers
+namespace Service.API.SERVICE.Controllers
 {
     public class MasterValidation
     {
@@ -79,7 +73,6 @@ namespace DEV.API.SERVICE.Controllers
             {
                 errors.Add("Special Characters Are Not Allowed in Sequence No");
             }
-
             if (errors.Count > 0)
             {
                 errorResponse.status = true;

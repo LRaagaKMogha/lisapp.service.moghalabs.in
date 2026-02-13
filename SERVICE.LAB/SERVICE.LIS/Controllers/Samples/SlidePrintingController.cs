@@ -1,25 +1,15 @@
-﻿using Dev.IRepository;
+﻿using Service.IRepository;
 using Service.Model.Sample;
 using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
-using Serilog;
 using Service.Model;
-using Service.Model.FrontOffice.PatientDue;
-using System.IO;
-using System.Net.Http.Headers;
-using Microsoft.AspNetCore.Hosting;
-using DEV.Common;
-using System.Linq;
+using Service.Common;
 using Microsoft.Extensions.Configuration;
-using Microsoft.AspNetCore.Authorization;
-using Dev.IRepository.Samples;
 
-namespace DEV.API.SERVICE.Controllers
+namespace Service.API.SERVICE.Controllers
 {
-    //[Authorize(AuthenticationSchemes = "Bearer")]
     [ApiController]
     public class SlidePrintingController : ControllerBase
     {

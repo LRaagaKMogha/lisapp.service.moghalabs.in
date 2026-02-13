@@ -1,4 +1,4 @@
-﻿namespace DEV.WinSelfHosting
+﻿namespace Service.WinSelfHosting
 {
     partial class WinSelfHostService
     {

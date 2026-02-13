@@ -1,9 +1,5 @@
-﻿using System;
-using DEV.Common;
-using Service.Model.Sample;
+﻿using Service.Common;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata;
-using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace Service.Model.EF
 {

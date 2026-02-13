@@ -1,8 +1,4 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Text.Json;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Primitives;
@@ -39,10 +35,8 @@ namespace Shared
                     return; // Terminate the middleware pipeline
                 }
             }
-
             await _next(context);
         }
-
         private bool QueryStringChanges(HttpContext context, User userData)
         {
             var queryString = context.Request.QueryString.Value;
@@ -57,7 +51,6 @@ namespace Shared
 
             return venueNoSame && venueBranchNoSame && usernoSame;
         }
-
         private bool UpdateQueryParameter(Dictionary<string, StringValues> queryDict, string key, int value)
         {
             if (!queryDict.ContainsKey(key)) return true;

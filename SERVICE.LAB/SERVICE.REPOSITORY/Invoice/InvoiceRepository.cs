@@ -1,19 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
-using Dev.IRepository;
+using Service.IRepository;
 using Service.Model;
 using Service.Model.EF;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using System.Linq;
-using DEV.Common;
+using Service.Common;
 using Microsoft.Data.SqlClient;
-using Serilog;
-using Newtonsoft.Json;
-using System.IO;
 
-namespace Dev.Repository
+namespace Service.Repository
 {
     public class InvoiceRepository : IInvoiceRepository
     {
@@ -32,6 +28,7 @@ namespace Dev.Repository
                     var _venueno = new SqlParameter("venueno", req.venueNo);
                     var _venuebranchno = new SqlParameter("venuebranchno", req.venueBranchNo);
                     var _isAutoInviceGenerate = new SqlParameter("isAutoInvoiceGenerate", req.isAutoInvoiceGenerate == null ? 0 : req.isAutoInvoiceGenerate);
+                    
                     lst = context.GetCustomerVisit.FromSqlRaw(
                     "Execute dbo.pro_GetCustomerVisit @fromdate, @todate, @customerNo, @venueno, @venuebranchno, @isAutoInvoiceGenerate",
                     _fromdate, _todate, _customerNo, _venueno, _venuebranchno, _isAutoInviceGenerate).ToList();
@@ -53,9 +50,10 @@ namespace Dev.Repository
                     var _InvoiceNo = new SqlParameter("InvoiceNo", req.searchtext);
                     var _venueno = new SqlParameter("venueno", req.venueNo);
                     var _venuebranchno = new SqlParameter("venuebranchno", req.venueBranchNo);
+                    
                     lst = context.GetCreditNoteResponse.FromSqlRaw(
                     "Execute dbo.pro_GetCreditNoteDetails @InvoiceNo,@venueno,@venuebranchno",
-                          _InvoiceNo, _venueno, _venuebranchno).ToList();
+                    _InvoiceNo, _venueno, _venuebranchno).ToList();
                 }
             }
             catch (Exception ex)
@@ -87,9 +85,10 @@ namespace Dev.Repository
                     var _userNo = new SqlParameter("userNo", req.userNo);
                     var _venueno = new SqlParameter("venueno", req.venueNo);
                     var _venuebranchno = new SqlParameter("venuebranchno", req.venueBranchNo);
+                    
                     var lst = context.InsertInvoiceCreate.FromSqlRaw(
-                        "Execute dbo.pro_InsertInvoiceCreate @customerNo,@invoiceCreateXML,@invoiceVisitsXML,@userNo,@venueno,@venuebranchno",
-                          _customerNo, _invoiceCreateXML, _invoiceVisitsXML, _userNo, _venueno, _venuebranchno).ToList();
+                    "Execute dbo.pro_InsertInvoiceCreate @customerNo,@invoiceCreateXML,@invoiceVisitsXML,@userNo,@venueno,@venuebranchno",
+                    _customerNo, _invoiceCreateXML, _invoiceVisitsXML, _userNo, _venueno, _venuebranchno).ToList();
 
                     obj = lst[0];
                 }
@@ -104,6 +103,7 @@ namespace Dev.Repository
         {
             rtninvoiceCredit obj = new rtninvoiceCredit();
             CommonHelper commonUtility = new CommonHelper();
+            
             try
             {
                 string invoiceVisitsXML = "";
@@ -119,9 +119,10 @@ namespace Dev.Repository
                     var _userNo = new SqlParameter("userNo", req.userNo);
                     var _venueno = new SqlParameter("venueno", req.venueNo);
                     var _venuebranchno = new SqlParameter("venuebranchno", req.venueBranchNo);
+                    
                     var lst = context.InsertInvoiceCreditNote.FromSqlRaw(
-                        "Execute dbo.pro_InsertInvoiceCreditNote @invoiceNo,@invoiceVisitsXML,@userNo,@venueno,@venuebranchno",
-                          _invoiceNo, _invoiceVisitsXML, _userNo, _venueno, _venuebranchno).ToList();
+                    "Execute dbo.pro_InsertInvoiceCreditNote @invoiceNo,@invoiceVisitsXML,@userNo,@venueno,@venuebranchno",
+                    _invoiceNo, _invoiceVisitsXML, _userNo, _venueno, _venuebranchno).ToList();
                 }
             }
             catch (Exception ex)
@@ -149,9 +150,9 @@ namespace Dev.Repository
                     var _filterCode = new SqlParameter("filterCode", req.filterCode);
 
                     lst = context.GetCustomerInvoice.FromSqlRaw(
-                        "Execute dbo.pro_GetCustomerInvoice @Type, @FromDate, @ToDate, @Flag, @CustomerNo, " +
-                        "@InvoiceNo, @VenueNo, @VenueBranchNo, @LoginType, @FilterCode",
-                        _type, _fromdate, _todate, _flag, _customerNo, _invoiceNo,_venueno, _venuebranchno, _loginType, _filterCode).ToList();
+                    "Execute dbo.pro_GetCustomerInvoice @Type, @FromDate, @ToDate, @Flag, @CustomerNo, " +
+                    "@InvoiceNo, @VenueNo, @VenueBranchNo, @LoginType, @FilterCode",
+                    _type, _fromdate, _todate, _flag, _customerNo, _invoiceNo,_venueno, _venuebranchno, _loginType, _filterCode).ToList();
                 }
             }
             catch (Exception ex)
@@ -170,9 +171,11 @@ namespace Dev.Repository
                     var _invoiceNo = new SqlParameter("invoiceNo", req.invoiceNo);
                     var _venueno = new SqlParameter("venueno", req.venueNo);
                     var _venuebranchno = new SqlParameter("venuebranchno", req.venueBranchNo);
+                    
                     var rtndblst = context.GetInvoiceInfo.FromSqlRaw(
-                        "Execute dbo.pro_GetInvoiceInfo @invoiceNo,@venueno,@venuebranchno",
-                           _invoiceNo, _venueno, _venuebranchno).ToList();
+                    "Execute dbo.pro_GetInvoiceInfo @invoiceNo,@venueno,@venuebranchno",
+                    _invoiceNo, _venueno, _venuebranchno).ToList();
+
                     obj = rtndblst[0];
                 }
             }
@@ -207,9 +210,10 @@ namespace Dev.Repository
                     var _userNo = new SqlParameter("userNo", req.userNo);
                     var _venueno = new SqlParameter("venueno", req.venueNo);
                     var _venuebranchno = new SqlParameter("venuebranchno", req.venueBranchNo);
+                    
                     var lst = context.InsertInvoicePayment.FromSqlRaw(
-                        "Execute dbo.pro_InsertInvoicePayment @invoiceNo,@customerNo,@invoicePaymentXML,@paymentModeXML,@userNo,@venueno,@venuebranchno",
-                          _invoiceNo, _customerNo, _invoicePaymentXML, _paymentModeXML, _userNo, _venueno, _venuebranchno).ToList();
+                    "Execute dbo.pro_InsertInvoicePayment @invoiceNo,@customerNo,@invoicePaymentXML,@paymentModeXML,@userNo,@venueno,@venuebranchno",
+                    _invoiceNo, _customerNo, _invoicePaymentXML, _paymentModeXML, _userNo, _venueno, _venuebranchno).ToList();
 
                     obj = lst[0];
                 }
@@ -226,16 +230,15 @@ namespace Dev.Repository
             try
             {
                 using (var context = new InvoiceContext(_config.GetConnectionString(ConfigKeys.DefaultConnection)))
-                {
-                    
+                {                    
                     var _searchby = new SqlParameter("searchby", req.searchby);
                     var _searchtext = new SqlParameter("searchtext", req.searchtext);
                     var _venueno = new SqlParameter("venueno", req.venueNo);
                     var _venuebranchno = new SqlParameter("venuebranchno", req.venueBranchNo);
+                    
                     lst = context.SearchInvoiceNo.FromSqlRaw(
-                        "Execute dbo.pro_SearchInvoiceNo @searchby,@searchtext,@venueno,@venuebranchno",
-                          _searchby, _searchtext, _venueno, _venuebranchno).ToList();
-
+                    "Execute dbo.pro_SearchInvoiceNo @searchby,@searchtext,@venueno,@venuebranchno",
+                    _searchby, _searchtext, _venueno, _venuebranchno).ToList();
                 }
             }
             catch (Exception ex)
@@ -254,9 +257,10 @@ namespace Dev.Repository
                     var _invoiceNo = new SqlParameter("invoiceNo", req.invoiceNo);
                     var _venueno = new SqlParameter("venueno", req.venueNo);
                     var _venuebranchno = new SqlParameter("venuebranchno", req.venueBranchNo);
+                    
                     lst = context.GetInvoicePayment.FromSqlRaw(
-                        "Execute dbo.pro_GetInvoicePayment @invoiceNo,@venueno,@venuebranchno",
-                          _invoiceNo, _venueno, _venuebranchno).ToList();
+                    "Execute dbo.pro_GetInvoicePayment @invoiceNo,@venueno,@venuebranchno",
+                    _invoiceNo, _venueno, _venuebranchno).ToList();
                 }
             }
             catch (Exception ex)
@@ -265,7 +269,6 @@ namespace Dev.Repository
             }
             return lst;
         }
-
         public List<CreditNoteReport> GetCreditNoteReport(reqinvoice req)
         {
             List<CreditNoteReport> lst = new List<CreditNoteReport>();
@@ -279,9 +282,10 @@ namespace Dev.Repository
                     var _invoiceNo = new SqlParameter("invoiceNo", req.invoiceNo);
                     var _venueno = new SqlParameter("venueno", req.venueNo);
                     var _venuebranchno = new SqlParameter("venuebranchno", req.venueBranchNo);
+                    
                     lst = context.GetCreditNoteReport.FromSqlRaw(
-                        "Execute dbo.Pro_GetCreditNoteReport @type,@FromDate,@ToDate,@invoiceNo,@venueno,@venuebranchno",
-                          _type, _fromdate, _todate, _invoiceNo, _venueno, _venuebranchno).ToList();
+                    "Execute dbo.Pro_GetCreditNoteReport @type,@FromDate,@ToDate,@invoiceNo,@venueno,@venuebranchno",
+                    _type, _fromdate, _todate, _invoiceNo, _venueno, _venuebranchno).ToList();
                 }
             }
             catch (Exception ex)
@@ -290,11 +294,11 @@ namespace Dev.Repository
             }
             return lst;
         }
-
         public rtnCancelInvoice InvoiceCancel(objInvoiceCancel req)
         {
             rtnCancelInvoice obj = new rtnCancelInvoice();
             CommonHelper commonUtility = new CommonHelper();
+            
             try
             {
                 using (var context = new InvoiceContext(_config.GetConnectionString(ConfigKeys.DefaultConnection)))
@@ -307,8 +311,8 @@ namespace Dev.Repository
                     var _cancelReason = new SqlParameter("cancelReason", req.cancelReason);
                     
                     var lst = context.InvoiceCancel.FromSqlRaw(
-                        "Execute dbo.pro_InvoiceCancel @InvoiceNo, @CustomerNo, @UserNo, @VenueNo, @VenueBranchNo, @CancelReason",
-                          _invoiceNo, _customerNo, _userNo,  _venueno, _venuebranchno, _cancelReason).ToList();
+                    "Execute dbo.pro_InvoiceCancel @InvoiceNo, @CustomerNo, @UserNo, @VenueNo, @VenueBranchNo, @CancelReason",
+                    _invoiceNo, _customerNo, _userNo,  _venueno, _venuebranchno, _cancelReason).ToList();
 
                     obj = lst[0];
                 }
@@ -327,9 +331,8 @@ namespace Dev.Repository
             {
                 using (var context = new InvoiceContext(_config.GetConnectionString(ConfigKeys.DefaultConnection)))
                 {
-
                     obj = context.getInvoiceCreateVenueDetails.FromSqlRaw(
-                        "Execute dbo.Pro_getInvoiceGenerateVenueDetails").ToList();
+                    "Execute dbo.Pro_getInvoiceGenerateVenueDetails").ToList();
                 }
             }
             catch (Exception ex)
@@ -338,7 +341,6 @@ namespace Dev.Repository
             }
             return obj;
         }
-
         public InvoiceTDSUpdateResponse UpdateTDSFlag(InvoiceTDSUpdateRequest req)
         {
             InvoiceTDSUpdateResponse obj = new InvoiceTDSUpdateResponse();
@@ -352,11 +354,13 @@ namespace Dev.Repository
                     var _userNo = new SqlParameter("userNo", req.userNo);
                     var _venueno = new SqlParameter("venueno", req.venueNo);
                     var _venuebranchno = new SqlParameter("venuebranchno", req.venueBranchNo);
+                    
                     var lst = context.UpdateTDSFlag.FromSqlRaw(
-                        "Execute dbo.pro_UpdateTDSFlag @invoiceNo,@isTDSCollected,@userNo,@venueno,@venuebranchno",
-                          _invoiceNo, _isTDSCollected, _userNo, _venueno, _venuebranchno).ToList();
+                    "Execute dbo.pro_UpdateTDSFlag @invoiceNo,@isTDSCollected,@userNo,@venueno,@venuebranchno",
+                    _invoiceNo, _isTDSCollected, _userNo, _venueno, _venuebranchno).ToList();
+                    
                     if(lst != null)
-                    obj.status = lst[0].status;
+                        obj.status = lst[0].status;
                 }
             }
             catch (Exception ex)

@@ -1,20 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Dev.IRepository;
-using Dev.Repository;
-using DEV.Common;
+using Service.IRepository;
+using Service.Common;
 using Service.Model;
-using Service.Model.PatientInfo;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Serilog;
 using Service.Model.Admin;
 using Microsoft.Extensions.Configuration;
 
-namespace DEV.API.SERVICE.Controllers.Admin
+namespace Service.API.SERVICE.Controllers.Admin
 {
     [Authorize(AuthenticationSchemes = "Bearer")]
     [ApiController]
@@ -84,7 +78,6 @@ namespace DEV.API.SERVICE.Controllers.Admin
             try
             {
                 response = _adminRepository.SearchUpdateDates(RequestItem);
-
             }
             catch (Exception ex)
             {
@@ -113,27 +106,11 @@ namespace DEV.API.SERVICE.Controllers.Admin
         [Route("api/Admin/FetchScrollText")]
         public List<ResponseDataScrollText> GetScrollText(RequestDataScrollText reqItem)
         {
-            List<ResponseDataScrollText> response = new List<ResponseDataScrollText>();
-            MasterRepository _IMasterRepository = new MasterRepository(_config);            
-            AppSettingResponse objAppSettingResponse = new AppSettingResponse();
+            List<ResponseDataScrollText> response = new List<ResponseDataScrollText>(); 
+            
             try
             {
                 response = _adminRepository.SearchScrollText(reqItem);
-
-                //string _CacheKey = CacheKeys.CommonMaster + "SCROLLTEXTINAPPFOOTER" + reqItem.venueNo + reqItem.venueBranchNo;
-                //response = MemoryCacheRepository.GetCacheItem<List<ResponseDataScrollText>>(_CacheKey);
-                //if (response == null)
-                //{
-                //    response = _adminRepository.SearchScrollText(reqItem);
-                //    //
-                //    objAppSettingResponse = new AppSettingResponse();
-                //    string AppCacheMemoryTime = "CacheMemoryTime";
-                //    objAppSettingResponse = _IMasterRepository.GetSingleAppSetting(AppCacheMemoryTime);                    
-                //    int cachetime = objAppSettingResponse != null && objAppSettingResponse.ConfigValue != null && objAppSettingResponse.ConfigValue != ""
-                //        ? Convert.ToInt32(objAppSettingResponse.ConfigValue) :0;
-
-                //    MemoryCacheRepository.AddItem(_CacheKey, response, Convert.ToInt32(cachetime));
-                //}
             }
             catch (Exception ex)
             {
@@ -141,6 +118,7 @@ namespace DEV.API.SERVICE.Controllers.Admin
             }
             return response;
         }
+
         [HttpPost]
         [Route("api/Admin/DeleteHistory")]
         public List<responsehistory> DeleteHistory(visitRequest obj)

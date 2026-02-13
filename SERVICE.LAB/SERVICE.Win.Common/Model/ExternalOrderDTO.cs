@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Dev.Win.Common
+namespace Service.Win.Common
 {
     public class ExternalOrderDTO
     {

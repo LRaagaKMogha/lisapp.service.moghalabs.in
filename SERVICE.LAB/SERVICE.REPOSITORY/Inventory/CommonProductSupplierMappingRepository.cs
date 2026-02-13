@@ -1,16 +1,14 @@
-﻿using Dev.IRepository.Inventory;
-using DEV.Common;
+﻿using Service.IRepository.Inventory;
+using Service.Common;
 using Service.Model.EF;
 using Service.Model.Inventory;
 using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 
-namespace Dev.Repository.Inventory
+namespace Service.Repository.Inventory
 {
     public class CommonProductSupplierMappingRepository : ICommonProductSupplierMappingRepository
     {
@@ -20,7 +18,6 @@ namespace Dev.Repository.Inventory
         {
             _config = config;
         }
-
         public async Task<object> GetProductSupplierMappingAsync(ProductSupplierMappingRequestDTO request)
         {
             object result = null;
@@ -75,7 +72,6 @@ namespace Dev.Repository.Inventory
             {
                 MyDevException.Error(ex, "CommonProductSupplierMappingRepository.GetProducSystem.InvalidCastException: 'Unable to cast object of type 'System.Int16' to type 'System.Int32'.'tSupplierMappingAsync", ExceptionPriority.Low, ApplicationType.REPOSITORY, request.VenueNo, 0, 0);
             }
-
             return result;
         }
         public async Task<int> InsertProductSupplierMappingAsync(ProductSupplierMappingInsertDTO dto)
@@ -92,16 +88,15 @@ namespace Dev.Repository.Inventory
                     var _ProductVsSupplierXML = new SqlParameter("@ProductVsSupplierXML", supplierXml);
 
                     await context.Database.ExecuteSqlRawAsync(
-                        "EXEC dbo.pro_IV_InsertProductSupplierMapping_Common @VenuNo, @UserNo, @ProductVsSupplierXML",
-                        _VenueNo, _UserNo, _ProductVsSupplierXML
+                    "EXEC dbo.pro_IV_InsertProductSupplierMapping_Common @VenuNo, @UserNo, @ProductVsSupplierXML",
+                    _VenueNo, _UserNo, _ProductVsSupplierXML
                     );
                     return 1;
                 }
             }
             catch (Exception ex)
             {
-                MyDevException.Error(ex, "InsertProductSupplierMappingAsync",
-                    ExceptionPriority.High, ApplicationType.REPOSITORY, dto.VenueNo, dto.UserNo, 0);
+                MyDevException.Error(ex, "InsertProductSupplierMappingAsync",ExceptionPriority.High, ApplicationType.REPOSITORY, dto.VenueNo, dto.UserNo, 0);
                 return 0;
             }
         }

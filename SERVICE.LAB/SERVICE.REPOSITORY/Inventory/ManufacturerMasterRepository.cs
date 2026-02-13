@@ -1,5 +1,5 @@
-﻿using Dev.IRepository.Inventory;
-using DEV.Common;
+﻿using Service.IRepository.Inventory;
+using Service.Common;
 using Service.Model;
 using Service.Model.EF;
 using Service.Model.Inventory;
@@ -10,42 +10,13 @@ using System;
 using System.Collections.Generic;
 using Microsoft.Data.SqlClient;
 using System.Linq;
-using System.Text;
 
-namespace Dev.Repository
+namespace Service.Repository
 {
     public class ManufacturerMasterRepository : IManufacturerMasterRepository
     {
         private IConfiguration _config;
         public ManufacturerMasterRepository(IConfiguration config) { _config = config; }
-
-        ///// <summary>
-        ///// Get Manufacturer Details
-        ///// </summary>
-        ///// <returns></returns>
-        //public List<GetManufacturerMasterResponse> GetManufacturers(GetCommonMasterRequest masterRequest)
-        //{
-        //    List<GetManufacturerMasterResponse> objresult = new List<GetManufacturerMasterResponse>();
-        //    try
-        //    {
-        //        using (var context = new MasterContext(_config.GetConnectionString(ConfigKeys.DefaultConnection)))
-        //        {
-        //            if (masterRequest.masterNo > 0)
-        //            {
-        //                objresult = context.Tbl_IV_Manufacturer.Where(x => x.venueNo == masterRequest.venueno && x.venueBranchNo == masterRequest.venuebranchno && x.manufacturerNo == masterRequest.masterNo && x.status == true).ToList();
-        //            }
-        //            else
-        //            {
-        //                objresult = context.Tbl_IV_Manufacturer.Where(x => x.venueNo == masterRequest.venueno && x.venueBranchNo == masterRequest.venuebranchno && x.status == true).ToList();
-        //            }
-        //        }
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        MyDevException.Error(ex, "GetManufacturers", ExceptionPriority.Low, ApplicationType.REPOSITORY, masterRequest.venueno, masterRequest.venuebranchno, 0);
-        //    }
-        //    return objresult;
-        //}
 
         /// <summary>
         /// Insert Manufacturer Details
@@ -129,8 +100,6 @@ namespace Dev.Repository
                 {
                     var _venueNo = new SqlParameter("venueNo", masterRequest.venueNo);
                     var _manufacturerNo = new SqlParameter("manufacturerNo", masterRequest.manufacturerNo);
-                    //var _status = new SqlParameter("Status", masterRequest.status);
-                    //var _userNo = new SqlParameter("UserNo", masterRequest.userNo);
                     var _pageIndex = new SqlParameter("pageIndex", masterRequest.pageIndex);
 
                     objResult = context.GetManufacturersDetail.FromSqlRaw(

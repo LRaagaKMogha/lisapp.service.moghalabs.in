@@ -1,21 +1,15 @@
-﻿using Dev.IRepository;
-using DEV.Common;
+﻿using Service.IRepository;
+using Service.Common;
 using Service.Model;
 using Service.Model.EF;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
-using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
-using System.Data;
 using Microsoft.Data.SqlClient;
-using System.IO;
 using System.Linq;
-using System.Xml.Linq;
-using Serilog;
-using Service.Model.Sample;
 
-namespace Dev.Repository
+namespace Service.Repository
 {
     public class ExternalPatientAPIRepositoy : IExternalPatientAPIRepositoy
     {
@@ -131,6 +125,7 @@ namespace Dev.Repository
                     var output = context.PatientSignUp.FromSqlRaw(
                     "Execute dbo.Pro_PA_PatientSignUp @Title,@Name,@Gender,@DOB,@MobileNo,@Email,@Address,@OTPNo,@type,@userno,@VenueNo,@VenueBranchNo",
                     _Title, _Name, _Gender, _DOB, _MobileNo, _EmailId, _Address, _OTPNo, _type, _UserNo, _VenueNo, _VenueBranchNo).FirstOrDefault();
+                    
                     if (output != null)
                     {
                         if (output.result == "0")
@@ -138,7 +133,6 @@ namespace Dev.Repository
                             result.otp = "";
                             result.userNo = 0;
                             result.status = 0;
-
                         }
                         else
                         {
@@ -165,7 +159,6 @@ namespace Dev.Repository
             ExternalPatientAppResponse result = new ExternalPatientAppResponse();
             try
             {
-
                 using (var context = new FrontOfficeContext(_config.GetConnectionString(ConfigKeys.DefaultConnection)))
                 {
                     var _SignupNo = new SqlParameter("SignupNo", results.SignupNo);
@@ -175,9 +168,11 @@ namespace Dev.Repository
                     var _Gender = new SqlParameter("Gender", results.Gender);
                     var _UserID = new SqlParameter("Address", results.Address);
                     var _Relationship = new SqlParameter("Relationship", results.Relationship);
+                    
                     var lst = context.PatientAddmember.FromSqlRaw(
                     "Execute dbo.Pro_PA_Addmember @SignupNo,@Title,@Name,@Age,@Gender,@Address,@Relationship",
                      _SignupNo, _TitleCode, _FirstName, _Age, _Gender, _UserID, _Relationship).FirstOrDefault();
+                    
                     if (lst != null)
                     {
                         if (lst.result > 0)
@@ -187,7 +182,6 @@ namespace Dev.Repository
                         }
                         else
                         {
-
                             result.status = 0;
                             result.message = "Invalid Member";
                         }
@@ -332,6 +326,5 @@ namespace Dev.Repository
             }
             return result;
         }
-
     }
 }

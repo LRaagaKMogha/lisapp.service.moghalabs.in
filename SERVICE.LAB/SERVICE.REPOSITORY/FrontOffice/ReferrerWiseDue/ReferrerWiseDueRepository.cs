@@ -1,6 +1,5 @@
-﻿using Dev.IRepository;
-using Dev.IRepository.FrontOffice;
-using DEV.Common;
+﻿using Service.IRepository.FrontOffice;
+using Service.Common;
 using Service.Model;
 using Service.Model.EF.ReferrerWiseDue;
 using Microsoft.Data.SqlClient;
@@ -8,12 +7,9 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
-using System.Configuration;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace Dev.Repository.FrontOffice.ReferrerWiseDue
+namespace Service.Repository.FrontOffice.ReferrerWiseDue
 {
     public class ReferrerWiseDueRepository : IReferrerWiseDueRepository
     {

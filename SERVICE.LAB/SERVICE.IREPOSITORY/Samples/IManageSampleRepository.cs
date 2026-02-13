@@ -1,10 +1,9 @@
 ﻿using Service.Model;
-using Service.Model.FrontOffice.PatientDue;
 using Service.Model.Sample;
 using System;
 using System.Collections.Generic;
 
-namespace Dev.IRepository
+namespace Service.IRepository
 {
     public interface IManageSampleRepository
     {

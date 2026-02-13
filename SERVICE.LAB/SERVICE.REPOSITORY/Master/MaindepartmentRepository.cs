@@ -2,16 +2,14 @@
 using Service.Model.EF;
 using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Linq;
-using Dev.IRepository;
+using Service.IRepository;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
-using DEV.Common;
-using Serilog;
+using Service.Common;
 using Microsoft.Data.SqlClient;
 
-namespace Dev.Repository
+namespace Service.Repository
 {
     public class MainDepartmentRepository : IMainDepartmentRepository
     {
@@ -29,8 +27,8 @@ namespace Dev.Repository
                     var _pageIndex = new SqlParameter("pageIndex", maindeptmaster?.pageIndex);
 
                     maindeptresult = context.GetMainmaster.FromSqlRaw(
-                       "Execute dbo.pro_GetMainDepartment @maindeptno,@venueno,@pageIndex",
-                        _maindeptno, _venueno, _pageIndex).ToList();
+                    "Execute dbo.pro_GetMainDepartment @maindeptno,@venueno,@pageIndex",
+                    _maindeptno, _venueno, _pageIndex).ToList();
                 }
             }
             catch (Exception ex)
@@ -39,8 +37,6 @@ namespace Dev.Repository
             }
             return maindeptresult;
         }
-    
-
         public MainDepartmentMasterResponse InsertMainDepartmentmaster(TblMainDepartment tblmaindepartment)        
         {
             MainDepartmentMasterResponse objresult = new MainDepartmentMasterResponse();
@@ -72,4 +68,3 @@ namespace Dev.Repository
         }
     }
 }
-

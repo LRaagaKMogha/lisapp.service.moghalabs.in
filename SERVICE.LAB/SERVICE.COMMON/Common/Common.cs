@@ -1,10 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
-using System.IO;
-using System.Text;
 
-namespace DEV.Common
+namespace Service.Common
 {
     /// <summary>  
     /// Different types of exceptions.  
@@ -34,7 +32,6 @@ namespace DEV.Common
     {
         Tooltable = 1,
         ContentTable = 2
-
     }
     public enum ExceptionPriority
     {

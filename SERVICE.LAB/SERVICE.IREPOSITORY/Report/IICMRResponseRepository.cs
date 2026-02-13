@@ -1,10 +1,8 @@
 ﻿using Service.Model;
 using Service.Model.Sample;
-using System;
 using System.Collections.Generic;
-using System.Text;
 
-namespace Dev.IRepository
+namespace Service.IRepository
 {
     public interface IICMRResponseRepository
     {

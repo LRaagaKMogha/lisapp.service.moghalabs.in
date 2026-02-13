@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Dev.IRepository.PatientInfo;
-using DEV.Common;
+using Service.IRepository.PatientInfo;
+using Service.Common;
 using Service.Model;
 using Service.Model.PatientInfo;
 using Service.Model.Sample;
@@ -11,10 +11,9 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using System.IO;
 using Microsoft.AspNetCore.Authorization;
-using Dev.IRepository;
-using Dev.Repository;
+using Service.IRepository;
 
-namespace DEV.API.SERVICE.Controllers.PatientInfo
+namespace Service.API.SERVICE.Controllers.PatientInfo
 {
     [Authorize(AuthenticationSchemes = "Bearer")]
     [ApiController]
@@ -23,12 +22,14 @@ namespace DEV.API.SERVICE.Controllers.PatientInfo
         private readonly IConfiguration _config;
         private readonly IPatientInfoRepository _patientInfoRepository;
         private readonly IExternalAPIRepository _IExternalAPIRepository;
-
-        public PatientInfoController(IPatientInfoRepository patientInfoRepository, IConfiguration config, IExternalAPIRepository externalAPIRepository)
+        private readonly IMasterRepository _IMasterRepository;
+        public PatientInfoController(IPatientInfoRepository patientInfoRepository, IConfiguration config, 
+            IExternalAPIRepository externalAPIRepository, IMasterRepository iMasterRepository)
         {
             _patientInfoRepository = patientInfoRepository;
             _IExternalAPIRepository = externalAPIRepository;
             _config = config;
+            _IMasterRepository = iMasterRepository;
         }
 
         [CustomAuthorize("LIMSFRONTOFFICE,LIMSDEFAULT")]
@@ -234,7 +235,6 @@ namespace DEV.API.SERVICE.Controllers.PatientInfo
                     var manualfilename = objDTO.ManualFileName;
                     string folderName = venueNo + "\\" + venuebNo + "\\" + patientNo;
                     //
-                    MasterRepository _IMasterRepository = new MasterRepository(_config);
                     AppSettingResponse objAppSettingResponse = new AppSettingResponse();
                     objAppSettingResponse = new AppSettingResponse();
                     string AppPatientMasterUpload = "PatientMasterUpload";
@@ -288,7 +288,6 @@ namespace DEV.API.SERVICE.Controllers.PatientInfo
             try
             {
                 //
-                MasterRepository _IMasterRepository = new MasterRepository(_config);
                 AppSettingResponse objAppSettingResponse = new AppSettingResponse();
                 objAppSettingResponse = new AppSettingResponse();
                 string AppPatientMasterUpload = "PatientMasterUpload";
@@ -363,7 +362,6 @@ namespace DEV.API.SERVICE.Controllers.PatientInfo
                     var manualfilename = objDTO.ManualFileName;
                     string folderName = "PatientImage\\" + venueNo + "\\" + venuebNo + "\\" + patientNo;
                     //
-                    MasterRepository _IMasterRepository = new MasterRepository(_config);
                     AppSettingResponse objAppSettingResponse = new AppSettingResponse();
                     objAppSettingResponse = new AppSettingResponse();
                     string AppPatientMasterUpload = "PatientMasterUpload";
@@ -417,7 +415,6 @@ namespace DEV.API.SERVICE.Controllers.PatientInfo
             try
             {
                 //
-                MasterRepository _IMasterRepository = new MasterRepository(_config);
                 AppSettingResponse objAppSettingResponse = new AppSettingResponse();
                 objAppSettingResponse = new AppSettingResponse();
                 string AppPatientMasterUpload = "PatientMasterUpload";
@@ -680,7 +677,6 @@ namespace DEV.API.SERVICE.Controllers.PatientInfo
             BulkFileUpload result = new BulkFileUpload();
             try
             {
-                MasterRepository _IMasterRepository = new MasterRepository(_config);
                 AppSettingResponse objAppSettingResponse = new AppSettingResponse();
                 objAppSettingResponse = new AppSettingResponse();
                 string HCPatientDocument = "UploadPathInit";

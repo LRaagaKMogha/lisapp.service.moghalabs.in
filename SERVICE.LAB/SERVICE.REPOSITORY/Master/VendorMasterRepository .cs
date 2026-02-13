@@ -1,21 +1,20 @@
 ﻿using System;
 using System.Collections.Generic;
-using Dev.IRepository;
+using Service.IRepository;
 using Service.Model;
 using Service.Model.EF;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using System.Linq;
-using DEV.Common;
+using Service.Common;
 using Microsoft.Data.SqlClient;
 
-namespace Dev.Repository
+namespace Service.Repository
 {
     public class VendorMasterRepository : IVendorMasterRepository
     {
         private IConfiguration _config;
         public VendorMasterRepository(IConfiguration config) { _config = config; }
-
 
         public List<responsegetvendor> GetVendorMaster(requestvendor req)
         {
@@ -29,10 +28,9 @@ namespace Dev.Repository
                     var _vendorno = new SqlParameter("vendorno", req?.vendorno);
                     var _pageIndex = new SqlParameter("pageIndex", req?.pageIndex);
 
-
                     lst = context.GetVendorMaster.FromSqlRaw(
-                        "Execute dbo.pro_GetVendormaster @vendorno,@venueno,@venuebranchno,@pageIndex",
-                        _vendorno, _venueno, _venuebranchno, _pageIndex).ToList();
+                    "Execute dbo.pro_GetVendormaster @vendorno,@venueno,@venuebranchno,@pageIndex",
+                    _vendorno, _venueno, _venuebranchno, _pageIndex).ToList();
                 }
             }
             catch (Exception ex)
@@ -73,8 +71,8 @@ namespace Dev.Repository
                     "@CountryNo,@PinCode,@Email,@venueno,@venuebranchNo,@WebSite,@GSTNo,@userNo,@vendorCode",
                     _vendorNo, _vendorName, _mobileno, _whatsAppNo, _phone, _status, _address, _place, _cityNo, _stateNo, _countryNo,
                     _pinCode, _email, _venueNo, _venuebranchNo, _webSite, _gstNo, _userNo, _vendorCode).ToList();
+                    
                     objresult.vendorno = obj[0].vendorno;
-
                 }
             }
             catch (Exception ex)
@@ -90,12 +88,11 @@ namespace Dev.Repository
             {
                 using (var context = new MasterContext(_config.GetConnectionString(ConfigKeys.DefaultConnection)))
                 {
-                    // var _VendorContactNo = new SqlParameter("VendorContactNo", creq.VendorContactNo);
                     var _venueno = new SqlParameter("venueno", creq?.venueno);
                     var _VendorMasterNo = new SqlParameter("VendorMasterNo", creq?.vendorMasterNo);
 
                     lst = context.GetVendorvsContactmaster.FromSqlRaw(
-                       "Execute dbo.pro_GetVendorvsContactmaster @venueno,@VendorMasterNo",
+                    "Execute dbo.pro_GetVendorvsContactmaster @venueno,@VendorMasterNo",
                    _venueno, _VendorMasterNo).ToList();
                 }
             }
@@ -105,7 +102,6 @@ namespace Dev.Repository
             }
             return lst;
         }
-
         public int InsertVendorContactmaster(savecontact creq1)
         {
 
@@ -122,8 +118,8 @@ namespace Dev.Repository
                     var _savecontactXML = new SqlParameter("savecontactXML", savecontactXML);
 
                     var lst = context.InsertVendorContactmaster.FromSqlRaw(
-                       "Execute dbo.pro_InsertVendorVsContact @venueNo,@VendorMasterNo,@userNo,@savecontactXML",
-                      _venueno, _VendorMasterNo, _userNo, _savecontactXML).ToList();
+                    "Execute dbo.pro_InsertVendorVsContact @venueNo,@VendorMasterNo,@userNo,@savecontactXML",
+                    _venueno, _VendorMasterNo, _userNo, _savecontactXML).ToList();
 
                     i = lst[0].VendorContactNo;
                 }
@@ -147,8 +143,8 @@ namespace Dev.Repository
                     var _pageindex = new SqlParameter("pageindex", sobj?.pageindex);
 
                     lst = context.GetVendorvsservices.FromSqlRaw(
-                       "Execute dbo.pro_GetVendorVsServices @venueno,@VendorMasterNo,@ServiceNo,@pageindex",
-                   _venueno, _VendorMasterNo, _ServiceNo, _pageindex).ToList();
+                    "Execute dbo.pro_GetVendorVsServices @venueno,@VendorMasterNo,@ServiceNo,@pageindex",
+                    _venueno, _VendorMasterNo, _ServiceNo, _pageindex).ToList();
                 }
             }
             catch (Exception ex)
@@ -159,10 +155,10 @@ namespace Dev.Repository
         }
         public int InsertVendorService(saveservice serviceobj)
         {
-
             CommonHelper commonUtility = new CommonHelper();
             string ServicelstXML = commonUtility.ToXML(serviceobj.getservicelst);
             int i = 0;
+            
             try
             {
                 using (var context = new MasterContext(_config.GetConnectionString(ConfigKeys.DefaultConnection)))
@@ -173,8 +169,9 @@ namespace Dev.Repository
                     var _servicelstXML = new SqlParameter("ServicelstXML", ServicelstXML);
 
                     var lst = context.InsertVendorService.FromSqlRaw(
-                       "Execute dbo.pro_InsertVendorVsServices @venueNo,@VendorMasterNo,@userNo,@servicelstXML",
-                      _venueno, _VendorMasterNo, _userNo, _servicelstXML).ToList();
+                    "Execute dbo.pro_InsertVendorVsServices @venueNo,@VendorMasterNo,@userNo,@servicelstXML",
+                    _venueno, _VendorMasterNo, _userNo, _servicelstXML).ToList();
+                    
                     if(lst.Any())
                     {
                         i = lst[0].VendorServiceNo;
@@ -182,8 +179,7 @@ namespace Dev.Repository
                     else
                     {
                         i = 0;
-                    }
-                    
+                    }                    
                 }
             }
             catch (Exception ex)
@@ -192,9 +188,5 @@ namespace Dev.Repository
             }
             return i;
         }
-
-
-
-
     }
 }

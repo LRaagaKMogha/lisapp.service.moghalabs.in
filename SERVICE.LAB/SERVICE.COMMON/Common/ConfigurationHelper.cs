@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Configuration;
 using System.Linq;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Data.SqlClient;
@@ -8,7 +7,7 @@ using System.Data;
 using System.IO;
 using System.Net.Mail;
 
-namespace DEV.Common
+namespace Service.Common
 {
     /// <summary>
     /// Configuration Helper
@@ -36,7 +35,6 @@ namespace DEV.Common
             System.Configuration.ConfigurationManager.AppSettings["IsSSL"] = _configuration.GetSection("IsSSL").Value;
             System.Configuration.ConfigurationManager.AppSettings["MKey"] = _configuration.GetSection("MKey").Value;
             System.Configuration.ConfigurationManager.AppSettings["Salt"] = _configuration.GetSection("Salt").Value;
-
         }
         public static void InitializeBBConfiguration(Dictionary<string, string> values)
         {
@@ -67,7 +65,6 @@ namespace DEV.Common
                     }
                 }
             }
-
             catch (Exception ex)
             {
                 Writefilelog(ex.ToFormattedString());
@@ -134,7 +131,6 @@ namespace DEV.Common
             }
         }
     }
-
     public static class ExceptionHelper
     {
         public static string ToFormattedString(this Exception exception)
@@ -155,7 +151,6 @@ namespace DEV.Common
                 yield return current;
             }
         }
-
         public static IEnumerable<TSource> FromHierarchy<TSource>(
             this TSource source,
             Func<TSource, TSource> nextItem)

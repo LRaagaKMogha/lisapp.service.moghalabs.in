@@ -1,7 +1,7 @@
 using System.Data;
 using System.Text.Json.Serialization;
 using AspNetCoreRateLimit;
-using DEV.Common;
+using Service.Common;
 using MasterManagement.Helpers;
 using MasterManagement.Services.Lookups;
 using MasterManagement.Services.Nurses;
@@ -10,7 +10,6 @@ using MasterManagement.Services.Tariffs;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Data.SqlClient;
 using Serilog;
-using Serilog.Filters;
 using Shared;
 using Shared.Audit;
 

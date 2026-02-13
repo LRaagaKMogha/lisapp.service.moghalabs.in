@@ -1,17 +1,15 @@
-﻿using Dev.IRepository;
-using DEV.Common;
+﻿using Service.IRepository;
+using Service.Common;
 using Service.Model;
 using Service.Model.EF;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
-using Serilog;
 using System;
 using System.Collections.Generic;
 using Microsoft.Data.SqlClient;
 using System.Linq;
-using System.Text;
 
-namespace Dev.Repository
+namespace Service.Repository
 {
     public class MultiPriceListRepository: IMultiPriceListRepository
     {
@@ -34,12 +32,10 @@ namespace Dev.Repository
                     var _DepartmentNo = new SqlParameter("DepartmentNo", getRequest.departmentNo);
                     var _RateListNo = new SqlParameter("rateListNo", getRequest.rateListNo);
                     var _serviceNo = new SqlParameter("serviceNo", getRequest.serviceNo);
-                    
 
                     objresult = context.GetMultiPriceListDTO.FromSqlRaw(
-                        "Execute dbo.pro_GetMultiPriceListDetails @VenueNo,@VenueBranchNo,@departmentNo,@rateListNo,@serviceNo",
-                     _VenueNo, _VenueBranchNo, _DepartmentNo, _RateListNo, _serviceNo).ToList();
-
+                    "Execute dbo.pro_GetMultiPriceListDetails @VenueNo,@VenueBranchNo,@departmentNo,@rateListNo,@serviceNo",
+                    _VenueNo, _VenueBranchNo, _DepartmentNo, _RateListNo, _serviceNo).ToList();
                 }
             }
             catch (Exception ex)
@@ -61,7 +57,6 @@ namespace Dev.Repository
 
             try
             {
-
                 string rateListXml = commonUtility.ToXML(multiPriceListRequest);
 
                 using (var context = new MasterContext(_config.GetConnectionString(ConfigKeys.DefaultConnection)))
@@ -72,19 +67,17 @@ namespace Dev.Repository
                     var _CreatedBy = new SqlParameter("CreatedBy", multiPriceListRequest.CreatedBy);
 
                     var dbResponse = context.InsertMultiPriceListDTO.FromSqlRaw(
-                        "Execute dbo.Pro_CreateMultipriceList @VenueNo,@VenueBranchNo,@rateListXml,@CreatedBy",
-                     _VenueNo, _VenueBranchNo, _rateListXml, _CreatedBy).ToList();
+                    "Execute dbo.Pro_CreateMultipriceList @VenueNo,@VenueBranchNo,@rateListXml,@CreatedBy",
+                    _VenueNo, _VenueBranchNo, _rateListXml, _CreatedBy).ToList();
+                    
                     result = dbResponse[0];
-
                 }
             }
             catch (Exception ex)
             {
-               // MyDevException.Error(ex, "InsertMultiPriceListDetails", ExceptionPriority.High, ApplicationType.REPOSITORY, tariffMasteritem.VenueNo, tariffMasteritem.VenueBranchNo, 0);
+               MyDevException.Error(ex, "InsertMultiPriceListDetails", ExceptionPriority.High, ApplicationType.REPOSITORY, multiPriceListRequest.VenueNo, multiPriceListRequest.VenueBranchNo, multiPriceListRequest.CreatedBy);
             }
             return result;
         }
-        
-
     }
 }

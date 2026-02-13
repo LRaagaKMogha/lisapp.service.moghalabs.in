@@ -2,12 +2,12 @@
 using System.Configuration;
 using System.IO;
 using System.Net;
-using DEV.Model.EF;
+using Service.Model.EF;
 using System.Data;
 using System.Collections.Generic;
 using Newtonsoft.Json;
 
-namespace DEV.Windows.Repository
+namespace Service.Win.Repository
 {
     public class ScheduleReport
     {
@@ -44,12 +44,10 @@ namespace DEV.Windows.Repository
                             writer.WriteLine();
                         }
                     }
-
                 }
             }
             catch (Exception ex)
             {
-
             }
         }
 
@@ -79,11 +77,8 @@ namespace DEV.Windows.Repository
             }
             catch (Exception ex)
             {
-
             }
             return result;
         }
-
-
     }
 }

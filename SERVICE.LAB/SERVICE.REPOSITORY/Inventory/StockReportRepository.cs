@@ -1,22 +1,15 @@
-﻿using Dev.IRepository.Inventory;
-using DEV.Common;
-using Service.Model;
+﻿using Service.IRepository.Inventory;
+using Service.Common;
 using Service.Model.EF;
 using Service.Model.Inventory;
 using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.Extensions.Configuration;
-using RtfPipe.Tokens;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 
-
-namespace Dev.Repository.Inventory
+namespace Service.Repository.Inventory
 {
     public class StockReportRepository :IStockReportReposistory
     {
@@ -44,17 +37,17 @@ namespace Dev.Repository.Inventory
                     var _pageCount = new SqlParameter("pageCount", stockreport.pageCount);
 
                     objresult = context.GetStockReport.FromSqlRaw(
-                        "EXEC dbo.pro_GetStockReport @VenueNo, @VenueBranchNo, @BranchNo, @StoreNo , @CategoryNo,  @ProductTypeNo ,@ProductMasterNo,   @FromDate, @ToDate, @Type, @PageIndex, @pageCount",
-                        _VenueNo, _VenueBranchNo, _BranchNo, _StoreNo, _CategoryNo, _ProductTypeNo, _ProductMasterNo,_FromDate, _ToDate, _Type, _PageIndex, _pageCount
+                    "EXEC dbo.pro_GetStockReport @VenueNo, @VenueBranchNo, @BranchNo, @StoreNo , @CategoryNo,  @ProductTypeNo ,@ProductMasterNo,   @FromDate, @ToDate, @Type, @PageIndex, @pageCount",
+                    _VenueNo, _VenueBranchNo, _BranchNo, _StoreNo, _CategoryNo, _ProductTypeNo, _ProductMasterNo,_FromDate, _ToDate, _Type, _PageIndex, _pageCount
                     ).ToList();
                 }
             }
             catch (Exception ex)
             {
                 MyDevException.Error(ex, "StockReportReposistory.GetStockReportResponse/VenuNo-" + stockreport.venueNo, ExceptionPriority.High, ApplicationType.REPOSITORY,
-                    stockreport.venueNo, stockreport.venueBranchNo, stockreport.userNo);
+                stockreport.venueNo, stockreport.venueBranchNo, stockreport.userNo);
             }
             return objresult;
         }
-}
     }
+}

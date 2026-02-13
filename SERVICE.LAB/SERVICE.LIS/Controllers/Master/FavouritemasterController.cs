@@ -1,18 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
-using Dev.IRepository;
-using DEV.Common;
+using Service.IRepository;
+using Service.Common;
 using Service.Model;
-using Service.Model.EF;
-using Service.Model.Sample;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
 using Microsoft.AspNetCore.Authorization;
 
-namespace DEV.API.SERVICE.Controllers
+namespace Service.API.SERVICE.Controllers
 {
     [Authorize(AuthenticationSchemes = "Bearer")]
     [ApiController]
@@ -30,10 +25,8 @@ namespace DEV.API.SERVICE.Controllers
        {
             List<Tblfav> objresult = new List<Tblfav>();
             try
-            {
-                
-                objresult = _FavouriteMasterRepository.GetFavouriteMasterDetails(getfav);
-               
+            {                
+                objresult = _FavouriteMasterRepository.GetFavouriteMasterDetails(getfav);               
             }
             catch (Exception ex)
             {
@@ -41,8 +34,6 @@ namespace DEV.API.SERVICE.Controllers
             }
             return objresult;
         }
-       
-
 
         [HttpGet]
         [Route("api/Favmaster/Getgroupdetails")]
@@ -93,7 +84,7 @@ namespace DEV.API.SERVICE.Controllers
             return result;
         }
     }
-    }
+}
 
 
 

@@ -1,11 +1,6 @@
 ﻿using Microsoft.Extensions.Configuration;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace Dev.Repository.Integration.externalservices
+namespace Service.Repository.Integration.externalservices
 {
     public class PatientDetailsServiceFactory
     {
@@ -21,7 +16,6 @@ namespace Dev.Repository.Integration.externalservices
                     return new SAPPatientDetailsService(config);
                 default:
                     return new RCMSPatientDetailsService(config);
-
             }
         }
     }

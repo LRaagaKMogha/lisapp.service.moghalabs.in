@@ -1,6 +1,6 @@
-﻿using Dev.IRepository;
-using Dev.IRepository.External.WhatsAppChatBot;
-using DEV.Common;
+﻿using Service.IRepository;
+using Service.IRepository.External.WhatsAppChatBot;
+using Service.Common;
 using Service.Model;
 using Service.Model.EF;
 using Service.Model.External.WhatsAppChatBot;
@@ -13,10 +13,9 @@ using System.Collections.Generic;
 using System.Data;
 using System.IO;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
-namespace Dev.Repository.External.WhatsAppChatBot
+namespace Service.Repository.External.WhatsAppChatBot
 {
     public class CommonReportRepository : ICommonReportRepository
     {
@@ -27,7 +26,6 @@ namespace Dev.Repository.External.WhatsAppChatBot
             _config = config;
             _mRepository = mRepository;
         }
-
         public async Task<List<PatientReportResponse>> GetPatientReport(PatientReportRequest objReq)
         {
             List<PatientReportResponse> objResponse = new List<PatientReportResponse>();

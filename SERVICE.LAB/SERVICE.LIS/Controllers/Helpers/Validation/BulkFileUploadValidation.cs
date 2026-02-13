@@ -1,20 +1,8 @@
 ﻿using Service.Model;
 using Service.Model.Common;
-using DEV.Common;
-using Microsoft.AspNetCore.Mvc.ModelBinding;
-using System;
 using System.Collections.Generic;
-using System.Resources;
-using System.Text.RegularExpressions;
-using Microsoft.IdentityModel.Tokens;
-using System.Data;
-using System.Linq;
-using Microsoft.AspNetCore.Mvc;
-using Service.Model.PatientInfo;
-using Service.Model.Sample;
-using System.Text;
 
-namespace DEV.API.SERVICE.Controllers
+namespace Service.API.SERVICE.Controllers
 {
     public class BulkFileUploadValidation
     {
@@ -28,11 +16,6 @@ namespace DEV.API.SERVICE.Controllers
             {
                 foreach (var fileUpload in lstjDTO)
                 {
-                    //if (fileUpload.FileType != "pdf")
-                    //{
-                    //    errors.Add("File format should be pdf");
-                    //}
-
                     if (string.IsNullOrEmpty(fileUpload.ManualFileName) || fileUpload.ManualFileName.TrimStart() == string.Empty)
                     {
                         errors.Add("Manual File Name is required");

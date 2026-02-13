@@ -1,12 +1,12 @@
 using System;
 using System.Collections.Generic;
-using Dev.IRepository.Samples;
-using DEV.Common;
+using Service.IRepository.Samples;
+using Service.Common;
 using Service.Model.Sample;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Authorization;
 
-namespace DEV.API.SERVICE.Controllers.Samples
+namespace Service.API.SERVICE.Controllers.Samples
 {
   [Authorize(AuthenticationSchemes = "Bearer")]
   [ApiController]

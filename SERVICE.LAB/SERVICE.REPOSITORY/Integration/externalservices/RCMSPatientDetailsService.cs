@@ -1,15 +1,13 @@
-﻿using DEV.Common;
+﻿using Service.Common;
 using Service.Model.Integration;
 using Microsoft.Extensions.Configuration;
 using RCMS;
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.ServiceModel;
-using System.Text;
 using System.Threading.Tasks;
 
-namespace Dev.Repository.Integration.externalservices
+namespace Service.Repository.Integration.externalservices
 {
     public class RCMSPatientDetailsService : IPatientDetailsService
     {

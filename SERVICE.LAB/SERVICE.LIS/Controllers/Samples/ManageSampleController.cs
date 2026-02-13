@@ -1,4 +1,4 @@
-﻿using Dev.IRepository;
+﻿using Service.IRepository;
 using Service.Model.Sample;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -6,13 +6,12 @@ using System.Collections.Generic;
 using Serilog;
 using Service.Model;
 using System.IO;
-using DEV.Common;
+using Service.Common;
 using System.Linq;
 using Microsoft.Extensions.Configuration;
 using Microsoft.AspNetCore.Authorization;
-using Dev.Repository;
 
-namespace DEV.API.SERVICE.Controllers
+namespace Service.API.SERVICE.Controllers
 {
     [Authorize(AuthenticationSchemes = "Bearer")]
     [ApiController]
@@ -20,10 +19,12 @@ namespace DEV.API.SERVICE.Controllers
     {
         private readonly IConfiguration _config;
         private readonly IManageSampleRepository _manageSampleRepository;
-        public ManageSampleController(IManageSampleRepository manageSampleRepository, IConfiguration config)
+        private readonly IMasterRepository _IMasterRepository;
+        public ManageSampleController(IManageSampleRepository manageSampleRepository, IConfiguration config, IMasterRepository iMasterRepository)
         {
             _manageSampleRepository = manageSampleRepository;
             _config = config;
+            _IMasterRepository = iMasterRepository;
         }
 
         [CustomAuthorize("LIMSSAMPLEMNTC")]
@@ -276,7 +277,6 @@ namespace DEV.API.SERVICE.Controllers
         {
             try
             {
-                MasterRepository _IMasterRepository = new MasterRepository(_config);
                 AppSettingResponse objAppSettingResponse = new AppSettingResponse();
                 objAppSettingResponse = new AppSettingResponse();
                 string AppResultAckUpload = "ResultAckUpload";
@@ -482,7 +482,6 @@ namespace DEV.API.SERVICE.Controllers
             int iOut = 2;
             try
             {
-                MasterRepository _IMasterRepository = new MasterRepository(_config);
                 AppSettingResponse objAppSettingResponse = new AppSettingResponse();
                 objAppSettingResponse = new AppSettingResponse();
                 string AppResultAckUpload = "ResultAckUpload";
@@ -529,7 +528,6 @@ namespace DEV.API.SERVICE.Controllers
             int iOut = 2;
             try
             {
-                MasterRepository _IMasterRepository = new MasterRepository(_config);
                 AppSettingResponse objAppSettingResponse = new AppSettingResponse();
                 objAppSettingResponse = new AppSettingResponse();
                 string AppResultAckUpload = "ResultAckUpload";
@@ -574,7 +572,6 @@ namespace DEV.API.SERVICE.Controllers
             try
             {
                 //
-                MasterRepository _IMasterRepository = new MasterRepository(_config);
                 AppSettingResponse objAppSettingResponse = new AppSettingResponse();
                 objAppSettingResponse = new AppSettingResponse();
                 string AppResultAckUpload = "ResultAckUpload";
@@ -679,10 +676,10 @@ namespace DEV.API.SERVICE.Controllers
         public ActionResult<FrontOffficeResponse> BulkUploadFile([FromBody] List<BulkFileUpload> lstjDTO)
         {
             FrontOffficeResponse result = new FrontOffficeResponse();
-            MasterRepository _IMasterRepository = new MasterRepository(_config);
             AppSettingResponse objAppSettingResponse = new AppSettingResponse();
             int venueno = 0;
             int venuebno = 0;
+            
             try
             {
                 var _errormsg = BulkFileUploadValidation.BulkUploadFile(lstjDTO);
@@ -744,7 +741,6 @@ namespace DEV.API.SERVICE.Controllers
             int iOutput = 0;
             try
             {
-                MasterRepository _IMasterRepository = new MasterRepository(_config);
                 AppSettingResponse objAppSettingResponse = new AppSettingResponse();
                 objAppSettingResponse = new AppSettingResponse();
                 string AppResultAckUpload = "ResultAckUpload";

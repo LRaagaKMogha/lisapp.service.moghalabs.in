@@ -1,16 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
-using Dev.IRepository;
-using DEV.Common;
+using Service.IRepository;
+using Service.Common;
 using Service.Model;
-using Service.Model.Sample;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
-using Serilog;
 using Microsoft.AspNetCore.Authorization;
 using Newtonsoft.Json;
 
-namespace DEV.API.SERVICE.Controllers
+namespace Service.API.SERVICE.Controllers
 {
     [Authorize(AuthenticationSchemes = "Bearer")]
     [ApiController]
@@ -106,7 +103,6 @@ namespace DEV.API.SERVICE.Controllers
             List<DeductionResponse> lstDeductionDTO = new List<DeductionResponse>();
             try
             {
-
                 lstDeductionDTO = _InsuranceRepository.GetDeductionMaster(venueNo, venueBranchNo, pageIndex);
             }
             catch (Exception ex)
@@ -115,6 +111,5 @@ namespace DEV.API.SERVICE.Controllers
             }
             return lstDeductionDTO;
         }
-
     }
 }

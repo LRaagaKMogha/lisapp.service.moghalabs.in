@@ -1,12 +1,7 @@
-﻿using Service.Model;
-using Service.Model.Master;
-using System;
+﻿using Service.Model.Master;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace Dev.IRepository.Master
+namespace Service.IRepository.Master
 {
     public  interface ITestTemplateMasterRepository
     {
@@ -16,6 +11,5 @@ namespace Dev.IRepository.Master
         InsertTestTemplateMasterRes InsertTestTemplateMaster(InsertTestTemplateMasterReq req);
         GetTestTemplateTextMasterRes GetTextTemplateTextMaster(GetTestTemplateTextMasterReq req);
         List<GetTemplateApprovalRes> GetTemplateApprovalList(GetTemplateApprovalReq req);
-
     }
 }

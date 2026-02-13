@@ -1,21 +1,11 @@
 ﻿using Service.Model;
 using Service.Model.Common;
-using DEV.Common;
-using Microsoft.AspNetCore.Mvc.ModelBinding;
-using System;
 using System.Collections.Generic;
-using System.Resources;
-using System.Text.RegularExpressions;
-using Microsoft.IdentityModel.Tokens;
 using System.Data;
 using System.Linq;
-using Microsoft.AspNetCore.Mvc;
-using Service.Model.PatientInfo;
 using Service.Model.Sample;
-using System.Text;
-using RtfPipe.Tokens;
 
-namespace DEV.API.SERVICE.Controllers
+namespace Service.API.SERVICE.Controllers
 {
     public class ResultAckValidation
     {
@@ -33,7 +23,6 @@ namespace DEV.API.SERVICE.Controllers
                     errors.Add("Select The From Date and To Date");
                 }
             }
-
             if (errors.Count > 0)
             {
                 errorResponse.status = true;
@@ -62,7 +51,6 @@ namespace DEV.API.SERVICE.Controllers
             {
                 errors.Add("Select Any one patient to save");
             }
-
             if (errors.Count > 0)
             {
                 errorResponse.status = true;
@@ -94,7 +82,6 @@ namespace DEV.API.SERVICE.Controllers
                     break;
                 }
             }
-
             if (errors.Count > 0)
             {
                 errorResponse.status = true;
@@ -113,7 +100,6 @@ namespace DEV.API.SERVICE.Controllers
             {
                 errors.Add("Please select the from lab accession no");
             }
-
             if (errors.Count > 0)
             {
                 errorResponse.status = true;

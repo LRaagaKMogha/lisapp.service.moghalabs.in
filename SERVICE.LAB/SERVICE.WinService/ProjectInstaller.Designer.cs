@@ -1,4 +1,4 @@
-﻿namespace Dev.WinService
+﻿namespace Service.Win.Service
 {
     partial class ProjectInstaller
     {

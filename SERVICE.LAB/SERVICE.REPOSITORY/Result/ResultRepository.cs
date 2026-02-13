@@ -1,28 +1,22 @@
-using Dev.IRepository;
-using DEV.Common;
+using Service.IRepository;
+using Service.Common;
 using Service.Model;
 using Service.Model.EF;
 using Service.Model.EF.DocumentUpload;
-using Service.Model.Integration;
 using Service.Model.Sample;
 using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using Microsoft.Extensions.Configuration;
 using Newtonsoft.Json;
-using Serilog;
 using System;
 using System.Collections.Generic;
 using System.Data;
-using System.Drawing.Text;
 using System.IO;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Linq;
-using static Service.Model.DocumentUploadDTO;
 
-namespace Dev.Repository
+namespace Service.Repository
 {
     public class ResultRepository : IResultRepository
     {

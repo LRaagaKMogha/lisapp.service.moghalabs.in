@@ -1,8 +1,4 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 using ErrorOr;
 using FluentValidation;
 using Microsoft.AspNetCore.Http;
@@ -29,7 +25,6 @@ namespace Shared
             }
             return errors;
         }
-
         public static bool checkCsvVulnerableCharactersValidator(string input)
         {
             if (string.IsNullOrEmpty(input)) return true;

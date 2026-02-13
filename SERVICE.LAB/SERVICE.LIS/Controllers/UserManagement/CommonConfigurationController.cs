@@ -1,16 +1,14 @@
-﻿using Dev.IRepository.UserManagement;
-using Dev.Repository.UserManagement;
-using DEV.Common;
+﻿using Service.IRepository.UserManagement;
+using Service.Common;
 using Service.Model;
 using Service.Model.UserManagement;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
-using NuGet.Protocol.Core.Types;
 using System;
 using System.Collections.Generic;
-namespace DEV.API.SERVICE.Controllers.UserManagement
+
+namespace Service.API.SERVICE.Controllers.UserManagement
 {
     [Authorize(AuthenticationSchemes = "Bearer")]
     [ApiController]

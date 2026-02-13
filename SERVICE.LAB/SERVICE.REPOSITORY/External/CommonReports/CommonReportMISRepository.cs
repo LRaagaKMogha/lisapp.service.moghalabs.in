@@ -1,6 +1,5 @@
-﻿using Dev.IRepository.External.CommonReports;
-using DEV.Common;
-using Service.Model.EF;
+﻿using Service.IRepository.External.CommonReports;
+using Service.Common;
 using Service.Model.EF.External.CommonReports;
 using Service.Model.External.CommonReports;
 using Microsoft.EntityFrameworkCore;
@@ -9,9 +8,8 @@ using System;
 using System.Collections.Generic;
 using Microsoft.Data.SqlClient;
 using System.Linq;
-using System.Text;
 
-namespace Dev.Repository.External.CommonReports
+namespace Service.Repository.External.CommonReports
 {
     public class CommonReportMISRepository : ICommonReportMISRepository
     {

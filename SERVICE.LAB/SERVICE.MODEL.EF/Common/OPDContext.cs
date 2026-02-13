@@ -1,11 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using DEV.Common;
-using Service.Model.FrontOffice.PatientDue;
-using Service.Model.PatientInfo;
-using Service.Model.Sample;
+﻿using Service.Common;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata;
 
 namespace Service.Model.EF
 {

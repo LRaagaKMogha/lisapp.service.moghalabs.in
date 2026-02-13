@@ -1,4 +1,4 @@
-﻿using DEV.Common;
+﻿using Service.Common;
 using Service.Model.FrontOffice;
 using Service.Model.Sample;
 using Microsoft.EntityFrameworkCore;

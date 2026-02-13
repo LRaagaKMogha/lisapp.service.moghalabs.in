@@ -1,17 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Dev.IRepository;
+using Service.IRepository;
 using Service.Model;
-using Microsoft.AspNetCore.Cors;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Configuration;
 using Serilog;
 using Microsoft.AspNetCore.Authorization;
 
-namespace DEV.API.SERVICE.Controllers
+namespace Service.API.SERVICE.Controllers
 {
     [Authorize(AuthenticationSchemes = "Bearer")]
     [ApiController]
@@ -23,9 +17,7 @@ namespace DEV.API.SERVICE.Controllers
             _IEditBillingRepository = noteRepository;
         }
 
-
-        [HttpGet]
-        
+        [HttpGet]        
         [Route("api/EditBilling/GetEditPatientDetails")]
         public GetEditPatientDetailsFinalResponse GetEditPatientDetails(long visitNo, int VenueNo, int VenueBranchNo)
         {
@@ -62,6 +54,7 @@ namespace DEV.API.SERVICE.Controllers
             }
             return Ok(result);
         }
+
         [HttpGet]
         [Route("api/EditBilling/ValidatePTTTest")]
         public dynamic ValidatePTTTest(int ServiceNo, string ServiceType, int VisitNo, int VenueNo, int VenueBranchNo)
@@ -70,7 +63,6 @@ namespace DEV.API.SERVICE.Controllers
             try
             {
                 objresult = _IEditBillingRepository.ValidatePTTTest(ServiceNo, ServiceType, VisitNo, VenueNo, VenueBranchNo);
-
             }
             catch (Exception ex)
             {

@@ -1,5 +1,5 @@
-﻿using Dev.IRepository;
-using DEV.Common;
+﻿using Service.IRepository;
+using Service.Common;
 using Service.Model;
 using Service.Model.EF;
 using Microsoft.EntityFrameworkCore;
@@ -8,13 +8,9 @@ using System;
 using System.Collections.Generic;
 using Microsoft.Data.SqlClient;
 using System.Linq;
-using System.Text;
-using Serilog;
 using System.IO;
-using Microsoft.AspNetCore.Mvc;
-using Service.Model.Integration;
 
-namespace Dev.Repository
+namespace Service.Repository
 {
     public class ClientMasterRepository : IClientMasterRepository
     {
@@ -84,6 +80,7 @@ namespace Dev.Repository
         {
             InsertCustomerResponse result = new InsertCustomerResponse();
             TblCustomer ClientMasteritem = postcustomerDTO?.tblcustomer;
+            
             try
             {
                 using (var context = new FrontOfficeContext(_config.GetConnectionString(ConfigKeys.DefaultConnection)))
@@ -220,7 +217,6 @@ namespace Dev.Repository
             }
             return objresult;
         }
-
         public List<CustomerMappingDTO> GetSubClinic(int CustomerNo, int VenueNo, int VenueBranchNo)
         {
             List<CustomerMappingDTO> objresult = new List<CustomerMappingDTO>();
@@ -254,9 +250,8 @@ namespace Dev.Repository
                     var _VenueBranchNo = new SqlParameter("VenueBranchNo", VenueBranchNo.ToString());
 
                     objresult = context.GetAllClients.FromSqlRaw(
-                       "Execute dbo.Pro_GetAllClientBySubCLinic @VenueNo,@VenueBranchNo",
+                    "Execute dbo.Pro_GetAllClientBySubCLinic @VenueNo,@VenueBranchNo",
                     _VenueNo, _VenueBranchNo).ToList();
-
                 }
             }
             catch (Exception ex)
@@ -265,7 +260,6 @@ namespace Dev.Repository
             }
             return objresult;
         }
-
         public List<ClientSubUserResponse> GetclientSubUser(GetCustomerRequest request)
         {
             List<ClientSubUserResponse> objresult = new List<ClientSubUserResponse>();
@@ -294,6 +288,7 @@ namespace Dev.Repository
             int VenueNo = ObjRequest.VenueNo;
             int VenueBranchNo = ObjRequest.VenueBranchNo;
             ClientRestrictionDayResponse objresult = new ClientRestrictionDayResponse();
+            
             try
             {
                 using (var context = new MasterContext(_config.GetConnectionString(ConfigKeys.DefaultConnection)))
@@ -317,10 +312,12 @@ namespace Dev.Repository
         public int DocumentUploadDetails(List<DocumentUploadlst> ClientDocument, int VenueNo, int VenueBranchNo, int UserID, int CustomerNo)
         {
             int result = 0;
+            
             try
             {
                 CommonHelper commonUtility = new CommonHelper();
                 string clientDocument = commonUtility.ToXML(ClientDocument);
+                
                 using (var context = new MasterContext(_config.GetConnectionString(ConfigKeys.DefaultConnection)))
                 {
                     var _ClientDocument = new SqlParameter("clientDocument", clientDocument);
@@ -344,6 +341,7 @@ namespace Dev.Repository
         {
             List<ClientDocUploadDetailRes> lstOutput = new List<ClientDocUploadDetailRes>();
             List<PhysicianDocUploadRes> objresult = new List<PhysicianDocUploadRes>();
+            
             try
             {
                 using (var context = new MasterContext(_config.GetConnectionString(ConfigKeys.DefaultConnection)))
@@ -386,6 +384,7 @@ namespace Dev.Repository
             MasterRepository _IMasterRepository = new MasterRepository(_config);
             AppSettingResponse objAppSettingResponse = new AppSettingResponse();
             string FilePath = string.Empty;
+            
             try
             {
                 objAppSettingResponse = new AppSettingResponse();
@@ -400,6 +399,7 @@ namespace Dev.Repository
                 var format = "";
                 string folderName = venueno + "\\" + venuebNo + "\\" + visitno + "\\" + visitId;
                 string newPath = Path.Combine(Pathinit, folderName);
+                
                 if (Directory.Exists(newPath))
                 {
                     string[] filePaths = Directory.GetFiles(newPath);
@@ -407,7 +407,6 @@ namespace Dev.Repository
                     {
                         for (int f = 0; f < filePaths.Length; f++)
                         {
-                            //string FullPath = newPath + "\\" + venueNo + "_" + venuebNo + "_" + visitId + "." + format;
                             result = new ClientFileUpload();
                             string path = filePaths[f].ToString();
                             Byte[] bytes = System.IO.File.ReadAllBytes(path);
@@ -432,4 +431,3 @@ namespace Dev.Repository
         }
     }
 }
-

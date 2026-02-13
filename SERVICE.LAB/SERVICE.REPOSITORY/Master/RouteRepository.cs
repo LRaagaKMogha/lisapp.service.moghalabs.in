@@ -4,15 +4,13 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Linq;
-using Dev.IRepository;
+using Service.IRepository;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Data.SqlClient;
-using System.Threading.Tasks;
-using DEV.Common;
-using Serilog;
+using Service.Common;
 
-namespace Dev.Repository
+namespace Service.Repository
 {
     public class RouteRepository : IRouteRepository
     {
@@ -38,7 +36,6 @@ namespace Dev.Repository
                     {
                         objresult = context.TblRoute.Where(x => x.VenueNo == getCommonMaster.venueno && x.VenueBranchNo == getCommonMaster.venuebranchno && x.Status ==true).ToList();
                     }
-
                 }
             }
             catch (Exception ex)
@@ -67,7 +64,6 @@ namespace Dev.Repository
                 MyDevException.Error(ex, "SearchRoute - " + RouteName, ExceptionPriority.Low, ApplicationType.REPOSITORY, 0, 0, 0);
             }
             return objresult;
-
         }
         /// <summary>
         /// Insert Route Details
@@ -107,7 +103,6 @@ namespace Dev.Repository
             }
             return result;
         }
-
         public List<Routelst> GetrouteMaster(RouteMasterRequest routeitems)
         {
             List<Routelst> objresult = new List<Routelst>();
@@ -121,8 +116,8 @@ namespace Dev.Repository
                     var _pageIndex = new SqlParameter("pageIndex", routeitems?.pageIndex);
 
                     objresult = context.GetrouteMaster.FromSqlRaw(
-                        "Execute dbo.pro_GetRoutemaster @RouteNo,@VenueNo,@VenueBranchNo,@pageIndex",
-                         _RouteNo, _VenueNo, _VenueBranchNo, _pageIndex).ToList();
+                    "Execute dbo.pro_GetRoutemaster @RouteNo,@VenueNo,@VenueBranchNo,@pageIndex",
+                    _RouteNo, _VenueNo, _VenueBranchNo, _pageIndex).ToList();
                 }
             }
             catch (Exception ex)
@@ -148,12 +143,11 @@ namespace Dev.Repository
                     var _Venueno = new SqlParameter("Venueno", route?.VenueNo);
                     var _VenueBranchNo = new SqlParameter("VenueBranchNo", route?.VenueBranchNo);
 
-
                     var obj = context.InsertRouteMaster.FromSqlRaw(
-                        "Execute dbo.pro_Insertroutemaster @routeNo,@routecode,@routeName,@description,@sequenceNo,@status,@userNo,@venueno,@VenueBranchNo",
-                         _routeNo, _routecode, _routeName, _description, _sequenceNo, _status, _userNo, _Venueno, _VenueBranchNo).AsEnumerable().FirstOrDefault();
+                    "Execute dbo.pro_Insertroutemaster @routeNo,@routecode,@routeName,@description,@sequenceNo,@status,@userNo,@venueno,@VenueBranchNo",
+                    _routeNo, _routecode, _routeName, _description, _sequenceNo, _status, _userNo, _Venueno, _VenueBranchNo).AsEnumerable().FirstOrDefault();
+                    
                     objresult.RouteNo = obj.RouteNo;
-
                 }
             }
             catch (Exception ex)
@@ -162,6 +156,5 @@ namespace Dev.Repository
             }
             return objresult;
         }
-
     }
 }

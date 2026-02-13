@@ -2,11 +2,8 @@
 using Service.Model;
 using Service.Model.Integration;
 using Service.Model.Sample;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
-namespace Dev.Repository
+namespace Service.Repository
 {
     public class AutoMapperConfiguration
     {

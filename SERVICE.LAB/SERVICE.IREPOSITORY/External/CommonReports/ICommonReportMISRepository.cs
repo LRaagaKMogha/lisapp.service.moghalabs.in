@@ -1,10 +1,7 @@
-﻿using Service.Model.External.CommonMasters;
-using Service.Model.External.CommonReports;
-using System;
+﻿using Service.Model.External.CommonReports;
 using System.Collections.Generic;
-using System.Text;
 
-namespace Dev.IRepository.External.CommonReports
+namespace Service.IRepository.External.CommonReports
 {
     public interface ICommonReportMISRepository
     {

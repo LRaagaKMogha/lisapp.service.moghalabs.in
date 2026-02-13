@@ -2,17 +2,17 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Dev.IRepository;
+using Service.IRepository;
 using Microsoft.EntityFrameworkCore;
 using Service.Model.EF;
 using Microsoft.Data.SqlClient;
-using DEV.Common;
+using Service.Common;
 using Microsoft.Extensions.Configuration;
 using System.DirectoryServices;
 using DirectoryEntry = System.DirectoryServices.DirectoryEntry;
 using OtpNet;
 
-namespace Dev.Repository
+namespace Service.Repository
 {
     public class UserRepository : IUserRepository
     {

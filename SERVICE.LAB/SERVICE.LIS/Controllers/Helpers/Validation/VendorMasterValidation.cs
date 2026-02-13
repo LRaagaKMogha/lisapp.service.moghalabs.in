@@ -1,16 +1,10 @@
 ﻿using Service.Model;
 using Service.Model.Common;
-using DEV.Common;
-using Microsoft.AspNetCore.Mvc.ModelBinding;
-using System;
 using System.Collections.Generic;
-using System.Resources;
 using System.Text.RegularExpressions;
-using Microsoft.IdentityModel.Tokens;
-using System.IO;
 using System.Linq;
 
-namespace DEV.API.SERVICE.Controllers
+namespace Service.API.SERVICE.Controllers
 {
     public class VendorMasterValidation
     {

@@ -1,21 +1,15 @@
 using AutoMapper;
-using Azure;
-using Azure.Core;
-using Dev.IRepository;
-using Dev.IRepository.PatientInfo;
-using Dev.Repository.Integration;
-using Dev.Repository.Integration.externalservices;
-using DEV.Common;
+using Service.IRepository;
+using Service.IRepository.PatientInfo;
+using Service.Repository.Integration.externalservices;
+using Service.Common;
 using Service.Model;
 using Service.Model.EF;
 using Service.Model.Integration;
 using Service.Model.PatientInfo;
 using Service.Model.Sample;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata.Conventions;
 using Microsoft.Extensions.Configuration;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
@@ -23,16 +17,12 @@ using Newtonsoft.Json.Serialization;
 using RCMS;
 using System;
 using System.Collections.Generic;
-using System.Diagnostics.Contracts;
 using System.Linq;
 using System.Linq.Expressions;
-using System.Security.AccessControl;
-using System.ServiceModel;
-using System.ServiceModel.Channels;
 using System.Threading.Tasks;
-using System.Windows.Forms;
+using Service.Repository.Integration;
 
-namespace Dev.Repository
+namespace Service.Repository
 {
     public class IntegrationRepository : IIntegrationRepository
     {

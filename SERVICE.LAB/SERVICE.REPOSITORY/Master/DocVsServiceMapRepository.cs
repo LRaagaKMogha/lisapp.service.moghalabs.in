@@ -1,16 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
-using Dev.IRepository;
+using Service.IRepository;
 using Service.Model;
 using Service.Model.EF;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using System.Linq;
-using DEV.Common;
+using Service.Common;
 using Microsoft.Data.SqlClient;
 
-namespace Dev.Repository
+namespace Service.Repository
 {
     public class DocVsServiceMapRepository : IDocVsServiceMapRepository
     {
@@ -29,8 +28,8 @@ namespace Dev.Repository
                     var _pageIndex = new SqlParameter("pageIndex", Req?.pageIndex);
 
                     objresult = context.Getdoctorlst.FromSqlRaw(
-                        "Execute dbo.pro_GetDoctorDetails @DoctorNo,@venueNo,@pageIndex",
-                         _DoctorNo, _venueNo, _pageIndex).ToList();
+                    "Execute dbo.pro_GetDoctorDetails @DoctorNo,@venueNo,@pageIndex",
+                    _DoctorNo, _venueNo, _pageIndex).ToList();
                 }
             }
             catch (Exception ex)
@@ -52,10 +51,9 @@ namespace Dev.Repository
                     var _ServiceType = new SqlParameter("ServiceType", Req?.ServiceType);
                     var _ServiceNo = new SqlParameter("ServiceNo", Req?.ServiceNo);
 
-                     objresult = context.GetdocVsSerlst.FromSqlRaw(
-                        "Execute dbo.pro_GetDocVsSerDetails @DoctorNo,@DeptNo,@ServiceType,@ServiceNo,@VenueNo",
-                          _venueNo, _DoctorNo, _DeptNo, _ServiceType, _ServiceNo).ToList();
-
+                    objresult = context.GetdocVsSerlst.FromSqlRaw(
+                    "Execute dbo.pro_GetDocVsSerDetails @DoctorNo,@DeptNo,@ServiceType,@ServiceNo,@VenueNo",
+                    _venueNo, _DoctorNo, _DeptNo, _ServiceType, _ServiceNo).ToList();
                 }
             }
             catch (Exception ex)
@@ -64,29 +62,27 @@ namespace Dev.Repository
             }
             return objresult;
         }
-
         public int InsertdocVsSer(DocVsSerInsReq Req)
-        {
-          
+        {          
             CommonHelper commonUtility = new CommonHelper();
             string DocVsSerXML = commonUtility.ToXML(Req.getdoclst);
             int i = 0;
+
             try
             {
                 using (var context = new MasterContext(_config.GetConnectionString(ConfigKeys.DefaultConnection)))
                 {
                     var _DocVsSerXML = new SqlParameter("DocVsSerXML",DocVsSerXML);
-
                     var _DoctorNo = new SqlParameter("DoctorNo", Req?.DoctorNo);                    
                     var _venuebranchno = new SqlParameter("venuebranchno", Req?.venuebranchno);
                     var _venueNo = new SqlParameter("venueNo", Req?.venueNo);
                     var _userno = new SqlParameter("userno", Req?.userno);
 
                     var obj = context.InsertdocVsSer.FromSqlRaw(
-                        "Execute dbo.pro_InsertDocVsSerDetails @DocVsSerXML,@DoctorNo,@venueNo,@venuebranchno,@userno",
-                         _DocVsSerXML, _DoctorNo, _venueNo, _venuebranchno,_userno).ToList();
-                     i= obj[0].DoctorServiceNo;
-
+                    "Execute dbo.pro_InsertDocVsSerDetails @DocVsSerXML,@DoctorNo,@venueNo,@venuebranchno,@userno",
+                    _DocVsSerXML, _DoctorNo, _venueNo, _venuebranchno,_userno).ToList();
+                    
+                    i = obj[0].DoctorServiceNo;
                 }
             }
             catch (Exception ex)
@@ -110,8 +106,8 @@ namespace Dev.Repository
                     var _ToDate = new SqlParameter("ToDate", Req?.ToDate);
 
                     objresult = context.GetdocVsSerApproval.FromSqlRaw(
-                        "Execute dbo.pro_getInternalDoctorVsAppraisalVsTransaction @ApprovedBy,@VenueNo,@VenueBranchNo,@Type,@Fromdate,@ToDate",
-                         _ApprovedBy, _VenueNo, _VenueBranchNo, _Type, _Fromdate, _ToDate).ToList();
+                    "Execute dbo.pro_getInternalDoctorVsAppraisalVsTransaction @ApprovedBy,@VenueNo,@VenueBranchNo,@Type,@Fromdate,@ToDate",
+                    _ApprovedBy, _VenueNo, _VenueBranchNo, _Type, _Fromdate, _ToDate).ToList();
                 }
             }
             catch (Exception ex)
@@ -120,7 +116,6 @@ namespace Dev.Repository
             }
             return objresult;
         }
-
         public List<DocVsSerAppdetailsRes> GetdocVsSerAppDetails(DocVsSerAppdetailsReq Req)
         {
             List<DocVsSerAppdetailsRes> objresult = new List<DocVsSerAppdetailsRes>();
@@ -133,8 +128,8 @@ namespace Dev.Repository
                     var _pageIndex = new SqlParameter("pageIndex", Req?.pageIndex);
 
                     objresult = context.GetdocVsSerAppDetails.FromSqlRaw(
-                        "Execute dbo.pro_GetDocVsSerVsProfCharge @DoctorNo,@VenueNo,@pageIndex",
-                         _DoctorNo, _VenueNo, _pageIndex).ToList();
+                    "Execute dbo.pro_GetDocVsSerVsProfCharge @DoctorNo,@VenueNo,@pageIndex",
+                    _DoctorNo, _VenueNo, _pageIndex).ToList();
                 }
             }
             catch (Exception ex)
@@ -145,12 +140,13 @@ namespace Dev.Repository
         }
         public int InsertdocVsSerProf(DocVsSerProfInsReq Req)
         {
-
             int i = 0;
+
             try
             {
                 CommonHelper commonUtility = new CommonHelper();
                 string DocVsSerProfXML = commonUtility.ToXML(Req?.getdocVsSerlst);
+                
                 using (var context = new MasterContext(_config.GetConnectionString(ConfigKeys.DefaultConnection)))
                 {
                     var _DocVsSerProfXML = new SqlParameter("DocVsSerProfXML", DocVsSerProfXML);
@@ -160,10 +156,10 @@ namespace Dev.Repository
                     var _userno = new SqlParameter("userno", Req?.userno);
 
                     var obj = context.InsertdocVsSerProf.FromSqlRaw(
-                        "Execute dbo.pro_InsertDocVsSerProfDetails @DocVsSerProfXML,@DoctorNo,@venueNo,@venuebranchno,@userno",
-                         _DocVsSerProfXML, _DoctorNo, _venueNo, _venuebranchno, _userno).FirstOrDefault();
+                    "Execute dbo.pro_InsertDocVsSerProfDetails @DocVsSerProfXML,@DoctorNo,@venueNo,@venuebranchno,@userno",
+                    _DocVsSerProfXML, _DoctorNo, _venueNo, _venuebranchno, _userno).FirstOrDefault();
+                    
                     i = obj?.DoctorProfMastNo ?? 0;
-
                 }
             }
             catch (Exception ex)
@@ -172,6 +168,5 @@ namespace Dev.Repository
             }
             return i;
         }
-
     }
 }

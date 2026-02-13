@@ -1,16 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
-using Dev.IRepository;
+using Service.IRepository;
 using Service.Model;
 using Service.Model.EF;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using System.Linq;
-using DEV.Common;
+using Service.Common;
 using Microsoft.Data.SqlClient;
 
-namespace Dev.Repository
+namespace Service.Repository
 {
     public class PackRepository : IPackRepository
     {
@@ -39,7 +38,6 @@ namespace Dev.Repository
             }
             return objresult;
         }
-
         public PackMasterResponse Insertpackmaster(TblPack tblPack)
         {
             PackMasterResponse objresult = new PackMasterResponse();

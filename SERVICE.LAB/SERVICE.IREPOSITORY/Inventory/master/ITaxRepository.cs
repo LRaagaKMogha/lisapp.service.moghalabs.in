@@ -1,13 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
 using Service.Model;
 
-namespace Dev.IRepository
+namespace Service.IRepository
 {
     public interface ITaxRepository
     {
-
         List<TblTax> Gettaxmaster(TaxMasterRequest taxRequest);
         TaxMasterResponse Inserttaxmaster(TblTax tbltax);
         List<TblHSN> GetHSNMaster(HSNMasterRequest HSNRequest);
@@ -15,5 +12,4 @@ namespace Dev.IRepository
         List<TblHSNRange> GetHSNRangeMaster(HSNRangeRequest HSNrangeRequest);
         HSNInsertResponse InsertHSNRangeMaster(TblInsertHSNRange tblhsnrange);
     }
-
 }

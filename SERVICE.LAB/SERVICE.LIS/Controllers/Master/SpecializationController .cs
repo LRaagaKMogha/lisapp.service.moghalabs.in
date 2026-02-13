@@ -1,17 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Service.Model;
-using Dev.IRepository;
-using Microsoft.Extensions.Logging;
-using DEV.Common;
+using Service.IRepository;
+using Service.Common;
 using Microsoft.AspNetCore.Authorization;
 using Shared.Audit;
 
-namespace DEV.API.SERVICE.Controllers
+namespace Service.API.SERVICE.Controllers
 {
     [Authorize(AuthenticationSchemes = "Bearer")]
     [ApiController]
@@ -29,7 +25,7 @@ namespace DEV.API.SERVICE.Controllers
         [Route("api/Specialization/Getspecializationmaster")]
         public IEnumerable<Tblspecialization> Getspecializationmaster(SpecializationMasterRequest specializationitem)
         {
-             List<Tblspecialization> result = new List<Tblspecialization>();
+            List<Tblspecialization> result = new List<Tblspecialization>();
             try
             {               
                 result= _specializationRepository.Getspecializationmaster(specializationitem);             

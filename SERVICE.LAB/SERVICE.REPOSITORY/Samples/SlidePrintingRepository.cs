@@ -1,4 +1,4 @@
-﻿using DEV.Common;
+﻿using Service.Common;
 using Service.Model.EF;
 using Service.Model.Sample;
 using Service.Model;
@@ -8,9 +8,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Microsoft.EntityFrameworkCore;
-using Dev.IRepository;
+using Service.IRepository;
 
-namespace Dev.Repository.Samples
+namespace Service.Repository.Samples
 {
     public class SlidePrintingRepository : ISlidePrintingRepository
     {
@@ -28,7 +28,6 @@ namespace Dev.Repository.Samples
             {
                 using (var context = new LIMSContext(_config.GetConnectionString(ConfigKeys.DefaultConnection)))
                 {
-
                     var _VenueNo = new SqlParameter("VenueNo", RequestItem?.VenueNo);
                     var _VenueBranchNo = new SqlParameter("VenueBranchNo", RequestItem?.VenueBranchNo);
                     var _FromDate = new SqlParameter("FROMDate", RequestItem?.FromDate);
@@ -42,9 +41,8 @@ namespace Dev.Repository.Samples
                     var _PatientNo = new SqlParameter("PatientNo", RequestItem?.PatientNo);
 
                     lstSlidePrintingResponses = context.GetSlidePrintingDTO.FromSqlRaw(
-                        "Execute dbo.pro_GetSlidePrintDetails @VenueNo,@VenueBranchNo,@FROMDate,@ToDate,@Type,@PageIndex,@UserNo,@FilterType,@VisitNo,@DepartmentType,@PatientNo",
-                         _VenueNo, _VenueBranchNo, _FromDate, _ToDate, _Type, _PageIndex, _UserNo, _FilterType, _VisitNo, _DepartmentType, _PatientNo).ToList();
-
+                    "Execute dbo.pro_GetSlidePrintDetails @VenueNo,@VenueBranchNo,@FROMDate,@ToDate,@Type,@PageIndex,@UserNo,@FilterType,@VisitNo,@DepartmentType,@PatientNo",
+                    _VenueNo, _VenueBranchNo, _FromDate, _ToDate, _Type, _PageIndex, _UserNo, _FilterType, _VisitNo, _DepartmentType, _PatientNo).ToList();
                 }
             }
             catch (Exception ex)
@@ -73,11 +71,10 @@ namespace Dev.Repository.Samples
                     var _ServiceNo = new SqlParameter("ServiceNo", RequestItem?.serviceNo);
 
                     lstSlidePrintingPatientResponses = context.GetSlidePrintingPatientDTO.FromSqlRaw(
-                        "Execute dbo.pro_GetSlidePrintPatientDetails @VenueNo,@VenueBranchNo,@VisitNo,@ServiceNo",
-                         _VenueNo, _VenueBranchNo, _VisitNo, _ServiceNo).ToList();
+                    "Execute dbo.pro_GetSlidePrintPatientDetails @VenueNo,@VenueBranchNo,@VisitNo,@ServiceNo",
+                    _VenueNo, _VenueBranchNo, _VisitNo, _ServiceNo).ToList();
 
                     MappingSlideprintPatientDetails(lstSlidePrintingPatientResponses, slidePrintPatientDetailsResponse);
-
                 }
             }
             catch (Exception ex)
@@ -86,11 +83,8 @@ namespace Dev.Repository.Samples
             }
             return slidePrintPatientDetailsResponse;
         }
-
         private static void MappingSlideprintPatientDetails(List<GetSlidePrintPatientDetailsResponse> lstSlidePrintingPatientResponses, SlidePrintPatientDetailsResponse slidePrintPatientDetailsResponse)
         {
-
-
             if (lstSlidePrintingPatientResponses.Any())
             {
                 slidePrintPatientDetailsResponse.Sno = lstSlidePrintingPatientResponses.FirstOrDefault().Sno;
@@ -127,6 +121,7 @@ namespace Dev.Repository.Samples
 
                 List<Specimen> specimens = new List<Specimen>();
                 List<Slide> slides = new List<Slide>();
+                
                 foreach (var patientDetails in lstSlidePrintingPatientResponses?.OrderBy(x => x.SlideSpecimenType).ThenBy(x => x.SlideBlock).ThenBy(x => x.Level))
                 {
                     if (patientDetails.SlideSpecimenType > 0)
@@ -171,12 +166,10 @@ namespace Dev.Repository.Samples
                         specimen.IsShowSpecimenOthers = patientDetails.IsShowSpecimenOthers;
                         specimens.Add(specimen);
                     }
-
                 }
                 slidePrintPatientDetailsResponse.specimens = specimens;
             }
         }
-
         public CommonTokenResponse SaveSlidePrintingDetails(SlidePrintPatientDetailsResponse slidePrintPatientDetails)
         {
             CommonTokenResponse response = new CommonTokenResponse();
@@ -189,7 +182,6 @@ namespace Dev.Repository.Samples
             {
                 using (var context = new MasterContext(_config.GetConnectionString(ConfigKeys.DefaultConnection)))
                 {
-
                     var _VenueNo = new SqlParameter("VenueNo", slidePrintPatientDetails?.VenueNo);
                     var _VenueBranchNo = new SqlParameter("VenueBranchNo", slidePrintPatientDetails?.VenueBranchNo);
                     var _SlidePrintingXML = new SqlParameter("SlidePrintingXML", slidePrintingXML);
@@ -199,8 +191,8 @@ namespace Dev.Repository.Samples
                     var _IsReject = new SqlParameter("IsReject", slidePrintPatientDetails?.IsReject);
 
                     var objresult = context.CreateSlidePrintingDTO.FromSqlRaw(
-                        "Execute dbo.Pro_InsertSlidePrinting @VenueNo,@VenueBranchNo,@SlidePrintingXML,@SpecimenXML,@DepartmentType,@IsRCHNo,@IsReject",
-                     _VenueNo, _VenueBranchNo, _SlidePrintingXML, _SpecimenXML, _DepartmentType, _IsRCHNo, _IsReject).ToList();
+                    "Execute dbo.Pro_InsertSlidePrinting @VenueNo,@VenueBranchNo,@SlidePrintingXML,@SpecimenXML,@DepartmentType,@IsRCHNo,@IsReject",
+                    _VenueNo, _VenueBranchNo, _SlidePrintingXML, _SpecimenXML, _DepartmentType, _IsRCHNo, _IsReject).ToList();
                     response = objresult[0];
                 }
             }
@@ -210,7 +202,6 @@ namespace Dev.Repository.Samples
             }
             return response;
         }
-
 
         /// <summary>
         /// Generate Slide Number
@@ -223,17 +214,15 @@ namespace Dev.Repository.Samples
             {
                 using (var context = new LIMSContext(_config.GetConnectionString(ConfigKeys.DefaultConnection)))
                 {
-
                     var _VenueNo = new SqlParameter("VenueNo", RequestItem?.VenueNo);
                     var _VenueBranchNo = new SqlParameter("VenueBranchNo", RequestItem?.VenueBranchNo);
                     var _Type = new SqlParameter("Type", RequestItem?.Type);
 
                     var response = context.GetGenerateRCHNoDTO.FromSqlRaw(
-                        "Execute dbo.pro_GenerateSlidePrintNumber @VenueNo,@VenueBranchNo,@Type",
-                         _VenueNo, _VenueBranchNo, _Type).ToList();
+                    "Execute dbo.pro_GenerateSlidePrintNumber @VenueNo,@VenueBranchNo,@Type",
+                    _VenueNo, _VenueBranchNo, _Type).ToList();
 
                     commonResponse = response[0];
-
                 }
             }
             catch (Exception ex)
@@ -254,17 +243,14 @@ namespace Dev.Repository.Samples
             {
                 using (var context = new LIMSContext(_config.GetConnectionString(ConfigKeys.DefaultConnection)))
                 {
-
                     var _VenueNo = new SqlParameter("VenueNo", RequestItem?.VenueNo);
                     var _VenueBranchNo = new SqlParameter("VenueBranchNo", RequestItem?.VenueBranchNo);
                     var _Type = new SqlParameter("DepartmentType", RequestItem?.SearchKey);
                     var _VisitNo = new SqlParameter("VisitNo", RequestItem?.visitNo);
 
                     commonResponse = context.GetExistngRCHNoDTO.FromSqlRaw(
-                        "Execute dbo.pro_GetExistingRCHNoDetails @VenueNo,@VenueBranchNo,@DepartmentType,@VisitNo",
-                         _VenueNo, _VenueBranchNo, _Type, _VisitNo).ToList();
-
-
+                    "Execute dbo.pro_GetExistingRCHNoDetails @VenueNo,@VenueBranchNo,@DepartmentType,@VisitNo",
+                    _VenueNo, _VenueBranchNo, _Type, _VisitNo).ToList();
                 }
             }
             catch (Exception ex)
@@ -273,7 +259,6 @@ namespace Dev.Repository.Samples
             }
             return commonResponse;
         }
-
         public List<GetBulkSlidePrintingDetails> GetBulkSlidePrintDetails(GetBulkSlidePrintingRequest RequestItem)
         {
             List<GetBulkSlidePrintingDetails> commonResponse = new List<GetBulkSlidePrintingDetails>();
@@ -281,7 +266,6 @@ namespace Dev.Repository.Samples
             {
                 using (var context = new LIMSContext(_config.GetConnectionString(ConfigKeys.DefaultConnection)))
                 {
-
                     var _VenueNo = new SqlParameter("VenueNo", RequestItem?.VenueNo);
                     var _VenueBranchNo = new SqlParameter("VenueBranchNo", RequestItem?.VenueBranchNo);
                     var _FromRCHNo = new SqlParameter("FromRCHNo", RequestItem?.FromRCHNo);
@@ -289,9 +273,8 @@ namespace Dev.Repository.Samples
                     var _UserNo = new SqlParameter("UserNo", RequestItem?.UserNo);
 
                     commonResponse = context.GetBulkSlidePrintingDTO.FromSqlRaw(
-                        "Execute dbo.Pro_GetBulkSlidePrintDetails @VenueNo,@VenueBranchNo,@FromRCHNo,@ToRCHNo,@UserNo",
-                         _VenueNo, _VenueBranchNo, _FromRCHNo, _ToRCHNo, _UserNo).ToList();
-
+                    "Execute dbo.Pro_GetBulkSlidePrintDetails @VenueNo,@VenueBranchNo,@FromRCHNo,@ToRCHNo,@UserNo",
+                    _VenueNo, _VenueBranchNo, _FromRCHNo, _ToRCHNo, _UserNo).ToList();
                 }
             }
             catch (Exception ex)
@@ -301,6 +284,4 @@ namespace Dev.Repository.Samples
             return commonResponse;
         }
     }
-
-
 }

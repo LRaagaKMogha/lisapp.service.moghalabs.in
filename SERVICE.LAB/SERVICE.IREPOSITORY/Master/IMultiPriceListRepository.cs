@@ -1,9 +1,7 @@
 ﻿using Service.Model;
-using System;
 using System.Collections.Generic;
-using System.Text;
 
-namespace Dev.IRepository
+namespace Service.IRepository
 {
    public interface IMultiPriceListRepository
     {
@@ -11,6 +9,3 @@ namespace Dev.IRepository
         InsertMultiPriceListResponse InsertMultiPriceListDetails(InsertMultiPriceListRequest tariffMasteritem);
     }
 }
-
-
-

@@ -5,7 +5,7 @@ using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DEV.Common
+namespace Service.Common
 {
     public static class ExportReportService
     {

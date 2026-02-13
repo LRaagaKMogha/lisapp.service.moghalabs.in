@@ -1,17 +1,8 @@
 ﻿using Service.Model;
 using Service.Model.Common;
-using DEV.Common;
-using Microsoft.AspNetCore.Mvc.ModelBinding;
-using System;
 using System.Collections.Generic;
-using System.Resources;
-using System.Text.RegularExpressions;
-using Microsoft.IdentityModel.Tokens;
-using System.Data;
-using System.Linq;
-using Service.Model.Sample;
 
-namespace DEV.API.SERVICE.Controllers
+namespace Service.API.SERVICE.Controllers
 {
     public class PatientReportValidation
     {
@@ -50,7 +41,6 @@ namespace DEV.API.SERVICE.Controllers
                 {
                     errors.Add("Select The From Date");
                 }
-
                 if (string.IsNullOrEmpty(req.todate) || req.todate.TrimStart() == string.Empty)
                 {
                     errors.Add("Select The To Date");
@@ -64,7 +54,6 @@ namespace DEV.API.SERVICE.Controllers
             }
             return errorResponse;
         }
-
         public static ErrorResponse SinglePrintPatientReport(List<PatientReportDTO> PatientItem)
         {
             ErrorResponse errorResponse = new ErrorResponse();
@@ -86,7 +75,6 @@ namespace DEV.API.SERVICE.Controllers
             }
             return errorResponse;
         }
-
         public static ErrorResponse PrintPatientReport(PatientReportDTO PatientItem)
         {
             ErrorResponse errorResponse = new ErrorResponse();
@@ -111,7 +99,6 @@ namespace DEV.API.SERVICE.Controllers
             }
             return errorResponse;
         }
-
         public static ErrorResponse GetAmendedPatientReport(requestamendedpatientreport req)
         {
             ErrorResponse errorResponse = new ErrorResponse();
@@ -123,7 +110,6 @@ namespace DEV.API.SERVICE.Controllers
                 {
                     errors.Add("Select The From Date");
                 }
-
                 if (string.IsNullOrEmpty(req.todate) || req.todate.TrimStart() == string.Empty)
                 {
                     errors.Add("Select The To Date");
@@ -137,7 +123,6 @@ namespace DEV.API.SERVICE.Controllers
             }
             return errorResponse;
         }
-
         public static ErrorResponse PrintAmendedPatientReport(AmendedPatientReportDTO RptItem)
         {
             ErrorResponse errorResponse = new ErrorResponse();
@@ -154,7 +139,6 @@ namespace DEV.API.SERVICE.Controllers
                     errors.Add("Provisional report couldn't be sent");
                 }
             }
-
             if (errors.Count > 0)
             {
                 errorResponse.status = true;
@@ -162,7 +146,6 @@ namespace DEV.API.SERVICE.Controllers
             }
             return errorResponse;
         }
-
         public static ErrorResponse GetATSubCatyMasters(GetATSubCatyMasterSearchReq RptItem)
         {
             ErrorResponse errorResponse = new ErrorResponse();

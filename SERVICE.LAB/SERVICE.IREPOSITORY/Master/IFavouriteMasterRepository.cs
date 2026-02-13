@@ -1,24 +1,14 @@
 ﻿using Service.Model;
-using System;
 using System.Collections.Generic;
-using System.Text;
-using Service.Model.Sample;
 
-
-namespace Dev.IRepository
+namespace Service.IRepository
 {
     public interface IFavouriteMasterRepository
     {
-        // List<GetAnalyzerMasterResponse> GetAnalyzerMasterDetails(GetAnalyzerMasterRequest getRequest);
-
         List<Tblfav> GetFavouriteMasterDetails(GetCommonMasterRequest getfav);
-
         List<Tblgroup> GetGroupDetails(int VenueNo, int VenueBranchNo);
-
         List<Tblpack> GetPackDetails(int VenueNo, int VenueBranchNo);
-        //List<Favoritemaster> GetCustomservice(CommonSearchRequest searchRequest);
         int InsertfavDetails(Tblfav favitem);
-        // InsertTariffMasterResponse InsertTariffMasterDetails(InsertTariffMasterRequest tariffMasteritem);
     }
 }
 

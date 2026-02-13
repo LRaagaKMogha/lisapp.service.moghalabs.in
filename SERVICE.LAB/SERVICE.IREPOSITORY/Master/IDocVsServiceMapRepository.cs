@@ -1,13 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
 using Service.Model;
 
-namespace Dev.IRepository
+namespace Service.IRepository
 {
     public interface IDocVsServiceMapRepository
     {
-
         List<DocVsSerResponse> Getdoctorlst(DocVsSerRequest Req);
         List<DocVsSerGetRes> GetdocVsSerlst(DocVsSerGetReq Req);
         int InsertdocVsSer(DocVsSerInsReq Req);
@@ -15,5 +12,4 @@ namespace Dev.IRepository
         List<DocVsSerAppdetailsRes> GetdocVsSerAppDetails(DocVsSerAppdetailsReq Req);
         int InsertdocVsSerProf(DocVsSerProfInsReq Req);
     }
-
 }

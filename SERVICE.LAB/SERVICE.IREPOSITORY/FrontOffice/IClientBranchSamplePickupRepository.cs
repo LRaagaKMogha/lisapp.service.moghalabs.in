@@ -1,16 +1,12 @@
-﻿using Service.Model;
-using Service.Model.FrontOffice;
-using System;
+﻿using Service.Model.FrontOffice;
 using System.Collections.Generic;
-using System.Text;
 
-namespace Dev.IRepository.FrontOffice
+namespace Service.IRepository.FrontOffice
 {
     public interface IClientBranchSamplePickupRepository
     {
         List<ClientBranchSamplePickupResponse> GetClientBranchSamplePickup(ClientBranchSamplePickupRequest RequestItem);
         ClientBranchSamplePickupInsertResponse InsertClientBranchSamplePickup(ClientBranchSamplePickupInsertRequest request);
         ClientBranchSamplePickupRiderInsertResponse InsertRiderClientBranchSamplePickup(ClientBranchSamplePickupRiderInsertRequest request);
-
     }
 }

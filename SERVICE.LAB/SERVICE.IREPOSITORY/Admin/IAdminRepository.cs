@@ -1,11 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
 using Service.Model;
 using Service.Model.Admin;
-using Service.Model.PatientInfo;
 
-namespace Dev.IRepository
+namespace Service.IRepository
 {
     public interface IAdminRepository
     {

@@ -17,7 +17,7 @@
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
     },
-    "DEV.API.SERVICE": {
+    "Service.API.SERVICE": {
       "commandName": "Project",
       "launchBrowser": true,
       "launchUrl": "api/swagger",

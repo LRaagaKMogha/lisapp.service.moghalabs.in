@@ -1,8 +1,7 @@
-﻿using Dev.IRepository;
-using DEV.Common;
+﻿using Service.IRepository;
+using Service.Common;
 using Service.Model;
 using Service.Model.EF;
-using Service.Model.EF.DocumentUpload;
 using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -11,9 +10,8 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using static Service.Model.DocumentUploadDTO;
 
-namespace Dev.Repository
+namespace Service.Repository
 {
     public class TestRepository : ITestRepository
     {
@@ -21,7 +19,6 @@ namespace Dev.Repository
         public TestRepository(IConfiguration config) {
             _config = config;
         }
-
         public List<lsttest> GetTestList(reqtest req)
         {
             List<lsttest> objResult = new List<lsttest>();

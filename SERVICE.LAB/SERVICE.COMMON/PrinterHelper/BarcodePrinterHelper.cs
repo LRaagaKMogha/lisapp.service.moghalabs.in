@@ -1,7 +1,8 @@
 ﻿using System;
 using System.IO;
 using System.Runtime.InteropServices;
-namespace DEV.Common
+
+namespace Service.Common
 {
     public class RawPrinterHelper
     {
@@ -83,7 +84,6 @@ namespace DEV.Common
             }
             return bSuccess;
         }
-
         public static bool SendFileToPrinter(string szPrinterName, string szFileName, string PrinterLable)
         {
             FileStream fs;
@@ -121,6 +121,5 @@ namespace DEV.Common
             }
             return bSuccess;
         }
-
     }
 }

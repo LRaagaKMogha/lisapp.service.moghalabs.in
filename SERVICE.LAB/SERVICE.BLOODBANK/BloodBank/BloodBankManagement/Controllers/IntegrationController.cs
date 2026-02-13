@@ -2,8 +2,8 @@
 using BloodBankManagement.Helpers;
 using BloodBankManagement.Services.Integration;
 using BloodBankManagement.Services.Reports;
-using DEV.Common;
-using DEV.Model.Integration;
+using Service.Common;
+using Service.Model.Integration;
 using ErrorOr;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
@@ -21,7 +21,7 @@ using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using static System.Net.Mime.MediaTypeNames;
 
-namespace DEV.API.SERVICE.Controllers
+namespace Service.API.SERVICE.Controllers
 {
     [CustomAuthorize("BloodBankMgmt")]
     public class IntegrationController : ApiController

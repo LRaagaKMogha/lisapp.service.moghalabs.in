@@ -1,16 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
-using Dev.IRepository;
 using Service.Model;
 using Service.Model.EF;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using System.Linq;
-using DEV.Common;
+using Service.Common;
 using Microsoft.Data.SqlClient;
+using Service.IRepository;
 
-namespace Dev.Repository
+namespace Service.Repository
 {
     public class CommericalMasterRepository : ICommericalRepository
     {
@@ -27,9 +26,10 @@ namespace Dev.Repository
                     var _CompanyNo = new SqlParameter("CompanyNo", getReq?.CompanyNo);
                     var _pageIndex = new SqlParameter("pageIndex", getReq?.pageIndex);
                     var _venueNo = new SqlParameter("venueNo", getReq?.venueNo);
+                    
                     objresult = context.Getcompany.FromSqlRaw(
-                        "Execute dbo.pro_GetCompanyDetails @venueNo,@CompanyNo,@pageIndex",
-                         _venueNo, _CompanyNo, _pageIndex).ToList();
+                    "Execute dbo.pro_GetCompanyDetails @venueNo,@CompanyNo,@pageIndex",
+                    _venueNo, _CompanyNo, _pageIndex).ToList();
                 }
             }
             catch (Exception ex)
@@ -56,14 +56,13 @@ namespace Dev.Repository
                     var _userNo = new SqlParameter("userNo", insReq?.userNo);
                     var _venueBranchno = new SqlParameter("venueBranchno", insReq.venueBranchno);
 
-
                     var obj = context.Insertcompany.FromSqlRaw(
-                        "Execute dbo.pro_InsertCompanyDetails @VenueNo,@CompanyNo,@CompanyName,@EmailID," +
-                        "@MobileNo,@SeqNo,@Status,@userNo,@venueBranchno",
-                         _VenueNo, _CompanyNo, _CompanyName, _EmailID, _MobileNo,
-                         _SeqNo, _Status, _userNo, _venueBranchno).AsEnumerable().FirstOrDefault();
+                    "Execute dbo.pro_InsertCompanyDetails @VenueNo,@CompanyNo,@CompanyName,@EmailID," +
+                    "@MobileNo,@SeqNo,@Status,@userNo,@venueBranchno",
+                    _VenueNo, _CompanyNo, _CompanyName, _EmailID, _MobileNo,
+                    _SeqNo, _Status, _userNo, _venueBranchno).AsEnumerable().FirstOrDefault();
+                    
                     objresult.CompanyNo = obj?.CompanyNo ?? 0;
-
                 }
             }
             catch (Exception ex)
@@ -82,9 +81,10 @@ namespace Dev.Repository
                     var _TaxMastNo = new SqlParameter("TaxMastNo", getReq?.TaxMastNo);
                     var _VenueNo = new SqlParameter("VenueNo", getReq?.VenueNo);
                     var _pageIndex = new SqlParameter("pageIndex", getReq?.pageIndex);
+                    
                     objresult = context.GetGST.FromSqlRaw(
-                        "Execute dbo.Pro_GetGSTTaxmaster @TaxMastNo,@VenueNo,@pageIndex",
-                         _TaxMastNo,_VenueNo, _pageIndex).ToList();
+                    "Execute dbo.Pro_GetGSTTaxmaster @TaxMastNo,@VenueNo,@pageIndex",
+                    _TaxMastNo,_VenueNo, _pageIndex).ToList();
                 }
             }
             catch (Exception ex)
@@ -93,7 +93,6 @@ namespace Dev.Repository
             }
             return objresult;
         }
-
         public GSTInsRes InsertGSTMaster(GSTInsReq insReq)
         {
             GSTInsRes objresult = new GSTInsRes();
@@ -110,12 +109,11 @@ namespace Dev.Repository
                     var _Status = new SqlParameter("Status", insReq?.Status);
                     var _userNo = new SqlParameter("userNo", insReq?.userNo);
 
-
                     var obj = context.InsertGST.FromSqlRaw(
-                        "Execute dbo.Pro_InsertGSTTaxMaster @TaxMastNo,@Description,@Percentage,@FromDate,@ToDate,@VenueNo,@Status,@userNo",
-                         _TaxMastNo, _Description, _Percentage, _FromDate, _ToDate, _VenueNo,_Status, _userNo).AsEnumerable().FirstOrDefault();
+                    "Execute dbo.Pro_InsertGSTTaxMaster @TaxMastNo,@Description,@Percentage,@FromDate,@ToDate,@VenueNo,@Status,@userNo",
+                    _TaxMastNo, _Description, _Percentage, _FromDate, _ToDate, _VenueNo,_Status, _userNo).AsEnumerable().FirstOrDefault();
+                    
                     objresult.TaxMastNo = obj?.TaxMastNo ?? 0;
-
                 }
             }
             catch (Exception ex)
@@ -124,6 +122,5 @@ namespace Dev.Repository
             }
             return objresult;
         }
-
     }
 }

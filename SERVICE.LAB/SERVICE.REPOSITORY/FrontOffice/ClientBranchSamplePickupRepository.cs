@@ -1,27 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
-using Dev.IRepository;
-using DEV.Common;
-using Service.Model;
+using Service.Common;
 using Service.Model.EF;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
-using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
 using System.Data;
-using System.Data.SqlClient;
-using System.IO;
 using System.Linq;
-using System.Xml.Linq;
-using Serilog;
-using System.Globalization;
-using Service.Model.Sample;
 using Service.Model.FrontOffice;
-using Dev.IRepository.FrontOffice;
+using Service.IRepository.FrontOffice;
 using Microsoft.Data.SqlClient;
-namespace Dev.Repository.FrontOffice
+
+namespace Service.Repository.FrontOffice
 {
     public class ClientBranchSamplePickupRepository : IClientBranchSamplePickupRepository
     {
@@ -47,15 +36,15 @@ namespace Dev.Repository.FrontOffice
                     var _PageIndex = new SqlParameter("PageIndex", RequestItem.PageIndex);
 
                     objresult = context.GetClientBranchSamplePickup.FromSqlRaw(
-                        "EXEC dbo.Pro_GetClientBranchSamplePickup @FROMDate,@ToDate,@Type,@VenueNo,@VenueBranchNo,@SPType,@SPTypeNo,@RiderNo,@PageIndex",
-                        _FromDate, _ToDate, _Type, _VenueNo, _VenueBranchNo, _SPType, _SPTypeNo, _RiderNo, _PageIndex
+                    "EXEC dbo.Pro_GetClientBranchSamplePickup @FROMDate,@ToDate,@Type,@VenueNo,@VenueBranchNo,@SPType,@SPTypeNo,@RiderNo,@PageIndex",
+                    _FromDate, _ToDate, _Type, _VenueNo, _VenueBranchNo, _SPType, _SPTypeNo, _RiderNo, _PageIndex
                     ).ToList();
                 }
             }
             catch (Exception ex)
             {
                 MyDevException.Error(ex, "ClientBranchSamplePickupRepository.GetClientBranchSamplePickup",
-                    ExceptionPriority.Medium, ApplicationType.REPOSITORY, RequestItem.VenueNo, RequestItem.VenueBranchNo, 0);
+                ExceptionPriority.Medium, ApplicationType.REPOSITORY, RequestItem.VenueNo, RequestItem.VenueBranchNo, 0);
             }
             return objresult;
         }
@@ -79,16 +68,16 @@ namespace Dev.Repository.FrontOffice
                     var _UserNo = new SqlParameter("UserNo", request.UserNo);
 
                     objResult = context.InsertClientBranchSamplePickup
-                        .FromSqlRaw(
-                            "EXEC dbo.Pro_InsertCilentBranchSamplePickup @SamplePickupNo, @SPType, @SPTypeNo, @SampleCount, @PickupDateTime, @RequesterInfo, @Status, @VenueNo, @VenueBranchNo, @UserNo",
-                            _SamplePickupNo, _SPType, _SPTypeNo, _SampleCount, _PickupDateTime, _RequesterInfo, _Status, _VenueNo, _VenueBranchNo, _UserNo
-                        ).AsEnumerable().FirstOrDefault();
+                    .FromSqlRaw(
+                    "EXEC dbo.Pro_InsertCilentBranchSamplePickup @SamplePickupNo, @SPType, @SPTypeNo, @SampleCount, @PickupDateTime, @RequesterInfo, @Status, @VenueNo, @VenueBranchNo, @UserNo",
+                    _SamplePickupNo, _SPType, _SPTypeNo, _SampleCount, _PickupDateTime, _RequesterInfo, _Status, _VenueNo, _VenueBranchNo, _UserNo
+                    ).AsEnumerable().FirstOrDefault();
                 }
             }
             catch (Exception ex)
             {
                 MyDevException.Error(ex, "ClientBranchSamplePickupRepository.InsertClientBranchSamplePickup",
-                    ExceptionPriority.Medium, ApplicationType.REPOSITORY, request.VenueNo, request.VenueBranchNo, request.UserNo);
+                ExceptionPriority.Medium, ApplicationType.REPOSITORY, request.VenueNo, request.VenueBranchNo, request.UserNo);
             }
 
             return objResult;
@@ -108,16 +97,16 @@ namespace Dev.Repository.FrontOffice
                     var _UserNo = new SqlParameter("UserNo", request.UserNo);
 
                     objResult = context.InsertRiderClientBranchSamplePickup
-                        .FromSqlRaw(
-                            "EXEC dbo.Pro_InsertAssignRiderToSamplePickup @SamplePickupNo, @RiderNo, @VenueNo, @VenueBranchNo, @UserNo",
-                            _SamplePickupNo, _RiderNo, _VenueNo, _VenueBranchNo, _UserNo
-                        ).AsEnumerable().FirstOrDefault();
+                    .FromSqlRaw(
+                        "EXEC dbo.Pro_InsertAssignRiderToSamplePickup @SamplePickupNo, @RiderNo, @VenueNo, @VenueBranchNo, @UserNo",
+                        _SamplePickupNo, _RiderNo, _VenueNo, _VenueBranchNo, _UserNo
+                    ).AsEnumerable().FirstOrDefault();
                 }
             }
             catch (Exception ex)
             {
                 MyDevException.Error(ex, "ClientBranchSamplePickupRepository.InsertRiderClientBranchSamplePickup",
-                    ExceptionPriority.Medium, ApplicationType.REPOSITORY, request.VenueNo, request.VenueBranchNo, request.UserNo);
+                ExceptionPriority.Medium, ApplicationType.REPOSITORY, request.VenueNo, request.VenueBranchNo, request.UserNo);
             }
 
             return objResult;

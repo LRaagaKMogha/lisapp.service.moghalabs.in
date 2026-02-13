@@ -1,5 +1,5 @@
-﻿using Dev.IRepository.Inventory;
-using DEV.Common;
+﻿using Service.IRepository.Inventory;
+using Service.Common;
 using Service.Model;
 using Service.Model.EF;
 using Service.Model.Inventory;
@@ -9,9 +9,8 @@ using System;
 using System.Collections.Generic;
 using Microsoft.Data.SqlClient;
 using System.Linq;
-using System.Text;
 
-namespace Dev.Repository.Inventory
+namespace Service.Repository.Inventory
 {
     public class StockUploadReposistory: IStockUploadReposistory
     {
@@ -41,30 +40,6 @@ namespace Dev.Repository.Inventory
             }
             return objresult;
         }
-
-        //public List<GetProductsByPOResponse> GetProductByPO(int venueNo, int venueBranchNo, int poNumber)
-        //{
-        //    List<GetProductsByPOResponse> objresult = new List<GetProductsByPOResponse>();
-        //    try
-        //    {
-        //        using (var context = new MasterContext(_config.GetConnectionString(ConfigKeys.DefaultConnection)))
-        //        {
-        //            var _VenueNo = new SqlParameter("VenueNo", venueNo);
-        //            var _VenueBranchNo = new SqlParameter("VenueBranchNo", venueBranchNo);
-        //            var _poNumber = new SqlParameter("PONo", poNumber);
-        //            objresult = context.GetProductByPODTO.FromSql(
-        //                "Execute dbo.pro_IV_GetProductsByPO @VenueNo,@VenueBranchNo,@PONo",
-        //             _VenueNo, _VenueBranchNo, _poNumber).ToList();
-        //        }
-
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        MyDevException.Error(ex, "StockUploadReposistory.GetProductByPO", ExceptionPriority.High, ApplicationType.REPOSITORY, venueNo, venueBranchNo, poNumber);
-        //    }
-        //    return objresult;
-        //}
-
         public CommonAdminResponse InsertStockUpload(InsertStockUploadRequest insertStockUpload)
         {
             CommonAdminResponse response = new CommonAdminResponse();

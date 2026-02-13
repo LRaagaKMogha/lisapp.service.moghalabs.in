@@ -1,15 +1,8 @@
-using System.Collections.Generic;
-using System.Linq;
-using System.Text.Json;
 using System.Threading.Tasks;
-using Dev.IRepository;
-using Service.Model;
 using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.Options;
 
-namespace DEV.API.SERVICE
+namespace Service.API.SERVICE
 {
     public class SecurityMiddleWare
     {
@@ -28,11 +21,11 @@ namespace DEV.API.SERVICE
             context.Response.OnStarting(state =>
             {
                 var httpContext = (HttpContext)state;
-                httpContext.Response.Headers.Add("Strict-Transport-Security", "max-age=31536000");
-                httpContext.Response.Headers.Add("X-Content-Type-Options", "nosniff");
-                httpContext.Response.Headers.Add("X-Xss-Protection", "1; mode=block");
-                httpContext.Response.Headers.Add("Content-Security-Policy", "default-src *; style-src 'self' http://* 'unsafe-inline'; script-src 'self' http://* 'unsafe-inline' 'unsafe-eval'; img-src 'self' http://* data:;");
-                httpContext.Response.Headers.Add("X-Frame-Options", _config.GetSection("X-Frame-Options").Value);
+                httpContext.Response.Headers.Append("Strict-Transport-Security", "max-age=31536000");
+                httpContext.Response.Headers.Append("X-Content-Type-Options", "nosniff");
+                httpContext.Response.Headers.Append("X-Xss-Protection", "1; mode=block");
+                httpContext.Response.Headers.Append("Content-Security-Policy", "default-src *; style-src 'self' http://* 'unsafe-inline'; script-src 'self' http://* 'unsafe-inline' 'unsafe-eval'; img-src 'self' http://* data:;");
+                httpContext.Response.Headers.Append("X-Frame-Options", _config.GetSection("X-Frame-Options").Value);
                 //... and so on
                 return Task.CompletedTask;
             }, context);

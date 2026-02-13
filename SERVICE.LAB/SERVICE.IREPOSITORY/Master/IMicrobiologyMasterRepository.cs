@@ -1,13 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
 using Service.Model;
 
-namespace Dev.IRepository
+namespace Service.IRepository
 {
     public interface IMicrobiologyMasterRepository
     {
-
         List<lstorgAntiRange> GetOrgAntibioticRange(reqorgAntiRange req);
         int SaveOrganismAntibioticRange(orgAntiRange req);
         List<orggetresponse> GetOrgmaster(reqorgAntiRange orggetreq);
@@ -20,7 +17,5 @@ namespace Dev.IRepository
         antinsertresponse Insertantimaster(antiresponse antinsertreq);
         List<orgAntiresponse> GetorgAntimaster(orgAntirequest reqorgAnti);
         organtinsertresponse InsertorgAntimaster(orgAntinsertresponse orgAntinsertreq);
-
     }
-
 }

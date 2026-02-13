@@ -1,11 +1,5 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 using BloodBankManagement.Services.StartupServices;
-using ErrorOr;
-using FluentValidation;
 
 namespace BloodBankManagement.Helpers
 {
@@ -49,12 +43,10 @@ namespace BloodBankManagement.Helpers
         {
             return GlobalConstants.Lookups.Any(x => x.Identifier == id && x.Type == type);
         }
-
         public static bool IsNumeric(string input)
         {
             return double.TryParse(input, out _);
-        }
-        
+        }        
         public static bool IsCrosMatchingTest(Int64 testId)
         {
             return testId == GlobalConstants.CrossMatchingXMId || testId == GlobalConstants.CrossMatchingManualXMId || testId == GlobalConstants.CrossMatchingImmediateSpinXMId;
@@ -67,7 +59,6 @@ namespace BloodBankManagement.Helpers
             }
             else return null;
         }
-
         public static DateTime? ParseStringToDateTime(string input)
         {
             if (DateTime.TryParse(input, out DateTime result))

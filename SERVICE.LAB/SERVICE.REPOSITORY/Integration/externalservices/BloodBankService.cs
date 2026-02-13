@@ -10,16 +10,15 @@ using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Logging;
-using Dev.IRepository;
+using Service.IRepository;
 using Service.Model;
 using Service.Model.Integration;
-using System.Text.Json;
-using DEV.Common;
+using Service.Common;
 using Service.Model.EF;
 using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 
-namespace Dev.Repository.Integration.externalservices
+namespace Service.Repository.Integration.externalservices
 {
     public class BloodBankService
     {

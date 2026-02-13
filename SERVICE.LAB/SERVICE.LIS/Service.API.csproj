@@ -59,10 +59,5 @@
 		<ProjectReference Include="..\Service.Repository\Service.Repository.csproj" />
 		<ProjectReference Include="..\Service.Model.EF\Service.Model.EF.csproj" />
 	</ItemGroup>
-	<ItemGroup>
-	  <Reference Include="Service.Common">
-	    <HintPath>..\SERVICE.COMMON\bin\Debug\net8.0\Service.Common.dll</HintPath>
-	  </Reference>
-	</ItemGroup>
 
 </Project>

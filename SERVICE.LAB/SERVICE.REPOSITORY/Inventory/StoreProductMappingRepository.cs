@@ -1,16 +1,14 @@
-﻿using Dev.IRepository.Inventory;
-using DEV.Common;
+﻿using Service.IRepository.Inventory;
+using Service.Common;
 using Service.Model.EF;
 using Service.Model.Inventory;
 using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 
-namespace Dev.Repository.Inventory
+namespace Service.Repository.Inventory
 {
     public class StoreProductMappingRepository : IStoreProductMappingRepository
     {
@@ -20,7 +18,6 @@ namespace Dev.Repository.Inventory
         {
             _config = config;
         }
-
         public async Task<object> GetStoreProductMappingAsync(StoreProductMappingRequestDTO request)
         {
             object result = null;
@@ -65,7 +62,6 @@ namespace Dev.Repository.Inventory
 
             return result;
         }
-
         public async Task<int> InsertStoreProductMappingAsync(StoreProductMappingInsertDTO dto)
         {
             try
@@ -80,9 +76,9 @@ namespace Dev.Repository.Inventory
                     var _StoreVsProductXML = new SqlParameter("@StoreVsProductXML", storeXml);
 
                     await context.Database.ExecuteSqlRawAsync(
-                        "EXEC dbo.pro_IV_InsertStoreProductMapping @VenuNo, @UserNo, @StoreVsProductXML",
-                        _VenueNo, _UserNo, _StoreVsProductXML
-                    );
+                    "EXEC dbo.pro_IV_InsertStoreProductMapping @VenuNo, @UserNo, @StoreVsProductXML",
+                    _VenueNo, _UserNo, _StoreVsProductXML);
+
                     return 1;
                 }
             }

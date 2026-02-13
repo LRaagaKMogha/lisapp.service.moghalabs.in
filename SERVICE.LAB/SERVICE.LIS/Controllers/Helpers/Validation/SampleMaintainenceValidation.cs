@@ -1,19 +1,12 @@
 ﻿using Service.Model;
 using Service.Model.Common;
-using DEV.Common;
-using Microsoft.AspNetCore.Mvc.ModelBinding;
 using System;
 using System.Collections.Generic;
-using System.Resources;
-using System.Text.RegularExpressions;
-using Microsoft.IdentityModel.Tokens;
 using System.Data;
 using System.Linq;
-using Microsoft.AspNetCore.Mvc;
-using RtfPipe.Tokens;
 using Service.Model.Sample;
 
-namespace DEV.API.SERVICE.Controllers
+namespace Service.API.SERVICE.Controllers
 {
     public class SampleMaintainenceValidation
     {
@@ -39,7 +32,6 @@ namespace DEV.API.SERVICE.Controllers
             }
             return errorResponse;
         }
-
         public static ErrorResponse CreateManageSample(List<CreateManageSampleRequest> createManageSample)
         {
             ErrorResponse errorResponse = new ErrorResponse();
@@ -182,7 +174,6 @@ namespace DEV.API.SERVICE.Controllers
                     errors.Add("Select The From Date and To Date");
                 }
             }
-
             if (errors.Count > 0)
             {
                 errorResponse.status = true;

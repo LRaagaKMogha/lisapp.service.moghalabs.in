@@ -3,7 +3,7 @@
 //using System.IO;
 //using System.Drawing;
 
-//namespace DEV.Common
+//namespace Service.Common
 //{
 //    public class ScannerHelper
 //    {

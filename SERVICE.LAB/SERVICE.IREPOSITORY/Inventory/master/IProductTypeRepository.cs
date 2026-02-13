@@ -1,18 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
 using Service.Model;
 
-namespace Dev.IRepository
+namespace Service.IRepository
 {
     public interface IProductTypeRepository
     {
-
         List<TblProductType> Getproducttypemaster(ProductTypeMasterRequest protypRequest);
         ProductTypeMasterResponse Insertproducttypemaster(TblProductType tblProtyp);
-
         List<TblProductCategory> GetProductCategory(ProductcategoryRequest ProductcategoryRequest);
         ProductcategoryResponse InsertproductCategory(TblProductCategory TblProductCategory);
     }
-
 }

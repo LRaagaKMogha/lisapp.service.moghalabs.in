@@ -1,5 +1,5 @@
-﻿using Dev.IRepository;
-using DEV.Common;
+﻿using Service.IRepository;
+using Service.Common;
 using Service.Model.EF;
 using Service.Model.Sample;
 using Microsoft.EntityFrameworkCore;
@@ -11,11 +11,10 @@ using System.Linq;
 using Serilog;
 using Service.Model;
 
-namespace Dev.Repository
+namespace Service.Repository
 {
     public class ManageSampleRepository : IManageSampleRepository
     {
-
         private IConfiguration _config;
         public ManageSampleRepository(IConfiguration config) { _config = config; }
 

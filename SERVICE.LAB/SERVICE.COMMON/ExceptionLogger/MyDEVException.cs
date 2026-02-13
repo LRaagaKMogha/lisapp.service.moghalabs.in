@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Configuration;
 
-namespace DEV.Common
+namespace Service.Common
 {
     public static class MyDevException
     {
@@ -10,6 +10,7 @@ namespace DEV.Common
         {
             string exceptioncontent = exception.ToFormattedString();
             ConfigurationHelper objconfig = new ConfigurationHelper();
+
             if (Priority == ExceptionPriority.High)
             {
                 if (ConfigurationManager.AppSettings["EnableNotification"] == "1")
@@ -18,7 +19,6 @@ namespace DEV.Common
                 }
             }
             WriteDevException(exceptioncontent, functionname, Priority, applicationType, veneueid, venuebranchid, userid);
-
         }
         public static void WriteDevException(string message, string functionname, ExceptionPriority Priority, ApplicationType applicationType, int? veneueid, int? venuebranchid, int? userid)
         {
@@ -41,11 +41,9 @@ namespace DEV.Common
                 objconfig.Writesqllog(objparam);
             }
         }
-
         public static void Error(Exception ex, string v1, ExceptionPriority low, ApplicationType rEPOSITORY, short venueNo, int v2)
         {
             throw new NotImplementedException();
         }
     }
-
 }

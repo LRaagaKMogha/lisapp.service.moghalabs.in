@@ -2,12 +2,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text.Json;
 using System.Threading.Tasks;
-using Dev.IRepository;
+using Service.IRepository;
 using Service.Model;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
-namespace DEV.API.SERVICE
+namespace Service.API.SERVICE
 {
     public class JwtMiddleware
     {

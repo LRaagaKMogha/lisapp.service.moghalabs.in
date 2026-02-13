@@ -1,11 +1,7 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using BloodBankManagement.Entities;
 using BloodBankManagement.Models;
-using DEV.Common;
-using DEV.Model.Integration;
+using Service.Common;
+using Service.Model.Integration;
 using Microsoft.EntityFrameworkCore;
 
 namespace BloodBankManagement.Helpers

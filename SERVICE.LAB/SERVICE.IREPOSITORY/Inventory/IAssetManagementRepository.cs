@@ -1,17 +1,12 @@
 ﻿using Service.Model;
 using Service.Model.Inventory.Master;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace Dev.IRepository.Inventory
+namespace Service.IRepository.Inventory
 {
     public interface IAssetManagementRepository
     {
         int InsertInstrumentDetails(postAssetManagementDTO objManuDTO);
         List<GetAssetManagementResponse> GetInstrumentDetail(AssetManagementRequest masterRequest);
-
     }
 }

@@ -1,7 +1,7 @@
 using AutoMapper;
 using BloodBankManagement.Helpers;
 using BloodBankManagement.Models;
-using DEV.Common;
+using Service.Common;
 using ErrorOr;
 using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
@@ -20,7 +20,6 @@ namespace BloodBankManagement.Services.Reports
             this.dataContext = dataContext;
             this.Configuration = configuration;
         }
-
         public async Task<ErrorOr<List<BBReportOutputDetails>>> PrintReport(Contracts.BBPatientReportRequestParam request)
         {
             List<BBReportOutputDetails> lst = new List<BBReportOutputDetails>();
@@ -46,7 +45,6 @@ namespace BloodBankManagement.Services.Reports
                 objdictionary.Add("IsLogo", request.IsLogo.ToString());
                 objdictionary.Add("ReportType", request.ReportType);
                 BBReportContext objReportContext = new BBReportContext(DefaultConnection);
-                //  BBTblReportMaster tblReportMaster = new BBTblReportMaster(0,"","","","","","","","",0,0,false);
                 BBTblReportMasterDetails tblReportMaster = new BBTblReportMasterDetails();
 
                 using (var context = new BloodBankDataContext(Configuration))
@@ -69,7 +67,6 @@ namespace BloodBankManagement.Services.Reports
                 string fileName = regId + "_" + Guid.NewGuid().ToString("N").Substring(0, 4) + ".pdf";
                 DataTable datable = objReportContext.getdatatable(objdictionary, tblReportMaster.ProcedureName);
 
-                //BBReportParamDTO objitem1 = new BBReportParamDTO(Dictionary<string, Object>[],Dictionary<string,string>,"","","");
                 BBReportParamDTODetails objitem = new BBReportParamDTODetails();
                 objitem.Datatable = CommonExtension.DatableToDicionary(datable);
                 objitem.Paramerter = objdictionary;

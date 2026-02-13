@@ -1,11 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Text;
 using System.Configuration;
 using System.Net.Mail;
 
-namespace Dev.Win.Common
+namespace Service.Win.Common
 {
     public class Logger
     {
@@ -42,7 +40,6 @@ namespace Dev.Win.Common
                 if (streamWriter != null) streamWriter.Close();
                 if (fileStream != null) fileStream.Close();
             }
-
         }
         public static void LogWritebyVenue(int VenueNo, int VenueBranchNo, string message)
         {
@@ -83,7 +80,6 @@ namespace Dev.Win.Common
                 if (streamWriter != null) streamWriter.Close();
                 if (fileStream != null) fileStream.Close();
             }
-
         }
         public static void SendNotifcationLog(string subject, string body)
         {
@@ -107,5 +103,3 @@ namespace Dev.Win.Common
         }
     }
 }
-
-

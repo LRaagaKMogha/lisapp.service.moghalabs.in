@@ -1,5 +1,4 @@
-﻿using Dev.IRepository.Inventory;
-using DEV.Common;
+﻿using Service.Common;
 using Service.Model;
 using Service.Model.EF;
 using Microsoft.EntityFrameworkCore;
@@ -8,9 +7,9 @@ using System;
 using System.Collections.Generic;
 using Microsoft.Data.SqlClient;
 using System.Linq;
-using System.Text;
+using Service.IRepository.Inventory;
 
-namespace Dev.Repository.Inventory
+namespace Service.Repository.Inventory
 {
     public class ConsumptionMappingRepositoty: IConsumptionMappingRepositoty
     {
@@ -34,8 +33,8 @@ namespace Dev.Repository.Inventory
                     var _productNo = new SqlParameter("ProductNo", request.ProductNo);
 
                     objresult = context.GetConsumptionMappingDTO.FromSqlRaw(
-                        "Execute dbo.pro_GetAllConsumptionMapping @VenueNo,@VenueBranchNo,@MasterNo,@UserNo,@PageIndex,@AnalyzerMasterNo,@AnalyzerParamNo,@UnitNo,@ProductNo",
-                     _venueNo, _venueBranchNo, _consumptionNo, _userNo, _pageIndex, _analyzerMasterNo, _parameterNo, _unitNo, _productNo).ToList();
+                    "Execute dbo.pro_GetAllConsumptionMapping @VenueNo,@VenueBranchNo,@MasterNo,@UserNo,@PageIndex,@AnalyzerMasterNo,@AnalyzerParamNo,@UnitNo,@ProductNo",
+                    _venueNo, _venueBranchNo, _consumptionNo, _userNo, _pageIndex, _analyzerMasterNo, _parameterNo, _unitNo, _productNo).ToList();
                 }
             }
             catch (Exception ex)
@@ -63,8 +62,9 @@ namespace Dev.Repository.Inventory
                     var _UserNo = new SqlParameter("UserNo", insertConsumption?.Createdby);
 
                     var objresult = context.CreateConsumptionMappingDTO.FromSqlRaw(
-                        "Execute dbo.Pro_InsertConsumptionMappingMaster @VenueNo,@VenueBranchNo,@ConsumptionXML,@UserNo",
-                     _VenueNo, _VenueBranchNo, _ConsumptionXML, _UserNo).ToList();
+                    "Execute dbo.Pro_InsertConsumptionMappingMaster @VenueNo,@VenueBranchNo,@ConsumptionXML,@UserNo",
+                    _VenueNo, _VenueBranchNo, _ConsumptionXML, _UserNo).ToList();
+                    
                     response = objresult[0];
                 }
             }

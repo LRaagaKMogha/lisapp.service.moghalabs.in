@@ -1,13 +1,10 @@
 ﻿using Service.Model;
-using Service.Model.Integration;
 using Service.Model.Sample;
 using Microsoft.AspNetCore.Mvc;
-using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 
-namespace Dev.IRepository
+namespace Service.IRepository
 {
     public interface IFrontOfficeRepository
     {

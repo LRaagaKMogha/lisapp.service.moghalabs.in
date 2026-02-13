@@ -1,18 +1,9 @@
 ﻿using Service.Model;
 using Service.Model.Common;
-using DEV.Common;
-using Microsoft.AspNetCore.Mvc.ModelBinding;
 using System;
 using System.Collections.Generic;
-using System.Resources;
-using System.Text.RegularExpressions;
-using Microsoft.IdentityModel.Tokens;
-using System.IO;
-using System.Linq;
-using Microsoft.AspNetCore.Mvc;
-using RtfPipe.Tokens;
 
-namespace DEV.API.SERVICE.Controllers
+namespace Service.API.SERVICE.Controllers
 {
     public class TariffMasterValidation
     {
@@ -66,8 +57,6 @@ namespace DEV.API.SERVICE.Controllers
                 errors.Add("Referrer No is required");
             if (string.IsNullOrEmpty(req.EffectiveFrom) || req.EffectiveFrom.TrimStart() == string.Empty)
                 errors.Add("Effective From is required");
-            //if (string.IsNullOrEmpty(req.EffectiveTo) || req.EffectiveTo.TrimStart() == string.Empty)
-            //    errors.Add("Effective To is required");
 
             DateTime EffectiveFrom, EffectiveTo;
             if (!string.IsNullOrEmpty(req.EffectiveFrom) && DateTime.TryParse(req.EffectiveFrom, out EffectiveFrom) &&

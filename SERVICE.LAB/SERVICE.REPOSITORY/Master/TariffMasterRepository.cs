@@ -1,19 +1,16 @@
-﻿using Dev.IRepository;
-using DEV.Common;
+﻿using Service.IRepository;
+using Service.Common;
 using Service.Model;
 using Service.Model.EF;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
-using Serilog;
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using Microsoft.Data.SqlClient;
 using System.Linq;
-using System.Text;
 using Newtonsoft.Json;
 
-namespace Dev.Repository
+namespace Service.Repository
 {
     public class TariffMasterRepository : ITariffMasterRepository
     {
@@ -41,9 +38,8 @@ namespace Dev.Repository
                     var _DoctorNo = new SqlParameter("DoctorNo", getRequest?.filterDoctorNo);
 
                     objresult = context.GetTariffMasterDTO.FromSqlRaw(
-                        "Execute dbo.Pro_GetTariff @VenueNo,@VenueBranchNo,@rateListNo,@PageIndex,@type,@ClientNo,@IsFranchisee,@DoctorNo",
-                     _VenueNo, _VenueBranchNo, _RateListNo, _PageIndex, _Type, _ClientNo, _IsFranchisee, _DoctorNo).ToList();
-
+                    "Execute dbo.Pro_GetTariff @VenueNo,@VenueBranchNo,@rateListNo,@PageIndex,@type,@ClientNo,@IsFranchisee,@DoctorNo",
+                    _VenueNo, _VenueBranchNo, _RateListNo, _PageIndex, _Type, _ClientNo, _IsFranchisee, _DoctorNo).ToList();
                 }
             }
             catch (Exception ex)
@@ -120,9 +116,8 @@ namespace Dev.Repository
                     var _PhysicianNo = new SqlParameter("physicianNo", getRequest?.physicianNo);
 
                     objresult = context.GetServiceDetailsDTO.FromSqlRaw(
-                        "Execute dbo.pro_TariffSearchService @VenueNo,@VenueBranchNo,@departmentNo,@rateListNo,@type,@clientNo,@physicianNo",
-                     _VenueNo, _VenueBranchNo, _DeptNo, _RateListNo, _Type, _clientNo, _PhysicianNo).ToList();
-
+                    "Execute dbo.pro_TariffSearchService @VenueNo,@VenueBranchNo,@departmentNo,@rateListNo,@type,@clientNo,@physicianNo",
+                    _VenueNo, _VenueBranchNo, _DeptNo, _RateListNo, _Type, _clientNo, _PhysicianNo).ToList();
                 }
             }
             catch (Exception ex)
@@ -131,7 +126,6 @@ namespace Dev.Repository
             }
             return objresult;
         }
-
         public List<GetTariffMasterListResponse> GetTariffMasterList(GetTariffMasterListRequest getRequest)
         {
             List<GetTariffMasterListResponse> objresult = new List<GetTariffMasterListResponse>();
@@ -147,8 +141,8 @@ namespace Dev.Repository
                     var _CommercialType = new SqlParameter("CommercialType", getRequest?.CommercialType);
 
                     objresult = context.GetTariffMasterListDTO.FromSqlRaw(
-                        "Execute dbo.Pro_GetTariffList @VenueNo,@VenueBranchNo,@rateListNo,@PageIndex,@IsApproval,@CommercialType",
-                     _VenueNo, _VenueBranchNo, _RateListNo, _PageIndex, _IsApproval, _CommercialType).ToList();
+                    "Execute dbo.Pro_GetTariffList @VenueNo,@VenueBranchNo,@rateListNo,@PageIndex,@IsApproval,@CommercialType",
+                    _VenueNo, _VenueBranchNo, _RateListNo, _PageIndex, _IsApproval, _CommercialType).ToList();
                 }
             }
             catch (Exception ex)
@@ -177,8 +171,8 @@ namespace Dev.Repository
                     var _IsRateShow = new SqlParameter("IsRateShow", getRequest?.israteshow);
 
                     objresult = context.TariffMasterServiceListDTO.FromSqlRaw(
-                        "Execute dbo.pro_TariffMasterSearchService @VenueNo,@VenueBranchNo,@departmentNo,@rateListNo,@IsApproval,@IsRateShow",
-                     _VenueNo, _VenueBranchNo, _DeptNo, _RateListNo, _IsApproval, _IsRateShow).ToList();
+                    "Execute dbo.pro_TariffMasterSearchService @VenueNo,@VenueBranchNo,@departmentNo,@rateListNo,@IsApproval,@IsRateShow",
+                    _VenueNo, _VenueBranchNo, _DeptNo, _RateListNo, _IsApproval, _IsRateShow).ToList();
                 }
             }
             catch (Exception ex)
@@ -187,7 +181,6 @@ namespace Dev.Repository
             }
             return objresult;
         }
-
         public TariffMasterInsertResponse InsertTariffMaster(InsertTariffMasterRequest tariffMasteritem)
         {
             TariffMasterInsertResponse result = new TariffMasterInsertResponse();
@@ -223,13 +216,14 @@ namespace Dev.Repository
                     var _deptDetailsXML = new SqlParameter("deptDetailsXML", deptDetailsXML);
 
                     var dbResponse = context.TariffMasterInsertDTO.FromSqlRaw(
-                        "Execute dbo.Pro_CreateTariffMaster " +
-                        "@VenueNo, @VenueBranchNo, @rateListXml, @RateListNo, @RateListName, @EffectiveFrom," +
-                        "@EffectiveTo, @SequenceNo, @Status, @CreatedBy,@mappingType, @OldRateListNo,@customerNo,@baseRateListNo,@isBasePriceChanged" +
-                        ",@IsApproval,@IsReject,@RejectReason,@OldRateListAppNo,@AppRateListAppNo,@deptDetailsXML",
-                     _VenueNo, _VenueBranchNo, _rateListXml, _RateListNo, _RateListName, _EffectiveFrom, _EffectiveTo,
-                     _SequenceNo, _Status, _CreatedBy, _MappingType, _OldRateListNo, _CustomerNo, _BaseRateListNo, _IsBasePriceChanged,
-                     _IsApproval, _IsReject, _RejectReason, _OldRateListAppNo, _AppRateListAppNo, _deptDetailsXML).ToList();
+                    "Execute dbo.Pro_CreateTariffMaster " +
+                    "@VenueNo, @VenueBranchNo, @rateListXml, @RateListNo, @RateListName, @EffectiveFrom," +
+                    "@EffectiveTo, @SequenceNo, @Status, @CreatedBy,@mappingType, @OldRateListNo,@customerNo,@baseRateListNo,@isBasePriceChanged" +
+                    ",@IsApproval,@IsReject,@RejectReason,@OldRateListAppNo,@AppRateListAppNo,@deptDetailsXML",
+                    _VenueNo, _VenueBranchNo, _rateListXml, _RateListNo, _RateListName, _EffectiveFrom, _EffectiveTo,
+                    _SequenceNo, _Status, _CreatedBy, _MappingType, _OldRateListNo, _CustomerNo, _BaseRateListNo, _IsBasePriceChanged,
+                    _IsApproval, _IsReject, _RejectReason, _OldRateListAppNo, _AppRateListAppNo, _deptDetailsXML).ToList();
+                    
                     result = dbResponse[0];
                 }
             }
@@ -239,7 +233,6 @@ namespace Dev.Repository
             }
             return result;
         }
-
         public List<GetClientTariffMasterListResponse> GetClientTariffMasterList(GetClientTariffMasterRequest getRequest)
         {
             List<GetClientTariffMasterListResponse> objresult = new List<GetClientTariffMasterListResponse>();
@@ -256,8 +249,8 @@ namespace Dev.Repository
                     var _DoctorNo = new SqlParameter("DoctorNo", getRequest?.filterDoctorNo);
 
                     objresult = context.GetClientTariffMasterListDTO.FromSqlRaw(
-                        "Execute dbo.Pro_GetClientTariffList @VenueNo,@VenueBranchNo,@rateListNo,@PageIndex,@type,@ClientNo,@DoctorNo",
-                     _VenueNo, _VenueBranchNo, _RateListNo, _PageIndex, _Type, _ClientNo, _DoctorNo).ToList();
+                    "Execute dbo.Pro_GetClientTariffList @VenueNo,@VenueBranchNo,@rateListNo,@PageIndex,@type,@ClientNo,@DoctorNo",
+                    _VenueNo, _VenueBranchNo, _RateListNo, _PageIndex, _Type, _ClientNo, _DoctorNo).ToList();
                 }
             }
             catch (Exception ex)
@@ -266,7 +259,6 @@ namespace Dev.Repository
             }
             return objresult;
         }
-
         public CTMInsertResponse InsertClientTariffMaster(InsertCTMRequest tariffMasteritem)
         {
             CTMInsertResponse result = new CTMInsertResponse();
@@ -294,11 +286,11 @@ namespace Dev.Repository
                     var _physicianNo = new SqlParameter("PhysicianNo", tariffMasteritem?.PhysicianNo);
 
                     var dbResponse = context.ClientTariffMasterInsertDTO.FromSqlRaw(
-                        "Execute dbo.Pro_CreateClientTariff " +
-                        "@VenueNo, @VenueBranchNo, @rateListXml, @RateListNo, @RateListName, @EffectiveFrom," +
-                        "@EffectiveTo, @SequenceNo, @Status, @CreatedBy, @mappingType, @OldRateListNo, @CustomerNo, @PhysicianNo",
-                     _venueNo, _venueBranchNo, _rateListXml, _rateListNo, _rateListName, _effectiveFrom, _effectiveTo,
-                     _sequenceNo, _status, _createdBy, _mappingType, _oldRateListNo, _customerNo, _physicianNo).ToList();
+                    "Execute dbo.Pro_CreateClientTariff " +
+                    "@VenueNo, @VenueBranchNo, @rateListXml, @RateListNo, @RateListName, @EffectiveFrom," +
+                    "@EffectiveTo, @SequenceNo, @Status, @CreatedBy, @mappingType, @OldRateListNo, @CustomerNo, @PhysicianNo",
+                    _venueNo, _venueBranchNo, _rateListXml, _rateListNo, _rateListName, _effectiveFrom, _effectiveTo,
+                    _sequenceNo, _status, _createdBy, _mappingType, _oldRateListNo, _customerNo, _physicianNo).ToList();
 
                     result = dbResponse[0];
                 }
@@ -326,8 +318,8 @@ namespace Dev.Repository
                     var _PhysicianNo = new SqlParameter("physicianNo", getRequest?.physicianNo);
 
                     objresult = context.ClientTariffServiceListDTO.FromSqlRaw(
-                        "Execute dbo.pro_ClientTariffSearchService @VenueNo,@VenueBranchNo,@departmentNo,@rateListNo,@type,@clientNo,@physicianNo",
-                     _VenueNo, _VenueBranchNo, _DeptNo, _RateListNo, _Type, _clientNo, _PhysicianNo).ToList();
+                    "Execute dbo.pro_ClientTariffSearchService @VenueNo,@VenueBranchNo,@departmentNo,@rateListNo,@type,@clientNo,@physicianNo",
+                    _VenueNo, _VenueBranchNo, _DeptNo, _RateListNo, _Type, _clientNo, _PhysicianNo).ToList();
                 }
             }
             catch (Exception ex)
@@ -350,9 +342,8 @@ namespace Dev.Repository
                     var _DeptNo = new SqlParameter("DeptNo", getRequest?.DeptNo);
 
                     obj = context.GetTariffupdateList.FromSqlRaw(
-                        "Execute dbo.pro_Gettariff_walkin_branchwise @VenueNo,@VenueBranchNo,@ServiceType,@ServiceNo,@DeptNo",
-                     _VenueNo, _VenueBranchNo, _ServiceType, _ServiceNo, _DeptNo).SingleOrDefault();
-
+                    "Execute dbo.pro_Gettariff_walkin_branchwise @VenueNo,@VenueBranchNo,@ServiceType,@ServiceNo,@DeptNo",
+                    _VenueNo, _VenueBranchNo, _ServiceType, _ServiceNo, _DeptNo).SingleOrDefault();
                 }
             }
             catch (Exception ex)
@@ -374,8 +365,8 @@ namespace Dev.Repository
                     var _PageIndex = new SqlParameter("PageIndex", req?.pageIndex);
 
                     objresult = context.GetContractMaster.FromSqlRaw(
-                        "Execute dbo.Pro_GetContractMaster @VenueNo,@ContractNo,@pageIndex",
-                     _VenueNo, _ContractNo, _PageIndex).ToList();
+                    "Execute dbo.Pro_GetContractMaster @VenueNo,@ContractNo,@pageIndex",
+                    _VenueNo, _ContractNo, _PageIndex).ToList();
                 }
             }
             catch (Exception ex)
@@ -384,7 +375,6 @@ namespace Dev.Repository
             }
             return objresult;
         }
-
         public InsertContractRes InserContractMaster(InsertContractReq req)
         {
             InsertContractRes result = new InsertContractRes();
@@ -414,13 +404,14 @@ namespace Dev.Repository
                     var _OldContractNo = new SqlParameter("OldContractNo", req?.OldContractNo);
 
                     var dbResponse = context.InserContractMaster.FromSqlRaw(
-                        "Execute dbo.Pro_InsertContractMaster " +
-                        "@VenueNo, @ContractListXml, @ContractNo, @Description, @Code, @ValidFrom," +
-                        "@ValidTo, @Status, @UserNo, @VenueBranchNo,@ContractVsClient" +
-                        ",@IsApproval,@IsReject,@RejectReason,@OldContractNo",
-                     _VenueNo, _ContractListXml, _ContractNo, _Description, _Code, _ValidFrom, _ValidTo,
-                     _Status, _UserNo, _VenueBranchNo, _ContractVsClient, _IsApproval
-                     , _IsReject, _RejectReason, _OldContractNo).ToList();
+                    "Execute dbo.Pro_InsertContractMaster " +
+                    "@VenueNo, @ContractListXml, @ContractNo, @Description, @Code, @ValidFrom," +
+                    "@ValidTo, @Status, @UserNo, @VenueBranchNo,@ContractVsClient" +
+                    ",@IsApproval,@IsReject,@RejectReason,@OldContractNo",
+                    _VenueNo, _ContractListXml, _ContractNo, _Description, _Code, _ValidFrom, _ValidTo,
+                    _Status, _UserNo, _VenueBranchNo, _ContractVsClient, _IsApproval
+                    , _IsReject, _RejectReason, _OldContractNo).ToList();
+
                     result = dbResponse[0];
                 }
             }
@@ -446,8 +437,8 @@ namespace Dev.Repository
                     var _IsApproval = new SqlParameter("IsApproval", getRequest?.IsApproval);
 
                     objresult = context.ContractMasterServiceListDTO.FromSqlRaw(
-                        "Execute dbo.pro_ContractMasterSearchService @VenueNo,@VenueBranchNo,@departmentNo,@ContractNo,@ServiceType,@ServiceNo,@IsApproval",
-                     _VenueNo, _VenueBranchNo, _DeptNo, _ContractNo, _Servicetype, _ServiceNo, _IsApproval).ToList();
+                    "Execute dbo.pro_ContractMasterSearchService @VenueNo,@VenueBranchNo,@departmentNo,@ContractNo,@ServiceType,@ServiceNo,@IsApproval",
+                    _VenueNo, _VenueBranchNo, _DeptNo, _ContractNo, _Servicetype, _ServiceNo, _IsApproval).ToList();
                 }
             }
             catch (Exception ex)
@@ -469,7 +460,6 @@ namespace Dev.Repository
 
                     var clientlst = context.GetContractVsClient.FromSqlRaw("Execute dbo.pro_GetContractVSClient @ContractNo,@VenueNo,@IsApproval", _ContractNo, _VenueNo, _IsApproval).ToList();
 
-
                     int oldClientNo = 0;
                     int newClientNo = 0;
 
@@ -480,6 +470,7 @@ namespace Dev.Repository
                         List<ContractVsSubCustomerMap> lstSubCustomerMap = new List<ContractVsSubCustomerMap>();
                         newClientNo = obj.ClientNo;
                         var subclientlst = clientlst.Where(x => x.MapCustomerNo == newClientNo).Select(x => new { x.MapCustomerNo, x.SubCustomerNo, x.SubCustomerName, x.SubClientStatus, x.ContractClientNo }).ToList();
+                        
                         if (newClientNo != oldClientNo)
                         {
                             ClientItem.ClientNo = obj.ClientNo;
@@ -535,11 +526,12 @@ namespace Dev.Repository
                     var _VenueBranchNo = new SqlParameter("VenueBranchNo", req?.VenueBranchNo);
 
                     var dbResponse = context.InsertClienttTariffMap.FromSqlRaw(
-                        "Execute dbo.pro_InsertClientTariffMapping " +
-                        "@ClientTariffMapNo, @RefTypeNo, @ReferrerNo, @RateListNo, @EffectiveFrom, @EffectiveTo," +
-                        "@Status, @VenueNo, @UserNo, @VenueBranchNo",
-                     _ClientTariffMapNo, _RefTypeNo, _ReferrerNo, _RateListNo, _EffectiveFrom, _EffectiveTo, _Status,
-                     _VenueNo, _UserNo, _VenueBranchNo).ToList();
+                    "Execute dbo.pro_InsertClientTariffMapping " +
+                    "@ClientTariffMapNo, @RefTypeNo, @ReferrerNo, @RateListNo, @EffectiveFrom, @EffectiveTo," +
+                    "@Status, @VenueNo, @UserNo, @VenueBranchNo",
+                    _ClientTariffMapNo, _RefTypeNo, _ReferrerNo, _RateListNo, _EffectiveFrom, _EffectiveTo, _Status,
+                    _VenueNo, _UserNo, _VenueBranchNo).ToList();
+                    
                     result = dbResponse[0];
                 }
             }
@@ -591,8 +583,8 @@ namespace Dev.Repository
                     var _IsRateShow = new SqlParameter("IsRateShow", getRequest?.ismodified);
 
                     objresult = context.GetRefSplRateServiceList.FromSqlRaw(
-                        "Execute dbo.pro_RefSplPriceSearchService @VenueNo,@VenueBranchNo,@departmentNo,@ContractNo,@ServiceType,@ServiceNo,@IsRateShow",
-                     _VenueNo, _VenueBranchNo, _DeptNo, _ContractNo, _Servicetype, _ServiceNo, _IsRateShow).ToList();
+                    "Execute dbo.pro_RefSplPriceSearchService @VenueNo,@VenueBranchNo,@departmentNo,@ContractNo,@ServiceType,@ServiceNo,@IsRateShow",
+                    _VenueNo, _VenueBranchNo, _DeptNo, _ContractNo, _Servicetype, _ServiceNo, _IsRateShow).ToList();
                 }
             }
             catch (Exception ex)
@@ -613,8 +605,8 @@ namespace Dev.Repository
                     var _PageIndex = new SqlParameter("PageIndex", req?.pageIndex);
 
                     objresult = context.GetReflst.FromSqlRaw(
-                        "Execute dbo.Pro_GetRefSplPrice @VenueNo,@ContractNo,@pageIndex",
-                     _VenueNo, _ContractNo, _PageIndex).ToList();
+                    "Execute dbo.Pro_GetRefSplPrice @VenueNo,@ContractNo,@pageIndex",
+                    _VenueNo, _ContractNo, _PageIndex).ToList();
                 }
             }
             catch (Exception ex)
@@ -644,10 +636,11 @@ namespace Dev.Repository
                     var _VenueBranchNo = new SqlParameter("VenueBranchNo", req?.VenueBranchNo);
 
                     var dbResponse = context.InsertReferrerlst.FromSqlRaw(
-                        "Execute dbo.Pro_InsertRefSplPrice " +
-                        "@RefSplNo, @SplPriceListXml, @RefTypeNo, @ReferrerNo, @VenueNo, @Status," +
-                        "@UserNo, @VenueBranchNo",
-                     _RefSplNo, _SplPriceListXml, _RefTypeNo, _ReferrerNo, _VenueNo, _Status, _UserNo, _VenueBranchNo).ToList();
+                    "Execute dbo.Pro_InsertRefSplPrice " +
+                    "@RefSplNo, @SplPriceListXml, @RefTypeNo, @ReferrerNo, @VenueNo, @Status," +
+                    "@UserNo, @VenueBranchNo",
+                    _RefSplNo, _SplPriceListXml, _RefTypeNo, _ReferrerNo, _VenueNo, _Status, _UserNo, _VenueBranchNo).ToList();
+                    
                     result = dbResponse[0];
                 }
             }
@@ -669,8 +662,8 @@ namespace Dev.Repository
                     var _IsApproval = new SqlParameter("IsApproval", req?.IsApproval);
 
                     objresult = context.GetTariffDeptDiscount.FromSqlRaw(
-                        "Execute dbo.pro_GetTariffDeptDiscount @RateListNo,@VenueNo,@IsApproval",
-                     _RateListNo, _VenueNo, _IsApproval).ToList();
+                    "Execute dbo.pro_GetTariffDeptDiscount @RateListNo,@VenueNo,@IsApproval",
+                    _RateListNo, _VenueNo, _IsApproval).ToList();
                 }
             }
             catch (Exception ex)
@@ -697,9 +690,9 @@ namespace Dev.Repository
                     var _ServiceNo = new SqlParameter("ServiceNo", req?.ServiceNo);
 
                     var objRes = context.GetPriceHistory.FromSqlRaw(
-                        "Execute dbo.Pro_ServiceRate_History " +
-                        "@VenueNo, @VenueBranchNo, @PageCode, @RateListNo, @ContractNo, @RefTypeNo, @ReferrerNo, @ServiceType, @ServiceNo",
-                        _VenueNo, _VenueBranchNo, _PageCode, _RateListNo, _ContractNo, _RefTypeNo, _ReferrerNo, _ServiceType, _ServiceNo).AsEnumerable().FirstOrDefault();
+                    "Execute dbo.Pro_ServiceRate_History " +
+                    "@VenueNo, @VenueBranchNo, @PageCode, @RateListNo, @ContractNo, @RefTypeNo, @ReferrerNo, @ServiceType, @ServiceNo",
+                    _VenueNo, _VenueBranchNo, _PageCode, _RateListNo, _ContractNo, _RefTypeNo, _ReferrerNo, _ServiceType, _ServiceNo).AsEnumerable().FirstOrDefault();
 
                     objresult.RowNo = objRes.RowNo;
                     objresult.EntityName = objRes.EntityName;
@@ -727,9 +720,8 @@ namespace Dev.Repository
                     var _ServiceNo = new SqlParameter("ServiceNo", req?.ServiceNo);
 
                     objresult = context.GetBasePrice.FromSqlRaw(
-                        "Execute dbo.Pro_GetBaseRate " +
-                        "@VenueNo, @VenueBranchNo, @ServiceType, @ServiceNo", _VenueNo, _VenueBranchNo, _ServiceType, _ServiceNo).ToList();
-
+                    "Execute dbo.Pro_GetBaseRate " +
+                    "@VenueNo, @VenueBranchNo, @ServiceType, @ServiceNo", _VenueNo, _VenueBranchNo, _ServiceType, _ServiceNo).ToList();
                 }
             }
             catch (Exception ex)
@@ -750,11 +742,10 @@ namespace Dev.Repository
                     var _BasePriceListXml = new SqlParameter("BasePriceListXml", BasePriceListXml);
 
                     var result = context.InsertBaseRatelst.FromSqlRaw(
-                         "Execute dbo.Pro_InsertBaseRate " +
-                         "@BasePriceListXml", _BasePriceListXml).AsEnumerable().FirstOrDefault();
+                    "Execute dbo.Pro_InsertBaseRate " +
+                    "@BasePriceListXml", _BasePriceListXml).AsEnumerable().FirstOrDefault();
 
                     objresult = result.result;
-
                 }
             }
             catch (Exception ex)

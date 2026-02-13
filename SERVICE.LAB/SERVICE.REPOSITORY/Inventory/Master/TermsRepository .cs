@@ -2,16 +2,14 @@
 using Service.Model.EF;
 using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Linq;
-using Dev.IRepository;
+using Service.IRepository;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
-using DEV.Common;
-using Serilog;
+using Service.Common;
 using Microsoft.Data.SqlClient;
 
-namespace Dev.Repository
+namespace Service.Repository
 {
     public class TermsRepository : ITermsRepository
     {
@@ -40,7 +38,6 @@ namespace Dev.Repository
             }
             return termsresult;
         }
-
         public Termsmasterresponse InsertTermsmaster(TblTerms tblterms)
         {
             Termsmasterresponse objresult = new Termsmasterresponse();
@@ -76,9 +73,6 @@ namespace Dev.Repository
                     {
                         objresult.termsNo = 1;
                     }
-
-                    //objresult.termsNo = (obj[0].termsNo < 0) ? 0 : obj[0].termsNo;
-
                 }
             }
             catch (Exception ex)
@@ -89,7 +83,3 @@ namespace Dev.Repository
         }
     }
 }
-
-
- 
-

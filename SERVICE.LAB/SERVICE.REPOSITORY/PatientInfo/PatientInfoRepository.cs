@@ -1,5 +1,5 @@
-﻿using Dev.IRepository.PatientInfo;
-using DEV.Common;
+﻿using Service.IRepository.PatientInfo;
+using Service.Common;
 using Service.Model;
 using Service.Model.EF;
 using Service.Model.EF.Common;
@@ -16,7 +16,7 @@ using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Dev.Repository.PatientInfo
+namespace Service.Repository.PatientInfo
 {
     public class PatientInfoRepository : IPatientInfoRepository
     {

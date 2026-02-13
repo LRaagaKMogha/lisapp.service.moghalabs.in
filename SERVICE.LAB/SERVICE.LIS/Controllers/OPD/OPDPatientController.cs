@@ -1,16 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
-using Dev.IRepository;
-using DEV.Common;
+using Service.IRepository;
+using Service.Common;
 using Service.Model;
 using Service.Model.Sample;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
-using Serilog;
 using Microsoft.AspNetCore.Authorization;
-using RtfPipe.Tokens;
 
-namespace DEV.API.SERVICE.Controllers
+namespace Service.API.SERVICE.Controllers
 {
     [Authorize(AuthenticationSchemes = "Bearer")]
     [ApiController]
@@ -330,7 +327,6 @@ namespace DEV.API.SERVICE.Controllers
                         {
                             if (item.b_PathName != "../assets/img/Default-img.png")
                             {
-                                string base64 = "";
                                 // Check if the image file exists
                                 if (!System.IO.File.Exists(item.b_PathName))
                                 {
@@ -355,7 +351,6 @@ namespace DEV.API.SERVICE.Controllers
                         {
                             if (item.a_PathName != "../assets/img/Default-img.png")
                             {
-                                string base64 = "";
                                 // Check if the image file exists
                                 if (!System.IO.File.Exists(item.a_PathName))
                                 {

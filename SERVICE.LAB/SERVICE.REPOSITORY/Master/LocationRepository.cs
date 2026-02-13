@@ -1,23 +1,20 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
-using Dev.IRepository;
+using Service.IRepository;
 using Service.Model;
 using Service.Model.EF;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using System.Linq;
-using DEV.Common;
+using Service.Common;
 using Microsoft.Data.SqlClient;
-using static System.Windows.Forms.AxHost;
 
-namespace Dev.Repository
+namespace Service.Repository
 {
     public class locationMasterRepository : IlocationMasterRepository
     {
         private IConfiguration _config;
         public locationMasterRepository(IConfiguration config) { _config = config; }
-
         public List<TblCountry> GetCountrymaster(CountryMasterRequest countryMasterRequest)
         {
             List<TblCountry> objresult = new List<TblCountry>();
@@ -26,21 +23,18 @@ namespace Dev.Repository
                 using (var context = new MasterContext(_config.GetConnectionString(ConfigKeys.DefaultConnection)))
                 {
                     var _countryNo = new SqlParameter("countryNo", countryMasterRequest?.countryNo);
-
                     var _CurrencyNo = new SqlParameter("CurrencyNo", countryMasterRequest?.currencyNo);
-
                     var _pageIndex = new SqlParameter("pageIndex", countryMasterRequest?.pageIndex);
                     var _VenueNo = new SqlParameter("VenueNo", countryMasterRequest?.VenueNo);
 
                     objresult = context.GetCountrymaster.FromSqlRaw(
-                        "Execute dbo.pro_GetCountrymaster @countryNo,@CurrencyNo,@pageIndex,@VenueNo",
-                         _countryNo, _CurrencyNo, _pageIndex, _VenueNo).ToList();
+                    "Execute dbo.pro_GetCountrymaster @countryNo,@CurrencyNo,@pageIndex,@VenueNo",
+                    _countryNo, _CurrencyNo, _pageIndex, _VenueNo).ToList();
                 }
             }
             catch (Exception ex)
             {
-                MyDevException.Error(ex, "LocationRepository.GetCountrymaster" + countryMasterRequest.countryNo.ToString(), ExceptionPriority.High, ApplicationType.REPOSITORY, 0, 0, 0);
-               
+                MyDevException.Error(ex, "LocationRepository.GetCountrymaster" + countryMasterRequest.countryNo.ToString(), ExceptionPriority.High, ApplicationType.REPOSITORY, 0, 0, 0);               
             }
             return objresult;
         }
@@ -64,10 +58,10 @@ namespace Dev.Repository
                     var _isoCode = new SqlParameter("isoCode", Country?.isoCode);
 
                     var obj = context.InsertCountrymaster.FromSqlRaw(
-                           "Execute dbo.pro_InsertCountrymaster @countryNo,@countryName,@Capital,@ISDCode,@CurrencyNo," +
-                           "@sequenceNo,@status,@VenueNo,@userNo,@isoCode",
-                              _countryNo, _countryName, _Capital, _isdCode,
-                              _currencyNo, _sequenceNo, _status, _VenueNo, _userNo, _isoCode).ToList();
+                    "Execute dbo.pro_InsertCountrymaster @countryNo,@countryName,@Capital,@ISDCode,@CurrencyNo," +
+                    "@sequenceNo,@status,@VenueNo,@userNo,@isoCode",
+                    _countryNo, _countryName, _Capital, _isdCode,
+                    _currencyNo, _sequenceNo, _status, _VenueNo, _userNo, _isoCode).ToList();
 
                     objresult.countryNo = obj[0].countryNo;
                 }
@@ -75,10 +69,8 @@ namespace Dev.Repository
             catch (Exception ex)
             {
                 MyDevException.Error(ex, "LocationRepository.InsertCountrymaster" + Country.countryNo.ToString(), ExceptionPriority.High, ApplicationType.REPOSITORY, 0, 0, 0);
-                
             }
             return objresult;
-
         }
         //state
 
@@ -95,14 +87,13 @@ namespace Dev.Repository
                     var _VenueNo = new SqlParameter("VenueNo", state?.venueNo);
 
                     objresult = context.GetStatemaster.FromSqlRaw(
-                        "Execute dbo.pro_GetStatemaster @stateNo,@CountryNo,@pageIndex,@VenueNo",
-                         _stateNo, _CountryNo, _pageIndex, _VenueNo).ToList();
+                    "Execute dbo.pro_GetStatemaster @stateNo,@CountryNo,@pageIndex,@VenueNo",
+                    _stateNo, _CountryNo, _pageIndex, _VenueNo).ToList();
                 }
             }
             catch (Exception ex)
             {
                 MyDevException.Error(ex, "LocationRepository.GetStatemaster" + state.stateNo.ToString(), ExceptionPriority.High, ApplicationType.REPOSITORY, 0, 0, 0);
-
             }
             return objresult;
         }
@@ -121,25 +112,26 @@ namespace Dev.Repository
                     var _sequenceNo = new SqlParameter("sequenceNo", state?.sequenceNo);
                     var _userNo = new SqlParameter("userNo", state?.userNo);
                     var _VenueNo = new SqlParameter("VenueNo", state?.VenueNo);
+                    
                     var obj = context.InsertStatemaster.FromSqlRaw(
-                        "EXEC dbo.pro_InsertStatemaster @stateNo,@stateName,@CountryNo,@status,@IsunionTerritory,@sequenceNo,@userNo,@VenueNo",
-                        _stateNo, _stateName, _CountryNo, _status, _isunionTerritory, _sequenceNo, _userNo, _VenueNo
+                    "EXEC dbo.pro_InsertStatemaster @stateNo,@stateName,@CountryNo,@status,@IsunionTerritory,@sequenceNo,@userNo,@VenueNo",
+                    _stateNo, _stateName, _CountryNo, _status, _isunionTerritory, _sequenceNo, _userNo, _VenueNo
                     ).ToList();
+
                     objresult.stateNo = obj[0].stateNo;
                 }
             }
             catch (Exception ex)
             {
-                MyDevException.Error(ex, "LocationRepository.InsertStatemaster" + state.stateNo.ToString(), ExceptionPriority.High, ApplicationType.REPOSITORY, 0, 0, 0);
-                
+                MyDevException.Error(ex, "LocationRepository.InsertStatemaster" + state.stateNo.ToString(), ExceptionPriority.High, ApplicationType.REPOSITORY, 0, 0, 0);                
             }
             return objresult;
-
         }
         //City
         public List<CityLst> GetCitymaster(CityRequest city)
         {
             List<CityLst> objresult = new List<CityLst>();
+            
             try
             {
                 using (var context = new MasterContext(_config.GetConnectionString(ConfigKeys.DefaultConnection)))
@@ -151,14 +143,13 @@ namespace Dev.Repository
                     var _VenueNo = new SqlParameter("VenueNo", city?.VenueNo);
 
                     objresult = context.GetCitymaster.FromSqlRaw(
-                      "Execute dbo.pro_GetCitymaster @cityNo,@stateNo,@CountryNo,@pageIndex,@VenueNo",
-                       _cityNo, _stateNo, _CountryNo, _pageIndex, _VenueNo).ToList();
+                    "Execute dbo.pro_GetCitymaster @cityNo,@stateNo,@CountryNo,@pageIndex,@VenueNo",
+                    _cityNo, _stateNo, _CountryNo, _pageIndex, _VenueNo).ToList();
                 }
             }
             catch (Exception ex)
             {
                 MyDevException.Error(ex, "LocationRepository.GetCitymaster" + city.cityNo.ToString(),  ExceptionPriority.High, ApplicationType.REPOSITORY, 0, 0, 0);
-            ;
             }
             return objresult;
         }
@@ -178,12 +169,9 @@ namespace Dev.Repository
                     var _userNo = new SqlParameter("userNo", city?.userNo);
                     var _VenueNo = new SqlParameter("VenueNo", city?.VenueNo);
 
-
                     var obj = context.InsertCitymaster.FromSqlRaw(
-                           "Execute dbo.pro_InsertCitymaster @cityNo,@CityName,@stateNo,@CountryNo,@status,@sequenceNo,@userNo,@VenueNo",
-                           
-                            _cityNo, _cityName, _stateNo, _CountryNo, _status,
-                                _sequenceNo, _userNo, _VenueNo).ToList();
+                    "Execute dbo.pro_InsertCitymaster @cityNo,@CityName,@stateNo,@CountryNo,@status,@sequenceNo,@userNo,@VenueNo",
+                    _cityNo, _cityName, _stateNo, _CountryNo, _status, _sequenceNo, _userNo, _VenueNo).ToList();
 
                     objresult.cityNo = obj[0].cityNo;
                 }
@@ -191,10 +179,8 @@ namespace Dev.Repository
             catch (Exception ex)
             {
                 MyDevException.Error(ex, "LocationRepository.InsertCitymaster" + city.cityNo.ToString(), ExceptionPriority.High, ApplicationType.REPOSITORY, 0, 0, 0);
-
             }
             return objresult;
-
         }
 
         //Place
@@ -213,14 +199,13 @@ namespace Dev.Repository
                     var _VenueNo = new SqlParameter("VenueNo", place?.VenueNo);
 
                     objresult = context.GetPlacemaster.FromSqlRaw(
-                      "Execute dbo.pro_GetPlacemaster @placeMasterNo,@cityNo,@stateNo,@CountryNo,@pageIndex,@VenueNo",
-                       _placeMasterNo, _cityNo, _stateNo, _CountryNo, _pageIndex, _VenueNo).ToList();
+                    "Execute dbo.pro_GetPlacemaster @placeMasterNo,@cityNo,@stateNo,@CountryNo,@pageIndex,@VenueNo",
+                    _placeMasterNo, _cityNo, _stateNo, _CountryNo, _pageIndex, _VenueNo).ToList();
                 }
             }
             catch (Exception ex)
             {
                 MyDevException.Error(ex, "LocationRepository.GetPlacemaster" + place.placeMasterNo.ToString(), ExceptionPriority.High, ApplicationType.REPOSITORY, 0, 0, 0);
-               
             }
             return objresult;
         }
@@ -241,10 +226,10 @@ namespace Dev.Repository
                     var _status = new SqlParameter("status", place?.status);
                     var _userNo = new SqlParameter("userNo", place?.userNo);
                     var _VenueNo = new SqlParameter("VenueNo", place?.VenueNo);
+                    
                     var obj = context.InsertPlacemaster.FromSqlRaw(
-                           "Execute dbo.pro_InsertPlacemaster @placeMasterNo,@placeName,@cityNo,@pinCode,@stdCode,@stateNo,@CountryNo,@status,@userNo,@VenueNo",
-                            
-                          _placeMasterNo, _placeName, _cityNo, _pinCode, _stdCode, _stateNo, _CountryNo, _status, _userNo, _VenueNo).ToList();
+                    "Execute dbo.pro_InsertPlacemaster @placeMasterNo,@placeName,@cityNo,@pinCode,@stdCode,@stateNo,@CountryNo,@status,@userNo,@VenueNo",
+                    _placeMasterNo, _placeName, _cityNo, _pinCode, _stdCode, _stateNo, _CountryNo, _status, _userNo, _VenueNo).ToList();
 
                     objresult.placeMasterNo = obj[0].placeMasterNo;
                 }
@@ -252,10 +237,8 @@ namespace Dev.Repository
             catch (Exception ex)
             {
                 MyDevException.Error(ex, "LocationRepository.InsertPlacemaster"+place.placeMasterNo.ToString(), ExceptionPriority.High, ApplicationType.REPOSITORY, 0, 0, 0);
-               
             }
             return objresult;
-
         }
 
         //Nationality
@@ -269,16 +252,15 @@ namespace Dev.Repository
                     var _nationalityMasterNo = new SqlParameter("nationalityMasterNo", Nationality?.nationalityMasterNo);
                     var _pageIndex = new SqlParameter("pageIndex", Nationality?.pageIndex);
                     var _VenueNo = new SqlParameter("VenueNo", Nationality?.VenueNo);
+                    
                     objresult = context.GetNationalityMaster.FromSqlRaw(
-                      "Execute dbo.pro_GetNationalityMaster @nationalityMasterNo,@pageIndex,@VenueNo",
-                       _nationalityMasterNo, _pageIndex, _VenueNo).ToList();
+                    "Execute dbo.pro_GetNationalityMaster @nationalityMasterNo,@pageIndex,@VenueNo",
+                    _nationalityMasterNo, _pageIndex, _VenueNo).ToList();
                 }
             }
             catch (Exception ex)
             {
                 MyDevException.Error(ex, "LocationRepository.GetNationalityMaster" + Nationality.nationalityMasterNo.ToString(), ExceptionPriority.High, ApplicationType.REPOSITORY, 0, 0, 0);
-
-               
             }
             return objresult;
         }
@@ -295,10 +277,10 @@ namespace Dev.Repository
                     var _userNo = new SqlParameter("userNo", Nationality?.userNo);
                     var _sequenceNo = new SqlParameter("sequenceNo", Nationality?.sequenceNo);
                     var _VenueNo = new SqlParameter("VenueNo", Nationality?.VenueNo);
+                    
                     var obj = context.InsertNationalitymaster.FromSqlRaw(
-                           "Execute dbo.pro_InsertNationalitymaster @nationalityMasterNo,@description,@status,@userNo,@sequenceNo,@VenueNo",
-                            
-                          _nationalityMasterNo, _description, _status,_userNo,_sequenceNo, _VenueNo).ToList();
+                    "Execute dbo.pro_InsertNationalitymaster @nationalityMasterNo,@description,@status,@userNo,@sequenceNo,@VenueNo",
+                    _nationalityMasterNo, _description, _status,_userNo,_sequenceNo, _VenueNo).ToList();
 
                     objresult.nationalityMasterNo = obj[0].nationalityMasterNo;
                 }
@@ -306,12 +288,8 @@ namespace Dev.Repository
             catch (Exception ex)
             {
                 MyDevException.Error(ex, "LocationRepository.InsertNationalitymaster" + Nationality.nationalityMasterNo.ToString(), ExceptionPriority.High, ApplicationType.REPOSITORY, 0, 0, 0);
-             
-            
             }
             return objresult;
-
         }
-
     }
 }

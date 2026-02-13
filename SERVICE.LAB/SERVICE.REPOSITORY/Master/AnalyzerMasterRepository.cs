@@ -2,17 +2,14 @@
 using Service.Model.EF;
 using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Linq;
-using Dev.IRepository;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
-using DEV.Common;
-using Serilog;
+using Service.Common;
 using Microsoft.Data.SqlClient;
-using System.Reflection;
+using Service.IRepository;
 
-namespace Dev.Repository
+namespace Service.Repository
 {
     public class AnalyzerMasterRepository : IAnalyzerMasterRepository
     {
@@ -26,7 +23,6 @@ namespace Dev.Repository
             {
                 using (var context = new LIMSContext(_config.GetConnectionString(ConfigKeys.DefaultConnection)))
                 {
-
                     if (getanalyzer.masterNo > 0)
                     {
                         objresult = context.TblAnalyzer.Where(x => x.VenueNo == getanalyzer.venueno   && x.Status == true).ToList();
@@ -43,7 +39,6 @@ namespace Dev.Repository
             }
             return objresult;
         }
-
         public TblAnalyzerdata InsertAnalyzerDetails(TblAnalyzerresponse TblAnalyzerresponse)
         {
             TblAnalyzerdata objresult = new TblAnalyzerdata();
@@ -59,12 +54,11 @@ namespace Dev.Repository
                     var _venueNo = new SqlParameter("venueNo", TblAnalyzerresponse?.venueNo);
                     var _userNo = new SqlParameter("userNo", TblAnalyzerresponse?.userNo);
 
-
                     var obj = context.InsertAnalyzerDetails.FromSqlRaw(
-                        "Execute dbo.pro_InsertAnalyzerDetails @analyzerMasterNo,@serialNo,@assetCode,@description,@status,@venueNo,@userNo",
-                        _analyzerMasterNo, _serialNo, _assetCode, _description, _status, _venueNo, _userNo).ToList();
+                    "Execute dbo.pro_InsertAnalyzerDetails @analyzerMasterNo,@serialNo,@assetCode,@description,@status,@venueNo,@userNo",
+                    _analyzerMasterNo, _serialNo, _assetCode, _description, _status, _venueNo, _userNo).ToList();
+                    
                     objresult.analyzerMasterNo = obj[0].analyzerMasterNo;
-
                 }
             }
             catch (Exception ex)
@@ -76,6 +70,7 @@ namespace Dev.Repository
         public AnaParamDtoResponse InsertAnaParam(AnaParamDto AnaParamobj)
         {
             AnaParamDtoResponse result = new AnaParamDtoResponse();
+            
             try
             {
                 using (var context = new MasterContext(_config.GetConnectionString(ConfigKeys.DefaultConnection)))
@@ -89,9 +84,11 @@ namespace Dev.Repository
                     var _userno = new SqlParameter("userNo", AnaParamobj.CreatedBy);
                     var _analyzerParamNo = new SqlParameter("analyzerParamNo", AnaParamobj.AnalyzerParamNo);
                     var _venuebranchno = new SqlParameter("venuebranchno", AnaParamobj.venuebranchno);
+                    
                     var lst = context.InsertAnalyzerParameter.FromSqlRaw(
-                       "Execute dbo.pro_InsertAnalyzerVsParameters @analyzerMasterNo,@description,@sequenceNo, @sampleNo,@status,@venueNo,@userNo,@analyzerParamNo,@venuebranchno",
-                        _analyzerMasterNo, _description, _sequenceNo, _sampleNo, _status, _venueNo, _userno, _analyzerParamNo, _venuebranchno).ToList();
+                    "Execute dbo.pro_InsertAnalyzerVsParameters @analyzerMasterNo,@description,@sequenceNo, @sampleNo,@status,@venueNo,@userNo,@analyzerParamNo,@venuebranchno",
+                    _analyzerMasterNo, _description, _sequenceNo, _sampleNo, _status, _venueNo, _userno, _analyzerParamNo, _venuebranchno).ToList();
+                    
                     result.AnalyzerMasterNo = lst[0].AnalyzerMasterNo;
                 }
             }
@@ -101,7 +98,6 @@ namespace Dev.Repository
             }
             return result;
         }
-
         public List<AnaParamGetDto> GetAnaParamDetails(int VenueNo, int VenueBranchNo, int analyzerParamNo, int Analyzerno, int Sampleno)
         {
             List<AnaParamGetDto> objresult = new List<AnaParamGetDto>();
@@ -114,8 +110,9 @@ namespace Dev.Repository
                     var _analyzerParamNo = new SqlParameter("analyzerParamNo", analyzerParamNo);
                     var _analyzerMasterNo = new SqlParameter("Analyzerno", Analyzerno);
                     var _Sampleno = new SqlParameter("Sampleno", Sampleno);
+                    
                     objresult = context.GetAnalyzerParameter.FromSqlRaw("Execute dbo.pro_GetAnalyzerVsParameters @VenueNo,@VenueBranchNo,@analyzerParamNo,@analyzerNo,@Sampleno",
-                        _venueno, _venuebranchno, _analyzerParamNo, _analyzerMasterNo, _Sampleno).ToList();
+                    _venueno, _venuebranchno, _analyzerParamNo, _analyzerMasterNo, _Sampleno).ToList();
                 }
             }
             catch (Exception ex)
@@ -140,9 +137,9 @@ namespace Dev.Repository
                     var _subtestNo = new SqlParameter("subtestNo", testmapRequest?.subtestNo);
                     var _pageIndex = new SqlParameter("pageIndex", testmapRequest?.pageIndex);
 
-                   objresult = context.GetAnalVsParamVsTest.FromSqlRaw(
-                        "Execute dbo.pro_GetAnalVsParamVsTest @venueNo,@branchNo,@analyzerparamTestNo,@analyzerMasterNo,@analyzerParamNo,@testNo,@subtestNo,@pageIndex",
-                       _venueNo, _branchNo, _analyzerparamTestNo, _analyzerMasterNo, _analyzerParamNo, _testNo, _subtestNo, _pageIndex).ToList();
+                    objresult = context.GetAnalVsParamVsTest.FromSqlRaw(
+                    "Execute dbo.pro_GetAnalVsParamVsTest @venueNo,@branchNo,@analyzerparamTestNo,@analyzerMasterNo,@analyzerParamNo,@testNo,@subtestNo,@pageIndex",
+                    _venueNo, _branchNo, _analyzerparamTestNo, _analyzerMasterNo, _analyzerParamNo, _testNo, _subtestNo, _pageIndex).ToList();
                 }
             }
             catch (Exception ex)
@@ -174,10 +171,10 @@ namespace Dev.Repository
                     var _UnitName = new SqlParameter("UnitName", responseTest?.UnitName);
 
                     var obj = context.InsertAnalVsParamVsTest.FromSqlRaw(
-                        "Execute dbo.pro_InsertAnalVsParamVsTest @analyzerparamTestNo,@analyzerMasterNo,@analyzerParamNo,@testNo,@subtestNo,@tstatus,@venueNo,@branchNo,@userNo,@unitNo,@methodNo,@PerUnitConsumption,@ReagentName,@UnitName",
-                        _analyzerparamTestNo, _analyzerMasterNo, _analyzerParamNo, _testNo, _subtestNo, _tstatus, _venueNo, _branchNo, _userNo, _unitNo, _methodNo, _perunitconsumption, _ReagentName, _UnitName).ToList();
+                    "Execute dbo.pro_InsertAnalVsParamVsTest @analyzerparamTestNo,@analyzerMasterNo,@analyzerParamNo,@testNo,@subtestNo,@tstatus,@venueNo,@branchNo,@userNo,@unitNo,@methodNo,@PerUnitConsumption,@ReagentName,@UnitName",
+                    _analyzerparamTestNo, _analyzerMasterNo, _analyzerParamNo, _testNo, _subtestNo, _tstatus, _venueNo, _branchNo, _userNo, _unitNo, _methodNo, _perunitconsumption, _ReagentName, _UnitName).ToList();
+                    
                     objresult.analyzerparamTestNo = obj[0].analyzerparamTestNo;
-
                 }
             }
             catch (Exception ex)
@@ -197,8 +194,7 @@ namespace Dev.Repository
                     var _testNo = new SqlParameter("testNo", subrequest?.testNo);
 
                     objresult = context.GetSubTest.FromSqlRaw(
-                        "Execute dbo.pro_GetSubTest @venueNo,@testNo",
-                       _venueNo, _testNo).ToList();
+                    "Execute dbo.pro_GetSubTest @venueNo,@testNo",_venueNo, _testNo).ToList();
                 }
             }
             catch (Exception ex)

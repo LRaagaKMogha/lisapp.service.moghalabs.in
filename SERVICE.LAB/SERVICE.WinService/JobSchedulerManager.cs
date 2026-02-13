@@ -2,9 +2,8 @@
 using System.ServiceProcess;
 using System.Configuration;
 
-namespace Dev.WinService
-{
- 
+namespace Service.Win.Service
+{ 
     partial class JobSchedulerManager : ServiceBase
     {
         public JobSchedulerManager()
@@ -43,7 +42,6 @@ namespace Dev.WinService
                
             }
         }
-
         #endregion
 
         #region Gets invoked when a service is stopped
@@ -65,14 +63,12 @@ namespace Dev.WinService
 
                 // Call GC to release the memory used by the resources 
                 System.GC.Collect();
-
             }
             catch (Exception ex)
             {
                
             }
         }
-
         #endregion
 
         #region This method will be called by the Timer class in regular intervals
@@ -91,7 +87,6 @@ namespace Dev.WinService
               
             }
         }
-
         # endregion
     }
 }

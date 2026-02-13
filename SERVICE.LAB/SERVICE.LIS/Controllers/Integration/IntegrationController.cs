@@ -1,29 +1,19 @@
 ﻿using AutoMapper;
-using Azure;
-using Dev.IRepository;
-using Dev.Repository;
-using Dev.Repository.Integration;
-using DEV.Common;
+using Service.IRepository;
+using Service.Common;
 using Service.Model;
 using Service.Model.Integration;
-using Service.Model.Sample;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.IdentityModel.Tokens;
-using PdfSharp.Pdf;
-using RCMS;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Globalization;
-using System.IO;
-using System.IO.Pipes;
 using System.Linq;
 using System.Threading.Tasks;
-using static System.Net.Mime.MediaTypeNames;
+using Service.Repository.Integration;
 
-namespace DEV.API.SERVICE.Controllers
+namespace Service.API.SERVICE.Controllers
 {
     [Authorize(AuthenticationSchemes = "Bearer")]
     [ApiController]
@@ -77,9 +67,6 @@ namespace DEV.API.SERVICE.Controllers
             response = await _IngtegrationRepository.GetMassRegistrationResponse(waitinglistrequest, user);
             return response;
         }
-
-
-
 
         [HttpPost]
         [Route("api/Integration/saveWaitingListMessages")]

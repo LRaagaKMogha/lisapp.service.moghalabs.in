@@ -1,5 +1,5 @@
-﻿using Dev.IRepository.Inventory;
-using DEV.Common;
+﻿using Service.IRepository.Inventory;
+using Service.Common;
 using Service.Model;
 using Service.Model.EF;
 using Service.Model.Inventory;
@@ -10,7 +10,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Dev.Repository.Inventory
+namespace Service.Repository.Inventory
 {
     public class GRNReturnReposistory: IGRNReturnReposistory
     {
@@ -46,7 +46,6 @@ namespace Dev.Repository.Inventory
             }
             return objresult;
         }
-
         public List<GetGRNBySupplierResponse> GetGRNBySupplierDetails(int venueNo, int venueBranchNo, int supplierNo)
         {
             List<GetGRNBySupplierResponse> objresult = new List<GetGRNBySupplierResponse>();
@@ -69,7 +68,6 @@ namespace Dev.Repository.Inventory
             }
             return objresult;
         }
-
         public List<GetProductsByGRNResponse> GetProductByGRN(int venueNo, int venueBranchNo, int grnNo)
         {
             List<GetProductsByGRNResponse> objresult = new List<GetProductsByGRNResponse>();
@@ -92,7 +90,6 @@ namespace Dev.Repository.Inventory
             }
             return objresult;
         }
-
         public List<GetProductsByGRNNo> GetGRNReturnProduct(int venueNo, int venueBranchNo, int grnRtnNo)
         {
             List<GetProductsByGRNNo> objresult = new List<GetProductsByGRNNo>();
@@ -115,7 +112,6 @@ namespace Dev.Repository.Inventory
             }
             return objresult;
         }
-
         public CommonAdminResponse InsertGRNReturn(PostGRN insertGRNReturn)
         {
             CommonAdminResponse response = new CommonAdminResponse();
@@ -146,7 +142,6 @@ namespace Dev.Repository.Inventory
             }
             return response;
         }
-
         public List<otherChargeModal> GetGRNOCDetailsById(int venueNo, int venueBranchNo, int GRNReturnNo)
         {
             List<otherChargeModal> objresult = new List<otherChargeModal>();

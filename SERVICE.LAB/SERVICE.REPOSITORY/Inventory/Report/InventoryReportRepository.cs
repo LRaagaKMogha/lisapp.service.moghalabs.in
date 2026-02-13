@@ -1,22 +1,19 @@
 ﻿using Service.Model.EF;
 using Microsoft.EntityFrameworkCore;
 using System;
-using System.Collections.Generic;
-using System.Data.SqlClient;
 using System.Linq;
-using System.Text;
 using System.Data;
 using System.IO;
 using Newtonsoft.Json;
-using DEV.Common;
+using Service.Common;
 using Service.Model;
 using Microsoft.Extensions.Configuration;
 using Service.Model.Inventory;
-using Dev.IRepository.Inventory.Report;
+using Service.IRepository.Inventory.Report;
 using Service.Model.Inventory.Report;
 using System.Threading.Tasks;
 
-namespace Dev.Repository.Inventory.Report
+namespace Service.Repository.Inventory.Report
 {    
     public class InventoryReportRepository : IInventoryReportRepository
     {

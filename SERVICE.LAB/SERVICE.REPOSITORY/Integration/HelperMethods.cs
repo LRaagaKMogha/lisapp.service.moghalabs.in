@@ -2,10 +2,8 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace Dev.Repository.Integration
+namespace Service.Repository.Integration
 {
     public class HelperMethods
     {
@@ -13,19 +11,13 @@ namespace Dev.Repository.Integration
         public static List<string> bbTests = new List<string>() { "420101", "499020" };
         public static int getReferralTypeName(IntegrationOrderDetailsResponse responseData)
         {
-            //if (responseData.IntegrationOrderClientDetails != null && !string.IsNullOrEmpty(responseData.IntegrationOrderClientDetails.clientcode))
-            //    return responseData.IntegrationOrderClientDetails.clientname;
-            //if (responseData.IntegrationOrderDoctorDetails != null && !string.IsNullOrEmpty(responseData.IntegrationOrderDoctorDetails.doctorname))
-            //    return responseData.IntegrationOrderDoctorDetails.doctorname;
             return 0;
-
         }
 
         public static bool isBBTestOrder(string testCode)
         {
             return bbTests.Any(tes => tes == testCode);
         }
-
         public static string getReferralType(IntegrationOrderDetailsResponse responseData)
         {
             if (responseData.IntegrationOrderClientDetails != null && !string.IsNullOrEmpty(responseData.IntegrationOrderClientDetails.clientcode))
@@ -33,7 +25,6 @@ namespace Dev.Repository.Integration
             if (responseData.IntegrationOrderDoctorDetails != null && !string.IsNullOrEmpty(responseData.IntegrationOrderDoctorDetails.doctorname))
                 return "3";
             return "1";
-
         }
         public static string getAlternateURNType(string urnType)
         {
@@ -66,7 +57,6 @@ namespace Dev.Repository.Integration
         {
             return maritalStatus?.ToLower() == "married" || maritalStatus?.ToLower() == "M" ? 1 : 0;
         }
-
         public static string GetAgeDescription(DateTime birthDate)
         {
             DateTime currentDate = DateTime.Now;
@@ -106,7 +96,6 @@ namespace Dev.Repository.Integration
 
             return age;
         }
-
         public static string getResulType(String s )
         {
             switch(s)
@@ -121,14 +110,12 @@ namespace Dev.Repository.Integration
             }
             return string.Empty;
         }
-
         public static string getSourceSystem(string sourceSystemId)
         {
             var id = Int32.Parse(sourceSystemId);
             nsourcesystem enumValue = (nsourcesystem)id;
             return Enum.GetName(typeof(nsourcesystem), enumValue);
         }
-
         public static string getGender(string genderId)
         {
             var id = 3;
@@ -138,27 +125,28 @@ namespace Dev.Repository.Integration
             ngender enumValue = (ngender)id;
             return Enum.GetName(typeof(ngender), enumValue);
         }
-
         public static string getGenderTitle(string genderId)
         {
-            ;
-            if (genderId == "1" || genderId == "M" || genderId?.ToUpper() == "MALE") return "Mr.";
-            else if (genderId == "2" || genderId == "F" || genderId?.ToUpper() == "FEMALE") return "Ms.";
+            if (genderId == "1" || genderId == "M" || genderId?.ToUpper() == "MALE") 
+                return "Mr.";
+            else if (genderId == "2" || genderId == "F" || genderId?.ToUpper() == "FEMALE") 
+                return "Ms.";
             return "Mr.";
         }
         public static int getAdditionalId(List<TestAdditionalInformation> testAdditionalInformation, string input)
         {
             var data = testAdditionalInformation.FirstOrDefault(x => x.DataType == input);
-            if (data != null) return Int32.Parse(data.ID.ToString());
+            if (data != null) 
+                return Int32.Parse(data.ID.ToString());
             return 0;
-
         }
         public static string getAdditionalDescription(List<TestAdditionalInformation> testAdditionalInformation, string input)
         {
             var data = testAdditionalInformation.FirstOrDefault(x => x.DataType == input);
-            if (data != null) return data.Details;
-            return input;
+            if (data != null) 
+                return data.Details;
 
+            return input;
         }
     }
 }

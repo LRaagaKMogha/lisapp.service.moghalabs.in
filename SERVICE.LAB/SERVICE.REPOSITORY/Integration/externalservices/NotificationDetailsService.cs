@@ -1,15 +1,10 @@
-﻿using Service.Model;
-using Service.Model.Integration;
+﻿using Service.Model.Integration;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Net.Http;
-using System.Net.Http.Json;
 using System.Text;
 using System.Text.Json;
-using System.Threading.Tasks;
 
-namespace Dev.Repository.Integration.externalservices
+namespace Service.Repository.Integration.externalservices
 {
     public class NotificationDetailsService
     {

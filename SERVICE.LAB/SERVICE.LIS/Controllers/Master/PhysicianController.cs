@@ -1,21 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
-using Dev.IRepository;
-using DEV.Common;
+using Service.IRepository;
+using Service.Common;
 using Service.Model;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Serilog;
 using Microsoft.AspNetCore.Authorization;
-using System.Configuration;
 using System.IO;
 using Microsoft.Extensions.Configuration;
-using Dev.Repository;
 using Shared.Audit;
 
-namespace DEV.API.SERVICE.Controllers.Master
+namespace Service.API.SERVICE.Controllers.Master
 {
     [Authorize(AuthenticationSchemes = "Bearer")]
     [ApiController]
@@ -24,12 +19,13 @@ namespace DEV.API.SERVICE.Controllers.Master
         private readonly IConfiguration _config;
         private readonly IPhysicianRepository _PhysicianRepository;
         private readonly IAuditService _auditService;
-
-        public PhysicianController(IPhysicianRepository noteRepository, IConfiguration config, IAuditService auditService)
+        private readonly IMasterRepository _IMasterRepository;
+        public PhysicianController(IPhysicianRepository noteRepository, IConfiguration config, IAuditService auditService, IMasterRepository iMasterRepository)
         {
             _PhysicianRepository = noteRepository;
             _config = config;
             _auditService = auditService;
+            _IMasterRepository = iMasterRepository;
         }
 
         #region Get Physician Details
@@ -153,7 +149,6 @@ namespace DEV.API.SERVICE.Controllers.Master
                     var manualfilename = objDTO.ManualFileName;
                     string folderName = venueNo + "\\" + venuebNo + "\\" + visitno + "\\" + visitId;
                     //
-                    MasterRepository _IMasterRepository = new MasterRepository(_config);
                     AppSettingResponse objAppSettingResponse = new AppSettingResponse();
                     objAppSettingResponse = new AppSettingResponse();
                     objAppSettingResponse = _IMasterRepository.GetSingleAppSetting("UploadPhysicianDoc");
@@ -222,7 +217,6 @@ namespace DEV.API.SERVICE.Controllers.Master
 
                     string folderName = venueNo + "\\" + venuebNo + "\\" + visitno + "\\" + visitId;
                     //
-                    MasterRepository _IMasterRepository = new MasterRepository(_config);
                     AppSettingResponse objAppSettingResponse = new AppSettingResponse();
                     objAppSettingResponse = new AppSettingResponse();
                     string AppUploadPhysicianDoc = "UploadPhysicianDoc";
@@ -252,7 +246,6 @@ namespace DEV.API.SERVICE.Controllers.Master
         {
             List<BulkFileUpload> lstresult = new List<BulkFileUpload>();
             BulkFileUpload result = new BulkFileUpload();
-            MasterRepository _IMasterRepository = new MasterRepository(_config);
             AppSettingResponse objAppSettingResponse = new AppSettingResponse();
             try
             {

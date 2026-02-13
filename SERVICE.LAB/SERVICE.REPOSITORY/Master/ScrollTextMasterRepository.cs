@@ -1,17 +1,15 @@
-﻿using Dev.IRepository.Master;
-using DEV.Common;
+﻿using Service.IRepository.Master;
+using Service.Common;
 using Service.Model.EF;
 using Service.Model.Master;
 using Microsoft.Data.SqlClient;
 using Microsoft.Extensions.Configuration;
-using Shared;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
-namespace Dev.Repository.Master
+
+namespace Service.Repository.Master
 {
     public class ScrollTextMasterRepository : IScrollTextMasterRepository
     {

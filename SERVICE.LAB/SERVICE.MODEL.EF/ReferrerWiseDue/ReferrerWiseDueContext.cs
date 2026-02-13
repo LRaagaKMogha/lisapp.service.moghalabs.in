@@ -1,4 +1,4 @@
-﻿using DEV.Common;
+﻿using Service.Common;
 using Microsoft.EntityFrameworkCore;
 
 namespace Service.Model.EF.ReferrerWiseDue

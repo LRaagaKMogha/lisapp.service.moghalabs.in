@@ -1,17 +1,15 @@
 ﻿using System;
-using System.IO;
 using System.Collections.Generic;
-using System.Text;
-using Dev.IRepository;
+using Service.IRepository;
 using Service.Model;
 using Service.Model.EF;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using System.Linq;
-using DEV.Common;
+using Service.Common;
 using Microsoft.Data.SqlClient;
 
-namespace Dev.Repository
+namespace Service.Repository
 {
     public class AllergyRepository : IAllergyRepository
     {
@@ -177,7 +175,6 @@ namespace Dev.Repository
             }
             return result;
         }
-
         public rtnAllergyReaction InsertAllergyReaction(TblAllergyReaction res)
         {
             rtnAllergyReaction objresult = new rtnAllergyReaction();
@@ -214,9 +211,7 @@ namespace Dev.Repository
                 {
                     var _AllergyReactionNo = new SqlParameter("AllergyReactionNo", masterRequest.AllergyReactionNo);
                     var _VenueNo = new SqlParameter("VenueNo", masterRequest.VenueNo);
-                   // var _Status = new SqlParameter("Status", masterRequest.Status);
-                    var _PageIndex = new SqlParameter("PageIndex", masterRequest.PageIndex);
-                 
+                    var _PageIndex = new SqlParameter("PageIndex", masterRequest.PageIndex);                 
 
                     objResult = context.GetAllergyReactionl.FromSqlRaw(
                     "Execute dbo.Pro_GetAllergyReaction @AllergyReactionNo, @VenueNo, @PageIndex",
@@ -229,6 +224,5 @@ namespace Dev.Repository
             }
             return objResult;
         }
-
     }
 }

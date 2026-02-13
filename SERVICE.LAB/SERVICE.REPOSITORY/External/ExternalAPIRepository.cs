@@ -1,13 +1,11 @@
-﻿using Dev.IRepository;
-using DEV.Common;
+﻿using Service.IRepository;
+using Service.Common;
 using Service.Model;
 using Service.Model.EF;
 using Service.Model.Sample;
 using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
-using Newtonsoft.Json;
-using Serilog;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -16,7 +14,7 @@ using System.IO;
 using System.Linq;
 using System.Xml.Linq;
 
-namespace Dev.Repository
+namespace Service.Repository
 {
     public class ExternalAPIRepository : IExternalAPIRepository
     {
@@ -49,7 +47,6 @@ namespace Dev.Repository
                     }
                     if (!isresult)
                     {
-
                         result.Status = 0;
                         result.Message = "Invalid Credentials";
                     }

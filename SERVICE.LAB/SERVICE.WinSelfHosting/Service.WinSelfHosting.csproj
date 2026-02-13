@@ -7,9 +7,9 @@
     <ProjectGuid>{1E1134C0-572A-411D-AF0B-E7A59FEAEC8D}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>WInBarcodeService</RootNamespace>
-    <AssemblyName>WInBarcodeService</AssemblyName>
-    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <RootNamespace>Service.Win.SelfHosting</RootNamespace>
+    <AssemblyName>Service.Win.SelfHosting</AssemblyName>
+    <TargetFrameworkVersion>v4.6.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <SccProjectName>
@@ -20,6 +20,7 @@
     </SccAuxPath>
     <SccProvider>
     </SccProvider>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -71,6 +72,12 @@
     </Reference>
     <Reference Include="RestSharp, Version=110.2.0.0, Culture=neutral, PublicKeyToken=598062e77f915f75, processorArchitecture=MSIL">
       <HintPath>..\packages\RestSharp.110.2.0\lib\netstandard2.0\RestSharp.dll</HintPath>
+    </Reference>
+    <Reference Include="Service.Common">
+      <HintPath>..\SERVICE.COMMON\bin\Debug\net8.0\Service.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="Service.Win.Common">
+      <HintPath>..\SERVICE.Win.Common\bin\Debug\Service.Win.Common.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Buffers, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
@@ -164,16 +171,6 @@
     <EmbeddedResource Include="ProjectInstaller.resx">
       <DependentUpon>ProjectInstaller.cs</DependentUpon>
     </EmbeddedResource>
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\DEV.Common\DEV.Common.csproj">
-      <Project>{05a982af-40b2-4e86-84af-e05d8f96ae07}</Project>
-      <Name>DEV.Common</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Dev.Win.Common\Dev.Win.Common.csproj">
-      <Project>{8772ec1c-224f-4da6-9c8f-5d2c1c5d86ce}</Project>
-      <Name>Dev.Win.Common</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Connected Services\" />

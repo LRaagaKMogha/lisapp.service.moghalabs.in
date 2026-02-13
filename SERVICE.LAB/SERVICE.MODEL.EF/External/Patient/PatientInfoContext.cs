@@ -1,10 +1,6 @@
-﻿using DEV.Common;
-using Service.Model.External.Billing;
+﻿using Service.Common;
 using Service.Model.External.Patient;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace Service.Model.EF.External.Patient
 {

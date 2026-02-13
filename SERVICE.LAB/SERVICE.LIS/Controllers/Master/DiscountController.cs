@@ -1,16 +1,13 @@
-﻿using Dev.IRepository.Inventory;
-using Dev.IRepository.Master;
-using Dev.Repository.Inventory;
-using DEV.Common;
+﻿using Service.IRepository.Master;
+using Service.Common;
 using Service.Model;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
 
-namespace DEV.API.SERVICE.Controllers.Master
+namespace Service.API.SERVICE.Controllers.Master
 {
     [Authorize(AuthenticationSchemes = "Bearer")]
     [ApiController]
@@ -32,9 +29,7 @@ namespace DEV.API.SERVICE.Controllers.Master
             List<GetDiscountDetails> objresult = new List<GetDiscountDetails>();
             try
             {
-
                 objresult = _discountRepository.GetDiscountMasters(discountItem);
-
             }
             catch (Exception ex)
             {

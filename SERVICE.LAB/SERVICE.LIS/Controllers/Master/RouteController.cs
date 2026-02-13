@@ -1,14 +1,12 @@
-﻿using Dev.IRepository;
-using DEV.Common;
+﻿using Service.IRepository;
+using Service.Common;
 using Service.Model;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
-using Serilog;
 using Microsoft.AspNetCore.Authorization;
 
-namespace DEV.API.SERVICE.Controllers
+namespace Service.API.SERVICE.Controllers
 {
     [Authorize(AuthenticationSchemes = "Bearer")]
     [ApiController]
@@ -98,7 +96,6 @@ namespace DEV.API.SERVICE.Controllers
             try
             {
                 objresult = _RouteRepository.InsertRouteMaster(route);
-
             }
             catch (Exception ex)
             {

@@ -1,21 +1,11 @@
 ﻿using Service.Model;
 using Service.Model.Common;
-using DEV.Common;
-using Microsoft.AspNetCore.Mvc.ModelBinding;
-using System;
 using System.Collections.Generic;
-using System.Resources;
-using System.Text.RegularExpressions;
-using Microsoft.IdentityModel.Tokens;
 using System.Data;
 using System.Linq;
-using Microsoft.AspNetCore.Mvc;
-using Service.Model.PatientInfo;
-using Service.Model.Sample;
 using System.Text;
-using StackExchange.Redis;
 
-namespace DEV.API.SERVICE.Controllers
+namespace Service.API.SERVICE.Controllers
 {
     public class BulkResultValidation
     {

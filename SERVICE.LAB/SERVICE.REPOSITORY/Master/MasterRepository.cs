@@ -4,15 +4,14 @@ using System;
 using System.Collections.Generic;
 using Microsoft.Data.SqlClient;
 using System.Linq;
-using Dev.IRepository;
+using Service.IRepository;
 using Microsoft.EntityFrameworkCore;
-using DEV.Common;
+using Service.Common;
 using Microsoft.Extensions.Configuration;
-using Serilog;
 using Service.Model.Master;
 using System.Xml.Linq;
 
-namespace Dev.Repository
+namespace Service.Repository
 {
     public class MasterRepository : IMasterRepository
     {

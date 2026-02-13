@@ -1,24 +1,16 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Dev.IRepository;
-using DEV.Common;
+using Service.IRepository;
+using Service.Common;
 using Service.Model;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
-using Serilog;
 using Microsoft.AspNetCore.Authorization;
 using System.IO;
-using System.Configuration;
 using Microsoft.Extensions.Configuration;
-using Dev.Repository;
-using Service.Model.EF;
-using Service.Model.EF.External.CommonMasters;
 using Shared.Audit;
 
-namespace DEV.API.SERVICE.Controllers
+namespace Service.API.SERVICE.Controllers
 {
     [Authorize(AuthenticationSchemes = "Bearer")]
     [ApiController]
@@ -28,12 +20,15 @@ namespace DEV.API.SERVICE.Controllers
         private readonly IClientMasterRepository _ClientMasterRepository;
         private readonly IFinanceIntegrationRepository _financeIntegrationRepository;
         private readonly IAuditService _auditService;
-        public ClientMasterController(IClientMasterRepository noteRepository, IConfiguration config, IFinanceIntegrationRepository financeIntegrationRepository, IAuditService auditService)
+        private readonly IMasterRepository _IMasterRepository;
+        public ClientMasterController(IClientMasterRepository noteRepository, IConfiguration config, 
+            IFinanceIntegrationRepository financeIntegrationRepository, IAuditService auditService, IMasterRepository iMasterRepository)
         {
             _ClientMasterRepository = noteRepository;
             _financeIntegrationRepository = financeIntegrationRepository;
             _config = config;
             _auditService = auditService;
+            _IMasterRepository = iMasterRepository;
         }
 
         #region Get ClientMaster Details
@@ -106,7 +101,6 @@ namespace DEV.API.SERVICE.Controllers
                         string IsCustomerApproval = "IsCustomerApproval";
 
                         var user = HttpContext.Items["User"] as UserClaimsIdentity;
-                        MasterRepository _IMasterRepository = new MasterRepository(_config);
                         var objAppSettingResponse = _IMasterRepository.GetSingleConfiguration(user.VenueNo, user.VenueBranchNo, IsCustomerApproval);
                         
                         if (postcustomerDTO.tblcustomer.CustomerNo > 0)
@@ -279,7 +273,6 @@ namespace DEV.API.SERVICE.Controllers
                     var manualfilename = objDTO.ManualFileName;
                     string folderName = venueNo + "\\" + venuebNo + "\\" + visitno + "\\" + visitId;
                     //
-                    MasterRepository _IMasterRepository = new MasterRepository(_config);
                     AppSettingResponse objAppSettingResponse = new AppSettingResponse();
                     objAppSettingResponse = new AppSettingResponse();
                     string AppUploadClientDoc = "UploadClientDoc";
@@ -331,7 +324,6 @@ namespace DEV.API.SERVICE.Controllers
                     var visitno = objDTO.PatientVisitNo;
                     string folderName = venueNo + "\\" + venuebNo + "\\" + visitno + "\\" + visitId;
                     //
-                    MasterRepository _IMasterRepository = new MasterRepository(_config);
                     AppSettingResponse objAppSettingResponse = new AppSettingResponse();
                     objAppSettingResponse = new AppSettingResponse();
                     string AppUploadClientDoc = "UploadClientDoc";

@@ -1,9 +1,6 @@
 ﻿using Service.Model;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
-namespace Dev.IRepository
+namespace Service.IRepository
 {
     public interface IExternalPatientAPIRepositoy
     {
@@ -16,12 +13,5 @@ namespace Dev.IRepository
         ServiceRateList GetServiceDetails(int ServiceNo, string ServiceType, int ClientNo, int VenueNo, int VenueBranchNo);
         ExternalPatientEditResponse editprofile(ExternalPatientEditRequest results);
         ExternalPatientUserDetail getUserDetail(ExternalPatientCommonRequest results);
-      
-        //List<ExternalPatientfamilyResponse> myfamily(ExternalPatientCommonRequest results);
-        //List<ExternalPatientService> getServices(ExternalPatientCommonRequest results);
-        //List<ExternalPatientAppResponse> addMember(ExternalPatientAddmember results);
-        //List<ExternalPatientAppResponse> insertPayments(ExternalPatientPayment results);
     }
-
 }
-

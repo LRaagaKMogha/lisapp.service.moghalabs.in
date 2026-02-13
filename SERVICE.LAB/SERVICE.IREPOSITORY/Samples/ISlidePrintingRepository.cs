@@ -2,7 +2,7 @@
 using Service.Model.Sample;
 using System.Collections.Generic;
 
-namespace Dev.IRepository
+namespace Service.IRepository
 {
     public interface ISlidePrintingRepository
     {

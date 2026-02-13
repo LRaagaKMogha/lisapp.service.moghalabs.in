@@ -4,20 +4,18 @@ using System.Data;
 using Microsoft.Data.SqlClient;
 using System.IO;
 using System.Linq;
-using System.Text;
-using Dev.IRepository.Samples;
-using DEV.Common;
+using Service.IRepository.Samples;
+using Service.Common;
 using Service.Model;
 using Service.Model.EF;
 using Service.Model.Sample;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Newtonsoft.Json;
-using Serilog;
 using System.Xml.Linq;
 using System.Threading.Tasks;
 
-namespace Dev.Repository.Samples
+namespace Service.Repository.Samples
 {
     public class WorkListRepository : IWorkListRepository
     {
@@ -122,6 +120,7 @@ namespace Dev.Repository.Samples
                 Dictionary<string, string> objdictionary = new Dictionary<string, string>();
                 ReportContext objReportContext = new ReportContext(_config.GetConnectionString(ConfigKeys.DefaultConnection));
                 TblReportMaster tblReportMaster = new TblReportMaster();
+                
                 using (var context = new LIMSContext(_config.GetConnectionString(ConfigKeys.DefaultConnection)))
                 {
                     tblReportMaster = context.TblReportMaster.Where(x => x.ReportKey == Key && x.VenueNo == PatientItem.VenueNo
@@ -238,10 +237,10 @@ namespace Dev.Repository.Samples
             }
             return Response;
         }
-
         public SingleTestCheckRes getTestCheck(SingleTestCheck RequestItem)
         {
             SingleTestCheckRes Response = new SingleTestCheckRes();
+            
             try
             {
                 using (var context = new LIMSContext(_config.GetConnectionString(ConfigKeys.DefaultConnection)))
@@ -263,7 +262,6 @@ namespace Dev.Repository.Samples
             }
             return Response;
         }
-
         public List<DenguTestRes> getDenguTest(DenguTestReq RequestItem)
         {
             List<DenguTestRes> _response = new List<DenguTestRes>();

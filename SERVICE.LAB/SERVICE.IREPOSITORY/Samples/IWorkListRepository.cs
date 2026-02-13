@@ -1,10 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using Service.Model.Sample;
 
-namespace Dev.IRepository.Samples
+namespace Service.IRepository.Samples
 {
    public interface IWorkListRepository
     {

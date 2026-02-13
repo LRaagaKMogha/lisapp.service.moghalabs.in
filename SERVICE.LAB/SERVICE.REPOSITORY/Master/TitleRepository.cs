@@ -4,14 +4,14 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Linq;
-using Dev.IRepository;
+using Service.IRepository;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
-using DEV.Common;
+using Service.Common;
 using Serilog;
 using Microsoft.Data.SqlClient;
 
-namespace Dev.Repository
+namespace Service.Repository
 {
     public class TitleRepository : ITitleRepository
     {
@@ -32,9 +32,8 @@ namespace Dev.Repository
                    
 
                     titleresult = context.GetTitle.FromSqlRaw(
-                       "Execute dbo.pro_GetCommanMaster @commonBranchNo,@venueNo,@venueBranchno,@CommonNo", 
-                        _commonBranchNo, _venueNo, _venueBranchno,_CommonNo).ToList();
-
+                    "Execute dbo.pro_GetCommanMaster @commonBranchNo,@venueNo,@venueBranchno,@CommonNo", 
+                    _commonBranchNo, _venueNo, _venueBranchno,_CommonNo).ToList();
                 }
             }
             catch (Exception ex)
@@ -43,7 +42,6 @@ namespace Dev.Repository
             }
             return titleresult;
         }
-
 
         public Titlemasterresponse InsertTitlemaster(TblName tbltitle)
         {
@@ -62,28 +60,20 @@ namespace Dev.Repository
                     var _commonValue = new SqlParameter("commonValue", tbltitle?.commonValue);
                     var _sequenceNo = new SqlParameter("sequenceNo", tbltitle?.sequenceNo);
                     var _status = new SqlParameter("status", tbltitle?.status);
-
                     
                     var obj = context.InsertTitle.FromSqlRaw(
-                           "Execute dbo.pro_InsertCommanmaster @CommonNo, @CommonCode,@IsDefault, @commonBranchNo,@venueNo,@venueBranchno,@userNo,@commonValue,@sequenceNo,@status",
-                               _CommonNo,_CommonCode, _IsDefault,_commonBranchNo, _venueNo, _venueBranchno, _userNo, _commonValue,
-                                _sequenceNo, _status).ToList();
-
+                    "Execute dbo.pro_InsertCommanmaster @CommonNo, @CommonCode,@IsDefault, @commonBranchNo,@venueNo,@venueBranchno,@userNo,@commonValue,@sequenceNo,@status",
+                    _CommonNo,_CommonCode, _IsDefault,_commonBranchNo, _venueNo, _venueBranchno, _userNo, _commonValue,
+                    _sequenceNo, _status).ToList();
 
                     objresult.commonBranchNo = obj[0].commonBranchNo;
                 }
             }
             catch (Exception ex)
             {
-
                 MyDevException.Error(ex, "TitleRepository.InsertTitlemaster" + tbltitle.CommonNo.ToString(), ExceptionPriority.Low, ApplicationType.REPOSITORY, tbltitle.venueNo, tbltitle.venueBranchno, 0);
             }
             return objresult;
-
         }
     }
 }
-
-
-
-

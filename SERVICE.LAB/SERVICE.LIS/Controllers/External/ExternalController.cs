@@ -1,29 +1,13 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
-using Dev.IRepository;
-using DEV.Common;
+using Service.IRepository;
+using Service.Common;
 using Service.Model;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
-using Serilog;
-using Microsoft.AspNetCore.Authorization;
-using System.Net.Http;
-using System.Text;
-using System.Text.Json;
-using Service.Model.Integration;
-using System.Runtime.ConstrainedExecution;
 using System.Data;
-using System.Reflection.Metadata;
-using Microsoft.Data.SqlClient.Server;
-using SixLabors.ImageSharp;
-using Dev.Repository;
-using StackExchange.Redis;
-using RtfPipe;
-using Didstopia.PDFSharp.Drawing.BarCodes;
 
-namespace DEV.API.SERVICE.Controllers
+namespace Service.API.SERVICE.Controllers
 {
     //[Authorize(AuthenticationSchemes = "Bearer")]
     [ApiController]
@@ -76,64 +60,11 @@ namespace DEV.API.SERVICE.Controllers
                         data.IsReRun = subitem.isrerun;
                         int result = _IExternalRepository.PostResult(data);
 
-                        //try
-                        //{
-                        //    ExternalResultCalculationRequest newReq = new ExternalResultCalculationRequest();
-                        //    newReq.BarcodeNo = subitem.bno;
-                        //    newReq.TestSubtesttNo = subitem.tsn;
-                        //    newReq.Result = subitem.rt;
-                        //    newReq.MachineId = data.MachineId;
-                        //    newReq.VenueNo = data.VenueNo;
-                        //    newReq.VenueBranchNo = data.VenueBranchNo;
-                        //    var response = _IExternalRepository.CheckFormulaIsAvailable_ForCalculation(newReq);
-
-                        //    if (response == true)
-                        //    {
-                        //        List<ExternalResultCalculation> objCalc = new List<ExternalResultCalculation>();
-                        //        objCalc = _IExternalRepository.GetExternalFormulaOrderDetails(newReq);
-
-                        //        ExternalResultDTO dataSub = new ExternalResultDTO();
-                        //        dataSub.MachineId = item.MId;
-                        //        dataSub.VenueNo = item.vbNo;
-                        //        dataSub.VenueBranchNo = item.VNo;
-
-                        //        objCalc = objCalc.Where(BarCode => BarCode.BarcodeNo == newReq.BarcodeNo).ToList();
-                        //        var od = objCalc.Where(t => t.TestSubtesttNo == newReq.TestSubtesttNo).ToList();
-
-                        //        int res = Calculator(objCalc, od);
-
-                        //        foreach (var dataResult in objCalc)
-                        //        {
-                        //            if (dataResult.result != "" && dataResult.result != "0.0" && dataResult.result.ToLower() != "nan" &&
-                        //                (dataResult.istformula == true || dataResult.issformula == true))
-                        //            {
-                        //                dataSub.BarcodeNo = dataResult.BarcodeNo;
-                        //                dataSub.TestSubtesttNo = dataResult.TestSubtesttNo;
-                        //                dataSub.Result = dataResult.result;
-                        //                dataSub.Comment = dataResult.Comment;
-                        //                dataSub.Base64 = "";
-                        //                dataSub.Hvalue = "";
-                        //                dataSub.Ivalue = "";
-                        //                dataSub.Lvalue = "";
-                        //                dataSub.IsReRun = false;
-                        //                dataSub.IsCalculationInput = 1;
-                        //                int result1 = _IExternalRepository.PostResult(dataSub);
-                        //            }
-                        //        }
-
-                        //    }
-                        //}
-                        //catch (Exception)
-                        //{
-                        //}
-
                         ExternalbulkResultResponseDTO outitem = new ExternalbulkResultResponseDTO();
                         outitem.status = result;
                         outitem.bno = subitem.bno;
                         outitem.tsn = subitem.tsn;
                         output.Add(outitem);
-
-                        //_IExternalRepository.ValidateAutoApporval(data);
                     }
                 }
             }
@@ -186,7 +117,7 @@ namespace DEV.API.SERVICE.Controllers
                     ExternalbulkCultureResponseDTO outitem = new ExternalbulkCultureResponseDTO();
                     outitem.status = result;
                     outitem.bno = item.Bno;
-                    outitem.tsn = item.Servno != null ? item.Servno.ToString() : "0";
+                    outitem.tsn = item.Servno.ToString();
                     output.Add(outitem);
                 }
             }
@@ -210,7 +141,6 @@ namespace DEV.API.SERVICE.Controllers
 
                         int decimalPoint = orderDetails.decimalpoint;
                         bool isRoundOff = orderDetails.isroundoff;
-                        double a = 0;
                         double val = 0;
                         var rowval = "";
                         int indx = orderDetails.formulajson.Count();
@@ -271,8 +201,8 @@ namespace DEV.API.SERVICE.Controllers
                                     {
                                         orderDetails.result = "";
                                         result = -1;
+                                        MyDevException.Error(ex, "ExternalController.Calculator", ExceptionPriority.High, ApplicationType.APPSERVICE, 0, 0, 0);
                                     }
-
                                 }
                                 return result;
                             }
@@ -480,6 +410,7 @@ namespace DEV.API.SERVICE.Controllers
                 return 0;
             }
         }
+
         //dif culture 
         [HttpPost]
         [Route("api/External/difbulkPostCultureResults")]
@@ -621,7 +552,7 @@ namespace DEV.API.SERVICE.Controllers
                     ExternalDifbulkCultureResponseDTO outitem = new ExternalDifbulkCultureResponseDTO();
                     outitem.status = result;
                     outitem.bno = Bno;
-                    outitem.tsn = Servno != null ? "T" + Servno.ToString() : "T0";
+                    outitem.tsn = "T" + Servno.ToString();
                     output.Add(outitem);
                 }
             }

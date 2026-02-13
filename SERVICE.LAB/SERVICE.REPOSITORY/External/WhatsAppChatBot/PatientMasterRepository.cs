@@ -1,17 +1,16 @@
-﻿using Dev.IRepository.External.WhatsAppChatBot;
-using DEV.Common;
+﻿using Service.IRepository.External.WhatsAppChatBot;
+using Service.Common;
 using Service.Model.EF.External.WhatsAppChatBot;
 using Service.Model.External.WhatsAppChatBot;
 using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
 using Microsoft.Data.SqlClient;
-using System.Text;
 using Microsoft.EntityFrameworkCore;
 using System.Linq;
 using Newtonsoft.Json;
 
-namespace Dev.Repository.External.WhatsAppChatBot
+namespace Service.Repository.External.WhatsAppChatBot
 {
     public class PatientMasterRepository : IPatientMasterRepository
     {

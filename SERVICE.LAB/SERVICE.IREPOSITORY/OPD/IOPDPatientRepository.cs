@@ -1,10 +1,8 @@
 ﻿using Service.Model;
 using Service.Model.Sample;
-using System;
 using System.Collections.Generic;
-using System.Text;
 
-namespace Dev.IRepository
+namespace Service.IRepository
 {
     public interface IOPDPatientRepository
     {
@@ -47,6 +45,5 @@ namespace Dev.IRepository
         List<OPDPatientMachineBookingList> GetPatientMachineBookingList(OPDPatientBookingRequest RequestItem);
         List<OPDPatientMachineDTOList> GetOPDPatientMachineList(CommonFilterRequestDTO RequestItem);
         OPDPatientMachineResponse InsertOPDMachinePatient(OPDPatientOfficeDTO req);
-
     }
 }

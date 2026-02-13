@@ -1,16 +1,13 @@
-﻿using Dev.IRepository.UserManagement;
-using DEV.Common;
-using Dev.Repository.UserManagement;
+﻿using Service.IRepository.UserManagement;
+using Service.Common;
 using Service.Model.UserManagement;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
-using NuGet.Protocol.Core.Types;
 using System;
 using System.Collections.Generic;
 
-namespace DEV.API.SERVICE.Controllers.UserManagement
+namespace Service.API.SERVICE.Controllers.UserManagement
 {
     [Authorize(AuthenticationSchemes = "Bearer")]
     [ApiController]
@@ -23,6 +20,7 @@ namespace DEV.API.SERVICE.Controllers.UserManagement
             _VenueVsMenuRepository = VenueVsMenuRepository;
             _config = config;
         }
+
         [AllowAnonymous]
         [HttpPost]
         [Route("api/VenueVsMenu/GetVenueVsMenu")]
@@ -40,6 +38,7 @@ namespace DEV.API.SERVICE.Controllers.UserManagement
             }
             return objResult;
         }
+
         [AllowAnonymous]
         [HttpPost]
         [Route("api/VenueVsMenu/InsertVenueVsMenu")]

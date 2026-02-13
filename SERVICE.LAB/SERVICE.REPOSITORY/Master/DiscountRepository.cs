@@ -1,5 +1,5 @@
-﻿using Dev.IRepository.Master;
-using DEV.Common;
+﻿using Service.IRepository.Master;
+using Service.Common;
 using Service.Model;
 using Service.Model.EF;
 using Microsoft.Data.SqlClient;
@@ -8,10 +8,8 @@ using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace Dev.Repository.Master
+namespace Service.Repository.Master
 {
     public class DiscountRepository : IDiscountRepository
     {
@@ -31,8 +29,8 @@ namespace Dev.Repository.Master
                     var _pageIndex = new SqlParameter("pageIndex", discountItem?.pageIndex);
 
                     objresult = context.GetDiscountMasterData.FromSqlRaw(
-                       "Execute dbo.pro_GetDiscountmaster @discountNo,@venueNo,@venueBranchno,@pageIndex",
-                         _discountNo, _venueNo, _venueBranchno, _pageIndex).ToList();
+                    "Execute dbo.pro_GetDiscountmaster @discountNo,@venueNo,@venueBranchno,@pageIndex",
+                    _discountNo, _venueNo, _venueBranchno, _pageIndex).ToList();
                 }
             }
             catch (Exception ex)
@@ -66,10 +64,11 @@ namespace Dev.Repository.Master
                     var _UserNo= new SqlParameter("UserNo", disResponse?.UserNo);
 
                     var obj = context.InsertDiscountMasterData.FromSqlRaw(
-                         "Execute dbo.pro_InsertDiscountmaster @discountNo,@discountName, @DiscountFor, @Amount, @Status," +
-                         "@Gender,@AgeRange,@AgeFrom,@AgeTo,@venueNo,@venueBranchNo,@IsRebate,@IsPercentage,@pageIndex,@UserNo",
-                           _discountNo, _discountName, _DiscountFor, _Amount, _Status, _Gender, _AgeRange, _AgeFrom,
-                           _AgeTo, _venueNo, _venueBranchNo, _IsRebate, _IsPercentage, _pageIndex, _UserNo).ToList();
+                    "Execute dbo.pro_InsertDiscountmaster @discountNo,@discountName, @DiscountFor, @Amount, @Status," +
+                    "@Gender,@AgeRange,@AgeFrom,@AgeTo,@venueNo,@venueBranchNo,@IsRebate,@IsPercentage,@pageIndex,@UserNo",
+                    _discountNo, _discountName, _DiscountFor, _Amount, _Status, _Gender, _AgeRange, _AgeFrom,
+                    _AgeTo, _venueNo, _venueBranchNo, _IsRebate, _IsPercentage, _pageIndex, _UserNo).ToList();
+                    
                     result.discountNo = obj[0].discountNo;
                 }
             }

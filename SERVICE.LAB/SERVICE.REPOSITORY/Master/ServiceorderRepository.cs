@@ -1,16 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
-using Dev.IRepository;
+using Service.IRepository;
 using Service.Model;
 using Service.Model.EF;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using System.Linq;
-using DEV.Common;
+using Service.Common;
 using Microsoft.Data.SqlClient;
 
-namespace Dev.Repository
+namespace Service.Repository
 {
     public class ServiceOrderRepository : IServiceOrderRepository
     {
@@ -31,20 +30,19 @@ namespace Dev.Repository
                     var _VenueNo = new SqlParameter("VenueNo", serviceOrderMasterRequest?.VenueNo);
 
                     objresult = context.GetServiceOrder.FromSqlRaw(
-                       "Execute dbo.pro_GetServiceOrder @MainDeptNo,@DeptNo,@ServiceType,@ServiceNo,@VenueNo",
-                         _MainDeptNo, _DeptNo, _ServiceType, _ServiceNo, _VenueNo).ToList();
+                    "Execute dbo.pro_GetServiceOrder @MainDeptNo,@DeptNo,@ServiceType,@ServiceNo,@VenueNo",
+                    _MainDeptNo, _DeptNo, _ServiceType, _ServiceNo, _VenueNo).ToList();
                 }
             }
             catch (Exception ex)
             {
                 MyDevException.Error(ex, "ServiceOrderRepository.GetServiceOrderMaster", ExceptionPriority.Low, ApplicationType.REPOSITORY, serviceOrderMasterRequest?.VenueNo, serviceOrderMasterRequest?.ServiceNo, 0);
             }
-                return objresult;
+            return objresult;
         }
 
         public ServiceOrderMasterResponse InsertServiceOrderMaster(TblServiceOrder resultItem)
-            {
-            
+        {            
             ServiceOrderMasterResponse result = new ServiceOrderMasterResponse();
             CommonHelper commonUtility = new CommonHelper();    
 
@@ -57,18 +55,15 @@ namespace Dev.Repository
                 }
 
                 using (var context = new MasterContext(_config.GetConnectionString(ConfigKeys.DefaultConnection)))
-                {
-           
-                   var _testServiceXML = new SqlParameter("testServiceXML", testServiceXML);
-                   var _userNo = new SqlParameter("userno", resultItem?.userNo);
-                   var _venueNo = new SqlParameter("venueNo", resultItem?.venueNo);
-                   var _venueBranchNo = new SqlParameter("venueBranchNo", resultItem?.venueBranchNo);
+                {           
+                    var _testServiceXML = new SqlParameter("testServiceXML", testServiceXML);
+                    var _userNo = new SqlParameter("userno", resultItem?.userNo);
+                    var _venueNo = new SqlParameter("venueNo", resultItem?.venueNo);
+                    var _venueBranchNo = new SqlParameter("venueBranchNo", resultItem?.venueBranchNo);
 
-                   var obj = context.InsertServiceOrder.FromSqlRaw(
-                        "Execute dbo.pro_InsertServiceOrder @testServiceXML,@userNo,@venueNo,@venueBranchNo",
-                         _testServiceXML, _userNo, _venueNo, _venueBranchNo).ToList();
-                   
-
+                    var obj = context.InsertServiceOrder.FromSqlRaw(
+                    "Execute dbo.pro_InsertServiceOrder @testServiceXML,@userNo,@venueNo,@venueBranchNo",
+                    _testServiceXML, _userNo, _venueNo, _venueBranchNo).ToList();
                 }
             }
             catch (Exception ex)
@@ -77,6 +72,5 @@ namespace Dev.Repository
             }
             return result;
         }
-
     }
 }

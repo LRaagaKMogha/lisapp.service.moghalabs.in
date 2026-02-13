@@ -1,12 +1,7 @@
-﻿using Service.Model.Inventory;
-using Service.Model.UserManagement;
-using System;
+﻿using Service.Model.UserManagement;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace Dev.IRepository.UserManagement
+namespace Service.IRepository.UserManagement
 {
     public interface IVenueVsMenuRepository
     {

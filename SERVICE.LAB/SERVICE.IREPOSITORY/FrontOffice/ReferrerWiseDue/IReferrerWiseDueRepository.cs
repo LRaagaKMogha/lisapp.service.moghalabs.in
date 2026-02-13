@@ -1,7 +1,6 @@
 ﻿using Service.Model;
-using System.Collections.Generic;
 
-namespace Dev.IRepository.FrontOffice
+namespace Service.IRepository.FrontOffice
 {
     public interface IReferrerWiseDueRepository
     {

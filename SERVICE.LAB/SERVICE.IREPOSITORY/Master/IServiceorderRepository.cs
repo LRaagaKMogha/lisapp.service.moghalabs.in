@@ -1,15 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
 using Service.Model;
 
-namespace Dev.IRepository
+namespace Service.IRepository
 {
     public interface IServiceOrderRepository
     {
-
         List<GetServiceDetails> GetServiceOrderMaster(ServiceOrderMasterRequest serviceOrderItem);
         ServiceOrderMasterResponse InsertServiceOrderMaster(TblServiceOrder resultItem);
     }
-
 }

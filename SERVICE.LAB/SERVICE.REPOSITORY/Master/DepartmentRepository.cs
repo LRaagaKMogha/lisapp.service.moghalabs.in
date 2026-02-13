@@ -4,15 +4,13 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Linq;
-using Dev.IRepository;
+using Service.IRepository;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
-using DEV.Common;
-using Serilog;
+using Service.Common;
 using Microsoft.Data.SqlClient;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
-namespace Dev.Repository
+namespace Service.Repository
 {
     public class DepartmentRepository : IDepartmentRepository
     {
@@ -38,7 +36,6 @@ namespace Dev.Repository
                     {
                         objresult = context.TblDepartment.Where(x => x.VenueNo == getCommonMaster.venueno && x.VenueBranchNo == getCommonMaster.venuebranchno && x.Status == true).ToList();
                     }
-
                 }
             }
             catch (Exception ex)
@@ -67,7 +64,6 @@ namespace Dev.Repository
                 MyDevException.Error(ex, "SearchDepartment - " + DepartmentName, ExceptionPriority.Low, ApplicationType.REPOSITORY, 0, 0, 0);
             }
             return objresult;
-
         }
         /// <summary>
         /// Insert Department Details
@@ -81,20 +77,6 @@ namespace Dev.Repository
             {
                 using (var context = new LIMSContext(_config.GetConnectionString(ConfigKeys.DefaultConnection)))
                 {
-                    //if (Departmentitem.DepartmentNo > 0)
-                    //{
-                    //    Departmentitem.ModifiedOn = DateTime.Now;
-                    //    Departmentitem.ModifiedBy = Departmentitem?.CreatedBy;
-                    //    context.Entry(Departmentitem).State = EntityState.Modified;
-                    //}
-                    //else
-                    //{
-                    //    Departmentitem.CreatedOn = DateTime.Now;
-                    //    Departmentitem.ModifiedOn = DateTime.Now;
-                    //    context.TblDepartment.Add(Departmentitem);
-                    //}
-                    //context.SaveChanges();
-
                     var _DepartmentNo = new SqlParameter("DepartmentNo", Departmentitem.DepartmentNo);
                     var _DepartmentCode = new SqlParameter("DepartmentCode", Departmentitem.DepartmentCode);
                     var _DepartmentName = new SqlParameter("DepartmentName", Departmentitem.DepartmentName);
@@ -120,12 +102,12 @@ namespace Dev.Repository
                     var _DoctorDescription3 = new SqlParameter("DoctorDescription3", Departmentitem?.DoctorDescription3);
 
                     var objResult = context.InsertDeptMaster.FromSqlRaw
-                              ("Execute dbo.pro_InsertDeptMaster @DepartmentNo, @DepartmentCode, @DepartmentName, @DepartmentDisplayText, @DeptSequenceNo, @IsSample, @IsCytology, @IsHisto,@VenueNo,@VenueBranchNo,@Status," +
-                              "@CreatedBy,@MainDeptNo,@DoctorName1,@DoctorSign1,@DoctorDescription1,@DoctorName2,@DoctorSign2,@DoctorDescription2,@DoctorName3,@DoctorSign3,@DoctorDescription3",
-                              _DepartmentNo, _DepartmentCode, _DepartmentName, _DepartmentDisplayText, _DeptSequenceNo, _IsSample, _IsCytology, _IsHisto, _VenueNo, _VenueBranchNo, _status, _CreatedBy, _MainDeptNo,
-                              _DoctorName1, _DoctorSign1, _DoctorDescription1, _DoctorName2, _DoctorSign2, _DoctorDescription2, _DoctorName3, _DoctorSign3, _DoctorDescription3).ToList();
+                    ("Execute dbo.pro_InsertDeptMaster @DepartmentNo, @DepartmentCode, @DepartmentName, @DepartmentDisplayText, @DeptSequenceNo, @IsSample, @IsCytology, @IsHisto,@VenueNo,@VenueBranchNo,@Status," +
+                    "@CreatedBy,@MainDeptNo,@DoctorName1,@DoctorSign1,@DoctorDescription1,@DoctorName2,@DoctorSign2,@DoctorDescription2,@DoctorName3,@DoctorSign3,@DoctorDescription3",
+                    _DepartmentNo, _DepartmentCode, _DepartmentName, _DepartmentDisplayText, _DeptSequenceNo, _IsSample, _IsCytology, _IsHisto, _VenueNo, _VenueBranchNo, _status, _CreatedBy, _MainDeptNo,
+                    _DoctorName1, _DoctorSign1, _DoctorDescription1, _DoctorName2, _DoctorSign2, _DoctorDescription2, _DoctorName3, _DoctorSign3, _DoctorDescription3).ToList();
+                    
                     result = objResult[0].DeptNo;
-
                 }
             }
             catch (Exception ex)
@@ -134,7 +116,6 @@ namespace Dev.Repository
             }
             return result;
         }
-
         public List<GetMaindepartment> GetMaindepartmentdetail(GetDeptMasterRequest req)
         {
             List<GetMaindepartment> objresult = new List<GetMaindepartment>();
@@ -149,8 +130,8 @@ namespace Dev.Repository
                     var _PageIndex = new SqlParameter("PageIndex", req?.pageIndex);
                     
                     objresult = context.GetDepartmentDetail.FromSqlRaw(
-                        "Execute dbo.Pro_Getdept @VenueNo, @VenueBranchNo, @masterNo,@Departmentnumber, @PageIndex",
-                     _VenueNo, _VenueBranchNo, _masterNo, _Departmentnumber, _PageIndex).ToList();
+                    "Execute dbo.Pro_Getdept @VenueNo, @VenueBranchNo, @masterNo,@Departmentnumber, @PageIndex",
+                    _VenueNo, _VenueBranchNo, _masterNo, _Departmentnumber, _PageIndex).ToList();
                 }
             }
             catch (Exception ex)
@@ -158,7 +139,6 @@ namespace Dev.Repository
                 MyDevException.Error(ex, "DepartmentRepository.GetMaindepartmentdetail", ExceptionPriority.Low, ApplicationType.REPOSITORY, req?.venueno, req?.venuebranchno, 0);
             }
             return objresult;
-
         }
         public List<DepartMentLangCodeRes> InsertLangCodeDeptMaster(DepartMentLangCodeReq req)
         {
@@ -177,10 +157,9 @@ namespace Dev.Repository
                     var _userNo = new SqlParameter("UserNo", req.UserNo);
                     var _isEdit = new SqlParameter("IsEdit", req.IsEdit);
 
-
                     objResult = context.InsertLangCodeDeptMasters.FromSqlRaw
-                        ("Execute dbo.Pro_InsertLanguageCodeDepartment @DeptNo, @DeptType, @LanguageCode, @LanguageText, @VenueNo, @VenueBranchNo, @Status, @UserNo,@IsEdit",
-                       _deptNo, _deptType, _languageCode, _languageText, _venueNo, _venueBranchNo, _status, _userNo,_isEdit).ToList();
+                    ("Execute dbo.Pro_InsertLanguageCodeDepartment @DeptNo, @DeptType, @LanguageCode, @LanguageText, @VenueNo, @VenueBranchNo, @Status, @UserNo,@IsEdit",
+                    _deptNo, _deptType, _languageCode, _languageText, _venueNo, _venueBranchNo, _status, _userNo,_isEdit).ToList();
                 }
             }
             catch (Exception ex)
@@ -189,7 +168,6 @@ namespace Dev.Repository
             }
             return objResult;
         }
-
         public List<GetDeptLangCodeRes> GetLangCodeDeptMaster(GetDeptLangCodeReq req)
         {
             List<GetDeptLangCodeRes> objResult = new List<GetDeptLangCodeRes>();
@@ -201,9 +179,10 @@ namespace Dev.Repository
                     var _deptType = new SqlParameter("@DeptType", req.DeptType);
                     var _venueNo = new SqlParameter("@VenueNo", req.VenueNo);
                     var _venueBranchNo = new SqlParameter("VenueBranchNo", req.VenueBranchNo);
+                    
                     objResult = context.GetLangCodeDeptMasters.FromSqlRaw
-                        ("EXEC dbo.Pro_GetLanguageCodeDepartment @DeptNo, @DeptType, @VenueNo, @VenueBranchNo",
-                        _deptNo, _deptType, _venueNo,_venueBranchNo).ToList();
+                    ("EXEC dbo.Pro_GetLanguageCodeDepartment @DeptNo, @DeptType, @VenueNo, @VenueBranchNo",
+                    _deptNo, _deptType, _venueNo,_venueBranchNo).ToList();
                 }
             }
             catch (Exception ex)
@@ -212,8 +191,5 @@ namespace Dev.Repository
             }
             return objResult;
         }
-
-
     }
 }
-

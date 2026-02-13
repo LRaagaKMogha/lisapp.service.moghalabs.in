@@ -1,16 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Service.Model;
-using Dev.IRepository;
-using Microsoft.Extensions.Logging;
-using DEV.Common;
-using Microsoft.Office.Interop.Word;
+using Service.IRepository;
+using Service.Common;
 
-namespace DEV.API.SERVICE.Controllers
+namespace Service.API.SERVICE.Controllers
 {
 
     [ApiController]
@@ -20,7 +15,6 @@ namespace DEV.API.SERVICE.Controllers
         public LocationMasterController(IlocationMasterRepository noteRepository)
         {
             _locationMasterRepository = noteRepository;
-
         }
         [HttpPost]
         [Route("api/Locationmaster/GetCountrymaster")]
@@ -37,115 +31,120 @@ namespace DEV.API.SERVICE.Controllers
             }
             return result;
         }
-            [HttpPost]
-            [Route("api/Locationmaster/InsertCountrymaster")]
-            public CountryMasteResponse InsertCountrymaster(Countrytab Country)
-                {
-                CountryMasteResponse objresult = new CountryMasteResponse();
-                try
-                {
-                    objresult = _locationMasterRepository.InsertCountrymaster(Country);
-                    string _CacheKey = CacheKeys.CommonMaster + "CountryName" + Country.VenueNo + Country.Venuebranchno;
-                    string _CacheKey1 = CacheKeys.CommonMaster + "countrymaster" + Country.VenueNo + Country.Venuebranchno;
-                    MemoryCacheRepository.GetCacheItem<List<CommonMasterDto>>(_CacheKey);
-                    MemoryCacheRepository.GetCacheItem<List<CommonMasterDto>>(_CacheKey1);
-                    MemoryCacheRepository.RemoveItem(_CacheKey);
-                    MemoryCacheRepository.RemoveItem(_CacheKey1);
-                }
-                catch (Exception ex)
-                {
-                    MyDevException.Error(ex, "InsertCountrymaster", ExceptionPriority.High, ApplicationType.REPOSITORY, 0, 0, 0);
-                }
-                return objresult;
-            }
-            //State
 
-            [HttpPost]
-            [Route("api/Locationmaster/GetStatemaster")]
-            public IEnumerable<lstState> GetStatemaster(StateRequest state)
+        [HttpPost]
+        [Route("api/Locationmaster/InsertCountrymaster")]
+        public CountryMasteResponse InsertCountrymaster(Countrytab Country)
             {
-                List<lstState> result = new List<lstState>();
-                try
-                {
-                    result = _locationMasterRepository.GetStatemaster(state);
-                }
-                catch (Exception ex)
-                {
-                    MyDevException.Error(ex, "GetStatemaster", ExceptionPriority.High, ApplicationType.REPOSITORY, 0, 0, 0);
-                }
-                return result;
+            CountryMasteResponse objresult = new CountryMasteResponse();
+            try
+            {
+                objresult = _locationMasterRepository.InsertCountrymaster(Country);
+                string _CacheKey = CacheKeys.CommonMaster + "CountryName" + Country.VenueNo + Country.Venuebranchno;
+                string _CacheKey1 = CacheKeys.CommonMaster + "countrymaster" + Country.VenueNo + Country.Venuebranchno;
+                MemoryCacheRepository.GetCacheItem<List<CommonMasterDto>>(_CacheKey);
+                MemoryCacheRepository.GetCacheItem<List<CommonMasterDto>>(_CacheKey1);
+                MemoryCacheRepository.RemoveItem(_CacheKey);
+                MemoryCacheRepository.RemoveItem(_CacheKey1);
             }
-            [HttpPost]
-            [Route("api/Locationmaster/InsertStatemaster")]
-            public StateResponse InsertStatemaster(Statetab state)
+            catch (Exception ex)
             {
-                StateResponse objresult = new StateResponse();
-                try
-                {
-                    objresult = _locationMasterRepository.InsertStatemaster(state);
-                    string _CacheKey = CacheKeys.CommonMaster + "StateName" + state.VenueNo + state.Venuebranchno;
-                    MemoryCacheRepository.GetCacheItem<List<CommonMasterDto>>(_CacheKey);
-                    MemoryCacheRepository.RemoveItem(_CacheKey);
+                MyDevException.Error(ex, "InsertCountrymaster", ExceptionPriority.High, ApplicationType.REPOSITORY, 0, 0, 0);
+            }
+            return objresult;
+        }
+        //State
 
-                }
-                catch (Exception ex)
-                {
-                    MyDevException.Error(ex, "InsertStatemaster", ExceptionPriority.High, ApplicationType.REPOSITORY, 0, 0, 0);
-                }
-                return objresult;
+        [HttpPost]
+        [Route("api/Locationmaster/GetStatemaster")]
+        public IEnumerable<lstState> GetStatemaster(StateRequest state)
+        {
+            List<lstState> result = new List<lstState>();
+            try
+            {
+                result = _locationMasterRepository.GetStatemaster(state);
             }
-            //City
+            catch (Exception ex)
+            {
+                MyDevException.Error(ex, "GetStatemaster", ExceptionPriority.High, ApplicationType.REPOSITORY, 0, 0, 0);
+            }
+            return result;
+        }
+            
+        [HttpPost]
+        [Route("api/Locationmaster/InsertStatemaster")]
+        public StateResponse InsertStatemaster(Statetab state)
+        {
+            StateResponse objresult = new StateResponse();
+            try
+            {
+                objresult = _locationMasterRepository.InsertStatemaster(state);
+                string _CacheKey = CacheKeys.CommonMaster + "StateName" + state.VenueNo + state.Venuebranchno;
+                MemoryCacheRepository.GetCacheItem<List<CommonMasterDto>>(_CacheKey);
+                MemoryCacheRepository.RemoveItem(_CacheKey);
 
-            [HttpPost]
-            [Route("api/Locationmaster/GetCitymaster")]
-            public IEnumerable<CityLst> GetCitymaster(CityRequest city)
-            {
-                List<CityLst> result = new List<CityLst>();
-                try
-                {
-                    result = _locationMasterRepository.GetCitymaster(city);
-                }
-                catch (Exception ex)
-                {
-                    MyDevException.Error(ex, "GetCitymaster", ExceptionPriority.High, ApplicationType.REPOSITORY, 0, 0, 0);
-                }
-                return result;
             }
-            [HttpPost]
-            [Route("api/Locationmaster/InsertCitymaster")]
-            public CityResponse InsertCitymaster(Citytab city)
+            catch (Exception ex)
             {
-                CityResponse objresult = new CityResponse();
-                try
-                {
-                    objresult = _locationMasterRepository.InsertCitymaster(city);
-                    string _CacheKey = CacheKeys.CommonMaster + "CityName" + city.VenueNo + city.Venuebranchno;
-                    MemoryCacheRepository.GetCacheItem<List<CommonMasterDto>>(_CacheKey);
-                    MemoryCacheRepository.RemoveItem(_CacheKey);
+                MyDevException.Error(ex, "InsertStatemaster", ExceptionPriority.High, ApplicationType.REPOSITORY, 0, 0, 0);
+            }
+            return objresult;
+        }
+        //City
 
-                }
-                catch (Exception ex)
-                {
-                    MyDevException.Error(ex, "InsertCitymaster", ExceptionPriority.High, ApplicationType.REPOSITORY, 0, 0, 0);
-                }
-                return objresult;
-            }
-            //Place
-            [HttpPost]
-            [Route("api/Locationmaster/GetPlacemaster")]
-            public IEnumerable<PlaceLst> GetPlacemaster(PlaceRequest place)
+        [HttpPost]
+        [Route("api/Locationmaster/GetCitymaster")]
+        public IEnumerable<CityLst> GetCitymaster(CityRequest city)
+        {
+            List<CityLst> result = new List<CityLst>();
+            try
             {
-                List<PlaceLst> result = new List<PlaceLst>();
-                try
-                {
-                    result = _locationMasterRepository.GetPlacemaster(place);
-                }
-                catch (Exception ex)
-                {
-                    MyDevException.Error(ex, "GetPlacemaster", ExceptionPriority.High, ApplicationType.REPOSITORY, 0, 0, 0);
-                }
-                return result;
+                result = _locationMasterRepository.GetCitymaster(city);
             }
+            catch (Exception ex)
+            {
+                MyDevException.Error(ex, "GetCitymaster", ExceptionPriority.High, ApplicationType.REPOSITORY, 0, 0, 0);
+            }
+            return result;
+        }
+            
+        [HttpPost]
+        [Route("api/Locationmaster/InsertCitymaster")]
+        public CityResponse InsertCitymaster(Citytab city)
+        {
+            CityResponse objresult = new CityResponse();
+            try
+            {
+                objresult = _locationMasterRepository.InsertCitymaster(city);
+                string _CacheKey = CacheKeys.CommonMaster + "CityName" + city.VenueNo + city.Venuebranchno;
+                MemoryCacheRepository.GetCacheItem<List<CommonMasterDto>>(_CacheKey);
+                MemoryCacheRepository.RemoveItem(_CacheKey);
+
+            }
+            catch (Exception ex)
+            {
+                MyDevException.Error(ex, "InsertCitymaster", ExceptionPriority.High, ApplicationType.REPOSITORY, 0, 0, 0);
+            }
+            return objresult;
+        }
+            
+        //Place
+        [HttpPost]
+        [Route("api/Locationmaster/GetPlacemaster")]
+        public IEnumerable<PlaceLst> GetPlacemaster(PlaceRequest place)
+        {
+            List<PlaceLst> result = new List<PlaceLst>();
+            try
+            {
+                result = _locationMasterRepository.GetPlacemaster(place);
+            }
+            catch (Exception ex)
+            {
+                MyDevException.Error(ex, "GetPlacemaster", ExceptionPriority.High, ApplicationType.REPOSITORY, 0, 0, 0);
+            }
+            return result;
+        }
+
         [HttpPost]
         [Route("api/Locationmaster/InsertPlacemaster")]
         public PlaceResponse InsertPlacemaster(PlaceLst place)
@@ -156,7 +155,6 @@ namespace DEV.API.SERVICE.Controllers
                 objresult = _locationMasterRepository.InsertPlacemaster(place);
                 string _CacheKey = CacheKeys.CommonMaster + "PINCODE";
                 MemoryCacheRepository.RemoveItem(_CacheKey);
-
             }
             catch (Exception ex)
             {
@@ -179,7 +177,7 @@ namespace DEV.API.SERVICE.Controllers
                 MyDevException.Error(ex, "GetNationalityMaster", ExceptionPriority.High, ApplicationType.REPOSITORY, 0, 0, 0);
             }
             return result;
-            }
+        }
 
         [HttpPost]
         [Route("api/Locationmaster/InsertNationalitymaster")]
@@ -189,7 +187,6 @@ namespace DEV.API.SERVICE.Controllers
             try
             {
                 objresult = _locationMasterRepository.InsertNationalitymaster(Nationality);
-
             }
             catch (Exception ex)
             {
@@ -198,5 +195,4 @@ namespace DEV.API.SERVICE.Controllers
             return objresult;
         }
     }
-
 }

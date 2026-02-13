@@ -1,9 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Security.Cryptography;
 using System.Text;
 
-namespace DEV.Common
+namespace Service.Common
 {
     public static class CommonSecurity
     {      
@@ -39,15 +38,6 @@ namespace DEV.Common
                     return md5StringWithDashes;
                 }
             }
-
-            //byte[] bytes = Encoding.Unicode.GetBytes(pass);
-            //byte[] src = Encoding.Unicode.GetBytes(salt);
-            //byte[] dst = new byte[src.Length + bytes.Length];
-            //System.Buffer.BlockCopy(src, 0, dst, 0, src.Length);
-            //System.Buffer.BlockCopy(bytes, 0, dst, src.Length, bytes.Length);
-            //HashAlgorithm algorithm = HashAlgorithm.Create("SHA1");
-            //byte[] inArray = algorithm.ComputeHash(dst);
-            //return EncodePasswordMd5(Convert.ToBase64String(inArray));
         }
         public static string EncodePasswordMd5(string pass) //Encrypt using MD5    
         {

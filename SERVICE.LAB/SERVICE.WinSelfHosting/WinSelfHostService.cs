@@ -1,16 +1,10 @@
 ﻿using System;
 using System.ServiceProcess;
-using System.Configuration;
-using System.Collections.Generic;
-using System.Data;
-using System.Data.Common;
 
-namespace DEV.WinSelfHosting
+namespace Service.WinSelfHosting
 {
-
     public partial class WinSelfHostService : ServiceBase
     {
-
         public WinSelfHostService()
         {
             InitializeComponent();
@@ -51,8 +45,6 @@ namespace DEV.WinSelfHosting
         }
 
         #endregion
-
-        
 
     }
 }

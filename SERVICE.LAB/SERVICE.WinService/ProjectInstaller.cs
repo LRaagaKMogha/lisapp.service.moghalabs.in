@@ -5,7 +5,7 @@ using System.Configuration.Install;
 using System.Reflection;
 using System.ServiceProcess;
 
-namespace Dev.WinService
+namespace Service.Win.Service
 {
     /// <summary>
     /// Service Manager
@@ -18,13 +18,10 @@ namespace Dev.WinService
         public ProjectInstaller()
         {
             InitializeComponent();
-
             this.Installers.Add(GetServiceInstaller());
             this.Installers.Add(GetServiceProcessInstaller());
-
             this.AfterInstall += ProjectInstaller_AfterInstall;
         }
-
         private ServiceInstaller GetServiceInstaller()
         {
             ServiceInstaller installer = new ServiceInstaller();
@@ -32,14 +29,12 @@ namespace Dev.WinService
             installer.StartType = ServiceStartMode.Automatic;
             return installer;
         }
-
         private ServiceProcessInstaller GetServiceProcessInstaller()
         {
             ServiceProcessInstaller installer = new ServiceProcessInstaller();
             installer.Account = ServiceAccount.LocalSystem;
             return installer;
         }
-
         private string GetConfigurationValue(string key)
         {
             Assembly service = Assembly.GetAssembly(typeof(ProjectInstaller));
@@ -54,7 +49,6 @@ namespace Dev.WinService
                 throw new IndexOutOfRangeException("Settings collection does not contain the requested key:" + key);
             }
         }
-
         void ProjectInstaller_AfterInstall(object sender, InstallEventArgs e)
         {
             using (ServiceController sc = new ServiceController(this.GetServiceInstaller().ServiceName))

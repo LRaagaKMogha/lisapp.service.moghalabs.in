@@ -1,9 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
 using Service.Model;
 
-namespace Dev.IRepository
+namespace Service.IRepository
 {
     public interface ISampleRepository
     {
@@ -13,5 +11,4 @@ namespace Dev.IRepository
         List<TblSample> GetSampleDetails1 (GetCommonMasterRequest sampleMasterRequest);
         List<sampleMasterResponse> InsertSampleDetails(TblSample Sampleitem);
     }
-
 }

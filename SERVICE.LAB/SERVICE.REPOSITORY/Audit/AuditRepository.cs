@@ -1,10 +1,7 @@
-﻿using Dev.IRepository.Audit;
-using DEV.Common;
+﻿using Service.IRepository.Audit;
+using Service.Common;
 using Service.Model;
 using Service.Model.Audit;
-using Service.Model.EF;
-using Service.Model.EF.Common;
-using Service.Model.Integration;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Shared.Audit;
@@ -12,11 +9,10 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
-using System.Text;
 using System.Threading.Tasks;
-using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
+using Service.Model.EF.Common;
 
-namespace Dev.Repository.Audit
+namespace Service.Repository.Audit
 {
     public class AuditRepository : IAuditRepository
     {

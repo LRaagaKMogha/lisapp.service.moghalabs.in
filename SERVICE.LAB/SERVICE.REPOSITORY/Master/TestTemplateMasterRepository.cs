@@ -1,5 +1,5 @@
-﻿using Dev.IRepository.Master;
-using DEV.Common;
+﻿using Service.IRepository.Master;
+using Service.Common;
 using Service.Model;
 using Service.Model.EF;
 using Service.Model.EF.DocumentUpload;
@@ -12,10 +12,9 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using static Service.Model.DocumentUploadDTO;
-namespace Dev.Repository.Master
+
+namespace Service.Repository.Master
 {
     public class TestTemplateMasterRepository : ITestTemplateMasterRepository
     {

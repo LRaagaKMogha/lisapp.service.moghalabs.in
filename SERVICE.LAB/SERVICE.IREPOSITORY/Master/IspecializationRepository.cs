@@ -1,16 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
 using Service.Model;
 
-namespace Dev.IRepository
+namespace Service.IRepository
 {
     public interface IspecializationRepository
     {
-
         List<Tblspecialization> Getspecializationmaster(SpecializationMasterRequest specializationitem);
         SpecializationMasterResponse Insertspecializatiomaster(Tblspecialization tblspecialization);
         int CheckMasterNameExists(CheckMasterNameExistsRequest checkMasterNameExistsRequest);
     }
-
 }

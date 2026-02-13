@@ -1,6 +1,5 @@
-﻿using Dev.IRepository;
-using Dev.IRepository.External.CommonMasters;
-using DEV.Common;
+﻿using Service.IRepository.External.CommonMasters;
+using Service.Common;
 using Service.Model.EF.External.CommonMasters;
 using Service.Model.External.CommonMasters;
 using Microsoft.EntityFrameworkCore;
@@ -9,9 +8,8 @@ using System;
 using System.Collections.Generic;
 using Microsoft.Data.SqlClient;
 using System.Linq;
-using System.Text;
 
-namespace Dev.Repository.External.CommonMasters
+namespace Service.Repository.External.CommonMasters
 {
     public class DeptMastRepository : IDeptMastRepository
     {

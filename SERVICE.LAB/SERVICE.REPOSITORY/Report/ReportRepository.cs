@@ -1,5 +1,5 @@
-﻿using Dev.IRepository;
-using DEV.Common;
+﻿using Service.IRepository;
+using Service.Common;
 using Service.Model;
 using Service.Model.EF;
 using Service.Model.Report;
@@ -8,10 +8,7 @@ using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Newtonsoft.Json;
-using Serilog;
-using SixLabors.ImageSharp.PixelFormats;
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Data;
 using System.IO;
@@ -20,11 +17,10 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
-namespace Dev.Repository
+namespace Service.Repository
 {
     public class ReportRepository : IReportRepository
     {
-
         private IConfiguration _config;
         public ReportRepository(IConfiguration config) { _config = config; }
 
@@ -41,7 +37,6 @@ namespace Dev.Repository
                 ReportContext objReportContext = new ReportContext(_config.GetConnectionString(ConfigKeys.DefaultConnection));
                 TblReportMaster tblReportMaster = new TblReportMaster();
                 var _Dictionary = ReportItem.ReportParamitem.ToDictionary(x => x.key, x => x.value);
-                //string departmentNo = _Dictionary["DepartmentNo"];
 
                 using (var context = new LIMSContext(_config.GetConnectionString(ConfigKeys.DefaultConnection)))
                 {
@@ -50,7 +45,7 @@ namespace Dev.Repository
                     if (!Directory.Exists(tblReportMaster?.ExportPath))
                     {
                         Directory.CreateDirectory(tblReportMaster?.ExportPath);
-                }
+                    }
                 }
 
                 DataTable datable = null;
@@ -71,8 +66,6 @@ namespace Dev.Repository
                 ReportParamDto objitem = new ReportParamDto();
                 objitem.datatable = CommonExtension.DatableToDicionary(datable);
                 objitem.paramerter = _Dictionary;
-
-
                 objitem.ReportPath = tblReportMaster?.ReportPath;
 
                 if (ReportItem.fileType == "excel")

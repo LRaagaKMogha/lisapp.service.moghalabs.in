@@ -4,11 +4,10 @@ using System.Security.Cryptography;
 using System;
 using System.Configuration;
 
-namespace DEV.Windows.Repository
+namespace Service.Win.Repository
 {
     public static class EncryptionHelper
     {
-
         public static string Encrypt(string plainText)
         {
             string EncryptionKey = ConfigurationManager.AppSettings["MKey"].ToString();

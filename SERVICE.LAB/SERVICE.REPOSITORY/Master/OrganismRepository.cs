@@ -3,14 +3,12 @@ using Service.Model.EF;
 using System;
 using System.Collections.Generic;
 using Microsoft.Data.SqlClient;
-using System.Linq;
-using Dev.IRepository;
+using Service.IRepository;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
-using DEV.Common;
-using Serilog;
+using Service.Common;
 
-namespace Dev.Repository
+namespace Service.Repository
 {
     public class OrganismRepository : IOrganismRepository
     {

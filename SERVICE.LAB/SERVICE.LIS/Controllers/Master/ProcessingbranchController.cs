@@ -1,13 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using Dev.IRepository;
-using DEV.Common;
+using Service.IRepository;
+using Service.Common;
 using Service.Model;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
-using Serilog;
 
-namespace DEV.API.SERVICE.Controllers
+namespace Service.API.SERVICE.Controllers
 {
 
     [ApiController]
@@ -34,16 +32,15 @@ namespace DEV.API.SERVICE.Controllers
             }
             return lst;
         }
+
         [HttpPost]
         [Route("api/ProcessingBranch/InsertProcessingbranch")]
         public Storeprocessingbranch InsertProcessingbranch(insertbranch obj1)
-
         {
             Storeprocessingbranch objresult = new Storeprocessingbranch();
             try
             {
                 objresult = _ProcessingbranchRepository.InsertProcessingbranch(obj1);
-
             }
             catch (Exception ex)
             {
@@ -51,6 +48,5 @@ namespace DEV.API.SERVICE.Controllers
             }
             return objresult;
         }
-
     }
 }

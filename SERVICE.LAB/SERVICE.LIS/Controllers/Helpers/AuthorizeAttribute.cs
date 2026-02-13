@@ -1,21 +1,14 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
 
-namespace DEV.API.SERVICE
+namespace Service.API.SERVICE
 {
-
     using System;
-    using System.Security.Claims;
-    using System.Threading.Tasks;
     using Service.Model;
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
-    using Microsoft.Extensions.DependencyInjection;
 
     [AttributeUsage(AttributeTargets.Class | AttributeTargets.Method, AllowMultiple = true)]
     public class CustomAuthorizeAttribute : TypeFilterAttribute
@@ -29,17 +22,14 @@ namespace DEV.API.SERVICE
     public class CustomAuthorizationRequirement : IAuthorizationRequirement
     {
         public string Role { get; }
-
         public CustomAuthorizationRequirement(string role)
         {
             Role = role;
         }
     }
-
     public class CustomAuthorizeFilter : IAuthorizationFilter
     {
         private readonly CustomAuthorizationRequirement _requirement;
-
         public CustomAuthorizeFilter(CustomAuthorizationRequirement requirement)
         {
             _requirement = requirement;
@@ -66,6 +56,5 @@ namespace DEV.API.SERVICE
                 context.Result = new JsonResult(new { message = "Unauthorized" }) { StatusCode = StatusCodes.Status401Unauthorized };
             }
         }
-
     }
 }

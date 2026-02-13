@@ -1,9 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
 using Service.Model;
 
-namespace Dev.IRepository
+namespace Service.IRepository
 {
     public interface IInvoiceRepository
     {
@@ -19,5 +17,6 @@ namespace Dev.IRepository
         rtninvoiceCredit InsertInvoiceCreditNote(objInvoiceCreditNote req);
         List<CreditNoteReport> GetCreditNoteReport(reqinvoice req);
         InvoiceTDSUpdateResponse UpdateTDSFlag(InvoiceTDSUpdateRequest req);
+        List<VenueDetails> InvoiceVenueDetails();
     }
 }

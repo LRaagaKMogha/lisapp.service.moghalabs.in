@@ -1,25 +1,21 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using Dev.IRepository;
+using Service.IRepository;
 using Service.Model;
 using Service.Model.EF;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using System.Linq;
-using DEV.Common;
+using Service.Common;
 using Microsoft.Data.SqlClient;
-using Serilog;
-using Newtonsoft.Json;
-using System.IO;
 
-namespace Dev.Repository
+namespace Service.Repository
 {
     public class MicrobiologyMasterRepository : IMicrobiologyMasterRepository
     {
         private IConfiguration _config;
         public MicrobiologyMasterRepository(IConfiguration config) { _config = config; }
-
 
         public List<lstorgAntiRange> GetOrgAntibioticRange(reqorgAntiRange req)
         {
@@ -34,8 +30,8 @@ namespace Dev.Repository
                     var _organismtypeno = new SqlParameter("organismtypeno", req?.OrganismGroupNo);
 
                     lst = context.GetOrgAntibioticRange.FromSqlRaw(
-                      "Execute dbo.pro_GetOrgAntibioticRangeMaster @venueno,@venuebranchno,@organismno,@organismtypeno",
-                      _venueno, _venuebranchno, _organismno, _organismtypeno).ToList();
+                    "Execute dbo.pro_GetOrgAntibioticRangeMaster @venueno,@venuebranchno,@organismno,@organismtypeno",
+                    _venueno, _venuebranchno, _organismno, _organismtypeno).ToList();
                 }
             }
             catch (Exception ex)
@@ -44,7 +40,6 @@ namespace Dev.Repository
             }
             return lst;
         }
-
         public int SaveOrganismAntibioticRange(orgAntiRange req)
         {
             CommonHelper commonUtility = new CommonHelper();
@@ -60,8 +55,8 @@ namespace Dev.Repository
                     var _orgAntiRangeXML = new SqlParameter("orgAntiRangeXML", orgAntiRangeXML);
 
                     var lst = context.SaveOrganismAntibioticRange.FromSqlRaw(
-                       "Execute dbo.pro_InsertOrganismAntibioticRange @venueno,@venuebranchno,@userno,@orgAntiRangeXML",
-                      _venueno, _venuebranchno, _userno, _orgAntiRangeXML).ToList();
+                    "Execute dbo.pro_InsertOrganismAntibioticRange @venueno,@venuebranchno,@userno,@orgAntiRangeXML",
+                    _venueno, _venuebranchno, _userno, _orgAntiRangeXML).ToList();
 
                     i = lst[0].testNo;
                 }
@@ -87,8 +82,8 @@ namespace Dev.Repository
                     var _pageIndex = new SqlParameter("pageIndex", orggetreq?.pageIndex);
 
                     lst = context.GetOrgmaster.FromSqlRaw(
-                      "Execute dbo.pro_GetOrganismmaster @venueno,@venuebranchno,@organismno,@OrganismGroupNo,@pageIndex",
-                      _venueno, _venuebranchno, _organismno, _OrganismGroupNo, _pageIndex).ToList();
+                    "Execute dbo.pro_GetOrganismmaster @venueno,@venuebranchno,@organismno,@OrganismGroupNo,@pageIndex",
+                    _venueno, _venuebranchno, _organismno, _OrganismGroupNo, _pageIndex).ToList();
                 }
             }
             catch (Exception ex)
@@ -111,8 +106,8 @@ namespace Dev.Repository
                     var _pageIndex = new SqlParameter("pageIndex", orggetreq?.pageIndex);
 
                     lst = context.GetOrgGrpmaster.FromSqlRaw(
-                      "Execute dbo.pro_GetOrganismGroupMaster @venueno,@venuebranchno,@organismgrpno,@organismtypeno,@pageIndex",
-                      _venueno, _venuebranchno, _organismgrpno, _organismtypeno, _pageIndex).ToList();
+                    "Execute dbo.pro_GetOrganismGroupMaster @venueno,@venuebranchno,@organismgrpno,@organismtypeno,@pageIndex",
+                    _venueno, _venuebranchno, _organismgrpno, _organismtypeno, _pageIndex).ToList();
                 }
             }
             catch (Exception ex)
@@ -121,8 +116,6 @@ namespace Dev.Repository
             }
             return lst;
         }
-
-
         public orginsertresponse InsertOrgmaster(orgresponse orginsertreq)
         {
             orginsertresponse objresult = new orginsertresponse();
@@ -142,9 +135,8 @@ namespace Dev.Repository
                     var _organismshortcode = new SqlParameter("organismshortcode", orginsertreq?.organismshortcode);
 
                     objresult = context.InsertOrgmaster.FromSqlRaw(
-                      "Execute dbo.pro_InsertOrganismmaster @venueno,@venuebranchno,@organismno,@organismGroupno,@organismname,@notes,@sequenceno,@status,@userno,@organismshortcode",
-                      _venueno, _venuebranchno, _organismno, _organismGroupno, _organismname, _notes, _sequenceno, _status, _userno, _organismshortcode).AsEnumerable().FirstOrDefault();
-
+                    "Execute dbo.pro_InsertOrganismmaster @venueno,@venuebranchno,@organismno,@organismGroupno,@organismname,@notes,@sequenceno,@status,@userno,@organismshortcode",
+                    _venueno, _venuebranchno, _organismno, _organismGroupno, _organismname, _notes, _sequenceno, _status, _userno, _organismshortcode).AsEnumerable().FirstOrDefault();
                 }
             }
             catch (Exception ex)
@@ -170,8 +162,9 @@ namespace Dev.Repository
                     var _userno = new SqlParameter("userNo", orginsertreq?.userno);
 
                     var lst = context.InsertOrgGrpmaster.FromSqlRaw(
-                      "Execute dbo.pro_InsertOrganismGrpmaster @venueno,@venuebranchno,@organismgrpno,@organismgrpname,@organismtypeno,@sequenceno,@status,@userNo ",
-                      _venueno, _venuebranchno, _organismgrpno, _organismtypeno, _organismgrpname, _sequenceno, _status, _userno).ToList();
+                    "Execute dbo.pro_InsertOrganismGrpmaster @venueno,@venuebranchno,@organismgrpno,@organismgrpname,@organismtypeno,@sequenceno,@status,@userNo ",
+                    _venueno, _venuebranchno, _organismgrpno, _organismtypeno, _organismgrpname, _sequenceno, _status, _userno).ToList();
+                    
                     objresult.organismGrpno = lst[0].organismGrpno;
                 }
             }
@@ -194,8 +187,8 @@ namespace Dev.Repository
                     var _pageIndex = new SqlParameter("pageIndex", orgtygetreq?.pageIndex);
 
                     lst = context.GetOrgtypemaster.FromSqlRaw(
-                      "Execute dbo.pro_GetOrganismTypemaster @venueno,@venuebranchno,@organismtypeno,@pageIndex",
-                      _venueno, _venuebranchno, _organismtypeno, _pageIndex).ToList();
+                    "Execute dbo.pro_GetOrganismTypemaster @venueno,@venuebranchno,@organismtypeno,@pageIndex",
+                    _venueno, _venuebranchno, _organismtypeno, _pageIndex).ToList();
                 }
             }
             catch (Exception ex)
@@ -220,9 +213,8 @@ namespace Dev.Repository
                     var _userno = new SqlParameter("userno", orgtyinsertreq?.userno);
 
                     objresult = context.InsertOrgtypemaster.FromSqlRaw(
-                      "Execute dbo.pro_InsertOrganismTypemaster @venueno,@venuebranchno,@organismtypeno,@organismtypename,@sequenceno,@status,@userNo",
-                      _venueno, _venuebranchno, _organismtypeno, _organismtypename, _sequenceno, _status, _userno).AsEnumerable().FirstOrDefault();
-
+                    "Execute dbo.pro_InsertOrganismTypemaster @venueno,@venuebranchno,@organismtypeno,@organismtypename,@sequenceno,@status,@userNo",
+                    _venueno, _venuebranchno, _organismtypeno, _organismtypename, _sequenceno, _status, _userno).AsEnumerable().FirstOrDefault();
                 }
             }
             catch (Exception ex)
@@ -244,8 +236,8 @@ namespace Dev.Repository
                     var _pageIndex = new SqlParameter("pageIndex", antireq?.pageIndex);
 
                     lst = context.Getantibiotic.FromSqlRaw(
-                      "Execute dbo.pro_GetAntibioticmaster @venueno,@venuebranchno,@antibioticno,@pageIndex",
-                      _venueno, _venuebranchno, _antibioticno, _pageIndex).ToList();
+                    "Execute dbo.pro_GetAntibioticmaster @venueno,@venuebranchno,@antibioticno,@pageIndex",
+                    _venueno, _venuebranchno, _antibioticno, _pageIndex).ToList();
                 }
             }
             catch (Exception ex)
@@ -270,8 +262,8 @@ namespace Dev.Repository
                     var _userno = new SqlParameter("userno", antinsertreq?.userno);
 
                     objresult = context.Insertantimaster.FromSqlRaw(
-                      "Execute dbo.pro_InsertAntibioticsmaster @venueno,@venuebranchno,@antibioticno,@antibioticName,@sequenceno,@status,@userNo",
-                      _venueno, _venuebranchno, _antibioticno, _antibioticName, _sequenceno, _status, _userno).AsEnumerable().FirstOrDefault();
+                    "Execute dbo.pro_InsertAntibioticsmaster @venueno,@venuebranchno,@antibioticno,@antibioticName,@sequenceno,@status,@userNo",
+                    _venueno, _venuebranchno, _antibioticno, _antibioticName, _sequenceno, _status, _userno).AsEnumerable().FirstOrDefault();
                 }
             }
             catch (Exception ex)
@@ -296,8 +288,8 @@ namespace Dev.Repository
                     var _organismNo = new SqlParameter("organismNo", reqorgAnti?.organismNo);
 
                     lst = context.Getantirog.FromSqlRaw(
-                      "Execute dbo.pro_GetOrganismtypeandantibioticmaster @venueno,@venuebranchno,@organismAntibioticMapNo,@organismTypeNo,@antibioticno,@pageIndex,@organismNo",
-                      _venueno, _venuebranchno, _organismAntibioticMapNo, _organismTypeNo, _antibioticno, _pageIndex, _organismNo).ToList();
+                    "Execute dbo.pro_GetOrganismtypeandantibioticmaster @venueno,@venuebranchno,@organismAntibioticMapNo,@organismTypeNo,@antibioticno,@pageIndex,@organismNo",
+                    _venueno, _venuebranchno, _organismAntibioticMapNo, _organismTypeNo, _antibioticno, _pageIndex, _organismNo).ToList();
                 }
             }
             catch (Exception ex)
@@ -324,8 +316,8 @@ namespace Dev.Repository
                     var _organismNo = new SqlParameter("organismNo", orgAntinsertreq?.organismNo);
 
                     objresult = context.Insertantiorg.FromSqlRaw(
-                      "Execute dbo.pro_InsertOrganismtypeandantibioticmaster @venueno,@venuebranchno,@organismAntibioticMapNo,@organismTypeNo,@antibioticno,@organismNo,@sequenceno,@status,@userno",
-                      _venueno, _venuebranchno, _organismAntibioticMapNo, _organismTypeNo, _antibioticno, _organismNo, _sequenceno, _status, _userno).AsEnumerable().FirstOrDefault();
+                    "Execute dbo.pro_InsertOrganismtypeandantibioticmaster @venueno,@venuebranchno,@organismAntibioticMapNo,@organismTypeNo,@antibioticno,@organismNo,@sequenceno,@status,@userno",
+                    _venueno, _venuebranchno, _organismAntibioticMapNo, _organismTypeNo, _antibioticno, _organismNo, _sequenceno, _status, _userno).AsEnumerable().FirstOrDefault();
                 }
             }
             catch (Exception ex)

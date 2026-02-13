@@ -1,11 +1,7 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using MasterManagement.Entities;
 using MasterManagement.Models;
 using Microsoft.EntityFrameworkCore;
-using DEV.Common;
+using Service.Common;
 
 namespace MasterManagement.Helpers
 {
@@ -28,7 +24,6 @@ namespace MasterManagement.Helpers
 
             });
         }
-
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.ApplyConfiguration(new ProductEntityConfiguration());
@@ -37,7 +32,6 @@ namespace MasterManagement.Helpers
             modelBuilder.ApplyConfiguration(new TariffEntityConfiguration());
             modelBuilder.ApplyConfiguration(new NurseEntityConfiguration());
         }
-
         public DbSet<Product> Products { get; set; }
         public DbSet<ProductSpecialRequirement> ProductSpecialRequirements { get; set; }
         public DbSet<Lookup> Lookups { get; set; }

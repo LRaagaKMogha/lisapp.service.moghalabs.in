@@ -1,5 +1,5 @@
-﻿using Dev.IRepository;
-using DEV.Common;
+﻿using Service.IRepository;
+using Service.Common;
 using Service.Model;
 using Service.Model.EF;
 using Service.Model.Sample;
@@ -9,15 +9,13 @@ using System;
 using System.Collections.Generic;
 using Microsoft.Data.SqlClient;
 using System.Linq;
-using System.Text;
 
-namespace Dev.Repository
+namespace Service.Repository
 {
     public class ICMRResponseRepository : IICMRResponseRepository
     {
         private IConfiguration _config;
         public ICMRResponseRepository(IConfiguration config) { _config = config; }
-
 
         public List<GetICMRResponse> GetICMRResult(CommonFilterRequestDTO RequestItem)
         {
@@ -33,10 +31,8 @@ namespace Dev.Repository
                     var _CustomerNo = new SqlParameter("CustomerNo", RequestItem.CustomerNo);
 
                     lstGetICMRResponse = context.GetICMRResponseDTO.FromSqlRaw(
-                        "Execute dbo.Pro_GetTATReport @FROMDate,@ToDate,@VenueNo,@VenueBranchNo,@RefferalType,@CustomerNo,@PhysicianNo,@DepartmentNo,@ServiceNo,@ServiceType,@OrderStatus",
+                    "Execute dbo.Pro_GetTATReport @FROMDate,@ToDate,@VenueNo,@VenueBranchNo,@RefferalType,@CustomerNo,@PhysicianNo,@DepartmentNo,@ServiceNo,@ServiceType,@OrderStatus",
                     _FromDate, _ToDate, _VenueNo, _VenueBranchNo, _CustomerNo).ToList();
-
-
                 }
             }
             catch (Exception ex)

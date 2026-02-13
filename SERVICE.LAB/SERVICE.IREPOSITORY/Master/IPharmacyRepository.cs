@@ -1,19 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
 using Service.Model;
 
-namespace Dev.IRepository
+namespace Service.IRepository
 {
     public interface IPharmacyRepository
     { 
-         List<TblGeneric> GetGeneric(reqgeneric req);
-         GenericMasterResponse InsertGeneric(TblGeneric tblGeneric);
-         List<TblMedtype> GetMedicinetype(reqmedtype medtype);
-         MedtypeMasterResponse InsertMedtype(TblMedtype tblmedtype);
-         List<TblMedstr> GetMedstr(reqmedstr medstr);
+        List<TblGeneric> GetGeneric(reqgeneric req);
+        GenericMasterResponse InsertGeneric(TblGeneric tblGeneric);
+        List<TblMedtype> GetMedicinetype(reqmedtype medtype);
+        MedtypeMasterResponse InsertMedtype(TblMedtype tblmedtype);
+        List<TblMedstr> GetMedstr(reqmedstr medstr);
         MedstrMasterResponse InsertMedstr(TblMedstr tblmedstr);
-
     }
-
 }

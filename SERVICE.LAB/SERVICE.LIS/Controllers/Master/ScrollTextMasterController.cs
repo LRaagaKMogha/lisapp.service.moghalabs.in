@@ -1,14 +1,13 @@
-﻿using Dev.IRepository.Master;
-using DEV.Common;
+﻿using Service.IRepository.Master;
+using Service.Common;
 using Service.Model.Master;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
 
-namespace DEV.API.SERVICE.Controllers.Master
+namespace Service.API.SERVICE.Controllers.Master
 {
     [Authorize(AuthenticationSchemes = "Bearer")]
     [ApiController]
@@ -16,12 +15,10 @@ namespace DEV.API.SERVICE.Controllers.Master
     {
         private readonly IConfiguration _config;
         private readonly IScrollTextMasterRepository _ScrollTextMasterRepository;
-
         public ScrollTextMasterController(IScrollTextMasterRepository ScrollTextMasterRepository, IConfiguration config)
         {
             _ScrollTextMasterRepository = ScrollTextMasterRepository;
             _config = config;
-
         }
         [HttpPost]
         [Route("api/ScrollTextMaster/GetScrollTextMasterDetails")]
@@ -30,9 +27,7 @@ namespace DEV.API.SERVICE.Controllers.Master
             List<ScrollTextMasterResponse> ScrollTextMasterresult = new List<ScrollTextMasterResponse>();
             try
             {
-
                 ScrollTextMasterresult = _ScrollTextMasterRepository.GetScrollTextMaster(scrollMaster);
-
             }
             catch (Exception ex)
             {
@@ -40,7 +35,6 @@ namespace DEV.API.SERVICE.Controllers.Master
             }
             return ScrollTextMasterresult;
         }
-
 
         [HttpPost]
         [Route("api/ScrollTextMaster/InsertScrollTextMaster")]

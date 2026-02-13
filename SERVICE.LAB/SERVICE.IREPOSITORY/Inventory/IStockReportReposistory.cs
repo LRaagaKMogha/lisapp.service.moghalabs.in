@@ -1,7 +1,7 @@
 ﻿using Service.Model.Inventory;
 using System.Collections.Generic;
 
-namespace Dev.IRepository.Inventory
+namespace Service.IRepository.Inventory
 {
     public interface IStockReportReposistory
     {

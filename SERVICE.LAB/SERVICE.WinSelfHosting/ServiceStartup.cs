@@ -1,17 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Web.Http;
 using System.Web.Http.SelfHost;
 using System.Configuration;
 using System.ServiceModel.Channels;
 using System.Web.Http.SelfHost.Channels;
-using System.ServiceModel;
-using DEV.Common;
+using Service.Win.Common;
 
-namespace DEV.WinSelfHosting
+namespace Service.WinSelfHosting
 {
     public class ServiceStartup
     {
@@ -19,7 +14,7 @@ namespace DEV.WinSelfHosting
         {
             try
             {
-                Logger.LogFileWrite("StartupAPI - " + DateTime.Now.ToString());
+                Logger.LogWrite("StartupAPI - " + DateTime.Now.ToString());
                 string PortNumber = ConfigurationManager.AppSettings["PortNo"].ToString();
                 var config = new HttpSelfHostConfiguration("https://localhost:" + PortNumber + "");
                 config.MaxReceivedMessageSize = 2147483647; // use config for this value
@@ -36,7 +31,7 @@ namespace DEV.WinSelfHosting
             }
             catch (Exception ex)
             {
-                Logger.LogFileWrite("StartupAPI - " + ex.ToString());
+                Logger.LogWrite("StartupAPI - " + ex.ToString());
                 throw;
             }
         }

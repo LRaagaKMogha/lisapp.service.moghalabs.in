@@ -1,24 +1,13 @@
-﻿using Dev.IRepository;
-using Dev.IRepository.FrontOffice;
-using Dev.Repository;
-using DEV.Common;
-using Service.Model;
+﻿using Service.IRepository.FrontOffice;
+using Service.Common;
 using Service.Model.FrontOffice;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.Logging;
-using Serilog;
 using System;
 using System.Collections.Generic;
-using System.Configuration;
-using System.Drawing;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
-namespace DEV.API.SERVICE.Controllers
+
+namespace Service.API.SERVICE.Controllers
 {
     [Authorize(AuthenticationSchemes = "Bearer")]
     [ApiController]

@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text.RegularExpressions;
-using System.Threading.Tasks;
+﻿using System.Text.RegularExpressions;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 
-namespace DEV.API.SERVICE.Shared.Masters
+namespace Service.API.SERVICE.Shared.Masters
 {
     public class CustomBadRequest : ValidationProblemDetails
     {
@@ -18,7 +14,6 @@ namespace DEV.API.SERVICE.Shared.Masters
             ConstructErrorMessages(context);
             Type = context.HttpContext.TraceIdentifier;
         }
-
         private void ConstructErrorMessages(ActionContext context)
         {
             foreach (var keyModelStatePair in context.ModelState)
@@ -45,7 +40,6 @@ namespace DEV.API.SERVICE.Shared.Masters
                 }
             }
         }
-
         string GetErrorMessage(ModelError error)
         {
             var invalidPropertyName = ExtractPropertyName(error.ErrorMessage);
@@ -53,7 +47,6 @@ namespace DEV.API.SERVICE.Shared.Masters
                 $"The input property '{invalidPropertyName}' was not valid." :
                 error.ErrorMessage;
         }
-
         static string ExtractPropertyName(string errorMessage)
         {
             string pattern = @"Path: \$.(\w+)";

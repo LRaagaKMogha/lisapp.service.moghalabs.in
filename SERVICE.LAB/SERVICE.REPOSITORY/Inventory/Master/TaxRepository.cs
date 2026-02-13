@@ -1,16 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
-using Dev.IRepository;
+using Service.IRepository;
 using Service.Model;
 using Service.Model.EF;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using System.Linq;
-using DEV.Common;
+using Service.Common;
 using Microsoft.Data.SqlClient;
 
-namespace Dev.Repository
+namespace Service.Repository
 {
     public class TaxRepository : ITaxRepository
     {
@@ -172,6 +171,7 @@ namespace Dev.Repository
                     var _RangeTo = new SqlParameter("RangeTo", tblhsnrange?.RangeTo);
                     var _HSNRangeNo = new SqlParameter("HSNRangeNo", tblhsnrange?.HSNRangeNo);
                     var _status = new SqlParameter("status", tblhsnrange?.status);
+                    
                     var obj = context.InsertHSNRangeMaster.FromSqlRaw(
                     "Execute pro_InsertHSNRangeWiseTax @venueNo,@venueBranchno,@HSNRangeNo,@HSNNo,@RangeFrom,@RangeTo,@taxNo,@status,@userNo",
                     _venueNo, _venueBranchno, _HSNRangeNo,_HSNNo, _RangeFrom, _RangeTo,_taxNo,_status, _userNo).ToList();

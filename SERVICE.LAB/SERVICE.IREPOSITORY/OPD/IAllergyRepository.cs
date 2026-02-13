@@ -1,11 +1,7 @@
 ﻿using Service.Model;
-using Service.Model.Inventory.Master;
-using System;
 using System.Collections.Generic;
-using System.Text;
-using Service.Model;
 
-namespace Dev.IRepository
+namespace Service.IRepository
 {
     public interface IAllergyRepository
     {

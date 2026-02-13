@@ -1,5 +1,5 @@
-﻿using Dev.IRepository.Inventory;
-using DEV.Common;
+﻿using Service.IRepository.Inventory;
+using Service.Common;
 using Service.Model;
 using Service.Model.EF;
 using Service.Model.Inventory;
@@ -12,7 +12,7 @@ using System.Collections.Generic;
 using Microsoft.Data.SqlClient;
 using System.Linq;
 
-namespace Dev.Repository
+namespace Service.Repository
 {
     public class SupplierMasterReposistory : ISupplierMasterRepository
     {
@@ -29,8 +29,7 @@ namespace Dev.Repository
             try
             {
                 using (var context = new MasterContext(_config.GetConnectionString(ConfigKeys.DefaultConnection)))
-                {
-                    
+                {                    
                     var _VenueNo = new SqlParameter("VenueNo", masterRequest?.venueNo);
                     var _SupplierNo = new SqlParameter("SupplierNo", masterRequest?.supplierNo);
                     var _Status = new SqlParameter("Status", masterRequest.status);
@@ -101,7 +100,6 @@ namespace Dev.Repository
                 {
                     var _supplierMasterNo = new SqlParameter("SupplierMasterNo", req?.supplierMasterNo);
                     var _venueno = new SqlParameter("venueno", req?.venueNo);
-                    //var _venuebranchno = new SqlParameter("venuebranchno", req.venueBranchNo);
 
                     var lst = context.GetEditSuppiler.FromSqlRaw(
                     "Execute dbo.pro_GetSuppilerMaster @SupplierMasterNo,@venueno",
@@ -175,4 +173,3 @@ namespace Dev.Repository
         }
     }
 }
-

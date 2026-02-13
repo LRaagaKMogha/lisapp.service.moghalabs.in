@@ -1,27 +1,19 @@
 ﻿using Service.Model;
 using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Linq;
-using Dev.IRepository;
+using Service.IRepository;
 using Microsoft.EntityFrameworkCore;
 using Service.Model.EF;
 using Microsoft.Data.SqlClient;
-using Newtonsoft.Json;
 using System.IO;
 using Microsoft.Extensions.Configuration;
-using DEV.Common;
+using Service.Common;
 using System.Data;
-using Serilog;
-using System.Text.RegularExpressions;
-using PdfSharp.Pdf;
-using PdfSharp.Pdf.IO;
 using Service.Model.Sample;
 using System.Xml.Linq;
-using Microsoft.Office.Interop.Word;
-using ErrorOr;
 
-namespace Dev.Repository
+namespace Service.Repository
 {
     public class OPDPatientRepository : IOPDPatientRepository
     {
@@ -35,6 +27,7 @@ namespace Dev.Repository
             {
                 CommonHelper commonUtility = new CommonHelper();
                 string prevApptProcedureDtlXML = "";
+                
                 if (objDTO.prevApptProcedureDtl != null && objDTO.prevApptProcedureDtl.Count > 0)
                 {
                     prevApptProcedureDtlXML = commonUtility.ToXML(objDTO.prevApptProcedureDtl);
@@ -156,7 +149,6 @@ namespace Dev.Repository
             }
             return result;
         }
-
         public List<OPDPatientDoctorDTOList> GetOPDDoctorPatientList(CommonFilterRequestDTO RequestItem)
         {
             List<OPDPatientDoctorDTOList> result = new List<OPDPatientDoctorDTOList>();
@@ -236,7 +228,6 @@ namespace Dev.Repository
             }
             return result;
         }
-
         public List<OPDPatientVitalList> GetPatientVitalData(SearchOPDPatientVitalRequest RequestItem)
         {
             List<OPDPatientVitalList> result = new List<OPDPatientVitalList>();
@@ -304,7 +295,6 @@ namespace Dev.Repository
             }
             return result;
         }
-
         public List<OPDPatientOPDDrugData> GetPatientOPDDrugData(SearchOPDPatientDataRequest RequestItem)
         {
             List<OPDPatientOPDDrugData> result = new List<OPDPatientOPDDrugData>();

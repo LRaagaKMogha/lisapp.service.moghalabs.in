@@ -8,8 +8,8 @@
     <ProjectGuid>{BE4F8A41-7B9A-47D2-BE5C-208DBDC58858}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>DEV.Windows.Repository</RootNamespace>
-    <AssemblyName>DEV.Windows.Repository</AssemblyName>
+    <RootNamespace>Service.Win.Repository</RootNamespace>
+    <AssemblyName>Service.Win.Repository</AssemblyName>
     <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
@@ -38,6 +38,9 @@
     <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Newtonsoft.Json.6.0.4\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="Service.Model.EF">
+      <HintPath>..\SERVICE.MODEL.EF\bin\Debug\net8.0\Service.Model.EF.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />

@@ -1,25 +1,17 @@
 ﻿using Service.Model;
 using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Linq;
-using Dev.IRepository;
+using Service.IRepository;
 using Microsoft.EntityFrameworkCore;
 using Service.Model.EF;
 using Microsoft.Data.SqlClient;
-using Newtonsoft.Json;
-using System.IO;
 using Microsoft.Extensions.Configuration;
-using DEV.Common;
+using Service.Common;
 using System.Data;
-using Serilog;
-using System.Text.RegularExpressions;
-using PdfSharp.Pdf;
-using PdfSharp.Pdf.IO;
-using Service.Model.Sample;
 using System.Xml.Linq;
 
-namespace Dev.Repository
+namespace Service.Repository
 {
     public class InsuranceRepository : IInsuranceRepository
     {

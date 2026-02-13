@@ -1,14 +1,11 @@
 ﻿using Service.Model;
-using System;
 using System.Collections.Generic;
-using System.Text;
 
-namespace Dev.IRepository
+namespace Service.IRepository
 {
     public interface IMainDepartmentRepository
     {
-            List<TblMainDepartment> GetMainDepartmentDetails(MainDepartmentmasterRequest maindeptmaster);
-            MainDepartmentMasterResponse InsertMainDepartmentmaster(TblMainDepartment tblmaindepartment);
-           
+        List<TblMainDepartment> GetMainDepartmentDetails(MainDepartmentmasterRequest maindeptmaster);
+        MainDepartmentMasterResponse InsertMainDepartmentmaster(TblMainDepartment tblmaindepartment);           
     }
 }

@@ -1,12 +1,7 @@
-﻿using DEV.Common;
+﻿using Service.Common;
 using Service.Model.Integration;
 using Microsoft.EntityFrameworkCore;
 using Shared.Audit;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Service.Model.EF.Common
 {

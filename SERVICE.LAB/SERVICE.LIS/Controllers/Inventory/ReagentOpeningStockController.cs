@@ -1,12 +1,12 @@
-﻿using Dev.IRepository.Inventory;
-using DEV.Common;
+﻿using Service.IRepository.Inventory;
+using Service.Common;
 using Service.Model;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using Microsoft.AspNetCore.Authorization;
 
-namespace DEV.API.SERVICE.Controllers.Inventory
+namespace Service.API.SERVICE.Controllers.Inventory
 {
     [Authorize(AuthenticationSchemes = "Bearer")]
     [ApiController]
@@ -16,7 +16,6 @@ namespace DEV.API.SERVICE.Controllers.Inventory
         public ReagentOpeningStockController(IReagentOpeningStockRepositoty ReagentOpeningStockRepositoty)
         {
             _ReagentOpeningStockRepositoty = ReagentOpeningStockRepositoty;
-
         }
         [HttpPost]
         [Route("api/ReagentOpeningStock/GetAllReagentOpeningStock")]
@@ -41,7 +40,6 @@ namespace DEV.API.SERVICE.Controllers.Inventory
             try
             {
                 result = _ReagentOpeningStockRepositoty.InsertReagentOpeningStock(insertReagentOpeningStock);
-
             }
             catch (Exception ex)
             {

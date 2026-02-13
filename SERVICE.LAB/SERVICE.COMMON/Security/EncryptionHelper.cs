@@ -4,7 +4,7 @@ using System.Security.Cryptography;
 using System;
 using System.Configuration;
 
-namespace DEV.Common
+namespace Service.Common
 {
     public static class EncryptionHelper
     {

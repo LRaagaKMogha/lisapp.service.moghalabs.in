@@ -1,9 +1,9 @@
 ﻿using AutoMapper;
 using Azure;
-using Dev.IRepository;
-using Dev.Repository.Integration;
-using Dev.Repository.Integration.externalservices;
-using DEV.Common;
+using Service.IRepository;
+using Service.Repository.Integration;
+using Service.Repository.Integration.externalservices;
+using Service.Common;
 using Service.Model;
 using Service.Model.EF;
 using Service.Model.EF.External.CommonMasters;
@@ -33,7 +33,7 @@ using System.Security.Principal;
 using System.ServiceModel;
 using System.Threading.Tasks;
 
-namespace Dev.Repository
+namespace Service.Repository
 {
     public class FinanceIntegrationRepository : IFinanceIntegrationRepository
     {

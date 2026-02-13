@@ -1,14 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
 using Service.Model;
 using Microsoft.AspNetCore.Mvc;
 
-namespace Dev.IRepository
+namespace Service.IRepository
 {
     public interface ITestRepository
-    {
-       
+    {       
         List<lsttest> GetTestList(reqtest req);
         objtest GetEditTest(reqtest req);
          int InsertTest(objtest req);
@@ -20,8 +17,6 @@ namespace Dev.IRepository
         objgrppkg GetEditGroupPackage(reqtest req);
         int InsertGroupPackage(objgrppkg req);
         List<lstgrppkgservice> GetSearchService(reqsearchservice req);
-
-
         List<lststest> GetSubTestList(reqtest req);
         objsubtest GetEditSubTest(reqtest req);
         int InsertSubTest(objsubtest req);
@@ -29,7 +24,6 @@ namespace Dev.IRepository
         List<GetFormulaResponse> GetTestFormula(GetFormulaRequest req);
         CheckTestcodeExistsRes GetAlreadyExisitingTestCode(CheckTestcodeExists req);
         List<restestapprove> GetTestApprove(reqtestapprove req);
-
         List<restestappHistory> GetApproveHistory(reqtestapprove req);
         List<GetTATRes> GetTATMaster(GetTATReq req);
         InsTATRes InsertTATMaster(InsTATReq req);
@@ -44,5 +38,4 @@ namespace Dev.IRepository
         List<GetStatinMasterDetailsRes> GetStatinMasterDetails(GetStatinMasterDetailsReq req);
         StainMasterInsertRes InsertStatinMasterDetails(StainMasterInsertReq req);
     }
-
 }

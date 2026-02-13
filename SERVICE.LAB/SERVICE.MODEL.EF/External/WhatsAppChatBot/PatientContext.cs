@@ -1,10 +1,6 @@
 ﻿using Service.Model.External.WhatsAppChatBot;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Text;
-using Microsoft.EntityFrameworkCore.Metadata;
-using DEV.Common;
+using Service.Common;
 
 namespace Service.Model.EF.External.WhatsAppChatBot
 {

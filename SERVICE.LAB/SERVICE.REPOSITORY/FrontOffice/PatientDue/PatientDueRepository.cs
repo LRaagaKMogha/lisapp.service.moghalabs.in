@@ -1,5 +1,5 @@
-﻿using Dev.IRepository;
-using DEV.Common;
+﻿using Service.IRepository;
+using Service.Common;
 using Service.Model;
 using Service.Model.EF;
 using Service.Model.FrontOffice.PatientDue;
@@ -11,7 +11,7 @@ using System.Collections.Generic;
 using Microsoft.Data.SqlClient;
 using System.Linq;
 
-namespace Dev.Repository
+namespace Service.Repository
 {
    public class PatientDueRepository: IPatientDueRepository
     {

@@ -1,5 +1,5 @@
-﻿using Dev.IRepository;
-using DEV.Common;
+﻿using Service.IRepository;
+using Service.Common;
 using Service.Model;
 using Service.Model.EF;
 using Microsoft.EntityFrameworkCore;
@@ -8,9 +8,8 @@ using System;
 using System.Collections.Generic;
 using Microsoft.Data.SqlClient;
 using System.Linq;
-using System.Text;
 
-namespace Dev.Repository
+namespace Service.Repository
 {
     public class InventoryDashBoardRepository : IInventoryDashBoardRepository
     {
@@ -24,7 +23,6 @@ namespace Dev.Repository
             {
                 using (var context = new LIMSContext(_config.GetConnectionString(ConfigKeys.DefaultConnection)))
                 {
-
                     var _UserType = new SqlParameter("UserType", RequestItem?.UserType);
                     var _UserNo = new SqlParameter("UserNo", RequestItem?.UserNo);
                     var _VenueNo = new SqlParameter("VenueNo", RequestItem?.VenueNo);
@@ -44,6 +42,5 @@ namespace Dev.Repository
             }
             return response;
         }
-
     }
 }

@@ -1,18 +1,10 @@
 ﻿using Service.Model;
 using Service.Model.Common;
-using DEV.Common;
-using Microsoft.AspNetCore.Mvc.ModelBinding;
 using System;
 using System.Collections.Generic;
-using System.Resources;
-using System.Text.RegularExpressions;
-using Microsoft.IdentityModel.Tokens;
-using System.Data;
-using System.Linq;
 using Service.Model.Sample;
-using RtfPipe.Tokens;
 
-namespace DEV.API.SERVICE.Controllers
+namespace Service.API.SERVICE.Controllers
 {
     public class ReportValidation
     {
@@ -149,7 +141,6 @@ namespace DEV.API.SERVICE.Controllers
             }
             return errorResponse;
         }
-
 
         // Result Impression Report //
         public static ErrorResponse GetPatientImpression(CommonFilterRequestDTO RequestItem)

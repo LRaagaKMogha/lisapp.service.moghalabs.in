@@ -1,16 +1,13 @@
 ﻿using Service.Model;
 using Service.Model.Common;
-using DEV.Common;
-using Microsoft.AspNetCore.Mvc.ModelBinding;
+using Service.Common;
 using System;
 using System.Collections.Generic;
-using System.Resources;
 using System.Text.RegularExpressions;
-using Microsoft.IdentityModel.Tokens;
 using System.Data;
 using System.Linq;
 
-namespace DEV.API.SERVICE.Controllers
+namespace Service.API.SERVICE.Controllers
 {
     public class TestMasterValidation
     {
@@ -29,8 +26,6 @@ namespace DEV.API.SERVICE.Controllers
                     errors.Add("Test Name is required");
                 if (string.IsNullOrEmpty(req.testDisplayName) || req.testDisplayName.TrimStart() == string.Empty)
                     errors.Add("Test Display Name is required");
-                //if (string.IsNullOrEmpty(req.testCode) || req.testCode.TrimStart() == string.Empty)
-                //    errors.Add("Test Code is Required");
                 if (string.IsNullOrEmpty(req.gender) || req.gender.TrimStart() == string.Empty)
                     errors.Add("Gender is required");
                 if (string.IsNullOrEmpty(req.resultType) || req.resultType.TrimStart() == string.Empty)
@@ -110,8 +105,6 @@ namespace DEV.API.SERVICE.Controllers
 
                 if (req.lstmultisamplesreferencelist != null && req.lstmultisamplesreferencelist.Any() && req.sampleNo > 0 && req.containerNo > 0)
                 {
-                    //var match = req.lstmultisamplesreferencelist
-                    //    .Any(d => d.sampleNo == req.sampleNo);
                     var dublicatecontainer = req.lstmultisamplesreferencelist.GroupBy(x => new { x.containerNo, x.sampleNo }).Where(x => x.Count() > 1).Select(x => x.Key).Count();
                     if (dublicatecontainer > 0)
                     {
@@ -177,8 +170,6 @@ namespace DEV.API.SERVICE.Controllers
                     errors.Add("Test Name is required");
                 if (string.IsNullOrEmpty(req.testDisplayName) || req.testDisplayName.TrimStart() == string.Empty)
                     errors.Add("Test Display Name is required");
-                //if (string.IsNullOrEmpty(req.testCode) || req.testCode.TrimStart() == string.Empty)
-                //    errors.Add("Test Code is Required");
                 if (string.IsNullOrEmpty(req.gender) || req.gender.TrimStart() == string.Empty)
                     errors.Add("Gender is required");
                 if (string.IsNullOrEmpty(req.resultType) || req.resultType.TrimStart() == string.Empty)
@@ -258,12 +249,6 @@ namespace DEV.API.SERVICE.Controllers
 
                 if (req.lstmultisamplesreferencelist != null && req.lstmultisamplesreferencelist.Any() && req.sampleNo > 0 && req.containerNo > 0)
                 {
-                    //var match = req.lstmultisamplesreferencelist
-                    //    .Any(d => d.sampleNo == req.sampleNo);
-                    //if (match)
-                    //{
-                    //    errors.Add("Duplicate sample's with tube type is could not allowed");
-                    //}
                     var dublicatecontainer = req.lstmultisamplesreferencelist.GroupBy(x => new { x.containerNo, x.sampleNo }).Where(x => x.Count() > 1).Select(x => x.Key).Count();
                     if (dublicatecontainer > 0)
                     {
@@ -336,7 +321,6 @@ namespace DEV.API.SERVICE.Controllers
         {
             return (b.Date - a.Date).Days;
         }
-
         public static bool ValidateFormula(string formulaText)
         {
             var lstOperatorChars = new List<string> { "+", "-", "*", "/", "=", "(", ")", "%", "^" };

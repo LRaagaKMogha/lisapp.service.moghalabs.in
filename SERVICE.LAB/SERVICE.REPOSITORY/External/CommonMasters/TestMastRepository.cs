@@ -1,5 +1,5 @@
-﻿using Dev.IRepository.External.CommonMasters;
-using DEV.Common;
+﻿using Service.IRepository.External.CommonMasters;
+using Service.Common;
 using Service.Model.EF.External.CommonMasters;
 using Service.Model.External.CommonMasters;
 using Microsoft.EntityFrameworkCore;
@@ -8,9 +8,8 @@ using System;
 using System.Collections.Generic;
 using Microsoft.Data.SqlClient;
 using System.Linq;
-using System.Text;
 
-namespace Dev.Repository.External.CommonMasters
+namespace Service.Repository.External.CommonMasters
 {
     public class TestMastRepository : ITestMastRepository
     {
@@ -31,9 +30,9 @@ namespace Dev.Repository.External.CommonMasters
                     var _venueBranchNo = new SqlParameter("VenueBranchNo", pVenueBranchNo);
 
                     objResponse = context.GetTestList.FromSqlRaw(
-                           "Execute dbo.pro_Ex_GetTestListInfo" +
-                           " @VenueNo, @VenueBranchNo",
-                             _venueNo, _venueBranchNo).ToList();
+                    "Execute dbo.pro_Ex_GetTestListInfo" +
+                    " @VenueNo, @VenueBranchNo",
+                    _venueNo, _venueBranchNo).ToList();
                 }
             }
             catch (Exception ex)

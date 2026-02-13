@@ -1,18 +1,16 @@
-﻿using Dev.IRepository.Inventory;
-using DEV.Common;
+﻿using Service.IRepository.Inventory;
+using Service.Common;
 using Service.Model;
 using Service.Model.EF;
 using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
-using Microsoft.IdentityModel.Tokens;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 
-namespace Dev.Repository.Inventory
+namespace Service.Repository.Inventory
 {
     public class StockCorrectionRepositoty : IStockCorrectionRepositoty
     {
@@ -184,6 +182,7 @@ namespace Dev.Repository.Inventory
                     var lst = context.GetStockAdjustmentProductDTO.FromSqlRaw(
                     "Execute dbo.pro_GetStockAdjustmentProductDetails @VenueNo, @VenueBranchNo, @StkadjNo",
                     _VenueNo, _VenueBranchNo, _StkadjNo).AsEnumerable().FirstOrDefault();
+                    
                     if (lst != null)
                     {
                         objresult.BranchNo = lst.BranchNo;
@@ -296,7 +295,6 @@ namespace Dev.Repository.Inventory
             }
             return objresult;
         }
-
         public List<ConsumptionDetailsResponse> GetStockConsumptionDetails(GetConsumptionListRequest request)
         {
             List<ConsumptionDetailsResponse> objresult = new List<ConsumptionDetailsResponse>();

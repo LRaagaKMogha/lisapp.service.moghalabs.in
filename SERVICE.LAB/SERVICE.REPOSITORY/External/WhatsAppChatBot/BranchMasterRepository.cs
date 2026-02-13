@@ -1,5 +1,5 @@
-﻿using Dev.IRepository.External.WhatsAppChatBot;
-using DEV.Common;
+﻿using Service.IRepository.External.WhatsAppChatBot;
+using Service.Common;
 using Service.Model.EF.External.WhatsAppChatBot;
 using Service.Model.External.WhatsAppChatBot;
 using Microsoft.EntityFrameworkCore;
@@ -8,11 +8,8 @@ using System;
 using System.Collections.Generic;
 using Microsoft.Data.SqlClient;
 using System.Linq;
-using System.Net;
-using System.Numerics;
-using System.Text;
 
-namespace Dev.Repository.External.WhatsAppChatBot
+namespace Service.Repository.External.WhatsAppChatBot
 {
     public class BranchMasterRepository : IBranchMasterRepository
     {

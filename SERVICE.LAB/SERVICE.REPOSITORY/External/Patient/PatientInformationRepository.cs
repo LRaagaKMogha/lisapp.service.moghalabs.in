@@ -1,7 +1,6 @@
-﻿using Dev.IRepository.External.Patient;
-using DEV.Common;
+﻿using Service.IRepository.External.Patient;
+using Service.Common;
 using Service.Model.EF.External.Patient;
-using Service.Model.External.Billing;
 using Service.Model.External.Patient;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -9,9 +8,8 @@ using System;
 using System.Collections.Generic;
 using Microsoft.Data.SqlClient;
 using System.Linq;
-using System.Text;
 
-namespace Dev.Repository.External.Patient
+namespace Service.Repository.External.Patient
 {
     public class PatientInformationRepository : IPatientInformationRepository
     {
@@ -31,9 +29,9 @@ namespace Dev.Repository.External.Patient
                     var _dtTo = new SqlParameter("ToDate", pDtTo);
 
                     objResponse = context.FetchPatientInformation.FromSqlRaw(
-                           "Execute dbo.Pro_Ex_GetPatientInfo" +
-                           " @VenueNo, @VenueBranchNo, @FromDate, @ToDate",
-                             _venueNo, _venueBranchNo, _dtFrom, _dtTo).ToList();
+                    "Execute dbo.Pro_Ex_GetPatientInfo" +
+                    " @VenueNo, @VenueBranchNo, @FromDate, @ToDate",
+                    _venueNo, _venueBranchNo, _dtFrom, _dtTo).ToList();
                 }
             }
             catch (Exception ex)

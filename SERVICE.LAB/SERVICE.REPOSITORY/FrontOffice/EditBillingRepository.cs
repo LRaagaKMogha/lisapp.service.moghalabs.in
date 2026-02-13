@@ -1,6 +1,5 @@
-﻿using Azure;
-using Dev.IRepository;
-using DEV.Common;
+﻿using Service.IRepository;
+using Service.Common;
 using Service.Model;
 using Service.Model.EF;
 using Microsoft.Data.SqlClient;
@@ -11,18 +10,15 @@ using Serilog;
 using System;
 using System.Collections.Generic;
 using System.Data;
-using System.Globalization;
-using System.IO;
 using System.Linq;
 using System.Xml.Linq;
 
-namespace Dev.Repository
+namespace Service.Repository
 {
     public class EditBillingRepository : IEditBillingRepository
     {
         private IConfiguration _config;
         public EditBillingRepository(IConfiguration config) { _config = config; }
-
 
         /// <summary>
         /// Insert Front OfficeMaster
@@ -35,7 +31,6 @@ namespace Dev.Repository
             FrontOffficeResponse result = new FrontOffficeResponse(); ;
             try
             {
-
                 using (var context = new FrontOfficeContext(_config.GetConnectionString(ConfigKeys.DefaultConnection)))
                 {
                     string Password = Guid.NewGuid().ToString("N").Substring(0, 7);

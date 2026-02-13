@@ -1,5 +1,5 @@
-﻿using Dev.IRepository;
-using DEV.Common;
+﻿using Service.IRepository;
+using Service.Common;
 using Service.Model;
 using Service.Model.EF;
 using Microsoft.EntityFrameworkCore;
@@ -8,9 +8,8 @@ using System;
 using System.Collections.Generic;
 using Microsoft.Data.SqlClient;
 using System.Linq;
-using System.Text;
 
-namespace Dev.Repository
+namespace Service.Repository
 {
     public class AnaParamRepository : IAnaParamRepository
     {
@@ -36,9 +35,11 @@ namespace Dev.Repository
                     var _venueNo = new SqlParameter("venueNo", AnaParamobj.VenueNo);
                     var _userno = new SqlParameter("userNo", AnaParamobj.CreatedBy);
                     var _analyzerParamNo = new SqlParameter("analyzerParamNo", AnaParamobj.AnalyzerParamNo);
+                    
                     var lst = context.InsertAnalyzerParameter.FromSqlRaw(
-                       "Execute dbo.pro_InsertAnalyzerVsParameters @analyzerMasterNo,@description,@sequenceNo, @sampleNo,@status,@venueNo,@userNo,@analyzerParamNo",
-                        _analyzerMasterNo, _description, _sequenceNo, _sampleNo, _status, _venueNo, _userno, _analyzerParamNo).ToList();
+                    "Execute dbo.pro_InsertAnalyzerVsParameters @analyzerMasterNo,@description,@sequenceNo, @sampleNo,@status,@venueNo,@userNo,@analyzerParamNo",
+                    _analyzerMasterNo, _description, _sequenceNo, _sampleNo, _status, _venueNo, _userno, _analyzerParamNo).ToList();
+                    
                     result.AnalyzerMasterNo = lst[0].AnalyzerMasterNo;
                 }
             }
@@ -48,7 +49,6 @@ namespace Dev.Repository
             }
             return result;
         }
-
         public List<AnaParamGetDto> GetAnaParamDetails(int VenueNo, int VenueBranchNo, int Analyzerno, int Sampleno)
         {
             List<AnaParamGetDto> objresult = new List<AnaParamGetDto>();
@@ -70,7 +70,6 @@ namespace Dev.Repository
             }
             return objresult;
         }
-
         public List<FetchAnaParamDto> FetchAnalyzerParamDetails(int VenueNo, int VenueBranchNo, int Analyzerno, int Sampleno)
         {
             List<FetchAnaParamDto> objresult = new List<FetchAnaParamDto>();
@@ -84,8 +83,8 @@ namespace Dev.Repository
                     var _sampleno = new SqlParameter("Sampleno", Sampleno);
 
                     objresult = context.FetchAnalyzerParameter.FromSqlRaw("Execute dbo.pro_FetchAnalyzerVsParametersMapping " +
-                        "@VenueNo, @VenueBranchNo, @Analyzerno, @Sampleno", 
-                        _venueno, _venuebranchno, _analyzerno, _sampleno).ToList();
+                    "@VenueNo, @VenueBranchNo, @Analyzerno, @Sampleno", 
+                    _venueno, _venuebranchno, _analyzerno, _sampleno).ToList();
                 }
             }
             catch (Exception ex)

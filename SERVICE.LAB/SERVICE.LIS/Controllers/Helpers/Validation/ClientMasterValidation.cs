@@ -1,16 +1,10 @@
 ﻿using Service.Model;
 using Service.Model.Common;
-using DEV.Common;
-using Microsoft.AspNetCore.Mvc.ModelBinding;
-using System;
+using Service.Common;
 using System.Collections.Generic;
-using System.Resources;
 using System.Text.RegularExpressions;
-using Microsoft.IdentityModel.Tokens;
-using System.Data;
-using System.Linq;
 
-namespace DEV.API.SERVICE.Controllers
+namespace Service.API.SERVICE.Controllers
 {
     public class ClientMasterValidation
     {
@@ -27,8 +21,6 @@ namespace DEV.API.SERVICE.Controllers
             {
                 if (string.IsNullOrEmpty(req.tblcustomer.CustomerName) || req.tblcustomer.CustomerName.TrimStart() == string.Empty)
                     errors.Add("CustomerName is required");
-                //if (string.IsNullOrEmpty(req.tblcustomer.hcicode) || req.tblcustomer.hcicode.TrimStart() == string.Empty)
-                //    errors.Add("HCI Code is required");
                 if (req.tblcustomer.CustomerType == 0)
                     errors.Add("CustomerType is required");
                 if (string.IsNullOrEmpty(req.tblcustomer.UserName) || req.tblcustomer.UserName.TrimStart() == string.Empty)

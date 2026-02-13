@@ -1,13 +1,12 @@
 ﻿using Service.Model;
 using Service.Model.Common;
-using DEV.Common;
-using System;
+using Service.Common;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
 using Newtonsoft.Json;
 using System.Linq;
 
-namespace DEV.API.SERVICE.Controllers
+namespace Service.API.SERVICE.Controllers
 {
     public static class UserValidation
     {

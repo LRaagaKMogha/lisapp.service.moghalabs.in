@@ -13,7 +13,7 @@ using Serilog;
 using Shared;
 using BloodBankManagement.Services.Downloads;
 using BloodBankManagement.Services.Reports;
-using DEV.Common;
+using Service.Common;
 using Serilog.Filters;
 using AspNetCoreRateLimit;
 using Microsoft.AspNetCore.Mvc;

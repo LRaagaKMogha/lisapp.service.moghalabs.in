@@ -7,9 +7,9 @@
     <ProjectGuid>{8772EC1C-224F-4DA6-9C8F-5D2C1C5D86CE}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Dev.Win.Common</RootNamespace>
-    <AssemblyName>Dev.Win.Common</AssemblyName>
-    <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
+    <RootNamespace>Service.Win.Common</RootNamespace>
+    <AssemblyName>Service.Win.Common</AssemblyName>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
     <TargetFrameworkProfile />

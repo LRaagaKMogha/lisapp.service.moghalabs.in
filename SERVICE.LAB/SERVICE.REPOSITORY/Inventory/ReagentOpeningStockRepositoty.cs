@@ -1,5 +1,5 @@
-﻿using Dev.IRepository.Inventory;
-using DEV.Common;
+﻿using Service.IRepository.Inventory;
+using Service.Common;
 using Service.Model;
 using Service.Model.EF;
 using Microsoft.EntityFrameworkCore;
@@ -8,9 +8,8 @@ using System;
 using System.Collections.Generic;
 using Microsoft.Data.SqlClient;
 using System.Linq;
-using System.Text;
 
-namespace Dev.Repository.Inventory
+namespace Service.Repository.Inventory
 {
     public class ReagentOpeningStockRepositoty: IReagentOpeningStockRepositoty
     {
@@ -43,7 +42,6 @@ namespace Dev.Repository.Inventory
             }
             return objresult;
         }
-
         public CommonAdminResponse InsertReagentOpeningStock(InsertReagentOpeningStockRequest insertReagentStock)
         {
             CommonAdminResponse response = new CommonAdminResponse();

@@ -1,5 +1,5 @@
-﻿using Dev.IRepository.Inventory;
-using DEV.Common;
+﻿using Service.IRepository.Inventory;
+using Service.Common;
 using Service.Model.EF;
 using Service.Model.Inventory;
 using Microsoft.Data.SqlClient;
@@ -9,7 +9,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Dev.Repository.Inventory
+namespace Service.Repository.Inventory
 {
     public class StoreMasterRepository : IStoreMasterRepository
     {
@@ -39,7 +39,6 @@ namespace Dev.Repository.Inventory
             }
             return objResult;
         }
-
         public List<StoreDetails> GetAllStoreByBranch(int VenueNo, int VenueBranchNo)
         {
             List<StoreDetails> objResult = new List<StoreDetails>();
@@ -60,7 +59,6 @@ namespace Dev.Repository.Inventory
             }
             return objResult;
         }
-
         public StoreMasterInsertResponseDTO InsertStoreMaster(StoreMasterInsertDTO req)
         {
             StoreMasterInsertResponseDTO result = new StoreMasterInsertResponseDTO();

@@ -1,16 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
-using Dev.IRepository;
+using Service.IRepository;
 using Service.Model;
 using Service.Model.EF;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using System.Linq;
-using DEV.Common;
+using Service.Common;
 using Microsoft.Data.SqlClient;
 
-namespace Dev.Repository
+namespace Service.Repository
 {
     public class specializationRepository : IspecializationRepository
     {
@@ -28,8 +27,8 @@ namespace Dev.Repository
                     var _venueNo = new SqlParameter("venueNo", specilazationMasterRequest.venueNo);
 
                     objresult = context.Getspecialization.FromSqlRaw(
-                        "Execute dbo.pro_GetSpecialization @specializationNO,@venueNo",
-                         _specializationNO, _venueNo).ToList();
+                    "Execute dbo.pro_GetSpecialization @specializationNO,@venueNo",
+                    _specializationNO, _venueNo).ToList();
                 }
             }
             catch (Exception ex)
@@ -52,10 +51,10 @@ namespace Dev.Repository
                     var _userNo = new SqlParameter("userNo", tblspecialization?.userNo);
 
                     var obj = context.Insertspecialization.FromSqlRaw(
-                        "Execute dbo.pro_InsertSpecialization @SpecializationNO,@Specialization,@venueno,@status,@userNo",
-                         _specializationNO, _specialization, _venueno, _status, _userNo).AsEnumerable().FirstOrDefault();
+                    "Execute dbo.pro_InsertSpecialization @SpecializationNO,@Specialization,@venueno,@status,@userNo",
+                    _specializationNO, _specialization, _venueno, _status, _userNo).AsEnumerable().FirstOrDefault();
+                    
                     objresult.specializationNo = obj?.specializationNo?? 0;
-
                 }
             }
             catch (Exception ex)
@@ -81,8 +80,9 @@ namespace Dev.Repository
                     var _RangeTo = new SqlParameter("RangeTo", checkMasterNameExistsRequest?.RangeTo);
 
                     var obj = context.Checkspecialization.FromSqlRaw(
-                        "Execute dbo.pro_CheckMasterNameExists @venueNo,@masterNo,@masterName,@masterValueno,@masterTypeNo,@RangeFrom,@RangeTo",
-                          _venueNo, _masterNo, _masterName, _masterValueno, _masterTypeNo,_RangeFrom, _RangeTo).ToList();
+                    "Execute dbo.pro_CheckMasterNameExists @venueNo,@masterNo,@masterName,@masterValueno,@masterTypeNo,@RangeFrom,@RangeTo",
+                    _venueNo, _masterNo, _masterName, _masterValueno, _masterTypeNo,_RangeFrom, _RangeTo).ToList();
+                    
                     iresult = obj[0].avail;
                 }
             }
@@ -92,6 +92,5 @@ namespace Dev.Repository
             }
             return iresult;
         }
-
     }
 }
