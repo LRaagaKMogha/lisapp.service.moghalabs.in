@@ -6,7 +6,7 @@ namespace Service.IRepository
    public interface ITariffMasterRepository
     {
         List<GetTariffMasterResponse> GetTariffMasterDetails(GetTariffMasterRequest getRequest);
-        List<GetServices> GetTariffService(GetTariffMasterRequest getRequest);
+        List<Getservices> GetTariffService(GetTariffMasterRequest getRequest);
         InsertTariffMasterResponse InsertTariffMasterDetails(InsertTariffMasterRequest tariffMasteritem);
         List<GetTariffMasterListResponse> GetTariffMasterList(GetTariffMasterListRequest getRequest);
         List<TariffMastServicesResponse> GetTariffMasterServiceList(GetTariffMasterListRequest getRequest);

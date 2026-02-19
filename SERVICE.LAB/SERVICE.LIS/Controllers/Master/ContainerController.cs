@@ -41,7 +41,7 @@ namespace Service.API.SERVICE.Controllers
         [Route("api/Container/Insertcontainermaster")]
         public ActionResult<ContainerMasterResponse> Insertcontainermaster(TblContainer tblContainer)
         {
-            ContainerMasterResponse objresult = new ContainerMasterResponse();
+            ContainerMasterResponse Objresult = new ContainerMasterResponse();
             try
             {
                 using (var auditScope = new AuditScope<TblContainer>(tblContainer, _auditService))
@@ -49,7 +49,7 @@ namespace Service.API.SERVICE.Controllers
                     var _errormsg = LaboratoryMasterValidation.Insertcontainermaster(tblContainer);
                     if (!_errormsg.status)
                     {
-                        objresult = _containerRepository.Insertcontainermaster(tblContainer);
+                        Objresult = _containerRepository.Insertcontainermaster(tblContainer);
                         string _CacheKey = CacheKeys.CommonMaster + "CONTAINER" + tblContainer.venueNo + tblContainer.venueBranchno;
                         MemoryCacheRepository.RemoveItem(_CacheKey);
                     }
@@ -61,7 +61,7 @@ namespace Service.API.SERVICE.Controllers
             {
                 MyDevException.Error(ex, "ContainerController.Insertcontainermaster" + tblContainer.containerNo.ToString(), ExceptionPriority.Low, ApplicationType.REPOSITORY, tblContainer.venueNo, tblContainer.venueBranchno, 0);
             }
-            return Ok(objresult);
+            return Ok(Objresult);
         }
     }
 }

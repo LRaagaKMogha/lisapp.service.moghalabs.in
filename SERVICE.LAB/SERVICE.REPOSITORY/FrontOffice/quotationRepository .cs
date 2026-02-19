@@ -30,7 +30,7 @@ namespace Service.Repository
                     var _pageIndex = new SqlParameter("pageIndex", req?.pageIndex);
 
                     lst = context.Getquotation.FromSqlRaw(
-                        "Execute dbo.pro_GetServiceQuotation @venueno,@venuebranchno,@QuotationMasterNo,@pageIndex",
+                        "Execute dbo.pro_GetserviceQuotation @venueno,@venuebranchno,@QuotationMasterNo,@pageIndex",
                          _venueno, _venuebranchno, _quotationMasterNo, _pageIndex).ToList();
                 }
             }
@@ -45,7 +45,7 @@ namespace Service.Repository
         public int Insertquotation(responselst req1)
         {
             CommonHelper commonUtility = new CommonHelper();
-            string TestXML = commonUtility.ToXML(req1.gettestlst);
+            string TestXML = commonUtility.ToXML(req1.Gettestlst);
             int i = 0;
             try
             {

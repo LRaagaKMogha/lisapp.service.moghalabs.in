@@ -18,7 +18,7 @@ namespace Service.Repository.Inventory
 
         public List<GetStockAlertResponse> GetStockAlertsDetails(StockAlertRequest stockAlertRequest)
         {
-            List<GetStockAlertResponse>objResult =new List<GetStockAlertResponse>();
+            List<GetStockAlertResponse>Objresult =new List<GetStockAlertResponse>();
             try
             {
                 using (var context = new MasterContext(_config.GetConnectionString(ConfigKeys.DefaultConnection)))
@@ -30,7 +30,7 @@ namespace Service.Repository.Inventory
                     var _StoreNo = new SqlParameter("StoreNo", stockAlertRequest.StoreNo);
                     var _ProductNo = new SqlParameter("ProductNo", stockAlertRequest.ProductNo);
 
-                    objResult = context.GetStockAlertsDetails.FromSqlRaw(
+                    Objresult = context.GetStockAlertsDetails.FromSqlRaw(
                     "Execute dbo.Pro_Getstockalert @VenueNo,@VenueBranchNo,@PageIndex,@BranchNo,@StoreNo,@ProductNo", _VenueNo, _Venuebranchno, _PageIndex, _BranchNo, _StoreNo, _ProductNo).ToList();
                 }
             }
@@ -38,7 +38,7 @@ namespace Service.Repository.Inventory
             {
                 MyDevException.Error(ex, "GetStockAlertsDetails", ExceptionPriority.Low, ApplicationType.REPOSITORY, stockAlertRequest.VenueNo, 0, 0);
             }
-            return objResult;
+            return Objresult;
         }
     }
 }

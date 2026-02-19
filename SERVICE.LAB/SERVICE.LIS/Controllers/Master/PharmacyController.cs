@@ -20,7 +20,7 @@ namespace Service.API.SERVICE.Controllers
         
         [HttpPost]
         [Route("api/Pharmacy/GetGeneric")]
-        public List<TblGeneric> GetGeneric(reqgeneric req)
+        public List<TblGeneric> GetGeneric(Reqgeneric req)
         {
             List<TblGeneric> lst = new List<TblGeneric>();
             try
@@ -38,10 +38,10 @@ namespace Service.API.SERVICE.Controllers
         [Route("api/Pharmacy/InsertGeneric")]
         public GenericMasterResponse InsertGeneric(TblGeneric tblGeneric)
         {
-            GenericMasterResponse objresult = new GenericMasterResponse();
+            GenericMasterResponse Objresult = new GenericMasterResponse();
             try
             {
-                objresult = _PharmacyRepository.InsertGeneric(tblGeneric);
+                Objresult = _PharmacyRepository.InsertGeneric(tblGeneric);
                 string _CacheKey = CacheKeys.CommonMaster + "GENERIC" + tblGeneric.venueNo + tblGeneric.venueBranchno;
                 MemoryCacheRepository.RemoveItem(_CacheKey);
             }
@@ -49,13 +49,13 @@ namespace Service.API.SERVICE.Controllers
             {
                 MyDevException.Error(ex, "PharmacyController.InsertGeneric", ExceptionPriority.Low, ApplicationType.APPSERVICE, tblGeneric.venueNo, tblGeneric.venueBranchno, 0);
             }
-            return objresult;
+            return Objresult;
         }
 
 
         [HttpPost]
         [Route("api/Pharmacy/GetMedicinetype")]
-        public List<TblMedtype> GetMedicinetype(reqmedtype  medtype)
+        public List<TblMedtype> GetMedicinetype(Reqmedtype  medtype)
         {
             List<TblMedtype> lst = new List<TblMedtype>();
             try
@@ -73,10 +73,10 @@ namespace Service.API.SERVICE.Controllers
         [Route("api/Pharmacy/InsertMedtype")]
         public MedtypeMasterResponse InsertMedtype(TblMedtype tblmedtype)
         {
-            MedtypeMasterResponse objresult = new MedtypeMasterResponse();
+            MedtypeMasterResponse Objresult = new MedtypeMasterResponse();
             try
             {
-                objresult = _PharmacyRepository.InsertMedtype(tblmedtype);
+                Objresult = _PharmacyRepository.InsertMedtype(tblmedtype);
                 string _CacheKey = CacheKeys.CommonMaster + "MEDICINETYPE" + tblmedtype.venueNo + tblmedtype.venueBranchno;
                 MemoryCacheRepository.RemoveItem(_CacheKey);
             }
@@ -84,12 +84,12 @@ namespace Service.API.SERVICE.Controllers
             {
                 MyDevException.Error(ex, "PharmacyController.InsertMedtype", ExceptionPriority.Low, ApplicationType.APPSERVICE, tblmedtype.venueNo, tblmedtype.venueBranchno, 0);
             }
-            return objresult;
+            return Objresult;
         }
 
         [HttpPost]
         [Route("api/Pharmacy/GetMedstr")]
-        public List<TblMedstr> GetMedstr(reqmedstr medstr)
+        public List<TblMedstr> GetMedstr(Reqmedstr medstr)
         {
             List<TblMedstr> lst = new List<TblMedstr>();
             try
@@ -108,10 +108,10 @@ namespace Service.API.SERVICE.Controllers
         [Route("api/Pharmacy/InsertMedstr")]
         public MedstrMasterResponse InsertMedstr(TblMedstr tblmedstr)
         {
-            MedstrMasterResponse objresult = new MedstrMasterResponse();
+            MedstrMasterResponse Objresult = new MedstrMasterResponse();
             try
             {
-                objresult = _PharmacyRepository.InsertMedstr(tblmedstr);
+                Objresult = _PharmacyRepository.InsertMedstr(tblmedstr);
                 string _CacheKey = CacheKeys.CommonMaster + "MEDICINESTRENGTH" + tblmedstr.venueNo + tblmedstr.venueBranchno;
                 MemoryCacheRepository.RemoveItem(_CacheKey);
             }
@@ -119,7 +119,7 @@ namespace Service.API.SERVICE.Controllers
             {
                 MyDevException.Error(ex, "PharmacyController.InsertMedstr", ExceptionPriority.Low, ApplicationType.APPSERVICE, tblmedstr.venueNo, tblmedstr.venueBranchno, 0);
             }
-            return objresult;
+            return Objresult;
         }
 
     }

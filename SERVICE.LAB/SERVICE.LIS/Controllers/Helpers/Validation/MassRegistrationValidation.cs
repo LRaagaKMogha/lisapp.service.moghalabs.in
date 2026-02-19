@@ -7,9 +7,9 @@ using Service.Model.PatientInfo;
 
 namespace Service.API.SERVICE.Controllers
 {
-    public class MassRegistrationValidation
+    public class massregistrationValidation
     {
-        public static ErrorResponse InsertMassRegistration(ExternalBulkFile objDTO)
+        public static ErrorResponse Insertmassregistration(ExternalBulkFile objDTO)
         {
             ErrorResponse errorResponse = new ErrorResponse();
             List<string> errors = new List<string>();

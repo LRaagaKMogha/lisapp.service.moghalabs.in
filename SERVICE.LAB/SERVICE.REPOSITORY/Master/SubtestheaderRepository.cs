@@ -18,7 +18,7 @@ namespace Service.Repository
 
         public List<TblSubtestheader> GetSubtestheadermaster(SubtestheaderMasterRequest subtestheaderMasterRequest)
         {
-            List<TblSubtestheader> objresult = new List<TblSubtestheader>();
+            List<TblSubtestheader> Objresult = new List<TblSubtestheader>();
             try
             {
                 using (var context = new LIMSContext(_config.GetConnectionString(ConfigKeys.DefaultConnection)))
@@ -28,7 +28,7 @@ namespace Service.Repository
                     var _venueBranchno = new SqlParameter("venueBranchno", subtestheaderMasterRequest?.venueBranchno);
                     var _pageIndex = new SqlParameter("pageIndex", subtestheaderMasterRequest?.pageIndex);
 
-                    objresult = context.Getheader.FromSqlRaw(
+                    Objresult = context.Getheader.FromSqlRaw(
                     "Execute dbo.pro_GetSubtestheadermaster @headerNO,@venueNo,@venueBranchno,@pageIndex",
                     _headerNo, _venueNo, _venueBranchno, _pageIndex).ToList();
                 }
@@ -37,11 +37,11 @@ namespace Service.Repository
             {
                 MyDevException.Error(ex, "SubtestheaderRepository.GetSubtestheadermaster" + subtestheaderMasterRequest.headerNo.ToString(), ExceptionPriority.Low, ApplicationType.REPOSITORY, subtestheaderMasterRequest.venueNo, subtestheaderMasterRequest.venueBranchno, 0);
             }
-            return objresult;
+            return Objresult;
         }
         public SubtestheaderMasterResponse InsertSubtestheadermaster(TblSubtestheader testheader)
         {
-            SubtestheaderMasterResponse objresult = new SubtestheaderMasterResponse();
+            SubtestheaderMasterResponse Objresult = new SubtestheaderMasterResponse();
             try
             {
                 using (var context = new LIMSContext(_config.GetConnectionString(ConfigKeys.DefaultConnection)))
@@ -55,7 +55,7 @@ namespace Service.Repository
                     var _status = new SqlParameter("status", testheader?.status);
                     var _userNo = new SqlParameter("userNo", testheader?.userNo);
 
-                    objresult = context.Insertheader.FromSqlRaw(
+                    Objresult = context.Insertheader.FromSqlRaw(
                     "Execute dbo.pro_InsertSubtestheader @headerNo,@headerdisplaytext,@headerName," +
                     "@venueBranchNo,@venueNo, @sequenceno,@status,@userNo",
                     _headerNo, _headerdisplaytext, _headerName, _venueBranchno, _venueNo, _sequenceNo, _status, _userNo).AsEnumerable().FirstOrDefault();                    
@@ -65,7 +65,7 @@ namespace Service.Repository
             {
                 MyDevException.Error(ex, "SubtestheaderRepository.InsertSubtestheadermaster - " + testheader.headerNo.ToString(), ExceptionPriority.Low, ApplicationType.REPOSITORY, testheader.venueNo, testheader.venueBranchno, 0);
             }
-            return objresult;
+            return Objresult;
         }
     }
 }

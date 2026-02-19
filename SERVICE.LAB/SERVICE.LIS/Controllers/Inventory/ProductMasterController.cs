@@ -24,16 +24,16 @@ namespace Service.API.SERVICE.Controllers.Inventory
         [Route("api/ProductMaster/GetProductMasterDetails")]
         public List<GetProductMasterResponse> GetProductMasters(GetCommonMasterRequest masterRequest)
         {
-            List<GetProductMasterResponse> objresult = new List<GetProductMasterResponse>();
+            List<GetProductMasterResponse> Objresult = new List<GetProductMasterResponse>();
             try
             {             
-                objresult = _ProductMasterRepository.GetProductMasters(masterRequest);                
+                Objresult = _ProductMasterRepository.GetProductMasters(masterRequest);                
             }
             catch (Exception ex)
             {
                 MyDevException.Error(ex, "ProductMasterController.GetProductMasterDetails-", ExceptionPriority.Low, ApplicationType.APPSERVICE, masterRequest.venueno, (int)masterRequest.venuebranchno, 0);
             }
-            return objresult;
+            return Objresult;
         }
         
         [CustomAuthorize("INVMASTERS")]
@@ -61,16 +61,16 @@ namespace Service.API.SERVICE.Controllers.Inventory
         [Route("api/ProductMaster/GetSupplierMapping")]
         public List<GetSupplierMappingDTO> GetSupplierMapping(int ProductNo, int VenueNo, int VenueBranchNo)
         {
-            List<GetSupplierMappingDTO> objresult = new List<GetSupplierMappingDTO>();
+            List<GetSupplierMappingDTO> Objresult = new List<GetSupplierMappingDTO>();
             try
             {
-                objresult = _ProductMasterRepository.GetSupplierMapping(ProductNo, VenueNo, VenueBranchNo);
+                Objresult = _ProductMasterRepository.GetSupplierMapping(ProductNo, VenueNo, VenueBranchNo);
             }
             catch (Exception ex)
             {
                 MyDevException.Error(ex, "ProductMasterController.GetSubCustomerDetailbyCustomer-" + ProductNo, ExceptionPriority.Low, ApplicationType.APPSERVICE, VenueNo, VenueBranchNo, 0);
             }
-            return objresult;
+            return Objresult;
         }
 
         [CustomAuthorize("INVMASTERS")]
@@ -78,16 +78,16 @@ namespace Service.API.SERVICE.Controllers.Inventory
         [Route("api/ProductMaster/GetDepartmentMapping")]
         public List<GetDepartmentMappingDTO> GetDepartmentMapping(int ProductNo, int VenueNo, int VenueBranchNo)
         {
-            List<GetDepartmentMappingDTO> objresult = new List<GetDepartmentMappingDTO>();
+            List<GetDepartmentMappingDTO> Objresult = new List<GetDepartmentMappingDTO>();
             try
             {
-                objresult = _ProductMasterRepository.GetDepartmentMapping(ProductNo, VenueNo, VenueBranchNo);
+                Objresult = _ProductMasterRepository.GetDepartmentMapping(ProductNo, VenueNo, VenueBranchNo);
             }
             catch (Exception ex)
             {
                 MyDevException.Error(ex, "ProductMasterController.GetDepartmentMapping-ProductNo" + ProductNo, ExceptionPriority.Low, ApplicationType.APPSERVICE, VenueNo, VenueBranchNo, 0);
             }
-            return objresult;
+            return Objresult;
         }
 
         [CustomAuthorize("INVOPERATIONS")]
@@ -95,16 +95,16 @@ namespace Service.API.SERVICE.Controllers.Inventory
         [Route("api/ProductMaster/GetIndentDetails")]
         public List<IndentDetailsResponse> GetIndentDetails(GetIndentDetailsRequest indent)
         {
-            List<IndentDetailsResponse> objresult = new List<IndentDetailsResponse>();
+            List<IndentDetailsResponse> Objresult = new List<IndentDetailsResponse>();
             try
             {
-                objresult = _ProductMasterRepository.GetIndentDetails(indent);
+                Objresult = _ProductMasterRepository.GetIndentDetails(indent);
             }
             catch (Exception ex)
             {
                 MyDevException.Error(ex, "ProductMasterController.GetIndentDetails-", ExceptionPriority.Low, ApplicationType.APPSERVICE, indent.venueNo, indent.venueBranchNo, 0);
             }
-            return objresult;
+            return Objresult;
         }
 
         [CustomAuthorize("INVOPERATIONS")]
@@ -112,16 +112,16 @@ namespace Service.API.SERVICE.Controllers.Inventory
         [Route("api/ProductMaster/GetIndentProductDetails")]
         public List<IndentProductDetailsNewResponse> GetIndentProductDetails(GetIndentDetailsRequest indent)
         {
-            List<IndentProductDetailsNewResponse> objresult = new List<IndentProductDetailsNewResponse>();
+            List<IndentProductDetailsNewResponse> Objresult = new List<IndentProductDetailsNewResponse>();
             try
             {
-                objresult = _ProductMasterRepository.GetIndentProductDetails(indent);
+                Objresult = _ProductMasterRepository.GetIndentProductDetails(indent);
             }
             catch (Exception ex)
             {
                 MyDevException.Error(ex, "ProductMasterController.GetIndentProductDetails", ExceptionPriority.Low, ApplicationType.APPSERVICE, indent.venueNo, indent.venueBranchNo, 0);
             }
-            return objresult;
+            return Objresult;
         }
 
         [CustomAuthorize("INVOPERATIONS")]
@@ -129,16 +129,16 @@ namespace Service.API.SERVICE.Controllers.Inventory
         [Route("api/ProductMaster/InsertIndentDetails")]
         public IndentDetailsSaveResponse InsertIndentDetails(IndentDetailsSaveRequest indent)
         {
-            IndentDetailsSaveResponse objresult = new IndentDetailsSaveResponse();
+            IndentDetailsSaveResponse Objresult = new IndentDetailsSaveResponse();
             try
             {
-                objresult = _ProductMasterRepository.InsertIndentDetails(indent);
+                Objresult = _ProductMasterRepository.InsertIndentDetails(indent);
             }
             catch (Exception ex)
             {
                 MyDevException.Error(ex, "ProductMasterController.InsertIndentDetails", ExceptionPriority.Low, ApplicationType.APPSERVICE, indent.venueNo, indent.venueBranchNo, 0);
             }
-            return objresult;
+            return Objresult;
         }
 
         [CustomAuthorize("INVOPERATIONS")]
@@ -146,16 +146,16 @@ namespace Service.API.SERVICE.Controllers.Inventory
         [Route("api/ProductMaster/GetIssueProductlst")]
         public List<GetIssueProductResponse> GetIssueProductlst(GetIssueProductRequest issue)
         {
-            List<GetIssueProductResponse> objresult = new List<GetIssueProductResponse>();
+            List<GetIssueProductResponse> Objresult = new List<GetIssueProductResponse>();
             try
             {
-                objresult = _ProductMasterRepository.GetIssueProductlst(issue);
+                Objresult = _ProductMasterRepository.GetIssueProductlst(issue);
             }
             catch (Exception ex)
             {
                 MyDevException.Error(ex, "ProductMasterController.GetIssueProductlst-", ExceptionPriority.Low, ApplicationType.APPSERVICE, issue.venueNo, issue.venueBranchNo, 0);
             }
-            return objresult;
+            return Objresult;
         }
 
         [CustomAuthorize("INVOPERATIONS")]
@@ -163,16 +163,16 @@ namespace Service.API.SERVICE.Controllers.Inventory
         [Route("api/ProductMaster/GetIssuedProductsByIssueNo")]
         public List<GetIssueProductByIssueNoResponse> GetIssuedProductsByIssueNo(GetIssueProductRequest issue)
         {
-            List<GetIssueProductByIssueNoResponse> objresult = new List<GetIssueProductByIssueNoResponse>();
+            List<GetIssueProductByIssueNoResponse> Objresult = new List<GetIssueProductByIssueNoResponse>();
             try
             {
-                objresult = _ProductMasterRepository.GetIssuedProductsByIssueNo(issue);
+                Objresult = _ProductMasterRepository.GetIssuedProductsByIssueNo(issue);
             }
             catch (Exception ex)
             {
                 MyDevException.Error(ex, "ProductMasterController.GetIssuedProductsByIssueNo-", ExceptionPriority.Low, ApplicationType.APPSERVICE, issue.venueNo, issue.venueBranchNo, 0);
             }
-            return objresult;
+            return Objresult;
         }
 
 
@@ -181,16 +181,16 @@ namespace Service.API.SERVICE.Controllers.Inventory
         [Route("api/ProductMaster/InsertIssueProductlst")]
         public SaveIssueProductResponse InsertIssueProductlst(IssueProductRequest issue)
         {
-            SaveIssueProductResponse objresult = new SaveIssueProductResponse();
+            SaveIssueProductResponse Objresult = new SaveIssueProductResponse();
             try
             {
-                objresult = _ProductMasterRepository.InsertIssueProductlst(issue);
+                Objresult = _ProductMasterRepository.InsertIssueProductlst(issue);
             }
             catch (Exception ex)
             {
                 MyDevException.Error(ex, "InsertIssueProductlst-", ExceptionPriority.Low, ApplicationType.APPSERVICE, issue.VenueNo, issue.VenueBranchNo, 0);
             }
-            return objresult;
+            return Objresult;
         }
 
 
@@ -199,16 +199,16 @@ namespace Service.API.SERVICE.Controllers.Inventory
         [Route("api/ProductMaster/InsertIssueReceivedProductlst")]
         public SaveIssueProductResponse InsertIssueReceivedProductlst(IssueProductRequest issue)
         {
-            SaveIssueProductResponse objresult = new SaveIssueProductResponse();
+            SaveIssueProductResponse Objresult = new SaveIssueProductResponse();
             try
             {
-                objresult = _ProductMasterRepository.InsertIssueReceivedProductlst(issue);
+                Objresult = _ProductMasterRepository.InsertIssueReceivedProductlst(issue);
             }
             catch (Exception ex)
             {
                 MyDevException.Error(ex, "InsertIssueReceivedProductlst-", ExceptionPriority.Low, ApplicationType.APPSERVICE, issue.VenueNo, issue.VenueBranchNo, 0);
             }
-            return objresult;
+            return Objresult;
         }
 
 
@@ -217,16 +217,16 @@ namespace Service.API.SERVICE.Controllers.Inventory
         [Route("api/ProductMaster/FetchProductDetails")]
         public List<FetchProductListResponse> FetchProductList(ProductMasterRequest productList)
         {
-            List<FetchProductListResponse> objresult = new List<FetchProductListResponse>();
+            List<FetchProductListResponse> Objresult = new List<FetchProductListResponse>();
             try
             {
-                objresult = _ProductMasterRepository.FetchProductList(productList);
+                Objresult = _ProductMasterRepository.FetchProductList(productList);
             }
             catch (Exception ex)
             {
                 MyDevException.Error(ex, "ProductMasterController.FetchProductList-", ExceptionPriority.Low, ApplicationType.APPSERVICE, productList.venueNo, productList.venueBranchNo, productList.userNo);
             }
-            return objresult;
+            return Objresult;
         }
 
         [CustomAuthorize("INVMASTERS")]
@@ -234,16 +234,16 @@ namespace Service.API.SERVICE.Controllers.Inventory
         [Route("api/ProductMaster/Getlookalike")]
         public List<Fetchlookalike> Getlookalike(Getlookalikeresponse obj)
         {
-            List<Fetchlookalike> objresult = new List<Fetchlookalike>();
+            List<Fetchlookalike> Objresult = new List<Fetchlookalike>();
             try
             {
-                objresult = _ProductMasterRepository.Getlookalike(obj);
+                Objresult = _ProductMasterRepository.Getlookalike(obj);
             }
             catch (Exception ex)
             {
                 MyDevException.Error(ex, "ProductMasterController.Getlookalike", ExceptionPriority.Low, ApplicationType.APPSERVICE,obj.VenueNo,0, 0);
             }
-            return objresult;
+            return Objresult;
         }
 
         [CustomAuthorize("INVMASTERS")]
@@ -251,16 +251,16 @@ namespace Service.API.SERVICE.Controllers.Inventory
         [Route("api/ProductMaster/GetSoundalike")]
         public List<Fetchsoundalike> GetSoundalike(GetSoundalikeresponse obj)
         {
-            List<Fetchsoundalike> objresult = new List<Fetchsoundalike>();
+            List<Fetchsoundalike> Objresult = new List<Fetchsoundalike>();
             try
             {
-                objresult = _ProductMasterRepository.GetSoundalike(obj);
+                Objresult = _ProductMasterRepository.GetSoundalike(obj);
             }
             catch (Exception ex)
             {
                 MyDevException.Error(ex, "ProductMasterController.GetSoundalike", ExceptionPriority.Low, ApplicationType.APPSERVICE, obj.VenueNo, 0, 0);
             }
-            return objresult;
+            return Objresult;
         }
 
         [CustomAuthorize("INVOPERATIONS")]
@@ -285,39 +285,39 @@ namespace Service.API.SERVICE.Controllers.Inventory
         [Route("api/ProductMaster/GetSubProduct")]
         public List<SubProductRes> GetSubProduct(SubProductReq obj)
         {
-            List<SubProductRes> objresult = new List<SubProductRes>();
+            List<SubProductRes> Objresult = new List<SubProductRes>();
             try
             {
-                objresult = _ProductMasterRepository.GetSubProduct(obj);
+                Objresult = _ProductMasterRepository.GetSubProduct(obj);
             }
             catch (Exception ex)
             {
                 MyDevException.Error(ex, "ProductMasterController.GetSubProduct", ExceptionPriority.Low, ApplicationType.APPSERVICE, obj.VenueNo, obj.subProductNo, 0);
             }
-            return objresult;
+            return Objresult;
         }
 
         [CustomAuthorize("INVMASTERS")]
         [HttpPost]
         [Route("api/ProductMaster/GetProdVsDrug")]
-        public List<lstdrugresponse> GetProdVsDrug(lstdrugreq obj)
+        public List<LstDrugresponse> GetProdVsDrug(LstDrugreq obj)
         {
-            List<lstdrugresponse> objresult = new List<lstdrugresponse>();
+            List<LstDrugresponse> Objresult = new List<LstDrugresponse>();
             try
             {
-                objresult = _ProductMasterRepository.GetProdVsDrug(obj);
+                Objresult = _ProductMasterRepository.GetProdVsDrug(obj);
             }
             catch (Exception ex)
             {
                 MyDevException.Error(ex, "ProductMasterController.GetProdVsDrug", ExceptionPriority.Low, ApplicationType.APPSERVICE, obj.venueNo, obj.productNo, 0);
             }
-            return objresult;
+            return Objresult;
         }
 
         [CustomAuthorize("INVMASTERS")]
         [HttpPost]
         [Route("api/ProductMaster/InsertProdVsDrugs")]
-        public int InsertProdVsDrugs(savedruglstreq creq1)
+        public int InsertProdVsDrugs(Savedruglstreq creq1)
         {
             int drugPresTempNo = 0;
             try
@@ -336,16 +336,16 @@ namespace Service.API.SERVICE.Controllers.Inventory
         [Route("api/ProductMaster/GetProductUnitList")]
         public List<ProductUnitDTO> GetProductUnitList(int VenueNo)
         {
-            List<ProductUnitDTO> objresult = new List<ProductUnitDTO>();
+            List<ProductUnitDTO> Objresult = new List<ProductUnitDTO>();
             try
             {
-                objresult = _ProductMasterRepository.GetProductUnitList(VenueNo);
+                Objresult = _ProductMasterRepository.GetProductUnitList(VenueNo);
             }
             catch (Exception ex)
             {
                 MyDevException.Error(ex, "ProductMasterController.GetProductUnitList", ExceptionPriority.Low, ApplicationType.APPSERVICE, VenueNo, VenueNo, 0);
             }
-            return objresult;
+            return Objresult;
         }
 
         [CustomAuthorize("INVMASTERS")]
@@ -353,16 +353,16 @@ namespace Service.API.SERVICE.Controllers.Inventory
         [Route("api/ProductMaster/GetBOMMapping")]
         public List<BOMMappingDTO> GetBOMMapping(int VenueNo, int TestNo, string TestType)
         {
-            List<BOMMappingDTO> objresult = new List<BOMMappingDTO>();
+            List<BOMMappingDTO> Objresult = new List<BOMMappingDTO>();
             try
             {
-                objresult = _ProductMasterRepository.GetBOMMapping(VenueNo, TestNo, TestType);
+                Objresult = _ProductMasterRepository.GetBOMMapping(VenueNo, TestNo, TestType);
             }
             catch (Exception ex)
             {
                 MyDevException.Error(ex, "ProductMasterController.GetBOMMapping", ExceptionPriority.Low, ApplicationType.APPSERVICE, VenueNo, VenueNo, 0);
             }
-            return objresult;
+            return Objresult;
         }
 
         [CustomAuthorize("INVMASTERS")]
@@ -370,16 +370,16 @@ namespace Service.API.SERVICE.Controllers.Inventory
         [Route("api/ProductMaster/InsertBOMMapping")]
         public BOMMappingResponse InsertBOMMapping(List<BOMMappingRequest> req)
         {
-            BOMMappingResponse objresult = new BOMMappingResponse();
+            BOMMappingResponse Objresult = new BOMMappingResponse();
             try
             {
-                objresult = _ProductMasterRepository.InsertBOMMapping(req);
+                Objresult = _ProductMasterRepository.InsertBOMMapping(req);
             }
             catch (Exception ex)
             {
                 MyDevException.Error(ex, "ProductMasterController.InsertBOMMapping", ExceptionPriority.Medium, ApplicationType.APPSERVICE, 0, 0, 0);
             }
-            return objresult;
+            return Objresult;
         }
     }
 }

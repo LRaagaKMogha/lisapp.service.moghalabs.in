@@ -16,12 +16,12 @@ namespace Service.IRepository
         ExternalCommonResponse InsertPayment(ExternalBookingPayment results);
         ExternalCommonResponse SignOut(ExternalSignout results);
         ExternalApiReferralResponse GetReferralDetails(ExternalApiReferralRequest results);
-        ExternalApiServiceResponse GetServiceDetails(ExternalServiceRequest serviceRequest);
+        ExternalApiServiceResponse GetserviceDetails(ExternalServiceRequest serviceRequest);
         ExternalCommonResponse InsertBooking(ExternalBookingDto results);
         ExternalCommonResponse UpdateRiderStatus(ExternalRiderStatusRequest results);
         ExternalCommonResponse UpdatePatientStatus(ExternalPatientStatusRequest results);
         List<ExternalHCAppointment> GetHCAppointsList(CommonFilterRequestDTO RequestItem);
-        ExternalupdateCommonResponse UpdateHCPatientDetails(UpdateHcpatient results);
+        ExternalupdateCommonResponse UpdateHCPatientdetails(UpdateHcpatient results);
         UpdateStatusApptDateResponse UpdateStatusApptDate(UpdateStatusApptDateRequest results);
         List<TestSlotBookingDTO> GetSlotBooking(CommonFilterRequestDTO RequestItem);
         SlotBookingupdateCResponse UpdateSlotBooking(UpdateHcpatient results);

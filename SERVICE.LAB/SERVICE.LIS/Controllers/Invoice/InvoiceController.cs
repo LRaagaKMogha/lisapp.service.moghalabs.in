@@ -81,9 +81,9 @@ namespace Service.API.SERVICE.Controllers
         #region InsertInvoiceCreate
         [HttpPost]
         [Route("api/Invoice/InsertInvoiceCreate")]
-        public ActionResult<rtninvoice> InsertInvoiceCreate(objInvoiceCreate req)
+        public ActionResult<Rtninvoice> InsertInvoiceCreate(ObjInvoiceCreate req)
         {
-            rtninvoice obj = new rtninvoice();
+            Rtninvoice obj = new Rtninvoice();
             try
             {
                 var _errormsg = InvoiceValidation.InsertInvoiceCreate(req);
@@ -105,9 +105,9 @@ namespace Service.API.SERVICE.Controllers
         #region InsertInvoiceCreditNote
         [HttpPost]
         [Route("api/Invoice/InsertInvoiceCreditNote")]
-        public ActionResult<rtninvoiceCredit> InsertInvoiceCreditNote(objInvoiceCreditNote req)
+        public ActionResult<RtninvoiceCredit> InsertInvoiceCreditNote(ObjInvoiceCreditNote req)
         {
-            rtninvoiceCredit obj = new rtninvoiceCredit();
+            RtninvoiceCredit obj = new RtninvoiceCredit();
             try
             {
                 var _errormsg = InvoiceValidation.InsertInvoiceCreditNote(req);
@@ -129,9 +129,9 @@ namespace Service.API.SERVICE.Controllers
         #region GetCustomerInvoice
         [HttpPost]
         [Route("api/Invoice/GetCustomerInvoice")]
-        public ActionResult<lstCustomerInvoice> GetCustomerInvoice(reqinvoice req)
+        public ActionResult<LstCustomerInvoice> GetCustomerInvoice(reqinvoice req)
         {
-            List<lstCustomerInvoice> lst = new List<lstCustomerInvoice>();
+            List<LstCustomerInvoice> lst = new List<LstCustomerInvoice>();
             try
             {
                 //var _errormsg = InvoiceValidation.GetCustomerInvoice(req);
@@ -153,9 +153,9 @@ namespace Service.API.SERVICE.Controllers
         #region GetInvoiceInfo
         [HttpPost]
         [Route("api/Invoice/GetInvoiceInfo")]
-        public objInvoice GetInvoiceInfo(reqinvoice req)
+        public ObjInvoice GetInvoiceInfo(reqinvoice req)
         {
-            objInvoice obj = new objInvoice();
+            ObjInvoice obj = new ObjInvoice();
             try
             {
                 obj = _InvoiceRepository.GetInvoiceInfo(req);
@@ -171,9 +171,9 @@ namespace Service.API.SERVICE.Controllers
         #region InsertInvoicePayment
         [HttpPost]
         [Route("api/Invoice/InsertInvoicePayment")]
-        public ActionResult<rtninvoicePayment> InsertInvoicePayment(objInvoicePayment req)
+        public ActionResult<RtninvoicePayment> InsertInvoicePayment(ObjInvoicePayment req)
         {
-            rtninvoicePayment obj = new rtninvoicePayment();
+            RtninvoicePayment obj = new RtninvoicePayment();
             try
             {
                 var _errormsg = InvoiceValidation.InsertInvoicePayment(req);
@@ -231,7 +231,7 @@ namespace Service.API.SERVICE.Controllers
         #region CancelInvoice
         [HttpPost]
         [Route("api/Invoice/InvoiceCancel")]
-        public ActionResult<rtnCancelInvoice> InvoiceCancel(objInvoiceCancel req)
+        public ActionResult<rtnCancelInvoice> InvoiceCancel(ObjInvoiceCancel req)
         {
             rtnCancelInvoice obj = new rtnCancelInvoice();
             try

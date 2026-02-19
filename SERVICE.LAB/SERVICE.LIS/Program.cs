@@ -50,7 +50,7 @@ ConfigurationHelper.InitializeConfiguration(config);
 var basePath = builder.Configuration["BasePath"] ?? string.Empty;
 
 // Logging
-string logPath = config["APIConfig:LogLocation"];
+string? logPath = config["APIConfig:LogLocation"] ?? string.Empty;
 int.TryParse(config["APIConfig:FileSizeMB"], out int fileSizeMb);
 Log.Logger = new LoggerConfiguration()
     .MinimumLevel.Debug()
@@ -107,7 +107,7 @@ var jwtKeyValue = config["JWT:Key"];
 if (string.IsNullOrEmpty(jwtKeyValue))
     throw new Exception("JWT:Key is missing in configuration");
 
-var jwtKey = Encoding.UTF8.GetBytes(config["JWT:Key"]);
+var jwtKey = Encoding.UTF8.GetBytes(config["JWT:Key"] ?? string.Empty);
 builder.Services.AddAuthentication(x =>
 {
     x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;

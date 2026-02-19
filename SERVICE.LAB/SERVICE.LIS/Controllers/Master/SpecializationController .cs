@@ -41,7 +41,7 @@ namespace Service.API.SERVICE.Controllers
         [Route("api/Specialization/Insertspecializatiomaster")]
         public ActionResult<SpecializationMasterResponse> Insertspecializatiomaster(Tblspecialization tblspecialization)
         {
-            SpecializationMasterResponse objresult = new SpecializationMasterResponse();
+            SpecializationMasterResponse Objresult = new SpecializationMasterResponse();
             try
             {
                 using(var auditScoped = new AuditScope<Tblspecialization>(tblspecialization, _auditService))
@@ -49,7 +49,7 @@ namespace Service.API.SERVICE.Controllers
                     var _errormsg = MasterValidation.Insertspecializatiomaster(tblspecialization);
                     if (!_errormsg.status)
                     {
-                        objresult = _specializationRepository.Insertspecializatiomaster(tblspecialization);
+                        Objresult = _specializationRepository.Insertspecializatiomaster(tblspecialization);
                     }
                     else
                         return BadRequest(_errormsg);
@@ -59,7 +59,7 @@ namespace Service.API.SERVICE.Controllers
             {
                 MyDevException.Error(ex, "SpecializationController.Insertspecializatiomaster - " + tblspecialization.specializationNo.ToString(), ExceptionPriority.Low, ApplicationType.APPSERVICE, tblspecialization.venueNo, tblspecialization.venueBranchno, tblspecialization.userNo);
             }
-            return Ok(objresult);
+            return Ok(Objresult);
         }
 
         [HttpPost]

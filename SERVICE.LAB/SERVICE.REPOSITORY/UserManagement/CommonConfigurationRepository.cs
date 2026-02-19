@@ -22,7 +22,7 @@ namespace Service.Repository.UserManagement
 
         public List<CommonConfigurationResponseDTO> GetCommonConfiguration(CommonConfigurationRequestDTO request)
         {
-            List<CommonConfigurationResponseDTO>objResult = new List<CommonConfigurationResponseDTO>();
+            List<CommonConfigurationResponseDTO>Objresult = new List<CommonConfigurationResponseDTO>();
             try
             {
                 using (var context = new MasterContext(_config.GetConnectionString(ConfigKeys.DefaultConnection)))
@@ -30,7 +30,7 @@ namespace Service.Repository.UserManagement
                     var _VenueNo = new SqlParameter("@VenueNo", request.VenueNo);
                     var _VenueBranchNo = new SqlParameter("@VenueBranchNo", request.VenueBranchNo);
                     var _UserNo = new SqlParameter("@UserNo", request.UserNo);
-                    objResult = context.GetCommonConfiguration.FromSqlRaw(
+                    Objresult = context.GetCommonConfiguration.FromSqlRaw(
                         "EXEC dbo.Pro_GetCommonConfiguration @VenueNo,@VenueBranchNo, @UserNo",
                         _VenueNo, _VenueBranchNo, _UserNo
                     ).ToList();
@@ -40,7 +40,7 @@ namespace Service.Repository.UserManagement
             {
                 MyDevException.Error(ex, "CommonConfigurationRepository.GetCommonConfiguration", ExceptionPriority.Low, ApplicationType.REPOSITORY, 0, 0, 0);
             }
-            return objResult;
+            return Objresult;
         }
         public int InsertCommonConfiguration(CommonConfigurationInsertDTO dto)
         {
@@ -71,13 +71,13 @@ namespace Service.Repository.UserManagement
         }
         public List<CommonMasterDto> GetAllBranches(CommonMasterRequestDTO request)
         {
-            List<CommonMasterDto> objResult = new List<CommonMasterDto>();
+            List<CommonMasterDto> Objresult = new List<CommonMasterDto>();
             try
             {
                 using (var context = new MasterContext(_config.GetConnectionString(ConfigKeys.DefaultConnection)))
                 {
                     var _VenueNo = new SqlParameter("@VenueNo", request.VenueNo);
-                    objResult = context.CommonMasterDTO
+                    Objresult = context.CommonMasterDTO
                         .FromSqlRaw("EXEC dbo.pro_GetAllBranches @VenueNo", _VenueNo)
                         .ToList();
                 }
@@ -88,7 +88,7 @@ namespace Service.Repository.UserManagement
                     ExceptionPriority.Low, ApplicationType.REPOSITORY, request.VenueNo, 0, 0);
             }
 
-            return objResult;
+            return Objresult;
         }
 
     }

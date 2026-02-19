@@ -54,14 +54,14 @@ namespace Service.Common
                     }
 
                     var responseText = await response.Content.ReadAsStringAsync();
-                    var objResult = JsonConvert.DeserializeObject<GoogleResponse>(responseText);
+                    var Objresult = JsonConvert.DeserializeObject<GoogleResponse>(responseText);
 
-                    if (objResult == null || string.IsNullOrEmpty(objResult.shortLink))
+                    if (Objresult == null || string.IsNullOrEmpty(Objresult.shortLink))
                     {
                         return DynamicLink;
                     }
 
-                    return objResult.shortLink;
+                    return Objresult.shortLink;
                 }
             }
             catch (Exception ex)

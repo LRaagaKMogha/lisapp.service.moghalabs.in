@@ -17,7 +17,7 @@ namespace Service.IRepository
         int ResetPassword(int UserNo, int venueNo, int VenueBranchNo, int usertype, int ResetUserNo);
         List<UserMenuDTO> GetUserTask(int VenueNo, int VenueBranchNo, int userno);
         List<UserDashBoardMasterResponse> GetDashBoardMaster(int CustomerNo, int VenueNo, int VenueBranchNo);
-        List<userbranchlist> GetUserBranchList(int userno, int VenueNo, int VenueBranchNo);
+        List<Userbranchlist> GetUserBranchList(int userno, int VenueNo, int VenueBranchNo);
         int InsertRoleMenuMapping(ReqRoleMenu Useritem);
         List<UserModuleDTO> GetRoleMenuMapping(RolegetReqDTO rolereq);
         int ValidateActionMenu(int UserNo, int VenueNo, string MenuType);

@@ -23,47 +23,47 @@ namespace Service.API.SERVICE.Controllers
         [Route("api/Favouritemaster/GetFavouriteMasterDetails")]
         public IEnumerable<Tblfav> GetFavouriteMasterDetails(GetCommonMasterRequest getfav)
        {
-            List<Tblfav> objresult = new List<Tblfav>();
+            List<Tblfav> Objresult = new List<Tblfav>();
             try
             {                
-                objresult = _FavouriteMasterRepository.GetFavouriteMasterDetails(getfav);               
+                Objresult = _FavouriteMasterRepository.GetFavouriteMasterDetails(getfav);               
             }
             catch (Exception ex)
             {
                 MyDevException.Error(ex, "GetFavouriteMasterDetails", ExceptionPriority.Low, ApplicationType.APPSERVICE, getfav.venueno, getfav.venuebranchno, 0);
             }
-            return objresult;
+            return Objresult;
         }
 
         [HttpGet]
         [Route("api/Favmaster/Getgroupdetails")]
         public List<Tblgroup> GetGroupDetails(int VenueNo, int VenueBranchNo)
         {
-            List<Tblgroup> objresult = new List<Tblgroup>();
+            List<Tblgroup> Objresult = new List<Tblgroup>();
             try
             {
-                objresult = _FavouriteMasterRepository.GetGroupDetails(VenueNo, VenueBranchNo).ToList();
+                Objresult = _FavouriteMasterRepository.GetGroupDetails(VenueNo, VenueBranchNo).ToList();
             }
             catch (Exception ex)
             {
                 MyDevException.Error(ex, "GetGroupDetails", ExceptionPriority.Medium, ApplicationType.APPSERVICE, VenueNo, VenueBranchNo, 0);
             }
-            return objresult;
+            return Objresult;
         }
         [HttpGet]
         [Route("api/Favmaster/Getpackdetails")]
         public List<Tblpack> GetPackDetails(int VenueNo, int VenueBranchNo)
         {
-            List<Tblpack> objresult = new List<Tblpack>();
+            List<Tblpack> Objresult = new List<Tblpack>();
             try
             {
-                objresult = _FavouriteMasterRepository.GetPackDetails(VenueNo, VenueBranchNo).ToList();
+                Objresult = _FavouriteMasterRepository.GetPackDetails(VenueNo, VenueBranchNo).ToList();
             }
             catch (Exception ex)
             {
                 MyDevException.Error(ex, "GetPackDetails", ExceptionPriority.Medium, ApplicationType.APPSERVICE, VenueNo, VenueBranchNo, 0);
             }
-            return objresult;
+            return Objresult;
         }
         [HttpPost]
         [Route("api/FavMaster/InsertfavDetails")]

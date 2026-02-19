@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace Service.Model.Inventory
 {
@@ -17,7 +16,6 @@ namespace Service.Model.Inventory
         public decimal rate { get; set; }
         public decimal mrp { get; set; }
     }
-
     public class InsertStockUploadRequest
     {
         public List<GetStockProductListResponse> productList { get; set; }
@@ -40,7 +38,7 @@ namespace Service.Model.Inventory
         public int ProductNo { get; set; }
         public int StoreNo { get; set; }
         public string StoreName { get; set; }
-        public string? ProductName { get; set; }
+        public string ProductName { get; set; }
     }
     public class GetStockReportRequest
     {
@@ -63,52 +61,31 @@ namespace Service.Model.Inventory
         public string toDate { get; set; }
         public string Type { get; set; }
         public int CategoryNo { get; set; }
-
     }
     public class GetStockReportResponse
-    {
-        
+    {        
         public decimal GrandTotalStockQuantity { get; set; }
         public Int64? rowNo { get; set; }   
-
         public string StoreName { get; set; } = string.Empty;
-
         public Int64 ProductMasterNo { get; set; }  
-
         public string ProductName { get; set; }  
-
-
         public decimal OpenValue { get; set; }  
-
-
         public decimal ReceiptValue { get; set; }   
-
-
         public decimal ReturnValue { get; set; }   
-
-
-        public decimal IssueValue { get; set; }  
-
-
+        public decimal IssueValue { get; set; }
         public decimal ConsumValue { get; set; }   
         public decimal AdjustQty { get; set; }   
-
         public decimal AdjustValue { get; set; }  
-
         public decimal  CloseValue { get; set; }
         public decimal  OpenQty { get; set; }
         public decimal  ReceiptQty { get; set; }
         public decimal  ReturnQty { get; set; }
         public decimal  IssueQty { get; set; }
         public decimal  ConsumQty { get; set; }
-        public decimal  CloseQty { get; set; }
-                        
+        public decimal CloseQty { get; set; }                        
         public decimal  GrandTotalOutOfStock { get; set; }
-            public int  TotalRecords {  get; set; }
+        public int TotalRecords {  get; set; }
         public string BatchNo { get; set; }
-        public DateTime? ExpDate   { get; set; }
-
-
-
+        public DateTime? ExpDate { get; set; }
     }
 }

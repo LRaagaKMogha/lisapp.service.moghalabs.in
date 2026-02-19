@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace Service.Model
 {
@@ -8,7 +7,7 @@ namespace Service.Model
     {
         public int RowNo { get; set; }
         public Int32 ProductNo { get; set; }
-       public string ProductName { get; set; }
+        public string ProductName { get; set; }
         public int UnitNo { get; set; }
         public string UnitName { get; set; }
         public int PackNo { get; set; }
@@ -23,25 +22,19 @@ namespace Service.Model
         public int Issue { get; set; }
         public int Balance { get; set; }
         public string IndentId { get; set; }
-
         public int? IndentNo { get; set; }
         public DateTime? IndendDate { get; set; }
         public string Store { get; set; }
         public int? StoreNo { get; set; }
         public int? ProdProfileNo { get; set; }
-
         public string FromVenueBranchName { get; set; }
         public string ToVenueBranchName { get; set; }
         public string ToStoreName { get; set; }
-
         public int ToVenueBranchNo { get; set; }
         public int FromVenueBranchNo { get; set; }
         public int ToStoreNo { get; set; }
-       // public int IssueNo { get; set; }
         public int TotalCloseQty { get; set; }
-
     }
-
     public class GetIssueProductByIssueNoResponse
     {
         public int RowNo { get; set; }
@@ -67,12 +60,7 @@ namespace Service.Model
         public int ToStoreNo { get; set; }
         public int StatusCode { get; set; }
         public decimal AlreadyReceivedQty { get; set; }
-        
-
     }
-
-
-
     public class GetIssueProductRequest
     {
         public int fromBranch { get; set; }
@@ -87,7 +75,6 @@ namespace Service.Model
         public int productNo { get; set; }
         public int indentNo { get; set; }
         public int IssueNo { get; set; }
-
     }
     public class IssueProductRequest
     {
@@ -123,7 +110,6 @@ namespace Service.Model
         public bool isClosed { get; set; }
         public int rejectedQty { get; set; }
         public int alreadyAcceptedQty { get; set; }
-
     }
     public class SaveIssueProductResponse
     {
@@ -138,9 +124,9 @@ namespace Service.Model
         public int venueNo { get; set; }
         public int venueBranchNo { get; set; }
         public int pageIndex { get; set; }
-        public string? fromDate { get; set; }
-        public string? toDate { get; set; }
-        public string? type { get; set; }
+        public string fromDate { get; set; }
+        public string toDate { get; set; }
+        public string type { get; set; }
     }
     public class GetDeptIssueProductResponse
     {
@@ -158,6 +144,3 @@ namespace Service.Model
         public int statusCode { get; set; }
     }
 }
-
-
-

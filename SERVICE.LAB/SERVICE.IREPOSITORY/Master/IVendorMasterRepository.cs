@@ -5,11 +5,11 @@ namespace Service.IRepository
 {
     public interface IVendorMasterRepository
     {
-        List<responsegetvendor> GetVendorMaster(requestvendor req);
-        StoreVendorMaster InsertVendorMaster(responsevendor req1);
-        List<getcontactlst> GetVendorvsContactmaster(getcontact creq);
-        int InsertVendorContactmaster(savecontact creq1);
-        List<getservicelst> GetVendorvsservices(getservice sobj);
-        int InsertVendorService(saveservice serviceobj);
+        List<Responsegetvendor> GetVendorMaster(Requestvendor req);
+        StoreVendorMaster InsertVendorMaster(Responsevendor req1);
+        List<Getcontactlst> GetVendorvsContactmaster(Getcontact creq);
+        int InsertVendorContactmaster(Savecontact creq1);
+        List<Getservicelst> GetVendorvsservices(Getservice sobj);
+        int InsertVendorService(Saveservice serviceobj);
     }
 }

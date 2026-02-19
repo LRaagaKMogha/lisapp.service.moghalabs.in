@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 
 namespace Service.Model
 {
@@ -7,8 +6,8 @@ namespace Service.Model
     {
         public int UserSessionNo { get; set; }
         public int UserNo { get; set; }
-        public string? Ipaddress { get; set; }
-        public string? ClientSysteminfo { get; set; }
+        public string Ipaddress { get; set; }
+        public string ClientSysteminfo { get; set; }
         public DateTime? LogInDateTime { get; set; }
         public DateTime? LogOutdateTime { get; set; }
         public bool? IsClosed { get; set; }

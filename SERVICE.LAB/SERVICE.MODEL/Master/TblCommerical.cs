@@ -13,31 +13,28 @@ namespace Service.Model
     public partial class CommericalGetRes
     {
         public int CompanyNo { get; set; }
-        public string? CompanyName { get; set; }
-        public string? EmailID { get; set; }
-        public string? MobileNo { get; set; }
+        public string CompanyName { get; set; }
+        public string EmailID { get; set; }
+        public string MobileNo { get; set; }
         public int seqNo { get; set; }
         public bool? Status { get; set; }
         public Int16 VenueNo { get; set; }
         public int CurrentseqNo { get; set; }
         public int pageIndex { get; set; }
         public int totalRecords { get; set; }
-
     }
     public partial class CommericalInsReq
     {
         public int CompanyNo { get; set; }
-        public string? CompanyName { get; set; }
-        public string? EmailID { get; set; }
-        public string? MobileNo { get; set; }
+        public string CompanyName { get; set; }
+        public string EmailID { get; set; }
+        public string MobileNo { get; set; }
         public int SeqNo { get; set; }
         public bool? Status { get; set; }
         public Int16 VenueNo { get; set; }
         public int venueBranchno { get; set; }
         public int userNo { get; set; }
-
     }
-
     public class CommericalInsRes
     {
         public int CompanyNo { get; set; }
@@ -61,7 +58,6 @@ namespace Service.Model
         public string ExpiredDate { get; set; }
         public int pageIndex { get; set; }
         public int totalRecords { get; set; }
-
     }
     public partial class GSTInsReq
     {
@@ -73,13 +69,9 @@ namespace Service.Model
         public byte VenueNo { get; set; }
         public bool? Status { get; set; }
         public int userNo { get; set; }
-
     }
-
     public class GSTInsRes
     {
         public Int16 TaxMastNo { get; set; }
     }
-
-
 }

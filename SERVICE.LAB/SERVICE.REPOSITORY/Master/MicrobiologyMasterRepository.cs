@@ -17,9 +17,9 @@ namespace Service.Repository
         private IConfiguration _config;
         public MicrobiologyMasterRepository(IConfiguration config) { _config = config; }
 
-        public List<lstorgAntiRange> GetOrgAntibioticRange(reqorgAntiRange req)
+        public List<LstorgAntiRange> GetOrgAntibioticRange(reqorgAntiRange req)
         {
-            List<lstorgAntiRange> lst = new List<lstorgAntiRange>();
+            List<LstorgAntiRange> lst = new List<LstorgAntiRange>();
             try
             {
                 using (var context = new MasterContext(_config.GetConnectionString(ConfigKeys.DefaultConnection)))
@@ -43,7 +43,7 @@ namespace Service.Repository
         public int SaveOrganismAntibioticRange(orgAntiRange req)
         {
             CommonHelper commonUtility = new CommonHelper();
-            string orgAntiRangeXML = commonUtility.ToXML(req.lstorgAntiRange);
+            string orgAntiRangeXML = commonUtility.ToXML(req.LstorgAntiRange);
             int i = 0;
             try
             {
@@ -68,9 +68,9 @@ namespace Service.Repository
             return i;
         }
 
-        public List<orggetresponse> GetOrgmaster(reqorgAntiRange orggetreq)
+        public List<Orggetresponse> GetOrgmaster(reqorgAntiRange orggetreq)
         {
-            List<orggetresponse> lst = new List<orggetresponse>();
+            List<Orggetresponse> lst = new List<Orggetresponse>();
             try
             {
                 using (var context = new MasterContext(_config.GetConnectionString(ConfigKeys.DefaultConnection)))
@@ -92,9 +92,9 @@ namespace Service.Repository
             }
             return lst;
         }
-        public List<orgGrpresponse> GetOrgGrpmaster(reqorgGroupAntiRange orggetreq)
+        public List<Orggrpresponse> GetOrgGrpmaster(reqorgGroupAntiRange orggetreq)
         {
-            List<orgGrpresponse> lst = new List<orgGrpresponse>();
+            List<Orggrpresponse> lst = new List<Orggrpresponse>();
             try
             {
                 using (var context = new MasterContext(_config.GetConnectionString(ConfigKeys.DefaultConnection)))
@@ -116,9 +116,9 @@ namespace Service.Repository
             }
             return lst;
         }
-        public orginsertresponse InsertOrgmaster(orgresponse orginsertreq)
+        public Orginsertresponse InsertOrgmaster(Orgresponse orginsertreq)
         {
-            orginsertresponse objresult = new orginsertresponse();
+            Orginsertresponse Objresult = new Orginsertresponse();
             try
             {
                 using (var context = new MasterContext(_config.GetConnectionString(ConfigKeys.DefaultConnection)))
@@ -134,7 +134,7 @@ namespace Service.Repository
                     var _userno = new SqlParameter("userNo", orginsertreq?.userno);
                     var _organismshortcode = new SqlParameter("organismshortcode", orginsertreq?.organismshortcode);
 
-                    objresult = context.InsertOrgmaster.FromSqlRaw(
+                    Objresult = context.InsertOrgmaster.FromSqlRaw(
                     "Execute dbo.pro_InsertOrganismmaster @venueno,@venuebranchno,@organismno,@organismGroupno,@organismname,@notes,@sequenceno,@status,@userno,@organismshortcode",
                     _venueno, _venuebranchno, _organismno, _organismGroupno, _organismname, _notes, _sequenceno, _status, _userno, _organismshortcode).AsEnumerable().FirstOrDefault();
                 }
@@ -143,11 +143,11 @@ namespace Service.Repository
             {
                 MyDevException.Error(ex, "MicrobiologyMasterRepository.InsertOrgmaster" + orginsertreq.organismno.ToString(), ExceptionPriority.Low, ApplicationType.REPOSITORY, orginsertreq.venueno, orginsertreq.venuebranchno, orginsertreq.userno);
             }
-            return objresult;
+            return Objresult;
         }
-        public orginsertGrpresponse InsertOrgGrpmaster(orggrpresponse orginsertreq)
+        public OrginsertGrpresponse InsertOrgGrpmaster(Orggrpresponse orginsertreq)
         {
-            orginsertGrpresponse objresult = new orginsertGrpresponse();
+            OrginsertGrpresponse Objresult = new OrginsertGrpresponse();
             try
             {
                 using (var context = new MasterContext(_config.GetConnectionString(ConfigKeys.DefaultConnection)))
@@ -165,18 +165,18 @@ namespace Service.Repository
                     "Execute dbo.pro_InsertOrganismGrpmaster @venueno,@venuebranchno,@organismgrpno,@organismgrpname,@organismtypeno,@sequenceno,@status,@userNo ",
                     _venueno, _venuebranchno, _organismgrpno, _organismtypeno, _organismgrpname, _sequenceno, _status, _userno).ToList();
                     
-                    objresult.organismGrpno = lst[0].organismGrpno;
+                    Objresult.organismGrpno = lst[0].organismGrpno;
                 }
             }
             catch (Exception ex)
             {
                 MyDevException.Error(ex, "MicrobiologyMasterRepository.InsertOrgGrpmaster" + orginsertreq.organismgrpno.ToString(), ExceptionPriority.Low, ApplicationType.REPOSITORY, orginsertreq.venueno, orginsertreq.venuebranchno, orginsertreq.userno);
             }
-            return objresult;
+            return Objresult;
         }
-        public List<orgtyperesponse> GetOrgtypemaster(orgtypereq orgtygetreq)
+        public List<Orgtyperesponse> GetOrgtypemaster(Orgtypereq orgtygetreq)
         {
-            List<orgtyperesponse> lst = new List<orgtyperesponse>();
+            List<Orgtyperesponse> lst = new List<Orgtyperesponse>();
             try
             {
                 using (var context = new MasterContext(_config.GetConnectionString(ConfigKeys.DefaultConnection)))
@@ -197,9 +197,9 @@ namespace Service.Repository
             }
             return lst;
         }
-        public orgtypeinsertresponse InsertOrgtypemaster(orgtyperesponse orgtyinsertreq)
+        public Orgtypeinsertresponse InsertOrgtypemaster(Orgtyperesponse orgtyinsertreq)
         {
-            orgtypeinsertresponse objresult = new orgtypeinsertresponse();
+            Orgtypeinsertresponse Objresult = new Orgtypeinsertresponse();
             try
             {
                 using (var context = new MasterContext(_config.GetConnectionString(ConfigKeys.DefaultConnection)))
@@ -212,7 +212,7 @@ namespace Service.Repository
                     var _status = new SqlParameter("status", orgtyinsertreq?.status);
                     var _userno = new SqlParameter("userno", orgtyinsertreq?.userno);
 
-                    objresult = context.InsertOrgtypemaster.FromSqlRaw(
+                    Objresult = context.InsertOrgtypemaster.FromSqlRaw(
                     "Execute dbo.pro_InsertOrganismTypemaster @venueno,@venuebranchno,@organismtypeno,@organismtypename,@sequenceno,@status,@userNo",
                     _venueno, _venuebranchno, _organismtypeno, _organismtypename, _sequenceno, _status, _userno).AsEnumerable().FirstOrDefault();
                 }
@@ -221,19 +221,19 @@ namespace Service.Repository
             {
                 MyDevException.Error(ex, "MicrobiologyMasterRepository.InsertOrgtypemaster" + orgtyinsertreq.organismtypeno.ToString(), ExceptionPriority.Low, ApplicationType.REPOSITORY, orgtyinsertreq.venueno, orgtyinsertreq.venuebranchno, orgtyinsertreq.userno);
             }
-            return objresult;
+            return Objresult;
         }
-        public List<antiresponse> GetAntimaster(antireq antireq)
+        public List<Antiresponse> GetAntimaster(Antireq Antireq)
         {
-            List<antiresponse> lst = new List<antiresponse>();
+            List<Antiresponse> lst = new List<Antiresponse>();
             try
             {
                 using (var context = new MasterContext(_config.GetConnectionString(ConfigKeys.DefaultConnection)))
                 {
-                    var _venueno = new SqlParameter("venueno", antireq?.venueno);
-                    var _venuebranchno = new SqlParameter("venuebranchno", antireq?.venuebranchno);
-                    var _antibioticno = new SqlParameter("antibioticno", antireq?.antibioticno);
-                    var _pageIndex = new SqlParameter("pageIndex", antireq?.pageIndex);
+                    var _venueno = new SqlParameter("venueno", Antireq?.venueno);
+                    var _venuebranchno = new SqlParameter("venuebranchno", Antireq?.venuebranchno);
+                    var _antibioticno = new SqlParameter("antibioticno", Antireq?.antibioticno);
+                    var _pageIndex = new SqlParameter("pageIndex", Antireq?.pageIndex);
 
                     lst = context.Getantibiotic.FromSqlRaw(
                     "Execute dbo.pro_GetAntibioticmaster @venueno,@venuebranchno,@antibioticno,@pageIndex",
@@ -242,13 +242,13 @@ namespace Service.Repository
             }
             catch (Exception ex)
             {
-                MyDevException.Error(ex, "MicrobiologyMasterRepository.GetAntimaster" + antireq.antibioticno.ToString(), ExceptionPriority.Low, ApplicationType.REPOSITORY, antireq.venueno, antireq.venuebranchno, 0);
+                MyDevException.Error(ex, "MicrobiologyMasterRepository.GetAntimaster" + Antireq.antibioticno.ToString(), ExceptionPriority.Low, ApplicationType.REPOSITORY, Antireq.venueno, Antireq.venuebranchno, 0);
             }
             return lst;
         }
-        public antinsertresponse Insertantimaster(antiresponse antinsertreq)
+        public Antinsertresponse Insertantimaster(Antiresponse antinsertreq)
         {
-            antinsertresponse objresult = new antinsertresponse();
+            Antinsertresponse Objresult = new Antinsertresponse();
             try
             {
                 using (var context = new MasterContext(_config.GetConnectionString(ConfigKeys.DefaultConnection)))
@@ -261,7 +261,7 @@ namespace Service.Repository
                     var _status = new SqlParameter("status", antinsertreq?.status);
                     var _userno = new SqlParameter("userno", antinsertreq?.userno);
 
-                    objresult = context.Insertantimaster.FromSqlRaw(
+                    Objresult = context.Insertantimaster.FromSqlRaw(
                     "Execute dbo.pro_InsertAntibioticsmaster @venueno,@venuebranchno,@antibioticno,@antibioticName,@sequenceno,@status,@userNo",
                     _venueno, _venuebranchno, _antibioticno, _antibioticName, _sequenceno, _status, _userno).AsEnumerable().FirstOrDefault();
                 }
@@ -270,11 +270,11 @@ namespace Service.Repository
             {
                 MyDevException.Error(ex, "MicrobiologyMasterRepository.Insertantimaster" + antinsertreq.antibioticno.ToString(), ExceptionPriority.Low, ApplicationType.REPOSITORY, antinsertreq.venueno, antinsertreq.venuebranchno, antinsertreq.userno);
             }
-            return objresult;
+            return Objresult;
         }
-        public List<orgAntiresponse> GetorgAntimaster(orgAntirequest reqorgAnti)
+        public List<OrgAntiresponse> GetorgAntimaster(OrgAntirequest reqorgAnti)
         {
-            List<orgAntiresponse> lst = new List<orgAntiresponse>();
+            List<OrgAntiresponse> lst = new List<OrgAntiresponse>();
             try
             {
                 using (var context = new MasterContext(_config.GetConnectionString(ConfigKeys.DefaultConnection)))
@@ -298,9 +298,9 @@ namespace Service.Repository
             }
             return lst;
         }
-        public organtinsertresponse InsertorgAntimaster(orgAntinsertresponse orgAntinsertreq)
+        public OrgAntinsertresponse InsertorgAntimaster(OrgAntinsertresponse orgAntinsertreq)
         {
-            organtinsertresponse objresult = new organtinsertresponse();
+            OrgAntinsertresponse Objresult = new OrgAntinsertresponse();
             try
             {
                 using (var context = new MasterContext(_config.GetConnectionString(ConfigKeys.DefaultConnection)))
@@ -315,7 +315,7 @@ namespace Service.Repository
                     var _userno = new SqlParameter("userno", orgAntinsertreq?.userno);
                     var _organismNo = new SqlParameter("organismNo", orgAntinsertreq?.organismNo);
 
-                    objresult = context.Insertantiorg.FromSqlRaw(
+                    Objresult = context.Insertantiorg.FromSqlRaw(
                     "Execute dbo.pro_InsertOrganismtypeandantibioticmaster @venueno,@venuebranchno,@organismAntibioticMapNo,@organismTypeNo,@antibioticno,@organismNo,@sequenceno,@status,@userno",
                     _venueno, _venuebranchno, _organismAntibioticMapNo, _organismTypeNo, _antibioticno, _organismNo, _sequenceno, _status, _userno).AsEnumerable().FirstOrDefault();
                 }
@@ -324,7 +324,7 @@ namespace Service.Repository
             {
                 MyDevException.Error(ex, "MicrobiologyMasterRepository.InsertorgAntimaster" + orgAntinsertreq.antibioticno.ToString(), ExceptionPriority.Low, ApplicationType.REPOSITORY, orgAntinsertreq.venueno, orgAntinsertreq.venuebranchno, orgAntinsertreq.userno);
             }
-            return objresult;
+            return Objresult;
         }
     }
 }

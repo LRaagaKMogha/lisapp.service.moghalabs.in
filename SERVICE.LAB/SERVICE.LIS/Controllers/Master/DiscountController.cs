@@ -26,16 +26,16 @@ namespace Service.API.SERVICE.Controllers.Master
         [Route("api/Discount/GetDiscountMaster")]
         public List<GetDiscountDetails> GetDiscountMasters(DiscountMasterRequest discountItem)
         {
-            List<GetDiscountDetails> objresult = new List<GetDiscountDetails>();
+            List<GetDiscountDetails> Objresult = new List<GetDiscountDetails>();
             try
             {
-                objresult = _discountRepository.GetDiscountMasters(discountItem);
+                Objresult = _discountRepository.GetDiscountMasters(discountItem);
             }
             catch (Exception ex)
             {
                 MyDevException.Error(ex, "GetDiscountMasters", ExceptionPriority.Low, ApplicationType.APPSERVICE, discountItem.venueNo, discountItem.venueBranchno, 0);
             }
-            return objresult;
+            return Objresult;
         }
 
         [HttpPost]

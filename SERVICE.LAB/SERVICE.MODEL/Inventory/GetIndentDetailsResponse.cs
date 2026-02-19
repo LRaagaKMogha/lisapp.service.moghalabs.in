@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace Service.Model
 {
@@ -64,8 +63,6 @@ namespace Service.Model
         public bool status { get; set; }
         public string unit { get; set; }
         public string pack { get; set; }
-
-
     }
     public class IndentProductDetailsNewResponse
     {
@@ -95,7 +92,6 @@ namespace Service.Model
         public string unit { get; set; }
         public string pack { get; set; }
     }
-
     public class GetIndentDetailsRequest
     {
         public int indentno { get; set; }
@@ -103,9 +99,9 @@ namespace Service.Model
         public int venueBranchNo { get; set; }
         public bool status { get; set; }
         public int pageIndex { get; set; }
-        public string? FromDate { get; set; }
-        public string? ToDate { get; set; }
-        public string? Type { get; set; }
+        public string FromDate { get; set; }
+        public string ToDate { get; set; }
+        public string Type { get; set; }
     }
     public class IndentDetailsSaveRequest
     {

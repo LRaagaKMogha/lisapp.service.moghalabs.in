@@ -14,7 +14,7 @@ namespace Service.Model.EF.External.CommonMasters
         public SubTestContext(DbContextOptions<SubTestContext> options) : base(options)
         {
         }
-        public virtual DbSet<LstSubTestInfo> GetSubTestList { get; set; }
+        public virtual DbSet<LstsubtestInfo> GetSubTestList { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -27,7 +27,7 @@ namespace Service.Model.EF.External.CommonMasters
         {
             modelBuilder.HasAnnotation("ProductVersion", "2.2.3-servicing-35854");
 
-            modelBuilder.Entity<LstSubTestInfo>(entity =>
+            modelBuilder.Entity<LstsubtestInfo>(entity =>
             {
                 entity.HasKey(e => e.subtestNo);
                 entity.ToTable("pro_Ex_GetSubTestListInfo");

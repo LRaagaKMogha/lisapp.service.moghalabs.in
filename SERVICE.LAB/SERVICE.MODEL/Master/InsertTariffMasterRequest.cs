@@ -1,11 +1,9 @@
-﻿using Service.Model.Sample;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace Service.Model
 {
-   public class InsertTariffMasterRequest
+    public class InsertTariffMasterRequest
     {
         public int RateListNo { get; set; }
         public string RateListName { get; set; }
@@ -29,11 +27,9 @@ namespace Service.Model
         public string RejectReason { get; set; }
         public int OldRateListAppNo { get; set; }
         public int AppRateListAppNo { get; set; }
-
         public List<tariffServiceDetails> serviceDetails { get; set; }
         public List<deptDetails> deptDetails { get; set; }
     }
-
     public class tariffServiceDetails
     {      
         public int? testNo { get; set; }
@@ -49,7 +45,6 @@ namespace Service.Model
         public string extCode { get; set; }
         public decimal oldAmount { get; set; }
     }
-
     public class deptDetails
     {
         public int? deptDiscountNo { get; set; }
@@ -76,10 +71,8 @@ namespace Service.Model
         public int? ModifiedBy { get; set; }
         public int? mappingType { get; set; }
         public int OldRateListNo { get; set; }
-
         public List<tariffServiceDetails> serviceDetails { get; set; }
     }
-
     public class InsertContractReq
     {
         public Byte VenueNo { get; set; }
@@ -98,7 +91,6 @@ namespace Service.Model
         public List<ContractListXml> serviceDetails { get; set; }
         public List<ContractVsClient> ContractVsClient { get; set; }
     }
-
     public class ContractVsClient
     {
         public Int16 contractMasterNo { get; set; }
@@ -106,7 +98,6 @@ namespace Service.Model
         public Boolean status { get; set; }
         public Boolean isChecked  { get; set; }
     }
-
     public class ContractListXml 
     {
         public int contractDtlsNo  { get; set; }
@@ -116,7 +107,6 @@ namespace Service.Model
         public bool isChecked { get; set; }
         public decimal oldAmount { get; set; }
     }
-
     public class InsertContractRes
     {
         public int resultStatus { get; set; }
@@ -125,7 +115,6 @@ namespace Service.Model
     {
         public int result { get; set; }
     }
-
     public class InsTariffReq
     {
         public Int16 ClientTariffMapNo { get; set; }
@@ -172,7 +161,6 @@ namespace Service.Model
         public string ReferrerName { get; set; }
         public string physicianName { get; set; }
     }
-
     public class InsertReflstReq
     {
         public Byte VenueNo { get; set; }
@@ -184,7 +172,6 @@ namespace Service.Model
         public int? UserNo { get; set; }
         public List<SplPriceListXml> serviceDetails { get; set; }
     }
-
     public class SplPriceListXml
     {
         public Int16 RefSplNo { get; set; }
@@ -192,7 +179,6 @@ namespace Service.Model
         public string serviceType { get; set; }
         public decimal? Amount { get; set; }
     }
-
     public class Tariffdeptdis 
     {
         public int RateListNo { get; set; }
@@ -205,7 +191,7 @@ namespace Service.Model
         public int DepartmentNo { get; set; }
         public int DeptDiscountNo { get; set; }
         public int Discount { get; set; }
-        public string? DepartmentName { get; set; }
+        public string DepartmentName { get; set; }
         public int RatelistNo { get; set; }
         public int OldDeptDiscountNo { get; set; }
         public int OldratelistNo { get; set; }
@@ -247,11 +233,8 @@ namespace Service.Model
         public string EffectiveFrom { get; set; }
         public string EffectiveTo { get; set; }
         public decimal BaseAmount { get; set; }
-        public int venueNo { get; set; }
-        
-    }
-           
- 
+        public int venueNo { get; set; }        
+    } 
     public class PriceHistoryService
     {
         public int RowNo { get; set; }
@@ -260,4 +243,3 @@ namespace Service.Model
         public decimal Rate { get; set; }
     }
 }
-

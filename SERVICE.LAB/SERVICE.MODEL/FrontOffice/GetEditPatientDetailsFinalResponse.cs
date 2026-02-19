@@ -30,7 +30,6 @@ namespace Service.Model
         public string AreaName { get; set; }
         public string Pincode { get; set; }
         public string SecondaryAddress { get; set; }
-        // public Int16 maritalStatus { get; set; }
         public string URNID { get; set; }
         public string URNType { get; set; }
         public bool IsStat { get; set; }
@@ -58,7 +57,6 @@ namespace Service.Model
         public int PhysicianNo { get; set; }
         public string CustomerName { get; set; }
         public string PhysicianName { get; set; }
-
         public string DueRemarks { get; set; }
         public string ExternalVisitIdentity { get; set; }
         public int WardNo { get; set; }
@@ -93,7 +91,6 @@ namespace Service.Model
         public string Remarks { get; set; }
         public bool IsExistsInvoice { get; set; }
     }
-
 
     public class EditBillServiceDetails
     {

@@ -25,16 +25,16 @@ namespace Service.API.SERVICE.Controllers
         [Route("getdetails")]
         public IEnumerable<GetRCMasterResponse> GetRCMaster(int venueNo, int venueBranchNo, int pageIndex, int RcNo)
         {
-            List<GetRCMasterResponse> objresult = new List<GetRCMasterResponse>();
+            List<GetRCMasterResponse> Objresult = new List<GetRCMasterResponse>();
             try
             {
-                objresult = _rcMasterRepository.GetRCDetails(venueNo, venueBranchNo, pageIndex, RcNo);
+                Objresult = _rcMasterRepository.GetRCDetails(venueNo, venueBranchNo, pageIndex, RcNo);
             }
             catch (Exception ex)
             {
                 MyDevException.Error(ex, "RCMasterController.GetRCMaster", ExceptionPriority.Low, ApplicationType.APPSERVICE, venueNo, venueBranchNo, 0);
             }
-            return objresult;
+            return Objresult;
         }
         #endregion
 
@@ -44,16 +44,16 @@ namespace Service.API.SERVICE.Controllers
         [Route("getrcdetails")]
         public IEnumerable<TblRC> GetRCMasterDetails(GetCommonMasterRequest masterRequest)
         {
-            List<TblRC> objresult = new List<TblRC>();
+            List<TblRC> Objresult = new List<TblRC>();
             try
             {
-                objresult = _rcMasterRepository.GetRCMasterDetails(masterRequest);
+                Objresult = _rcMasterRepository.GetRCMasterDetails(masterRequest);
             }
             catch (Exception ex)
             {
                 MyDevException.Error(ex, "RCMasterController.GetRCMaster", ExceptionPriority.Low, ApplicationType.APPSERVICE, masterRequest.venueno, masterRequest.venuebranchno, 0);
             }
-            return objresult;
+            return Objresult;
         }
         #endregion
 
@@ -63,16 +63,16 @@ namespace Service.API.SERVICE.Controllers
         [Route("edit")]
         public IEnumerable<RCPriceList> GetEditRCMaster(int venueNo, int venueBranchNo, int rcNo)
         {
-            List<RCPriceList> objresult = new List<RCPriceList>();
+            List<RCPriceList> Objresult = new List<RCPriceList>();
             try
             {
-                objresult = _rcMasterRepository.GetEditRCMaster(venueNo, venueBranchNo, rcNo);
+                Objresult = _rcMasterRepository.GetEditRCMaster(venueNo, venueBranchNo, rcNo);
             }
             catch (Exception ex)
             {
                 MyDevException.Error(ex, "RCMasterController.GetEditRCMaster", ExceptionPriority.Low, ApplicationType.APPSERVICE, venueNo, venueBranchNo, 0);
             }
-            return objresult;
+            return Objresult;
         }
         #endregion
 

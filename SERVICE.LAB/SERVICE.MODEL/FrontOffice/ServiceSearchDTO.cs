@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace Service.Model
 {
@@ -16,7 +15,6 @@ namespace Service.Model
         public string Gender { get; set; }
         public bool IsChoice { get; set; }
         public int ChoiceCount { get; set; }
-
     }
     public class ServiceParamDTO
     {    
@@ -25,7 +23,6 @@ namespace Service.Model
         public int venueNo { get; set; }
         public int venueBranchNo { get; set; }
     }
-
     public class OptionalTestDTO
     {
         public int TestNo { get; set; }
@@ -60,14 +57,12 @@ namespace Service.Model
         public int ChoiceCount { get; set; }
         public decimal baseamount { get; set; }
     }
-
     public class ClientRestrictionDay
     {
         public int ClientNumber { get; set; }
         public int RestrictionDays { get; set; }
         public int VenueNo { get; set; }
         public int VenueBranchNo { get; set; }
-
     }
     public class ClientRestrictionDayResponse
     {
@@ -105,7 +100,6 @@ namespace Service.Model
     }    
     public class GetDetailsByPincode
     {
-
         public Int64 Row_Num { get; set; }
         public int CityNo { get; set; }
         public string CityName { get; set; }
@@ -118,11 +112,11 @@ namespace Service.Model
     public class Humanbodyparts
     {
         public int HumanBodyParts_Id { get; set; }
-        public string? Type { get; set; }
-        public string? Name { get; set; }
-        public string? Path { get; set; }
+        public string Type { get; set; }
+        public string Name { get; set; }
+        public string Path { get; set; }
     }
-    public class displaylist
+    public class Displaylist
     {
         public Int64 Row_Num { get; set; }
         public Int64 Sno { get; set; }

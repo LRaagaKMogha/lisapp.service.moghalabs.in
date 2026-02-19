@@ -41,16 +41,16 @@ namespace Service.API.SERVICE.Controllers
         [Route("api/ClientMaster/GetClientMasterDetails")]
         public IEnumerable<CustomerResponse> GetClientMasterDetails(GetCustomerRequest getCustomerRequest)
         {
-            List<CustomerResponse> objresult = new List<CustomerResponse>();
+            List<CustomerResponse> Objresult = new List<CustomerResponse>();
             try
             {
-                objresult = _ClientMasterRepository.GetClientMasterDetails(getCustomerRequest);
+                Objresult = _ClientMasterRepository.GetClientMasterDetails(getCustomerRequest);
             }
             catch (Exception ex)
             {
                 MyDevException.Error(ex, "ClientMasterController.GetClientMasterDetails", ExceptionPriority.Low, ApplicationType.APPSERVICE, getCustomerRequest.venueNo, getCustomerRequest.venueBranchNo, 0);
             }
-            return objresult;
+            return Objresult;
         }
         #endregion
 
@@ -64,16 +64,16 @@ namespace Service.API.SERVICE.Controllers
         [Route("api/ClientMaster/GetclientSubUser")]
         public IEnumerable<ClientSubUserResponse> GetclientSubUser(GetCustomerRequest getCustomerRequest)
         {
-            List<ClientSubUserResponse> objresult = new List<ClientSubUserResponse>();
+            List<ClientSubUserResponse> Objresult = new List<ClientSubUserResponse>();
             try
             {
-                objresult = _ClientMasterRepository.GetclientSubUser(getCustomerRequest);
+                Objresult = _ClientMasterRepository.GetclientSubUser(getCustomerRequest);
             }
             catch (Exception ex)
             {
                 MyDevException.Error(ex, "ClientMasterController.GetclientSubUser", ExceptionPriority.Low, ApplicationType.APPSERVICE, getCustomerRequest.venueNo, getCustomerRequest.venueBranchNo, 0);
             }
-            return objresult;
+            return Objresult;
         }
 
         #endregion
@@ -90,50 +90,56 @@ namespace Service.API.SERVICE.Controllers
         public ActionResult InsertClientMasterDetails([FromBody] PostCustomerMaster postcustomerDTO)
         {
             InsertCustomerResponse result = new InsertCustomerResponse();
-            string ExistingCustomerCode = string.Empty;
+            string? ExistingCustomerCode = string.Empty;
             try
             {
-                using (var auditScoped = new AuditScope<TblCustomer>(postcustomerDTO.tblcustomer, _auditService))
+                if (postcustomerDTO.tblcustomer != null)
                 {
-                    var _errormsg = ClientMasterValidation.InsertClientMasterDetails(postcustomerDTO);
-                    if (!_errormsg.status)
+                    using (var auditScoped = new AuditScope<TblCustomer>(postcustomerDTO.tblcustomer, _auditService))
                     {
-                        string IsCustomerApproval = "IsCustomerApproval";
-
-                        var user = HttpContext.Items["User"] as UserClaimsIdentity;
-                        var objAppSettingResponse = _IMasterRepository.GetSingleConfiguration(user.VenueNo, user.VenueBranchNo, IsCustomerApproval);
-                        
-                        if (postcustomerDTO.tblcustomer.CustomerNo > 0)
+                        var _errormsg = ClientMasterValidation.InsertClientMasterDetails(postcustomerDTO);
+                        if (!_errormsg.status)
                         {
-                            List<CustomerResponse> objresult = new List<CustomerResponse>();
+                            var user = HttpContext.Items["User"] as UserClaimsIdentity;
 
-                            objresult = _ClientMasterRepository.GetClientMasterDetails(new GetCustomerRequest()
+                            if (user != null)
                             {
-                                customerNumber = postcustomerDTO.tblcustomer.CustomerNo,
-                                venueNo = user.VenueNo,
-                                venueBranchNo = user.VenueBranchNo,
-                                pageIndex = 1
-                            });
+                                if (postcustomerDTO.tblcustomer.CustomerNo > 0)
+                                {
+                                    List<CustomerResponse> Objresult = new List<CustomerResponse>();
 
-                            ExistingCustomerCode = objresult.Count > 0 ? objresult[0].CustomerCode : "";
-                        }
+                                    Objresult = _ClientMasterRepository.GetClientMasterDetails(new GetCustomerRequest()
+                                    {
+                                        customerNumber = postcustomerDTO.tblcustomer.CustomerNo,
+                                        venueNo = user.VenueNo,
+                                        venueBranchNo = user.VenueBranchNo,
+                                        pageIndex = 1
+                                    });
 
-                        result = _ClientMasterRepository.InsertClientMasterDetails(postcustomerDTO);
-                        string _CacheKey = CacheKeys.UserMenu + result.CustomerNo + postcustomerDTO.tblcustomer.VenueNo + postcustomerDTO.tblcustomer.VenueBranchNo + "1";
-                        if (postcustomerDTO.subclient.Count > 0)
-                        {
-                            _ClientMasterRepository.InsertSubClientMasterDetails(postcustomerDTO.subclient, postcustomerDTO.tblcustomer.VenueNo, postcustomerDTO.tblcustomer.VenueBranchNo, postcustomerDTO.tblcustomer.CreatedBy, result.CustomerNo, postcustomerDTO.tblcustomer.IsApproval, postcustomerDTO.tblcustomer.IsReject);
+                                    ExistingCustomerCode = Objresult.Count > 0 ? Objresult[0].CustomerCode : "";
+                                }
+                            }
+
+                            result = _ClientMasterRepository.InsertClientMasterDetails(postcustomerDTO);
+                            string _CacheKey = CacheKeys.UserMenu + result.CustomerNo + postcustomerDTO.tblcustomer.VenueNo + postcustomerDTO.tblcustomer.VenueBranchNo + "1";
+                            
+                            if (postcustomerDTO.subclient != null && postcustomerDTO.subclient.Count > 0)
+                            {
+                                _ClientMasterRepository.InsertSubClientMasterDetails(postcustomerDTO.subclient, postcustomerDTO.tblcustomer.VenueNo, postcustomerDTO.tblcustomer.VenueBranchNo, postcustomerDTO.tblcustomer.CreatedBy, result.CustomerNo, postcustomerDTO.tblcustomer.IsApproval, postcustomerDTO.tblcustomer.IsReject);
+                            }
+
+                            MemoryCacheRepository.RemoveItem(CacheKeys.CustomerMaster);
+                            MemoryCacheRepository.RemoveItem(_CacheKey);
+
+                            if (postcustomerDTO.isDocUpdModified == true && postcustomerDTO.documentUploadlst != null && postcustomerDTO.documentUploadlst.Count > 0)
+                            {
+                                _ClientMasterRepository.DocumentUploadDetails(postcustomerDTO.documentUploadlst, postcustomerDTO.tblcustomer.VenueNo, postcustomerDTO.tblcustomer.VenueBranchNo, postcustomerDTO.tblcustomer.CreatedBy, postcustomerDTO.tblcustomer.CustomerNo);
+                            }
                         }
-                        MemoryCacheRepository.RemoveItem(CacheKeys.CustomerMaster);
-                        MemoryCacheRepository.RemoveItem(_CacheKey);
-                        if (postcustomerDTO.isDocUpdModified == true && postcustomerDTO.documentUploadlst.Count > 0 && postcustomerDTO.documentUploadlst != null)
-                        {
-                            _ClientMasterRepository.DocumentUploadDetails(postcustomerDTO.documentUploadlst, postcustomerDTO.tblcustomer.VenueNo, postcustomerDTO.tblcustomer.VenueBranchNo, postcustomerDTO.tblcustomer.CreatedBy, postcustomerDTO.tblcustomer.CustomerNo);
-                        }
+                        else
+                            return BadRequest(_errormsg);
                     }
-                    else
-                        return BadRequest(_errormsg);
-                }                
+                }
             }
             catch (Exception ex)
             {
@@ -182,32 +188,32 @@ namespace Service.API.SERVICE.Controllers
         [Route("api/ClientMaster/GetSubCustomerDetail")]
         public List<CustomerMappingDTO> GetSubCustomerDetailbyCustomer(int CustomerNo, int VenueNo, int VenueBranchNo, int IsApproval)
         {
-            List<CustomerMappingDTO> objresult = new List<CustomerMappingDTO>();
+            List<CustomerMappingDTO> Objresult = new List<CustomerMappingDTO>();
             try
             {
-                objresult = _ClientMasterRepository.GetSubCustomerDetailbyCustomer(CustomerNo,VenueNo, VenueBranchNo, IsApproval);
+                Objresult = _ClientMasterRepository.GetSubCustomerDetailbyCustomer(CustomerNo,VenueNo, VenueBranchNo, IsApproval);
             }
             catch (Exception ex)
             {
                 MyDevException.Error(ex, "ClientMasterController.GetSubCustomerDetailbyCustomer - " + CustomerNo, ExceptionPriority.Low, ApplicationType.APPSERVICE, VenueNo, VenueBranchNo, 0);
             }
-            return objresult;
+            return Objresult;
         }
         [CustomAuthorize("LIMSMasters")]
         [HttpGet]
         [Route("api/ClientMaster/GetSubClinic")]
         public List<CustomerMappingDTO> GetSubClinic(int CustomerNo, int VenueNo, int VenueBranchNo)
         {
-            List<CustomerMappingDTO> objresult = new List<CustomerMappingDTO>();
+            List<CustomerMappingDTO> Objresult = new List<CustomerMappingDTO>();
             try
             {
-                objresult = _ClientMasterRepository.GetSubClinic(CustomerNo, VenueNo, VenueBranchNo);
+                Objresult = _ClientMasterRepository.GetSubClinic(CustomerNo, VenueNo, VenueBranchNo);
             }
             catch (Exception ex)
             {
                 MyDevException.Error(ex, "ClientMasterController.GetSubClinic - " + CustomerNo, ExceptionPriority.Low, ApplicationType.APPSERVICE, VenueNo, VenueBranchNo,0);
             }
-            return objresult;
+            return Objresult;
         }
         #endregion
 
@@ -219,16 +225,16 @@ namespace Service.API.SERVICE.Controllers
             int clientno = ObjRequest.ClientNumber;
             int venueno = ObjRequest.ClientNumber;
             int venuebranchno = ObjRequest.ClientNumber;
-            ClientRestrictionDayResponse objresult = new ClientRestrictionDayResponse();
+            ClientRestrictionDayResponse Objresult = new ClientRestrictionDayResponse();
             try
             {
-                objresult = _ClientMasterRepository.GetClientRestrictionDayIsValid(ObjRequest);
+                Objresult = _ClientMasterRepository.GetClientRestrictionDayIsValid(ObjRequest);
             }
             catch (Exception ex)
             {
                 MyDevException.Error(ex, "ClientMasterController.GetClientRestrictionDayIsValid/Clientno - " + clientno, ExceptionPriority.Medium, ApplicationType.APPSERVICE, venueno, venuebranchno, 0);
             }
-            return objresult;
+            return Objresult;
         }
 
         [CustomAuthorize("LIMSMasters")]
@@ -236,16 +242,16 @@ namespace Service.API.SERVICE.Controllers
         [Route("api/ClientMaster/GetClientDocumentDetails")]
         public IEnumerable<ClientDocUploadDetailRes> GetClientDocumentDetails(ClientDocUploadReq Req)
         {
-            List<ClientDocUploadDetailRes> objresult = new List<ClientDocUploadDetailRes>();
+            List<ClientDocUploadDetailRes> Objresult = new List<ClientDocUploadDetailRes>();
             try
             {
-                objresult = _ClientMasterRepository.GetClientDocumentDetails(Req);
+                Objresult = _ClientMasterRepository.GetClientDocumentDetails(Req);
             }
             catch (Exception ex)
             {
                 MyDevException.Error(ex, "ClientMasterController.GetClientDocumentDetails", ExceptionPriority.Low, ApplicationType.APPSERVICE, Req.venueNo, Req.venueBranchNo, 0);
             }
-            return objresult;
+            return Objresult;
         }
 
         [CustomAuthorize("LIMSMasters")]

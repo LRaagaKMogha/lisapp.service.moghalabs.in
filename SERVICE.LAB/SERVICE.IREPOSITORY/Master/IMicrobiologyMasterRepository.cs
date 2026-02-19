@@ -5,17 +5,17 @@ namespace Service.IRepository
 {
     public interface IMicrobiologyMasterRepository
     {
-        List<lstorgAntiRange> GetOrgAntibioticRange(reqorgAntiRange req);
+        List<LstorgAntiRange> GetOrgAntibioticRange(reqorgAntiRange req);
         int SaveOrganismAntibioticRange(orgAntiRange req);
-        List<orggetresponse> GetOrgmaster(reqorgAntiRange orggetreq);
-        List<orgGrpresponse> GetOrgGrpmaster(reqorgGroupAntiRange orggetreq);
-        orginsertresponse InsertOrgmaster(orgresponse orginsertreq);
-        orginsertGrpresponse InsertOrgGrpmaster(orggrpresponse orginsertreq);
-        List<orgtyperesponse> GetOrgtypemaster(orgtypereq orgtygetreq);
-        orgtypeinsertresponse InsertOrgtypemaster(orgtyperesponse orgtyinsertreq);
-        List<antiresponse> GetAntimaster(antireq antireq);
-        antinsertresponse Insertantimaster(antiresponse antinsertreq);
-        List<orgAntiresponse> GetorgAntimaster(orgAntirequest reqorgAnti);
-        organtinsertresponse InsertorgAntimaster(orgAntinsertresponse orgAntinsertreq);
+        List<Orggetresponse> GetOrgmaster(reqorgAntiRange orggetreq);
+        List<Orggrpresponse> GetOrgGrpmaster(reqorgGroupAntiRange orggetreq);
+        Orginsertresponse InsertOrgmaster(Orgresponse orginsertreq);
+        OrginsertGrpresponse InsertOrgGrpmaster(Orggrpresponse orginsertreq);
+        List<Orgtyperesponse> GetOrgtypemaster(Orgtypereq orgtygetreq);
+        Orgtypeinsertresponse InsertOrgtypemaster(Orgtyperesponse orgtyinsertreq);
+        List<Antiresponse> GetAntimaster(Antireq Antireq);
+        Antinsertresponse Insertantimaster(Antiresponse antinsertreq);
+        List<OrgAntiresponse> GetorgAntimaster(OrgAntirequest reqorgAnti);
+        OrgAntinsertresponse InsertorgAntimaster(OrgAntinsertresponse orgAntinsertreq);
     }
 }

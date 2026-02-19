@@ -21,9 +21,9 @@ namespace Service.Repository
         /// Get Unit Details
         /// </summary>
         /// <returns></returns>
-        public List<lstunits> GetUnits(reqUnits req)
+        public List<Lstunits> GetUnits(ReqUnits req)
         {
-            List<lstunits> lst = new List<lstunits>();
+            List<Lstunits> lst = new List<Lstunits>();
             try
             {
                 using (var context = new MasterContext(_config.GetConnectionString(ConfigKeys.DefaultConnection)))
@@ -52,9 +52,9 @@ namespace Service.Repository
         /// </summary>
         /// <param name="Unititem"></param>
         /// <returns></returns>
-        public rtnUnit InsertUnitDetails(TblUnits req)
+        public RtnUnit InsertUnitDetails(TblUnits req)
         {
-            rtnUnit res = new rtnUnit();
+            RtnUnit res = new RtnUnit();
             try
             {
                 using (var context = new MasterContext(_config.GetConnectionString(ConfigKeys.DefaultConnection)))

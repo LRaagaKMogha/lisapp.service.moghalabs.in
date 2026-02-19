@@ -3,8 +3,8 @@ using System.Threading.Tasks;
 
 namespace Service.Repository.Integration.externalservices
 {
-    public interface IPatientDetailsService
+    public interface IPatientdetailsService
     {
-        Task<ExternalPatientDetails> GetPatientDetails(string patientId);
+        Task<ExternalPatientDetails> GetPatientdetails(string patientId);
     }
 }

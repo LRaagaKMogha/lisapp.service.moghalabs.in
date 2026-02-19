@@ -1,7 +1,5 @@
-﻿using ErrorOr;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace Service.Model
 {
@@ -101,12 +99,9 @@ namespace Service.Model
         public tbl_IV_ProductMaster tblproductMaster { get; set; }
         public List<GetSupplierMappingDTO> supplierlist { get; set; }
         public List<GetDepartmentMappingDTO> departmentlist { get; set; }
-
         public List<Fetchlookalike> lookalikelist { get; set; }
-
         public List<Fetchsoundalike> soundalikelist { get; set; }
         public List<Fetchsubproduct> subProduct { get; set; }
-
         public int userNo { get; set; }
     }
     public class FetchProductListResponse
@@ -170,7 +165,6 @@ namespace Service.Model
         public int lookproductno { get; set; }
         public int likeproductno { get; set; }
         public string productname { get; set; }
-
         public string likeproductname { get; set; }
         public bool status { get; set; }
     }
@@ -178,7 +172,6 @@ namespace Service.Model
     {
         public int VenueNo { get; set; }
         public int lookproductno { get; set; }
-
     }
     public class Fetchsoundalike
     {
@@ -189,27 +182,23 @@ namespace Service.Model
         public string lookasoundname { get; set; }
         public string likeasoundname { get; set; }
         public bool status { get; set; }
-
     }
     public class GetSoundalikeresponse
     {
         public int VenueNo { get; set; }
         public int soundProductno { get; set; }
-
     }
     public class Fetchsubproduct
     {
         public int subProductMasterNo { get; set; }
         public int productMasterNo { get; set; }
         public bool status { get; set; }
-
     }
     public class SubProductReq
     {
         public int VenueNo { get; set; }
         public int subProductNo { get; set; }
         public int ProductMasterNo { get; set; }
-
     }
     public class SubProductRes
     {
@@ -218,14 +207,13 @@ namespace Service.Model
         public int ProductMasterNo { get; set; }
         public string ProductMasterName { get; set; }
         public bool status { get; set; }
-
     }
-    public class lstdrugreq
+    public class LstDrugreq
     {
         public int venueNo { get; set; }
         public int productNo { get; set; }
     }
-    public class lstdrugresponse
+    public class LstDrugresponse
     {
         public int drugPresTempNo { get; set; }
         public int rootNo { get; set; }
@@ -234,18 +222,17 @@ namespace Service.Model
         public int intakeNo { get; set; }
         public bool isDefault { get; set; }
     }
-    public class savedruglstreq
+    public class Savedruglstreq
     {
         public int venueno { get; set; }
         public int productNo { get; set; }
         public int userNo { get; set; }
-        public List<lstdrugresponse> lstdrugresponse { get; set; }
+        public List<LstDrugresponse> LstDrugresponse { get; set; }
     }
-    public class savedruglstresponse
+    public class Savedruglstresponse
     {
         public int DrugPresTempNo { get; set; }
     }
-
     public class ProductUnitDTO
     {
         public int ProductMasterNo { get; set; }
@@ -276,7 +263,6 @@ namespace Service.Model
         public int ProductMasterNo { get; set; }
         public int UnitsNo { get; set; }
         public int Qty { get; set; }
-
     }
     public class BOMMappingResponse
     {

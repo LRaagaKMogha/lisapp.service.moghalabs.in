@@ -17,7 +17,7 @@ namespace Service.Repository
         public CommentMasterRepository(IConfiguration config) { _config = config; }
         public List<CommentGetRes> Getcommentmaster(CommentGetReq getReq)
         {
-            List<CommentGetRes> objresult = new List<CommentGetRes>();
+            List<CommentGetRes> Objresult = new List<CommentGetRes>();
             try
             {
                 using (var context = new MasterContext(_config.GetConnectionString(ConfigKeys.DefaultConnection)))
@@ -28,7 +28,7 @@ namespace Service.Repository
                     var _venueNo = new SqlParameter("venueNo", getReq?.venueNo);
                     var _subCatyNo = new SqlParameter("subCatyNo", getReq?.SubCatyNo);
 
-                    objresult = context.Getcomment.FromSqlRaw(
+                    Objresult = context.Getcomment.FromSqlRaw(
                     "Execute dbo.pro_GetCommentMaster @venueNo, @CommentsMastNo, @CategoryNo, @pageIndex, @SubCatyNo",
                     _venueNo, _CommentsMastNo, _CategoryNo, _pageIndex, _subCatyNo).ToList();
                 }
@@ -37,11 +37,11 @@ namespace Service.Repository
             {
                 MyDevException.Error(ex, "CommentRepository.Getcommentmaster" + getReq.CommentsMastNo.ToString(), ExceptionPriority.Low, ApplicationType.REPOSITORY, getReq.venueNo,0, 0);
             }
-            return objresult;
+            return Objresult;
         }
         public CommentInsRes Insertcommentmaster(CommentInsReq insReq)
         {
-            CommentInsRes objresult = new CommentInsRes();
+            CommentInsRes Objresult = new CommentInsRes();
             try
             {
                 using (var context = new MasterContext(_config.GetConnectionString(ConfigKeys.DefaultConnection)))
@@ -64,18 +64,18 @@ namespace Service.Repository
                     _VenueNo, _CommentsMastNo, _CategoryNo, _Description, _ShortCode,
                     _SeqNo, _Status, _userNo,_venueBranchno, _SubCatyNo, _Abnormal).AsEnumerable().FirstOrDefault();
 
-                    objresult.CommentsMastNo = obj?.CommentsMastNo?? 0;
+                    Objresult.CommentsMastNo = obj?.CommentsMastNo?? 0;
                 }
             }
             catch (Exception ex)
             {
                 MyDevException.Error(ex, "CommentRepository.Insertcommentmaster" + insReq.CommentsMastNo.ToString(), ExceptionPriority.Low, ApplicationType.REPOSITORY, insReq.VenueNo, insReq.venueBranchno, 0);
             }
-            return objresult;
+            return Objresult;
         }
         public List<GetNationRaceRes> GetNationRace(GetNationRaceReq getReq)
         {
-            List<GetNationRaceRes> objresult = new List<GetNationRaceRes>();
+            List<GetNationRaceRes> Objresult = new List<GetNationRaceRes>();
             try
             {
                 using (var context = new MasterContext(_config.GetConnectionString(ConfigKeys.DefaultConnection)))
@@ -84,7 +84,7 @@ namespace Service.Repository
                     var _Type = new SqlParameter("Type", getReq?.Type);
                     var _pageIndex = new SqlParameter("pageIndex", getReq?.pageIndex);
                    
-                    objresult = context.GetNationRace.FromSqlRaw(
+                    Objresult = context.GetNationRace.FromSqlRaw(
                     "Execute dbo.pro_GetNationalityRace @CommonNo,@Type,@pageIndex",
                     _CommonNo, _Type, _pageIndex).ToList();
                 }
@@ -93,11 +93,11 @@ namespace Service.Repository
             {
                 MyDevException.Error(ex, "CommentRepository.GetNationaRace" + getReq.CommonNo.ToString(), ExceptionPriority.Low, ApplicationType.REPOSITORY, getReq.CommonNo, 0, 0);
             }
-            return objresult;
+            return Objresult;
         }
         public InsNationRaceRes InsertNationRace(InsNationRaceReq insReq)
         {
-            InsNationRaceRes objresult = new InsNationRaceRes();
+            InsNationRaceRes Objresult = new InsNationRaceRes();
             try
             {
                 using (var context = new MasterContext(_config.GetConnectionString(ConfigKeys.DefaultConnection)))
@@ -111,19 +111,19 @@ namespace Service.Repository
                     "Execute dbo.pro_InsertNationalityRace @CommonNo,@Description,@Status,@Type",
                     _CommonNo, _Description, _Status, _Type).AsEnumerable().FirstOrDefault();
 
-                    objresult.CommonNo = response?.CommonNo ?? 0;
-                    objresult.LastPageIndex = response?.LastPageIndex ?? 0;
+                    Objresult.CommonNo = response?.CommonNo ?? 0;
+                    Objresult.LastPageIndex = response?.LastPageIndex ?? 0;
                 }
             }
             catch (Exception ex)
             {
                 MyDevException.Error(ex, "CommentRepository.GetNationaRace - " + insReq.CommonNo.ToString(), ExceptionPriority.Low, ApplicationType.REPOSITORY, insReq.CommonNo, 0, 0);
             }
-            return objresult;
+            return Objresult;
         }
         public List<TemplateCommentRes> TemplateInsertcomment(TemplateComment Req)
         {
-            List<TemplateCommentRes> objresult = new List<TemplateCommentRes>();
+            List<TemplateCommentRes> Objresult = new List<TemplateCommentRes>();
             try
             {
                 using (var context = new MasterContext(_config.GetConnectionString(ConfigKeys.DefaultConnection)))
@@ -140,7 +140,7 @@ namespace Service.Repository
                     var _userNo = new SqlParameter("userNo", Req?.UserNo);
                     var _PageCode = new SqlParameter("pageCode", Req?.PageCode);
 
-                    objresult = context.TemplateInsertcomment.FromSqlRaw(
+                    Objresult = context.TemplateInsertcomment.FromSqlRaw(
                     "Execute dbo.pro_CRUDTemplateCommentbyPatientVisit @type,@cHQcNo,@venueNo,@venueBranchno,@testNo,@commentNo,@visitNo,@shortCode,@description," +
                     "@userNo,@pageCode",
                     _Type, _CHQcNo,_VenueNo, _VenueBranchno, _TestNo, _VisitNo, _CommentNo,_ShortCode, _Description, _userNo, _PageCode).AsEnumerable().ToList();
@@ -150,11 +150,11 @@ namespace Service.Repository
             {
                 MyDevException.Error(ex, "CommentRepository.Insertcommentmaster" + Req.CommentNo.ToString(), ExceptionPriority.Low, ApplicationType.REPOSITORY, Req.VenueNo, Req.VenueBranchno, 0);
             }
-            return objresult;
+            return Objresult;
         }
         public CommentSubCatyInsResponse InsertCommentSubCategory(InsertCommentSubCategoryReqest objRequest)
         {
-            CommentSubCatyInsResponse objresult = new CommentSubCatyInsResponse();
+            CommentSubCatyInsResponse Objresult = new CommentSubCatyInsResponse();
             try
             {
                 using (var context = new MasterContext(_config.GetConnectionString(ConfigKeys.DefaultConnection)))
@@ -173,18 +173,18 @@ namespace Service.Repository
                     "@CategoryNo, @SubCatyNo, @SubCatyDesc, @DeptNo, @SeqNo, @Status, @UserNo, @VenueNo",
                     _CategoryNo, _SubCatyNo, _SubCatyDesc, _DeptNo, _SeqNo, _Status, _userNo, _VenueNo).AsEnumerable().FirstOrDefault();
                     
-                    objresult.SubCatyNo = obj?.SubCatyNo ?? 0;
+                    Objresult.SubCatyNo = obj?.SubCatyNo ?? 0;
                 }
             }
             catch (Exception ex)
             {
                 MyDevException.Error(ex, "CommentRepository.InsertCommentSubCategory" + objRequest.SubCatyNo.ToString(), ExceptionPriority.Low, ApplicationType.REPOSITORY, objRequest.VenueNo, 0, objRequest.userNo);
             }
-            return objresult;
+            return Objresult;
         }
         public List<FetchCommentSubCategoryResponse> GetCommentSubCategory(FetchCommentSubCategoryReqest objRequest)
         {
-            List<FetchCommentSubCategoryResponse> objResult = new List<FetchCommentSubCategoryResponse>();
+            List<FetchCommentSubCategoryResponse> Objresult = new List<FetchCommentSubCategoryResponse>();
             try
             {
                 using (var context = new MasterContext(_config.GetConnectionString(ConfigKeys.DefaultConnection)))
@@ -194,7 +194,7 @@ namespace Service.Repository
                     var _VenueNo = new SqlParameter("VenueNo", objRequest?.VenueNo);
                     var _pageIndex = new SqlParameter("pageIndex", objRequest?.pageIndex);
 
-                    objResult = context.GetSubCatyComment.FromSqlRaw(
+                    Objresult = context.GetSubCatyComment.FromSqlRaw(
                     "Execute dbo.pro_GetCommentSubCategory " +
                     "@CategoryNo, @SubCatyNo, @VenueNo, @PageIndex",
                     _CategoryNo, _SubCatyNo, _VenueNo, _pageIndex).AsEnumerable().ToList();
@@ -204,11 +204,11 @@ namespace Service.Repository
             {
                 MyDevException.Error(ex, "CommentRepository.GetCommentSubCategory" + objRequest.SubCatyNo.ToString(), ExceptionPriority.Low, ApplicationType.REPOSITORY, objRequest.VenueNo, 0, objRequest.userNo);
             }
-            return objResult;
+            return Objresult;
         }
         public BankMasterResponse InsertBankMaster(InsertBankMastereq objRequest)
         {
-            BankMasterResponse objresult = new BankMasterResponse();
+            BankMasterResponse Objresult = new BankMasterResponse();
             
             try
             {
@@ -232,19 +232,19 @@ namespace Service.Repository
                     "@BankID, @BankName, @BankShortName, @BankType, @HeadOfficeAddress, @CountryID, @StateID, @CityID, @PostalCode, @CreatedBy, @Status,@VenueNo",
                     _BankID, _BankName, _BankShortName, _BankType, _HeadOfficeAddresss, _CountryID, _StateID, _CityID, _PostalCode, _CreatedBy, _Status, _VenueNo).AsEnumerable().FirstOrDefault();
 
-                    objresult = obj;
+                    Objresult = obj;
                 }
             }
             catch (Exception ex)
             {
                 MyDevException.Error(ex, "CommentRepository.InsertBankMaster" + objRequest.BankID.ToString(), ExceptionPriority.Low, ApplicationType.REPOSITORY, objRequest.VenueNo, 0, 0);
             }
-            return objresult;
+            return Objresult;
         }
 
         public List<BankMasterResponse> GetBankMaster(InsertBankMasterr objRequest)
         {
-            List<BankMasterResponse> objResult = new List<BankMasterResponse>();
+            List<BankMasterResponse> Objresult = new List<BankMasterResponse>();
             try
             {
                 using (var context = new MasterContext(_config.GetConnectionString(ConfigKeys.DefaultConnection)))
@@ -253,7 +253,7 @@ namespace Service.Repository
                     var _VenueNo = new SqlParameter("VenueNo", objRequest?.VenueNo);
                     var _PageIndex = new SqlParameter("pageIndex", objRequest?.PageIndex);
 
-                    objResult = context.GetBankMaster.FromSqlRaw(
+                    Objresult = context.GetBankMaster.FromSqlRaw(
                     "Execute dbo.Pro_GetBank_Master " +
                     "@BankID, @VenueNo, @PageIndex",
                     _BankID, _VenueNo, _PageIndex).AsEnumerable().ToList();
@@ -263,11 +263,11 @@ namespace Service.Repository
             {
                 MyDevException.Error(ex, "CommentRepository.GetBankMaster" + objRequest.BankID.ToString(), ExceptionPriority.Low, ApplicationType.REPOSITORY, objRequest.VenueNo, 0,0);
             }
-            return objResult;
+            return Objresult;
         }
         public BankBranchResponse InsertBankBranch(InsertBankbranchreq objRequest)
         {
-            BankBranchResponse objresult = new BankBranchResponse();
+            BankBranchResponse Objresult = new BankBranchResponse();
             try
             {
                 using (var context = new MasterContext(_config.GetConnectionString(ConfigKeys.DefaultConnection)))
@@ -289,19 +289,19 @@ namespace Service.Repository
                     "@BranchID, @BankID, @BranchName, @BranchCode, @IFSCcode, @BranchAddress, @ContactNumbers, @EmailID, @CreatedBy, @Status,@VenueNo",
                     _BranchID, _BankID, _BranchName, _BranchCode, _IFSCcode, _BranchAddress, _ContactNumbers, _EmailID, _CreatedBy, _Status, _VenueNo).AsEnumerable().FirstOrDefault();
 
-                    objresult = obj;
+                    Objresult = obj;
                 }
             }
             catch (Exception ex)
             {
                 MyDevException.Error(ex, "CommentRepository.InsertBankMaster" + objRequest.BankID.ToString(), ExceptionPriority.Low, ApplicationType.REPOSITORY, objRequest.VenueNo, 0, 0);
             }
-            return objresult;
+            return Objresult;
         }
 
         public List<BankBranchResponse> GetBankBranch(GetBankbranchreq objRequest)
         {
-            List<BankBranchResponse> objResult = new List<BankBranchResponse>();
+            List<BankBranchResponse> Objresult = new List<BankBranchResponse>();
             try
             {
                 using (var context = new MasterContext(_config.GetConnectionString(ConfigKeys.DefaultConnection)))
@@ -310,7 +310,7 @@ namespace Service.Repository
                     var _VenueNo = new SqlParameter("VenueNo", objRequest?.VenueNo);
                     var _PageIndex = new SqlParameter("PageIndex", objRequest?.PageIndex);
 
-                    objResult = context.GetBankBranch.FromSqlRaw(
+                    Objresult = context.GetBankBranch.FromSqlRaw(
                     "Execute dbo.Pro_GetBank_Branch @BranchID, @VenueNo, @PageIndex",
                     _BranchID, _VenueNo, _PageIndex).AsEnumerable().ToList();
                 }
@@ -322,7 +322,7 @@ namespace Service.Repository
                     ExceptionPriority.Low, ApplicationType.REPOSITORY,
                     objRequest.VenueNo, 0, 0);
             }
-            return objResult;
+            return Objresult;
         }
     }
 }

@@ -42,7 +42,7 @@ namespace Service.API.SERVICE.Controllers
         [Route("api/MainDepartment/InsertMainDepartmentmaster")]
         public ActionResult<MainDepartmentMasterResponse> InsertMainDepartmentmaster(TblMainDepartment tblmaindepartment)
         {
-            MainDepartmentMasterResponse objresult = new MainDepartmentMasterResponse();
+            MainDepartmentMasterResponse Objresult = new MainDepartmentMasterResponse();
             try
             {
                 using (var auditScope = new AuditScope<TblMainDepartment>(tblmaindepartment, _auditService))
@@ -50,7 +50,7 @@ namespace Service.API.SERVICE.Controllers
                     var _errormsg = LaboratoryMasterValidation.InsertMainDepartmentmaster(tblmaindepartment);
                     if (!_errormsg.status)
                     {
-                        objresult = _MainDepartmentRepository.InsertMainDepartmentmaster(tblmaindepartment);
+                        Objresult = _MainDepartmentRepository.InsertMainDepartmentmaster(tblmaindepartment);
 
                         string _CacheKey = CacheKeys.CommonMaster + "MAINDEPARTMENT" + tblmaindepartment.venueno + tblmaindepartment.venuebranchno;
                         MemoryCacheRepository.RemoveItem(_CacheKey);
@@ -63,7 +63,7 @@ namespace Service.API.SERVICE.Controllers
             {
                 MyDevException.Error(ex, "MainDepartmentController.InsertMainDepartmentmaster", ExceptionPriority.Low, ApplicationType.APPSERVICE, tblmaindepartment.venueno, tblmaindepartment.venuebranchno, 0);
             }
-            return Ok(objresult);
+            return Ok(Objresult);
         }
     }
 }

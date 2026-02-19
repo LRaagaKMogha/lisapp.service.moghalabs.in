@@ -1,14 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace Service.Model.FrontOffice
 {
     public class ClientBranchSamplePickupRequest
     {
-        public string? FromDate { get; set; }
-        public string? ToDate { get; set; }
-        public string? Type { get; set; }
+        public string FromDate { get; set; }
+        public string ToDate { get; set; }
+        public string Type { get; set; }
         public int VenueNo { get; set; }
         public int VenueBranchNo { get; set; }
         public short? SPType { get; set; }
@@ -46,7 +44,6 @@ namespace Service.Model.FrontOffice
         public string ModifiedByName { get; set; }
         public string ClientBranchName { get; set; }
     }
-
     public class ClientBranchSamplePickupInsertRequest
     {
         public int SamplePickupNo { get; set; }
@@ -60,7 +57,6 @@ namespace Service.Model.FrontOffice
         public int VenueBranchNo { get; set; }
         public int UserNo { get; set; }
     }
-
     public class ClientBranchSamplePickupInsertResponse
     {
         public int SamplePickupNo { get; set; }
@@ -73,7 +69,6 @@ namespace Service.Model.FrontOffice
         public int VenueBranchNo { get; set; }
         public int UserNo { get; set; }
     }
-
     public class ClientBranchSamplePickupRiderInsertResponse
     {
         public int SamplePickupNo { get; set; }

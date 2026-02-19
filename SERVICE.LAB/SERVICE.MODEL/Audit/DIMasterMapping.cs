@@ -33,16 +33,16 @@ namespace Service.Model.Audit
         }
     }
 
-    [DtoMapping(typeof(responseTest))]
-    public class TblAnalyzerParamTestMasterMapping : DtoToTableMapping<responseTest>
+    [DtoMapping(typeof(ResponseTest))]
+    public class TblAnalyzerParamTestMasterMapping : DtoToTableMapping<ResponseTest>
     {
         public override void SetUp()
         {
             TableName = "tbl_AnalyzerVsParametersVsTests";
-            EntityIdProperty = nameof(responseTest.analyzerparamTestNo);
+            EntityIdProperty = nameof(ResponseTest.analyzerparamTestNo);
             SubMenuCode = "Analyzer - Parameter - Test";
             AddProperty(x => x.tstatus, "Status");
-            IgnoreProperties = new List<System.Linq.Expressions.Expression<Func<responseTest, object>>>
+            IgnoreProperties = new List<System.Linq.Expressions.Expression<Func<ResponseTest, object>>>
             {
                 x => x.userNo
             };

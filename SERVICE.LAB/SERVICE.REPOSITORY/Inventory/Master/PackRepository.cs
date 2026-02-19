@@ -18,7 +18,7 @@ namespace Service.Repository
 
         public List<TblPack> Getpackmaster(PackMasterRequest packRequest)
         {
-            List<TblPack> objresult = new List<TblPack>();
+            List<TblPack> Objresult = new List<TblPack>();
             try
             {
                 using (var context = new LIMSContext(_config.GetConnectionString(ConfigKeys.DefaultConnection)))
@@ -27,7 +27,7 @@ namespace Service.Repository
                     var _venueNo = new SqlParameter("venueNo", packRequest?.venueNo);
                     var _pageIndex = new SqlParameter("pageIndex", packRequest?.pageIndex);
 
-                    objresult = context.Getpack.FromSqlRaw(
+                    Objresult = context.Getpack.FromSqlRaw(
                     "Execute dbo.pro_Getpackmaster @packNo, @venueNo,@pageIndex",
                     _packNo, _venueNo, _pageIndex).ToList();
                 }
@@ -36,11 +36,11 @@ namespace Service.Repository
             {
                 MyDevException.Error(ex, "PackRepository.Getpackmaster" + packRequest.packNo.ToString(), ExceptionPriority.Low, ApplicationType.REPOSITORY, packRequest.venueNo, packRequest.venueBranchno, 0);
             }
-            return objresult;
+            return Objresult;
         }
         public PackMasterResponse Insertpackmaster(TblPack tblPack)
         {
-            PackMasterResponse objresult = new PackMasterResponse();
+            PackMasterResponse Objresult = new PackMasterResponse();
             try
             {
                 using (var context = new LIMSContext(_config.GetConnectionString(ConfigKeys.DefaultConnection)))
@@ -59,14 +59,14 @@ namespace Service.Repository
                     "@status,@venueNo,@userNo,@VenueBranchNo",
                     _packNo, _description, _quantity, _sequenceNo, _status,_venueNo, _userNo, _venueBranchno).ToList();
                     
-                    objresult.packNo = obj[0].packNo;
+                    Objresult.packNo = obj[0].packNo;
                 }
             }
             catch (Exception ex)
             {
                 MyDevException.Error(ex, "PackRepository.Insertpackmaster" + tblPack.packNo.ToString(), ExceptionPriority.Low, ApplicationType.REPOSITORY, tblPack.venueNo, tblPack.venueBranchno, tblPack.userNo);
             }
-            return objresult;
+            return Objresult;
         }
     }
 }

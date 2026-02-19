@@ -26,9 +26,9 @@ namespace Service.API.SERVICE.Controllers
         [CustomAuthorize("LIMSPATIENTREPORTS")]
         [HttpPost]
         [Route("api/PatientReport/GetPatientReport")]
-        public ActionResult<lstpatientreport> GetPatientReport(requestpatientreport req)
+        public ActionResult<Lstpatientreport> GetPatientReport(requestpatientreport req)
         {
-            List<lstpatientreport> lst = new List<lstpatientreport>();
+            List<Lstpatientreport> lst = new List<Lstpatientreport>();
             try
             {
                 var _errormsg = PatientReportValidation.GetPatientReport(req);
@@ -144,10 +144,11 @@ namespace Service.API.SERVICE.Controllers
             ReportOutput result = new ReportOutput();
             try
             {
-                string FolderPath = string.Empty;
-                string filename = string.Empty;
-                string URLPath = string.Empty;
+                string? FolderPath = string.Empty;
+                string? filename = string.Empty;
+                string? URLPath = string.Empty;
                 List<ReportOutput> outputitem = new List<ReportOutput>();
+
                 foreach (var item in PatientItem)
                 {
                     var output = await _PatientReportRepository.PrintPatientReport(item);
@@ -167,7 +168,6 @@ namespace Service.API.SERVICE.Controllers
                     }
                     if (!string.IsNullOrEmpty(FolderPath))
                     {
-                        //string finalfileName = Guid.NewGuid().ToString("N").Substring(0, 6) + ".pdf";
                         var finalfileName =  _PatientReportRepository.GetPdfFileName(PatientItem).Result;
                         result.PatientExportFolderPath = FolderPath + "\\" + finalfileName;
                         result.PatientExportFile = URLPath + "/" + finalfileName;

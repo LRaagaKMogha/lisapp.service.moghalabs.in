@@ -38,17 +38,17 @@ namespace Service.API.SERVICE.Controllers.Archive
         #endregion
 
         [HttpPost]
-        [Route("api/Archive/GetArchivePatientDetails")]
-        public List<GetArchivePatientResponse> GetArchivePatientDetails(GetArchivePatientRequest req)
+        [Route("api/Archive/GetArchivePatientdetails")]
+        public List<GetArchivePatientResponse> GetArchivePatientdetails(GetArchivePatientRequest req)
         {
             List<GetArchivePatientResponse> lst = new List<GetArchivePatientResponse>();
             try
             {
-                lst = _ArchiveRepository.GetArchivePatientDetails(req);
+                lst = _ArchiveRepository.GetArchivePatientdetails(req);
             }
             catch (Exception ex)
             {
-                MyDevException.Error(ex, "ArchiveController.GetArchivePatientDetails", ExceptionPriority.Low, ApplicationType.APPSERVICE, req.VenueNo, req.VenueBranchNo, 0);
+                MyDevException.Error(ex, "ArchiveController.GetArchivePatientdetails", ExceptionPriority.Low, ApplicationType.APPSERVICE, req.VenueNo, req.VenueBranchNo, 0);
             }
             return lst;
         }

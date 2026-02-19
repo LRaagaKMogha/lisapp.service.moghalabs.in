@@ -25,7 +25,7 @@ namespace Service.Repository
         /// <returns></returns>
         public List<GetSupplierMasterResponse> GetSupplierDetails(SupplierMasterRequest masterRequest)
         {
-            List<GetSupplierMasterResponse> objResult = new List<GetSupplierMasterResponse>();
+            List<GetSupplierMasterResponse> Objresult = new List<GetSupplierMasterResponse>();
             try
             {
                 using (var context = new MasterContext(_config.GetConnectionString(ConfigKeys.DefaultConnection)))
@@ -36,7 +36,7 @@ namespace Service.Repository
                     var _UserNo = new SqlParameter("UserNo", masterRequest?.userNo);
                     var _PageIndex = new SqlParameter("PageIndex", masterRequest?.pageIndex);
 
-                    objResult = context.GetSupplierDetails.FromSqlRaw(
+                    Objresult = context.GetSupplierDetails.FromSqlRaw(
                     "Execute dbo.Pro_Iv_FetchSuppliersDetails @VenueNo, @SupplierNo, @Status,@UserNo, @PageIndex",
                     _VenueNo, _SupplierNo, _Status, _UserNo, _PageIndex).ToList();
                 }
@@ -45,7 +45,7 @@ namespace Service.Repository
             {
                 MyDevException.Error(ex, "SupplierMasterReposistory.GetSupplierMasters" + masterRequest.supplierNo.ToString(), ExceptionPriority.Low, ApplicationType.REPOSITORY, masterRequest.venueNo, masterRequest.venueBranchNo, masterRequest.userNo);
             }
-            return objResult;         
+            return Objresult;         
         }
 
         /// <summary>
@@ -78,11 +78,11 @@ namespace Service.Repository
                     var _supplierVsBankXML = new SqlParameter("SupplierVsBankXML", supplierVsBankXML);
                     var _userNo = new SqlParameter("UserNo", supplierMasterDTO?.userNo);
 
-                    var objResult = context.CreateSupplierMasterDTO.FromSqlRaw(
+                    var Objresult = context.CreateSupplierMasterDTO.FromSqlRaw(
                     "Execute dbo.Pro_Iv_InsertSupplierMaster @VenueNo, @VenueBranchNo, @SupplierMasterXML, @SupplierVsContactXML, @SupplierVsBankXML, @UserNo",
                     _venueNo, _venueBranchNo, _supplierMasterXML, _supplierVsContactXML, _supplierVsBankXML, _userNo).AsEnumerable().FirstOrDefault();
 
-                    result = objResult.status;
+                    result = Objresult.status;
                 }
             }
             catch (Exception ex)

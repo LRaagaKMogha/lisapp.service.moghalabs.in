@@ -23,32 +23,32 @@ namespace Service.API.SERVICE.Controllers
         [Route("api/Qcresult/GetqcresultDetails")]
         public List<GetTblqcresult> GetqcresultDetails(QcresultRequest req)
         {
-            List<GetTblqcresult> objresult = new List<GetTblqcresult>();
+            List<GetTblqcresult> Objresult = new List<GetTblqcresult>();
             try
             {
-                objresult = _QcresultentryRepository.GetqcresultDetails(req);
+                Objresult = _QcresultentryRepository.GetqcresultDetails(req);
             }
             catch (Exception ex)
             {
                 MyDevException.Error(ex, "QcresultRepository.GetqcresultDetails", ExceptionPriority.Low, ApplicationType.APPSERVICE, req.venueNo, 0, 0);
             }
-            return objresult;
+            return Objresult;
         }
 
         [HttpPost]
         [Route("api/Qcresult/InsertqcresultDetails")]
         public QcresultResponse InsertqcresultDetails(SaveqcresDTO req)
         {
-            QcresultResponse objresult = new QcresultResponse();
+            QcresultResponse Objresult = new QcresultResponse();
             try
             {
-                objresult = _QcresultentryRepository.InsertqcresultDetails(req);
+                Objresult = _QcresultentryRepository.InsertqcresultDetails(req);
             }
             catch (Exception ex)
             {
                 MyDevException.Error(ex, "QcresultRepository.InsertqcresultDetails", ExceptionPriority.Low, ApplicationType.APPSERVICE, req.venueNo, 0, 0);
             }
-            return objresult;
+            return Objresult;
         }
 
         [HttpPost]

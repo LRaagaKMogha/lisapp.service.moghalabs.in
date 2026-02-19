@@ -42,13 +42,13 @@ namespace Service.API.SERVICE.Controllers
         [Route("api/Title/InsertTitlemaster")]
         public ActionResult<Titlemasterresponse> InsertTitlemaster(TblName tblTitle)
         {
-            Titlemasterresponse objresult = new Titlemasterresponse();
+            Titlemasterresponse Objresult = new Titlemasterresponse();
             try
             {
                 var _errormsg = MasterValidation.InsertTitlemaster(tblTitle);
                 if (!_errormsg.status)
                 {
-                    objresult = _TitleRepository.InsertTitlemaster(tblTitle);
+                    Objresult = _TitleRepository.InsertTitlemaster(tblTitle);
                     string _CacheKey = CacheKeys.CommonMaster + "COMMON" + tblTitle.venueNo + tblTitle.venueBranchno;
                     MemoryCacheRepository.RemoveItem(_CacheKey);
                 }
@@ -59,7 +59,7 @@ namespace Service.API.SERVICE.Controllers
             {
                 MyDevException.Error(ex, "TitleController.InsertTitlemaster", ExceptionPriority.Low, ApplicationType.APPSERVICE, tblTitle.venueNo, tblTitle.venueBranchno, 0);
             }
-            return Ok(objresult);
+            return Ok(Objresult);
         }
     }
 }

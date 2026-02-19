@@ -26,16 +26,16 @@ namespace Service.API.SERVICE.Controllers.Inventory
         [Route("api/StoreMaster/GetStoreMasterDetails")]
         public List<StoreMasterResponseDTO> GetStoreMasterDetails(StoreMasterRequestDTO storeMasterRequest)
         {
-            List<StoreMasterResponseDTO> objResult = new List<StoreMasterResponseDTO>();
+            List<StoreMasterResponseDTO> Objresult = new List<StoreMasterResponseDTO>();
             try
             {
-                objResult = _storeMasterRepository.GetStoreMasterDetails(storeMasterRequest);
+                Objresult = _storeMasterRepository.GetStoreMasterDetails(storeMasterRequest);
             }
             catch (Exception ex)
             {
                 MyDevException.Error(ex, "StoreMasterController.GetStoreMasterDetails", ExceptionPriority.Low, ApplicationType.APPSERVICE, storeMasterRequest.VenueNo, 0, 0);
             }
-            return objResult;
+            return Objresult;
         }
 
         [CustomAuthorize("INVMASTERS,INVOPERATIONS")]
@@ -43,16 +43,16 @@ namespace Service.API.SERVICE.Controllers.Inventory
         [Route("api/StoreMaster/GetAllStoreByBranch")]
         public List<StoreDetails> GetAllStoreByBranch(int VenueNo, int VenueBranchNo)
         {
-            List<StoreDetails> objResult = new List<StoreDetails>();
+            List<StoreDetails> Objresult = new List<StoreDetails>();
             try
             {
-                objResult = _storeMasterRepository.GetAllStoreByBranch(VenueNo,VenueBranchNo);
+                Objresult = _storeMasterRepository.GetAllStoreByBranch(VenueNo,VenueBranchNo);
             }
             catch (Exception ex)
             {
                 MyDevException.Error(ex, "StoreMasterController.GetAllStoreByBranch", ExceptionPriority.Low, ApplicationType.APPSERVICE, VenueNo, 0, 0);
             }
-            return objResult;
+            return Objresult;
         }
 
         [CustomAuthorize("INVMASTERS")]
@@ -60,14 +60,14 @@ namespace Service.API.SERVICE.Controllers.Inventory
         [Route("api/StoreMaster/InsertStoreMaster")]
         public StoreMasterInsertResponseDTO InsertStoreMaster(StoreMasterInsertDTO req)
         {
-            StoreMasterInsertResponseDTO objresult = new StoreMasterInsertResponseDTO();
+            StoreMasterInsertResponseDTO Objresult = new StoreMasterInsertResponseDTO();
             try
             {
-                objresult = _storeMasterRepository.InsertStoreMaster(req);
+                Objresult = _storeMasterRepository.InsertStoreMaster(req);
                 string _CacheKey = CacheKeys.CommonMaster + "STOREMASTER" + req.VenueNo + req.VenueBranchNo;
                 MemoryCacheRepository.RemoveItem(_CacheKey);
 
-                objresult = _storeMasterRepository.InsertStoreMaster(req);
+                Objresult = _storeMasterRepository.InsertStoreMaster(req);
                 string _CacheKey1 = CacheKeys.CommonMaster + "STORES" + req.VenueNo + req.VenueBranchNo;
                 MemoryCacheRepository.RemoveItem(_CacheKey1);
             }
@@ -75,7 +75,7 @@ namespace Service.API.SERVICE.Controllers.Inventory
             {
                 MyDevException.Error(ex, "StoreMasterController.InsertStoreMasterDetails" + req.StoreID.ToString(), ExceptionPriority.Low, ApplicationType.REPOSITORY, req.VenueNo, req.VenueBranchNo, 0);
             }
-            return objresult;
+            return Objresult;
         }
     }
 }

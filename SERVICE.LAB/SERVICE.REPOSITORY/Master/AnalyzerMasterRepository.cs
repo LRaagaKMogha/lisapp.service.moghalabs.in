@@ -18,18 +18,18 @@ namespace Service.Repository
 
         public List<TblAnalyzer> GetAnalyzerMasterDetails(GetCommonMasterRequest getanalyzer)
         {
-            List<TblAnalyzer> objresult = new List<TblAnalyzer>();
+            List<TblAnalyzer> Objresult = new List<TblAnalyzer>();
             try
             {
                 using (var context = new LIMSContext(_config.GetConnectionString(ConfigKeys.DefaultConnection)))
                 {
                     if (getanalyzer.masterNo > 0)
                     {
-                        objresult = context.TblAnalyzer.Where(x => x.VenueNo == getanalyzer.venueno   && x.Status == true).ToList();
+                        Objresult = context.TblAnalyzer.Where(x => x.VenueNo == getanalyzer.venueno   && x.Status == true).ToList();
                     }
                     else
                     {
-                        objresult = context.TblAnalyzer.Where(x => x.VenueNo == getanalyzer.venueno ).ToList();
+                        Objresult = context.TblAnalyzer.Where(x => x.VenueNo == getanalyzer.venueno ).ToList();
                     }
                 }
             }
@@ -37,11 +37,11 @@ namespace Service.Repository
             {
                 MyDevException.Error(ex, "GetAnalyzerMasterDetails", ExceptionPriority.Low, ApplicationType.REPOSITORY, getanalyzer.venueno, getanalyzer.venuebranchno, 0);
             }
-            return objresult;
+            return Objresult;
         }
         public TblAnalyzerdata InsertAnalyzerDetails(TblAnalyzerresponse TblAnalyzerresponse)
         {
-            TblAnalyzerdata objresult = new TblAnalyzerdata();
+            TblAnalyzerdata Objresult = new TblAnalyzerdata();
             try
             {
                 using (var context = new LIMSContext(_config.GetConnectionString(ConfigKeys.DefaultConnection)))
@@ -58,14 +58,14 @@ namespace Service.Repository
                     "Execute dbo.pro_InsertAnalyzerDetails @analyzerMasterNo,@serialNo,@assetCode,@description,@status,@venueNo,@userNo",
                     _analyzerMasterNo, _serialNo, _assetCode, _description, _status, _venueNo, _userNo).ToList();
                     
-                    objresult.analyzerMasterNo = obj[0].analyzerMasterNo;
+                    Objresult.analyzerMasterNo = obj[0].analyzerMasterNo;
                 }
             }
             catch (Exception ex)
             {
                 MyDevException.Error(ex, "AnalyzerMasterRepository.InsertAnalyzerDetails" + TblAnalyzerresponse.analyzerMasterNo.ToString(), ExceptionPriority.Low, ApplicationType.REPOSITORY, TblAnalyzerresponse.venueNo, 0, TblAnalyzerresponse.userNo);
             }
-            return objresult;
+            return Objresult;
         }
         public AnaParamDtoResponse InsertAnaParam(AnaParamDto AnaParamobj)
         {
@@ -100,7 +100,7 @@ namespace Service.Repository
         }
         public List<AnaParamGetDto> GetAnaParamDetails(int VenueNo, int VenueBranchNo, int analyzerParamNo, int Analyzerno, int Sampleno)
         {
-            List<AnaParamGetDto> objresult = new List<AnaParamGetDto>();
+            List<AnaParamGetDto> Objresult = new List<AnaParamGetDto>();
             try
             {
                 using (var context = new MasterContext(_config.GetConnectionString(ConfigKeys.DefaultConnection)))
@@ -111,7 +111,7 @@ namespace Service.Repository
                     var _analyzerMasterNo = new SqlParameter("Analyzerno", Analyzerno);
                     var _Sampleno = new SqlParameter("Sampleno", Sampleno);
                     
-                    objresult = context.GetAnalyzerParameter.FromSqlRaw("Execute dbo.pro_GetAnalyzerVsParameters @VenueNo,@VenueBranchNo,@analyzerParamNo,@analyzerNo,@Sampleno",
+                    Objresult = context.GetAnalyzerParameter.FromSqlRaw("Execute dbo.pro_GetAnalyzerVsParameters @VenueNo,@VenueBranchNo,@analyzerParamNo,@analyzerNo,@Sampleno",
                     _venueno, _venuebranchno, _analyzerParamNo, _analyzerMasterNo, _Sampleno).ToList();
                 }
             }
@@ -119,89 +119,89 @@ namespace Service.Repository
             {
                 MyDevException.Error(ex, "AnaParamRepository.GetAnaParamDetails", ExceptionPriority.High, ApplicationType.REPOSITORY, VenueNo, VenueBranchNo, 0);
             }
-            return objresult;
+            return Objresult;
         }
-        public List<TbltestMap> GetAnalVsParamVsTest(testmapRequest testmapRequest)
+        public List<TbltestMap> GetAnalVsParamVsTest(TestmapRequest TestmapRequest)
         {
-            List<TbltestMap> objresult = new List<TbltestMap>();
+            List<TbltestMap> Objresult = new List<TbltestMap>();
             try
             {
                 using (var context = new MasterContext(_config.GetConnectionString(ConfigKeys.DefaultConnection)))
                 {
-                    var _venueNo = new SqlParameter("venueNo", testmapRequest?.venueNo);
-                    var _branchNo = new SqlParameter("branchNo", testmapRequest?.branchNo);
-                    var _analyzerparamTestNo = new SqlParameter("analyzerparamTestNo", testmapRequest?.analyzerparamTestNo);
-                    var _analyzerMasterNo = new SqlParameter("analyzerMasterNo", testmapRequest?.analyzerMasterNo);
-                    var _analyzerParamNo = new SqlParameter("analyzerParamNo", testmapRequest?.analyzerParamNo);
-                    var _testNo = new SqlParameter("testNo", testmapRequest?.testNo);
-                    var _subtestNo = new SqlParameter("subtestNo", testmapRequest?.subtestNo);
-                    var _pageIndex = new SqlParameter("pageIndex", testmapRequest?.pageIndex);
+                    var _venueNo = new SqlParameter("venueNo", TestmapRequest?.venueNo);
+                    var _branchNo = new SqlParameter("branchNo", TestmapRequest?.branchNo);
+                    var _analyzerparamTestNo = new SqlParameter("analyzerparamTestNo", TestmapRequest?.analyzerparamTestNo);
+                    var _analyzerMasterNo = new SqlParameter("analyzerMasterNo", TestmapRequest?.analyzerMasterNo);
+                    var _analyzerParamNo = new SqlParameter("analyzerParamNo", TestmapRequest?.analyzerParamNo);
+                    var _testNo = new SqlParameter("testNo", TestmapRequest?.testNo);
+                    var _subtestNo = new SqlParameter("subtestNo", TestmapRequest?.subtestNo);
+                    var _pageIndex = new SqlParameter("pageIndex", TestmapRequest?.pageIndex);
 
-                    objresult = context.GetAnalVsParamVsTest.FromSqlRaw(
+                    Objresult = context.GetAnalVsParamVsTest.FromSqlRaw(
                     "Execute dbo.pro_GetAnalVsParamVsTest @venueNo,@branchNo,@analyzerparamTestNo,@analyzerMasterNo,@analyzerParamNo,@testNo,@subtestNo,@pageIndex",
                     _venueNo, _branchNo, _analyzerparamTestNo, _analyzerMasterNo, _analyzerParamNo, _testNo, _subtestNo, _pageIndex).ToList();
                 }
             }
             catch (Exception ex)
             {
-                MyDevException.Error(ex, "AnalyzerMasterRepository.GetAnalVsParamVsTest" + testmapRequest.analyzerparamTestNo.ToString(), ExceptionPriority.Low, ApplicationType.REPOSITORY, testmapRequest.venueNo, 0, 0);
+                MyDevException.Error(ex, "AnalyzerMasterRepository.GetAnalVsParamVsTest" + TestmapRequest.analyzerparamTestNo.ToString(), ExceptionPriority.Low, ApplicationType.REPOSITORY, TestmapRequest.venueNo, 0, 0);
             }
-            return objresult;
+            return Objresult;
         }
-        public analVsparamVstestMap InsertAnalVsParamVsTest(responseTest responseTest)
+        public AnalVsparamVstestMap InsertAnalVsParamVsTest(ResponseTest ResponseTest)
         {
-            analVsparamVstestMap objresult = new analVsparamVstestMap();
+            AnalVsparamVstestMap Objresult = new AnalVsparamVstestMap();
             try
             {
                 using (var context = new MasterContext(_config.GetConnectionString(ConfigKeys.DefaultConnection)))
                 {
-                    var _analyzerparamTestNo = new SqlParameter("analyzerparamTestNo", responseTest?.analyzerparamTestNo);
-                    var _analyzerMasterNo = new SqlParameter("analyzerMasterNo", responseTest?.analyzerMasterNo);
-                    var _analyzerParamNo = new SqlParameter("analyzerParamNo", responseTest?.analyzerParamNo);
-                    var _testNo = new SqlParameter("testNo", responseTest?.testNo);
-                    var _subtestNo = new SqlParameter("subtestNo", responseTest?.subtestNo);
-                    var _tstatus = new SqlParameter("tstatus", responseTest?.tstatus);
-                    var _venueNo = new SqlParameter("venueNo", responseTest?.venueNo);
-                    var _branchNo = new SqlParameter("branchNo", responseTest?.venuebranchno);
-                    var _userNo = new SqlParameter("userNo", responseTest?.userNo);
-                    var _unitNo = new SqlParameter("unitNo", responseTest?.unitNo);
-                    var _methodNo = new SqlParameter("methodNo", responseTest?.methodNo);
-                    var _perunitconsumption = new SqlParameter("perUnitConsumption", responseTest?.perUnitConsumption);
-                    var _ReagentName = new SqlParameter("ReagentName", responseTest?.ReagentName);
-                    var _UnitName = new SqlParameter("UnitName", responseTest?.UnitName);
+                    var _analyzerparamTestNo = new SqlParameter("analyzerparamTestNo", ResponseTest?.analyzerparamTestNo);
+                    var _analyzerMasterNo = new SqlParameter("analyzerMasterNo", ResponseTest?.analyzerMasterNo);
+                    var _analyzerParamNo = new SqlParameter("analyzerParamNo", ResponseTest?.analyzerParamNo);
+                    var _testNo = new SqlParameter("testNo", ResponseTest?.testNo);
+                    var _subtestNo = new SqlParameter("subtestNo", ResponseTest?.subtestNo);
+                    var _tstatus = new SqlParameter("tstatus", ResponseTest?.tstatus);
+                    var _venueNo = new SqlParameter("venueNo", ResponseTest?.venueNo);
+                    var _branchNo = new SqlParameter("branchNo", ResponseTest?.venuebranchno);
+                    var _userNo = new SqlParameter("userNo", ResponseTest?.userNo);
+                    var _unitNo = new SqlParameter("unitNo", ResponseTest?.unitNo);
+                    var _methodNo = new SqlParameter("methodNo", ResponseTest?.methodNo);
+                    var _perunitconsumption = new SqlParameter("perUnitConsumption", ResponseTest?.perUnitConsumption);
+                    var _ReagentName = new SqlParameter("ReagentName", ResponseTest?.ReagentName);
+                    var _UnitName = new SqlParameter("UnitName", ResponseTest?.UnitName);
 
                     var obj = context.InsertAnalVsParamVsTest.FromSqlRaw(
                     "Execute dbo.pro_InsertAnalVsParamVsTest @analyzerparamTestNo,@analyzerMasterNo,@analyzerParamNo,@testNo,@subtestNo,@tstatus,@venueNo,@branchNo,@userNo,@unitNo,@methodNo,@PerUnitConsumption,@ReagentName,@UnitName",
                     _analyzerparamTestNo, _analyzerMasterNo, _analyzerParamNo, _testNo, _subtestNo, _tstatus, _venueNo, _branchNo, _userNo, _unitNo, _methodNo, _perunitconsumption, _ReagentName, _UnitName).ToList();
                     
-                    objresult.analyzerparamTestNo = obj[0].analyzerparamTestNo;
+                    Objresult.analyzerparamTestNo = obj[0].analyzerparamTestNo;
                 }
             }
             catch (Exception ex)
             {
-                MyDevException.Error(ex, "AnalyzerMasterRepository.InsertAnalVsParamVsTest" + responseTest.analyzerparamTestNo.ToString(), ExceptionPriority.Low, ApplicationType.REPOSITORY, responseTest.venueNo, 0, responseTest.userNo);
+                MyDevException.Error(ex, "AnalyzerMasterRepository.InsertAnalVsParamVsTest" + ResponseTest.analyzerparamTestNo.ToString(), ExceptionPriority.Low, ApplicationType.REPOSITORY, ResponseTest.venueNo, 0, ResponseTest.userNo);
             }
-            return objresult;
+            return Objresult;
         }
-        public List<subresponse> GetSubTest(subrequest subrequest)
+        public List<Subresponse> GetSubTest(Subrequest Subrequest)
         {
-            List<subresponse> objresult = new List<subresponse>();
+            List<Subresponse> Objresult = new List<Subresponse>();
             try
             {
                 using (var context = new MasterContext(_config.GetConnectionString(ConfigKeys.DefaultConnection)))
                 {
-                    var _venueNo = new SqlParameter("venueNo", subrequest?.venueNo);
-                    var _testNo = new SqlParameter("testNo", subrequest?.testNo);
+                    var _venueNo = new SqlParameter("venueNo", Subrequest?.venueNo);
+                    var _testNo = new SqlParameter("testNo", Subrequest?.testNo);
 
-                    objresult = context.GetSubTest.FromSqlRaw(
+                    Objresult = context.GetSubTest.FromSqlRaw(
                     "Execute dbo.pro_GetSubTest @venueNo,@testNo",_venueNo, _testNo).ToList();
                 }
             }
             catch (Exception ex)
             {
-                MyDevException.Error(ex, "AnalyzerMasterRepository.GetSubTest", ExceptionPriority.Low, ApplicationType.REPOSITORY, subrequest.venueNo, 0, 0);
+                MyDevException.Error(ex, "AnalyzerMasterRepository.GetSubTest", ExceptionPriority.Low, ApplicationType.REPOSITORY, Subrequest.venueNo, 0, 0);
             }
-            return objresult;
+            return Objresult;
         }
     }
 }

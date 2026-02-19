@@ -39,7 +39,7 @@ namespace Service.Repository
         }
         public QcresultResponse InsertqcresultDetails(SaveqcresDTO req)
         {
-            QcresultResponse objresult = new QcresultResponse();
+            QcresultResponse Objresult = new QcresultResponse();
             CommonHelper commonUtility = new CommonHelper();
            
             var resultXML = commonUtility.ToXML(req?.resultlst);
@@ -61,14 +61,14 @@ namespace Service.Repository
                     "Execute dbo.pro_InsertQcresultentry  @venueNo,@userNo,@venueBranchno,@analyzerNo,@paramNo,@lotNo,@resultDate,@resultXML",
                     _venueNo,_userNo,_venueBranchno,_analyzerNo,_paramNo,_lotNo,_resultDate,_resultXML).ToList();
 
-                    objresult = obj[0];
+                    Objresult = obj[0];
                 }
             }
             catch (Exception ex)
             {
                 MyDevException.Error(ex, " QcresultentryRepository.InsertQcmaster", ExceptionPriority.Low, ApplicationType.REPOSITORY, req?.venueNo, 0, 0);
             }
-            return objresult;
+            return Objresult;
         }
 
         public SaveqcresDTO EditqcresultDetails(EditqcresDTO req)

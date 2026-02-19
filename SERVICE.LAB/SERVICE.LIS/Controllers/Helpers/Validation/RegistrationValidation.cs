@@ -12,13 +12,11 @@ namespace Service.API.SERVICE.Controllers
 {
     public class RegistrationValidation
     {
-        private static List<BulkFileUpload> _lstBulkImages;
-        private static IConfiguration _config;
-        private static IMasterRepository _IMasterRepository;
-        public static void SetValidation(List<BulkFileUpload> lstBulkImages, IConfiguration config, IMasterRepository IMasterRepository)
+        private static List<BulkFileUpload>? _lstBulkImages;
+        private static IMasterRepository? _IMasterRepository;
+        public static void SetValidation(List<BulkFileUpload> lstBulkImages, IMasterRepository IMasterRepository)
         {
             _lstBulkImages = lstBulkImages;
-            _config = config;
             _IMasterRepository = IMasterRepository;
         }
 
@@ -149,16 +147,19 @@ namespace Service.API.SERVICE.Controllers
             }
 
             // Validate for Duplicate Service Names //
-            for (int i = 0; i < objDTO.Orders.Count; i++)
+            if (objDTO.Orders != null)
             {
-                var v = objDTO.Orders[i];
-                if (v.TestNo > 0)
+                for (int i = 0; i < objDTO.Orders.Count; i++)
                 {
-                    var isduplicate = objDTO.Orders.Where(x => x.TestNo == v.TestNo && x.TestType == v.TestType).ToList();
-                    if (isduplicate.Count > 1)
+                    var v = objDTO.Orders[i];
+                    if (v.TestNo > 0)
                     {
-                        errors.Add("This Service Already Exists");
-                        break;
+                        var isduplicate = objDTO.Orders.Where(x => x.TestNo == v.TestNo && x.TestType == v.TestType).ToList();
+                        if (isduplicate.Count > 1)
+                        {
+                            errors.Add("This Service Already Exists");
+                            break;
+                        }
                     }
                 }
             }

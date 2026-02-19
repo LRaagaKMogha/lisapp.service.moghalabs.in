@@ -107,9 +107,9 @@ namespace Service.API.SERVICE.Controllers
             List<string> errors = new List<string>();
 
             string action = req.fileType;
-            string fromDate = null;
-            string toDate = null;
-            string typeValue = null;
+            string? fromDate = null;
+            string? toDate = null;
+            string? typeValue = null;
 
             foreach (var param in req.ReportParamitem)
             {

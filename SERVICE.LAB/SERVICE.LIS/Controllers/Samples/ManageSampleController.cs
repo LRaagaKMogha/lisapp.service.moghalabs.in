@@ -32,13 +32,13 @@ namespace Service.API.SERVICE.Controllers
         [Route("api/ManageSample/GetManageSampleDetails")]
         public ActionResult GetManageSampleDetails(CommonFilterRequestDTO RequestItem)
         {
-            List<GetManagesampleResponse> objresult = new List<GetManagesampleResponse>();
+            List<GetManagesampleResponse> Objresult = new List<GetManagesampleResponse>();
             try
             {
                 var _errormsg = SampleMaintainenceValidation.GetManageSampleDetails(RequestItem);
                 if (!_errormsg.status)
                 {
-                    objresult = _manageSampleRepository.GetManageSampleDetails(RequestItem);
+                    Objresult = _manageSampleRepository.GetManageSampleDetails(RequestItem);
                 }
                 else
                     return BadRequest(_errormsg);
@@ -47,7 +47,7 @@ namespace Service.API.SERVICE.Controllers
             {
                 MyDevException.Error(ex, "ManageSampleController.GetManageSampleDetails", ExceptionPriority.Low, ApplicationType.APPSERVICE, RequestItem.VenueNo, RequestItem.VenueBranchNo, 0);
             }
-            return Ok(objresult);
+            return Ok(Objresult);
         }
 
         [CustomAuthorize("LIMSSAMPLEMNTC")]
@@ -182,13 +182,13 @@ namespace Service.API.SERVICE.Controllers
         [Route("api/ManageSample/GetSampleOutSource")]
         public ActionResult GetSampleOutSource(GetSampleOutsourceRequest RequestItem)
         {
-            List<GetSampleOutsourceResponse> objresult = new List<GetSampleOutsourceResponse>();
+            List<GetSampleOutsourceResponse> Objresult = new List<GetSampleOutsourceResponse>();
             try
             {
                 var _errormsg = SampleMaintainenceValidation.GetSampleOutSource(RequestItem);
                 if (!_errormsg.status)
                 {
-                    objresult = _manageSampleRepository.GetSampleOutSource(RequestItem);
+                    Objresult = _manageSampleRepository.GetSampleOutSource(RequestItem);
                 }
                 else
                     return BadRequest(_errormsg);
@@ -198,7 +198,7 @@ namespace Service.API.SERVICE.Controllers
             {
                 MyDevException.Error(ex, "ManageSampleController.GetSampleOutSource", ExceptionPriority.Low, ApplicationType.APPSERVICE, RequestItem.VenueNo, RequestItem.VenueBranchNo, 0);
             }
-            return Ok(objresult);
+            return Ok(Objresult);
         }
 
         [CustomAuthorize("LIMSSAMPLEMNTC")]
@@ -252,13 +252,13 @@ namespace Service.API.SERVICE.Controllers
         [Route("api/ManageSample/GetResultACK")]
         public ActionResult<GetSampleOutsourceResponse> GetResultACK(GetSampleOutsourceRequest RequestItem)
         {
-            List<GetSampleOutsourceResponse> objresult = new List<GetSampleOutsourceResponse>();
+            List<GetSampleOutsourceResponse> Objresult = new List<GetSampleOutsourceResponse>();
             try
             {
                 var _errormsg = ResultAckValidation.GetResultACK(RequestItem);
                 if (!_errormsg.status)
                 {
-                    objresult = _manageSampleRepository.GetResultACK(RequestItem);
+                    Objresult = _manageSampleRepository.GetResultACK(RequestItem);
                 }
                 else
                     return BadRequest(_errormsg);
@@ -267,7 +267,7 @@ namespace Service.API.SERVICE.Controllers
             {
                 MyDevException.Error(ex, "ManageSampleController.GetResultACK", ExceptionPriority.Low, ApplicationType.APPSERVICE, RequestItem.VenueNo, RequestItem.VenueBranchNo, 0);
             }
-            return Ok(objresult);
+            return Ok(Objresult);
         }
 
         [CustomAuthorize("LIMSSAMPLEMNTC")]
@@ -360,16 +360,16 @@ namespace Service.API.SERVICE.Controllers
         [Route("api/ManageSample/GetSampletransfer")]
         public List<GetSampleTransferResponse> GetSampletransfer(GetSampleOutsourceRequest RequestItem)
         {
-            List<GetSampleTransferResponse> objresult = new List<GetSampleTransferResponse>();
+            List<GetSampleTransferResponse> Objresult = new List<GetSampleTransferResponse>();
             try
             {
-                objresult = _manageSampleRepository.GetSampleTransfer(RequestItem);
+                Objresult = _manageSampleRepository.GetSampleTransfer(RequestItem);
             }
             catch (Exception ex)
             {
                 MyDevException.Error(ex, "ManageSampleController.GetSampletransfer", ExceptionPriority.Low, ApplicationType.APPSERVICE, RequestItem.VenueNo, RequestItem.VenueBranchNo, 0);
             }
-            return objresult;
+            return Objresult;
         }
 
         [CustomAuthorize("LIMSSAMPLEMNTC")]
@@ -394,16 +394,16 @@ namespace Service.API.SERVICE.Controllers
         [Route("api/ManageSample/GetBranchSampleReceive")]
         public List<GetbranchSampleReceiveResponse> GetBranchSampleReceive(GetBranchSampleReceiveRequest RequestItem)
         {
-            List<GetbranchSampleReceiveResponse> objresult = new List<GetbranchSampleReceiveResponse>();
+            List<GetbranchSampleReceiveResponse> Objresult = new List<GetbranchSampleReceiveResponse>();
             try
             {
-                objresult = _manageSampleRepository.GetBranchSampleReceive(RequestItem);
+                Objresult = _manageSampleRepository.GetBranchSampleReceive(RequestItem);
             }
             catch (Exception ex)
             {
                 MyDevException.Error(ex, "ManageSampleController.GetBranchSampleReceive", ExceptionPriority.Low, ApplicationType.APPSERVICE, RequestItem.VenueNo, RequestItem.VenueBranchNo, 0);
             }
-            return objresult;
+            return Objresult;
         }
 
         [CustomAuthorize("LIMSSAMPLEMNTC")]
@@ -411,16 +411,16 @@ namespace Service.API.SERVICE.Controllers
         [Route("api/ManageSample/GetSampleTransferReport")]
         public List<SampleReportResponse> GetSampleTransferReport(CommonFilterRequestDTO RequestItem)
         {
-            List<SampleReportResponse> objresult = new List<SampleReportResponse>();
+            List<SampleReportResponse> Objresult = new List<SampleReportResponse>();
             try
             {
-                objresult = _manageSampleRepository.GetSampleTransferReport(RequestItem);
+                Objresult = _manageSampleRepository.GetSampleTransferReport(RequestItem);
             }
             catch (Exception ex)
             {
                 MyDevException.Error(ex, "ManageSampleController.GetSampleTransferReport", ExceptionPriority.Low, ApplicationType.APPSERVICE, RequestItem.VenueNo, RequestItem.VenueBranchNo, 0);
             }
-            return objresult;
+            return Objresult;
         }
 
         [CustomAuthorize("LIMSSAMPLEMNTC")]
@@ -816,13 +816,13 @@ namespace Service.API.SERVICE.Controllers
         [Route("api/ManageSample/GetBarcodePrintDetails")]
         public ActionResult GetBarcodePrintDetails(BarcodePrintRequest RequestItem)
         {
-            List<BarcodePrintResponse> objResult = new List<BarcodePrintResponse>();
+            List<BarcodePrintResponse> Objresult = new List<BarcodePrintResponse>();
             try
             {
                 var _errormsg = SampleMaintainenceValidation.GetBarcodePrintDetailsValidation(RequestItem);
                 if (!_errormsg.status)
                 {
-                    objResult = _manageSampleRepository.GetBarcodePrintDetails(RequestItem);
+                    Objresult = _manageSampleRepository.GetBarcodePrintDetails(RequestItem);
                 }
                 else
                     return BadRequest(_errormsg);
@@ -831,7 +831,7 @@ namespace Service.API.SERVICE.Controllers
             {
                 MyDevException.Error(ex, "ManageSampleController.GetBarcodePrintDetails", ExceptionPriority.Low, ApplicationType.APPSERVICE, RequestItem.VenueNo, RequestItem.VenueBranchNo, 0);
             }
-            return Ok(objResult);
+            return Ok(Objresult);
         }
 
         [HttpPost]
@@ -868,18 +868,18 @@ namespace Service.API.SERVICE.Controllers
 
         [HttpGet]
         [Route("api/ManageSample/GetPrePrintBarcodelist")]
-        public List<PrePrintBarcodeOrderResponse> GetPrePrintBarcodelist(int VenueNo, int VenueBranchNo, long visitNo)
+        public List<PrePrintBarcodeOrderresponse> GetPrePrintBarcodelist(int VenueNo, int VenueBranchNo, long visitNo)
         {
-            List<PrePrintBarcodeOrderResponse> objresult = new List<PrePrintBarcodeOrderResponse>();
+            List<PrePrintBarcodeOrderresponse> Objresult = new List<PrePrintBarcodeOrderresponse>();
             try
             {
-                objresult = _manageSampleRepository.GetPrePrintBarcodelist(visitNo, VenueNo, VenueBranchNo);
+                Objresult = _manageSampleRepository.GetPrePrintBarcodelist(visitNo, VenueNo, VenueBranchNo);
             }
             catch (Exception ex)
             {
                 MyDevException.Error(ex, "ManageSampleController.GetPrePrintBarcodelist", ExceptionPriority.Medium, ApplicationType.APPSERVICE, VenueNo, VenueBranchNo, 0);
             }
-            return objresult;
+            return Objresult;
         }
     }
 }

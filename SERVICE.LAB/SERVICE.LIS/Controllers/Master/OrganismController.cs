@@ -21,9 +21,9 @@ namespace Service.API.SERVICE.Controllers
         #region GetOrganismMaster
         [HttpPost]
         [Route("api/Organism/GetOrganismMaster")]
-        public List<lstorganism> GetOrganismMaster(reqsearchorganism req)
+        public List<Lstorganism> GetOrganismMaster(Reqsearchorganism req)
         {
-            List<lstorganism> lst = new List<lstorganism>();
+            List<Lstorganism> lst = new List<Lstorganism>();
             try
             {
                 lst = _OrganismRepository.GetOrganismMaster(req);

@@ -6,6 +6,6 @@ namespace Service.IRepository
     public interface IProcessingbranchRepository
     {
         List<responsebranch> GetProcessingbranch(reqbranch req);
-        Storeprocessingbranch InsertProcessingbranch(insertbranch obj1);
+        Storeprocessingbranch InsertProcessingbranch(Insertbranch obj1);
     }
 }

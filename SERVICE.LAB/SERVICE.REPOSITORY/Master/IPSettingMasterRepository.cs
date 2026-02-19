@@ -28,8 +28,8 @@ namespace Service.Repository
                     string ipsettingXML = commonUtility.ToXML(ipSettingRequest);
                     var _ipsettingXML = new SqlParameter("ipsettingXML", ipsettingXML);
 
-                    var objresult = context.InsertIPSetting.FromSqlRaw("Execute dbo.pro_InsertIPSettingDetails @ipsettingXML", _ipsettingXML).AsEnumerable().FirstOrDefault();
-                    result.resultStatus = objresult?.resultStatus ?? 0;
+                    var Objresult = context.InsertIPSetting.FromSqlRaw("Execute dbo.pro_InsertIPSettingDetails @ipsettingXML", _ipsettingXML).AsEnumerable().FirstOrDefault();
+                    result.resultStatus = Objresult?.resultStatus ?? 0;
                 }
             }
             catch (Exception ex)
@@ -111,7 +111,7 @@ namespace Service.Repository
 
         public List<GetIPSettingResponse> GetIpSettings(int venueNo, int venueBranchNo, int pageIndex, int IPSettingNo)
         {
-            List<GetIPSettingResponse> objresult = new List<GetIPSettingResponse>();
+            List<GetIPSettingResponse> Objresult = new List<GetIPSettingResponse>();
             try
             {
                 using (var context = new LIMSContext(_config.GetConnectionString(ConfigKeys.DefaultConnection)))
@@ -121,7 +121,7 @@ namespace Service.Repository
                     var _PageIndex = new SqlParameter("PageIndex", pageIndex.ToString());
                     var _IPSettingNo = new SqlParameter("IPSettingNo", IPSettingNo.ToString());
 
-                    objresult = context.GetIPSettingMasterDTO.FromSqlRaw
+                    Objresult = context.GetIPSettingMasterDTO.FromSqlRaw
                         ("Execute dbo.pro_GetIPSettings @venueNo,@venueBranchNo,@pageIndex,@IPSettingNo", _VenueNo, _VenueBranchNo, _PageIndex,_IPSettingNo).ToList();
                 }
             }
@@ -129,19 +129,19 @@ namespace Service.Repository
             {
                 MyDevException.Error(ex, "IPSettingMasterRepository.GetSubCustomerDetailbyCustomer", ExceptionPriority.High, ApplicationType.REPOSITORY, venueNo, venueBranchNo, 0);
             }
-            return objresult;
+            return Objresult;
         }
 
         public List<RCPriceList> GetEditIpSettings(int venueNo, int venueBranchNo, int physicianNo, int rcNo)
         {
-            List<RCPriceList> objresult = new List<RCPriceList>();
+            List<RCPriceList> Objresult = new List<RCPriceList>();
             try
             {
                 using (var context = new LIMSContext(_config.GetConnectionString(ConfigKeys.DefaultConnection)))
                 {
                     var iPSettings = context.TblIPSettings.Where(x => x.PhysicianNo == physicianNo && x.RCNo == rcNo && x.VenueNo == venueNo && x.VenueBranchNo == venueBranchNo).ToList();
-                    objresult = context.RCPriceLists.Where(x => x.RCNo == rcNo && x.VenueNo == venueNo && x.VenueBranchNo == venueBranchNo).ToList();
-                    objresult.ForEach(x =>
+                    Objresult = context.RCPriceLists.Where(x => x.RCNo == rcNo && x.VenueNo == venueNo && x.VenueBranchNo == venueBranchNo).ToList();
+                    Objresult.ForEach(x =>
                     {
                         var rclist = iPSettings.Where(y => y.RCPNo == x.RCPNo).ToList();
                         if (rclist.Any())
@@ -155,7 +155,7 @@ namespace Service.Repository
             {
                 MyDevException.Error(ex, "IPSettingMasterRepository.GetEditIpSettings", ExceptionPriority.High, ApplicationType.REPOSITORY, venueNo, venueBranchNo, 0);
             }
-            return objresult;
+            return Objresult;
         }
     }
 }

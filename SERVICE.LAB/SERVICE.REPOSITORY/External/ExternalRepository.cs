@@ -40,11 +40,11 @@ namespace Service.Repository
                     var _Rerun = new SqlParameter("IsReRun", results.IsReRun);
                     var _IsCalculationInput = new SqlParameter("IsCalculationInput", results.IsCalculationInput);
                     
-                    var objresult = context.InsertExternalResult.FromSqlRaw(
+                    var Objresult = context.InsertExternalResult.FromSqlRaw(
                     "Execute dbo.pro_InsertExternalResults @MachineId,@BarcodeNo,@TestSubtesttNo,@Result,@VenueNo,@VenueBranchNo,@Comment,@Ivalue,@Hvalue,@Lvalue,@IsReRun,@IsCalculationInput",
                     _MachineId, _BarcodeNo, _TestSubtesttNo, _Result, _VenueNo, _VenueBranchNo, _Comment, _Ivalue, _Hvalue, _Lvalue, _Rerun, _IsCalculationInput).ToList();
 
-                    var rtnresult = objresult[0].Status;
+                    var rtnresult = Objresult[0].Status;
 
                     if (rtnresult >= 1)
                     {
@@ -80,11 +80,11 @@ namespace Service.Repository
                     var _PatientResultTemplateNo = new SqlParameter("PatientResultTemplateNo", PatientResultTemplateNo);
                     var _VenueNo = new SqlParameter("VenueNo", VenueNo);
                     var _VenueBranchNo = new SqlParameter("VenueBranchNo", VenueBranchNo);
-                    var objresult = context.GetExternalTemplateResult.FromSqlRaw(
+                    var Objresult = context.GetExternalTemplateResult.FromSqlRaw(
                          "Execute dbo.pro_GetExternalTemplateResult @PatientResultTemplateNo,@VenueNo,@VenueBranchNo",
                       _PatientResultTemplateNo, _VenueNo, _VenueBranchNo).ToList();
 
-                    obj = objresult[0];
+                    obj = Objresult[0];
                     //---------------------
                     if (obj.orderlistno > 1 && obj.templateno > 0 && obj.serviceno > 0)
                     {
@@ -237,7 +237,7 @@ namespace Service.Repository
         }
         public Boolean CheckFormulaIsAvailable_ForCalculation(ExternalResultCalculationRequest req)
         {
-            CheckFormulaIsAvailable objResult = new CheckFormulaIsAvailable();
+            CheckFormulaIsAvailable Objresult = new CheckFormulaIsAvailable();
             Boolean result = false;
 
             try
@@ -250,11 +250,11 @@ namespace Service.Repository
                     var _VenueNo = new SqlParameter("VenueNo", req.VenueNo);
                     var _VenueBranchNo = new SqlParameter("VenueBranchNo", req.VenueBranchNo);
 
-                    objResult = context.CheckFormulaIsAvailable_ForCalculation.FromSqlRaw(
+                    Objresult = context.CheckFormulaIsAvailable_ForCalculation.FromSqlRaw(
                          "Execute dbo.pro_check_visit_having_formula_for_calculation @VenueNo, @VenueBranchNo, @BarcodeNo, @TestSubtesttNo",
                         _VenueNo, _VenueBranchNo, _BarcodeNo, _TestSubtesttNo).AsEnumerable().FirstOrDefault();
 
-                    result = objResult.ReturnValue;
+                    result = Objresult.ReturnValue;
                 }
             }
             catch (Exception ex)
@@ -296,8 +296,8 @@ namespace Service.Repository
                         objExtRslt.issformula=r.issformula;
                         objExtRslt.decimalpoint = r.decimalpoint;
                         objExtRslt.isroundoff= r.isroundoff;
-                        objExtRslt.formulaparameterjson = JsonConvert.DeserializeObject<List<formulaparameterjson>>(r.formulaparameterjson);
-                        objExtRslt.formulajson = JsonConvert.DeserializeObject<List<formulajson>>(r.formulajson);
+                        objExtRslt.Formulaparameterjson = JsonConvert.DeserializeObject<List<Formulaparameterjson>>(r.Formulaparameterjson);
+                        objExtRslt.Formulajson = JsonConvert.DeserializeObject<List<Formulajson>>(r.Formulajson);
                         objExtRslt.testno = r.testno;
                         objExtRslt.subtestno = r.subtestno;
                         objExtRslt.testtype = r.testtype;
@@ -348,8 +348,7 @@ namespace Service.Repository
                 {
                     var _Type = new SqlParameter("Type", "");
                     var _Formula = new SqlParameter("Formula", req);
-                    var objresult = context.InsertExternalResult.FromSqlRaw("Execute dbo.pro_FormulaCalculation @Type,@Formula",_Type, _Formula).ToList();
-                    result = result;
+                    var Objresult = context.InsertExternalResult.FromSqlRaw("Execute dbo.pro_FormulaCalculation @Type,@Formula",_Type, _Formula).ToList();
                 }
             }
             catch (Exception ex)
@@ -656,7 +655,7 @@ namespace Service.Repository
         }
         public List<CommonMasterDto> GetEGFRList(int venueno, int venuebranchno, string MasterKey)
         {
-            List<CommonMasterDto> objresult = new List<CommonMasterDto>();
+            List<CommonMasterDto> Objresult = new List<CommonMasterDto>();
             try
             {
                 using (var context = new MasterContext(_config.GetConnectionString(ConfigKeys.DefaultConnection)))
@@ -664,7 +663,7 @@ namespace Service.Repository
                     var _venueno = new SqlParameter("venueno", venueno);
                     var _venuebranchno = new SqlParameter("venuebranchno", venuebranchno);
                     var _MasterKey = new SqlParameter("MasterKey", MasterKey);
-                    objresult = context.CommonMasterDTO.FromSqlRaw("Execute dbo.pro_CommonDetails @MasterKey,@venueno,@venuebranchno", _MasterKey, _venueno, _venuebranchno).ToList();
+                    Objresult = context.CommonMasterDTO.FromSqlRaw("Execute dbo.pro_CommonDetails @MasterKey,@venueno,@venuebranchno", _MasterKey, _venueno, _venuebranchno).ToList();
 
                 }
             }
@@ -672,7 +671,7 @@ namespace Service.Repository
             {
                 MyDevException.Error(ex, "ExternalRepository.EGFR-" + MasterKey, ExceptionPriority.Low, ApplicationType.REPOSITORY, venueno, venuebranchno, 0);
             }
-            return objresult;
+            return Objresult;
         }
     }
 }

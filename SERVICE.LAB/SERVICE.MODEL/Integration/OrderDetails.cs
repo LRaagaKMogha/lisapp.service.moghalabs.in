@@ -145,7 +145,7 @@ namespace Service.Model.Integration
         public List<WaitingListCreateManageSampleRequest> manageSamples { get; set; }
         public List<WaitingListCreateManageSampleResponse> Response { get; set; }
         public bool IsMassRegistration { get; set; }
-        public bool IsDowntimeOrderRegistration { get; set;  }
+        public bool IsDowntimeOrderRegistration { get; set; }
         public List<OrderSaveRequest> Orders { get; set; }
     }
     public class TubeDetails
@@ -164,7 +164,7 @@ namespace Service.Model.Integration
         public bool IsStat { get; set; }
         public int GenderId { get; set; }
         public bool IsFasting { get; set; }
-        public int VisitId { get; set;  }
+        public int VisitId { get; set; }
         public bool PatientDetailsUpdated { get; set; }
         public List<TubeDetails> TubeDetails { get; set; }
     }
@@ -185,9 +185,9 @@ namespace Service.Model.Integration
         public string BBLabAccessionNo { get; set; }
         public string DowntimeLabAccessionNo { get; set; }
         public string ServiceType { get; set; }
-        public string Gender { get; set;  }
+        public string Gender { get; set; }
         public string BarcodeShortNames { get; set; }
-        public string SampleName { get; set;  }
+        public string SampleName { get; set; }
         public string ContainerName { get; set; }
         public List<int> SelectedTestsIds { get; set; }
 
@@ -396,7 +396,7 @@ namespace Service.Model.Integration
         public string SampleName { get; set; }
         public string PackageName { get; set; }
         public string GroupName { get; set; }
-        public string GroupCode { get; set;  }
+        public string GroupCode { get; set; }
         public int SampleNo { get; set; }
         public int ContainerNo { get; set; }
     }
@@ -577,7 +577,7 @@ namespace Service.Model.Integration
         public bool? IsRejected { get; set; }
         public string? RejectedReason { get; set; }
         public bool? IsOnHold { get; set; }
-        public bool? IsNotGiven {get;set;}
+        public bool? IsNotGiven { get; set; }
         public string? RejectedReasonDesc { get; set; }
         public string? LabAccessionNo { get; set; }
         public Int64? PatientVisitNo { get; set; } = 0;
@@ -734,7 +734,7 @@ namespace Service.Model.Integration
         public List<allergydetails> allergydetails { get; set; }
     }
 
-    public class orderrespondetails
+    public class OrderResponDetails
     {
         public string referenceno { get; set; }
         public string responsecode { get; set; }
@@ -786,7 +786,7 @@ namespace Service.Model.Integration
         public int? PhysicianNo { get; set; }
     }
 
-    public class MassRegistration
+    public class massregistration
     {
         public int MassRegistrationNo { get; set; }
         public int? MassFileNo { get; set; }
@@ -811,9 +811,7 @@ namespace Service.Model.Integration
         public string? PostalCode { get; set; }
         public string? Alternate_email { get; set; }
         public string? Nationality { get; set; }
-
     }
-
     public class MassRegistrationSample
     {
         public int MassRegistrationSampleNo { get; set; }
@@ -833,7 +831,7 @@ namespace Service.Model.Integration
         public int? ModifiedBy { get; set; }
     }
 
-    public class massregistration
+    public class MassRegistrationRef
     {
         public string referenceno { get; set; }
         public patientdetails patientdetails { get; set; }
@@ -856,7 +854,7 @@ namespace Service.Model.Integration
         public string idtype { get; set; }
         [Required]
         [MaxLength(20)]
-        public string idnumber { get; set; }        
+        public string idnumber { get; set; }
         public DateTime registrationdttm { get; set; }
 
         [Required]
@@ -911,7 +909,7 @@ namespace Service.Model.Integration
         [Required]
         [MaxLength(80)]
         public string firstname { get; set; }
-        
+
         [MaxLength(80)]
         public string lastname { get; set; }
         [MaxLength(20)]
@@ -920,7 +918,7 @@ namespace Service.Model.Integration
         public string alternateIdnumber { get; set; }
 
         [Required]
-        public ngender gender { get; set; }
+        public nGender gender { get; set; }
         [Required]
         public DateTime dateofbirth { get; set; }
         public bool isVIP { get; set; }
@@ -936,7 +934,6 @@ namespace Service.Model.Integration
         [MaxLength(6)]
         public string weight { get; set; }
         public string patientno { get; set; }
-
     }
     public class labdetails
     {

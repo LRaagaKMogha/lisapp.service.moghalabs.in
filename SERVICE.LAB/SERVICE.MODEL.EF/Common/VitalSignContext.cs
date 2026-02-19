@@ -18,8 +18,8 @@ namespace Service.Model.EF
         public virtual DbSet<VitalSignDTO> GetVitalSignList { get; set; }
         public virtual DbSet<SaveVitalSignDTOResponse> SaveVitalSign { get; set; }
         public virtual DbSet<VitalSignMastersResponse> GetVitalSignMaster { get; set; }
-        public virtual DbSet<SaveAllergyResponse> SaveAllergyDetails { get; set; }
-        public virtual DbSet<GetAllergyResponse> GetAllergyDetails { get; set; }
+        public virtual DbSet<SaveAllergyResponse> SaveAllergydetails { get; set; }
+        public virtual DbSet<GetAllergyResponse> GetAllergydetails { get; set; }
         public virtual DbSet<SaveDiseasesResponse> SaveDiseasesDetails { get; set; }
         public virtual DbSet<GetDiseasesResponse> GetDiseasesDetails { get; set; }
         public virtual DbSet<lstVaccineSchedule> lstVaccineSchedule { get; set; }
@@ -58,13 +58,13 @@ namespace Service.Model.EF
             modelBuilder.Entity<SaveAllergyResponse>(entity =>
             {
                 entity.HasKey(e => e.allergyRecordingno);
-                entity.ToTable("pro_InsertAllergyDetails");
+                entity.ToTable("pro_InsertAllergydetails");
                 entity.Property(e => e.allergyRecordingno).HasColumnName("allergyRecordingno");
             });
             modelBuilder.Entity<GetAllergyResponse>(entity =>
             {
                 entity.HasKey(e => e.RowNo);
-                entity.ToTable("pro_GetAllergyDetails");
+                entity.ToTable("pro_GetAllergydetails");
                 entity.Property(e => e.RowNo).HasColumnName("RowNo");
             });
             modelBuilder.Entity<SaveDiseasesResponse>(entity =>

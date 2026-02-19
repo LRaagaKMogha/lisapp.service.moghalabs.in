@@ -16,13 +16,13 @@ namespace Service.Model.EF
         }
         
         public virtual DbSet<lstcustomerVisit> GetCustomerVisit { get; set; }
-        public virtual DbSet<rtninvoice> InsertInvoiceCreate { get; set; }
+        public virtual DbSet<Rtninvoice> InsertInvoiceCreate { get; set; }
 
-        public virtual DbSet<rtninvoiceCredit> InsertInvoiceCreditNote { get; set; }
+        public virtual DbSet<RtninvoiceCredit> InsertInvoiceCreditNote { get; set; }
         
-        public virtual DbSet<lstCustomerInvoice> GetCustomerInvoice { get; set; }
-        public virtual DbSet<objInvoice> GetInvoiceInfo { get; set; }
-        public virtual DbSet<rtninvoicePayment> InsertInvoicePayment { get; set; }
+        public virtual DbSet<LstCustomerInvoice> GetCustomerInvoice { get; set; }
+        public virtual DbSet<ObjInvoice> GetInvoiceInfo { get; set; }
+        public virtual DbSet<RtninvoicePayment> InsertInvoicePayment { get; set; }
         public virtual DbSet<lstSearchInvoice> SearchInvoiceNo { get; set; }
         public virtual DbSet<lstInvoicePayment> GetInvoicePayment { get; set; }
         public virtual DbSet<lstCreditNoteVisit> GetCreditNoteResponse { get; set; }
@@ -54,13 +54,13 @@ namespace Service.Model.EF
                 entity.Property(e => e.rowNo).HasColumnName("rowNo");
             });
 
-            modelBuilder.Entity<rtninvoice>(entity =>
+            modelBuilder.Entity<Rtninvoice>(entity =>
             {
                 entity.HasKey(e => e.invoiceNo);
                 entity.ToTable("pro_InsertInvoiceCreate");
                 entity.Property(e => e.invoiceNo).HasColumnName("invoiceNo");
             });
-            modelBuilder.Entity<rtninvoiceCredit>(entity =>
+            modelBuilder.Entity<RtninvoiceCredit>(entity =>
             {
                 entity.HasKey(e => e.CreditNo);
                 entity.ToTable("pro_InsertInvoiceCreditNote");
@@ -68,21 +68,21 @@ namespace Service.Model.EF
             });
 
 
-            modelBuilder.Entity<lstCustomerInvoice>(entity =>
+            modelBuilder.Entity<LstCustomerInvoice>(entity =>
             {
                 entity.HasKey(e => e.rowNo);
                 entity.ToTable("pro_GetCustomerInvoice");
                 entity.Property(e => e.rowNo).HasColumnName("rowNo");
             });
 
-            modelBuilder.Entity<objInvoice>(entity =>
+            modelBuilder.Entity<ObjInvoice>(entity =>
             {
                 entity.HasKey(e => e.rowNo);
                 entity.ToTable("pro_GetInvoiceInfo");
                 entity.Property(e => e.rowNo).HasColumnName("rowNo");
             });
 
-            modelBuilder.Entity<rtninvoicePayment>(entity =>
+            modelBuilder.Entity<RtninvoicePayment>(entity =>
             {
                 entity.HasKey(e => e.invoicePaymentNo);
                 entity.ToTable("pro_InsertInvoicePayment");

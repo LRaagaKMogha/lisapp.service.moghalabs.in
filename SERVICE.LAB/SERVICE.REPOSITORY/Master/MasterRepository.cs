@@ -25,27 +25,27 @@ namespace Service.Repository
         /// <returns></returns>
         public List<CommonMasterDto> GetCommonMasterList(int venueno, int venuebranchno, string MasterKey)
         {
-            List<CommonMasterDto> objresult = new List<CommonMasterDto>();
+            List<CommonMasterDto> Objresult = new List<CommonMasterDto>();
             MasterRepository _IMasterRepository = new MasterRepository(_config);
             AppSettingResponse objAppSettingResponse = new AppSettingResponse();
             try
             {
                 string _CacheKey = CacheKeys.CommonMaster + MasterKey + venueno + venuebranchno;
-                objresult = MemoryCacheRepository.GetCacheItem<List<CommonMasterDto>>(_CacheKey);
-                if (objresult == null || MasterKey == "MediaLab" || MasterKey == "ANALYZER" || MasterKey == "PARAMNAME" || MasterKey == "PRODUCTMASTER" || MasterKey == "CountryName" || MasterKey == "StateName" || MasterKey == "CityName" || MasterKey == "countrymaster" || objresult.Count()==0)
+                Objresult = MemoryCacheRepository.GetCacheItem<List<CommonMasterDto>>(_CacheKey);
+                if (Objresult == null || MasterKey == "MediaLab" || MasterKey == "ANALYZER" || MasterKey == "PARAMNAME" || MasterKey == "PRODUCTMASTER" || MasterKey == "CountryName" || MasterKey == "StateName" || MasterKey == "CityName" || MasterKey == "countrymaster" || Objresult.Count()==0)
                 {
                     using (var context = new MasterContext(_config.GetConnectionString(ConfigKeys.DefaultConnection)))
                     {
                         var _venueno = new SqlParameter("venueno", venueno);
                         var _venuebranchno = new SqlParameter("venuebranchno", venuebranchno);
                         var _MasterKey = new SqlParameter("MasterKey", MasterKey);
-                        objresult = context.CommonMasterDTO.FromSqlRaw("Execute dbo.pro_CommonDetails @MasterKey,@venueno,@venuebranchno", _MasterKey, _venueno, _venuebranchno).ToList();
+                        Objresult = context.CommonMasterDTO.FromSqlRaw("Execute dbo.pro_CommonDetails @MasterKey,@venueno,@venuebranchno", _MasterKey, _venueno, _venuebranchno).ToList();
                         objAppSettingResponse = new AppSettingResponse();
                         string AppCacheMemoryTime = "CacheMemoryTime";
                         objAppSettingResponse = _IMasterRepository.GetSingleAppSetting(AppCacheMemoryTime);
                         int cachetime = objAppSettingResponse != null && objAppSettingResponse.ConfigValue != null && objAppSettingResponse.ConfigValue != ""
                             ? Convert.ToInt32(objAppSettingResponse.ConfigValue) : 0;
-                        MemoryCacheRepository.AddItem(_CacheKey, objresult, Convert.ToInt32(cachetime));
+                        MemoryCacheRepository.AddItem(_CacheKey, Objresult, Convert.ToInt32(cachetime));
                     }
                 }
             }
@@ -53,7 +53,7 @@ namespace Service.Repository
             {
                 MyDevException.Error(ex, "MasterRepository.GetCommonMasterList-" + MasterKey, ExceptionPriority.Low, ApplicationType.REPOSITORY, venueno, venuebranchno, 0);
             }
-            return objresult;   
+            return Objresult;   
         }
 
 
@@ -65,26 +65,26 @@ namespace Service.Repository
         /// <returns></returns>
         public List<ConfigurationDto> GetConfigurationList(int venueno, int venuebranchno)
         {
-            List<ConfigurationDto> objresult = new List<ConfigurationDto>();
+            List<ConfigurationDto> Objresult = new List<ConfigurationDto>();
             MasterRepository _IMasterRepository = new MasterRepository(_config);
             AppSettingResponse objAppSettingResponse = new AppSettingResponse();
             try
             {
                 string _CacheKey = CacheKeys.ConfigurationMaster  + venueno + venuebranchno;
-                objresult = MemoryCacheRepository.GetCacheItem<List<ConfigurationDto>>(_CacheKey);
-                if (objresult == null)
+                Objresult = MemoryCacheRepository.GetCacheItem<List<ConfigurationDto>>(_CacheKey);
+                if (Objresult == null)
                 {
                     using (var context = new MasterContext(_config.GetConnectionString(ConfigKeys.DefaultConnection)))
                     {
                         var _venueno = new SqlParameter("VenueNo", venueno);
                         var _venuebranchno = new SqlParameter("VenueBranchNo", venuebranchno);
-                        objresult = context.ConfigurationDTO.FromSqlRaw("Execute dbo.pro_GetConfiguration @VenueNo,@VenueBranchNo", _venueno, _venuebranchno).ToList();
+                        Objresult = context.ConfigurationDTO.FromSqlRaw("Execute dbo.pro_GetConfiguration @VenueNo,@VenueBranchNo", _venueno, _venuebranchno).ToList();
                         objAppSettingResponse = new AppSettingResponse();
                         string AppCacheMemoryTime = "CacheMemoryTime";
                         objAppSettingResponse = _IMasterRepository.GetSingleAppSetting(AppCacheMemoryTime);
                         int cachetime = objAppSettingResponse != null && objAppSettingResponse.ConfigValue != null && objAppSettingResponse.ConfigValue != ""
                             ? Convert.ToInt32(objAppSettingResponse.ConfigValue) : 0;
-                        MemoryCacheRepository.AddItem(_CacheKey, objresult, Convert.ToInt32(cachetime));
+                        MemoryCacheRepository.AddItem(_CacheKey, Objresult, Convert.ToInt32(cachetime));
                     }
                 }
             }
@@ -92,7 +92,7 @@ namespace Service.Repository
             {
                 MyDevException.Error(ex, "MasterRepository.GetConfigurationList", ExceptionPriority.Low, ApplicationType.REPOSITORY, venueno, venuebranchno, 0);
             }
-            return objresult;
+            return Objresult;
         }
 
         /// <summary>
@@ -102,7 +102,7 @@ namespace Service.Repository
         /// <returns></returns>
         public List<CommonMasterDto> GetSearchCommonMasterList(int venueno, int venuebranchno, string MasterKey, string MasterValue)
         {
-            List<CommonMasterDto> objresult = new List<CommonMasterDto>();
+            List<CommonMasterDto> Objresult = new List<CommonMasterDto>();
             try
             {
 
@@ -112,7 +112,7 @@ namespace Service.Repository
                     var _venuebranchno = new SqlParameter("venuebranchno", venuebranchno);
                     var _MasterKey = new SqlParameter("MasterKey", MasterKey);
                     var _MasterValue = new SqlParameter("MasterValue", MasterValue);
-                    objresult = context.CommonMasterDTO.FromSqlRaw("Execute dbo.pro_SearchCommonDetails @MasterKey,@MasterValue,@venueno,@venuebranchno", _MasterKey, _MasterValue, _venueno, _venuebranchno).ToList();
+                    Objresult = context.CommonMasterDTO.FromSqlRaw("Execute dbo.pro_SearchCommonDetails @MasterKey,@MasterValue,@venueno,@venuebranchno", _MasterKey, _MasterValue, _venueno, _venuebranchno).ToList();
 
                 }
 
@@ -121,21 +121,21 @@ namespace Service.Repository
             {
                 MyDevException.Error(ex, "MasterRepository.GetSearchCommonMasterList", ExceptionPriority.Low, ApplicationType.REPOSITORY, venueno, venuebranchno, 0);
             }
-            return objresult;
+            return Objresult;
         }
 
         public List<TblDepartment> GetDepartmentList(int VenueNo, int VenueBranchNo)
         {
-            List<TblDepartment> objresult = new List<TblDepartment>();
+            List<TblDepartment> Objresult = new List<TblDepartment>();
             try
             {
                 string _CacheKey = CacheKeys.tblDepartmentList + VenueNo + VenueBranchNo;
-                objresult = MemoryCacheRepository.GetCacheItem<List<TblDepartment>>(_CacheKey);
-                if (objresult == null)
+                Objresult = MemoryCacheRepository.GetCacheItem<List<TblDepartment>>(_CacheKey);
+                if (Objresult == null)
                 {
                     using (var context = new MasterContext(_config.GetConnectionString(ConfigKeys.DefaultConnection)))
                     {
-                        objresult = context.TblDepartment.Where(a => a.VenueNo == VenueNo
+                        Objresult = context.TblDepartment.Where(a => a.VenueNo == VenueNo
                         && a.VenueBranchNo == VenueBranchNo && a.Status == true).ToList();
                         //
                         MasterRepository _IMasterRepository = new MasterRepository(_config);
@@ -145,7 +145,7 @@ namespace Service.Repository
                         objAppSettingResponse = _IMasterRepository.GetSingleAppSetting(AppCacheMemoryTime);
                         int cachetime = objAppSettingResponse != null && objAppSettingResponse.ConfigValue != null && objAppSettingResponse.ConfigValue != ""
                             ? Convert.ToInt32(objAppSettingResponse.ConfigValue) : 0;
-                        MemoryCacheRepository.AddItem(_CacheKey, objresult, Convert.ToInt32(cachetime));
+                        MemoryCacheRepository.AddItem(_CacheKey, Objresult, Convert.ToInt32(cachetime));
                     }
                 }
             }
@@ -153,20 +153,20 @@ namespace Service.Repository
             {
                 MyDevException.Error(ex, "MasterRepository.GetDepartmentList", ExceptionPriority.Low, ApplicationType.REPOSITORY, VenueNo, VenueBranchNo, 0);
             }
-            return objresult;
+            return Objresult;
         }
         public List<TblMethod> GetMethodList(int VenueNo, int VenueBranchNo)
         {
-            List<TblMethod> objresult = new List<TblMethod>();
+            List<TblMethod> Objresult = new List<TblMethod>();
             try
             {
                 string _CacheKey = CacheKeys.tblMethodList + VenueNo + VenueBranchNo;
-                objresult = MemoryCacheRepository.GetCacheItem<List<TblMethod>>(_CacheKey);
-                if (objresult == null)
+                Objresult = MemoryCacheRepository.GetCacheItem<List<TblMethod>>(_CacheKey);
+                if (Objresult == null)
                 {
                     using (var context = new MasterContext(_config.GetConnectionString(ConfigKeys.DefaultConnection)))
                     {
-                        objresult = context.TblMethod.Where(a => a.VenueNo == VenueNo && a.Status == true).ToList();
+                        Objresult = context.TblMethod.Where(a => a.VenueNo == VenueNo && a.Status == true).ToList();
                         //
                         MasterRepository _IMasterRepository = new MasterRepository(_config);
                         AppSettingResponse objAppSettingResponse = new AppSettingResponse();
@@ -175,7 +175,7 @@ namespace Service.Repository
                         objAppSettingResponse = _IMasterRepository.GetSingleAppSetting(AppCacheMemoryTime);
                         int cachetime = objAppSettingResponse != null && objAppSettingResponse.ConfigValue != null && objAppSettingResponse.ConfigValue != ""
                             ? Convert.ToInt32(objAppSettingResponse.ConfigValue) : 0;
-                        MemoryCacheRepository.AddItem(_CacheKey, objresult, Convert.ToInt32(cachetime));
+                        MemoryCacheRepository.AddItem(_CacheKey, Objresult, Convert.ToInt32(cachetime));
                     }
                 }
             }
@@ -183,20 +183,20 @@ namespace Service.Repository
             {
                 MyDevException.Error(ex, "MasterRepository.GetMethodList", ExceptionPriority.Low, ApplicationType.REPOSITORY, VenueNo, VenueBranchNo, 0);
             }
-            return objresult;
+            return Objresult;
         }
         public List<TblUnits> GetUnitsList(int VenueNo, int VenueBranchNo)
         {
-            List<TblUnits> objresult = new List<TblUnits>();
+            List<TblUnits> Objresult = new List<TblUnits>();
             try
             {
                 string _CacheKey = CacheKeys.tblUnitsList + VenueNo + VenueBranchNo;
-                objresult = MemoryCacheRepository.GetCacheItem<List<TblUnits>>(_CacheKey);
-                if (objresult == null)
+                Objresult = MemoryCacheRepository.GetCacheItem<List<TblUnits>>(_CacheKey);
+                if (Objresult == null)
                 {
                     using (var context = new MasterContext(_config.GetConnectionString(ConfigKeys.DefaultConnection)))
                     {
-                        objresult = context.TblUnits.Where(a => a.VenueNo == VenueNo
+                        Objresult = context.TblUnits.Where(a => a.VenueNo == VenueNo
                         && a.VenueBranchNo == VenueBranchNo && a.Status == true).ToList();
                         //
                         MasterRepository _IMasterRepository = new MasterRepository(_config);
@@ -206,7 +206,7 @@ namespace Service.Repository
                         objAppSettingResponse = _IMasterRepository.GetSingleAppSetting(AppCacheMemoryTime);
                         int cachetime = objAppSettingResponse != null && objAppSettingResponse.ConfigValue != null && objAppSettingResponse.ConfigValue != ""
                             ? Convert.ToInt32(objAppSettingResponse.ConfigValue) : 0;
-                        MemoryCacheRepository.AddItem(_CacheKey, objresult, Convert.ToInt32(cachetime));
+                        MemoryCacheRepository.AddItem(_CacheKey, Objresult, Convert.ToInt32(cachetime));
                     }
                 }
             }
@@ -214,20 +214,20 @@ namespace Service.Repository
             {
                 MyDevException.Error(ex, "MasterRepository.GetUnitsList", ExceptionPriority.Low, ApplicationType.REPOSITORY, VenueNo, VenueBranchNo, 0);
             }
-            return objresult;
+            return Objresult;
         }
         public List<TblOrganism> GetOrganismList(int VenueNo, int VenueBranchNo)
         {
-            List<TblOrganism> objresult = new List<TblOrganism>();
+            List<TblOrganism> Objresult = new List<TblOrganism>();
             try
             {
                 string _CacheKey = CacheKeys.tblOrganismList + VenueNo + VenueBranchNo;
-                objresult = MemoryCacheRepository.GetCacheItem<List<TblOrganism>>(_CacheKey);
-                if (objresult == null)
+                Objresult = MemoryCacheRepository.GetCacheItem<List<TblOrganism>>(_CacheKey);
+                if (Objresult == null)
                 {
                     using (var context = new MasterContext(_config.GetConnectionString(ConfigKeys.DefaultConnection)))
                     {
-                        objresult = context.TblOrganism.Where(a => a.VenueNo == VenueNo
+                        Objresult = context.TblOrganism.Where(a => a.VenueNo == VenueNo
                         && a.VenueBranchNo ==VenueBranchNo && a.Status == true).ToList();
                         //
                         MasterRepository _IMasterRepository = new MasterRepository(_config);
@@ -237,7 +237,7 @@ namespace Service.Repository
                         objAppSettingResponse = _IMasterRepository.GetSingleAppSetting(AppCacheMemoryTime);
                         int cachetime = objAppSettingResponse != null && objAppSettingResponse.ConfigValue != null && objAppSettingResponse.ConfigValue != ""
                             ? Convert.ToInt32(objAppSettingResponse.ConfigValue) : 0;
-                        MemoryCacheRepository.AddItem(_CacheKey, objresult, Convert.ToInt32(cachetime));
+                        MemoryCacheRepository.AddItem(_CacheKey, Objresult, Convert.ToInt32(cachetime));
                     }
                 }
             }
@@ -245,22 +245,22 @@ namespace Service.Repository
             {
                 MyDevException.Error(ex, "MasterRepository.GetOrganismList", ExceptionPriority.Low, ApplicationType.REPOSITORY, VenueNo, VenueBranchNo, 0);
             }
-            return objresult;
+            return Objresult;
         }
-        public List<lstotdrugmap> GetOrgTypeAntiMapList(int VenueNo, int VenueBranchNo)
+        public List<Lstotdrugmap> GetOrgTypeAntiMapList(int VenueNo, int VenueBranchNo)
         {
-            List<lstotdrugmap> objresult = new List<lstotdrugmap>();
+            List<Lstotdrugmap> Objresult = new List<Lstotdrugmap>();
             try
             {
                 string _CacheKey = CacheKeys.tblOrgTypeAntiMapList + VenueNo + VenueBranchNo;
-                objresult = MemoryCacheRepository.GetCacheItem<List<lstotdrugmap>>(_CacheKey);
-                if (objresult == null)
+                Objresult = MemoryCacheRepository.GetCacheItem<List<Lstotdrugmap>>(_CacheKey);
+                if (Objresult == null)
                 {
                     using (var context = new MasterContext(_config.GetConnectionString(ConfigKeys.DefaultConnection)))
                     {
                         var lst = context.GetOrgTypeAntiMapList.FromSqlRaw("Execute dbo.pro_GetOrgTypeAntiMap").ToList();
 
-                        objresult = lst.Where(a => a.VenueNo == VenueNo
+                        Objresult = lst.Where(a => a.VenueNo == VenueNo
                         && a.VenueBranchNo == VenueBranchNo && a.Status == true).ToList();
                         //
                         MasterRepository _IMasterRepository = new MasterRepository(_config);
@@ -270,7 +270,7 @@ namespace Service.Repository
                         objAppSettingResponse = _IMasterRepository.GetSingleAppSetting(AppCacheMemoryTime);
                         int cachetime = objAppSettingResponse != null && objAppSettingResponse.ConfigValue != null && objAppSettingResponse.ConfigValue != ""
                             ? Convert.ToInt32(objAppSettingResponse.ConfigValue) : 0;
-                        MemoryCacheRepository.AddItem(_CacheKey, objresult, Convert.ToInt32(cachetime));
+                        MemoryCacheRepository.AddItem(_CacheKey, Objresult, Convert.ToInt32(cachetime));
                     }
                 }
             }
@@ -278,22 +278,22 @@ namespace Service.Repository
             {
                 MyDevException.Error(ex, "MasterRepository.GetOrgTypeAntiMapList", ExceptionPriority.Low, ApplicationType.REPOSITORY, VenueNo, VenueBranchNo, 0);
             }
-            return objresult;
+            return Objresult;
         }
         public List<TblTemplate> GetTemplateList(int VenueNo, int VenueBranchNo)
         {
-            List<TblTemplate> objresult = new List<TblTemplate>();
+            List<TblTemplate> Objresult = new List<TblTemplate>();
             try
             {
                 string _CacheKey = CacheKeys.tblTemplateList + VenueNo + VenueBranchNo;
-                objresult = MemoryCacheRepository.GetCacheItem<List<TblTemplate>>(_CacheKey);
-                if (objresult == null)
+                Objresult = MemoryCacheRepository.GetCacheItem<List<TblTemplate>>(_CacheKey);
+                if (Objresult == null)
                 {
                     using (var context = new MasterContext(_config.GetConnectionString(ConfigKeys.DefaultConnection)))
                     {
                         var lst = context.GetTemplateList.FromSqlRaw("Execute dbo.pro_GetTemplateMaster").ToList();
 
-                        objresult = lst.Where(a => a.VenueNo == VenueNo
+                        Objresult = lst.Where(a => a.VenueNo == VenueNo
                         && a.VenueBranchNo == VenueBranchNo && a.Status == true).ToList();
                         //
                         MasterRepository _IMasterRepository = new MasterRepository(_config);
@@ -303,7 +303,7 @@ namespace Service.Repository
                         objAppSettingResponse = _IMasterRepository.GetSingleAppSetting(AppCacheMemoryTime);
                         int cachetime = objAppSettingResponse != null && objAppSettingResponse.ConfigValue != null && objAppSettingResponse.ConfigValue != ""
                             ? Convert.ToInt32(objAppSettingResponse.ConfigValue) : 0;
-                        MemoryCacheRepository.AddItem(_CacheKey, objresult, Convert.ToInt32(cachetime));
+                        MemoryCacheRepository.AddItem(_CacheKey, Objresult, Convert.ToInt32(cachetime));
                     }
                 }
             }
@@ -311,12 +311,12 @@ namespace Service.Repository
             {
                 MyDevException.Error(ex, "MasterRepository.GetTemplateList", ExceptionPriority.Low, ApplicationType.REPOSITORY, VenueNo, VenueBranchNo, 0);
             }
-            return objresult;
+            return Objresult;
         }
 
         public List<CommonMasterDto> GetVenueDetails(int venueno, int venuebranchno, string MasterKey)
         {
-            List<CommonMasterDto> objresult = new List<CommonMasterDto>();
+            List<CommonMasterDto> Objresult = new List<CommonMasterDto>();
             try
             {
                 using (var context = new MasterContext(_config.GetConnectionString(ConfigKeys.DefaultConnection)))
@@ -324,7 +324,7 @@ namespace Service.Repository
                     var _venueno = new SqlParameter("venueno", venueno);
                     var _venuebranchno = new SqlParameter("venuebranchno", venuebranchno);
                     var _MasterKey = new SqlParameter("MasterKey", MasterKey);
-                    objresult = context.CommonMasterDTO.FromSqlRaw("Execute dbo.pro_CommonDetails @MasterKey,@venueno,@venuebranchno", _MasterKey, _venueno, _venuebranchno).ToList();
+                    Objresult = context.CommonMasterDTO.FromSqlRaw("Execute dbo.pro_CommonDetails @MasterKey,@venueno,@venuebranchno", _MasterKey, _venueno, _venuebranchno).ToList();
 
                 }
 
@@ -333,7 +333,7 @@ namespace Service.Repository
             {
                 MyDevException.Error(ex, "MasterRepository.GetVenueDetails", ExceptionPriority.Low, ApplicationType.REPOSITORY, venueno, venuebranchno, 0);
             }
-            return objresult;
+            return Objresult;
         }
 
         public ConfigurationDto GetSingleConfiguration(int? venueno, int? venuebranchno, string configkey)
@@ -376,21 +376,21 @@ namespace Service.Repository
 
         public List<RefTypeCommonMasterDto> GetRefTypeList(int venueno, int venuebranchno)
         {
-            List<RefTypeCommonMasterDto> objresult = new List<RefTypeCommonMasterDto>();
+            List<RefTypeCommonMasterDto> Objresult = new List<RefTypeCommonMasterDto>();
             MasterRepository _IMasterRepository = new MasterRepository(_config);
             AppSettingResponse objAppSettingResponse = new AppSettingResponse();
             try
             {
                 string _CacheKey = CacheKeys.RefTypeList + venueno + venuebranchno;
-                objresult = MemoryCacheRepository.GetCacheItem<List<RefTypeCommonMasterDto>>(_CacheKey);
-                if (objresult == null)
+                Objresult = MemoryCacheRepository.GetCacheItem<List<RefTypeCommonMasterDto>>(_CacheKey);
+                if (Objresult == null)
                 {
                     using (var context = new MasterContext(_config.GetConnectionString(ConfigKeys.DefaultConnection)))
                     {
                         var _venueno = new SqlParameter("VenueNo", venueno);
                         var _venuebranchno = new SqlParameter("VenueBranchNo", venuebranchno);
 
-                        objresult = context.RefTypeListDTO.FromSqlRaw("Execute dbo.pro_RefTypeSettings @VenueNo, @VenueBranchNo", _venueno, _venuebranchno).ToList();
+                        Objresult = context.RefTypeListDTO.FromSqlRaw("Execute dbo.pro_RefTypeSettings @VenueNo, @VenueBranchNo", _venueno, _venuebranchno).ToList();
                         
                         objAppSettingResponse = new AppSettingResponse();
                         string AppCacheMemoryTime = "CacheMemoryTime";
@@ -399,7 +399,7 @@ namespace Service.Repository
                         int cachetime = objAppSettingResponse != null && objAppSettingResponse.ConfigValue != null && objAppSettingResponse.ConfigValue != ""
                             ? Convert.ToInt32(objAppSettingResponse.ConfigValue) : 0;
                         
-                        MemoryCacheRepository.AddItem(_CacheKey, objresult, Convert.ToInt32(cachetime));
+                        MemoryCacheRepository.AddItem(_CacheKey, Objresult, Convert.ToInt32(cachetime));
                     }
                 }
             }
@@ -407,12 +407,12 @@ namespace Service.Repository
             {
                 MyDevException.Error(ex, "MasterRepository.GetRefTypeList", ExceptionPriority.Low, ApplicationType.REPOSITORY, venueno, venuebranchno, 0);
             }
-            return objresult;
+            return Objresult;
         }
 
         public TreatmentPlanMaster GetTreatmentMasterDetails(reqTreatmentMaster disName)
         {
-            TreatmentPlanMaster objresult = new TreatmentPlanMaster();
+            TreatmentPlanMaster Objresult = new TreatmentPlanMaster();
             List<TreatmentPlanProMaster> resultPRO = new List<TreatmentPlanProMaster>();
             List<TreatmentPlanPrmMaster> resultPRM = new List<TreatmentPlanPrmMaster>();
             try
@@ -438,25 +438,25 @@ namespace Service.Repository
                     "Execute dbo.pro_GetTreatmentMasterDetailsByPRM @TreatmentNo,@Type, @VenueNo, @VenueBranchNo",
                     _TreatmentNo, _type, _VenueNo, _VenueBranchNo).ToList();
                 }
-                objresult.treatmentNo = disName.treatmentNo;
-                objresult.treatmentName = disName.treatmentName;
-                objresult.diseaseNo = disName.diseaseNo;
-                objresult.diseaseName = disName.diseaseName;
-                objresult.VenueNo = disName.VenueNo;
-                objresult.VenueBranchNo = disName.VenueBranchNo;
-                objresult.lstpharmacy = resultPRM;
-                objresult.lstProcedures = resultPRO;
-                objresult.rate = disName.Rate;
+                Objresult.treatmentNo = disName.treatmentNo;
+                Objresult.treatmentName = disName.treatmentName;
+                Objresult.diseaseNo = disName.diseaseNo;
+                Objresult.diseaseName = disName.diseaseName;
+                Objresult.VenueNo = disName.VenueNo;
+                Objresult.VenueBranchNo = disName.VenueBranchNo;
+                Objresult.lstpharmacy = resultPRM;
+                Objresult.lstProcedures = resultPRO;
+                Objresult.rate = disName.Rate;
             }
             catch (Exception ex)
             {
                 MyDevException.Error(ex, "MasterRepository.GetTreatmentMasterDetails", ExceptionPriority.Low, ApplicationType.REPOSITORY, disName.VenueNo, disName.VenueBranchNo, 0);
             }
-            return objresult;
+            return Objresult;
         }
         public List<reqTreatmentMaster> GetTreatmentMaster(reqTreatmentMaster disName)
         {
-            List<reqTreatmentMaster> objresult = new List<reqTreatmentMaster>();
+            List<reqTreatmentMaster> Objresult = new List<reqTreatmentMaster>();
             try
             {
                 using (var context = new MasterContext(_config.GetConnectionString(ConfigKeys.DefaultConnection)))
@@ -467,7 +467,7 @@ namespace Service.Repository
                     var _VenueBranchNo = new SqlParameter("VenueBranchNo", disName?.VenueBranchNo);
                     var _PageIndex = new SqlParameter("PageIndex", disName?.PageIndex);
 
-                    objresult = context.GetTreatmentMaster.FromSqlRaw(
+                    Objresult = context.GetTreatmentMaster.FromSqlRaw(
                     "Execute dbo.pro_GetTreatmentMaster @TreatmentNo, @DiseaseNo, @VenueNo, @VenueBranchNo, @PageIndex",
                     _TreatmentNo, _DiseaseNo, _VenueNo, _VenueBranchNo, _PageIndex).ToList();
                 }
@@ -476,7 +476,7 @@ namespace Service.Repository
             {
                 MyDevException.Error(ex, "MasterRepository.GetTreatmentMaster", ExceptionPriority.Low, ApplicationType.REPOSITORY, disName.VenueNo, disName.VenueBranchNo, 0);
             }
-            return objresult;
+            return Objresult;
         }
 
         public TreatmentPlanMasterResponse DeleteTreatmentplan(int treatmentNo, int VenueNo, int VenueBranchNo, int UserNo)

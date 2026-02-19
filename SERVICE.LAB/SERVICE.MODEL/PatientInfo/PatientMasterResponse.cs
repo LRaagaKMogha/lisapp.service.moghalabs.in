@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace Service.Model.PatientInfo
 {
@@ -43,7 +41,7 @@ namespace Service.Model.PatientInfo
         public Int16 BloodGroup { get; set; }
         public bool IsActive { get; set; }
         public bool IsPatientMaster { get; set; }
-        public string? LoyalCardNo { get; set; }
+        public string LoyalCardNo { get; set; }
         public int SaveType { get; set; }
     }
     public class PatientsMasterRequest
@@ -54,7 +52,7 @@ namespace Service.Model.PatientInfo
         public int PageIndex { get; set; }
         public bool IsPatientMaster { get; set; }
     }
-    public partial class rtnpatient
+    public partial class Rtnpatient
     {
         public int PatientNo { get; set; }
     }

@@ -6,7 +6,7 @@ namespace Service.IRepository
 {
     public interface IPatientReportRepository
     {
-        List<lstpatientreport> GetPatientReport(requestpatientreport req);
+        List<Lstpatientreport> GetPatientReport(requestpatientreport req);
         Task<List<ReportOutput>> PrintPatientReport(PatientReportDTO PatientItem);
         List<TblCsatransaction> GetCsaTransaction(CsaRequest req);
         int InsertCSAAcknowledgement(TblCsatransaction req);

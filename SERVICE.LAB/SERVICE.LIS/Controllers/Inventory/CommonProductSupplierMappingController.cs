@@ -25,7 +25,7 @@ namespace Service.API.SERVICE.Controllers.Inventory
         [Route("api/CommonProductSupplierMappingMaster")]
         public async Task<IActionResult> GetProductSupplierMapping([FromBody] ProductSupplierMappingRequestDTO request)
         {
-            object result = null;
+            object? result = null;
 
             try
             {
@@ -42,6 +42,7 @@ namespace Service.API.SERVICE.Controllers.Inventory
                 return StatusCode(500, "An error occurred while processing your request.");
             }
         }
+
         [HttpPost]
         [Route("api/CommonProductSupplierMappingInsert")]
         public async Task<IActionResult> InsertProductSupplierMapping([FromBody] ProductSupplierMappingInsertDTO dto)
@@ -58,6 +59,5 @@ namespace Service.API.SERVICE.Controllers.Inventory
                 return StatusCode(500, new { status = 0 });
             }
         }
-
     }
 }

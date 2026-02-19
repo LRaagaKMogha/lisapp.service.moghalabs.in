@@ -19,9 +19,9 @@ namespace Service.Repository
         public TestRepository(IConfiguration config) {
             _config = config;
         }
-        public List<lsttest> GetTestList(reqtest req)
+        public List<Lsttest> GetTestList(Reqtest req)
         {
-            List<lsttest> objResult = new List<lsttest>();
+            List<Lsttest> Objresult = new List<Lsttest>();
             try
             {
                 using (var context = new MasterContext(_config.GetConnectionString(ConfigKeys.DefaultConnection)))
@@ -41,7 +41,7 @@ namespace Service.Repository
 
                     for (int i = 0; i < lst.Count; i++)
                     {
-                        lsttest objTemp = new lsttest();
+                        Lsttest objTemp = new Lsttest();
 
                         objTemp.rowNo = lst[i].rowNo;
                         objTemp.testNo = lst[i].testNo;
@@ -69,7 +69,7 @@ namespace Service.Repository
                             objTemp.lstmultisamplesreferencelist = new List<MultiSamplesReferenceList>();
                             objTemp.lstmultisamplesreferencelist = JsonConvert.DeserializeObject<List<MultiSamplesReferenceList>>(lst[i].multisampleXml);
                         }
-                        objResult.Add(objTemp);
+                        Objresult.Add(objTemp);
                     }
                 }
             }
@@ -77,11 +77,11 @@ namespace Service.Repository
             {
                 MyDevException.Error(ex, "TestRepository.GetTestList" + req.testNo.ToString(), ExceptionPriority.Low, ApplicationType.REPOSITORY, req.venueNo, req.venueBranchNo, 0);
             }
-            return objResult;
+            return Objresult;
         }
-        public objtest GetEditTest(reqtest req)
+        public Objtest GetEditTest(Reqtest req)
         {
-            objtest obj = new objtest();
+            Objtest obj = new Objtest();
             try
             {
                 using (var context = new MasterContext(_config.GetConnectionString(ConfigKeys.DefaultConnection)))
@@ -297,10 +297,10 @@ namespace Service.Repository
                         obj.comments = "";
                     }
 
-                    obj.lsttestrefrange = JsonConvert.DeserializeObject<List<lsttestrefrange>>(lst[0].testrefrange);
-                    obj.lsttestanalyrange = JsonConvert.DeserializeObject<List<lsttestanalyrange>>(lst[0].testanlyrange);
-                    obj.lsttestPickList = JsonConvert.DeserializeObject<List<lsttestPickList>>(lst[0].testPickList);
-                    obj.lstTemplateList = JsonConvert.DeserializeObject<List<lstTemplateList>>(lst[0].testTemplate);
+                    obj.Lsttestrefrange = JsonConvert.DeserializeObject<List<Lsttestrefrange>>(lst[0].testrefrange);
+                    obj.Lsttestanalyrange = JsonConvert.DeserializeObject<List<Lsttestanalyrange>>(lst[0].testanlyrange);
+                    obj.LsttestPickList = JsonConvert.DeserializeObject<List<LsttestPickList>>(lst[0].testPickList);
+                    obj.LstTemplateList = JsonConvert.DeserializeObject<List<LstTemplateList>>(lst[0].testTemplate);
                     obj.isUploadOption = lst[0].isUploadOption;
                     obj.isMultiEditor = lst[0].isMultiEditor;
                     obj.isFormulaFor = lst[0].isFormulaFor;
@@ -321,25 +321,25 @@ namespace Service.Repository
             }
             return obj;
         }
-        public int InsertTest(objtest req)
+        public int InsertTest(Objtest req)
         {
             int testno = 0;
             CommonHelper commonUtility = new CommonHelper();
 
             string testRRXML = "";
             string testAMRXML = "";
-            if (req.lsttestrefrange != null && req.lsttestrefrange.Count > 0)
+            if (req.Lsttestrefrange != null && req.Lsttestrefrange.Count > 0)
             {
-                testRRXML = commonUtility.ToXML(req.lsttestrefrange);
+                testRRXML = commonUtility.ToXML(req.Lsttestrefrange);
             }
-            if (req.lsttestanalyrange != null && req.lsttestanalyrange.Count > 0)
+            if (req.Lsttestanalyrange != null && req.Lsttestanalyrange.Count > 0)
             {
-                testAMRXML = commonUtility.ToXML(req.lsttestanalyrange);
+                testAMRXML = commonUtility.ToXML(req.Lsttestanalyrange);
             }
             string testPLXML = "";
-            if (req.lsttestPickList != null && req.lsttestPickList.Count > 0)
+            if (req.LsttestPickList != null && req.LsttestPickList.Count > 0)
             {
-                testPLXML = commonUtility.ToXML(req.lsttestPickList);
+                testPLXML = commonUtility.ToXML(req.LsttestPickList);
             }
             //sample multi select 
             if (req.lstMultiSampleList != null && req.lstMultiSampleList.Count > 0)
@@ -352,9 +352,9 @@ namespace Service.Repository
                 testMultiSampleList = commonUtility.ToXML(req.lstmultisamplesreferencelist);
             }
 
-            req.lsttestrefrange.Clear();
-            req.lsttestanalyrange.Clear();
-            req.lsttestPickList.Clear();
+            req.Lsttestrefrange.Clear();
+            req.Lsttestanalyrange.Clear();
+            req.LsttestPickList.Clear();
             req.lstMultiSampleList?.Clear();
             req.lstmultisamplesreferencelist?.Clear();
             string testXML = commonUtility.ToXML(req);
@@ -556,9 +556,9 @@ namespace Service.Repository
             }
             return testno;
         }
-        public rtntemplateNo InsertTemplateText(lstTemplateList req)
+        public RtntemplateNo InsertTemplateText(LstTemplateList req)
         {
-            rtntemplateNo obj = new rtntemplateNo();
+            RtntemplateNo obj = new RtntemplateNo();
             int templateNo = 0;
             int templateApprovalNo = 0;
             string templateName = "";
@@ -668,9 +668,9 @@ namespace Service.Repository
             return obj;
         }
 
-        public rtntemplateText GetTemplateText(reqtest req)
+        public RtntemplateText GetTemplateText(Reqtest req)
         {
-            rtntemplateText obj = new rtntemplateText();
+            RtntemplateText obj = new RtntemplateText();
             try
             {
                 //
@@ -697,9 +697,9 @@ namespace Service.Repository
             CommonHelper commonUtility = new CommonHelper();
 
             string testSeqXML = "";
-            if (req.lsttestsequence.Count > 0)
+            if (req.Lsttestsequence.Count > 0)
             {
-                testSeqXML = commonUtility.ToXML(req.lsttestsequence);
+                testSeqXML = commonUtility.ToXML(req.Lsttestsequence);
             }
 
             try
@@ -725,9 +725,9 @@ namespace Service.Repository
             }
             return i;
         }
-        public List<lstgrppkg> GetGroupPackageList(reqtest req)
+        public List<Lstgrppkg> GetGroupPackageList(Reqtest req)
         {
-            List<lstgrppkg> lst = new List<lstgrppkg>();
+            List<Lstgrppkg> lst = new List<Lstgrppkg>();
             try
             {
                 using (var context = new MasterContext(_config.GetConnectionString(ConfigKeys.DefaultConnection)))
@@ -752,9 +752,9 @@ namespace Service.Repository
             }
             return lst;
         }
-        public objgrppkg GetEditGroupPackage(reqtest req)
+        public Objgrppkg GetEditGroupPackage(Reqtest req)
         {
-            objgrppkg obj = new objgrppkg();
+            Objgrppkg obj = new Objgrppkg();
             try
             {
                 using (var context = new MasterContext(_config.GetConnectionString(ConfigKeys.DefaultConnection)))
@@ -898,7 +898,7 @@ namespace Service.Repository
                     {
                         obj.Specimen = "";
                     }
-                    obj.lstgrppkgservice = JsonConvert.DeserializeObject<List<lstgrppkgservice>>(lst[0].grppkgtests);
+                    obj.Lstgrppkgservice = JsonConvert.DeserializeObject<List<Lstgrppkgservice>>(lst[0].grppkgtests);
                 }
             }
             catch (Exception ex)
@@ -907,17 +907,17 @@ namespace Service.Repository
             }
             return obj;
         }
-        public int InsertGroupPackage(objgrppkg req)
+        public int InsertGroupPackage(Objgrppkg req)
         {
             int serviceNo = 0;
             CommonHelper commonUtility = new CommonHelper();
 
             string grouptestXML = "";
-            if (req.lstgrppkgservice?.Count > 0)
+            if (req.Lstgrppkgservice?.Count > 0)
             {
-                grouptestXML = commonUtility.ToXML(req.lstgrppkgservice);
+                grouptestXML = commonUtility.ToXML(req.Lstgrppkgservice);
             }
-            req.lstgrppkgservice?.Clear();
+            req.Lstgrppkgservice?.Clear();
             string groupXML = commonUtility.ToXML(req);
             try
             {
@@ -1037,9 +1037,9 @@ namespace Service.Repository
             }
             return serviceNo;
         }
-        public List<lstgrppkgservice> GetSearchService(reqsearchservice req)
+        public List<Lstgrppkgservice> GetSearchService(Reqsearchservice req)
         {
-            List<lstgrppkgservice> lst = new List<lstgrppkgservice>();
+            List<Lstgrppkgservice> lst = new List<Lstgrppkgservice>();
             try
             {
                 using (var context = new MasterContext(_config.GetConnectionString(ConfigKeys.DefaultConnection)))
@@ -1061,9 +1061,9 @@ namespace Service.Repository
             }
             return lst;
         }
-        public List<lststest> GetSubTestList(reqtest req)
+        public List<Lststest> GetSubTestList(Reqtest req)
         {
-            List<lststest> lst = new List<lststest>();
+            List<Lststest> lst = new List<Lststest>();
             try
             {
                 using (var context = new MasterContext(_config.GetConnectionString(ConfigKeys.DefaultConnection)))
@@ -1083,13 +1083,13 @@ namespace Service.Repository
                     int subTestNo = 0;
 
                     rtndblst = rtndblst.OrderBy(a => a.testNo).ToList();
-                    List<lststest> lstv = new List<lststest>();
+                    List<Lststest> lstv = new List<Lststest>();
                     foreach (var v in rtndblst)
                     {
                         if (testNo != v.testNo)
                         {
                             testNo = v.testNo;
-                            lststest objv = new lststest();
+                            Lststest objv = new Lststest();
                             objv.rowNo = v.rowNo;
                             objv.testNo = v.testNo;
                             objv.testName = v.testName;
@@ -1099,13 +1099,13 @@ namespace Service.Repository
                             subTestNo = 0;
                             var ollst = rtndblst.Where(o => o.testNo == v.testNo).ToList();
                             ollst = ollst.OrderBy(a => a.stSequenceNo).ToList();
-                            List<lstsubtest> lstol = new List<lstsubtest>();
+                            List<Lstsubtest> lstol = new List<Lstsubtest>();
                             foreach (var ol in ollst)
                             {
                                 if (subTestNo != ol.subTestNo)
                                 {
                                     subTestNo = ol.subTestNo;
-                                    lstsubtest objol = new lstsubtest();
+                                    Lstsubtest objol = new Lstsubtest();
                                     objol.testNo = ol.testNo;
                                     objol.departmentNo = ol.departmentNo;
                                     objol.departmentName = ol.departmentName;
@@ -1119,7 +1119,7 @@ namespace Service.Repository
                                     lstol.Add(objol);
                                 }
                             }
-                            objv.lstsubtest = lstol;
+                            objv.Lstsubtest = lstol;
                             lst.Add(objv);
                         }
                     }
@@ -1131,9 +1131,9 @@ namespace Service.Repository
             }
             return lst;
         }
-        public objsubtest GetEditSubTest(reqtest req)
+        public Objsubtest GetEditSubTest(Reqtest req)
         {
-            objsubtest obj = new objsubtest();
+            Objsubtest obj = new Objsubtest();
             try
             {
                 using (var context = new MasterContext(_config.GetConnectionString(ConfigKeys.DefaultConnection)))
@@ -1177,9 +1177,9 @@ namespace Service.Repository
                     obj.languagecode = lst[0].languagecode;
                     obj.RestrictedValue = lst[0].RestrictedValue;
                     obj.IsNoPrintInRpt = lst[0].IsNoPrintInRpt;
-                    obj.lsttestrefrange = JsonConvert.DeserializeObject<List<lsttestrefrange>>(lst[0].testrefrange);
-                    obj.lsttestPickList = JsonConvert.DeserializeObject<List<lsttestPickList>>(lst[0].testPickList);
-                    obj.lsttestanalyrange = JsonConvert.DeserializeObject<List<lsttestanalyrange>>(lst[0].testanlyrange);
+                    obj.Lsttestrefrange = JsonConvert.DeserializeObject<List<Lsttestrefrange>>(lst[0].testrefrange);
+                    obj.LsttestPickList = JsonConvert.DeserializeObject<List<LsttestPickList>>(lst[0].testPickList);
+                    obj.Lsttestanalyrange = JsonConvert.DeserializeObject<List<Lsttestanalyrange>>(lst[0].testanlyrange);
                     obj.testCode = lst[0].testCode;
                 }
             }
@@ -1189,28 +1189,28 @@ namespace Service.Repository
             }
             return obj;
         }
-        public int InsertSubTest(objsubtest req)
+        public int InsertSubTest(Objsubtest req)
         {
             int subTestNo = 0;
             CommonHelper commonUtility = new CommonHelper();
 
             string testRRXML = "";
             string testAMRXML = "";
-            if (req.lsttestrefrange.Count > 0)
+            if (req.Lsttestrefrange.Count > 0)
             {
-                testRRXML = commonUtility.ToXML(req.lsttestrefrange);
+                testRRXML = commonUtility.ToXML(req.Lsttestrefrange);
             }
             string testPLXML = "";
-            if (req.lsttestPickList.Count > 0)
+            if (req.LsttestPickList.Count > 0)
             {
-                testPLXML = commonUtility.ToXML(req.lsttestPickList);
+                testPLXML = commonUtility.ToXML(req.LsttestPickList);
             }
-            if (req.lsttestanalyrange != null && req.lsttestanalyrange.Count > 0)
+            if (req.Lsttestanalyrange != null && req.Lsttestanalyrange.Count > 0)
             {
-                testAMRXML = commonUtility.ToXML(req.lsttestanalyrange);
+                testAMRXML = commonUtility.ToXML(req.Lsttestanalyrange);
             }
-            req.lsttestrefrange.Clear();
-            req.lsttestPickList.Clear();
+            req.Lsttestrefrange.Clear();
+            req.LsttestPickList.Clear();
             string testXML = commonUtility.ToXML(req);
 
             try
@@ -1328,9 +1328,9 @@ namespace Service.Repository
             }
             return outp;
         }
-        public List<restestapprove> GetTestApprove(reqtestapprove req)
+        public List<Restestapprove> GetTestApprove(Reqtestapprove req)
         {
-            List<restestapprove> lst = new List<restestapprove>();
+            List<Restestapprove> lst = new List<Restestapprove>();
             try
             {
                 using (var context = new MasterContext(_config.GetConnectionString(ConfigKeys.DefaultConnection)))
@@ -1352,13 +1352,13 @@ namespace Service.Repository
                     //int subTestNo = 0;
 
                     //rtndblst = rtndblst.OrderBy(a => a.ServiceNo).ToList();
-                    //List<restestapprove> lstv = new List<restestapprove>();
+                    //List<Restestapprove> lstv = new List<Restestapprove>();
                     //foreach (var v in rtndblst)
                     //{
                     //    if (testNo != v.ServiceNo)
                     //    {
                     //        testNo = v.ServiceNo;
-                    //        restestapprove objv = new restestapprove();
+                    //        Restestapprove objv = new Restestapprove();
                     //        objv.RowNo = v.RowNo;
                     //        objv.ServiceNo = v.ServiceNo;
                     //        objv.TestName = v.TestName;
@@ -1371,13 +1371,13 @@ namespace Service.Repository
                     //        subTestNo = 0;
                     //        var ollst = rtndblst.Where(o => o.ServiceNo == v.ServiceNo).ToList();
                     //        ollst = ollst.OrderBy(a => a.STSequenceNo).ToList();
-                    //        List<lstsubtestApp> lstol = new List<lstsubtestApp>();
+                    //        List<LstsubtestApp> lstol = new List<LstsubtestApp>();
                     //        foreach (var ol in ollst)
                     //        {
                     //            if (subTestNo != ol.SubTestNo)
                     //            {
                     //                subTestNo = ol.SubTestNo;
-                    //                lstsubtestApp objol = new lstsubtestApp();
+                    //                LstsubtestApp objol = new LstsubtestApp();
                     //                objol.Id = ol.RowNo;
                     //                objol.ServiceNo = ol.ServiceNo;
                     //                objol.SubTestNo = ol.SubTestNo;
@@ -1389,7 +1389,7 @@ namespace Service.Repository
                     //                lstol.Add(objol);
                     //            }
                     //        }
-                    //        objv.lstsubtestApp = lstol;
+                    //        objv.LstsubtestApp = lstol;
                     //        lst.Add(objv);
                     //    }
                     //}
@@ -1402,9 +1402,9 @@ namespace Service.Repository
             }
             return lst;
         }
-        public List<restestappHistory> GetApproveHistory(reqtestapprove req)
+        public List<RestestappHistory> GetApproveHistory(Reqtestapprove req)
         {
-            List<restestappHistory> lst = new List<restestappHistory>();
+            List<RestestappHistory> lst = new List<RestestappHistory>();
             try
             {
                 using (var context = new MasterContext(_config.GetConnectionString(ConfigKeys.DefaultConnection)))
@@ -1641,9 +1641,9 @@ namespace Service.Repository
             }
             return lst;
         }
-        public objgrppkg GetPackageInstrauction(reqtest req)
+        public Objgrppkg GetPackageInstrauction(Reqtest req)
         {
-            objgrppkg obj = new objgrppkg();
+            Objgrppkg obj = new Objgrppkg();
             try
             {
                 using (var context = new MasterContext(_config.GetConnectionString(ConfigKeys.DefaultConnection)))
@@ -1704,7 +1704,7 @@ namespace Service.Repository
                         {
                             obj.Specimen = "";
                         }
-                        obj.lstgrppkgservice = JsonConvert.DeserializeObject<List<lstgrppkgservice>>(lst[0].grppkgtests);
+                        obj.Lstgrppkgservice = JsonConvert.DeserializeObject<List<Lstgrppkgservice>>(lst[0].grppkgtests);
                     }
                 }
             }
@@ -1714,7 +1714,7 @@ namespace Service.Repository
             }
             return obj;
         }
-        public List<PrintPackageDetails> GetPrintPakg(reqsearchservice req)
+        public List<PrintPackageDetails> GetPrintPakg(Reqsearchservice req)
         {
             List<PrintPackageDetails> lst = new List<PrintPackageDetails>();
             try

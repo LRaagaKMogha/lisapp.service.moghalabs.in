@@ -8,16 +8,16 @@ using System.Threading.Tasks;
 
 namespace Service.Repository.Integration.externalservices
 {
-    public class SAPPatientDetailsService : IPatientDetailsService
+    public class SAPPatientdetailsService : IPatientdetailsService
     {
         public IConfiguration config { get; set; }
         public string url { get; set; }
-        public SAPPatientDetailsService(IConfiguration _config)
+        public SAPPatientdetailsService(IConfiguration _config)
         {
             config = _config;
             this.url = config["Urls:SAP"];
         }
-        public async Task<ExternalPatientDetails> GetPatientDetails(string patientId)
+        public async Task<ExternalPatientDetails> GetPatientdetails(string patientId)
         {
             var responsePatient = new ExternalPatientDetails();
             try
@@ -68,7 +68,7 @@ namespace Service.Repository.Integration.externalservices
                     Bed = data.Zimmr,
                     Room = data.Bett,
                     IsAllergy = data.AllergyInd == "X",
-                    AllergyDetails = data.Allergen,
+                    Allergydetails = data.Allergen,
                     PostalCode = data.AdPstcd1,
                     DocumentNumber = data.DocNum,
                     PatientNumber = data.Patnr,

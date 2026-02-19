@@ -47,7 +47,7 @@ namespace Service.API.SERVICE.Controllers
                     data.VenueNo = item.vbNo;
                     data.VenueBranchNo = item.VNo;
 
-                    foreach (var subitem in item.lsttest)
+                    foreach (var subitem in item.Lsttest)
                     {
                         data.BarcodeNo = subitem.bno;
                         data.TestSubtesttNo = subitem.tsn;
@@ -143,17 +143,17 @@ namespace Service.API.SERVICE.Controllers
                         bool isRoundOff = orderDetails.isroundoff;
                         double val = 0;
                         var rowval = "";
-                        int indx = orderDetails.formulajson.Count();
+                        int indx = orderDetails.Formulajson.Count();
 
                         if (indx > 0)
                         {
                             formulaTest = "(";
                         }
 
-                        for (var i = 0; i < orderDetails.formulajson.Count(); i++)
+                        for (var i = 0; i < orderDetails.Formulajson.Count(); i++)
                         {
-                            var formulaserviceno = orderDetails.formulajson[i].parameterserviceno;
-                            var formulaservicetype = orderDetails.formulajson[i].parameterservicetype;
+                            var formulaserviceno = orderDetails.Formulajson[i].parameterserviceno;
+                            var formulaservicetype = orderDetails.Formulajson[i].parameterservicetype;
 
                             //----Egfr
                             var lstEgfr = _IExternalRepository.GetEGFRList(1, 1, "EGFRTEST");
@@ -210,16 +210,16 @@ namespace Service.API.SERVICE.Controllers
                             else
                             {
                                 val = 0;
-                                if (orderDetails.formulajson[i].value == 0)
+                                if (orderDetails.Formulajson[i].value == 0)
                                 {
                                     var plst = new List<ExternalResultCalculation>();
-                                    if (orderDetails.formulajson[i].parameterservicetype == "T")
+                                    if (orderDetails.Formulajson[i].parameterservicetype == "T")
                                     {
-                                        plst = req.Where(service => service.testno == orderDetails.formulajson[i].parameterserviceno).ToList();
+                                        plst = req.Where(service => service.testno == orderDetails.Formulajson[i].parameterserviceno).ToList();
                                     }
-                                    else if (orderDetails.formulajson[i].parameterservicetype == "S")
+                                    else if (orderDetails.Formulajson[i].parameterservicetype == "S")
                                     {
-                                        plst = req.Where(service => service.subtestno == orderDetails.formulajson[i].parameterserviceno).ToList();
+                                        plst = req.Where(service => service.subtestno == orderDetails.Formulajson[i].parameterserviceno).ToList();
                                     }
                                     if (plst != null && plst.Count() > 0)
                                     {
@@ -239,75 +239,75 @@ namespace Service.API.SERVICE.Controllers
                                 }
                                 else
                                 {
-                                    val = double.Parse(orderDetails.formulajson[i].value.ToString());
+                                    val = double.Parse(orderDetails.Formulajson[i].value.ToString());
                                 }
 
-                                if (orderDetails.formulajson[i].foperator == "")
+                                if (orderDetails.Formulajson[i].foperator == "")
                                 {
                                     if (val != 0)
-                                        formulaTest += orderDetails.formulajson[i].foperator + val;
+                                        formulaTest += orderDetails.Formulajson[i].foperator + val;
                                     else
-                                        formulaTest += orderDetails.formulajson[i].foperator + rowval;
+                                        formulaTest += orderDetails.Formulajson[i].foperator + rowval;
                                 }
-                                else if (orderDetails.formulajson[i].foperator == "+")
+                                else if (orderDetails.Formulajson[i].foperator == "+")
                                 {
                                     if (val != 0)
-                                        formulaTest += orderDetails.formulajson[i].foperator + val;
+                                        formulaTest += orderDetails.Formulajson[i].foperator + val;
                                     else
-                                        formulaTest += orderDetails.formulajson[i].foperator + rowval;
+                                        formulaTest += orderDetails.Formulajson[i].foperator + rowval;
                                 }
-                                else if (orderDetails.formulajson[i].foperator == "-")
+                                else if (orderDetails.Formulajson[i].foperator == "-")
                                 {
                                     if (val != 0)
-                                        formulaTest += orderDetails.formulajson[i].foperator + val;
+                                        formulaTest += orderDetails.Formulajson[i].foperator + val;
                                     else
-                                        formulaTest += orderDetails.formulajson[i].foperator + rowval;
+                                        formulaTest += orderDetails.Formulajson[i].foperator + rowval;
                                 }
-                                else if (orderDetails.formulajson[i].foperator == "*")
+                                else if (orderDetails.Formulajson[i].foperator == "*")
                                 {
                                     if (val != 0)
-                                        formulaTest += orderDetails.formulajson[i].foperator + val;
+                                        formulaTest += orderDetails.Formulajson[i].foperator + val;
                                     else
-                                        formulaTest += orderDetails.formulajson[i].foperator + rowval;
+                                        formulaTest += orderDetails.Formulajson[i].foperator + rowval;
                                 }
-                                else if (orderDetails.formulajson[i].foperator == "/")
+                                else if (orderDetails.Formulajson[i].foperator == "/")
                                 {
                                     if (val != 0)
-                                        formulaTest += orderDetails.formulajson[i].foperator + val;
+                                        formulaTest += orderDetails.Formulajson[i].foperator + val;
                                     else
-                                        formulaTest += orderDetails.formulajson[i].foperator + rowval;
+                                        formulaTest += orderDetails.Formulajson[i].foperator + rowval;
                                 }
-                                else if (orderDetails.formulajson[i].foperator == "(")
+                                else if (orderDetails.Formulajson[i].foperator == "(")
                                 {
                                     if (val != 0)
-                                        formulaTest += orderDetails.formulajson[i].foperator + val;
+                                        formulaTest += orderDetails.Formulajson[i].foperator + val;
                                     else
-                                        formulaTest += orderDetails.formulajson[i].foperator + rowval;
+                                        formulaTest += orderDetails.Formulajson[i].foperator + rowval;
                                 }
-                                else if (orderDetails.formulajson[i].foperator == ")")
+                                else if (orderDetails.Formulajson[i].foperator == ")")
                                 {
                                     if (val != 0)
-                                        formulaTest += orderDetails.formulajson[i].foperator + val;
+                                        formulaTest += orderDetails.Formulajson[i].foperator + val;
                                     else
-                                        formulaTest += orderDetails.formulajson[i].foperator + rowval;
+                                        formulaTest += orderDetails.Formulajson[i].foperator + rowval;
                                 }
-                                else if (orderDetails.formulajson[i].foperator == "^")
+                                else if (orderDetails.Formulajson[i].foperator == "^")
                                 {
                                     if (val != 0)
-                                        formulaTest += orderDetails.formulajson[i].foperator + val;
+                                        formulaTest += orderDetails.Formulajson[i].foperator + val;
                                     else
-                                        formulaTest += orderDetails.formulajson[i].foperator + rowval;
+                                        formulaTest += orderDetails.Formulajson[i].foperator + rowval;
                                 }
-                                else if (orderDetails.formulajson[i].foperator == "^")
+                                else if (orderDetails.Formulajson[i].foperator == "^")
                                 {
                                     if (val != 0)
                                         formulaTest += "**" + val; //Math.pow(height, 0.725)
                                     else
                                         formulaTest += "**";
                                     //if (val != 0)
-                                    //    formulaTest += orderDetails.formulajson[i].foperator + val;
+                                    //    formulaTest += orderDetails.Formulajson[i].foperator + val;
                                     //else
-                                    //    formulaTest += orderDetails.formulajson[i].foperator + rowval;
+                                    //    formulaTest += orderDetails.Formulajson[i].foperator + rowval;
                                 }
                             }
                         }
@@ -399,18 +399,6 @@ namespace Service.API.SERVICE.Controllers
             return Math.Max(a, b);
         }
 
-        private double EvaluateFormula(string formulaTest, int decimalPoint)
-        {
-            try
-            {
-                return Math.Round(double.Parse(new DataTable().Compute(formulaTest, null).ToString()), decimalPoint);
-            }
-            catch (Exception)
-            {
-                return 0;
-            }
-        }
-
         //dif culture 
         [HttpPost]
         [Route("api/External/difbulkPostCultureResults")]
@@ -437,16 +425,16 @@ namespace Service.API.SERVICE.Controllers
                     data.Servno = Servno;
                     data.Samp = Samp;
                     data.lstCultureorg1 = new DifBulkCultureOrgResultDTO();
-                    var lstOrg1 = results.Where(d => d.OrgType == "T11").ToList();
-                    if (lstOrg1 != null && lstOrg1.Count > 0)
+                    var Lstorg1 = results.Where(d => d.OrgType == "T11").ToList();
+                    if (Lstorg1 != null && Lstorg1.Count > 0)
                     {
                         DifBulkCultureOrgResultDTO obj = new DifBulkCultureOrgResultDTO();
-                        obj.Ono = lstOrg1[0].Ono;
-                        obj.Ocode = lstOrg1[0].Ocode;
-                        obj.Oname = lstOrg1[0].Oname;
-                        obj.Base64 = lstOrg1[0].Base64;
+                        obj.Ono = Lstorg1[0].Ono;
+                        obj.Ocode = Lstorg1[0].Ocode;
+                        obj.Oname = Lstorg1[0].Oname;
+                        obj.Base64 = Lstorg1[0].Base64;
                         obj.lstCulturedrug = new List<DifBulkCultureDrugResultDTO>();
-                        foreach (var drgitem in lstOrg1)
+                        foreach (var drgitem in Lstorg1)
                         {
                             DifBulkCultureDrugResultDTO dobj = new DifBulkCultureDrugResultDTO();
                             dobj.Dno = drgitem.Dno;
@@ -459,16 +447,16 @@ namespace Service.API.SERVICE.Controllers
                         }
                         data.lstCultureorg1 = obj;
                     }
-                    var lstOrg2 = results.Where(d => d.OrgType == "T12").ToList();
-                    if (lstOrg2 != null && lstOrg2.Count > 0)
+                    var Lstorg2 = results.Where(d => d.OrgType == "T12").ToList();
+                    if (Lstorg2 != null && Lstorg2.Count > 0)
                     {
                         DifBulkCultureOrgResultDTO obj = new DifBulkCultureOrgResultDTO();
-                        obj.Ono = lstOrg2[0].Ono;
-                        obj.Ocode = lstOrg2[0].Ocode;
-                        obj.Oname = lstOrg2[0].Oname;
-                        obj.Base64 = lstOrg2[0].Base64;
+                        obj.Ono = Lstorg2[0].Ono;
+                        obj.Ocode = Lstorg2[0].Ocode;
+                        obj.Oname = Lstorg2[0].Oname;
+                        obj.Base64 = Lstorg2[0].Base64;
                         obj.lstCulturedrug = new List<DifBulkCultureDrugResultDTO>();
-                        foreach (var drgitem in lstOrg2)
+                        foreach (var drgitem in Lstorg2)
                         {
                             DifBulkCultureDrugResultDTO dobj = new DifBulkCultureDrugResultDTO();
                             dobj.Dno = drgitem.Dno;
@@ -481,16 +469,16 @@ namespace Service.API.SERVICE.Controllers
                         }
                         data.lstCultureorg2 = obj;
                     }
-                    var lstOrg3 = results.Where(d => d.OrgType == "T13").ToList();
-                    if (lstOrg3 != null && lstOrg3.Count > 0)
+                    var Lstorg3 = results.Where(d => d.OrgType == "T13").ToList();
+                    if (Lstorg3 != null && Lstorg3.Count > 0)
                     {
                         DifBulkCultureOrgResultDTO obj = new DifBulkCultureOrgResultDTO();
-                        obj.Ono = lstOrg3[0].Ono;
-                        obj.Ocode = lstOrg3[0].Ocode;
-                        obj.Oname = lstOrg3[0].Oname;
-                        obj.Base64 = lstOrg3[0].Base64;
+                        obj.Ono = Lstorg3[0].Ono;
+                        obj.Ocode = Lstorg3[0].Ocode;
+                        obj.Oname = Lstorg3[0].Oname;
+                        obj.Base64 = Lstorg3[0].Base64;
                         obj.lstCulturedrug = new List<DifBulkCultureDrugResultDTO>();
-                        foreach (var drgitem in lstOrg3)
+                        foreach (var drgitem in Lstorg3)
                         {
                             DifBulkCultureDrugResultDTO dobj = new DifBulkCultureDrugResultDTO();
                             dobj.Dno = drgitem.Dno;
@@ -503,16 +491,16 @@ namespace Service.API.SERVICE.Controllers
                         }
                         data.lstCultureorg3 = obj;
                     }
-                    var lstOrg4 = results.Where(d => d.OrgType == "T14").ToList();
-                    if (lstOrg4 != null && lstOrg4.Count > 0)
+                    var Lstorg4 = results.Where(d => d.OrgType == "T14").ToList();
+                    if (Lstorg4 != null && Lstorg4.Count > 0)
                     {
                         DifBulkCultureOrgResultDTO obj = new DifBulkCultureOrgResultDTO();
-                        obj.Ono = lstOrg4[0].Ono;
-                        obj.Ocode = lstOrg4[0].Ocode;
-                        obj.Oname = lstOrg4[0].Oname;
-                        obj.Base64 = lstOrg4[0].Base64;
+                        obj.Ono = Lstorg4[0].Ono;
+                        obj.Ocode = Lstorg4[0].Ocode;
+                        obj.Oname = Lstorg4[0].Oname;
+                        obj.Base64 = Lstorg4[0].Base64;
                         obj.lstCulturedrug = new List<DifBulkCultureDrugResultDTO>();
-                        foreach (var drgitem in lstOrg4)
+                        foreach (var drgitem in Lstorg4)
                         {
                             DifBulkCultureDrugResultDTO dobj = new DifBulkCultureDrugResultDTO();
                             dobj.Dno = drgitem.Dno;
@@ -525,16 +513,16 @@ namespace Service.API.SERVICE.Controllers
                         }
                         data.lstCultureorg4 = obj;
                     }
-                    var lstOrg5 = results.Where(d => d.OrgType == "T15").ToList();
-                    if (lstOrg5 != null && lstOrg5.Count > 0)
+                    var Lstorg5 = results.Where(d => d.OrgType == "T15").ToList();
+                    if (Lstorg5 != null && Lstorg5.Count > 0)
                     {
                         DifBulkCultureOrgResultDTO obj = new DifBulkCultureOrgResultDTO();
-                        obj.Ono = lstOrg5[0].Ono;
-                        obj.Ocode = lstOrg5[0].Ocode;
-                        obj.Oname = lstOrg5[0].Oname;
-                        obj.Base64 = lstOrg5[0].Base64;
+                        obj.Ono = Lstorg5[0].Ono;
+                        obj.Ocode = Lstorg5[0].Ocode;
+                        obj.Oname = Lstorg5[0].Oname;
+                        obj.Base64 = Lstorg5[0].Base64;
                         obj.lstCulturedrug = new List<DifBulkCultureDrugResultDTO>();
-                        foreach (var drgitem in lstOrg5)
+                        foreach (var drgitem in Lstorg5)
                         {
                             DifBulkCultureDrugResultDTO dobj = new DifBulkCultureDrugResultDTO();
                             dobj.Dno = drgitem.Dno;

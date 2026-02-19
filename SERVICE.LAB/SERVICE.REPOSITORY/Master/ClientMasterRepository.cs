@@ -23,7 +23,7 @@ namespace Service.Repository
         /// <returns></returns>
         public List<CustomerResponse> GetClientMasterDetails(GetCustomerRequest getCustomerRequest)
         {
-            List<CustomerResponse> objresult = new List<CustomerResponse>();
+            List<CustomerResponse> Objresult = new List<CustomerResponse>();
             try
             {
                 using (var context = new MasterContext(_config.GetConnectionString(ConfigKeys.DefaultConnection)))
@@ -38,7 +38,7 @@ namespace Service.Repository
                     var _IsApproval = new SqlParameter("IsApproval", getCustomerRequest.IsApproval);
                     var _viewvenuebranchno = new SqlParameter("viewvenuebranchno", getCustomerRequest?.viewvenuebranchno == null ? 0 : getCustomerRequest.viewvenuebranchno);
 
-                    objresult = context.GetClientMasterDTO.FromSqlRaw(
+                    Objresult = context.GetClientMasterDTO.FromSqlRaw(
                     "Execute dbo.Pro_GetCustomer @VenueNo, @VenueBranchNo, @CustomerNo, @IsFranchisee, @PageIndex, @custType, @PayType, @IsApproval,@viewvenuebranchno",
                     _VenueNo, _VenueBranchNo, _VisitNo, _IsFranchisee, _PageIndex, _custType, _PayType, _IsApproval, _viewvenuebranchno).ToList();
                 }
@@ -47,7 +47,7 @@ namespace Service.Repository
             {
                 MyDevException.Error(ex, "ClientMasterRepository.GetClientMasterDetails", ExceptionPriority.High, ApplicationType.REPOSITORY, getCustomerRequest.venueNo, getCustomerRequest.venueBranchNo, getCustomerRequest.userNo);
             }
-            return objresult;
+            return Objresult;
         }
 
         /// <summary>
@@ -57,19 +57,19 @@ namespace Service.Repository
         /// <returns></returns>
         public List<TblCustomer> SearchClientMaster(string ClientMasterName)
         {
-            List<TblCustomer> objresult = new List<TblCustomer>();
+            List<TblCustomer> Objresult = new List<TblCustomer>();
             try
             {
                 using (var context = new LIMSContext(_config.GetConnectionString(ConfigKeys.DefaultConnection)))
                 {
-                    objresult = context.TblCustomer.Where(a => a.CustomerName == ClientMasterName).ToList();
+                    Objresult = context.TblCustomer.Where(a => a.CustomerName == ClientMasterName).ToList();
                 }
             }
             catch (Exception ex)
             {
                 MyDevException.Error(ex, "ClientMasterRepository.SearchClientMaster - " + ClientMasterName, ExceptionPriority.High, ApplicationType.REPOSITORY, 0, 0, 0);
             }
-            return objresult;
+            return Objresult;
         }
         /// <summary>
         /// Insert ClientMaster Details
@@ -97,9 +97,9 @@ namespace Service.Repository
                     CommonHelper commonUtility = new CommonHelper();
                     var encodingPassword = CommonSecurity.EncodePassword(ConfigKeys.Defaultpassword, CommonSecurity.GeneratePassword(1));
                     ClientMasteritem.Password = encodingPassword;
-                    string clientDetails = commonUtility.ToXML(ClientMasteritem);
+                    string Clientdetails = commonUtility.ToXML(ClientMasteritem);
 
-                    var _ClientDetails = new SqlParameter("ClientDetails", clientDetails);
+                    var _Clientdetails = new SqlParameter("Clientdetails", Clientdetails);
                     var _VenueNo = new SqlParameter("VenueNo", ClientMasteritem.VenueNo);
                     var _VenueBranchNo = new SqlParameter("VenueBranchNo", ClientMasteritem.VenueBranchNo);
                     var _UserID = new SqlParameter("UserNo", ClientMasteritem.CreatedBy);
@@ -110,8 +110,8 @@ namespace Service.Repository
                     var _OldCustomerNo = new SqlParameter("OldCustomerNo", ClientMasteritem?.OldCustomerNo);
 
                     var dbResponse = context.InsertClientMaster.FromSqlRaw(
-                    "Execute dbo.Pro_InsertClientMaster @VenueNo, @VenueBranchNo, @UserNo, @ClientDetails, @dashBoardJson, @IsApproval, @IsReject, @RejectReason, @OldCustomerNo",
-                    _VenueNo, _VenueBranchNo, _UserID, _ClientDetails, _dashBoardJson, _IsApproval, _IsReject, _RejectReason, _OldCustomerNo).AsEnumerable().FirstOrDefault();
+                    "Execute dbo.Pro_InsertClientMaster @VenueNo, @VenueBranchNo, @UserNo, @Clientdetails, @dashBoardJson, @IsApproval, @IsReject, @RejectReason, @OldCustomerNo",
+                    _VenueNo, _VenueBranchNo, _UserID, _Clientdetails, _dashBoardJson, _IsApproval, _IsReject, _RejectReason, _OldCustomerNo).AsEnumerable().FirstOrDefault();
 
                     result = dbResponse;
                 }
@@ -129,11 +129,11 @@ namespace Service.Repository
             {
                 using (var context = new MasterContext(_config.GetConnectionString(ConfigKeys.DefaultConnection)))
                 {
-                    string clientdetails = string.Empty;
+                    string Clientdetails = string.Empty;
                     var customer = postcustomerDTO.tblsubcustomer.Where(x => x.isadd == true).Select(x => x.CustomerNo).ToList();
                     if (customer.Count > 0)
                     {
-                        clientdetails = string.Join(",", customer);
+                        Clientdetails = string.Join(",", customer);
                     }
 
                     var _CustomerSubUserNo = new SqlParameter("CustomerSubUserNo", postcustomerDTO?.CustomerSubUserNo);
@@ -142,14 +142,14 @@ namespace Service.Repository
                     var _Email = new SqlParameter("Email", postcustomerDTO?.Email);
                     var _PhoneNo = new SqlParameter("PhoneNo", postcustomerDTO?.PhoneNo);
                     var _status = new SqlParameter("Status", postcustomerDTO?.status);
-                    var _ClientDetails = new SqlParameter("ClientDetails", clientdetails);
+                    var _Clientdetails = new SqlParameter("Clientdetails", Clientdetails);
                     var _VenueNo = new SqlParameter("VenueNo", postcustomerDTO.VenueNo);
                     var _VenueBranchNo = new SqlParameter("VenueBranchNo", postcustomerDTO.VenueBranchNo);
                     var _UserID = new SqlParameter("UserNo", postcustomerDTO.CreatedBy);
 
                     result = context.InsertClientsubuserMaster.FromSqlRaw(
-                    "Execute dbo.Pro_InsertClientsubuserMaster @CustomerSubUserNo,@LoginName,@userName,@Email,@PhoneNo,@Status,@ClientDetails,@VenueNo,@VenueBranchNo,@UserNo",
-                    _CustomerSubUserNo, _LoginName, _userName, _Email, _PhoneNo, _status, _ClientDetails, _VenueNo, _VenueBranchNo, _UserID).AsEnumerable().FirstOrDefault().status;
+                    "Execute dbo.Pro_InsertClientsubuserMaster @CustomerSubUserNo,@LoginName,@userName,@Email,@PhoneNo,@Status,@Clientdetails,@VenueNo,@VenueBranchNo,@UserNo",
+                    _CustomerSubUserNo, _LoginName, _userName, _Email, _PhoneNo, _status, _Clientdetails, _VenueNo, _VenueBranchNo, _UserID).AsEnumerable().FirstOrDefault().status;
                 }
             }
             catch (Exception ex)
@@ -166,18 +166,18 @@ namespace Service.Repository
                 using (var context = new MasterContext(_config.GetConnectionString(ConfigKeys.DefaultConnection)))
                 {
                     CommonHelper commonUtility = new CommonHelper();
-                    string clientDetails = commonUtility.ToXML(subclient);
+                    string Clientdetails = commonUtility.ToXML(subclient);
                     var _VenueNo = new SqlParameter("VenueNo", VenueNo);
                     var _VenueBranchNo = new SqlParameter("VenueBranchNo", VenueBranchNo);
                     var _UserID = new SqlParameter("UserNo", UserID);
                     var _CustomerNo = new SqlParameter("CustomerNo", CustomerNo);
-                    var _ClientDetails = new SqlParameter("ClientDetails", clientDetails);
+                    var _Clientdetails = new SqlParameter("Clientdetails", Clientdetails);
                     var _IsApproval = new SqlParameter("IsApproval", IsApproval);
                     var _IsReject = new SqlParameter("IsReject", IsReject);
                     
                     var dbResponse = context.InsertSubClientMapping.FromSqlRaw(
-                    "Execute dbo.Pro_InsertSubClientMapping @VenueNo,@VenueBranchNo,@UserNo,@CustomerNo,@ClientDetails,@IsApproval,@IsReject",
-                     _VenueNo, _VenueBranchNo, _UserID, _CustomerNo, _ClientDetails, _IsApproval, _IsReject).ToList();
+                    "Execute dbo.Pro_InsertSubClientMapping @VenueNo,@VenueBranchNo,@UserNo,@CustomerNo,@Clientdetails,@IsApproval,@IsReject",
+                     _VenueNo, _VenueBranchNo, _UserID, _CustomerNo, _Clientdetails, _IsApproval, _IsReject).ToList();
                 }
             }
             catch (Exception ex)
@@ -196,7 +196,7 @@ namespace Service.Repository
         /// <returns></returns>
         public List<CustomerMappingDTO> GetSubCustomerDetailbyCustomer(int CustomerNo, int VenueNo, int VenueBranchNo, int IsApproval)
         {
-            List<CustomerMappingDTO> objresult = new List<CustomerMappingDTO>();
+            List<CustomerMappingDTO> Objresult = new List<CustomerMappingDTO>();
             try
             {
                 using (var context = new MasterContext(_config.GetConnectionString(ConfigKeys.DefaultConnection)))
@@ -206,7 +206,7 @@ namespace Service.Repository
                     var _CustomerNo = new SqlParameter("CustomerNo", CustomerNo);
                     var _IsApproval = new SqlParameter("IsApproval", IsApproval);
 
-                    objresult = context.GetCustomerMapping.FromSqlRaw(
+                    Objresult = context.GetCustomerMapping.FromSqlRaw(
                     "Execute dbo.Pro_GetCustomerMapping @VenueNo,@VenueBranchNo,@CustomerNo,@IsApproval",
                     _VenueNo, _VenueBranchNo, _CustomerNo, _IsApproval).ToList();
                 }
@@ -215,11 +215,11 @@ namespace Service.Repository
             {
                 MyDevException.Error(ex, "ClientMasterRepository.GetSubCustomerDetailbyCustomer", ExceptionPriority.High, ApplicationType.REPOSITORY, VenueNo, VenueBranchNo, 0);
             }
-            return objresult;
+            return Objresult;
         }
         public List<CustomerMappingDTO> GetSubClinic(int CustomerNo, int VenueNo, int VenueBranchNo)
         {
-            List<CustomerMappingDTO> objresult = new List<CustomerMappingDTO>();
+            List<CustomerMappingDTO> Objresult = new List<CustomerMappingDTO>();
             try
             {
                 using (var context = new MasterContext(_config.GetConnectionString(ConfigKeys.DefaultConnection)))
@@ -228,7 +228,7 @@ namespace Service.Repository
                     var _VenueBranchNo = new SqlParameter("VenueBranchNo", VenueBranchNo.ToString());
                     var _CustomerNo = new SqlParameter("CustomerNo", CustomerNo);
                  
-                    objresult = context.GetCLinic.FromSqlRaw(
+                    Objresult = context.GetCLinic.FromSqlRaw(
                     "Execute dbo.Pro_GetCLinic @VenueNo,@VenueBranchNo,@CustomerNo",
                     _VenueNo, _VenueBranchNo, _CustomerNo).ToList();
                 }
@@ -237,11 +237,11 @@ namespace Service.Repository
             {
                 MyDevException.Error(ex, "ClientMasterRepository.GetSubClinic", ExceptionPriority.High, ApplicationType.REPOSITORY, VenueNo, VenueBranchNo, 0);
             }
-            return objresult;
+            return Objresult;
         }
         public List<ClientSubClientMappingDTO> GetAllClientBySubClinic(int VenueNo, int VenueBranchNo)
         {
-            List<ClientSubClientMappingDTO> objresult = new List<ClientSubClientMappingDTO>();
+            List<ClientSubClientMappingDTO> Objresult = new List<ClientSubClientMappingDTO>();
             try
             {
                 using (var context = new MasterContext(_config.GetConnectionString(ConfigKeys.DefaultConnection)))
@@ -249,7 +249,7 @@ namespace Service.Repository
                     var _VenueNo = new SqlParameter("VenueNo", VenueNo.ToString());
                     var _VenueBranchNo = new SqlParameter("VenueBranchNo", VenueBranchNo.ToString());
 
-                    objresult = context.GetAllClients.FromSqlRaw(
+                    Objresult = context.GetAllClients.FromSqlRaw(
                     "Execute dbo.Pro_GetAllClientBySubCLinic @VenueNo,@VenueBranchNo",
                     _VenueNo, _VenueBranchNo).ToList();
                 }
@@ -258,11 +258,11 @@ namespace Service.Repository
             {
                 MyDevException.Error(ex, "GetSubClinic", ExceptionPriority.High, ApplicationType.REPOSITORY, VenueNo, VenueBranchNo, 0);
             }
-            return objresult;
+            return Objresult;
         }
         public List<ClientSubUserResponse> GetclientSubUser(GetCustomerRequest request)
         {
-            List<ClientSubUserResponse> objresult = new List<ClientSubUserResponse>();
+            List<ClientSubUserResponse> Objresult = new List<ClientSubUserResponse>();
             try
             {
                 using (var context = new MasterContext(_config.GetConnectionString(ConfigKeys.DefaultConnection)))
@@ -270,7 +270,7 @@ namespace Service.Repository
                     var _VenueNo = new SqlParameter("venueNo", request.venueNo);
                     var _VenueBranchNo = new SqlParameter("venueBranchno", request.venueBranchNo);
 
-                    objresult = context.GetClientSubUserResponse.FromSqlRaw(
+                    Objresult = context.GetClientSubUserResponse.FromSqlRaw(
                     "Execute dbo.pro_GetClientSubUser @venueNo,@venueBranchno",
                     _VenueNo, _VenueBranchNo).ToList();
                 }
@@ -279,7 +279,7 @@ namespace Service.Repository
             {
                 MyDevException.Error(ex, "ClientMasterRepository.GetclientSubUser", ExceptionPriority.High, ApplicationType.REPOSITORY, request.venueNo, request.venueBranchNo, 0);
             }
-            return objresult;
+            return Objresult;
         }
         public ClientRestrictionDayResponse GetClientRestrictionDayIsValid(ClientRestrictionDay ObjRequest)
         {
@@ -287,7 +287,7 @@ namespace Service.Repository
             int RestrictionDays = ObjRequest.RestrictionDays;
             int VenueNo = ObjRequest.VenueNo;
             int VenueBranchNo = ObjRequest.VenueBranchNo;
-            ClientRestrictionDayResponse objresult = new ClientRestrictionDayResponse();
+            ClientRestrictionDayResponse Objresult = new ClientRestrictionDayResponse();
             
             try
             {
@@ -298,7 +298,7 @@ namespace Service.Repository
                     var _VenueNo = new SqlParameter("VenueNo", VenueNo);
                     var _VenueBranchNo = new SqlParameter("VenueBranchNo", VenueBranchNo);
 
-                    objresult = context.ClientRestriction.FromSqlRaw(
+                    Objresult = context.ClientRestriction.FromSqlRaw(
                     "Execute dbo.pro_GetClientRestrictionDayIsValid @ClientNumber,@RestrictionDays,@VenueNo,@VenueBranchNo",
                     _ClientNumber, _RestrictionDays, _VenueNo, _VenueBranchNo).FirstOrDefault();
                 }
@@ -307,7 +307,7 @@ namespace Service.Repository
             {
                 MyDevException.Error(ex, "ClientMasterRepository.GetClientRestrictionDayIsValid/ClientNumber/RestrictionDays-" + ClientNumber + "/" + RestrictionDays, ExceptionPriority.High, ApplicationType.REPOSITORY, VenueNo, VenueBranchNo, 0);
             }
-            return objresult;
+            return Objresult;
         }
         public int DocumentUploadDetails(List<DocumentUploadlst> ClientDocument, int VenueNo, int VenueBranchNo, int UserID, int CustomerNo)
         {
@@ -340,7 +340,7 @@ namespace Service.Repository
         public List<ClientDocUploadDetailRes> GetClientDocumentDetails(ClientDocUploadReq Req)
         {
             List<ClientDocUploadDetailRes> lstOutput = new List<ClientDocUploadDetailRes>();
-            List<PhysicianDocUploadRes> objresult = new List<PhysicianDocUploadRes>();
+            List<PhysicianDocUploadRes> Objresult = new List<PhysicianDocUploadRes>();
             
             try
             {
@@ -351,13 +351,13 @@ namespace Service.Repository
                     var _venueNo = new SqlParameter("venueNo", Req.venueNo);
                     var _VenueBranchNo = new SqlParameter("VenueBranchNo", Req.venueBranchNo);
 
-                    objresult = context.GetClientDocumentDetails.FromSqlRaw(
+                    Objresult = context.GetClientDocumentDetails.FromSqlRaw(
                     "Execute dbo.pro_GetEntityDocument @EntityType, @EntityNo, @venueNo, @venueBranchNo",
                     _EntityType, _EntityNo, _venueNo, _VenueBranchNo).ToList();
 
-                    if (objresult != null && objresult.Count > 0)
+                    if (Objresult != null && Objresult.Count > 0)
                     {
-                        foreach (var v in objresult)
+                        foreach (var v in Objresult)
                         {
                             ClientDocUploadDetailRes obj = new ClientDocUploadDetailRes();
                             obj.documentNo = v.documentNo;
@@ -396,7 +396,6 @@ namespace Service.Repository
                 var venueno = venueNo;
                 var venuebNo = venueBranchNo;
                 var visitno = physicianNo;
-                var format = "";
                 string folderName = venueno + "\\" + venuebNo + "\\" + visitno + "\\" + visitId;
                 string newPath = Path.Combine(Pathinit, folderName);
                 

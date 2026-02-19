@@ -9,16 +9,16 @@ using System.Threading.Tasks;
 
 namespace Service.Repository.Integration.externalservices
 {
-    public class RCMSPatientDetailsService : IPatientDetailsService
+    public class RCMSPatientdetailsService : IPatientdetailsService
     {
         public IConfiguration config { get; set;  }
         public string url { get; set; }
-        public RCMSPatientDetailsService(IConfiguration _config)
+        public RCMSPatientdetailsService(IConfiguration _config)
         {
             config = _config;
             this.url = config["Urls:RCMS"];
         }
-        public async Task<ExternalPatientDetails> GetPatientDetails(string patientId)
+        public async Task<ExternalPatientDetails> GetPatientdetails(string patientId)
         {
             var responsePatient = new ExternalPatientDetails();
             try
@@ -74,7 +74,7 @@ namespace Service.Repository.Integration.externalservices
                         Room = "",
                         RoomNumber = "",
                         IsAllergy = false,
-                        AllergyDetails = "",
+                        Allergydetails = "",
                         PostalCode = data.LocalAddress != null ? data.LocalAddress.PostalCode : "000000",
                         DocumentNumber = "",
                         PatientNumber = patientId,

@@ -53,16 +53,16 @@ namespace Service.API.SERVICE.Controllers.Inventory
         [Route("api/Instrument/GetInstrumentDetail")]
         public List<GetAssetManagementResponse> GetInstrumentDetail(AssetManagementRequest masterRequest)
         {
-            List<GetAssetManagementResponse> objResult = new List<GetAssetManagementResponse>();
+            List<GetAssetManagementResponse> Objresult = new List<GetAssetManagementResponse>();
             try
             {
-                objResult = _AssetManagementRepository.GetInstrumentDetail(masterRequest);
+                Objresult = _AssetManagementRepository.GetInstrumentDetail(masterRequest);
             }
             catch (Exception ex)
             {
                 MyDevException.Error(ex, "GetInstrumentDetail", ExceptionPriority.Low, ApplicationType.APPSERVICE, masterRequest.venueNo, 0, 0);
             }
-            return objResult;
+            return Objresult;
         }
 
         [CustomAuthorize("INVMASTERS")]
@@ -112,14 +112,15 @@ namespace Service.API.SERVICE.Controllers.Inventory
         public IActionResult GetInstrumentPDF(int venueNo, int venueBranchNo, string instrumentName)
         {
             var objAppSettingResponse = _IMasterRepository.GetSingleAppSetting("UploadPathInit");
-            string basePath = objAppSettingResponse?.ConfigValue ?? "";
-            string folderPath = Path.Combine(basePath, $"{venueNo}\\{venueBranchNo}\\{instrumentName}");
+            string? basePath = objAppSettingResponse?.ConfigValue ?? "";
+            string? folderPath = Path.Combine(basePath, $"{venueNo}\\{venueBranchNo}\\{instrumentName}");
+
             if (!Directory.Exists(folderPath))
             {
                 return NotFound($"Folder not found: {folderPath}");
             }
 
-            string filePath = Directory.GetFiles(folderPath, "*.pdf").FirstOrDefault();
+            string? filePath = Directory.GetFiles(folderPath,"*.pdf").FirstOrDefault();
 
             if (filePath != null && System.IO.File.Exists(filePath))
             {

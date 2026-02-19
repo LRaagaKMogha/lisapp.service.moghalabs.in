@@ -18,7 +18,7 @@ namespace Service.Repository
 
         public List<Tblspecialization> Getspecializationmaster(SpecializationMasterRequest specilazationMasterRequest)
         {
-            List<Tblspecialization> objresult = new List<Tblspecialization>();
+            List<Tblspecialization> Objresult = new List<Tblspecialization>();
             try
             {
                 using (var context = new LIMSContext(_config.GetConnectionString(ConfigKeys.DefaultConnection)))
@@ -26,7 +26,7 @@ namespace Service.Repository
                     var _specializationNO = new SqlParameter("specializationNO", specilazationMasterRequest.specializationNo);
                     var _venueNo = new SqlParameter("venueNo", specilazationMasterRequest.venueNo);
 
-                    objresult = context.Getspecialization.FromSqlRaw(
+                    Objresult = context.Getspecialization.FromSqlRaw(
                     "Execute dbo.pro_GetSpecialization @specializationNO,@venueNo",
                     _specializationNO, _venueNo).ToList();
                 }
@@ -35,11 +35,11 @@ namespace Service.Repository
             {
                 MyDevException.Error(ex, "specializationRepository.GetspecializationDetails" + specilazationMasterRequest?.specializationNo.ToString(), ExceptionPriority.Low, ApplicationType.REPOSITORY, specilazationMasterRequest?.venueNo,0, 0);
             }
-            return objresult;
+            return Objresult;
         }
         public SpecializationMasterResponse Insertspecializatiomaster(Tblspecialization tblspecialization)
         {
-            SpecializationMasterResponse objresult = new SpecializationMasterResponse();
+            SpecializationMasterResponse Objresult = new SpecializationMasterResponse();
             try
             {
                 using (var context = new LIMSContext(_config.GetConnectionString(ConfigKeys.DefaultConnection)))
@@ -54,14 +54,14 @@ namespace Service.Repository
                     "Execute dbo.pro_InsertSpecialization @SpecializationNO,@Specialization,@venueno,@status,@userNo",
                     _specializationNO, _specialization, _venueno, _status, _userNo).AsEnumerable().FirstOrDefault();
                     
-                    objresult.specializationNo = obj?.specializationNo?? 0;
+                    Objresult.specializationNo = obj?.specializationNo?? 0;
                 }
             }
             catch (Exception ex)
             {
                 MyDevException.Error(ex, "specializationRepository.Insertspecializatiomaster" + tblspecialization?.specializationNo.ToString(), ExceptionPriority.Low, ApplicationType.REPOSITORY, tblspecialization?.venueNo, tblspecialization?.venueBranchno, tblspecialization?.userNo);
             }
-            return objresult;
+            return Objresult;
         }
 
         public int CheckMasterNameExists(CheckMasterNameExistsRequest checkMasterNameExistsRequest)

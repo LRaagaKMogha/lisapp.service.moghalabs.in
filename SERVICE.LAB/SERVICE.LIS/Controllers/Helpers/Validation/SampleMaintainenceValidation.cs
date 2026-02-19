@@ -316,20 +316,20 @@ namespace Service.API.SERVICE.Controllers
             return errorResponse;
         }
 
-        public static ErrorResponse SaveSlidePrintingDetails(SlidePrintPatientDetailsResponse slidePrintPatientDetails)
+        public static ErrorResponse SaveSlidePrintingDetails(SlidePrintPatientdetailsResponse slidePrintPatientdetails)
         {
             ErrorResponse errorResponse = new ErrorResponse();
             List<string> errors = new List<string>();
 
-            if (slidePrintPatientDetails.specimens != null && slidePrintPatientDetails.specimens.Count > 0)
+            if (slidePrintPatientdetails.specimens != null && slidePrintPatientdetails.specimens.Count > 0)
             {
-                var duplicateSpecimenTypes = slidePrintPatientDetails.specimens
+                var duplicateSpecimenTypes = slidePrintPatientdetails.specimens
                     .GroupBy(s => s.SpecimenType)
                     .Where(g => g.Count() > 1)
                     .Select(g => g.Key)
                     .ToList();
 
-                foreach (var specimen in slidePrintPatientDetails.specimens)
+                foreach (var specimen in slidePrintPatientdetails.specimens)
                 {
                     if (duplicateSpecimenTypes.Contains(specimen.SpecimenType))
                     {

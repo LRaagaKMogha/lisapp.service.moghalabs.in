@@ -27,9 +27,9 @@ namespace Service.API.SERVICE.Controllers
        
         [HttpPost]
         [Route("api/Test/GetTestList")]
-        public List<lsttest> GetTestList([FromBody] reqtest req)
+        public List<Lsttest> GetTestList([FromBody] Reqtest req)
         {
-            List<lsttest> lst = new List<lsttest>();
+            List<Lsttest> lst = new List<Lsttest>();
             try
             {
                 lst = _TestRepository.GetTestList(req);
@@ -44,9 +44,9 @@ namespace Service.API.SERVICE.Controllers
         [CustomAuthorize("LIMSMasters")]
         [HttpPost]
         [Route("api/Test/GetEditTest")]
-        public objtest GetEditTest([FromBody] reqtest req)
+        public Objtest GetEditTest([FromBody] Reqtest req)
         {
-            objtest obj = new objtest();
+            Objtest obj = new Objtest();
             try
             {
                 obj = _TestRepository.GetEditTest(req);
@@ -61,7 +61,7 @@ namespace Service.API.SERVICE.Controllers
         [CustomAuthorize("LIMSMasters")]
         [HttpPost]
         [Route("api/Test/InsertTest")]
-        public ActionResult InsertTest(objtest req)
+        public ActionResult InsertTest(Objtest req)
         {
             int testno = 0;
             try
@@ -89,9 +89,9 @@ namespace Service.API.SERVICE.Controllers
         [CustomAuthorize("LIMSMasters")]
         [HttpPost]
         [Route("api/Test/GetTemplateText")]
-        public rtntemplateText GetTemplateText(reqtest req)
+        public RtntemplateText GetTemplateText(Reqtest req)
         {
-            rtntemplateText obj = new rtntemplateText();
+            RtntemplateText obj = new RtntemplateText();
             try
             {
                 obj = _TestRepository.GetTemplateText(req);
@@ -106,9 +106,9 @@ namespace Service.API.SERVICE.Controllers
         [CustomAuthorize("LIMSMasters")]
         [HttpPost]
         [Route("api/Test/InsertTemplateText")]
-        public ActionResult<rtntemplateNo> InsertTemplateText(lstTemplateList req)
+        public ActionResult<RtntemplateNo> InsertTemplateText(LstTemplateList req)
         {
-            rtntemplateNo obj = new rtntemplateNo();
+            RtntemplateNo obj = new RtntemplateNo();
             //int i = 0;
             try
             {
@@ -153,9 +153,9 @@ namespace Service.API.SERVICE.Controllers
         #region GetGroupPackageList
         [HttpPost]
         [Route("api/Test/GetGroupPackageList")]
-        public List<lstgrppkg> GetGroupPackageList([FromBody] reqtest req)
+        public List<Lstgrppkg> GetGroupPackageList([FromBody] Reqtest req)
         {
-            List<lstgrppkg> lst = new List<lstgrppkg>();
+            List<Lstgrppkg> lst = new List<Lstgrppkg>();
             try
             {
                 lst = _TestRepository.GetGroupPackageList(req);
@@ -171,9 +171,9 @@ namespace Service.API.SERVICE.Controllers
         #region GetEditGroupPackage
         [HttpPost]
         [Route("api/Test/GetEditGroupPackage")]
-        public objgrppkg GetEditGroupPackage([FromBody] reqtest req)
+        public Objgrppkg GetEditGroupPackage([FromBody] Reqtest req)
         {
-            objgrppkg obj = new objgrppkg();
+            Objgrppkg obj = new Objgrppkg();
             try
             {
                 obj = _TestRepository.GetEditGroupPackage(req);
@@ -189,7 +189,7 @@ namespace Service.API.SERVICE.Controllers
         #region InsertGroupPackage
         [HttpPost]
         [Route("api/Test/InsertGroupPackage")]
-        public ActionResult InsertGroupPackage(objgrppkg req)
+        public ActionResult InsertGroupPackage(Objgrppkg req)
         {
             int groupno = 0;
             try
@@ -197,8 +197,8 @@ namespace Service.API.SERVICE.Controllers
                 var _errormsg = TestMasterValidation.InsertGroupPackage(req);
                 if (!_errormsg.status)
                 {
-                    var reqClone = JsonConvert.DeserializeObject<objgrppkg>(JsonConvert.SerializeObject(req));
-                    using (var auditScope = new AuditScope<objgrppkg>(reqClone, _auditService, req.pageCode, req.pageCode == "GRPMAS" ? new string[] { "Group Master Save" } : new string[] { "Package Master Save" }))
+                    var reqClone = JsonConvert.DeserializeObject<Objgrppkg>(JsonConvert.SerializeObject(req));
+                    using (var auditScope = new AuditScope<Objgrppkg>(reqClone, _auditService, req.pageCode, req.pageCode == "GRPMAS" ? new string[] { "Group Master Save" } : new string[] { "Package Master Save" }))
                     {
                         groupno = _TestRepository.InsertGroupPackage(req);
                         auditScope.IsRollBack = groupno == 0 ? true : false;
@@ -221,9 +221,9 @@ namespace Service.API.SERVICE.Controllers
         #region GetSearchService
         [HttpPost]
         [Route("api/Test/GetSearchService")]
-        public List<lstgrppkgservice> GetSearchService([FromBody] reqsearchservice req)
+        public List<Lstgrppkgservice> GetSearchService([FromBody] Reqsearchservice req)
         {
-            List<lstgrppkgservice> lst = new List<lstgrppkgservice>();
+            List<Lstgrppkgservice> lst = new List<Lstgrppkgservice>();
             try
             {
                 lst = _TestRepository.GetSearchService(req);
@@ -242,9 +242,9 @@ namespace Service.API.SERVICE.Controllers
         [CustomAuthorize("LIMSMasters")]
         [HttpPost]
         [Route("api/Test/GetSubTestList")]
-        public List<lststest> GetSubTestList([FromBody] reqtest req)
+        public List<Lststest> GetSubTestList([FromBody] Reqtest req)
         {
-            List<lststest> lst = new List<lststest>();
+            List<Lststest> lst = new List<Lststest>();
             try
             {
                 lst = _TestRepository.GetSubTestList(req);
@@ -259,9 +259,9 @@ namespace Service.API.SERVICE.Controllers
         [CustomAuthorize("LIMSMasters")]
         [HttpPost]
         [Route("api/Test/GetEditSubTest")]
-        public objsubtest GetEditSubTest(reqtest req)
+        public Objsubtest GetEditSubTest(Reqtest req)
         {
-            objsubtest obj = new objsubtest();
+            Objsubtest obj = new Objsubtest();
             try
             {
                 obj = _TestRepository.GetEditSubTest(req);
@@ -276,7 +276,7 @@ namespace Service.API.SERVICE.Controllers
         [CustomAuthorize("LIMSMasters")]
         [HttpPost]
         [Route("api/Test/InsertSubTest")]
-        public ActionResult InsertSubTest(objsubtest req)
+        public ActionResult InsertSubTest(Objsubtest req)
         {
             int testno = 0;
             try
@@ -364,9 +364,9 @@ namespace Service.API.SERVICE.Controllers
         [CustomAuthorize("LIMSMasters")]
         [HttpPost]
         [Route("api/Test/GetTestApprove")]
-        public List<restestapprove> GetTestApprove([FromBody] reqtestapprove req)
+        public List<Restestapprove> GetTestApprove([FromBody] Reqtestapprove req)
         {
-            List<restestapprove> lst = new List<restestapprove>();
+            List<Restestapprove> lst = new List<Restestapprove>();
             try
             {
                 lst = _TestRepository.GetTestApprove(req);
@@ -381,9 +381,9 @@ namespace Service.API.SERVICE.Controllers
         [CustomAuthorize("LIMSMasters")]
         [HttpPost]
         [Route("api/Test/GetApproveHistory")]
-        public List<restestappHistory> GetApproveHistory([FromBody] reqtestapprove req)
+        public List<RestestappHistory> GetApproveHistory([FromBody] Reqtestapprove req)
         {
-            List<restestappHistory> lst = new List<restestappHistory>();
+            List<RestestappHistory> lst = new List<RestestappHistory>();
             try
             {
                 lst = _TestRepository.GetApproveHistory(req);
@@ -605,9 +605,9 @@ namespace Service.API.SERVICE.Controllers
         #region GetPackageInstrauction
         [HttpPost]
         [Route("api/Test/GetPackageInstrauction")]
-        public objgrppkg GetPackageInstrauction([FromBody] reqtest req)
+        public Objgrppkg GetPackageInstrauction([FromBody] Reqtest req)
         {
-            objgrppkg obj = new objgrppkg();
+            Objgrppkg obj = new Objgrppkg();
             try
             {
                 obj = _TestRepository.GetPackageInstrauction(req);
@@ -623,7 +623,7 @@ namespace Service.API.SERVICE.Controllers
         #region PacagePrint
         [HttpPost]
         [Route("api/Test/GetPrintPakg")]
-        public List<PrintPackageDetails> GetPrintPakg([FromBody] reqsearchservice req)
+        public List<PrintPackageDetails> GetPrintPakg([FromBody] Reqsearchservice req)
         {
             List<PrintPackageDetails> lst = new List<PrintPackageDetails>();
             try

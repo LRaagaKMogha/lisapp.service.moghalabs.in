@@ -238,16 +238,16 @@ namespace Service.Repository
             }
             return result;
         }
-        public ExternalPatientAppServiceResponse GetService(int VenueNo, int VenueBranchNo, int IsApproval)
+        public ExternalPatientAppServiceResponse Getservice(int VenueNo, int VenueBranchNo, int IsApproval)
         {
             ExternalPatientAppServiceResponse result = new ExternalPatientAppServiceResponse();
             try
             {
                 IFrontOfficeRepository frontOfficeRepository = new FrontOfficeRepository(_config);
-                var data = frontOfficeRepository.GetService(VenueNo, VenueBranchNo, IsApproval);
+                var data = frontOfficeRepository.Getservice(VenueNo, VenueBranchNo, IsApproval);
                 if (data.Count > 0)
                 {
-                    result.lstService = new List<ServiceSearchDTO>();
+                    result.Lstservice = new List<ServiceSearchDTO>();
                     result.status = 1;
                     result.message = "Data Fetched Successfully";
                 }
@@ -259,23 +259,23 @@ namespace Service.Repository
             }
             catch (Exception ex)
             {
-                MyDevException.Error(ex, "ExternalPatientController.GetService", ExceptionPriority.High, ApplicationType.REPOSITORY, VenueNo, VenueBranchNo, 0);
+                MyDevException.Error(ex, "ExternalPatientController.Getservice", ExceptionPriority.High, ApplicationType.REPOSITORY, VenueNo, VenueBranchNo, 0);
             }
             return result;
         }
-        public ServiceRateList GetServiceDetails(int ServiceNo, string ServiceType, int ClientNo, int VenueNo, int VenueBranchNo)
+        public ServiceRateList GetserviceDetails(int ServiceNo, string ServiceType, int ClientNo, int VenueNo, int VenueBranchNo)
         {
-            ServiceRateList objresult = new ServiceRateList();
+            ServiceRateList Objresult = new ServiceRateList();
             try
             {
                 IFrontOfficeRepository frontOfficeRepository = new FrontOfficeRepository(_config);
-                objresult = frontOfficeRepository.GetServiceDetails(ServiceNo, ServiceType, ClientNo, VenueNo, VenueBranchNo, 0, 0);
+                Objresult = frontOfficeRepository.GetserviceDetails(ServiceNo, ServiceType, ClientNo, VenueNo, VenueBranchNo, 0, 0);
             }
             catch (Exception ex)
             {
-                MyDevException.Error(ex, "ExternalPatientController.GetServiceDetails/ServiceNo-" + ServiceNo, ExceptionPriority.Medium, ApplicationType.REPOSITORY, VenueNo, VenueBranchNo, 0);
+                MyDevException.Error(ex, "ExternalPatientController.GetserviceDetails/ServiceNo-" + ServiceNo, ExceptionPriority.Medium, ApplicationType.REPOSITORY, VenueNo, VenueBranchNo, 0);
             }
-            return objresult;
+            return Objresult;
         }
         public ExternalPatientEditResponse editprofile(ExternalPatientEditRequest results)
         {

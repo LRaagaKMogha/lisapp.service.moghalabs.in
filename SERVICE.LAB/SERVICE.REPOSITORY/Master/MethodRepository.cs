@@ -24,7 +24,7 @@ namespace Service.Repository
         /// <returns></returns>
         public List<TblMethod> GetMethods1(GetCommonMasterRequest masterRequest)
         {
-            List<TblMethod> objresult = new List<TblMethod>();
+            List<TblMethod> Objresult = new List<TblMethod>();
             try
             {
                 using (var context = new MasterContext(_config.GetConnectionString(ConfigKeys.DefaultConnection)))
@@ -32,11 +32,11 @@ namespace Service.Repository
 
                     if (masterRequest.masterNo > 0)
                     {
-                        objresult = context.TblMethod.Where(x => x.VenueNo == masterRequest.venueno && x.MethodNo == masterRequest.masterNo).ToList();
+                        Objresult = context.TblMethod.Where(x => x.VenueNo == masterRequest.venueno && x.MethodNo == masterRequest.masterNo).ToList();
                     }
                     else
                     {
-                        objresult = context.TblMethod.Where(x => x.VenueNo == masterRequest.venueno).ToList();
+                        Objresult = context.TblMethod.Where(x => x.VenueNo == masterRequest.venueno).ToList();
                     }
                 }
             }
@@ -44,12 +44,12 @@ namespace Service.Repository
             {
                 MyDevException.Error(ex, "GetMethods1", ExceptionPriority.Low, ApplicationType.REPOSITORY, masterRequest?.venueno, masterRequest?.venuebranchno, 0);
             }
-            return objresult;
+            return Objresult;
         }
 
         public List<TblMethod> GetMethods(GetCommonMasterRequest masterRequest)
         {
-            List<TblMethod> objresult = new List<TblMethod>();
+            List<TblMethod> Objresult = new List<TblMethod>();
             try
             {
                 using (var context = new MasterContext(_config.GetConnectionString(ConfigKeys.DefaultConnection)))
@@ -59,7 +59,7 @@ namespace Service.Repository
                     var _venuebranchno = new SqlParameter("VenueBranchNo", masterRequest?.venuebranchno);
                     var _pageIndex = new SqlParameter("pageIndex", masterRequest?.pageIndex);
 
-                    objresult = context.GetMethods.FromSqlRaw(
+                    Objresult = context.GetMethods.FromSqlRaw(
                         "Execute dbo.pro_GetMethod @MethodNo,@venueNo,@venueBranchNo,@pageIndex",
                         _MethodNo, _venueno, _venuebranchno, _pageIndex).ToList();
                 }
@@ -68,7 +68,7 @@ namespace Service.Repository
             {
                 MyDevException.Error(ex, "MethodRepository.GetMethods" + masterRequest.MethodNo.ToString(), ExceptionPriority.Low, ApplicationType.REPOSITORY, masterRequest?.venueno, masterRequest?.venuebranchno, 0);
             }
-            return objresult;
+            return Objresult;
         }
 
 
@@ -106,7 +106,7 @@ namespace Service.Repository
         }
         public List<MethodResponse> InsertMethodDetails(TblMethod Methoditem)
         {
-            List<MethodResponse> objresult = new List<MethodResponse>();
+            List<MethodResponse> Objresult = new List<MethodResponse>();
             try
             {
                 using (var context = new MasterContext(_config.GetConnectionString(ConfigKeys.DefaultConnection)))
@@ -120,7 +120,7 @@ namespace Service.Repository
                     var _userno = new SqlParameter("userno", Methoditem?.CreatedBy);
 
 
-                    objresult = context.InsertMethodDetails.FromSqlRaw(
+                    Objresult = context.InsertMethodDetails.FromSqlRaw(
                         "Execute dbo.pro_InsertMethod @MethodNo,@MethodName,@MethodDisplayText,@Status,@VenueNo,@VenueBranchNo,@userno",
                         _MethodNo, _MethodName, _MethodDisplayText, _Status, _venueno, _venuebranchno, _userno).ToList();
                 }
@@ -129,7 +129,7 @@ namespace Service.Repository
             {
                 MyDevException.Error(ex, "MethodRepository.InsertMethodDetails" + Methoditem?.MethodNo.ToString(), ExceptionPriority.Low, ApplicationType.REPOSITORY, Methoditem?.VenueNo, Methoditem?.VenueBranchNo, 0);
             }
-            return objresult;
+            return Objresult;
         }
     }
 }

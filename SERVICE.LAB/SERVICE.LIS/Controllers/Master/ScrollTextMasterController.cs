@@ -40,16 +40,16 @@ namespace Service.API.SERVICE.Controllers.Master
         [Route("api/ScrollTextMaster/InsertScrollTextMaster")]
         public SaveScrollTextMasterResponse InsertScrollTextMaster(SaveScrollTextMasterRequest request)
         {
-            SaveScrollTextMasterResponse objresult = new SaveScrollTextMasterResponse();
+            SaveScrollTextMasterResponse Objresult = new SaveScrollTextMasterResponse();
             try
             {
-                objresult = _ScrollTextMasterRepository.InsertScrollTextMaster(request);
+                Objresult = _ScrollTextMasterRepository.InsertScrollTextMaster(request);
             }
             catch (Exception ex)
             {
                 MyDevException.Error(ex, "ScrollTextMasterController.InsertScrollTextMaster", ExceptionPriority.Low, ApplicationType.APPSERVICE, request.VenueNo, request.VenueBranchNo, 0);
             }
-            return objresult;
+            return Objresult;
         }
     }
 }

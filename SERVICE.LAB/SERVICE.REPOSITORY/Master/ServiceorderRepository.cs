@@ -16,9 +16,9 @@ namespace Service.Repository
         private IConfiguration _config;
         public ServiceOrderRepository(IConfiguration config) { _config = config; }
 
-        public List<GetServiceDetails> GetServiceOrderMaster(ServiceOrderMasterRequest serviceOrderMasterRequest)
+        public List<GetserviceDetails> GetserviceOrderMaster(ServiceOrderMasterRequest serviceOrderMasterRequest)
         {
-            List<GetServiceDetails> objresult = new List<GetServiceDetails>();
+            List<GetserviceDetails> Objresult = new List<GetserviceDetails>();
             try
             {
                 using (var context = new MasterContext(_config.GetConnectionString(ConfigKeys.DefaultConnection)))
@@ -29,16 +29,16 @@ namespace Service.Repository
                     var _ServiceNo = new SqlParameter("ServiceNo", serviceOrderMasterRequest?.ServiceNo);
                     var _VenueNo = new SqlParameter("VenueNo", serviceOrderMasterRequest?.VenueNo);
 
-                    objresult = context.GetServiceOrder.FromSqlRaw(
-                    "Execute dbo.pro_GetServiceOrder @MainDeptNo,@DeptNo,@ServiceType,@ServiceNo,@VenueNo",
+                    Objresult = context.GetserviceOrder.FromSqlRaw(
+                    "Execute dbo.pro_GetserviceOrder @MainDeptNo,@DeptNo,@ServiceType,@ServiceNo,@VenueNo",
                     _MainDeptNo, _DeptNo, _ServiceType, _ServiceNo, _VenueNo).ToList();
                 }
             }
             catch (Exception ex)
             {
-                MyDevException.Error(ex, "ServiceOrderRepository.GetServiceOrderMaster", ExceptionPriority.Low, ApplicationType.REPOSITORY, serviceOrderMasterRequest?.VenueNo, serviceOrderMasterRequest?.ServiceNo, 0);
+                MyDevException.Error(ex, "ServiceOrderRepository.GetserviceOrderMaster", ExceptionPriority.Low, ApplicationType.REPOSITORY, serviceOrderMasterRequest?.VenueNo, serviceOrderMasterRequest?.ServiceNo, 0);
             }
-            return objresult;
+            return Objresult;
         }
 
         public ServiceOrderMasterResponse InsertServiceOrderMaster(TblServiceOrder resultItem)

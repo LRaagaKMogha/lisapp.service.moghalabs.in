@@ -29,20 +29,20 @@ namespace Service.API.SERVICE.Controllers.Master
         [AllowAnonymous]
         [HttpPost]
         [Route("api/Unit/GetUnitDetails")]
-        public IEnumerable<lstunits> GetUnitDetails(reqUnits req)
+        public IEnumerable<Lstunits> GetUnitDetails(ReqUnits req)
         {
-            List<lstunits> objresult = new List<lstunits>();
+            List<Lstunits> Objresult = new List<Lstunits>();
             try
             {
              
-                objresult = _UnitRepository.GetUnits(req);
+                Objresult = _UnitRepository.GetUnits(req);
 
             }
             catch (Exception ex)
             {
                 MyDevException.Error(ex, "UnitController.GetUnitDetails-", ExceptionPriority.Low, ApplicationType.APPSERVICE, req.venueNo, req.venueBranchNo, 0);
             }
-            return objresult;
+            return Objresult;
         }
 
         #endregion
@@ -55,9 +55,9 @@ namespace Service.API.SERVICE.Controllers.Master
         /// <returns></returns>        
         [HttpPost]
         [Route("api/Unit/InsertUnitDetails")]
-        public ActionResult<rtnUnit> InsertUnitDetails([FromBody] TblUnits Unititem)
+        public ActionResult<RtnUnit> InsertUnitDetails([FromBody] TblUnits Unititem)
         {
-            rtnUnit result = new rtnUnit();
+            RtnUnit result = new RtnUnit();
             try
             {
                 using (var auditScope = new AuditScope<TblUnits>(Unititem, _auditService))

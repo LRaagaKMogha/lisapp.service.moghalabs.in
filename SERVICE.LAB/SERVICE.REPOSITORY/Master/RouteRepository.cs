@@ -23,18 +23,18 @@ namespace Service.Repository
         /// <returns></returns>
         public List<TblRoute> GetRouteDetails(GetCommonMasterRequest getCommonMaster)
         {
-            List<TblRoute> objresult = new List<TblRoute>();
+            List<TblRoute> Objresult = new List<TblRoute>();
             try
             {
                 using (var context = new LIMSContext(_config.GetConnectionString(ConfigKeys.DefaultConnection)))
                 {
                     if(getCommonMaster.masterNo >0)
                     {
-                        objresult = context.TblRoute.Where(x => x.VenueNo == getCommonMaster.venueno && x.VenueBranchNo == getCommonMaster.venuebranchno && x.RouteNo == getCommonMaster.masterNo && x.Status == true).ToList();
+                        Objresult = context.TblRoute.Where(x => x.VenueNo == getCommonMaster.venueno && x.VenueBranchNo == getCommonMaster.venuebranchno && x.RouteNo == getCommonMaster.masterNo && x.Status == true).ToList();
                     }
                     else
                     {
-                        objresult = context.TblRoute.Where(x => x.VenueNo == getCommonMaster.venueno && x.VenueBranchNo == getCommonMaster.venuebranchno && x.Status ==true).ToList();
+                        Objresult = context.TblRoute.Where(x => x.VenueNo == getCommonMaster.venueno && x.VenueBranchNo == getCommonMaster.venuebranchno && x.Status ==true).ToList();
                     }
                 }
             }
@@ -42,7 +42,7 @@ namespace Service.Repository
             {
                 MyDevException.Error(ex, "GetRouteDetails", ExceptionPriority.Low, ApplicationType.REPOSITORY, getCommonMaster.venueno, getCommonMaster.venuebranchno, 0);
             }
-            return objresult;
+            return Objresult;
         }
         /// <summary>
         /// Search Route
@@ -51,19 +51,19 @@ namespace Service.Repository
         /// <returns></returns>
         public List<TblRoute> SearchRoute(string RouteName)
         {
-            List<TblRoute> objresult = new List<TblRoute>();
+            List<TblRoute> Objresult = new List<TblRoute>();
             try
             {
                 using (var context = new LIMSContext(_config.GetConnectionString(ConfigKeys.DefaultConnection)))
                 {
-                    objresult = context.TblRoute.Where(a => a.RouteName == RouteName).ToList();
+                    Objresult = context.TblRoute.Where(a => a.RouteName == RouteName).ToList();
                 }
             }
             catch (Exception ex)
             {
                 MyDevException.Error(ex, "SearchRoute - " + RouteName, ExceptionPriority.Low, ApplicationType.REPOSITORY, 0, 0, 0);
             }
-            return objresult;
+            return Objresult;
         }
         /// <summary>
         /// Insert Route Details
@@ -105,7 +105,7 @@ namespace Service.Repository
         }
         public List<Routelst> GetrouteMaster(RouteMasterRequest routeitems)
         {
-            List<Routelst> objresult = new List<Routelst>();
+            List<Routelst> Objresult = new List<Routelst>();
             try
             {
                 using (var context = new LIMSContext(_config.GetConnectionString(ConfigKeys.DefaultConnection)))
@@ -115,7 +115,7 @@ namespace Service.Repository
                     var _VenueBranchNo = new SqlParameter("VenueBranchNo", routeitems?.VenueBranchNo);
                     var _pageIndex = new SqlParameter("pageIndex", routeitems?.pageIndex);
 
-                    objresult = context.GetrouteMaster.FromSqlRaw(
+                    Objresult = context.GetrouteMaster.FromSqlRaw(
                     "Execute dbo.pro_GetRoutemaster @RouteNo,@VenueNo,@VenueBranchNo,@pageIndex",
                     _RouteNo, _VenueNo, _VenueBranchNo, _pageIndex).ToList();
                 }
@@ -124,11 +124,11 @@ namespace Service.Repository
             {
                 MyDevException.Error(ex, "RouteRepository.GetrouteMaster" + routeitems.RouteNo.ToString(), ExceptionPriority.Low, ApplicationType.REPOSITORY, routeitems.VenueNo, routeitems.VenueBranchNo, 0);
             }
-            return objresult;
+            return Objresult;
         }
         public RouteMasterResponse InsertRouteMaster(Routelst route)
         {
-            RouteMasterResponse objresult = new RouteMasterResponse();
+            RouteMasterResponse Objresult = new RouteMasterResponse();
             try
             {
                 using (var context = new LIMSContext(_config.GetConnectionString(ConfigKeys.DefaultConnection)))
@@ -147,14 +147,14 @@ namespace Service.Repository
                     "Execute dbo.pro_Insertroutemaster @routeNo,@routecode,@routeName,@description,@sequenceNo,@status,@userNo,@venueno,@VenueBranchNo",
                     _routeNo, _routecode, _routeName, _description, _sequenceNo, _status, _userNo, _Venueno, _VenueBranchNo).AsEnumerable().FirstOrDefault();
                     
-                    objresult.RouteNo = obj.RouteNo;
+                    Objresult.RouteNo = obj.RouteNo;
                 }
             }
             catch (Exception ex)
             {
                 MyDevException.Error(ex, "RouteRepository.InsertRouteMaster" + route.RouteNo.ToString(), ExceptionPriority.Low, ApplicationType.REPOSITORY, route.VenueNo, route.VenueBranchNo, route.UserNo);
             }
-            return objresult;
+            return Objresult;
         }
     }
 }

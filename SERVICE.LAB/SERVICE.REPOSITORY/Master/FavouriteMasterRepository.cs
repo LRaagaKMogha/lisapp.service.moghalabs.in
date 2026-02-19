@@ -16,18 +16,18 @@ namespace Service.Repository
         public FavouriteMasterRepository(IConfiguration config) { _config = config; }
         public List<Tblfav> GetFavouriteMasterDetails(GetCommonMasterRequest getfav)
         {
-            List<Tblfav> objresult = new List<Tblfav>();
+            List<Tblfav> Objresult = new List<Tblfav>();
             try
             {
                 using (var context = new LIMSContext(_config.GetConnectionString(ConfigKeys.DefaultConnection)))
                 {
                     if (getfav.masterNo > 0)
                     {
-                        objresult = context.Tblfav.Where(x => x.VenueNo == getfav.venueno && x.Status == true).ToList();
+                        Objresult = context.Tblfav.Where(x => x.VenueNo == getfav.venueno && x.Status == true).ToList();
                     }
                     else
                     {
-                        objresult = context.Tblfav.Where(x => x.VenueNo == getfav.venueno).ToList();
+                        Objresult = context.Tblfav.Where(x => x.VenueNo == getfav.venueno).ToList();
                     }
                 }
             }
@@ -35,39 +35,39 @@ namespace Service.Repository
             {
                 MyDevException.Error(ex, "FavouriteMasterRepository.GetFavouriteMasterDetails", ExceptionPriority.Low, ApplicationType.REPOSITORY, getfav.venueno, getfav.venuebranchno, 0);
             }
-            return objresult;
+            return Objresult;
         }       
         public List<Tblgroup> GetGroupDetails(int VenueNo, int VenueBranchNo)
         {
-            List<Tblgroup> objresult = new List<Tblgroup>();
+            List<Tblgroup> Objresult = new List<Tblgroup>();
             try
             {
                 using (var context = new LIMSContext(_config.GetConnectionString(ConfigKeys.DefaultConnection)))
                 {
-                    objresult = context.Tblgroup.Where(a => a.VenueNo == VenueNo && a.VenueBranchNo == VenueBranchNo).ToList();
+                    Objresult = context.Tblgroup.Where(a => a.VenueNo == VenueNo && a.VenueBranchNo == VenueBranchNo).ToList();
                 }
             }
             catch (Exception ex)
             {
                 MyDevException.Error(ex, "FavouriteMasterRepository.GetGroupDetails", ExceptionPriority.High, ApplicationType.REPOSITORY, VenueNo, VenueBranchNo, 0);
             }
-            return objresult;
+            return Objresult;
         }
         public List<Tblpack> GetPackDetails(int VenueNo, int VenueBranchNo)
         {
-            List<Tblpack> objresult = new List<Tblpack>();
+            List<Tblpack> Objresult = new List<Tblpack>();
             try
             {
                 using (var context = new LIMSContext(_config.GetConnectionString(ConfigKeys.DefaultConnection)))
                 {
-                    objresult = context.Tblpack.Where(a => a.VenueNo == VenueNo && a.VenueBranchNo == VenueBranchNo).ToList();
+                    Objresult = context.Tblpack.Where(a => a.VenueNo == VenueNo && a.VenueBranchNo == VenueBranchNo).ToList();
                 }
             }
             catch (Exception ex)
             {
                 MyDevException.Error(ex, "FavouriteMasterRepository.GetPackDetails", ExceptionPriority.High, ApplicationType.REPOSITORY, VenueNo, VenueBranchNo, 0);
             }
-            return objresult;
+            return Objresult;
         }
         public int InsertfavDetails(Tblfav favitem)
         {

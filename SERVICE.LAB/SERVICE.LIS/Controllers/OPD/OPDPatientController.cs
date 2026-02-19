@@ -173,16 +173,16 @@ namespace Service.API.SERVICE.Controllers
         [Route("api/OPDPatient/GetOPDService")]
         public List<ServiceSearchDTO> GetOPDService(int VenueNo, int VenueBranchNo, int doctorNo, int type)
         {
-            List<ServiceSearchDTO> objresult = new List<ServiceSearchDTO>();
+            List<ServiceSearchDTO> Objresult = new List<ServiceSearchDTO>();
             try
             {
-                objresult = _OPDPatientRepository.GetOPDService(VenueNo, VenueBranchNo, doctorNo, type);
+                Objresult = _OPDPatientRepository.GetOPDService(VenueNo, VenueBranchNo, doctorNo, type);
             }
             catch (Exception ex)
             {
                 MyDevException.Error(ex, "OPDPatientController.GetOPDService", ExceptionPriority.Medium, ApplicationType.APPSERVICE, VenueNo, VenueBranchNo, 0);
             }
-            return objresult;
+            return Objresult;
         }
         [HttpGet]
         [Route("api/OPDPatient/GetOPDMedicineData")]
@@ -252,38 +252,39 @@ namespace Service.API.SERVICE.Controllers
         [Route("api/OPDPatient/GetOPDPhysicianAmount")]
         public int GetOPDPhysicianAmount(OPDPatientOfficeDTO RequestItem)
         {
-            int objresult = 0;
+            int Objresult = 0;
             try
             {
-                objresult = _OPDPatientRepository.GetOPDPhysicianAmount(RequestItem);
+                Objresult = _OPDPatientRepository.GetOPDPhysicianAmount(RequestItem);
             }
             catch (Exception ex)
             {
                 MyDevException.Error(ex, "OPDPatientController.GetOPDPhysicianAmount", ExceptionPriority.Low, ApplicationType.APPSERVICE, RequestItem.PhysicianNo, RequestItem.VenueNo, RequestItem.VenueBranchNo);
             }
-            return objresult;
+            return Objresult;
         }
         [HttpGet]
         [Route("api/OPDPatient/Gethumanbodyparts")]
         public List<Humanbodyparts> Gethumanbodyparts(int VenueNo, int VenueBranchNo, int type)
         {
-            List<Humanbodyparts> objresult = new List<Humanbodyparts>();
+            List<Humanbodyparts> Objresult = new List<Humanbodyparts>();
             try
             {
-                objresult = _OPDPatientRepository.Gethumanbodyparts(VenueNo, VenueBranchNo, type);
+                Objresult = _OPDPatientRepository.Gethumanbodyparts(VenueNo, VenueBranchNo, type);
             }
             catch (Exception ex)
             {
                 MyDevException.Error(ex, "OPDPatientController.Gethumanbodyparts", ExceptionPriority.Medium, ApplicationType.APPSERVICE, VenueNo, VenueBranchNo, 0);
             }
-            return objresult;
+            return Objresult;
         }
 
         [HttpGet]
         [Route("api/OPDPatient/GetOPDPatientMasterDefinedInvDetails")]
         public List<OPDPatientDisVsInvDetails> GetOPDPatientMasterDefinedInvDetails(string type, int patientNo, int venueNo, int venueBranchNo)
         {
-            List<OPDPatientDisVsInvDetails> result = null;
+            List<OPDPatientDisVsInvDetails> result = new();
+
             try
             {
                 result = _OPDPatientRepository.GetOPDPatientMasterDefinedInvDetails(type, patientNo, venueNo, venueBranchNo);
@@ -299,7 +300,7 @@ namespace Service.API.SERVICE.Controllers
         [Route("api/OPDPatient/GetOPDPatientMasterDefinedDrugDetails")]
         public List<OPDPatientDisVsDrugDetails> GetOPDPatientDiseaseHistoryDrugDetails(string type, int patientNo, int venueNo, int venueBranchNo)
         {
-            List<OPDPatientDisVsDrugDetails> result = null;
+            List<OPDPatientDisVsDrugDetails> result = new();
             try
             {
                 result = _OPDPatientRepository.GetOPDPatientMasterDefinedDrugDetails(type, patientNo, venueNo, venueBranchNo);
@@ -401,38 +402,38 @@ namespace Service.API.SERVICE.Controllers
         [Route("api/OPDPatient/GetPatientDocumentDetails")]
         public List<OPDBulkFileUpload> GetPatientDocumentDetails(PatientDocUploadReq Req)
         {
-            List<OPDBulkFileUpload> objresult = new List<OPDBulkFileUpload>();
+            List<OPDBulkFileUpload> Objresult = new List<OPDBulkFileUpload>();
             try
             {
-                objresult = _OPDPatientRepository.GetPatientDocumentDetails(Req);
+                Objresult = _OPDPatientRepository.GetPatientDocumentDetails(Req);
             }
             catch (Exception ex)
             {
-                MyDevException.Error(ex, "OPDPatientController.GetPatientDocumentDetails", ExceptionPriority.Low, ApplicationType.APPSERVICE, (int)Req.venueNo, (int)Req.venueBranchNo, 0);
+                MyDevException.Error(ex, "OPDPatientController.GetPatientDocumentDetails", ExceptionPriority.Low, ApplicationType.APPSERVICE, Req.venueNo, Req.venueBranchNo, 0);
             }
-            return objresult;
+            return Objresult;
         }
         [HttpPost]
         [Route("api/OPDPatient/GetPatientDocumentAll")]
         public List<DocumentInfo> GetPatientDocumentAll(PatientDocUploadReq obj)
         {
-            List<DocumentInfo> objresult = new List<DocumentInfo>();
+            List<DocumentInfo> Objresult = new List<DocumentInfo>();
             try
             {
-                objresult = _OPDPatientRepository.GetPatientDocumentAll(obj);
+                Objresult = _OPDPatientRepository.GetPatientDocumentAll(obj);
             }
             catch (Exception ex)
             {
-                MyDevException.Error(ex, "OPDPatientController.GetPatientDocumentAll", ExceptionPriority.Low, ApplicationType.APPSERVICE, (int)obj.venueNo, (int)obj.venueBranchNo, 0);
+                MyDevException.Error(ex, "OPDPatientController.GetPatientDocumentAll", ExceptionPriority.Low, ApplicationType.APPSERVICE, obj.venueNo, obj.venueBranchNo, 0);
             }
-            return objresult;
+            return Objresult;
         }
 
         [HttpPost]
         [Route("api/OPDPatient/GetDrugDetails")]
-        public List<drugresponse> GetDrugDetails(drugreq RequestItem)
+        public List<Drugresponse> GetDrugDetails(Drugreq RequestItem)
         {
-            List<drugresponse> patientAssessment = new List<drugresponse>();
+            List<Drugresponse> patientAssessment = new List<Drugresponse>();
             try
             {
                 patientAssessment = _OPDPatientRepository.GetDrugDetails(RequestItem);
@@ -475,40 +476,42 @@ namespace Service.API.SERVICE.Controllers
             }
             return patientAssessment;
         }
+
         [HttpPost]
         [Route("api/OPDPatient/OPDImagingFile")]
-        public OPDBeforeAfterImageList OPDImagingFile([FromBody] OPDBeforeAfterImageList objDTO)
+        public ActionResult<OPDBeforeAfterImageList> OPDImagingFile([FromBody] OPDBeforeAfterImageList objDTO)
         {
             OPDBeforeAfterImageList result = new OPDBeforeAfterImageList();
             try
             {
-                result = _OPDPatientRepository.OPDImagingFile(objDTO);
-                if (result != null)
-                {
-                    var res = _OPDPatientRepository.InserOPDImaging(result);
-                }
+                result = _OPDPatientRepository.OPDImagingFile(objDTO) ?? new OPDBeforeAfterImageList();
+
+                if (result == null)
+                    return BadRequest("Imaging processing failed.");
+
+                _OPDPatientRepository.InserOPDImaging(result);
             }
             catch (Exception ex)
             {
-                MyDevException.Error(ex, "OPDPatientController.OPDImagingFile", ExceptionPriority.High, ApplicationType.APPSERVICE, (int)objDTO.venueNo, (int)objDTO.venueBranchNo, (int)objDTO.userNo);
+                MyDevException.Error(ex, "OPDPatientController.OPDImagingFile", ExceptionPriority.High, ApplicationType.APPSERVICE, objDTO.venueNo, objDTO.venueBranchNo, objDTO.userNo);
             }
-            return result;
+            return Ok(result);
         }
 
         [HttpPost]
         [Route("api/OPDPatient/InserOPDImaging")]
         public OPDBeforeAfterImageListResponse InserOPDImaging(OPDBeforeAfterImageList res)
         {
-            OPDBeforeAfterImageListResponse objresult = new OPDBeforeAfterImageListResponse();
+            OPDBeforeAfterImageListResponse Objresult = new OPDBeforeAfterImageListResponse();
             try
             {
-                objresult = _OPDPatientRepository.InserOPDImaging(res);
+                Objresult = _OPDPatientRepository.InserOPDImaging(res);
             }
             catch (Exception ex)
             {
                 MyDevException.Error(ex, "OPDPatientController.InserOPDImaging" + res.appointmentNo.ToString(), ExceptionPriority.Low, ApplicationType.REPOSITORY, res.venueNo, res.venueBranchNo, 0);
             }
-            return objresult;
+            return Objresult;
         }
         [HttpPost]
         [Route("api/OPDPatient/InsertFollowUpAppointment")]
@@ -577,16 +580,16 @@ namespace Service.API.SERVICE.Controllers
         [Route("api/OPDPatient/OPDImagingIncludingreport")]
         public ImageListResponse OPDImagingIncludingreport(OPDBeforeAfterImageList res)
         {
-            ImageListResponse objresult = new ImageListResponse();
+            ImageListResponse Objresult = new ImageListResponse();
             try
             {
-                objresult = _OPDPatientRepository.OPDImagingIncludingreport(res);
+                Objresult = _OPDPatientRepository.OPDImagingIncludingreport(res);
             }
             catch (Exception ex)
             {
                 MyDevException.Error(ex, "OPDPatientController.OPDImaging" + res.appointmentNo.ToString(), ExceptionPriority.Low, ApplicationType.REPOSITORY, res.venueNo, res.venueBranchNo, 0);
             }
-            return objresult;
+            return Objresult;
         }
 
         [HttpPost]
@@ -607,18 +610,18 @@ namespace Service.API.SERVICE.Controllers
         [HttpGet]
         [AllowAnonymous]
         [Route("api/display/GetDisplayView")]
-        public List<displaylist> GetDisplayView(int VenueNo, int VenueBranchNo, int type)
+        public List<Displaylist> GetDisplayView(int VenueNo, int VenueBranchNo, int type)
         {
-            List<displaylist> objresult = new List<displaylist>();
+            List<Displaylist> Objresult = new List<Displaylist>();
             try
             {
-                objresult = _OPDPatientRepository.GetDisplayView(VenueNo, VenueBranchNo, type);
+                Objresult = _OPDPatientRepository.GetDisplayView(VenueNo, VenueBranchNo, type);
             }
             catch (Exception ex)
             {
                 MyDevException.Error(ex, "OPDPatientController.GetDisplayView", ExceptionPriority.Low, ApplicationType.APPSERVICE, 0, 0, 0);
             }
-            return objresult;
+            return Objresult;
         }
         [HttpPost]
         [Route("api/OPDPatient/GetOPDPatientMachineList")]

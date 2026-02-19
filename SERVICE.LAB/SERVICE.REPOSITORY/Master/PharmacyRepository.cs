@@ -17,7 +17,7 @@ namespace Service.Repository
         private IConfiguration _config;
         public PharmacyRepository(IConfiguration config) { _config = config; }    
 
-        public List<TblGeneric> GetGeneric(reqgeneric req)
+        public List<TblGeneric> GetGeneric(Reqgeneric req)
         {
             List<TblGeneric> lst = new List<TblGeneric>();
             try
@@ -41,7 +41,7 @@ namespace Service.Repository
         }
         public GenericMasterResponse InsertGeneric(TblGeneric tblGeneric)
         {
-            GenericMasterResponse objresult = new GenericMasterResponse();
+            GenericMasterResponse Objresult = new GenericMasterResponse();
             try
             {
                 using (var context = new MasterContext(_config.GetConnectionString(ConfigKeys.DefaultConnection)))
@@ -61,17 +61,17 @@ namespace Service.Repository
                     _genericNo, _venueNo, _venueBranchno, _userNo, _genericName,
                     _isNotified, _sequenceNo, _status).ToList();
 
-                    objresult.genericNo = obj[0].genericNo;
+                    Objresult.genericNo = obj[0].genericNo;
                 }
             }
             catch (Exception ex)
             {
                 MyDevException.Error(ex, "PharmacyRepository.InsertGeneric" + tblGeneric.genericNo.ToString(), ExceptionPriority.Low, ApplicationType.REPOSITORY, tblGeneric.venueNo, tblGeneric.venueBranchno, 0);
             }
-            return objresult;
+            return Objresult;
         }
 
-        public List<TblMedtype> GetMedicinetype(reqmedtype medtype)
+        public List<TblMedtype> GetMedicinetype(Reqmedtype medtype)
         {
             List<TblMedtype> lst = new List<TblMedtype>();
             try
@@ -96,7 +96,7 @@ namespace Service.Repository
         }
         public MedtypeMasterResponse InsertMedtype(TblMedtype tblmedtype)
         {
-            MedtypeMasterResponse objresult = new MedtypeMasterResponse();
+            MedtypeMasterResponse Objresult = new MedtypeMasterResponse();
             try
             {
                 using (var context = new MasterContext(_config.GetConnectionString(ConfigKeys.DefaultConnection)))
@@ -116,16 +116,16 @@ namespace Service.Repository
                     _medicineTypeNo, _venueNo, _venueBranchno, _userNo, _description,
                     _unitNo,_sequenceNo, _status).ToList();
 
-                    objresult.medicineTypeNo = obj[0].medicineTypeNo;
+                    Objresult.medicineTypeNo = obj[0].medicineTypeNo;
                 }
             }
             catch (Exception ex)
             {
                 MyDevException.Error(ex, "PharmacyRepository.InsertMedtype" + tblmedtype.medicineTypeNo.ToString(), ExceptionPriority.Low, ApplicationType.REPOSITORY, tblmedtype.venueNo, tblmedtype.venueBranchno, 0);
             }
-            return objresult;
+            return Objresult;
         }
-        public List<TblMedstr> GetMedstr(reqmedstr medstr)
+        public List<TblMedstr> GetMedstr(Reqmedstr medstr)
         {
             List<TblMedstr> lst = new List<TblMedstr>();
             try
@@ -149,7 +149,7 @@ namespace Service.Repository
         }
         public MedstrMasterResponse InsertMedstr(TblMedstr tblmedstr)
         {
-            MedstrMasterResponse objresult = new MedstrMasterResponse();
+            MedstrMasterResponse Objresult = new MedstrMasterResponse();
             try
             {
                 using (var context = new MasterContext(_config.GetConnectionString(ConfigKeys.DefaultConnection)))
@@ -169,14 +169,14 @@ namespace Service.Repository
                     _strengthNo, _venueNo, _venueBranchno, _userNo, _strengthName,
                     _strengthValue, _sequenceNo, _status).ToList();
 
-                    objresult.strengthNo = obj[0].strengthNo;
+                    Objresult.strengthNo = obj[0].strengthNo;
                 }
             }
             catch (Exception ex)
             {
                 MyDevException.Error(ex, "PharmacyRepository.InsertMedstr" + tblmedstr.strengthNo.ToString(), ExceptionPriority.Low, ApplicationType.REPOSITORY, tblmedstr.venueNo, tblmedstr.venueBranchno, 0);
             }
-            return objresult;
+            return Objresult;
         }
     }
 }

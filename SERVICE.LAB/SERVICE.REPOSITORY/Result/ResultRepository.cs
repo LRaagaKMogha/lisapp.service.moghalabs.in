@@ -22,9 +22,9 @@ namespace Service.Repository
     {
         private IConfiguration _config;
         public ResultRepository(IConfiguration config) { _config = config; }
-        public List<lstsearchresultvisit> SearchResultVisit(requestsearchresultvisit req)
+        public List<Lstsearchresultvisit> SearchResultVisit(Requestsearchresultvisit req)
         {
-            List<lstsearchresultvisit> lst = new List<lstsearchresultvisit>();
+            List<Lstsearchresultvisit> lst = new List<Lstsearchresultvisit>();
             try
             {
                 using (var context = new ResultContext(_config.GetConnectionString(ConfigKeys.DefaultConnection)))
@@ -48,9 +48,9 @@ namespace Service.Repository
             }
             return lst;
         }
-        public List<lstresultvisit> GetResultVisit(requestresultvisit req)
+        public List<Lstresultvisit> GetResultVisit(Requestresultvisit req)
         {
-            List<lstresultvisit> lst = new List<lstresultvisit>();
+            List<Lstresultvisit> lst = new List<Lstresultvisit>();
             try
             {
                 using (var context = new ResultContext(_config.GetConnectionString(ConfigKeys.DefaultConnection)))
@@ -100,7 +100,7 @@ namespace Service.Repository
                         if (patientvisitno != v.patientvisitno)
                         {
                             patientvisitno = v.patientvisitno;
-                            lstresultvisit obj = new lstresultvisit();
+                            Lstresultvisit obj = new Lstresultvisit();
                             obj.patientno = v.patientno;
                             obj.rhNo = v.rhNo;
                             obj.patientvisitno = v.patientvisitno;
@@ -127,11 +127,11 @@ namespace Service.Repository
                             obj.isVipIndication = v.isVipIndication;
                             obj.isSecondReviewAvail = v.isSecondReviewAvail;
                             var serlst = rtndblst.Where(o => o.patientvisitno == v.patientvisitno).ToList();
-                            List<lstservice> lsts = new List<lstservice>();
+                            List<Lstservice> lsts = new List<Lstservice>();
                             
                             foreach (var s in serlst)
                             {
-                                lstservice objs = new lstservice();
+                                Lstservice objs = new Lstservice();
                                 objs.patientvisitno = s.patientvisitno;
                                 objs.orderlistno = s.orderlistno;
                                 objs.servicetype = s.servicetype;
@@ -158,7 +158,7 @@ namespace Service.Repository
                                 objs.isVipIndication = s.isVipIndication;
                                 lsts.Add(objs);
                             }
-                            obj.lstservice = lsts;
+                            obj.Lstservice = lsts;
                             lst.Add(obj);
                         }
                     }
@@ -168,12 +168,11 @@ namespace Service.Repository
             {
                 MyDevException.Error(ex, "ResultRepository.GetResultVisit", ExceptionPriority.High, ApplicationType.REPOSITORY, req.venueno, req.venuebranchno, req.userno);
             }
-            //return lst.OrderByDescending(x => x.visStat).ToList();//12656
             return lst;
         }
-        public List<deltaresult> GetDeltaResult(requestdeltaresult req)
+        public List<Deltaresult> GetDeltaresult(requestDeltaresult req)
         {
-            List<deltaresult> lst = new List<deltaresult>();
+            List<Deltaresult> lst = new List<Deltaresult>();
             try
             {
                 using (var context = new ResultContext(_config.GetConnectionString(ConfigKeys.DefaultConnection)))
@@ -185,20 +184,20 @@ namespace Service.Repository
                     var _testno = new SqlParameter("testno", req.testno);
                     var _subtestno = new SqlParameter("subtestno", req.subtestno);
                     
-                    lst = context.GetDeltaResult.FromSqlRaw(
-                    "Execute dbo.pro_GetDeltaResult @venueno,@venuebranchno,@userno,@patientno,@testno,@subtestno",
+                    lst = context.GetDeltaresult.FromSqlRaw(
+                    "Execute dbo.pro_GetDeltaresult @venueno,@venuebranchno,@userno,@patientno,@testno,@subtestno",
                     _venueno, _venuebranchno, _userno, _patientno, _testno, _subtestno).ToList();
                 }
             }
             catch (Exception ex)
             {
-                MyDevException.Error(ex, "ResultRepository.GetDeltaResult" + req.patientno.ToString(), ExceptionPriority.Low, ApplicationType.REPOSITORY, req.venueno, req.venuebranchno, req.userno);
+                MyDevException.Error(ex, "ResultRepository.GetDeltaresult" + req.patientno.ToString(), ExceptionPriority.Low, ApplicationType.REPOSITORY, req.venueno, req.venuebranchno, req.userno);
             }
             return lst;
         }
-        public objresult GetVisitHistoy(requestdeltaresult req)
+        public Objresult GetVisitHistoy(requestDeltaresult req)
         {
-            objresult obj = new objresult();
+            Objresult obj = new Objresult();
             try
             {
                 using (var context = new ResultContext(_config.GetConnectionString(ConfigKeys.DefaultConnection)))
@@ -218,13 +217,13 @@ namespace Service.Repository
                     int orderlistno = 0;
 
                     rtndblst = rtndblst.OrderBy(a => a.patientvisitno).ToList();
-                    List<lstvisit> lstv = new List<lstvisit>();
+                    List<Lstvisit> lstv = new List<Lstvisit>();
                     foreach (var v in rtndblst)
                     {
                         if (patientvisitno != v.patientvisitno)
                         {
                             patientvisitno = v.patientvisitno;
-                            lstvisit objv = new lstvisit();
+                            Lstvisit objv = new Lstvisit();
                             objv.patientno = v.patientno;
                             objv.patientvisitno = v.patientvisitno;
                             objv.patientid = v.patientid;
@@ -240,13 +239,13 @@ namespace Service.Repository
                             orderlistno = 0;
                             var ollst = rtndblst.Where(o => o.patientvisitno == v.patientvisitno).ToList();
                             ollst = ollst.OrderBy(d => d.departmentseqno).ThenBy(s => s.serviceseqno).ToList();
-                            List<lstorderlist> lstol = new List<lstorderlist>();
+                            List<Lstorderlist> lstol = new List<Lstorderlist>();
                             foreach (var ol in ollst)
                             {
                                 if (orderlistno != ol.orderlistno)
                                 {
                                     orderlistno = ol.orderlistno;
-                                    lstorderlist objol = new lstorderlist();
+                                    Lstorderlist objol = new Lstorderlist();
                                     objol.patientvisitno = ol.patientvisitno;
                                     objol.orderlistno = ol.orderlistno;
                                     objol.departmentname = ol.departmentname;
@@ -270,10 +269,10 @@ namespace Service.Repository
 
                                     var odlst = ollst.Where(o => o.orderlistno == ol.orderlistno).ToList();
                                     odlst = odlst.OrderBy(t => t.tseqno).ThenBy(st => st.subtestno).ToList();
-                                    List<lstorderdetail> lstod = new List<lstorderdetail>();
+                                    List<Lstorderdetail> lstod = new List<Lstorderdetail>();
                                     foreach (var t in odlst)
                                     {
-                                        lstorderdetail objod = new lstorderdetail();
+                                        Lstorderdetail objod = new Lstorderdetail();
                                         objod.orderlistno = ol.orderlistno;
                                         objod.orderdetailsno = t.orderdetailsno;
                                         objod.testtype = t.testtype;
@@ -293,15 +292,15 @@ namespace Service.Repository
                                         objod.internotes = "";
                                         lstod.Add(objod);
                                     }
-                                    objol.lstorderdetail = lstod;
+                                    objol.Lstorderdetail = lstod;
                                     lstol.Add(objol);
                                 }
                             }
-                            objv.lstorderlist = lstol;
+                            objv.Lstorderlist = lstol;
                             lstv.Add(objv);
                         }
                     }
-                    obj.lstvisit = lstv;
+                    obj.Lstvisit = lstv;
                 }
             }
             catch (Exception ex)
@@ -310,9 +309,9 @@ namespace Service.Repository
             }
             return obj;
         }
-        public async Task<objresult> GetResult(requestresult req)
+        public async Task<Objresult> GetResult(Requestresult req)
         {
-            objresult obj = new objresult();
+            Objresult obj = new Objresult();
             MasterRepository _IMasterRepository = new MasterRepository(_config);
             AppSettingResponse objAppSettingResponse = new AppSettingResponse();
             try
@@ -338,13 +337,13 @@ namespace Service.Repository
                     int id = 0;
 
                     rtndblst = rtndblst.OrderBy(a => a.patientvisitno).ToList();
-                    List<lstvisit> lstv = new List<lstvisit>();
+                    List<Lstvisit> lstv = new List<Lstvisit>();
                     foreach (var v in rtndblst)
                     {
                         if (patientvisitno != v.patientvisitno)
                         {
                             patientvisitno = v.patientvisitno;
-                            lstvisit objv = new lstvisit();
+                            Lstvisit objv = new Lstvisit();
                             objv.patientno = v.patientno;
                             objv.patientvisitno = v.patientvisitno;
                             objv.patientid = v.patientid;
@@ -379,14 +378,14 @@ namespace Service.Repository
                             orderlistno = 0;
                             var ollst = rtndblst.Where(o => o.patientvisitno == v.patientvisitno).ToList();
                             ollst = ollst.OrderBy(d => d.departmentseqno).ThenBy(s => s.serviceseqno).ToList();
-                            List<lstorderlist> lstol = new List<lstorderlist>();
+                            List<Lstorderlist> lstol = new List<Lstorderlist>();
                             int deptno = 0;
                             foreach (var ol in ollst)
                             {
                                 if (orderlistno != ol.orderlistno)
                                 {
                                     orderlistno = ol.orderlistno;
-                                    lstorderlist objol = new lstorderlist();
+                                    Lstorderlist objol = new Lstorderlist();
                                     objol.patientvisitno = ol.patientvisitno;
                                     objol.orderlistno = ol.orderlistno;
                                     objol.departmentno = ol.departmentno;
@@ -441,17 +440,16 @@ namespace Service.Repository
                                     objol.IsPartialEntryTrans = ol.IsPartialEntryTrans;
                                     objol.IsPartialValidationTrans = ol.IsPartialValidationTrans;
 
-                                    // objol.dIComment = ol.dIComment != null && ol.dIComment != "" ? ol.dIComment: objol.dIComment;
                                     if (deptno != objol.departmentno)
                                         objol.isIHLValueAvail = ol.isIHLValueAvail;
                                     deptno = objol.departmentno;
-                                    //  objol.isSubTestDeptNotMapd = ol.isSubTestDeptNotMapd;
+
                                     //non mapped department shown
                                     objol.isDeptAvail = ol.isDeptAvail;
-                                    if (objol.isMultiEditor != null && objol.isMultiEditor == 1)
+                                    if (objol.isMultiEditor == 1)
                                     {
                                         //multi editor - single test scenario - saved/drafted details shown in reportstatus, ICMR PatientId, SRF Number, abnormal, critical values
-                                        requestresult reqtemplate = new requestresult();
+                                        Requestresult reqtemplate = new Requestresult();
                                         reqtemplate.pagecode = req.pagecode;
                                         reqtemplate.venueno = req.venueno;
                                         reqtemplate.venuebranchno = req.venuebranchno;
@@ -459,7 +457,7 @@ namespace Service.Repository
                                         reqtemplate.serviceno = objol.serviceno;
                                         reqtemplate.deptno = req.deptno;
                                         reqtemplate.servicetype = objol.servicetype;
-                                        objresulttemplate objtemplate = new objresulttemplate();
+                                        Objresulttemplate objtemplate = new Objresulttemplate();
                                         objtemplate = GetResultTemplate(reqtemplate);
                                         if (objtemplate != null)
                                         {
@@ -489,8 +487,8 @@ namespace Service.Repository
                                             objAppSettingResponse = _IMasterRepository.GetSingleAppSetting(AppTransFilePath);
                                             string path = objAppSettingResponse != null && objAppSettingResponse.ConfigValue != null && objAppSettingResponse.ConfigValue != ""
                                                     ? objAppSettingResponse.ConfigValue : "";
-                                            //string path = _config.GetConnectionString(ConfigKeys.TransFilePath);
                                             path = path + req.venueno.ToString() + "/G/InterNotes/" + objol.orderlistno + ".ym";
+
                                             if (File.Exists(path))
                                             {
                                                 objol.internotes = File.ReadAllText(path);
@@ -508,7 +506,6 @@ namespace Service.Repository
                                             objAppSettingResponse = _IMasterRepository.GetSingleAppSetting(AppMasterFilePath);
                                             string path = objAppSettingResponse != null && objAppSettingResponse.ConfigValue != null && objAppSettingResponse.ConfigValue != ""
                                                     ? objAppSettingResponse.ConfigValue : "";
-                                            //string path = _config.GetConnectionString(ConfigKeys.MasterFilePath);
                                             path = path + req.venueno.ToString() + "/G/InterNotes/" + objol.serviceno + ".ym";
                                             if (File.Exists(path))
                                             {
@@ -529,12 +526,11 @@ namespace Service.Repository
                                         objol.internotes = "";
                                     }
                                     var odlst = ollst.Where(o => o.orderlistno == ol.orderlistno).ToList();
-                                    //odlst = odlst.OrderBy(t => t.tseqno).ThenBy(st => st.subtestno).ToList();
                                     odlst = odlst.OrderBy(t => t.tseqno).ThenBy(st => st.sseqno).ToList();//issue raised in PSH 
-                                    List<lstorderdetail> lstod = new List<lstorderdetail>();
+                                    List<Lstorderdetail> lstod = new List<Lstorderdetail>();
                                     foreach (var t in odlst)
                                     {
-                                        lstorderdetail objod = new lstorderdetail();
+                                        Lstorderdetail objod = new Lstorderdetail();
                                         objod.id = id;
                                         id = id + 1;
                                         objod.orderlistno = ol.orderlistno;
@@ -566,9 +562,9 @@ namespace Service.Repository
                                         objod.isformulaparameter = t.isformulaparameter;
                                         objod.formulaserviceno = t.formulaserviceno;
                                         objod.formulaservicetype = t.formulaservicetype;
-                                        objod.formulajson = JsonConvert.DeserializeObject<List<formulajson>>(t.formulajson);
-                                        objod.formulaparameterjson = JsonConvert.DeserializeObject<List<formulaparameterjson>>(t.formulaparameterjson);
-                                        objod.picklistjson = JsonConvert.DeserializeObject<List<picklistjson>>(t.picklistjson);
+                                        objod.Formulajson = JsonConvert.DeserializeObject<List<Formulajson>>(t.Formulajson);
+                                        objod.Formulaparameterjson = JsonConvert.DeserializeObject<List<Formulaparameterjson>>(t.Formulaparameterjson);
+                                        objod.Picklistjson = JsonConvert.DeserializeObject<List<Picklistjson>>(t.Picklistjson);
                                         objod.headerno = t.headerno;
                                         objod.isedit = t.isedit;
                                         objod.testinter = t.testinter;
@@ -596,9 +592,6 @@ namespace Service.Repository
                                         objod.isPCVTest = t.isPCVTest;
                                         objod.isHGBAvail = t.isHGBAvail;
                                         objod.isPTTAvail = t.isPTTAvail;
-                                        //objod.pCVCalcRange = t.pCVCalcRange;
-                                        //objod.hGBRestrictValue = t.hGBRestrictValue;
-                                        //objod.hGBCalcValue = t.hGBCalcValue;
                                         objod.pTTRestrictedValue = t.pTTRestrictedValue;
                                         objod.hGBMessage = t.hGBMessage;
                                         objod.pTTMessage = t.pTTMessage;
@@ -620,7 +613,7 @@ namespace Service.Repository
                                         objod.isMCHC = t.isMCHC;
                                         objod.isIndRerun = t.isIndRerun;
                                         objol.isrerun = objod.isIndRerun == true ? false : (objol.isrerun == false ? false : objol.isrerun);
-                                        objod.logicneededjson = JsonConvert.DeserializeObject<List<logicConceptResponse>>(t.logicneededjson);
+                                        objod.logicneededjson = JsonConvert.DeserializeObject<List<LogicConceptResponse>>(t.logicneededjson);
                                         objod.isExtraSubtestEnable = t.isExtraSubTestEnable;
                                         objod.isBlast = t.isBlast;
                                         objod.isAMC = t.isAMC;
@@ -644,7 +637,6 @@ namespace Service.Repository
                                             objAppSettingResponse = _IMasterRepository.GetSingleAppSetting(AppTransTemplateFilePath);
                                             string path = objAppSettingResponse != null && objAppSettingResponse.ConfigValue != null && objAppSettingResponse.ConfigValue != ""
                                                     ? objAppSettingResponse.ConfigValue : "";
-                                            //string path = _config.GetConnectionString(ConfigKeys.TransTemplateFilePath);
                                             path = path + req.venueno.ToString() + "/" + objod.orderlistno.ToString() + "/" + objod.testno.ToString() + "/" + objod.subtestno.ToString() + ".ym";
 
                                             if (File.Exists(path))
@@ -700,8 +692,8 @@ namespace Service.Repository
                                                 objAppSettingResponse = _IMasterRepository.GetSingleAppSetting(AppTransFilePath);
                                                 string path = objAppSettingResponse != null && objAppSettingResponse.ConfigValue != null && objAppSettingResponse.ConfigValue != ""
                                                         ? objAppSettingResponse.ConfigValue : "";
-                                                // string path = _config.GetConnectionString(ConfigKeys.TransFilePath);
                                                 path = path + req.venueno.ToString() + "/T/InterNotes/" + objod.orderdetailsno + ".ym";
+
                                                 if (File.Exists(path))
                                                 {
                                                     objod.internotes = File.ReadAllText(path);
@@ -718,8 +710,8 @@ namespace Service.Repository
                                                 objAppSettingResponse = _IMasterRepository.GetSingleAppSetting(AppMasterFilePath);
                                                 string path = objAppSettingResponse != null && objAppSettingResponse.ConfigValue != null && objAppSettingResponse.ConfigValue != ""
                                                         ? objAppSettingResponse.ConfigValue : "";
-                                                //string path = _config.GetConnectionString(ConfigKeys.MasterFilePath);
                                                 path = path + req.venueno.ToString() + "/T/InterNotes/" + objod.testno + ".ym";
+
                                                 if (File.Exists(path))
                                                 {
                                                     objod.internotes = File.ReadAllText(path);
@@ -733,8 +725,8 @@ namespace Service.Repository
                                                 objAppSettingResponse = _IMasterRepository.GetSingleAppSetting(AppMasterFilePath);
                                                 string Fhpath = objAppSettingResponse != null && objAppSettingResponse.ConfigValue != null && objAppSettingResponse.ConfigValue != ""
                                                         ? objAppSettingResponse.ConfigValue : "";
-                                                //string Fhpath = _config.GetConnectionString(ConfigKeys.MasterFilePath);
                                                 Fhpath = Fhpath + req.venueno.ToString() + "/T/InterNotes/" + objod.testno + "_H" + ".ym";
+                                               
                                                 if (File.Exists(Fhpath))
                                                 {
                                                     objod.interNotesHigh = File.ReadAllText(Fhpath);
@@ -748,8 +740,8 @@ namespace Service.Repository
                                                 objAppSettingResponse = _IMasterRepository.GetSingleAppSetting(AppMasterFilePath);
                                                 string Flpath = objAppSettingResponse != null && objAppSettingResponse.ConfigValue != null && objAppSettingResponse.ConfigValue != ""
                                                         ? objAppSettingResponse.ConfigValue : "";
-                                                //string Flpath = _config.GetConnectionString(ConfigKeys.MasterFilePath);
                                                 Flpath = Flpath + req.venueno.ToString() + "/T/InterNotes/" + objod.testno + "_L" + ".ym";
+
                                                 if (File.Exists(Flpath))
                                                 {
                                                     objod.interNotesLow = File.ReadAllText(Flpath);
@@ -786,15 +778,15 @@ namespace Service.Repository
                                         }
                                         lstod.Add(objod);
                                     }
-                                    objol.lstorderdetail = lstod;
+                                    objol.Lstorderdetail = lstod;
                                     lstol.Add(objol);
                                 }
                             }
-                            objv.lstorderlist = lstol;
+                            objv.Lstorderlist = lstol;
                             lstv.Add(objv);
                         }
                     }
-                    obj.lstvisit = lstv;
+                    obj.Lstvisit = lstv;
                 }
             }
             catch (Exception ex)
@@ -803,10 +795,9 @@ namespace Service.Repository
             }
             return obj;
         }
-
-        public async Task<resultrtn> InsertResult(objresult req)
+        public async Task<Resultrtn> InsertResult(Objresult req)
         {
-            resultrtn obj = new resultrtn();
+            Resultrtn obj = new Resultrtn();
             MasterRepository _IMasterRepository = new MasterRepository(_config);
             AppSettingResponse objAppSettingResponse = new AppSettingResponse();
             
@@ -817,16 +808,16 @@ namespace Service.Repository
                     XDocument odxml = new XDocument();
                     XElement xodtbl = new XElement("odtbl");
 
-                    foreach (var vst in req.lstvisit)
+                    foreach (var vst in req.Lstvisit)
                     {
                         int oldserviceno = 0;
-                        foreach (var ol in vst.lstorderlist)
+                        foreach (var ol in vst.Lstorderlist)
                         {
                             //for draft - we need to allow empty result's as well also
                             if (req.action=="SD" || (ol.ischecked == true || ol.risrerun == true || ol.risrecollect == true || ol.risrecheck == true || ol.isnoresult == true || (ol.isLock == true || ol.isLockChanged == true)))
                             {
                                 int oldtestno = 0;
-                                foreach (var od in ol.lstorderdetail)
+                                foreach (var od in ol.Lstorderdetail)
                                 {
                                     if (od.resulttype != "C" && od.resulttype != "TE" && 
                                         ((req.pagecode == "PCRA" && od.ischecked == true || ol.risrerun == true || ol.risrecheck == true || (ol.isLock == true || ol.isLockChanged == true)) ||
@@ -954,17 +945,17 @@ namespace Service.Repository
 
                     if (req.pagecode == "PCRA" && req.action == "SV" && obj.patientvisitno > 0)
                     {
-                        int output = await PushDueMessage(obj.patientvisitno, req.venueno, req.venuebranchno, req.userno, req.pagecode, "1", req.lstvisit[0].fullname);
+                        int output = await PushDueMessage(obj.patientvisitno, req.venueno, req.venuebranchno, req.userno, req.pagecode, "1", req.Lstvisit[0].fullname);
                         if (output == 0)
                         {
-                            await PushMessage(obj.patientvisitno, req.venueno, req.venuebranchno, req.userno, req.pagecode, "1", req.lstvisit[0].fullname);
+                            await PushMessage(obj.patientvisitno, req.venueno, req.venuebranchno, req.userno, req.pagecode, "1", req.Lstvisit[0].fullname);
                         }
                     }
                 }
             }
             catch (Exception ex)
             {
-                MyDevException.Error(ex, "ResultRepository.InsertResult - " + req.lstvisit.FirstOrDefault().patientvisitno.ToString(), ExceptionPriority.High, ApplicationType.REPOSITORY, req.venueno, req.venuebranchno, req.userno);
+                MyDevException.Error(ex, "ResultRepository.InsertResult - " + req.Lstvisit.FirstOrDefault().patientvisitno.ToString(), ExceptionPriority.High, ApplicationType.REPOSITORY, req.venueno, req.venuebranchno, req.userno);
             }
 
             return obj;
@@ -980,8 +971,11 @@ namespace Service.Repository
                     var _venueno = new SqlParameter("VenueNo", venueno);
                     var _venuebranchno = new SqlParameter("VenueBranchNo", venuebranchno);
                     var _Type = new SqlParameter("Type", 1);
-                    var lst = context.GetCustomerMsgDetails.FromSqlRaw(
-                   "Execute dbo.Pro_GetCustomerNotification @PatientVisitNo,@VenueNo,@VenueBranchNo,@Type", _PatientVisitNo, _venueno, _venuebranchno, _Type).ToList();
+
+                    var lst = await context.GetCustomerMsgDetails.FromSqlRaw(
+                   "Execute dbo.Pro_GetCustomerNotification @PatientVisitNo,@VenueNo,@VenueBranchNo,@Type", 
+                   _PatientVisitNo, _venueno, _venuebranchno, _Type).ToListAsync();
+                    
                     foreach (var item in lst)
                     {
                         if (!string.IsNullOrEmpty(item.Address))
@@ -1045,6 +1039,7 @@ namespace Service.Repository
             int result = 0;
             MasterRepository _IMasterRepository = new MasterRepository(_config);
             AppSettingResponse objAppSettingResponse = new AppSettingResponse();
+
             try
             {
                 using (var context = new ResultContext(_config.GetConnectionString(ConfigKeys.DefaultConnection)))
@@ -1053,9 +1048,9 @@ namespace Service.Repository
                     var _venueno = new SqlParameter("VenueNo", venueno);
                     var _venuebranchno = new SqlParameter("VenueBranchNo", venuebranchno);
                     
-                    var lst = context.GetCustomerMsgDetails.FromSqlRaw(
+                    var lst = await context.GetCustomerMsgDetails.FromSqlRaw(
                     "Execute dbo.Pro_GetCustomerNotification @PatientVisitNo,@VenueNo,@VenueBranchNo", 
-                    _PatientVisitNo, _venueno, _venuebranchno).ToList();
+                    _PatientVisitNo, _venueno, _venuebranchno).ToListAsync();
                     
                     foreach (var item in lst)
                     {
@@ -1172,9 +1167,9 @@ namespace Service.Repository
             return result;
         }
 
-        public objresultmb GetResultMB(requestresult req)
+        public Objresultmb GetResultMB(Requestresult req)
         {
-            objresultmb obj = new objresultmb();
+            Objresultmb obj = new Objresultmb();
             try
             {
                 using (var context = new ResultContext(_config.GetConnectionString(ConfigKeys.DefaultConnection)))
@@ -1250,8 +1245,8 @@ namespace Service.Repository
                     obj.patterndescription = v.patterndescription;
                     obj.colonycount = v.colonycount;
                     obj.wetpreparation = v.wetpreparation;
-                    obj.lstgramstainmb = JsonConvert.DeserializeObject<List<lstgramstainmb>>(v.gramstainjson);
-                    obj.lstgramstainmbbottle = JsonConvert.DeserializeObject<List<lstgramstainmbbottle>>(v.gramstainbottlejson);
+                    obj.Lstgramstainmb = JsonConvert.DeserializeObject<List<Lstgramstainmb>>(v.gramstainjson);
+                    obj.Lstgramstainmbbottle = JsonConvert.DeserializeObject<List<Lstgramstainmbbottle>>(v.gramstainbottlejson);
                     obj.gramstaintext = v.gramstaintext;
                     obj.gramstainbottletext = v.gramstainbottletext;
                     obj.comments = v.comments;
@@ -1271,23 +1266,23 @@ namespace Service.Repository
                     obj.UnitText = v.UnitText;
                     obj.ColonyCountText = v.ColonyCountText;
 
-                    List<lstorg> lstorg = new List<lstorg>();
+                    List<Lstorg> Lstorg = new List<Lstorg>();
                     if (v.mbdrugjson == "")
                     {
                     }
                     else
                     {
-                        var lstmbdrugjson = JsonConvert.DeserializeObject<List<lstmbdrugjson>>(v.mbdrugjson);
+                        var Lstmbdrugjson = JsonConvert.DeserializeObject<List<Lstmbdrugjson>>(v.mbdrugjson);
                         var orgno = 0;
                         var orgnonew = 0;
-                        //lstmbdrugjson = lstmbdrugjson.OrderBy(t => t.osequenceno).ToList();
-                        foreach (var o in lstmbdrugjson)
+                        //Lstmbdrugjson = Lstmbdrugjson.OrderBy(t => t.osequenceno).ToList();
+                        foreach (var o in Lstmbdrugjson)
                         {
                             if (orgno != o.organismno || orgnonew != o.orgno)
                             {
                                 orgno = o.organismno;
                                 orgnonew = o.orgno;
-                                lstorg objorg = new lstorg();
+                                Lstorg objorg = new Lstorg();
                                 objorg.organismtypeno = o.organismtypeno;
                                 objorg.organismno = o.organismno;
                                 objorg.organismmccode = o.organismmccode;
@@ -1302,12 +1297,12 @@ namespace Service.Repository
                                 objorg.orgbasednotes = o.orgbasednotes;
                                 objorg.orgno = o.orgno;
                                 objorg.isInterface = o.isInterface;
-                                var druglst = lstmbdrugjson.Where(d => d.organismno == o.organismno && d.orgno == o.orgno).ToList();
+                                var druglst = Lstmbdrugjson.Where(d => d.organismno == o.organismno && d.orgno == o.orgno).ToList();
                                 druglst = druglst.OrderBy(t => t.asequenceno).ToList();
-                                List<lstdrug> lstdrug = new List<lstdrug>();
+                                List<Lstdrug> Lstdrug = new List<Lstdrug>();
                                 foreach (var dl in druglst)
                                 {
-                                    lstdrug objdrug = new lstdrug();
+                                    Lstdrug objdrug = new Lstdrug();
                                     objdrug.organismno = dl.organismno;
                                     objdrug.antibioticno = dl.antibioticno;
                                     objdrug.antibioticmccode = dl.antibioticmccode;
@@ -1317,14 +1312,14 @@ namespace Service.Repository
                                     objdrug.isshow = dl.isshow;
                                     objdrug.interpvalue = dl.interpvalue;
                                     objdrug.orgType = dl.orgType;
-                                    lstdrug.Add(objdrug);
+                                    Lstdrug.Add(objdrug);
                                 }
-                                objorg.lstdrug = lstdrug;
-                                lstorg.Add(objorg);
+                                objorg.Lstdrug = Lstdrug;
+                                Lstorg.Add(objorg);
                             }
                         }
                     }
-                    obj.lstorg = lstorg;
+                    obj.Lstorg = Lstorg;
                 }
             }
             catch (Exception ex)
@@ -1334,9 +1329,9 @@ namespace Service.Repository
             return obj;
         }
 
-        public resultrtn InsertResultMB(objresultmb req)
+        public async Task<Resultrtn> InsertResultMB(Objresultmb req)
         {
-            resultrtn obj = new resultrtn();
+            Resultrtn obj = new Resultrtn();
             try
             {
                 using (var context = new ResultContext(_config.GetConnectionString(ConfigKeys.DefaultConnection)))
@@ -1364,9 +1359,9 @@ namespace Service.Repository
                     var _patterndescription = new SqlParameter("patterndescription", req.patterndescription);
                     var _colonycount = new SqlParameter("colonycount", req.colonycount);
                     var _wetpreparation = new SqlParameter("wetpreparation", req.wetpreparation);
-                    string gramstainjson = JsonConvert.SerializeObject(req.lstgramstainmb);
+                    string gramstainjson = JsonConvert.SerializeObject(req.Lstgramstainmb);
                     var _gramstainjson = new SqlParameter("gramstainjson", gramstainjson);
-                    string gramstainbottlejson = JsonConvert.SerializeObject(req.lstgramstainmbbottle);
+                    string gramstainbottlejson = JsonConvert.SerializeObject(req.Lstgramstainmbbottle);
                     var _gramstainbottlejson = new SqlParameter("gramstainbottlejson", gramstainbottlejson);
                     var _gramstaintext = new SqlParameter("gramstaintext", req.gramstaintext);
                     var _gramstainbottletext = new SqlParameter("gramstainbottletext", req.gramstainbottletext);
@@ -1385,11 +1380,12 @@ namespace Service.Repository
 
                     XDocument odxml = new XDocument();
                     XElement xorgantitbl = new XElement("organtitbl");
-                    if (req.lstorg.Count > 0)
+
+                    if (req.Lstorg.Count > 0)
                     {
-                        foreach (var org in req.lstorg)
+                        foreach (var org in req.Lstorg)
                         {
-                            var druglst = org.lstdrug.Where(d => d.antibioticno > 0).ToList();
+                            var druglst = org.Lstdrug.Where(d => d.antibioticno > 0).ToList();
                             if (druglst.Count == 0)
                             {
                                 XElement xrow = new XElement("row",
@@ -1459,7 +1455,7 @@ namespace Service.Repository
                     var _organtixml = new SqlParameter("organtixml", req.organtixml);
                     var _ismbnoresult = new SqlParameter("ismbnoresult", req.ismbnoresult);
 
-                    var lst = context.InsertResultMB.FromSqlRaw(
+                    var lst = await context.InsertResultMB.FromSqlRaw(
                     "Execute dbo.pro_InsertResultMB @pagecode, @action, @venueno, @venuebranchno, @userno, " +
                     "@isabnormal, @iscritical, @ischecked, @isrerun, @isrecollect, @isrecheck, @isattachment, " +
                     "@patientvisitno,@orderlistno,@serviceno,@reportstatus,@resultstatus,@resultpattern,@patterndescription," +
@@ -1468,13 +1464,14 @@ namespace Service.Repository
                     _pagecode, _action, _venueno, _venuebranchno, _userno, _isabnormal, _iscritical, _ischecked, _isrerun, _isrecollect, _isrecheck, _isattachment,
                     _patientvisitno, _orderlistno, _serviceno, _reportstatus, _resultstatus, _resultpattern, _patterndescription, _colonycount, _wetpreparation,
                     _gramstainjson, _gramstainbottlejson, _gramstaintext, _gramstainbottletext, _comments, _organtixml, _approvalDoctor, _ismbnoresult, _isSecondReviewAvail,
-                    _isLock, _snomedId, _SrcOfSpecimenNo, _SrcOfSpecimenDesc, _SrcOfSpecimenOthers, _NoMicroOrgSeen, _CCUnitNo, _UnitText, _ColonyCountText).ToList();
+                    _isLock, _snomedId, _SrcOfSpecimenNo, _SrcOfSpecimenDesc, _SrcOfSpecimenOthers, _NoMicroOrgSeen, _CCUnitNo, _UnitText, _ColonyCountText)
+                    .ToListAsync();
 
                     obj = lst[0];
 
                     if (req.pagecode == "PCRA" && req.action == "SV" && obj.patientvisitno > 0)
                     {
-                        PushMessage(obj.patientvisitno, req.venueno, req.venuebranchno, req.userno, req.pagecode, "2", req.fullname);
+                        await PushMessage(obj.patientvisitno, req.venueno, req.venuebranchno, req.userno, req.pagecode, "2", req.fullname);
                     }
                 }
             }
@@ -1485,9 +1482,9 @@ namespace Service.Repository
             return obj;
         }
 
-        public List<orgtypeantibiotic> GetOrgTypeAntibiotic(requestresult req)
+        public List<Orgtypeantibiotic> GetOrgtypeantibiotic(Requestresult req)
         {
-            List<orgtypeantibiotic> lst = new List<orgtypeantibiotic>();
+            List<Orgtypeantibiotic> lst = new List<Orgtypeantibiotic>();
             try
             {
                 using (var context = new ResultContext(_config.GetConnectionString(ConfigKeys.DefaultConnection)))
@@ -1498,21 +1495,21 @@ namespace Service.Repository
                     var _organismtypeno = new SqlParameter("organismtypeno", req.serviceno);
                     var _type = new SqlParameter("type", req.type);
 
-                    lst = context.GetOrgTypeAntibiotic.FromSqlRaw(
-                    "Execute dbo.pro_GetOrgTypeAntibiotic @venueno,@venuebranchno,@organismno,@organismtypeno,@type",
+                    lst = context.GetOrgtypeantibiotic.FromSqlRaw(
+                    "Execute dbo.pro_GetOrgtypeantibiotic @venueno,@venuebranchno,@organismno,@organismtypeno,@type",
                     _venueno, _venuebranchno, _organismno, _organismtypeno, _type).ToList();
                 }
             }
             catch (Exception ex)
             {
-                MyDevException.Error(ex, "ResultRepository.GetOrgTypeAntibiotic", ExceptionPriority.High, ApplicationType.REPOSITORY, req.venueno, req.venuebranchno, 0);
+                MyDevException.Error(ex, "ResultRepository.GetOrgtypeantibiotic", ExceptionPriority.High, ApplicationType.REPOSITORY, req.venueno, req.venuebranchno, 0);
             }
             return lst;
         }
 
-        public objresulttemplate GetResultTemplate(requestresult req)
+        public Objresulttemplate GetResultTemplate(Requestresult req)
         {
-            objresulttemplate obj = new objresulttemplate();
+            Objresulttemplate obj = new Objresulttemplate();
             bool lGetResult = false;
 
             //
@@ -1720,17 +1717,19 @@ namespace Service.Repository
             return obj;
         }
 
-        public resultrtn InsertResultTemplate(objresulttemplate req)
+        public async Task<Resultrtn> InsertResultTemplate(Objresulttemplate req)
         {
-            resultrtn obj = new resultrtn();
+            Resultrtn obj = new Resultrtn();
 
             try
             {
                 MasterRepository _IMasterRepository = new MasterRepository(_config);
                 AppSettingResponse objAppSettingResponse = new AppSettingResponse();
                 string AppTransTemplateFilePath = "TransTemplateFilePath";
+                
                 objAppSettingResponse = _IMasterRepository.GetSingleAppSetting(AppTransTemplateFilePath);
                 string auditfolder = string.Empty;
+                
                 if (req.pagecode == "PCRA")
                 {
                     //get current result template content                    
@@ -1795,9 +1794,10 @@ namespace Service.Repository
 
                     if ((req.isMultiEditor == 1 && req.multieditorcount == 1) || (req.isMultiEditor != 1))
                     {
-                        var lst = context.InsertResultTemplate.FromSqlRaw(
+                        var lst = await context.InsertResultTemplate.FromSqlRaw(
                         "Execute dbo.pro_InsertResultTemplate @pagecode,@action,@venueno,@venuebranchno,@userno,@isabnormal,@iscritical,@ischecked,@isrerun,@isrecollect,@isrecheck,@isattachment,@patientvisitno,@orderlistno,@serviceno,@reportstatus,@templateno,@icmrPatientId,@srfNumber,@approvalDoctor,@istmpnoresult,@isSecondReviewAvail,@isLock,@SnomedId,@tissueAudit,@requiredPath,@malignantCase",
-                        _pagecode, _action, _venueno, _venuebranchno, _userno, _isabnormal, _iscritical, _ischecked, _isrerun, _isrecollect, _isrecheck, _isattachment, _patientvisitno, _orderlistno, _serviceno, _reportstatus, _templateno, _icmrPatientId, _srfNumber, _approvalDoctor, _isnoresult, _isSecondReviewAvail, _isLock, _snomedId, _tissueAudit, _requiredPath,_malignantCase).ToList();
+                        _pagecode, _action, _venueno, _venuebranchno, _userno, _isabnormal, _iscritical, _ischecked, _isrerun, _isrecollect, _isrecheck, _isattachment, _patientvisitno, _orderlistno, _serviceno, _reportstatus, _templateno, _icmrPatientId, _srfNumber, _approvalDoctor, _isnoresult, _isSecondReviewAvail, _isLock, _snomedId, _tissueAudit, _requiredPath,_malignantCase)
+                        .ToListAsync();
 
                         obj = lst[0];
                     }
@@ -1831,7 +1831,7 @@ namespace Service.Repository
                     }
 
                     string createText = req.result + Environment.NewLine;
-                    if (req.isMultiEditor == 1 && req.subtestno != null && req.subtestno > 0)
+                    if (req.isMultiEditor == 1 && req.subtestno > 0)
                     {
                         try
                         {
@@ -1857,7 +1857,7 @@ namespace Service.Repository
 
                     if (req.pagecode == "PCRA" && req.action == "SV" && obj.patientvisitno > 0)
                     {
-                        PushMessage(obj.patientvisitno, req.venueno, req.venuebranchno, req.userno, req.pagecode, "3", req.fullname);
+                        await PushMessage(obj.patientvisitno, req.venueno, req.venuebranchno, req.userno, req.pagecode, "3", req.fullname);
                     }
                 }
 
@@ -1916,10 +1916,9 @@ namespace Service.Repository
             }
             return obj;
         }
-
-        public objrecall GetRecall(requestresult req)
+        public Objrecall GetRecall(Requestresult req)
         {
-            objrecall obj = new objrecall();
+            Objrecall obj = new Objrecall();
             try
             {
                 using (var context = new ResultContext(_config.GetConnectionString(ConfigKeys.DefaultConnection)))
@@ -1946,11 +1945,11 @@ namespace Service.Repository
                     obj.referredBy = rtndblst[0].referredBy;
                     obj.venueBranchName = rtndblst[0].venueBranchName;
 
-                    List<lstRecallServicves> lstv = new List<lstRecallServicves>();
+                    List<LstRecallServicves> lstv = new List<LstRecallServicves>();
                     foreach (var v in rtndblst)
                     {
                         patientvisitno = v.patientVisitNo;
-                        lstRecallServicves objv = new lstRecallServicves();
+                        LstRecallServicves objv = new LstRecallServicves();
                         objv.patientVisitNo = v.patientVisitNo;
                         objv.orderListNo = v.orderListNo;
                         objv.barcodeNo = v.barcodeNo;
@@ -1961,7 +1960,7 @@ namespace Service.Repository
                         objv.orderListStatusText = v.orderListStatusText;
                         lstv.Add(objv);
                     }
-                    obj.lstRecallServicves = lstv;
+                    obj.LstRecallServicves = lstv;
                 }
             }
             catch (Exception ex)
@@ -1971,21 +1970,21 @@ namespace Service.Repository
             return obj;
         }
 
-        public recallResponse InsertRecall(objrecall req)
+        public RecallResponse InsertRecall(Objrecall req)
         {
-            recallResponse objRes = new recallResponse();
-            recallDataResponse obj = new recallDataResponse();
+            RecallResponse objRes = new RecallResponse();
+            RecallDataResponse obj = new RecallDataResponse();
             try
             {
                 using (var context = new ResultContext(_config.GetConnectionString(ConfigKeys.DefaultConnection)))
                 {
                     CommonHelper commonUtility = new CommonHelper();
                     string recallXML = "";
-                    if (req.lstRecallServicves.Count > 0)
+                    if (req.LstRecallServicves.Count > 0)
                     {
-                        recallXML = commonUtility.ToXML(req.lstRecallServicves);
+                        recallXML = commonUtility.ToXML(req.LstRecallServicves);
                     }
-                    req.lstRecallServicves.Clear();
+                    req.LstRecallServicves.Clear();
 
                     var _recallXML = new SqlParameter("recallXML", recallXML);
                     var _patientVisitNo = new SqlParameter("patientVisitNo", req.patientVisitNo);
@@ -2002,9 +2001,9 @@ namespace Service.Repository
                     objRes.multieditorcount = data[0].multieditorcount;
                     objRes.RsltAmendNo = data[0].RsltAmendNo;
                     objRes.RsltAmendCode = data[0].RsltAmendCode;
-                    objRes.lstTestDetails = JsonConvert.DeserializeObject<List<RecallTestDetailsResponse>>(data[0]?.lstTestDetails ?? "");
+                    objRes.LsttestDetails = JsonConvert.DeserializeObject<List<RecallTestDetailsResponse>>(data[0]?.LsttestDetails ?? "");
 
-                    if (objRes.lstTestDetails != null && objRes.lstTestDetails.Count > 0)
+                    if (objRes.LsttestDetails != null && objRes.LsttestDetails.Count > 0)
                     {
                         string sourcePath = "", destPath = "";
                         string sourceFolder, destFolder = "";
@@ -2026,7 +2025,7 @@ namespace Service.Repository
                         destPath = objDest != null && objDest.ConfigValue != null && objDest.ConfigValue != ""
                                 ? objDest.ConfigValue : "";
 
-                        foreach (var z in objRes.lstTestDetails)
+                        foreach (var z in objRes.LsttestDetails)
                         {   
                             sourcePath = sourcePath + req.venueno.ToString() + "\\" + z.orderListNo.ToString() + "\\";
                             destPath = destPath + req.venueno.ToString() + "\\" + amendNo + '\\' + z.orderListNo.ToString() + "\\";
@@ -2054,9 +2053,9 @@ namespace Service.Repository
             return objRes;
         }
 
-        public List<objresulttemplate> GetBulkResult(requestresultvisit req)
+        public List<Objresulttemplate> GetBulkResult(Requestresultvisit req)
         {
-            List<objresulttemplate> lst = new List<objresulttemplate>();
+            List<Objresulttemplate> lst = new List<Objresulttemplate>();
             MasterRepository _IMasterRepository = new MasterRepository(_config);
             AppSettingResponse objAppSettingResponse = new AppSettingResponse();
             try
@@ -2084,7 +2083,7 @@ namespace Service.Repository
 
                     foreach (var v in rtndblst)
                     {
-                        objresulttemplate obj = new objresulttemplate();
+                        Objresulttemplate obj = new Objresulttemplate();
                         obj.patientno = v.patientno;
                         obj.patientvisitno = v.patientvisitno;
                         obj.patientid = v.patientid;
@@ -2195,9 +2194,9 @@ namespace Service.Repository
             return lst;
         }
 
-        public resultrtn InsertBulkResult(objbulkresulttemplate req)
+        public async Task<Resultrtn> InsertBulkResult(Objbulkresulttemplate req)
         {
-            resultrtn obj = new resultrtn();
+            Resultrtn obj = new Resultrtn();
             try
             {
                 using (var context = new ResultContext(_config.GetConnectionString(ConfigKeys.DefaultConnection)))
@@ -2245,7 +2244,7 @@ namespace Service.Repository
 
                         if (req.pagecode == "PCRA" && req.action == "SV" && v.patientvisitno > 0)
                         {
-                            PushMessage(v.patientvisitno, req.venueno, req.venuebranchno, req.userno, req.pagecode, "3", v.fullname);
+                            await PushMessage(v.patientvisitno, req.venueno, req.venuebranchno, req.userno, req.pagecode, "3", v.fullname);
                         }
                     }
                 }
@@ -2257,9 +2256,9 @@ namespace Service.Repository
             return obj;
         }
 
-        public List<covidresult> GetCovidWorkOrder(covidWorkOrderreq req)
+        public List<Covidresult> GetCovidWorkOrder(CovidWorkOrderreq req)
         {
-            List<covidresult> lst = new List<covidresult>();
+            List<Covidresult> lst = new List<Covidresult>();
             try
             {
                 using (var context = new ResultContext(_config.GetConnectionString(ConfigKeys.DefaultConnection)))
@@ -2292,21 +2291,20 @@ namespace Service.Repository
             return lst;
         }
 
-        public resultrtn InsertCovidWorkOrder(covidWorkOrder req)
+        public Resultrtn InsertCovidWorkOrder(CovidWorkOrder req)
         {
-            resultrtn obj = new resultrtn();
+            Resultrtn obj = new Resultrtn();
             try
             {
                 using (var context = new ResultContext(_config.GetConnectionString(ConfigKeys.DefaultConnection)))
                 {
-
                     CommonHelper commonUtility = new CommonHelper();
                     string covidXML = "";
-                    if (req.lstcovidresult.Count > 0)
+                    if (req.lstCovidresult.Count > 0)
                     {
-                        covidXML = commonUtility.ToXML(req.lstcovidresult);
+                        covidXML = commonUtility.ToXML(req.lstCovidresult);
                     }
-                    req.lstcovidresult.Clear();
+                    req.lstCovidresult.Clear();
 
                     var _covidXML = new SqlParameter("covidXML", covidXML);
                     var _venueno = new SqlParameter("venueno", req.venueno);
@@ -2374,10 +2372,7 @@ namespace Service.Repository
                     var _Nationality = new SqlParameter("Nationality", RequestItem.FranchiseNo);//nationality
                     var _searchType = new SqlParameter("searchType", RequestItem.searchType);
                     var _searchKeyword = new SqlParameter("searchKeyword", RequestItem.SearchKey);
-                    //var _refferalType = new SqlParameter("@refferalType", SqlDbType.Int);
-                    //_refferalType.Value = RequestItem.refferalType != 0 ? (object)RequestItem.refferalType : 0;
                     var _refferalType = new SqlParameter("refferalType", RequestItem.refferalType);
-
 
                     List<PatientDataImpressionResponse> result = context.GetPatientImpressionList.FromSqlRaw(
                     "Execute dbo.Pro_GetPatientSearchImpression @FROMDate,@ToDate,@Type,@VenueNo,@VenueBranchNo,@CustomerNo,@PhysicianNo,@DepartmentNo,@ServiceNo,@IsReport,@ServiceType,@PatientVisitNo,@UserNo,@IDType,@Nationality,@searchType,@searchKeyword,@refferalType",
@@ -2460,11 +2455,6 @@ namespace Service.Repository
                         var _userNos = new SqlParameter("UserNo", RequestItem.userNo);
                         var _isPageIndexReq = new SqlParameter("isPageIndexReq", RequestItem.isStat);
                         var _refferalTypee = new SqlParameter("refferalType", RequestItem.refferalType);
-                        //var _refferalTypee = new SqlParameter("@refferalType", SqlDbType.Int);
-                        //_refferalTypee.Value = RequestItem.refferalType != 0 ? (object)RequestItem.refferalType : 0;
-
-
-
 
                         lstPatientInfoResponse = context.GetPatientImpressionoutput.FromSqlRaw(
                         "Execute dbo.Pro_GetPatientImpression @FROMDate,@ToDate,@Type,@VenueNo,@VenueBranchNo,@CustomerNo,@PhysicianNo,@DepartmentNo,@ServiceNo,@orderxml,@PageIndex,@IsReport,@ServiceType,@PatientVisitNo,@UserNo,@isPageIndexReq,@refferalType",
@@ -2479,9 +2469,9 @@ namespace Service.Repository
             return lstPatientInfoResponse;
         }
 
-        public async Task<objresult> GetResultExceptUserMapped(requestresult req)
+        public async Task<Objresult> GetResultExceptUserMapped(Requestresult req)
         {
-            objresult obj = new objresult();
+            Objresult obj = new Objresult();
             MasterRepository _IMasterRepository = new MasterRepository(_config);
             AppSettingResponse objAppSettingResponse = new AppSettingResponse();
             try
@@ -2506,13 +2496,13 @@ namespace Service.Repository
                     int id = 0;
 
                     rtndblst = rtndblst.OrderBy(a => a.patientvisitno).ToList();
-                    List<lstvisit> lstv = new List<lstvisit>();
+                    List<Lstvisit> lstv = new List<Lstvisit>();
                     foreach (var v in rtndblst)
                     {
                         if (patientvisitno != v.patientvisitno)
                         {
                             patientvisitno = v.patientvisitno;
-                            lstvisit objv = new lstvisit();
+                            Lstvisit objv = new Lstvisit();
                             objv.patientno = v.patientno;
                             objv.patientvisitno = v.patientvisitno;
                             objv.patientid = v.patientid;
@@ -2542,14 +2532,14 @@ namespace Service.Repository
                             var ollst = rtndblst.Where(o => o.patientvisitno == v.patientvisitno).ToList();
                             ollst = ollst.OrderBy(d => d.departmentseqno).ThenBy(s => s.serviceseqno).ToList();
 
-                            List<lstorderlist> lstol = new List<lstorderlist>();
+                            List<Lstorderlist> lstol = new List<Lstorderlist>();
 
                             foreach (var ol in ollst)
                             {
                                 if (orderlistno != ol.orderlistno)
                                 {
                                     orderlistno = ol.orderlistno;
-                                    lstorderlist objol = new lstorderlist();
+                                    Lstorderlist objol = new Lstorderlist();
                                     objol.patientvisitno = ol.patientvisitno;
                                     objol.orderlistno = ol.orderlistno;
                                     objol.departmentno = ol.departmentno;
@@ -2580,10 +2570,10 @@ namespace Service.Repository
                                     objol.isrecheck = ol.isrecheck;
                                     objol.isMultiEditor = ol.isMultiEditor;
 
-                                    if (objol.isMultiEditor != null && objol.isMultiEditor == 1)
+                                    if (objol.isMultiEditor == 1)
                                     {
                                         //multi editor - single test scenario - saved/drafted details shown in reportstatus, ICMR PatientId, SRF Number, abnormal, critical values
-                                        requestresult reqtemplate = new requestresult();
+                                        Requestresult reqtemplate = new Requestresult();
                                         reqtemplate.pagecode = req.pagecode;
                                         reqtemplate.venueno = req.venueno;
                                         reqtemplate.venuebranchno = req.venuebranchno;
@@ -2592,7 +2582,7 @@ namespace Service.Repository
                                         reqtemplate.deptno = req.deptno;
                                         reqtemplate.servicetype = objol.servicetype;
 
-                                        objresulttemplate objtemplate = new objresulttemplate();
+                                        Objresulttemplate objtemplate = new Objresulttemplate();
                                         objtemplate = GetResultTemplate(reqtemplate);
 
                                         if (objtemplate != null)
@@ -2664,10 +2654,10 @@ namespace Service.Repository
                                     var odlst = ollst.Where(o => o.orderlistno == ol.orderlistno).ToList();
                                     //odlst = odlst.OrderBy(t => t.tseqno).ThenBy(st => st.subtestno).ToList();
                                     odlst = odlst.OrderBy(t => t.tseqno).ThenBy(st => st.sseqno).ToList();//issue raised in PSH 
-                                    List<lstorderdetail> lstod = new List<lstorderdetail>();
+                                    List<Lstorderdetail> lstod = new List<Lstorderdetail>();
                                     foreach (var t in odlst)
                                     {
-                                        lstorderdetail objod = new lstorderdetail();
+                                        Lstorderdetail objod = new Lstorderdetail();
                                         objod.id = id;
                                         id = id + 1;
                                         objod.orderlistno = ol.orderlistno;
@@ -2698,9 +2688,9 @@ namespace Service.Repository
                                         objod.isformulaparameter = t.isformulaparameter;
                                         objod.formulaserviceno = t.formulaserviceno;
                                         objod.formulaservicetype = t.formulaservicetype;
-                                        objod.formulajson = JsonConvert.DeserializeObject<List<formulajson>>(t.formulajson);
-                                        objod.formulaparameterjson = JsonConvert.DeserializeObject<List<formulaparameterjson>>(t.formulaparameterjson);
-                                        objod.picklistjson = JsonConvert.DeserializeObject<List<picklistjson>>(t.picklistjson);
+                                        objod.Formulajson = JsonConvert.DeserializeObject<List<Formulajson>>(t.Formulajson);
+                                        objod.Formulaparameterjson = JsonConvert.DeserializeObject<List<Formulaparameterjson>>(t.Formulaparameterjson);
+                                        objod.Picklistjson = JsonConvert.DeserializeObject<List<Picklistjson>>(t.Picklistjson);
                                         objod.headerno = t.headerno;
                                         objod.isedit = t.isedit;
                                         objod.testinter = t.testinter;
@@ -2802,15 +2792,15 @@ namespace Service.Repository
                                         }
                                         lstod.Add(objod);
                                     }
-                                    objol.lstorderdetail = lstod;
+                                    objol.Lstorderdetail = lstod;
                                     lstol.Add(objol);
                                 }
                             }
-                            objv.lstorderlist = lstol;
+                            objv.Lstorderlist = lstol;
                             lstv.Add(objv);
                         }
                     }
-                    obj.lstvisit = lstv;
+                    obj.Lstvisit = lstv;
                 }
             }
             catch (Exception ex)
@@ -2821,9 +2811,9 @@ namespace Service.Repository
         }
 
         //merged concept
-        public List<mergeresultresponse> GetMergedResult(mergeresultrequest req)
+        public List<Mergeresultresponse> GetMergedResult(Mergeresultrequest req)
         {
-            List<mergeresultresponse> lst = new List<mergeresultresponse>();
+            List<Mergeresultresponse> lst = new List<Mergeresultresponse>();
             try
             {
                 using (var context = new ResultContext(_config.GetConnectionString(ConfigKeys.DefaultConnection)))
@@ -2848,9 +2838,9 @@ namespace Service.Repository
             }
             return lst;
         }
-        public savemergeresultresponse InsertMergedResult(savemergeresultrequest req)
+        public Savemergeresultresponse InsertMergedResult(Savemergeresultrequest req)
         {
-            savemergeresultresponse Obj = new savemergeresultresponse();
+            Savemergeresultresponse Obj = new Savemergeresultresponse();
             try
             {
                 using (var context = new ResultContext(_config.GetConnectionString(ConfigKeys.DefaultConnection)))
@@ -2914,9 +2904,9 @@ namespace Service.Repository
             return Obj;
         }
         //
-        public List<culturehistoryreponse> GetCultureHistory(culturehistoryrequest req)
+        public List<Culturehistoryreponse> GetCultureHistory(Culturehistoryrequest req)
         {
-            List<culturehistoryreponse> lst = new List<culturehistoryreponse>();
+            List<Culturehistoryreponse> lst = new List<Culturehistoryreponse>();
             try
             {
                 using (var context = new ResultContext(_config.GetConnectionString(ConfigKeys.DefaultConnection)))
@@ -2940,9 +2930,9 @@ namespace Service.Repository
             return lst;
         }
 
-        public async Task<objresult> GetAnalyserResult(analyserrequestresult req)
+        public async Task<Objresult> GetAnalyserResult(AnalyserRequestresult req)
         {
-            objresult obj = new objresult();
+            Objresult obj = new Objresult();
             MasterRepository _IMasterRepository = new MasterRepository(_config);
             AppSettingResponse objAppSettingResponse = new AppSettingResponse();
             try
@@ -2977,13 +2967,13 @@ namespace Service.Repository
                     int id = 0;
 
                     rtndblst = rtndblst.OrderBy(a => a.patientvisitno).ToList();
-                    List<lstvisit> lstv = new List<lstvisit>();
+                    List<Lstvisit> lstv = new List<Lstvisit>();
                     foreach (var v in rtndblst)
                     {
                         if (patientvisitno != v.patientvisitno)
                         {
                             patientvisitno = v.patientvisitno;
-                            lstvisit objv = new lstvisit();
+                            Lstvisit objv = new Lstvisit();
                             objv.patientno = v.patientno;
                             objv.patientvisitno = v.patientvisitno;
                             objv.patientid = v.patientid;
@@ -3016,13 +3006,13 @@ namespace Service.Repository
                             orderlistno = 0;
                             var ollst = rtndblst.Where(o => o.patientvisitno == v.patientvisitno).ToList();
                             ollst = ollst.OrderBy(d => d.departmentseqno).ThenBy(s => s.serviceseqno).ToList();
-                            List<lstorderlist> lstol = new List<lstorderlist>();
+                            List<Lstorderlist> lstol = new List<Lstorderlist>();
                             foreach (var ol in ollst)
                             {
                                 if (orderlistno != ol.orderlistno)
                                 {
                                     orderlistno = ol.orderlistno;
-                                    lstorderlist objol = new lstorderlist();
+                                    Lstorderlist objol = new Lstorderlist();
                                     objol.patientvisitno = ol.patientvisitno;
                                     objol.orderlistno = ol.orderlistno;
                                     objol.departmentno = ol.departmentno;
@@ -3060,10 +3050,10 @@ namespace Service.Repository
 
                                     //non mapped department shown
                                     objol.isDeptAvail = ol.isDeptAvail;
-                                    if (objol.isMultiEditor != null && objol.isMultiEditor == 1)
+                                    if (objol.isMultiEditor == 1)
                                     {
                                         //multi editor - single test scenario - saved/drafted details shown in reportstatus, ICMR PatientId, SRF Number, abnormal, critical values
-                                        requestresult reqtemplate = new requestresult();
+                                        Requestresult reqtemplate = new Requestresult();
                                         reqtemplate.pagecode = req.pagecode;
                                         reqtemplate.venueno = req.venueno;
                                         reqtemplate.venuebranchno = req.venuebranchno;
@@ -3071,7 +3061,7 @@ namespace Service.Repository
                                         reqtemplate.serviceno = objol.serviceno;
                                         reqtemplate.deptno = req.deptno;
                                         reqtemplate.servicetype = objol.servicetype;
-                                        objresulttemplate objtemplate = new objresulttemplate();
+                                        Objresulttemplate objtemplate = new Objresulttemplate();
                                         objtemplate = GetResultTemplate(reqtemplate);
                                         if (objtemplate != null)
                                         {
@@ -3143,10 +3133,10 @@ namespace Service.Repository
                                     var odlst = ollst.Where(o => o.orderlistno == ol.orderlistno).ToList();
                                     //odlst = odlst.OrderBy(t => t.tseqno).ThenBy(st => st.subtestno).ToList();
                                     odlst = odlst.OrderBy(t => t.tseqno).ThenBy(st => st.sseqno).ToList();//issue raised in PSH 
-                                    List<lstorderdetail> lstod = new List<lstorderdetail>();
+                                    List<Lstorderdetail> lstod = new List<Lstorderdetail>();
                                     foreach (var t in odlst)
                                     {
-                                        lstorderdetail objod = new lstorderdetail();
+                                        Lstorderdetail objod = new Lstorderdetail();
                                         objod.id = id;
                                         id = id + 1;
                                         objod.orderlistno = ol.orderlistno;
@@ -3177,9 +3167,9 @@ namespace Service.Repository
                                         objod.isformulaparameter = t.isformulaparameter;
                                         objod.formulaserviceno = t.formulaserviceno;
                                         objod.formulaservicetype = t.formulaservicetype;
-                                        objod.formulajson = JsonConvert.DeserializeObject<List<formulajson>>(t.formulajson);
-                                        objod.formulaparameterjson = JsonConvert.DeserializeObject<List<formulaparameterjson>>(t.formulaparameterjson);
-                                        objod.picklistjson = JsonConvert.DeserializeObject<List<picklistjson>>(t.picklistjson);
+                                        objod.Formulajson = JsonConvert.DeserializeObject<List<Formulajson>>(t.Formulajson);
+                                        objod.Formulaparameterjson = JsonConvert.DeserializeObject<List<Formulaparameterjson>>(t.Formulaparameterjson);
+                                        objod.Picklistjson = JsonConvert.DeserializeObject<List<Picklistjson>>(t.Picklistjson);
                                         objod.headerno = t.headerno;
                                         objod.isedit = t.isedit;
                                         objod.testinter = t.testinter;
@@ -3197,7 +3187,7 @@ namespace Service.Repository
                                         objod.isExtraSubtestEnable = t.isExtraSubTestEnable;
                                         objod.isLogicNeeded = t.isLogicNeeded;
                                         objod.prevABORHResult = t.prevABORHResult;
-                                        objod.logicneededjson = JsonConvert.DeserializeObject<List<logicConceptResponse>>(t.logicneededjson);
+                                        objod.logicneededjson = JsonConvert.DeserializeObject<List<LogicConceptResponse>>(t.logicneededjson);
                                        
                                         if (t.isMultiEditor == 1)
                                         {
@@ -3333,15 +3323,15 @@ namespace Service.Repository
                                         }
                                         lstod.Add(objod);
                                     }
-                                    objol.lstorderdetail = lstod;
+                                    objol.Lstorderdetail = lstod;
                                     lstol.Add(objol);
                                 }
                             }
-                            objv.lstorderlist = lstol;
+                            objv.Lstorderlist = lstol;
                             lstv.Add(objv);
                         }
                     }
-                    obj.lstvisit = lstv;
+                    obj.Lstvisit = lstv;
                 }
 
             }
@@ -3351,9 +3341,9 @@ namespace Service.Repository
             }
             return obj;
         }
-        public async Task<resultrtn> InsertAnalyserResult(objresult req)
+        public async Task<Resultrtn> InsertAnalyserResult(Objresult req)
         {
-            resultrtn obj = new resultrtn();
+            Resultrtn obj = new Resultrtn();
             MasterRepository _IMasterRepository = new MasterRepository(_config);
             AppSettingResponse objAppSettingResponse = new AppSettingResponse();
             try
@@ -3362,15 +3352,15 @@ namespace Service.Repository
                 {
                     XDocument odxml = new XDocument();
                     XElement xodtbl = new XElement("odtbl");
-                    foreach (var vst in req.lstvisit)
+                    foreach (var vst in req.Lstvisit)
                     {
                         int oldserviceno = 0;
-                        foreach (var ol in vst.lstorderlist)
+                        foreach (var ol in vst.Lstorderlist)
                         {
                             if (ol.ischecked == true || ol.risrerun == true || ol.risrecollect == true || ol.risrecheck == true || ol.isnoresult == true)
                             {
                                 int oldtestno = 0;
-                                foreach (var od in ol.lstorderdetail)
+                                foreach (var od in ol.Lstorderdetail)
                                 {
                                     if (od.resulttype != "CU" && od.resulttype != "TE")
                                     {
@@ -3494,21 +3484,21 @@ namespace Service.Repository
         }
         
         #region BulkResult Entry
-        public BulkResultSaveResponse SaveBulkResultEtry(List<objbulkresult> req)
+        public BulkResultSaveResponse SaveBulkResultEtry(List<Objbulkresult> req)
         {
             BulkResultSaveResponse obj = new BulkResultSaveResponse();
             try
             {
                 string outxml = string.Empty;
-                List<lstbulkresultdbl> lst = new List<lstbulkresultdbl>();
-                lstbulkresultdbl objn = new lstbulkresultdbl();
+                List<Lstbulkresultdbl> lst = new List<Lstbulkresultdbl>();
+                Lstbulkresultdbl objn = new Lstbulkresultdbl();
                 foreach (var data in req)
                 {
                     foreach (var subdata in data.lstbulkresultdetails)
                     {
                         if (subdata.ischecked == true || subdata.isrecheck == true || subdata.isrerun == true || subdata.isrecollect == true || subdata.isnoresult == true)
                         {
-                            objn = new lstbulkresultdbl();
+                            objn = new Lstbulkresultdbl();
                             objn.patientno = subdata.patientno;
                             objn.patientid = subdata.patientid;
                             objn.patientvisitno = subdata.patientvisitno;
@@ -3584,9 +3574,9 @@ namespace Service.Repository
             }
             return obj;
         }
-        public List<objbulkresult> GetBulkResultEtry(analyserrequestresult req)
+        public List<Objbulkresult> GetBulkResultEtry(AnalyserRequestresult req)
         {
-            List<objbulkresult> lst = new List<objbulkresult>();
+            List<Objbulkresult> lst = new List<Objbulkresult>();
             try
             {
                 using (var context = new ResultContext(_config.GetConnectionString(ConfigKeys.DefaultConnection)))
@@ -3614,17 +3604,17 @@ namespace Service.Repository
 
                     if (rtndblst != null)
                     {
-                        lst = new List<objbulkresult>();
-                        objbulkresult obj = new objbulkresult();
+                        lst = new List<Objbulkresult>();
+                        Objbulkresult obj = new Objbulkresult();
                         rtndblst = rtndblst.OrderBy(a => a.patientvisitno).ToList();
-                        objbulkresultdetails objsub = new objbulkresultdetails();
+                        Objbulkresultdetails objsub = new Objbulkresultdetails();
                         int servceno = 0;
                         string servicename = string.Empty;
                         string servcetype = string.Empty;
 
                         foreach (var item in rtndblst)
                         {
-                            obj = new objbulkresult();
+                            obj = new Objbulkresult();
                             if (servceno != item.actualserviceno || servcetype != item.actualservicetype)
                             {
                                 var serviceexists = lst.Where(d => d.serviceno == item.actualserviceno && d.servicetype == item.actualservicetype).ToList();
@@ -3637,7 +3627,7 @@ namespace Service.Repository
                                     obj.venueno = req.venueno;
                                     obj.venuebranchno = req.venuebranchno;
                                     obj.userno = req.userno;
-                                    obj.lstbulkresultdetails = new List<objbulkresultdetails>();
+                                    obj.lstbulkresultdetails = new List<Objbulkresultdetails>();
                                     obj.servicetype = item.actualservicetype;
                                     obj.serviceno = item.actualserviceno;
                                     obj.servicename = item.actualservicename;
@@ -3652,7 +3642,7 @@ namespace Service.Repository
                                         int sno = 1;
                                         foreach (var spcdata in lstout)
                                         {
-                                            objsub = new objbulkresultdetails();
+                                            objsub = new Objbulkresultdetails();
                                             objsub.rowno = sno;
                                             objsub.visitid = spcdata.visitid;
                                             objsub.patientid = spcdata.patientid;
@@ -3702,9 +3692,9 @@ namespace Service.Repository
                                             objsub.issformula = spcdata.issformula;
                                             objsub.formulaserviceno = spcdata.formulaserviceno;
                                             objsub.formulaservicetype = spcdata.formulaservicetype;
-                                            objsub.formulajson = JsonConvert.DeserializeObject<List<formulajson>>(spcdata.formulajson);
-                                            objsub.formulaparameterjson = JsonConvert.DeserializeObject<List<formulaparameterjson>>(spcdata.formulaparameterjson);
-                                            objsub.picklistjson = JsonConvert.DeserializeObject<List<picklistjson>>(spcdata.picklistjson);
+                                            objsub.Formulajson = JsonConvert.DeserializeObject<List<Formulajson>>(spcdata.Formulajson);
+                                            objsub.Formulaparameterjson = JsonConvert.DeserializeObject<List<Formulaparameterjson>>(spcdata.Formulaparameterjson);
+                                            objsub.Picklistjson = JsonConvert.DeserializeObject<List<Picklistjson>>(spcdata.Picklistjson);
                                             objsub.isrecheck = spcdata.isrecheck;
                                             objsub.isrecollect = spcdata.isrecollect;
                                             objsub.isrerun = spcdata.isrerun;
@@ -3950,7 +3940,7 @@ namespace Service.Repository
         }
         public List<GetResultforVisitMergeResponse> GetVisitMerge(VisitMergeRequest req)
         {
-            List<GetResultforVisitMergeResponse> lstVisitMerge = new List<GetResultforVisitMergeResponse>();
+            List<GetResultforVisitMergeResponse> LstvisitMerge = new List<GetResultforVisitMergeResponse>();
             try
             {
                 using (var context = new ResultContext(_config.GetConnectionString(ConfigKeys.DefaultConnection)))
@@ -4003,10 +3993,10 @@ namespace Service.Repository
                             obj.fisVip = lstexe[t].fisVip;
                             obj.fresulttypeno = lstexe[t].fresulttypeno;
                             obj.fresulttype = lstexe[t].fresulttype;
-                            obj.fpicklistjson = lstexe[t].fpicklistjson;
+                            obj.fPicklistjson = lstexe[t].fPicklistjson;
 
-                            obj.fpicklistjsondata = new List<picklistjson>();
-                            obj.fpicklistjsondata = JsonConvert.DeserializeObject<List<picklistjson>>(lstexe[t].fpicklistjson);
+                            obj.fPicklistjsondata = new List<Picklistjson>();
+                            obj.fPicklistjsondata = JsonConvert.DeserializeObject<List<Picklistjson>>(lstexe[t].fPicklistjson);
 
                             obj.fbarcode = lstexe[t].fbarcode;
                             obj.fserviceseqno = lstexe[t].fserviceseqno;
@@ -4045,10 +4035,10 @@ namespace Service.Repository
                             obj.tisVip = lstexe[t].tisVip;
                             obj.tresulttypeno = lstexe[t].tresulttypeno;
                             obj.tresulttype = lstexe[t].tresulttype;
-                            obj.tpicklistjson = lstexe[t].tpicklistjson;
+                            obj.tPicklistjson = lstexe[t].tPicklistjson;
 
-                            obj.tpicklistjsondata = new List<picklistjson>();
-                            obj.tpicklistjsondata = JsonConvert.DeserializeObject<List<picklistjson>>(lstexe[t].tpicklistjson);
+                            obj.tPicklistjsondata = new List<Picklistjson>();
+                            obj.tPicklistjsondata = JsonConvert.DeserializeObject<List<Picklistjson>>(lstexe[t].tPicklistjson);
 
                             obj.tbarcode = lstexe[t].tbarcode;
                             obj.tserviceseqno = lstexe[t].tserviceseqno;
@@ -4062,7 +4052,7 @@ namespace Service.Repository
                             obj.istovisitvalidated = lstexe[t].istovisitvalidated;
                             obj.fromvisitvalidatemessage = lstexe[t].fromvisitvalidatemessage;
                             obj.tovisitvalidatemessage = lstexe[t].tovisitvalidatemessage;
-                            lstVisitMerge.Add(obj);
+                            LstvisitMerge.Add(obj);
                         }
                     }
                 }
@@ -4071,7 +4061,7 @@ namespace Service.Repository
             {
                 MyDevException.Error(ex, "ResultRepository.GetVisitMerge - " + req.fromvisitno.ToString(), ExceptionPriority.High, ApplicationType.REPOSITORY, req.venueno, req.venuebranchno, 0);
             }
-            return lstVisitMerge;
+            return LstvisitMerge;
         }
         #endregion
 
@@ -4111,7 +4101,7 @@ namespace Service.Repository
                                         string address = maillst[d].ToString();
 
                                         //mail contet push
-                                        string ollst = lst[0].orderlistno != null && lst[0].orderlistno > 0 ? lst[0].orderlistno.ToString() : "";
+                                        string ollst = lst[0].orderlistno > 0 ? lst[0].orderlistno.ToString() : "";
                                         PatientReportDTO PatientItem = new PatientReportDTO();
                                         PatientReportRepository objRepository = new PatientReportRepository(_config);
                                         PatientItem.fullname = fullname.Replace(".", "");
@@ -4149,8 +4139,8 @@ namespace Service.Repository
                                         result = 1;
                                     }
                                 }
-                                saveinfectioncontroldetrequest ob = new saveinfectioncontroldetrequest();
-                                saveinfectioncontroldetresponse outs = new saveinfectioncontroldetresponse();
+                                Saveinfectioncontroldetrequest ob = new Saveinfectioncontroldetrequest();
+                                Saveinfectioncontroldetresponse outs = new Saveinfectioncontroldetresponse();
                                 ob.PatientVisitNo = patientVisitNo; ;
                                 ob.Type = resultype;
                                 ob.VenueNo = venueno;
@@ -4169,9 +4159,9 @@ namespace Service.Repository
             return result;
         }
 
-        public saveinfectioncontroldetresponse InsertInfectionControlAvailDatas(saveinfectioncontroldetrequest req)
+        public Saveinfectioncontroldetresponse InsertInfectionControlAvailDatas(Saveinfectioncontroldetrequest req)
         {
-            saveinfectioncontroldetresponse obj = new saveinfectioncontroldetresponse();
+            Saveinfectioncontroldetresponse obj = new Saveinfectioncontroldetresponse();
             try
             {
                 using (var context = new ResultContext(_config.GetConnectionString(ConfigKeys.DefaultConnection)))
@@ -4201,9 +4191,9 @@ namespace Service.Repository
         #endregion
        
         #region LogicComments Get
-        public List<logicCommentsRespose> GetLogicComments(logicCommentsRequest req)
+        public List<LogicCommentsRespose> GetLogicComments(LogicCommentsRequest req)
         {
-            List<logicCommentsRespose> lst = new List<logicCommentsRespose>();
+            List<LogicCommentsRespose> lst = new List<LogicCommentsRespose>();
             try
             {
                 using (var context = new ResultContext(_config.GetConnectionString(ConfigKeys.DefaultConnection)))
@@ -4229,9 +4219,9 @@ namespace Service.Repository
         #endregion
         
         #region Extra subtest flag based calculation for DC
-        public extrasubtestflagbasedformularesponse GetExtrasubtestbasedformula(extrasubtestflagbasedformularequest req)
+        public Extrasubtestflagbasedformularesponse GetExtrasubtestbasedformula(Extrasubtestflagbasedformularequest req)
         {
-            extrasubtestflagbasedformularesponse obj = new extrasubtestflagbasedformularesponse();
+            Extrasubtestflagbasedformularesponse obj = new Extrasubtestflagbasedformularesponse();
             try
             {
                 using (var context = new ResultContext(_config.GetConnectionString(ConfigKeys.DefaultConnection)))
@@ -4245,13 +4235,13 @@ namespace Service.Repository
                     var _servicetype = new SqlParameter("servicetype", req.serviceType);
 
                     var lst = context.GetExtrasubtestbasedformula.FromSqlRaw(
-                    "Execute dbo.pro_GetIndividualTestFormulaJson @pagecode,@venueno,@venuebranchno,@userno,@patientvisitno,@serviceno,@servicetype",
+                    "Execute dbo.pro_GetIndividualTestFormulajson @pagecode,@venueno,@venuebranchno,@userno,@patientvisitno,@serviceno,@servicetype",
                     _pagecode, _venueno, _venuebranchno, _userno, _patientvisitno, _serviceno, _servicetype).ToList();
                     
                     if (lst != null && lst.Count > 0)
                     {
-                        obj.formulaParameterJson = lst[0].formulaParameterJson;
-                        obj.formulaJson = lst[0].formulaJson;
+                        obj.Formulaparameterjson = lst[0].Formulaparameterjson;
+                        obj.Formulajson = lst[0].Formulajson;
                     }
                 }
             }
@@ -4289,7 +4279,7 @@ namespace Service.Repository
             return lst;
         }
 
-        public async Task<BulkResultSaveResponse> AutoApprovalBulkResult(List<objbulkresult> req)
+        public async Task<BulkResultSaveResponse> AutoApprovalBulkResult(List<Objbulkresult> req)
         {
             req.Where(x =>
             {
@@ -4301,19 +4291,19 @@ namespace Service.Repository
             return await Task.Factory.StartNew(() => this.SaveBulkResultEtry(req));
         }
         
-        public async Task<resultrtn> AutoApprovalResult(objresult originalReq, resultrtn req)
+        public async Task<Resultrtn> AutoApprovalResult(Objresult originalReq, Resultrtn req)
         {
             if (originalReq != null)
             {
                 originalReq.pagecode = "PCRA";
-                originalReq.lstvisit.Where(x => !x.isAbnormalAvail).ToList().ForEach(visit =>
+                originalReq.Lstvisit.Where(x => !x.isAbnormalAvail).ToList().ForEach(visit =>
                 {
                     visit.validatedon = visit.enteredon;
                     visit.approvedon = visit.enteredon;
 
-                    visit.lstorderlist.Where(x => !x.isabnormal).ToList().ForEach(order =>
+                    visit.Lstorderlist.Where(x => !x.isabnormal).ToList().ForEach(order =>
                     {
-                        order.lstorderdetail.ForEach(orderDetail =>
+                        order.Lstorderdetail.ForEach(orderDetail =>
                         {
                             if (decimal.TryParse(orderDetail.llcolumn, out decimal llColumn) && decimal.TryParse(orderDetail.hlcolumn, out decimal hlColumn) && decimal.TryParse(orderDetail.result, out decimal result))
                             {
@@ -4377,9 +4367,9 @@ namespace Service.Repository
             return obj;
         }
 
-        public async Task<objUpdPartialEntryFlagResponse> UpdatePartialResultFlag(objUpdPartialEntryFlagRequest req)
+        public async Task<ObjUpdPartialEntryFlagResponse> UpdatePartialResultFlag(ObjUpdPartialEntryFlagRequest req)
         {
-            objUpdPartialEntryFlagResponse objResponse = new objUpdPartialEntryFlagResponse();
+            ObjUpdPartialEntryFlagResponse objResponse = new ObjUpdPartialEntryFlagResponse();
 
             try
             {
@@ -4408,9 +4398,9 @@ namespace Service.Repository
             return objResponse;
         }
         #region Patient Result - Pending Test
-        public List<PendingVisitDetailsRes> GetPendingVisitDetails(PendingVisitDetailsReq req)
+        public List<PendingVisitdetailsRes> GetPendingVisitdetails(PendingVisitdetailsReq req)
         {
-            List<PendingVisitDetailsRes> lst = new List<PendingVisitDetailsRes>();
+            List<PendingVisitdetailsRes> lst = new List<PendingVisitdetailsRes>();
             try
             {
                 using (var context = new ResultContext(_config.GetConnectionString(ConfigKeys.DefaultConnection)))
@@ -4435,14 +4425,14 @@ namespace Service.Repository
                     var _orderstatus = new SqlParameter("orderstatus", req.orderstatus);
                     var _maindeptNo = new SqlParameter("maindeptNo", req.maindeptNo);
                     var _pageCount = new SqlParameter("pageCount", req.pageCount);
-                    lst = context.PendingVisitDetailsLst.FromSqlRaw(
-                        "Execute dbo.pro_GetPendingVisitDetails @pagecode,@venueno,@venuebranchno,@userno,@viewvenuebranchno,@pageindex,@type,@fromdate,@todate,@patientno,@patientvisitno,@deptno,@serviceno,@servicetype,@refferraltypeno,@customerno,@physicianno,@orderstatus,@maindeptNo,@pageCount",
+                    lst = context.PendingVisitdetailsLst.FromSqlRaw(
+                        "Execute dbo.pro_GetPendingVisitdetails @pagecode,@venueno,@venuebranchno,@userno,@viewvenuebranchno,@pageindex,@type,@fromdate,@todate,@patientno,@patientvisitno,@deptno,@serviceno,@servicetype,@refferraltypeno,@customerno,@physicianno,@orderstatus,@maindeptNo,@pageCount",
                         _pagecode, _venueno, _venuebranchno, _userno, _viewvenuebranchno, _pageindex, _type, _fromdate, _todate, _patientno, _patientvisitno, _deptno, _serviceno, _servicetype, _refferraltypeno, _customerno, _physicianno, _orderstatus, _maindeptNo, _pageCount).ToList();
                 }
             }
             catch (Exception ex)
             {
-                MyDevException.Error(ex, "ResultRepository.GetPendingVisitDetails" + req.patientno.ToString(), ExceptionPriority.Low, ApplicationType.REPOSITORY, req.venueno, req.venuebranchno, req.userno);
+                MyDevException.Error(ex, "ResultRepository.GetPendingVisitdetails" + req.patientno.ToString(), ExceptionPriority.Low, ApplicationType.REPOSITORY, req.venueno, req.venuebranchno, req.userno);
             }
             return lst;
         }

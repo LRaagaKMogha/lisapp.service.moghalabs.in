@@ -26,13 +26,13 @@ namespace Service.API.SERVICE.Controllers
         [Route("api/SlidePrinting/GetSlidePrintingDetails")]
         public ActionResult GetSlidePrintingDetails(SlidePrintingRequest RequestItem)
         {
-            List<GetSlidePrintingResponse> objresult = new List<GetSlidePrintingResponse>();
+            List<GetSlidePrintingResponse> Objresult = new List<GetSlidePrintingResponse>();
             try
             {
                 var _errormsg = SampleMaintainenceValidation.GetSlidePrintingDetails(RequestItem);
                 if (!_errormsg.status)
                 {
-                    objresult = _SlidePrintingRepository.GetSlidePrintingDetails(RequestItem);
+                    Objresult = _SlidePrintingRepository.GetSlidePrintingDetails(RequestItem);
                 }
                 else
                     return BadRequest(_errormsg);
@@ -41,91 +41,91 @@ namespace Service.API.SERVICE.Controllers
             {
                 MyDevException.Error(ex, "GetSlidePrintingDetails", ExceptionPriority.Low, ApplicationType.APPSERVICE, RequestItem.VenueNo, RequestItem.VenueBranchNo, 0);
             }
-            return Ok(objresult);
+            return Ok(Objresult);
         }
 
         [HttpPost]
-        [Route("api/SlidePrinting/GetSlidePrintingPatientDetails")]
-        public SlidePrintPatientDetailsResponse GetSlidePrintingPatientDetails(CommonFilterRequestDTO RequestItem)
+        [Route("api/SlidePrinting/GetSlidePrintingPatientdetails")]
+        public SlidePrintPatientdetailsResponse GetSlidePrintingPatientdetails(CommonFilterRequestDTO RequestItem)
         {
-            SlidePrintPatientDetailsResponse objresult = new SlidePrintPatientDetailsResponse();
+            SlidePrintPatientdetailsResponse Objresult = new SlidePrintPatientdetailsResponse();
             try
             {
-                objresult = _SlidePrintingRepository.GetSlidePrintingPatientDetails(RequestItem);
+                Objresult = _SlidePrintingRepository.GetSlidePrintingPatientdetails(RequestItem);
             }
             catch (Exception ex)
             {
-                MyDevException.Error(ex, "GetSlidePrintingPatientDetails", ExceptionPriority.Low, ApplicationType.APPSERVICE, RequestItem.VenueNo, RequestItem.VenueBranchNo, 0);
+                MyDevException.Error(ex, "GetSlidePrintingPatientdetails", ExceptionPriority.Low, ApplicationType.APPSERVICE, RequestItem.VenueNo, RequestItem.VenueBranchNo, 0);
             }
-            return objresult;
+            return Objresult;
         }
         [HttpPost]
         [Route("api/SlidePrinting/SaveSlidePrintingDetails")]
-        public ActionResult<CommonTokenResponse> SaveSlidePrintingDetails(SlidePrintPatientDetailsResponse slidePrintPatientDetails)
+        public ActionResult<CommonTokenResponse> SaveSlidePrintingDetails(SlidePrintPatientdetailsResponse slidePrintPatientdetails)
         {
-            CommonTokenResponse objresult = new CommonTokenResponse();
+            CommonTokenResponse Objresult = new CommonTokenResponse();
             try
             {
-                var _errormsg = SampleMaintainenceValidation.SaveSlidePrintingDetails(slidePrintPatientDetails);
+                var _errormsg = SampleMaintainenceValidation.SaveSlidePrintingDetails(slidePrintPatientdetails);
                 if (!_errormsg.status)
                 {
-                    objresult = _SlidePrintingRepository.SaveSlidePrintingDetails(slidePrintPatientDetails);
+                    Objresult = _SlidePrintingRepository.SaveSlidePrintingDetails(slidePrintPatientdetails);
                 }
                 else
                     return BadRequest(_errormsg);
             }
             catch (Exception ex)
             {
-                MyDevException.Error(ex, "SaveSlidePrintingDetails", ExceptionPriority.Low, ApplicationType.APPSERVICE, slidePrintPatientDetails.VenueNo, slidePrintPatientDetails.VenueBranchNo, 0);
+                MyDevException.Error(ex, "SaveSlidePrintingDetails", ExceptionPriority.Low, ApplicationType.APPSERVICE, slidePrintPatientdetails.VenueNo, slidePrintPatientdetails.VenueBranchNo, 0);
             }
-            return Ok(objresult);
+            return Ok(Objresult);
         }
 
         [HttpPost]
         [Route("api/SlidePrinting/GenerateSlideNumber")]
         public CommonTokenResponse GenerateSlideNUmber(CommonFilterRequestDTO RequestItem)
         {
-            CommonTokenResponse objresult = new CommonTokenResponse();
+            CommonTokenResponse Objresult = new CommonTokenResponse();
             try
             {
-                objresult = _SlidePrintingRepository.GenerateSlideNumber(RequestItem);
+                Objresult = _SlidePrintingRepository.GenerateSlideNumber(RequestItem);
             }
             catch (Exception ex)
             {
                 MyDevException.Error(ex, "GetSlidePrintingDetails", ExceptionPriority.Low, ApplicationType.APPSERVICE, RequestItem.VenueNo, RequestItem.VenueBranchNo, 0);
             }
-            return objresult;
+            return Objresult;
         }
 
         [HttpPost]
         [Route("api/SlidePrinting/GetExistingRCHNoDetails")]
         public List<ExistingRCHNoResponse> GetExistingRCHNoDetails(CommonFilterRequestDTO RequestItem)
         {
-            List<ExistingRCHNoResponse> objresult = new List<ExistingRCHNoResponse>();
+            List<ExistingRCHNoResponse> Objresult = new List<ExistingRCHNoResponse>();
             try
             {
-                objresult = _SlidePrintingRepository.GetExistingRCHNoDetails(RequestItem);
+                Objresult = _SlidePrintingRepository.GetExistingRCHNoDetails(RequestItem);
             }
             catch (Exception ex)
             {
                 MyDevException.Error(ex, "GetSlidePrintingDetails", ExceptionPriority.Low, ApplicationType.APPSERVICE, RequestItem.VenueNo, RequestItem.VenueBranchNo, 0);
             }
-            return objresult;
+            return Objresult;
         }
         [HttpPost]
         [Route("api/SlidePrinting/GetBulkSlidePrintDetails")]
         public List<GetBulkSlidePrintingDetails> GetBulkSlidePrintDetails(GetBulkSlidePrintingRequest RequestItem)
         {
-            List<GetBulkSlidePrintingDetails> objresult = new List<GetBulkSlidePrintingDetails>();
+            List<GetBulkSlidePrintingDetails> Objresult = new List<GetBulkSlidePrintingDetails>();
             try
             {
-                objresult = _SlidePrintingRepository.GetBulkSlidePrintDetails(RequestItem);
+                Objresult = _SlidePrintingRepository.GetBulkSlidePrintDetails(RequestItem);
             }
             catch (Exception ex)
             {
                 MyDevException.Error(ex, "GetSlidePrintingDetails", ExceptionPriority.Low, ApplicationType.APPSERVICE, RequestItem.VenueNo, RequestItem.VenueBranchNo, 0);
             }
-            return objresult;
+            return Objresult;
         }
 
     }

@@ -12,7 +12,7 @@ namespace Service.API.SERVICE.Controllers
     public class TestMasterValidation
     {
         // Test Master //
-        public static ErrorResponse InsertTest(objtest req)
+        public static ErrorResponse InsertTest(Objtest req)
         {
             ErrorResponse errorResponse = new ErrorResponse();
             List<string> errors = new List<string>();
@@ -55,11 +55,11 @@ namespace Service.API.SERVICE.Controllers
                     _csvcheck.IsMatch(req.barcodePrefix ?? "") || _csvcheck.IsMatch(req.barcodeSuffix ?? ""))
                     errors.Add("Special character not allowed");
 
-                if (req.lsttestrefrange != null && req.lsttestrefrange.Any())
+                if (req.Lsttestrefrange != null && req.Lsttestrefrange.Any())
                 {
-                    var agetodaysinvalidlst = req.lsttestrefrange.Where(j => j.ageToType == "D" && j.ageTo > 73048).ToList();
-                    var agetoyearsinvalidlst = req.lsttestrefrange.Where(j => j.ageToType == "Y" && j.ageTo > 200).ToList();
-                    var agetomonthsinvalidlst = req.lsttestrefrange.Where(j => j.ageToType == "M" && j.ageTo > 2400).ToList();
+                    var agetodaysinvalidlst = req.Lsttestrefrange.Where(j => j.ageToType == "D" && j.ageTo > 73048).ToList();
+                    var agetoyearsinvalidlst = req.Lsttestrefrange.Where(j => j.ageToType == "Y" && j.ageTo > 200).ToList();
+                    var agetomonthsinvalidlst = req.Lsttestrefrange.Where(j => j.ageToType == "M" && j.ageTo > 2400).ToList();
 
                     if (agetodaysinvalidlst.Any() || agetoyearsinvalidlst.Any() || agetomonthsinvalidlst.Any())
                     {
@@ -67,11 +67,11 @@ namespace Service.API.SERVICE.Controllers
                     }
                 }
 
-                if (req.lsttestanalyrange != null && req.lsttestanalyrange.Any())
+                if (req.Lsttestanalyrange != null && req.Lsttestanalyrange.Any())
                 {
-                    var anaagetodaysinvalidlst = req.lsttestanalyrange.Where(j => j.ageToType == "D" && j.ageTo > 73048).ToList();
-                    var anaagetoyearsinvalidlst = req.lsttestanalyrange.Where(j => j.ageToType == "Y" && j.ageTo > 200).ToList();
-                    var anaagetomonthsinvalidlst = req.lsttestanalyrange.Where(j => j.ageToType == "M" && j.ageTo > 2400).ToList();
+                    var anaagetodaysinvalidlst = req.Lsttestanalyrange.Where(j => j.ageToType == "D" && j.ageTo > 73048).ToList();
+                    var anaagetoyearsinvalidlst = req.Lsttestanalyrange.Where(j => j.ageToType == "Y" && j.ageTo > 200).ToList();
+                    var anaagetomonthsinvalidlst = req.Lsttestanalyrange.Where(j => j.ageToType == "M" && j.ageTo > 2400).ToList();
 
                     if (anaagetodaysinvalidlst.Any() || anaagetoyearsinvalidlst.Any() || anaagetomonthsinvalidlst.Any())
                     {
@@ -81,10 +81,14 @@ namespace Service.API.SERVICE.Controllers
 
                 if (req.isSelectMultiSample == true)
                 {
-                    var selecteddata = req.lstmultisamplesreferencelist.Where(d => d.sampleNo <= 0).ToList();
-                    if (selecteddata.Any())
+                    if (req.lstmultisamplesreferencelist != null)
                     {
-                        errors.Add("Please Select Sample in Multi Sample List");
+                        var selecteddata = req.lstmultisamplesreferencelist.Where(d => d.sampleNo <= 0).ToList();
+
+                        if (selecteddata.Any())
+                        {
+                            errors.Add("Please Select Sample in Multi Sample List");
+                        }
                     }
                 }
 
@@ -148,11 +152,11 @@ namespace Service.API.SERVICE.Controllers
                     req.DeltaRange = Math.Round(req.DeltaRange, 2);
                 }
 
-                if (req.lsttestrefrange != null && req.lsttestrefrange.Any() && req.lsttestanalyrange != null && req.lsttestanalyrange.Any() &&
+                if (req.Lsttestrefrange != null && req.Lsttestrefrange.Any() && req.Lsttestanalyrange != null && req.Lsttestanalyrange.Any() &&
                     req.lstmultisamplesreferencelist != null && req.lstmultisamplesreferencelist.Any())
                 {
-                    var ageTestRef = req.lsttestrefrange.Where(i => i.ageFrom < 0 && i.ageTo < 0).ToList();
-                    var ageAnalyRange = req.lsttestanalyrange.Where(j => j.ageFrom < 0 && j.ageTo < 0).ToList();
+                    var ageTestRef = req.Lsttestrefrange.Where(i => i.ageFrom < 0 && i.ageTo < 0).ToList();
+                    var ageAnalyRange = req.Lsttestanalyrange.Where(j => j.ageFrom < 0 && j.ageTo < 0).ToList();
                     var ageMultiRefList = req.lstmultisamplesreferencelist.Where(k => k.ageFrom < 0 && k.ageTo < 0).ToList();
 
                     if (ageTestRef.Any() || ageAnalyRange.Any() || ageMultiRefList.Any())
@@ -199,11 +203,11 @@ namespace Service.API.SERVICE.Controllers
                     _csvcheck.IsMatch(req.barcodePrefix ?? "") || _csvcheck.IsMatch(req.barcodeSuffix ?? ""))
                     errors.Add("Special character not allowed");
 
-                if (req.lsttestrefrange != null && req.lsttestrefrange.Any())
+                if (req.Lsttestrefrange != null && req.Lsttestrefrange.Any())
                 {
-                    var agetodaysinvalidlst = req.lsttestrefrange.Where(j => j.ageToType == "D" && j.ageTo > 73048).ToList();
-                    var agetoyearsinvalidlst = req.lsttestrefrange.Where(j => j.ageToType == "Y" && j.ageTo > 200).ToList();
-                    var agetomonthsinvalidlst = req.lsttestrefrange.Where(j => j.ageToType == "M" && j.ageTo > 2400).ToList();
+                    var agetodaysinvalidlst = req.Lsttestrefrange.Where(j => j.ageToType == "D" && j.ageTo > 73048).ToList();
+                    var agetoyearsinvalidlst = req.Lsttestrefrange.Where(j => j.ageToType == "Y" && j.ageTo > 200).ToList();
+                    var agetomonthsinvalidlst = req.Lsttestrefrange.Where(j => j.ageToType == "M" && j.ageTo > 2400).ToList();
 
                     if (agetodaysinvalidlst.Any() || agetoyearsinvalidlst.Any() || agetomonthsinvalidlst.Any())
                     {
@@ -211,11 +215,11 @@ namespace Service.API.SERVICE.Controllers
                     }
                 }
 
-                if (req.lsttestanalyrange != null && req.lsttestanalyrange.Any())
+                if (req.Lsttestanalyrange != null && req.Lsttestanalyrange.Any())
                 {
-                    var anaagetodaysinvalidlst = req.lsttestanalyrange.Where(j => j.ageToType == "D" && j.ageTo > 73048).ToList();
-                    var anaagetoyearsinvalidlst = req.lsttestanalyrange.Where(j => j.ageToType == "Y" && j.ageTo > 200).ToList();
-                    var anaagetomonthsinvalidlst = req.lsttestanalyrange.Where(j => j.ageToType == "M" && j.ageTo > 2400).ToList();
+                    var anaagetodaysinvalidlst = req.Lsttestanalyrange.Where(j => j.ageToType == "D" && j.ageTo > 73048).ToList();
+                    var anaagetoyearsinvalidlst = req.Lsttestanalyrange.Where(j => j.ageToType == "Y" && j.ageTo > 200).ToList();
+                    var anaagetomonthsinvalidlst = req.Lsttestanalyrange.Where(j => j.ageToType == "M" && j.ageTo > 2400).ToList();
 
                     if (anaagetodaysinvalidlst.Any() || anaagetoyearsinvalidlst.Any() || anaagetomonthsinvalidlst.Any())
                     {
@@ -225,7 +229,10 @@ namespace Service.API.SERVICE.Controllers
 
                 if (req.isSelectMultiSample == true)
                 {
-                    var selecteddata = req.lstmultisamplesreferencelist.Where(d => d.sampleNo <= 0).ToList();
+                    var selecteddata = (req.lstmultisamplesreferencelist ?? new List<MultiSamplesReferenceList>())
+                        .Where(d => d.sampleNo <= 0)
+                        .ToList();
+
                     if (selecteddata.Any())
                     {
                         errors.Add("Please Select Sample in Multi Sample List");
@@ -241,6 +248,7 @@ namespace Service.API.SERVICE.Controllers
                 {
                     var match = req.lstmultisamplesreferencelist
                         .Any(d => d.sampleNo == req.sampleNo && d.containerNo == req.containerNo);
+
                     if (match)
                     {
                         errors.Add("Selected sample and tube type should not be a primary sample and tube type");
@@ -292,11 +300,11 @@ namespace Service.API.SERVICE.Controllers
                     req.DeltaRange = Math.Round(req.DeltaRange, 2);
                 }
 
-                if (req.lsttestrefrange != null && req.lsttestrefrange.Any() && req.lsttestanalyrange != null && req.lsttestanalyrange.Any() &&
+                if (req.Lsttestrefrange != null && req.Lsttestrefrange.Any() && req.Lsttestanalyrange != null && req.Lsttestanalyrange.Any() &&
                     req.lstmultisamplesreferencelist != null && req.lstmultisamplesreferencelist.Any())
                 {
-                    var ageTestRef = req.lsttestrefrange.Where(i => i.ageFrom < 0 && i.ageTo < 0).ToList();
-                    var ageAnalyRange = req.lsttestanalyrange.Where(j => j.ageFrom < 0 && j.ageTo < 0).ToList();
+                    var ageTestRef = req.Lsttestrefrange.Where(i => i.ageFrom < 0 && i.ageTo < 0).ToList();
+                    var ageAnalyRange = req.Lsttestanalyrange.Where(j => j.ageFrom < 0 && j.ageTo < 0).ToList();
                     var ageMultiRefList = req.lstmultisamplesreferencelist.Where(k => k.ageFrom < 0 && k.ageTo < 0).ToList();
 
                     if (ageTestRef.Any() || ageAnalyRange.Any() || ageMultiRefList.Any())
@@ -342,7 +350,7 @@ namespace Service.API.SERVICE.Controllers
         }
 
         // Insert Template Text //
-        public static ErrorResponse InsertTemplateText(lstTemplateList req)
+        public static ErrorResponse InsertTemplateText(LstTemplateList req)
         {
             ErrorResponse errorResponse = new ErrorResponse();
             List<string> errors = new List<string>();
@@ -377,7 +385,7 @@ namespace Service.API.SERVICE.Controllers
         }
 
         // Sub-Test Master //
-        public static ErrorResponse InsertSubTest(objsubtest req)
+        public static ErrorResponse InsertSubTest(Objsubtest req)
         {
             ErrorResponse errorResponse = new ErrorResponse();
             List<string> errors = new List<string>();
@@ -397,11 +405,11 @@ namespace Service.API.SERVICE.Controllers
                _csvcheck.IsMatch(req.testShortName.ToSubstring(req.testShortName == null ? 0 : req.testShortName.Length)))
                 errors.Add("Special character not allowed");
 
-            if (req.lsttestrefrange != null && req.lsttestrefrange.Any())
+            if (req.Lsttestrefrange != null && req.Lsttestrefrange.Any())
             {
-                var agetodaysinvalidlst = req.lsttestrefrange.Where(j => j.ageToType == "D" && j.ageTo > 73048).ToList();
-                var agetoyearsinvalidlst = req.lsttestrefrange.Where(j => j.ageToType == "Y" && j.ageTo > 200).ToList();
-                var agetomonthsinvalidlst = req.lsttestrefrange.Where(j => j.ageToType == "M" && j.ageTo > 2400).ToList();
+                var agetodaysinvalidlst = req.Lsttestrefrange.Where(j => j.ageToType == "D" && j.ageTo > 73048).ToList();
+                var agetoyearsinvalidlst = req.Lsttestrefrange.Where(j => j.ageToType == "Y" && j.ageTo > 200).ToList();
+                var agetomonthsinvalidlst = req.Lsttestrefrange.Where(j => j.ageToType == "M" && j.ageTo > 2400).ToList();
 
                 if (agetodaysinvalidlst.Any() || agetoyearsinvalidlst.Any() || agetomonthsinvalidlst.Any())
                 {
@@ -433,9 +441,9 @@ namespace Service.API.SERVICE.Controllers
                 req.DeltaRange = Math.Round(req.DeltaRange, 2);
             }
 
-            if (req.lsttestrefrange != null && req.lsttestrefrange.Any())
+            if (req.Lsttestrefrange != null && req.Lsttestrefrange.Any())
             {
-                var ageTestRef = req.lsttestrefrange.Where(i => i.ageFrom < 0 && i.ageTo < 0).ToList();
+                var ageTestRef = req.Lsttestrefrange.Where(i => i.ageFrom < 0 && i.ageTo < 0).ToList();
 
                 if (ageTestRef.Any())
                 {
@@ -452,7 +460,7 @@ namespace Service.API.SERVICE.Controllers
         }
 
         // Group & Package Master //
-        public static ErrorResponse InsertGroupPackage(objgrppkg req)
+        public static ErrorResponse InsertGroupPackage(Objgrppkg req)
         {
             ErrorResponse errorResponse = new ErrorResponse();
             List<string> errors = new List<string>();
@@ -470,7 +478,7 @@ namespace Service.API.SERVICE.Controllers
                 errors.Add("Service Name is required");
             if (req.pageCode.Equals("PKGMAS") && string.IsNullOrEmpty(req.displayName) || req.displayName.TrimStart() == string.Empty)
                 errors.Add("Display Name is required");
-            if (req.lstgrppkgservice == null || req.lstgrppkgservice.Count < 1)
+            if (req.Lstgrppkgservice == null || req.Lstgrppkgservice.Count < 1)
             {
                 if (req.pageCode.Equals("GRPMAS"))
                     errors.Add("Add more than two tests");
@@ -509,28 +517,31 @@ namespace Service.API.SERVICE.Controllers
             }
 
             // Validate for duplicate services
-            for (int i = 0; i < req.lstgrppkgservice.Count; i++)
+            if (req.Lstgrppkgservice != null)
             {
-                var v = req.lstgrppkgservice[i];
-                if (v.serviceNo > 0)
+                for (int i = 0; i < req.Lstgrppkgservice.Count; i++)
                 {
-                    if (req.pageCode == "GRPMAS")
+                    var v = req.Lstgrppkgservice[i];
+                    if (v.serviceNo > 0)
                     {
-                        var isduplicate = req.lstgrppkgservice.Where(x => x.serviceNo == v.serviceNo && x.serviceType == v.serviceType).ToList();
-                        if (isduplicate.Count > 1)
+                        if (req.pageCode == "GRPMAS")
                         {
-                            errors.Add("This service already exists");
-                            break;
+                            var isduplicate = req.Lstgrppkgservice.Where(x => x.serviceNo == v.serviceNo && x.serviceType == v.serviceType).ToList();
+                            if (isduplicate.Count > 1)
+                            {
+                                errors.Add("This service already exists");
+                                break;
+                            }
                         }
-                    }
-                    else if (req.pageCode == "PKGMAS")
-                    {
-                        var isduplicate = req.lstgrppkgservice.Where(x => x.serviceNo == v.serviceNo && x.serviceType == v.serviceType).ToList();
-                        if (isduplicate.Count > 1)
+                        else if (req.pageCode == "PKGMAS")
                         {
+                            var isduplicate = req.Lstgrppkgservice.Where(x => x.serviceNo == v.serviceNo && x.serviceType == v.serviceType).ToList();
+                            if (isduplicate.Count > 1)
+                            {
 
-                            errors.Add("This service already exists");
-                            break;
+                                errors.Add("This service already exists");
+                                break;
+                            }
                         }
                     }
                 }

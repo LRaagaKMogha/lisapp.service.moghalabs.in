@@ -112,11 +112,14 @@ namespace Service.API.SERVICE.Controllers
         [AllowAnonymous]
         [HttpPost]
         [Route("api/Common/gethelper")]
-        public string gethelper(LstFilter plaintext)
+        public ActionResult<string> gethelper(LstFilter plaintext)
         {
             string result = string.Empty;
             try
             {
+                if (string.IsNullOrEmpty(plaintext.filterValue))
+                    return BadRequest("filterValue is required.");
+
                 if (plaintext.filterCode == "E")
                     result = EncryptionHelper.Encrypt(plaintext.filterValue);
                 else if (plaintext.filterCode == "D")

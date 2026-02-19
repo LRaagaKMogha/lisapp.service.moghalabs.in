@@ -32,7 +32,7 @@ namespace Service.Model.Inventory
         public decimal? RoundOffInCurrency { get; set; }
         public decimal? NetAmount { get; set; }
         public decimal? TotalAmount { get; set; }
-        public string? PODate { get; set; }
+        public string PODate { get; set; }
         public string GRNStatus { get; set; }
         public string statusColorCode { get; set; } 
         public bool IsRateChanged { get; set; }

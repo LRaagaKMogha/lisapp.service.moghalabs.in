@@ -8,23 +8,23 @@ using System.Threading.Tasks;
 
 namespace Service.Model.Audit
 {
-    [DtoMapping(typeof(responsevendor))]
-    public class TblVendorMasterMapping : DtoToTableMapping<responsevendor>
+    [DtoMapping(typeof(Responsevendor))]
+    public class TblVendorMasterMapping : DtoToTableMapping<Responsevendor>
     {
         public override void SetUp()
         {
             TableName = "tbl_Vendor";
-            EntityIdProperty = nameof(responsevendor.vendorno);
+            EntityIdProperty = nameof(Responsevendor.vendorno);
             SubMenuCode = "Vendor";
-            IgnoreProperties = new List<System.Linq.Expressions.Expression<Func<responsevendor, object>>>
+            IgnoreProperties = new List<System.Linq.Expressions.Expression<Func<Responsevendor, object>>>
             {
                 x => x.userNo
             };
         }
     }
 
-    [DtoMapping(typeof(getcontactlst))]
-    public class TblVendorContactMapping : DtoToTableMapping<getcontactlst>
+    [DtoMapping(typeof(Getcontactlst))]
+    public class TblVendorContactMapping : DtoToTableMapping<Getcontactlst>
     {
         public override void SetUp()
         {
@@ -49,8 +49,8 @@ namespace Service.Model.Audit
         }
     }
 
-    [DtoMapping(typeof(getservicelst))]
-    public class TblVendorServiceMapping : DtoToTableMapping<getservicelst>
+    [DtoMapping(typeof(Getservicelst))]
+    public class TblVendorServiceMapping : DtoToTableMapping<Getservicelst>
     {
         public override void SetUp()
         {
@@ -73,7 +73,7 @@ namespace Service.Model.Audit
             AddProperty(x => x.serviceCode, "VendorTestCode", x => new { ControlType = "Service Code" });
             AddProperty(x => x.serviceType, "");
             EntityIdProperty = "Id";
-            IgnoreProperties = new List<System.Linq.Expressions.Expression<Func<getservicelst, object>>>
+            IgnoreProperties = new List<System.Linq.Expressions.Expression<Func<Getservicelst, object>>>
             {
                 x => x.serviceName, x => x.totalRecords, x => x.pageSize
             };

@@ -43,7 +43,7 @@ namespace Service.Repository
             return lst;            
         }
 
-        public List<GetArchivePatientResponse> GetArchivePatientDetails(GetArchivePatientRequest req)
+        public List<GetArchivePatientResponse> GetArchivePatientdetails(GetArchivePatientRequest req)
         {
             List<GetArchivePatientResponse> lst = new List<GetArchivePatientResponse>();
             try
@@ -56,14 +56,14 @@ namespace Service.Repository
                     var _venuebranchno = new SqlParameter("VenueBranchNo", req.VenueBranchNo);
                     var _userno = new SqlParameter("UserNo", req.UserNo);
                     
-                    lst = context.GetArchivePatientDetailsDTO.FromSqlRaw(
+                    lst = context.GetArchivePatientdetailsDTO.FromSqlRaw(
                         "Execute dbo.pro_GetArchiveVisit @PatientVisitNo,@VenueNo,@VenueBranchNo,@UserNo",
                          _visitNo, _venueno, _venuebranchno, _userno).ToList();
                 }
             }
             catch (Exception ex)
             {
-                MyDevException.Error(ex, "ArchiveRepository.GetArchivePatientDetails", ExceptionPriority.Low, ApplicationType.REPOSITORY, 0, 0, 0);
+                MyDevException.Error(ex, "ArchiveRepository.GetArchivePatientdetails", ExceptionPriority.Low, ApplicationType.REPOSITORY, 0, 0, 0);
             }
             return lst;
         }

@@ -13,7 +13,7 @@ namespace Service.IRepository
         List<TblMethod> GetMethodList(int VenueNo, int VenueBranchNo);
         List<TblUnits> GetUnitsList(int VenueNo, int VenueBranchNo);
         List<TblOrganism> GetOrganismList(int VenueNo, int VenueBranchNo);
-        List<lstotdrugmap> GetOrgTypeAntiMapList(int VenueNo, int VenueBranchNo);
+        List<Lstotdrugmap> GetOrgTypeAntiMapList(int VenueNo, int VenueBranchNo);
         List<TblTemplate> GetTemplateList(int VenueNo, int VenueBranchNo);
         List<CommonMasterDto> GetVenueDetails(int venueno, int venuebranchno, string MasterKey);
         ConfigurationDto GetSingleConfiguration(int? venueno, int? venuebranchno, string configkey);

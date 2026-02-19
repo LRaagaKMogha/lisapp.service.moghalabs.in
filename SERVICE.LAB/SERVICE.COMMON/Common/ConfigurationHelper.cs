@@ -133,11 +133,14 @@ namespace Service.Common
     }
     public static class ExceptionHelper
     {
-        public static string ToFormattedString(this Exception exception)
+        public static string ToFormattedString(this Exception? exception)
         {
+            if (exception == null)
+                return string.Empty;
+
             var messages = exception
-            .FromHierarchy(ex => ex.InnerException, ex => ex != null)
-            .Select(ex => ex!.Message ?? string.Empty);
+            .FromHierarchy(ex => ex.InnerException)
+            .Select(ex => ex.Message ?? string.Empty);
 
             return string.Join(Environment.NewLine, messages);
         }

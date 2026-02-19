@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Text;
 
 namespace Service.Model.PatientInfo
 {
@@ -17,7 +16,6 @@ namespace Service.Model.PatientInfo
         public string PrimaryId { get; set; }        
         public string PatientName { get; set; }
         public string Age { get; set; }
-
         public int VisitNo { get; set; }
         public string VisitId { get; set; }
         public string RegistrationDate { get; set; }
@@ -101,7 +99,7 @@ namespace Service.Model.PatientInfo
         public string BranchName { get; set; }
         public string marketingExec { get; set; }
         public string collectionExec { get; set; }
-        public string? loyalcardno { get; set; }
+        public string loyalcardno { get; set; }
     }
     public class CustomSearchResponse
     {
@@ -134,7 +132,6 @@ namespace Service.Model.PatientInfo
         public string Reason { get; set; }
         public string GroupName { get; set; }
     }
-
     public class EditSampleRequest
     {
         public int specimenQty { get; set; }
@@ -142,15 +139,12 @@ namespace Service.Model.PatientInfo
         public int PatientVisitNo { get; set; }
         public int UserNo  { get; set; }
         public int VenueNo { get; set; }
-
     }
     public class GetSampleRequest
     {
         public int PatientVisitNo { get; set; }
         public int VenueNo { get; set; }
-
     }
-
     public class GetSampleResponse 
     {
         public Int64 RowNo { get; set; }
@@ -180,13 +174,11 @@ namespace Service.Model.PatientInfo
         public int ServiceNo { get; set; }
         public string BarcodeNo { get; set; }
         public string VisitID { get; set; }
-
     }
     public class EditPatientResponseNew
     {
         public string statusCode { get; set; }
     }
-
     public class SyncMasterRequestDTO
     {
         public int visitNo { get; set; }
@@ -303,7 +295,7 @@ namespace Service.Model.PatientInfo
         public string BranchName { get; set; }
         public string marketingExec { get; set; }
         public string collectionExec { get; set; }
-        public string? loyalcardno { get; set; }
+        public string loyalcardno { get; set; }
     }
     public class ReportOutputhc
     {
@@ -311,8 +303,4 @@ namespace Service.Model.PatientInfo
         public string PatientExportFolderPath { get; set; }
         public string ExportURL { get; set; }
     }
-
 }
-
-
-

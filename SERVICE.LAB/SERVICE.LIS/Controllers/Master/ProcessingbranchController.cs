@@ -35,18 +35,18 @@ namespace Service.API.SERVICE.Controllers
 
         [HttpPost]
         [Route("api/ProcessingBranch/InsertProcessingbranch")]
-        public Storeprocessingbranch InsertProcessingbranch(insertbranch obj1)
+        public Storeprocessingbranch InsertProcessingbranch(Insertbranch obj1)
         {
-            Storeprocessingbranch objresult = new Storeprocessingbranch();
+            Storeprocessingbranch Objresult = new Storeprocessingbranch();
             try
             {
-                objresult = _ProcessingbranchRepository.InsertProcessingbranch(obj1);
+                Objresult = _ProcessingbranchRepository.InsertProcessingbranch(obj1);
             }
             catch (Exception ex)
             {
                 MyDevException.Error(ex, "ProcessingbranchController.InsertProcessingbranch" + obj1.processingBranchMapNo.ToString(), ExceptionPriority.Low, ApplicationType.REPOSITORY, obj1.venueNo, obj1.userNo, obj1.processingBranchMapNo);
             }
-            return objresult;
+            return Objresult;
         }
     }
 }

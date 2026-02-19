@@ -38,16 +38,16 @@ namespace Service.API.SERVICE.Controllers
         [Route("api/FrontOffice/GetCountry")]
         public List<TblCountryList> GetCountry(int VenueNo)
         {
-            List<TblCountryList> objresult = new List<TblCountryList>();
+            List<TblCountryList> Objresult = new List<TblCountryList>();
             try
             {
-                objresult = _IFrontOfficeRepository.GetCountry(VenueNo);
+                Objresult = _IFrontOfficeRepository.GetCountry(VenueNo);
             }
             catch (Exception ex)
             {
                 MyDevException.Error(ex, "FrontOfficeController.GetCountry", ExceptionPriority.Medium, ApplicationType.APPSERVICE, 0, 0, 0);
             }
-            return objresult;
+            return Objresult;
         }
 
         /// <summary>
@@ -60,16 +60,16 @@ namespace Service.API.SERVICE.Controllers
         [Route("api/FrontOffice/GetState")]
         public List<TblState> GetState(int VenueNo)
         {
-            List<TblState> objresult = new List<TblState>();
+            List<TblState> Objresult = new List<TblState>();
             try
             {
-                objresult = _IFrontOfficeRepository.GetState(VenueNo);
+                Objresult = _IFrontOfficeRepository.GetState(VenueNo);
             }
             catch (Exception ex)
             {
                 MyDevException.Error(ex, "FrontOfficeController.GetState", ExceptionPriority.Medium, ApplicationType.APPSERVICE, 0, 0, 0);
             }
-            return objresult;
+            return Objresult;
         }
         /// <summary>
         /// Get City
@@ -81,205 +81,205 @@ namespace Service.API.SERVICE.Controllers
         [Route("api/FrontOffice/GetCity")]
         public List<TblCity> GetCity(int VenueNo)
         {
-            List<TblCity> objresult = new List<TblCity>();
+            List<TblCity> Objresult = new List<TblCity>();
             try
             {
-                objresult = _IFrontOfficeRepository.GetCity(VenueNo);
+                Objresult = _IFrontOfficeRepository.GetCity(VenueNo);
             }
             catch (Exception ex)
             {
                 MyDevException.Error(ex, "FrontOfficeController.GetCity", ExceptionPriority.Medium, ApplicationType.APPSERVICE, 0, 0, 0);
             }
-            return objresult;
+            return Objresult;
         }
         [HttpGet]
         [Route("api/FrontOffice/GetDetailsByPincode")]
         public GetDetailsByPincode GetDetailsByPincode(int VenueNo, int VenueBranchNo, string PinCode)
         {
-            GetDetailsByPincode objresult = new GetDetailsByPincode();
+            GetDetailsByPincode Objresult = new GetDetailsByPincode();
             try
             {
-                objresult = _IFrontOfficeRepository.GetDetailsByPincode(VenueNo, VenueBranchNo, PinCode);
+                Objresult = _IFrontOfficeRepository.GetDetailsByPincode(VenueNo, VenueBranchNo, PinCode);
             }
             catch (Exception ex)
             {
                 MyDevException.Error(ex, "FrontOfficeController.GetDetailsByPincode", ExceptionPriority.Medium, ApplicationType.APPSERVICE, 0, 0, 0);
             }
-            return objresult;
+            return Objresult;
         }
 
         [HttpGet]
         [Route("api/FrontOffice/GetCurrency")]
         public List<TblCurrency> GetCurrency(int VenueNo, int VenueBranchNo)
         {
-            List<TblCurrency> objresult = new List<TblCurrency>();
+            List<TblCurrency> Objresult = new List<TblCurrency>();
             try
             {
-                objresult = _IFrontOfficeRepository.GetCurrency(VenueNo).ToList();
+                Objresult = _IFrontOfficeRepository.GetCurrency(VenueNo).ToList();
             }
             catch (Exception ex)
             {
                 MyDevException.Error(ex, "FrontOfficeController.GetCurrency", ExceptionPriority.Medium, ApplicationType.APPSERVICE, VenueNo, VenueBranchNo, 0);
             }
-            return objresult;
+            return Objresult;
         }
 
         [HttpGet]
         [Route("api/FrontOffice/GetPhysicianDetails")]
         public List<TblPhysician> GetPhysicianDetails(int VenueNo, int VenueBranchNo)
         {
-            List<TblPhysician> objresult = new List<TblPhysician>();
+            List<TblPhysician> Objresult = new List<TblPhysician>();
             try
             {
-                objresult = _IFrontOfficeRepository.GetPhysicianDetails(VenueNo, VenueBranchNo).ToList();
+                Objresult = _IFrontOfficeRepository.GetPhysicianDetails(VenueNo, VenueBranchNo).ToList();
             }
             catch (Exception ex)
             {
                 MyDevException.Error(ex, "FrontOfficeController.GetPhysicianDetails", ExceptionPriority.Medium, ApplicationType.APPSERVICE, VenueNo, VenueBranchNo, 0);
             }
-            return objresult;
+            return Objresult;
         }
         [HttpGet]
         [Route("api/FrontOffice/GetPhysicianDetailsbyName")]
         public List<TblPhysicianSearch> GetPhysicianDetailsbyName(int VenueNo, int VenueBranchNo, string physicianName, int type = 0)
         {
-            List<TblPhysicianSearch> objresult = new List<TblPhysicianSearch>();
+            List<TblPhysicianSearch> Objresult = new List<TblPhysicianSearch>();
             try
             {
-                objresult = _IFrontOfficeRepository.GetPhysicianDetailsbyName(VenueNo, VenueBranchNo, physicianName, type).ToList();
+                Objresult = _IFrontOfficeRepository.GetPhysicianDetailsbyName(VenueNo, VenueBranchNo, physicianName, type).ToList();
             }
             catch (Exception ex)
             {
                 MyDevException.Error(ex, "FrontOfficeController.GetPhysicianDetailsbyName", ExceptionPriority.Medium, ApplicationType.APPSERVICE, VenueNo, VenueBranchNo, 0);
             }
-            return objresult;
+            return Objresult;
         }
         [HttpGet]
         [Route("api/FrontOffice/GetDiscountMaster")]
         public List<TblDiscount> GetDiscountMaster(int VenueNo, int VenueBranchNo)
         {
-            List<TblDiscount> objresult = new List<TblDiscount>();
+            List<TblDiscount> Objresult = new List<TblDiscount>();
             try
             {
-                objresult = _IFrontOfficeRepository.GetDiscountMaster(VenueNo, VenueBranchNo).ToList();
+                Objresult = _IFrontOfficeRepository.GetDiscountMaster(VenueNo, VenueBranchNo).ToList();
             }
             catch (Exception ex)
             {
                 MyDevException.Error(ex, "FrontOfficeController.GetDiscountMaster", ExceptionPriority.Medium, ApplicationType.APPSERVICE, VenueNo, VenueBranchNo, 0);
             }
-            return objresult;
+            return Objresult;
         }
 
         [HttpGet]
-        [Route("api/FrontOffice/GetService")]
-        public List<ServiceSearchDTO> GetService(int VenueNo, int VenueBranchNo, int IsApproval)
+        [Route("api/FrontOffice/Getservice")]
+        public List<ServiceSearchDTO> Getservice(int VenueNo, int VenueBranchNo, int IsApproval)
         {
-            List<ServiceSearchDTO> objresult = new List<ServiceSearchDTO>();
+            List<ServiceSearchDTO> Objresult = new List<ServiceSearchDTO>();
             try
             {
-                objresult = _IFrontOfficeRepository.GetService(VenueNo, VenueBranchNo, IsApproval).ToList();
+                Objresult = _IFrontOfficeRepository.Getservice(VenueNo, VenueBranchNo, IsApproval).ToList();
 
             }
             catch (Exception ex)
             {
-                MyDevException.Error(ex, "FrontOfficeController.GetService", ExceptionPriority.Medium, ApplicationType.APPSERVICE, VenueNo, VenueBranchNo, 0);
+                MyDevException.Error(ex, "FrontOfficeController.Getservice", ExceptionPriority.Medium, ApplicationType.APPSERVICE, VenueNo, VenueBranchNo, 0);
             }
-            return objresult;
+            return Objresult;
         }
 
         [HttpGet]
-        [Route("api/FrontOffice/GetServiceDetails")]
-        public ServiceRateList GetServiceDetails(int ServiceNo, string ServiceType, int ClientNo, int VenueNo, int VenueBranchNo, int physicianNo, int splratelisttype)
+        [Route("api/FrontOffice/GetserviceDetails")]
+        public ServiceRateList GetserviceDetails(int ServiceNo, string ServiceType, int ClientNo, int VenueNo, int VenueBranchNo, int physicianNo, int splratelisttype)
         {
-            ServiceRateList objresult = new ServiceRateList();
+            ServiceRateList Objresult = new ServiceRateList();
             try
             {
-                objresult = _IFrontOfficeRepository.GetServiceDetails(ServiceNo, ServiceType, ClientNo, VenueNo, VenueBranchNo, physicianNo, splratelisttype);
+                Objresult = _IFrontOfficeRepository.GetserviceDetails(ServiceNo, ServiceType, ClientNo, VenueNo, VenueBranchNo, physicianNo, splratelisttype);
 
             }
             catch (Exception ex)
             {
-                MyDevException.Error(ex, "FrontOfficeController.GetServiceDetails/ServiceNo-" + ServiceNo, ExceptionPriority.Medium, ApplicationType.APPSERVICE, VenueNo, VenueBranchNo, 0);
+                MyDevException.Error(ex, "FrontOfficeController.GetserviceDetails/ServiceNo-" + ServiceNo, ExceptionPriority.Medium, ApplicationType.APPSERVICE, VenueNo, VenueBranchNo, 0);
             }
-            return objresult;
+            return Objresult;
         }
         [HttpGet]
         [Route("api/FrontOffice/GetGrouptest")]
         public List<GroupTestDTO> GetGrouptest(int ServiceNo, string ServiceType, int VenueNo, int VenueBranchNo)
         {
-            List<GroupTestDTO> objresult = new List<GroupTestDTO>();
+            List<GroupTestDTO> Objresult = new List<GroupTestDTO>();
             try
             {
-                objresult = _IFrontOfficeRepository.GetGrouptest(ServiceNo, ServiceType, VenueNo, VenueBranchNo);
+                Objresult = _IFrontOfficeRepository.GetGrouptest(ServiceNo, ServiceType, VenueNo, VenueBranchNo);
             }
             catch (Exception ex)
             {
                 MyDevException.Error(ex, "FrontOfficeController.GetGrouptest/ServiceNo-" + ServiceNo, ExceptionPriority.Medium, ApplicationType.APPSERVICE, VenueNo, VenueBranchNo, 0);
             }
-            return objresult;
+            return Objresult;
         }
         [HttpGet]
         [Route("api/FrontOffice/GetOptionalSelectedInPackages")]
         public List<OptionalTestDTO> GetOptionalSelectedInPackages(int ServiceNo, int VenueNo, int VenueBranchNo, int PatientVisitNo)
         {
-            List<OptionalTestDTO> objresult = new List<OptionalTestDTO>();
+            List<OptionalTestDTO> Objresult = new List<OptionalTestDTO>();
             try
             {
-                objresult = _IFrontOfficeRepository.GetOptionalSelectedInPackages(ServiceNo, VenueNo, VenueBranchNo,PatientVisitNo);
+                Objresult = _IFrontOfficeRepository.GetOptionalSelectedInPackages(ServiceNo, VenueNo, VenueBranchNo,PatientVisitNo);
             }
             catch (Exception ex)
             {
                 MyDevException.Error(ex, "FrontOfficeController.GetOptionalSelectedInPackages/ServiceNo-" + ServiceNo, ExceptionPriority.Medium, ApplicationType.APPSERVICE, VenueNo, VenueBranchNo, 0);
             }
-            return objresult;
+            return Objresult;
         }
 
         [HttpGet]
         [Route("api/FrontOffice/Getcustomer")]
         public List<CustomerList> Getcustomers(int VenueNo, int VenueBranchNo, int UserNo, int IsFranchisee = 0, bool ExcludePostpaid = false, bool ExcludePrepaid = false, bool ExcludeCash = false, bool IsApproval = false, int IsClinical = -1 , int clientType = 0,bool IsMapping = false)
         {
-            List<CustomerList> objresult = new List<CustomerList>();
+            List<CustomerList> Objresult = new List<CustomerList>();
             try
             {
-                objresult = _IFrontOfficeRepository.GetCustomers(VenueNo, VenueBranchNo, UserNo, IsFranchisee, ExcludePostpaid, ExcludePrepaid, ExcludeCash, IsApproval, IsClinical, clientType,IsMapping).ToList();
+                Objresult = _IFrontOfficeRepository.GetCustomers(VenueNo, VenueBranchNo, UserNo, IsFranchisee, ExcludePostpaid, ExcludePrepaid, ExcludeCash, IsApproval, IsClinical, clientType,IsMapping).ToList();
             }
             catch (Exception ex)
             {
                 MyDevException.Error(ex, "FrontOfficeController.Getcustomers", ExceptionPriority.Medium, ApplicationType.APPSERVICE, VenueNo, VenueBranchNo, UserNo);
             }
-            return objresult;
+            return Objresult;
         }
 
         [HttpGet]
         [Route("api/FrontOffice/GetCustomerDetails")]
         public CustomerList GetCustomerDetails(long Customerno, int VenueNo, int VenueBranchNo)
         {
-            CustomerList objresult = new CustomerList();
+            CustomerList Objresult = new CustomerList();
             try
             {
-                objresult = _IFrontOfficeRepository.GetCustomerDetails(Customerno, VenueNo, VenueBranchNo);
+                Objresult = _IFrontOfficeRepository.GetCustomerDetails(Customerno, VenueNo, VenueBranchNo);
             }
             catch (Exception ex)
             {
                 MyDevException.Error(ex, "FrontOfficeController.GetCustomerDetails/Customerno:" + Customerno, ExceptionPriority.Medium, ApplicationType.APPSERVICE, VenueNo, VenueBranchNo, 0);
             }
-            return objresult;
+            return Objresult;
         }
 
         [HttpGet]
         [Route("api/FrontOffice/GetCustomerCurrentBalance")]
         public CustomerCurrentBalance GetCustomerCurrentBalance(long Customerno, int VenueNo, int VenueBranchNo)
         {
-            CustomerCurrentBalance objresult = new CustomerCurrentBalance();
+            CustomerCurrentBalance Objresult = new CustomerCurrentBalance();
             try
             {
-                objresult = _IFrontOfficeRepository.GetCustomerCurrentBalance(Customerno, VenueNo, VenueBranchNo);
+                Objresult = _IFrontOfficeRepository.GetCustomerCurrentBalance(Customerno, VenueNo, VenueBranchNo);
             }
             catch (Exception ex)
             {
                 MyDevException.Error(ex, "FrontOfficeController.GetCustomerCurrentBalance/Customerno:" + Customerno, ExceptionPriority.Medium, ApplicationType.APPSERVICE, VenueNo, VenueBranchNo, 0);
             }
-            return objresult;
+            return Objresult;
         }
 
         [CustomAuthorize("LIMSFRONTOFFICE")]
@@ -357,23 +357,23 @@ namespace Service.API.SERVICE.Controllers
             return result;
         }
         [HttpPost]
-        [Route("api/FrontOffice/InsertMassRegistration")]
-        public ActionResult<MassRegistrationResponse> InsertMassRegistration([FromBody] ExternalBulkFile objDTO)
+        [Route("api/FrontOffice/Insertmassregistration")]
+        public ActionResult<MassRegistrationResponse> Insertmassregistration([FromBody] ExternalBulkFile objDTO)
         {
             MassRegistrationResponse result = new MassRegistrationResponse();
             try
             {
-                var _errormsg = MassRegistrationValidation.InsertMassRegistration(objDTO);
+                var _errormsg = massregistrationValidation.Insertmassregistration(objDTO);
                 if (!_errormsg.status)
                 {
-                    result = _IFrontOfficeRepository.InsertMassRegistration(objDTO);
+                    result = _IFrontOfficeRepository.Insertmassregistration(objDTO);
                 }
                 else
                     return BadRequest(_errormsg);
             }
             catch (Exception ex)
             {
-                MyDevException.Error(ex, "FrontOfficeController.InsertMassRegistration", ExceptionPriority.High, ApplicationType.APPSERVICE, objDTO.VenueNo, objDTO.VenueBranchNo, objDTO.UserNo);
+                MyDevException.Error(ex, "FrontOfficeController.Insertmassregistration", ExceptionPriority.High, ApplicationType.APPSERVICE, objDTO.VenueNo, objDTO.VenueBranchNo, objDTO.UserNo);
             }
             return Ok(result);
         }
@@ -428,19 +428,19 @@ namespace Service.API.SERVICE.Controllers
 
         [CustomAuthorize("LIMSFRONTOFFICE")]
         [HttpGet]
-        [Route("api/FrontOffice/GetPatientDetails")]
-        public GetPatientDetailsResponse GetPatientDetails(long visitNo, int VenueNo, int VenueBranchNo, string searchType = null, int PatientNo = 0, int Isprocedure = 0)
+        [Route("api/FrontOffice/GetPatientdetails")]
+        public GetPatientDetailsResponse GetPatientdetails(long visitNo, int VenueNo, int VenueBranchNo, string? searchType = null, int PatientNo = 0, int Isprocedure = 0)
         {
-            GetPatientDetailsResponse objresult = new GetPatientDetailsResponse();
+            GetPatientDetailsResponse Objresult = new GetPatientDetailsResponse();
             try
             {
-                objresult = _IFrontOfficeRepository.GetPatientDetails(visitNo, VenueNo, VenueBranchNo, searchType, PatientNo, Isprocedure);
+                Objresult = _IFrontOfficeRepository.GetPatientDetails(visitNo, VenueNo, VenueBranchNo, searchType, PatientNo, Isprocedure);
             }
             catch (Exception ex)
             {
-                MyDevException.Error(ex, "FrontOfficeController.GetPatientDetails/visitNo-" + visitNo, ExceptionPriority.High, ApplicationType.APPSERVICE, VenueNo, VenueBranchNo, 0);
+                MyDevException.Error(ex, "FrontOfficeController.GetPatientdetails/visitNo-" + visitNo, ExceptionPriority.High, ApplicationType.APPSERVICE, VenueNo, VenueBranchNo, 0);
             }
-            return objresult;
+            return Objresult;
         }
 
         [CustomAuthorize("LIMSFRONTOFFICE")]
@@ -688,9 +688,9 @@ namespace Service.API.SERVICE.Controllers
         [CustomAuthorize("LIMSFRONTOFFICE")]
         [HttpPost]
         [Route("api/FrontOffice/InsertDoctor")]
-        public DoctorDetails InsertDoctor([FromBody] DoctorDetails objDTO)
+        public Doctordetails InsertDoctor([FromBody] Doctordetails objDTO)
         {
-            DoctorDetails result = new DoctorDetails();
+            Doctordetails result = new Doctordetails();
             try
             {
                 result = _IFrontOfficeRepository.InsertDoctor(objDTO);
@@ -813,9 +813,9 @@ namespace Service.API.SERVICE.Controllers
         [CustomAuthorize("LIMSFRONTOFFICE")]
         [HttpPost]
         [Route("api/FrontOffice/CheckExternalVistIdExists")]
-        public ExternalVisitDetailsResponse CheckExternalVistIdExists(ExternalVisitDetails req)
+        public ExternalVisitdetailsResponse CheckExternalVistIdExists(ExternalVisitdetails req)
         {
-            ExternalVisitDetailsResponse result = new ExternalVisitDetailsResponse();
+            ExternalVisitdetailsResponse result = new ExternalVisitdetailsResponse();
             try
             {
                 result = _IFrontOfficeRepository.CheckExternalVistIdExists(req);
@@ -917,17 +917,17 @@ namespace Service.API.SERVICE.Controllers
         [Route("api/FrontOffice/ValidateNricNo")]
         public dynamic ValidateCaseNo(int ServiceNo, string ServiceType, string NricNo, int VenueNo, int VenueBranchNo, bool IsNonConcurrent = false)
         {
-            int objresult = 0;
+            int Objresult = 0;
             try
             {
-                objresult = _IFrontOfficeRepository.ValidateNricNo(ServiceNo, ServiceType, NricNo, VenueNo, VenueBranchNo, IsNonConcurrent);
+                Objresult = _IFrontOfficeRepository.ValidateNricNo(ServiceNo, ServiceType, NricNo, VenueNo, VenueBranchNo, IsNonConcurrent);
 
             }
             catch (Exception ex)
             {
                 MyDevException.Error(ex, "FrontOfficeController.ValidateNricNo/ServiceNo-" + ServiceNo, ExceptionPriority.Medium, ApplicationType.APPSERVICE, VenueNo, VenueBranchNo, 0);
             }
-            return objresult;
+            return Objresult;
         }
 
         [HttpPost]
@@ -1070,32 +1070,32 @@ namespace Service.API.SERVICE.Controllers
         [Route("api/FrontOffice/getloyalcard")]
         public List<Tblloyal> getloyalcard(TblloyalReq req)
         {
-            List<Tblloyal> objresult = new List<Tblloyal>();
+            List<Tblloyal> Objresult = new List<Tblloyal>();
             try
             {
-                objresult = _IFrontOfficeRepository.getloyalcard(req).ToList();
+                Objresult = _IFrontOfficeRepository.getloyalcard(req).ToList();
             }
             catch (Exception ex)
             {
                 MyDevException.Error(ex, "FrontOfficeController.GetCustomerDetailsbyName", ExceptionPriority.Medium, ApplicationType.APPSERVICE, req.venueNo, req.venuebranchno, 0);
             }
-            return objresult;
+            return Objresult;
         }
 
         [HttpPost]
         [Route("api/FrontOffice/GetVisitPatternID")]
         public PatientVisitPatternIDGenRes GetVisitPatternID(PatientVisitPatternIDGenReq req)
         {
-            PatientVisitPatternIDGenRes objresult = new PatientVisitPatternIDGenRes();
+            PatientVisitPatternIDGenRes Objresult = new PatientVisitPatternIDGenRes();
             try
             {
-                objresult = _IFrontOfficeRepository.GetVisitPatternID(req);
+                Objresult = _IFrontOfficeRepository.GetVisitPatternID(req);
             }
             catch (Exception ex)
             {
                 MyDevException.Error(ex, "FrontOfficeController.GetVisitPatternID", ExceptionPriority.Medium, ApplicationType.APPSERVICE, req.VenueNo, req.VenueBranchNo, 0);
             }
-            return objresult;
+            return Objresult;
         }
         [HttpPost]
         [Route("api/FrontOffice/InsertPreBookingDetails")]
@@ -1132,16 +1132,16 @@ namespace Service.API.SERVICE.Controllers
         [Route("api/FrontOffice/GetLoyaltyCardPatternID")]
         public AutoLoyaltyIDGenResponse GetLoyaltyCardPatternID(AutoLoyaltyIDGenRequest req)
         {
-            AutoLoyaltyIDGenResponse objresult = new AutoLoyaltyIDGenResponse();
+            AutoLoyaltyIDGenResponse Objresult = new AutoLoyaltyIDGenResponse();
             try
             {
-                objresult = _IFrontOfficeRepository.GetLoyaltyCardPatternID(req);
+                Objresult = _IFrontOfficeRepository.GetLoyaltyCardPatternID(req);
             }
             catch (Exception ex)
             {
                 MyDevException.Error(ex, "FrontOfficeController.GetLoyaltyCardPatternID", ExceptionPriority.High, ApplicationType.APPSERVICE, req.VenueNo, req.VenueBranchNo, 0);
             }
-            return objresult;
+            return Objresult;
         }
     }
 }

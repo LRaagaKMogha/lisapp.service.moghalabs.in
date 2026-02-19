@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace Service.Model
 {
@@ -10,30 +9,30 @@ namespace Service.Model
         public int oPDPatientAppointmentNo { get; set; }
         public Int64 PatientNo { get; set; }
         public int PatientVisitNo { get; set; }
-        public string? TitleCode { get; set; }
-        public string? FirstName { get; set; }
-        public string? MiddleName { get; set; }
-        public string? LastName { get; set; }
+        public string TitleCode { get; set; }
+        public string FirstName { get; set; }
+        public string MiddleName { get; set; }
+        public string LastName { get; set; }
         public int Age { get; set; }
         public string AgeType { get; set; }
         public string DOB { get; set; }
         public string Gender { get; set; }
-        public string? MobileNumber { get; set; }
-        public string? WhatsappNo { get; set; }
-        public string? EmailID { get; set; }
-        public string? SecondaryEmailID { get; set; }
-        public string? Address { get; set; }
+        public string MobileNumber { get; set; }
+        public string WhatsappNo { get; set; }
+        public string EmailID { get; set; }
+        public string SecondaryEmailID { get; set; }
+        public string Address { get; set; }
         public int CountryNo { get; set; }
         public int StateNo { get; set; }
         public int CityNo { get; set; }
-        public string? AreaName { get; set; }
-        public string? Pincode { get; set; }
+        public string AreaName { get; set; }
+        public string Pincode { get; set; }
         public int AppointmentMode { get; set; }
         public int SpecializationNo { get; set; }
         public int PhysicianNo { get; set; }
-        public string? Reason { get; set; }
+        public string Reason { get; set; }
         public string AppointmentDateTime { get; set; }
-        public string? ArrivedDateTime { get; set; }
+        public string ArrivedDateTime { get; set; }
         public int appointmentStatus { get; set; }
         public bool IsNew { get; set; }
         public bool IsEmergency { get; set; }
@@ -41,7 +40,7 @@ namespace Service.Model
         public int VenueNo { get; set; }
         public int VenueBranchNo { get; set; }
         public int UserNo { get; set; }
-        public string? EmiratesId { get; set; }
+        public string EmiratesId { get; set; }
         public bool IsAutoEmail { get; set; }
         public bool IsAutoSMS { get; set; }
         public bool IsAutoWhatsApp { get; set; }
@@ -49,11 +48,11 @@ namespace Service.Model
         public int PatientVisitID { get; set; }
         public int ReasonType { get; set; }
         public int RefferalType { get; set; }
-        public string? RefTypeothers { get; set; }
+        public string RefTypeothers { get; set; }
         public int PhysNo { get; set; }
-        public string? LastVisitDate { get; set; }
+        public string LastVisitDate { get; set; }
         public decimal LastConfees { get; set; }
-        public List<prevApptProcedureDtl>? prevApptProcedureDtl { get; set; }
+        public List<prevApptProcedureDtl> prevApptProcedureDtl { get; set; }
         public string CancelReason { get; set; }
         public string RescheduleReason { get; set; }
         public int? MachineNo {  get; set; }
@@ -61,30 +60,28 @@ namespace Service.Model
     public class prevApptProcedureDtl
     {
         public int ServiceNo { get; set; }
-        public string? ServiceType { get; set; }
+        public string ServiceType { get; set; }
         public decimal Amount { get; set; }
     }
     public class OPDPatientDTOResponse
     {
-        public string? AppointmentNo { get; set; }
+        public string AppointmentNo { get; set; }
         public int OPDPatientNo { get; set; }
         public int PatientNo { get; set; }
-        public string? PatientName { get; set; }
-        public string? PhysicianName { get; set; }
+        public string PatientName { get; set; }
+        public string PhysicianName { get; set; }
         public int VenBranchNo { get; set; }
     }
     public class OPDDiagnosisDTOResponse
     {
         public int PhysicianDiagnosisNo { get; set; }
-        public string? AppointmentDateTime { get; set; }
-        public string? AppointmentNo { get; set; }
+        public string AppointmentDateTime { get; set; }
+        public string AppointmentNo { get; set; }
         public int PhysicianNo { get; set; }
         public Int16 OutputTypeNo { get; set; }
         public int VenBranchNo { get; set; }
-        public string? AppointmentDate { get; set; }
+        public string AppointmentDate { get; set; }
     }
-
-
     public class OPDDiagnosisDTORequest
     {
         public int PatientNo { get; set; }
@@ -119,7 +116,6 @@ namespace Service.Model
         public string GeneralCommands { get; set; }
         public string CheifComplaintslst { get; set; }
     }
-
     public class OPDServiceList
     {
         public string TestType { get; set; }
@@ -150,21 +146,18 @@ namespace Service.Model
         public int BookingStatus { get; set; }
         public string classname { get; set; }
     }
-
     public class OPDPatientMedicineList
     {
         public Int64 Row_Num { get; set; }
         public int ProductMasterNo { get; set; }
         public string ProductMasterName { get; set; }
         public string MedicineType { get; set; }
-
     }
     public class OPDOPDPatientHistory
     {
         public int OPDPatientAppointmentNo { get; set; }
         public string AppointmentNo { get; set; }
         public string AppointmentDateTime { get; set; }
-
     }
     public class OPDPatientVitalList
     {
@@ -180,7 +173,7 @@ namespace Service.Model
     public class SearchOPDPatientRequest
     {
         public int Searchkey { get; set; }
-        public string? Searchvalue { get; set; }
+        public string Searchvalue { get; set; }
         public int VenueNo { get; set; }
         public int VenueBranchNo { get; set; }
         public int Userno { get; set; }
@@ -198,7 +191,6 @@ namespace Service.Model
         public int VenueNo { get; set; }
         public int VenueBranchNo { get; set; }
     }
-
     public class OPDPatientBookingRequest
     {
         public string AppointmentDate { get; set; }
@@ -255,25 +247,24 @@ namespace Service.Model
         public string specializationName { get; set; }
         public string PhysicianName { get; set; }
         public bool IsNew { get; set; }
-        public string? PaymentStatus { get; set; }
-        public string? EmiratesId { get; set; }
+        public string PaymentStatus { get; set; }
+        public string EmiratesId { get; set; }
         public bool IsAutoEmail { get; set; }
         public bool IsAutoSMS { get; set; }
         public bool IsAutoWhatsApp { get; set; }
         public Int16 OutputTypeNo { get; set; }
         public string BookingDateTime { get; set; }
         public int VenBranchNo { get; set; }
-        public string? VenueBranchName { get; set; }
-        public string? VisitId { get; set; }
+        public string VenueBranchName { get; set; }
+        public string VisitId { get; set; }
         public int PatientVisitID { get; set; }
         public int ReasonType { get; set; }
         public int RefferalType { get; set; }
-        public string? RefTypeothers { get; set; }
+        public string RefTypeothers { get; set; }
         public int PhysNo { get; set; }
-        public string? physName { get; set; }
-        public string? cancelReason { get; set; } = string.Empty;
+        public string physName { get; set; }
+        public string cancelReason { get; set; } = string.Empty;
     }
-
     public class OPDPatientOPDData
     {
         public int PhysicianDiagnosisNo { get; set; }
@@ -334,8 +325,8 @@ namespace Service.Model
     {
         public int ProductMasterNo { get; set; }
         public string ProductMasterName { get; set; }
-        public string? FromDate { get; set; }
-        public string? ToDate { get; set; }
+        public string FromDate { get; set; }
+        public string ToDate { get; set; }
         public int FrequencyNo { get; set; }
         public int RootNo { get; set; }
         public int DosageNo { get; set; }
@@ -354,12 +345,11 @@ namespace Service.Model
     }
     public class ProductInsReq
     {
-        public string? ProductName { get; set; }
+        public string ProductName { get; set; }
         public int Venueno { get; set; }
         public int Venuebranchno { get; set; }
         public int UserNo { get; set; }
     }
-
     public class ProductInsRes
     {
         public int ProductNo { get; set; }
@@ -370,12 +360,12 @@ namespace Service.Model
         public int oPDPROCNo { get; set; }
         public int oPDTreatmentNo { get; set; }
         public int testNo { get; set; }
-        public string? testName { get; set; }
-        public string? appointmentDateTime { get; set; }
+        public string testName { get; set; }
+        public string appointmentDateTime { get; set; }
         public int performPhysicianNo { get; set; }
-        public string? performPhysicianName { get; set; }
+        public string performPhysicianName { get; set; }
         public int specializationNo { get; set; }
-        public string? bookingStatus { get; set; }
+        public string bookingStatus { get; set; }
         public int venueNo { get; set; }
         public int venueBranchNo { get; set; }
         public int userNo { get; set; }
@@ -389,7 +379,7 @@ namespace Service.Model
         public int oPDTreatmentPlanPharmacyNo { get; set; }
         public int oPDTreatmentNo { get; set; }
         public int productMasterNo { get; set; }
-        public string? productMasterName { get; set; }
+        public string productMasterName { get; set; }
         public int daily { get; set; }
         public int am { get; set; }
         public int pm { get; set; }
@@ -401,11 +391,11 @@ namespace Service.Model
         public int oPDTreatmentPlanProceduresNo { get; set; }
         public int oPDTreatmentNo { get; set; }
         public int testNo { get; set; }
-        public string? testName { get; set; }
+        public string testName { get; set; }
         public int scheduleEveryNo { get; set; }
-        public string? scheduleEveryName { get; set; }
+        public string scheduleEveryName { get; set; }
         public int frequencyNo { get; set; }
-        public string? frequencyName { get; set; }
+        public string frequencyName { get; set; }
         public int daySunday { get; set; }
         public int dayMonday { get; set; }
         public int dayTuesday { get; set; }
@@ -415,8 +405,8 @@ namespace Service.Model
         public int daySaturday { get; set; }
         public int totalTreatments { get; set; }
         public int performPhysicianNo { get; set; }
-        public string? performPhysicianName { get; set; }
-        public string? nextAppointmentDate { get; set; }
+        public string performPhysicianName { get; set; }
+        public string nextAppointmentDate { get; set; }
         public int specializationNo { get; set; }
         public decimal rate { get; set; }
     }
@@ -425,7 +415,7 @@ namespace Service.Model
         public int oPDTreatmentNo { get; set; }
         public int appointmentNo { get; set; }
         public int patientNo { get; set; }
-        public string? nextAppointmentDate { get; set; }
+        public string nextAppointmentDate { get; set; }
     }
     public partial class TreatmentPlanResponse
     {
@@ -433,7 +423,7 @@ namespace Service.Model
     }
     public class OPDDiagnosisDTOFollowupResponse
     {
-        public string? AppointmentNo { get; set; }
+        public string AppointmentNo { get; set; }
     }
     public class OPDBeforeAfterImageListResponse
     {
@@ -449,39 +439,38 @@ namespace Service.Model
         public Int32 TotalRecords { get; set; }
         public Int32 Row_num { get; set; }
         public Int32 Sno { get; set; }
-        public string? PatientID { get; set; }
+        public string PatientID { get; set; }
         public int PatientVisitID { get; set; }
         public int PatientNo { get; set; }
-        public string? PrimaryId { get; set; }
-        public string? PatientName { get; set; }
-        public string? Age { get; set; }
-        public string? ageType { get; set; }
-        public string? gender { get; set; }
-        public string? ageGender { get; set; }
-        public string? AppointmentDateTime { get; set; }
-        public string? AppointmentDate { get; set; }
-        public string? Appointmenttime { get; set; }
-        public string? ArrivedDateTime { get; set; }
+        public string PrimaryId { get; set; }
+        public string PatientName { get; set; }
+        public string Age { get; set; }
+        public string ageType { get; set; }
+        public string gender { get; set; }
+        public string ageGender { get; set; }
+        public string AppointmentDateTime { get; set; }
+        public string AppointmentDate { get; set; }
+        public string Appointmenttime { get; set; }
+        public string ArrivedDateTime { get; set; }
         public int OPDPatientAppointmentNo { get; set; }
-        public string? AppointmentNo { get; set; }
+        public string AppointmentNo { get; set; }
         public bool IsNew { get; set; }
         public int ProcedureNo { get; set; }
-        public string? ProcedureName { get; set; }
+        public string ProcedureName { get; set; }
         public decimal ProcedureAmount { get; set; }
-        public string? MobileNumber { get; set; }
+        public string MobileNumber { get; set; }
         public int ApptStatus { get; set; }
         public int PhysicianNo { get; set; }
-        public string? PhysicianName { get; set; }
+        public string PhysicianName { get; set; }
         public int VenBranchNo { get; set; }
-
-        public string? PrevApptNo { get; set; }
-        public string? PrevApptDate { get; set; }
+        public string PrevApptNo { get; set; }
+        public string PrevApptDate { get; set; }
         public decimal PrevApptConsAmount { get; set; }
         public int PrevProcedureNo { get; set; }
-        public string? PrevProcedureName { get; set; }
+        public string PrevProcedureName { get; set; }
         public decimal PrevProcedureAmount { get; set; }
         public int PrevPhysicianNo { get; set; }
-        public string? PrevPhysicianName { get; set; }
+        public string PrevPhysicianName { get; set; }
         public Int16 OutputTypeNo { get; set; }
     }
     public class OPDPatientDisVsDrugDetails
@@ -489,9 +478,9 @@ namespace Service.Model
         public int diseaseVsProductMappingNo { get; set; }
         public Int16 diseaseMasterNo { get; set; }
         public int masterNo { get; set; }
-        public string? diseaseName { get; set; }
-        public string? description { get; set; }
-        public string? type { get; set; }
+        public string diseaseName { get; set; }
+        public string description { get; set; }
+        public string type { get; set; }
         public int rootNo { get; set; }
         public int frequencyNo { get; set; }
         public int dosageNo { get; set; }
@@ -502,12 +491,12 @@ namespace Service.Model
         public int diseaseVsTestMappingNo { get; set; }
         public Int16 diseaseMasterNo { get; set; }
         public int masterNo { get; set; }
-        public string? diseaseName { get; set; }
-        public string? description { get; set; }
-        public string? type { get; set; }
-        public string? testCode { get; set; }
-        public string? testName { get; set; }
-        public string? testType { get; set; }
+        public string diseaseName { get; set; }
+        public string description { get; set; }
+        public string type { get; set; }
+        public string testCode { get; set; }
+        public string testName { get; set; }
+        public string testType { get; set; }
         public int deptNo { get; set; }
     }
     public class OPDBeforeAfterImageList
@@ -516,24 +505,24 @@ namespace Service.Model
         public int physicianDiagnosisNo { get; set; }
         public int appointmentNo { get; set; }
         public int patientNo { get; set; }
-        public string? b_Type { get; set; }
-        public string? b_FileName { get; set; }
-        public string? b_FileType { get; set; }
-        public string? b_PathName { get; set; }
-        public string? b_Src { get; set; }
-        public string? a_Type { get; set; }
-        public string? a_FileName { get; set; }
-        public string? a_FileType { get; set; }
-        public string? a_PathName { get; set; }
-        public string? a_Src { get; set; }
+        public string b_Type { get; set; }
+        public string b_FileName { get; set; }
+        public string b_FileType { get; set; }
+        public string b_PathName { get; set; }
+        public string b_Src { get; set; }
+        public string a_Type { get; set; }
+        public string a_FileName { get; set; }
+        public string a_FileType { get; set; }
+        public string a_PathName { get; set; }
+        public string a_Src { get; set; }
         public int venueNo { get; set; }
         public int venueBranchNo { get; set; }
         public int userNo { get; set; }
         public Boolean Status { get; set; }
-        public string? createDateTime { get; set; }
+        public string createDateTime { get; set; }
         public Boolean Includingreport { get; set; }
     }
-    public class drugresponse
+    public class Drugresponse
     {
         public int productNo { get; set; }
         public int rootNo { get; set; }
@@ -569,10 +558,9 @@ namespace Service.Model
         public string AreaName { get; set; }
         public string Pincode { get; set; }
         public DateTime AppointmentDateTime { get; set; }
-        public string? AppointmentNo { get; set; }
+        public string AppointmentNo { get; set; }
         public int MachineNo { get; set; }
         public int PatientVisitID { get; set; }
-        //public bool? isNew { get; set; }
     }
     public class OPDDoctorList
     {
@@ -637,22 +625,22 @@ namespace Service.Model
         public string ArrivedDateTime { get; set; }
         public int AppointmentStatus { get; set; }
         public string AppointmentNo { get; set; }
-        public string? MachineName { get; set; }
-        public string? VenueBranchName { get; set; }
+        public string MachineName { get; set; }
+        public string VenueBranchName { get; set; }
         public int PatientVisitID { get; set; }
-        public string? PatientID { get; set; }
+        public string PatientID { get; set; }
         public int VenBranchNo { get; set; }
         public int ReasonType { get; set; }
         public int RefferalType { get; set; }
-        public string? RefTypeothers { get; set; }
+        public string RefTypeothers { get; set; }
         public int PhysNo { get; set; }
-        public string? physName { get; set; }
+        public string physName { get; set; }
         public string BookingDateTime { get; set; }
         public bool? isNew { get; set; }
     }
     public class OPDPatientMachineResponse
     {
-        public string? AppointmentNo { get; set; }
+        public string AppointmentNo { get; set; }
         public int OPDPatientNo { get; set; }
     }
     public class SearchOPDPatient
@@ -680,7 +668,7 @@ namespace Service.Model
         public string AreaName { get; set; }
         public string Pincode { get; set; }
         public DateTime AppointmentDateTime { get; set; }
-        public string? AppointmentNo { get; set; }
+        public string AppointmentNo { get; set; }
         public int PhysicianNo { get; set; }
         public bool IsSysCalDOB { get; set; }
         public int PatientVisitID { get; set; }
@@ -694,11 +682,11 @@ namespace Service.Model
         public int VenueBranchNo { get; set; }
         public int pageIndex { get; set; }
         public int userNo { get; set; }
-        public string? MobileNo { get; set; }
-        public string? AppointmentNo { get; set; }
-        public string? PatientName { get; set; }
+        public string MobileNo { get; set; }
+        public string AppointmentNo { get; set; }
+        public string PatientName { get; set; }
         public int PatientVisitNo { get; set; }
-        public string? PatientID { get; set; }
+        public string PatientID { get; set; }
     }
     public class OPDDoctorMainDayList
     {
@@ -769,7 +757,7 @@ namespace Service.Model
         public string specializationName { get; set; }
         public string PhysicianName { get; set; }
         public bool IsNew { get; set; }
-        public string? VenueBranchName { get; set; }
+        public string VenueBranchName { get; set; }
         public Int16 OutputTypeNo { get; set; }
         public int venBranchNo { get; set; }
         public string BookingDateTime { get; set; }
@@ -779,7 +767,7 @@ namespace Service.Model
         public int oPDTreatmentNo { get; set; }
         public int appointmentNo { get; set; }
         public int patientNo { get; set; }
-        public string? nextAppointmentDate { get; set; }
+        public string nextAppointmentDate { get; set; }
         public decimal totalAmount { get; set; }
         public List<OPDTreatmentPlanProcedures> lstProcedures { get; set; }
         public List<OPDTreatmentPlanPharmacy> lstpharmacy { get; set; }
@@ -789,24 +777,23 @@ namespace Service.Model
     }
     public partial class PatientDocUploadReq
     {
-        public string? ApptNo { get; set; }
+        public string ApptNo { get; set; }
         public int? patientNumber { get; set; }
         public Int16? venueNo { get; set; }
         public int? venueBranchNo { get; set; }
         public int? docType { get; set; }
     }
-    public partial class drugreq
+    public partial class Drugreq
     {
         public int venueNo { get; set; }
         public int productNo { get; set; }
-
     }
     public partial class SkinHistoryReq
     {
         public int VenueNo { get; set; }
         public int VenueBranchNo { get; set; }
         public int PatientVisitNo { get; set; }
-        public string? ApptNo { get; set; }
+        public string ApptNo { get; set; }
     }
     public class OPDStatusLogListRequest
     {

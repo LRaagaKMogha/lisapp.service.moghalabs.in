@@ -14,9 +14,9 @@ namespace Service.Repository
     {
         private IConfiguration _config;
         public OrganismRepository(IConfiguration config) { _config = config; }
-        public List<lstorganism> GetOrganismMaster(reqsearchorganism req)
+        public List<Lstorganism> GetOrganismMaster(Reqsearchorganism req)
         {
-            List<lstorganism> lst = new List<lstorganism>();
+            List<Lstorganism> lst = new List<Lstorganism>();
             try
             {
                 using (var context = new MasterContext(_config.GetConnectionString(ConfigKeys.DefaultConnection)))

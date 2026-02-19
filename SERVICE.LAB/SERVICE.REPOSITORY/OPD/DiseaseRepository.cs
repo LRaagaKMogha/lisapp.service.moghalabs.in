@@ -18,9 +18,9 @@ namespace Service.Repository
         private IConfiguration _config;
         public DiseaseRepository(IConfiguration config) { _config = config; }
 
-        public List<lstDiseaseCategory> GetDiseaseCategorys(reqDiseaseCategory disCat)
+        public List<LstDiseaseCategory> GetDiseaseCategorys(ReqDiseaseCategory disCat)
         {
-            List<lstDiseaseCategory> objresult = new List<lstDiseaseCategory>();
+            List<LstDiseaseCategory> Objresult = new List<LstDiseaseCategory>();
             try
             {
                 using (var context = new OPDContext(_config.GetConnectionString(ConfigKeys.DefaultConnection)))
@@ -30,7 +30,7 @@ namespace Service.Repository
                     var _VenueBranchNo = new SqlParameter("VenueBranchNo", disCat?.VenueBranchNo);
                     var _PageIndex = new SqlParameter("PageIndex", disCat?.PageIndex);
 
-                    objresult = context.GetDiseaseCategoryData.FromSqlRaw(
+                    Objresult = context.GetDiseaseCategoryData.FromSqlRaw(
                     "Execute dbo.pro_GetDiseaseCategory @DiseaseCategoryNo,@VenueNo,@VenueBranchNo,@PageIndex",
                     _DiseaseCategoryNo, _VenueNo, _VenueBranchNo, _PageIndex).ToList();
                 }
@@ -39,11 +39,11 @@ namespace Service.Repository
             {
                 MyDevException.Error(ex, "DiseaseRepository.GetDiseaseCategorys", ExceptionPriority.Low, ApplicationType.REPOSITORY, disCat.VenueNo, disCat.VenueBranchNo, 0);
             }
-            return objresult;
+            return Objresult;
         }
-        public rtnDiseaseCategory InsertDiseaseCategorys(TblDiseaseCategory resq)
+        public RtnDiseaseCategory InsertDiseaseCategorys(TblDiseaseCategory resq)
         {
-            rtnDiseaseCategory result = new rtnDiseaseCategory();
+            RtnDiseaseCategory result = new RtnDiseaseCategory();
             try
             {
                 using (var context = new OPDContext(_config.GetConnectionString(ConfigKeys.DefaultConnection)))
@@ -71,9 +71,9 @@ namespace Service.Repository
             return result;
         }
 
-        public List<lstDiseaseMaster> GetDiseaseMasters(reqDiseaseMaster disName)
+        public List<LstDiseaseMaster> GetDiseaseMasters(ReqDiseaseMaster disName)
         {
-            List<lstDiseaseMaster> objresult = new List<lstDiseaseMaster>();
+            List<LstDiseaseMaster> Objresult = new List<LstDiseaseMaster>();
             try
             {
                 using (var context = new OPDContext(_config.GetConnectionString(ConfigKeys.DefaultConnection)))
@@ -84,7 +84,7 @@ namespace Service.Repository
                     var _VenueBranchNo = new SqlParameter("VenueBranchNo", disName?.VenueBranchNo);
                     var _PageIndex = new SqlParameter("PageIndex", disName?.PageIndex);
 
-                    objresult = context.GetDiseaseMasterData.FromSqlRaw(
+                    Objresult = context.GetDiseaseMasterData.FromSqlRaw(
                     "Execute dbo.pro_GetDiseaseMaster @DiseaseMasterNo, @DiseaseCategoryNo, @VenueNo, @VenueBranchNo, @PageIndex",
                     _DiseaseMasterNo, _DiseaseCategoryNo, _VenueNo, _VenueBranchNo, _PageIndex).ToList();
                 }
@@ -93,11 +93,11 @@ namespace Service.Repository
             {
                 MyDevException.Error(ex, "DiseaseRepository.GetDiseaseMasters", ExceptionPriority.Low, ApplicationType.REPOSITORY, disName.VenueNo, disName.VenueBranchNo, 0);
             }
-            return objresult;
+            return Objresult;
         }
-        public rtnDiseaseMaster InsertDiseaseMasters(TblDiseaseMaster ress)
+        public RtnDiseaseMaster InsertDiseaseMasters(TblDiseaseMaster ress)
         {
-            rtnDiseaseMaster result = new rtnDiseaseMaster();
+            RtnDiseaseMaster result = new RtnDiseaseMaster();
             try
             {
                 using (var context = new OPDContext(_config.GetConnectionString(ConfigKeys.DefaultConnection)))
@@ -126,7 +126,7 @@ namespace Service.Repository
             }
             return result;
         }
-        public int InsertDiseaseTemplateText(lstDiseaseTemplateList req)
+        public int InsertDiseaseTemplateText(LstDiseaseTemplateList req)
         {
             int templateNo = 0;
             try
@@ -175,9 +175,9 @@ namespace Service.Repository
             }
             return templateNo;
         }
-        public reqresponse GetDiseaseTemplateText(lstDiseaseTemplateList req)
+        public Reqresponse GetDiseaseTemplateText(LstDiseaseTemplateList req)
         {
-            reqresponse obj = new reqresponse();
+            Reqresponse obj = new Reqresponse();
             try
             {
                 MasterRepository _IMasterRepository = new MasterRepository(_config);
@@ -197,9 +197,9 @@ namespace Service.Repository
             }
             return obj;
         }
-        public List<lstDiseaseTemplateList> GetTemplateList(int VenueNo, int VenueBranchNo,int TemplateNo, int TempDiseaseNo)
+        public List<LstDiseaseTemplateList> GetTemplateList(int VenueNo, int VenueBranchNo,int TemplateNo, int TempDiseaseNo)
         {
-            List<lstDiseaseTemplateList> objresult = new List<lstDiseaseTemplateList>();
+            List<LstDiseaseTemplateList> Objresult = new List<LstDiseaseTemplateList>();
             try
             {
                 using (var context = new OPDContext(_config.GetConnectionString(ConfigKeys.DefaultConnection)))
@@ -209,7 +209,7 @@ namespace Service.Repository
                     var _VenueNo = new SqlParameter("VenueNo", VenueNo);
                     var _VenueBranchNo = new SqlParameter("VenueBranchNo", VenueBranchNo);
 
-                    objresult = context.GetTemplateList.FromSqlRaw(
+                    Objresult = context.GetTemplateList.FromSqlRaw(
                     "Execute dbo.pro_GetDiseaseTemplate @TemplateNo, @TempDiseaseNo, @VenueNo, @VenueBranchNo",
                     _TemplateNo,_TempDiseaseNo, _VenueNo, _VenueBranchNo).ToList();
                 }
@@ -218,11 +218,11 @@ namespace Service.Repository
             {
                 MyDevException.Error(ex, "DiseaseRepository.GetTemplateList", ExceptionPriority.Low, ApplicationType.REPOSITORY, VenueNo, VenueBranchNo, 0);
             }
-            return objresult;
+            return Objresult;
         }
-        public List<DiseaseVsProductMapping> GetDiseaseVsDrugMaster(reqDiseaseMaster disName)
+        public List<DiseaseVsProductMapping> GetDiseaseVsDrugMaster(ReqDiseaseMaster disName)
         {
-            List<DiseaseVsProductMapping> objresult = new List<DiseaseVsProductMapping>();
+            List<DiseaseVsProductMapping> Objresult = new List<DiseaseVsProductMapping>();
             try
             {
                 using (var context = new OPDContext(_config.GetConnectionString(ConfigKeys.DefaultConnection)))
@@ -232,7 +232,7 @@ namespace Service.Repository
                     var _VenueBranchNo = new SqlParameter("VenueBranchNo", disName?.VenueBranchNo);
                     var _PageIndex = new SqlParameter("PageIndex", disName?.PageIndex);
 
-                    objresult = context.GetDiseaseVsDrugMaster.FromSqlRaw(
+                    Objresult = context.GetDiseaseVsDrugMaster.FromSqlRaw(
                     "Execute dbo.pro_GetDiseaseVsDrugMaster @DiseaseMasterNo, @VenueNo, @VenueBranchNo, @PageIndex",
                     _DiseaseMasterNo, _VenueNo, _VenueBranchNo, _PageIndex).ToList();
                 }
@@ -241,11 +241,11 @@ namespace Service.Repository
             {
                 MyDevException.Error(ex, "DiseaseRepository.GetDiseaseVsDrugMaster", ExceptionPriority.Low, ApplicationType.REPOSITORY, disName.VenueNo, disName.VenueBranchNo, 0);
             }
-            return objresult;
+            return Objresult;
         }
-        public List<DiseaseVsTestMapping> GetDiseaseVsTestMaster(reqDiseaseMaster disName)
+        public List<DiseaseVsTestMapping> GetDiseaseVsTestMaster(ReqDiseaseMaster disName)
         {
-            List<DiseaseVsTestMapping> objresult = new List<DiseaseVsTestMapping>();
+            List<DiseaseVsTestMapping> Objresult = new List<DiseaseVsTestMapping>();
             try
             {
                 using (var context = new OPDContext(_config.GetConnectionString(ConfigKeys.DefaultConnection)))
@@ -255,7 +255,7 @@ namespace Service.Repository
                     var _VenueBranchNo = new SqlParameter("VenueBranchNo", disName?.VenueBranchNo);
                     var _PageIndex = new SqlParameter("PageIndex", disName?.PageIndex);
 
-                    objresult = context.GetDiseaseVsTestMaster.FromSqlRaw(
+                    Objresult = context.GetDiseaseVsTestMaster.FromSqlRaw(
                     "Execute dbo.pro_GetDiseaseVsTestMaster @DiseaseMasterNo, @VenueNo, @VenueBranchNo, @PageIndex",
                     _DiseaseMasterNo, _VenueNo, _VenueBranchNo, _PageIndex).ToList();
                 }
@@ -264,11 +264,11 @@ namespace Service.Repository
             {
                 MyDevException.Error(ex, "DiseaseRepository.GetDiseaseVsTestMaster", ExceptionPriority.Low, ApplicationType.REPOSITORY, disName.VenueNo, disName.VenueBranchNo, 0);
             }
-            return objresult;
+            return Objresult;
         }
-        public rtnDisVsDrugMaster InsertDisVsDrugMaster(reqDisVsDrugMaster res)
+        public RtnDisVsDrugMaster InsertDisVsDrugMaster(ReqDisVsDrugMaster res)
         {
-            rtnDisVsDrugMaster result = new rtnDisVsDrugMaster();
+            RtnDisVsDrugMaster result = new RtnDisVsDrugMaster();
             try
             {
                 using (var context = new OPDContext(_config.GetConnectionString(ConfigKeys.DefaultConnection)))
@@ -295,9 +295,9 @@ namespace Service.Repository
             return result;
         }
 
-        public rtnDisVsInvMaster InsertDisVsInvMaster(reqDisVsInvMaster res)
+        public RtnDisVsInvMaster InsertDisVsInvMaster(ReqDisVsInvMaster res)
         {
-            rtnDisVsInvMaster result = new rtnDisVsInvMaster();
+            RtnDisVsInvMaster result = new RtnDisVsInvMaster();
             try
             {
                 using (var context = new OPDContext(_config.GetConnectionString(ConfigKeys.DefaultConnection)))
@@ -324,9 +324,9 @@ namespace Service.Repository
             return result;
         }
 
-        public List<MachineMasterDTO> GetMachineMaster(reqMachineMaster param)
+        public List<MachineMasterDTO> GetMachineMaster(ReqMachineMaster param)
         {
-            List<MachineMasterDTO> objresult = new List<MachineMasterDTO>();
+            List<MachineMasterDTO> Objresult = new List<MachineMasterDTO>();
             try
             {
                 using (var context = new OPDContext(_config.GetConnectionString(ConfigKeys.DefaultConnection)))
@@ -335,7 +335,7 @@ namespace Service.Repository
                     var _VenueBranchNo = new SqlParameter("VenueBranchNo", param?.VenueBranchNo);
                     var _PageIndex = new SqlParameter("PageIndex", param?.PageIndex);
 
-                    objresult = context.GetMachineResult.FromSqlRaw(
+                    Objresult = context.GetMachineResult.FromSqlRaw(
                     "Execute dbo.pro_GetMachineMaster @VenueNo, @VenueBranchNo, @PageIndex",
                     _VenueNo, _VenueBranchNo, _PageIndex).ToList();
                 }
@@ -344,11 +344,11 @@ namespace Service.Repository
             {
                 MyDevException.Error(ex, "DiseaseRepository.GetMachineMaster", ExceptionPriority.Low, ApplicationType.REPOSITORY, param.VenueNo, param.VenueBranchNo, 0);
             }
-            return objresult;
+            return Objresult;
         }
-        public reqMachineMasterResponse InsertMachineResult(InvMachineMasterRequest res)
+        public ReqMachineMasterResponse InsertMachineResult(InvMachineMasterRequest res)
         {
-            reqMachineMasterResponse result = new reqMachineMasterResponse();
+            ReqMachineMasterResponse result = new ReqMachineMasterResponse();
             try
             {
                 using (var context = new OPDContext(_config.GetConnectionString(ConfigKeys.DefaultConnection)))

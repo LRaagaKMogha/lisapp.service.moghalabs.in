@@ -67,7 +67,7 @@ namespace Service.Repository
                     var _fmobileNo = new SqlParameter("fmobileNo", objManuDTO.fmobileNo);
                     var _fwhatsappNo = new SqlParameter("fwhatsappNo", objManuDTO.fwhatsappNo);
 
-                    var objResult = context.CreateManufacturerMasterDTO.FromSqlRaw(
+                    var Objresult = context.CreateManufacturerMasterDTO.FromSqlRaw(
                     "Execute dbo.Pro_Iv_InsertManufacturerMaster @venueNo,@venueBranchno,@userNo,@status,@manufacturerNo,@manufacturerName,@contactName,@mobileNo," +
                     "@phoneNo,@cwhatsappNo,@address,@email,@ccountryNo,@cstateNo,@ccityNo,@cplace,@cname,@cemail,@cphoneNo," +
                     "@cmobileNo,@panNo,@cstreet,@website,@remarks,@fcountryNo,@fstateNo,@fcityNo,@fplace,@fstreet," +
@@ -77,7 +77,7 @@ namespace Service.Repository
                     _cphoneNo,_cmobileNo,_panNo,_cstreet, _website,_remarks, _fcountryNo, _fstateNo,_fcityNo,
                     _fplace,_fstreet,_fname,_femail,_fphoneNo,_fmobileNo,_fwhatsappNo).ToList();
 
-                    response = objResult[0];
+                    response = Objresult[0];
                 }
             }
             catch (Exception ex)
@@ -93,7 +93,7 @@ namespace Service.Repository
         /// <returns></returns>
         public List<GetManufacturerMasterResponse> GetManufacturersDetail(ManufacturerMasterRequest masterRequest)
         {
-            List<GetManufacturerMasterResponse> objResult = new List<GetManufacturerMasterResponse>();
+            List<GetManufacturerMasterResponse> Objresult = new List<GetManufacturerMasterResponse>();
             try
             {
                 using (var context = new MasterContext(_config.GetConnectionString(ConfigKeys.DefaultConnection)))
@@ -102,7 +102,7 @@ namespace Service.Repository
                     var _manufacturerNo = new SqlParameter("manufacturerNo", masterRequest.manufacturerNo);
                     var _pageIndex = new SqlParameter("pageIndex", masterRequest.pageIndex);
 
-                    objResult = context.GetManufacturersDetail.FromSqlRaw(
+                    Objresult = context.GetManufacturersDetail.FromSqlRaw(
                     "Execute dbo.pro_Iv_FetchManufacturersDetail @venueNo,@manufacturerNo,@pageIndex",
                      _venueNo,_manufacturerNo,_pageIndex).ToList();
                 }
@@ -111,7 +111,7 @@ namespace Service.Repository
             {
                 MyDevException.Error(ex, "GetManufacturersDetail", ExceptionPriority.Low, ApplicationType.REPOSITORY, masterRequest.venueNo, 0, 0);
             }
-            return objResult;
+            return Objresult;
         }
     }
 }

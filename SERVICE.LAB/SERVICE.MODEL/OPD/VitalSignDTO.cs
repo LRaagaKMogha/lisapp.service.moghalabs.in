@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace Service.Model
 {
@@ -119,7 +118,7 @@ namespace Service.Model
         public Int16 AllergyStatusNo { get; set; }
         public string AllergyStatus { get; set; }
         public string Comments { get; set; }
-        public string? Others { get; set; }
+        public string Others { get; set; }
         public bool Status { get; set; }
     }
     public partial class SaveAllergyRequest
@@ -130,7 +129,7 @@ namespace Service.Model
         public int userno { get; set; }
         public int opdpatientno { get; set; }
         public int OPDPatientAppointmentNo { get; set; }
-        public List<SaveAllergyDeatileRequest> lstAllergyDetails { get; set; }
+        public List<SaveAllergyDeatileRequest> lstAllergydetails { get; set; }
     }
     public partial class SaveAllergyDeatileRequest
     {
@@ -194,43 +193,39 @@ namespace Service.Model
         public int diseaserecordingno { get; set; }
     }
     #endregion
+
     #region Vaccine Details
     public partial class GetVaccineScheduleRequest
     {
         public int? PatientNo { get; set; }
         public bool IsAdult { get; set; }
     }
-
     public partial class lstVaccineSchedule
     {
         public int VaccineId { get; set; }
         public string VaccineName { get; set; }
-        public string? Description { get; set; }
+        public string Description { get; set; }
         public int? Stage { get; set; }
         public DateTime? DueDate { get; set; }
         public DateTime? DateOfVaccination { get; set; }
     }
-
     public partial class SaveVaccineRecordRequest
     {
         public int PatientNo { get; set; }
         public bool IsAdult { get; set; }
         public int VaccineId { get; set; }
         public DateTime DateOfVaccination { get; set; }
-        public DateTime? DueDate { get; set; }
+        public DateTime DueDate { get; set; }
         public int VaccinatedBy { get; set; }
     }
-
     public partial class SaveVaccineRecordDTORequest
     {
         public List<SaveVaccineRecordRequest> lstVaccineRecord { get; set; }
     }
-
     public partial class GetLatestPatientVisitRequest
     {
         public int PatientNo { get; set; }
     }
-
     public partial class lstPatientLatestVisit
     {
         public int PatientNo { get; set; }
@@ -238,12 +233,11 @@ namespace Service.Model
         public string Gender { get; set; }
         public DateTime DOB { get; set; }
     }
-
     #endregion
 
     public partial class GetVitalResultResponse
     {
-        public string? Vitaldatetime { get; set; }
+        public string Vitaldatetime { get; set; }
     }
 }
 

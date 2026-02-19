@@ -46,16 +46,16 @@ namespace Service.API.SERVICE.Controllers.Inventory
         [Route("api/Manufacturer/GetManufacturersDetail")]
         public List<GetManufacturerMasterResponse> GetManufacturersDetail(ManufacturerMasterRequest masterRequest)
         {
-            List<GetManufacturerMasterResponse> objResult = new List<GetManufacturerMasterResponse>();
+            List<GetManufacturerMasterResponse> Objresult = new List<GetManufacturerMasterResponse>();
             try
             {
-                objResult = _ManufacturerMasterRepository.GetManufacturersDetail(masterRequest);
+                Objresult = _ManufacturerMasterRepository.GetManufacturersDetail(masterRequest);
             }
             catch (Exception ex)
             {
                 MyDevException.Error(ex, "ManufacturerMasterController.GetManufacturersDetail", ExceptionPriority.Low, ApplicationType.APPSERVICE, masterRequest.venueNo, 0, 0);
             }
-            return objResult;
+            return Objresult;
         }
     }
 }

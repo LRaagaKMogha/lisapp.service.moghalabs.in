@@ -49,23 +49,20 @@ namespace Service.Model
         public string ServiceName { get; set; }
         public string ServiceType { get; set; }
         public string ServiceCode { get; set; }
-        public string? NRICNumber { get; set; }
+        public string NRICNumber { get; set; }
         public int RaceNo { get; set; }
-        public string? PatientBlock { get; set; }
-        public string? PatientUnitNo { get; set; }
-        public string? PatientFloor { get; set; }
-        public string? PatientBuilding { get; set; }
-        public string? PatientHomeNo { get; set; }
+        public string PatientBlock { get; set; }
+        public string PatientUnitNo { get; set; }
+        public string PatientFloor { get; set; }
+        public string PatientBuilding { get; set; }
+        public string PatientHomeNo { get; set; }
         public string AlternateIdType { get; set; }
         public string AlternateId { get; set; }
         public int? NationalityNo { get; set; }
-        public string? loyalcardno { get; set; }
-
+        public string loyalcardno { get; set; }
     }
-
     public class GetPatientDetailsWithServices: GetPatientDetailsResponse
     {        
         public List<ServiceSearchDTO> serviceRateLists { get; set; }
-
     }
 }

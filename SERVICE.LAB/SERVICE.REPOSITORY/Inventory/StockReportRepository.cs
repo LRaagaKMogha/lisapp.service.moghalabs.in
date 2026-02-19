@@ -18,7 +18,7 @@ namespace Service.Repository.Inventory
 
         public List<GetStockReportResponse> GetStockReport(GetStockReportRequest stockreport)
         {
-            List<GetStockReportResponse> objresult = new List<GetStockReportResponse>();
+            List<GetStockReportResponse> Objresult = new List<GetStockReportResponse>();
             try
             {
                 using (var context = new MasterContext(_config.GetConnectionString(ConfigKeys.DefaultConnection)))
@@ -36,7 +36,7 @@ namespace Service.Repository.Inventory
                     var _PageIndex = new SqlParameter("PageIndex", stockreport.pageIndex);
                     var _pageCount = new SqlParameter("pageCount", stockreport.pageCount);
 
-                    objresult = context.GetStockReport.FromSqlRaw(
+                    Objresult = context.GetStockReport.FromSqlRaw(
                     "EXEC dbo.pro_GetStockReport @VenueNo, @VenueBranchNo, @BranchNo, @StoreNo , @CategoryNo,  @ProductTypeNo ,@ProductMasterNo,   @FromDate, @ToDate, @Type, @PageIndex, @pageCount",
                     _VenueNo, _VenueBranchNo, _BranchNo, _StoreNo, _CategoryNo, _ProductTypeNo, _ProductMasterNo,_FromDate, _ToDate, _Type, _PageIndex, _pageCount
                     ).ToList();
@@ -47,7 +47,7 @@ namespace Service.Repository.Inventory
                 MyDevException.Error(ex, "StockReportReposistory.GetStockReportResponse/VenuNo-" + stockreport.venueNo, ExceptionPriority.High, ApplicationType.REPOSITORY,
                 stockreport.venueNo, stockreport.venueBranchNo, stockreport.userNo);
             }
-            return objresult;
+            return Objresult;
         }
     }
 }

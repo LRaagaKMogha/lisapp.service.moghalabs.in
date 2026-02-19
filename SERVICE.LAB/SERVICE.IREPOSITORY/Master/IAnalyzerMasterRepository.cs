@@ -9,8 +9,8 @@ namespace Service.IRepository
         TblAnalyzerdata InsertAnalyzerDetails(TblAnalyzerresponse TblAnalyzerresponse);
         AnaParamDtoResponse InsertAnaParam(AnaParamDto AnaParamobj);
         List<AnaParamGetDto> GetAnaParamDetails(int VenueNo, int VenueBranchNo, int GetAnaParamDetails, int Analyzerno, int Sampleno);
-        List<TbltestMap> GetAnalVsParamVsTest(testmapRequest testmapRequest);
-        analVsparamVstestMap InsertAnalVsParamVsTest(responseTest responseTest);
-        List<subresponse> GetSubTest(subrequest subrequest);
+        List<TbltestMap> GetAnalVsParamVsTest(TestmapRequest TestmapRequest);
+        AnalVsparamVstestMap InsertAnalVsParamVsTest(ResponseTest ResponseTest);
+        List<Subresponse> GetSubTest(Subrequest Subrequest);
     }
 }

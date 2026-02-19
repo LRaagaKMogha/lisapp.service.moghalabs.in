@@ -40,7 +40,7 @@ namespace Service.Repository
         }
         public Termsmasterresponse InsertTermsmaster(TblTerms tblterms)
         {
-            Termsmasterresponse objresult = new Termsmasterresponse();
+            Termsmasterresponse Objresult = new Termsmasterresponse();
             try
             {
                 using (var context = new LIMSContext(_config.GetConnectionString(ConfigKeys.DefaultConnection)))
@@ -63,15 +63,15 @@ namespace Service.Repository
 
                     if (obj[0].termsNo == -1)
                     {
-                        objresult.termsNo = -1; 
+                        Objresult.termsNo = -1; 
                     }
                     else if (obj[0].termsNo == 0)
                     {
-                        objresult.termsNo = 0;
+                        Objresult.termsNo = 0;
                     }
                     else if (obj[0].termsNo > 0)
                     {
-                        objresult.termsNo = 1;
+                        Objresult.termsNo = 1;
                     }
                 }
             }
@@ -79,7 +79,7 @@ namespace Service.Repository
             {
                 MyDevException.Error(ex, "TermsRepository.InsertTermsmaster" + tblterms.termsNo.ToString(), ExceptionPriority.Low, ApplicationType.REPOSITORY, tblterms.venueNo, tblterms.venuebranchno, 0);
             }
-            return objresult;
+            return Objresult;
         }
     }
 }

@@ -53,18 +53,18 @@ namespace Service.Repository.FrontOffice.ReferrerWiseDue
                         response.ReportDueAmount = responseData[0].ReportDueAmount;
 
                         foreach(var item in responseData) {
-                            RefWiseDueResponseList objResult = new RefWiseDueResponseList();
-                            objResult.RowNo = item.RowNo;
-                            objResult.BranchNo = item.BranchNo;
-                            objResult.BranchName = item.BranchName;
-                            objResult.RefTypeNo = item.RefTypeNo;
-                            objResult.ReferralType  = item.ReferralType;
-                            objResult.ReferrerNo = item.ReferrerNo;
-                            objResult.ReferrerName = item.ReferrerName;
-                            objResult.VisitCount = item.VisitCount;
-                            objResult.DueAmount = item.DueAmount;
+                            RefWiseDueResponseList Objresult = new RefWiseDueResponseList();
+                            Objresult.RowNo = item.RowNo;
+                            Objresult.BranchNo = item.BranchNo;
+                            Objresult.BranchName = item.BranchName;
+                            Objresult.RefTypeNo = item.RefTypeNo;
+                            Objresult.ReferralType  = item.ReferralType;
+                            Objresult.ReferrerNo = item.ReferrerNo;
+                            Objresult.ReferrerName = item.ReferrerName;
+                            Objresult.VisitCount = item.VisitCount;
+                            Objresult.DueAmount = item.DueAmount;
 
-                            responseList.Add(objResult);
+                            responseList.Add(Objresult);
                         }
 
                         response.RefWiseDueResponseList = responseList;

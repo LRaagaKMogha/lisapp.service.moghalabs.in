@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Service.Model.Inventory
 {
-    public class GetPurchaseOrderResponse
+    public class GetPurchaseOrderresponse
     {
         public Int32 Sno { get; set; }
         public Int32 TotalRecords { get; set; }

@@ -40,10 +40,10 @@ namespace Service.API.SERVICE.Controllers
         [Route("api/Producttype/Insertproducttypemaster")]
         public ProductTypeMasterResponse Insertproducttypemaster(TblProductType tblProtyp)
         {
-            ProductTypeMasterResponse objresult = new ProductTypeMasterResponse();
+            ProductTypeMasterResponse Objresult = new ProductTypeMasterResponse();
             try
             {
-                objresult = _producttypeRepository.Insertproducttypemaster(tblProtyp);
+                Objresult = _producttypeRepository.Insertproducttypemaster(tblProtyp);
                 string _CacheKey = CacheKeys.CommonMaster + "PRODUCTTYPE" + tblProtyp.venueNo + tblProtyp.venueBranchno;
                 MemoryCacheRepository.RemoveItem(_CacheKey);
             }
@@ -51,7 +51,7 @@ namespace Service.API.SERVICE.Controllers
             {
                 MyDevException.Error(ex, "ProductTypeController.Insertproducttypemaster" + tblProtyp.productTypeno.ToString(), ExceptionPriority.Low, ApplicationType.APPSERVICE, tblProtyp.venueNo, tblProtyp.venueBranchno, tblProtyp.userNo);
             }
-            return objresult;
+            return Objresult;
         }
 
         [CustomAuthorize("INVMASTERS")]
@@ -76,10 +76,10 @@ namespace Service.API.SERVICE.Controllers
         [Route("api/Producttype/InsertproductCategory")]
         public ProductcategoryResponse InsertproductCategory(TblProductCategory TblProductCategory)
         {
-            ProductcategoryResponse objresult = new ProductcategoryResponse();
+            ProductcategoryResponse Objresult = new ProductcategoryResponse();
             try
             {
-                objresult = _producttypeRepository.InsertproductCategory(TblProductCategory);
+                Objresult = _producttypeRepository.InsertproductCategory(TblProductCategory);
                 string _CacheKey = CacheKeys.CommonMaster + "PRODUCTCATEGORY" + TblProductCategory.venueNo + TblProductCategory.venueBranchno;
                 MemoryCacheRepository.RemoveItem(_CacheKey);
             }
@@ -87,7 +87,7 @@ namespace Service.API.SERVICE.Controllers
             {
                 MyDevException.Error(ex, "ProductTypeController.InsertproductCategory" + TblProductCategory.categoryNo.ToString(), ExceptionPriority.Low, ApplicationType.APPSERVICE, TblProductCategory.venueNo, TblProductCategory.venueBranchno,0);
             }
-            return objresult;
+            return Objresult;
         }
     }
 }

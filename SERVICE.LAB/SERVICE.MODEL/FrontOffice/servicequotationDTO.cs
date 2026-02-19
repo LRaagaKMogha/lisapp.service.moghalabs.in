@@ -23,7 +23,6 @@ namespace Service.Model
         public string lastName { get; set; }
         public string fullName { get; set; }
         public string gender { get; set; }
-        //public DateTime dOB { get; set; }
         public Byte ageY { get; set; }
         public Byte ageM { get; set; }
         public Byte ageD { get; set; }
@@ -41,9 +40,7 @@ namespace Service.Model
         public string referer { get; set; }
         public int pageIndex { get; set; }
         public int TotalRecords { get; set; }
-
     }
-
     public class responselst
     {
         public int quotationMasterNo { get; set; }
@@ -71,11 +68,11 @@ namespace Service.Model
         public int physicianNo { get; set; }
         public string physicianName { get; set; }
         public string customerName { get; set; }
-        public List<gettestlst> gettestlst { get; set; }
+        public List<Gettestlst> Gettestlst { get; set; }
         public int quotationOrderListNo { get; set; }
         public string quotationNo { get; set; }
     }
-    public class gettestlst
+    public class Gettestlst
     {
         public int quotationOrderListNo { get; set; }
         public int quotationMasterNo { get; set; }
@@ -86,8 +83,6 @@ namespace Service.Model
     }
     public class storequotationlst
     {
-        public int quotationMasterNo { get; set; }
-       
-    }
-     
+        public int quotationMasterNo { get; set; }       
+    }     
 }

@@ -34,7 +34,7 @@ namespace Service.Model.Integration
         public string responsemsg { get; set; }
         public List<labresponsedetails> labresponsedetails { get; set; }
         [JsonIgnore]
-        public List<labresponsedetails> labdetails { get; set; }
+        public List<labresponsedetails> Labdetails { get; set; }
     }
     public class labresponsedetails
     {
@@ -51,21 +51,21 @@ namespace Service.Model.Integration
         [MaxLength(36)]
         public string SourceRequestID { get; set; }
         public DateTime labregistereddttm { get; set; }
-        public List<labreportdetails> reportdetails { get; set; }
+        public List<Labreportdetails> reportdetails { get; set; }
 
     }
-    public class labreportdetails
+    public class Labreportdetails
     {
         public string accessionno { get; set; }
 
         public byte[]? reportdata { get; set; }
-        public List<labtestdetails> testdetails { get; set; }
+        public List<Labtestdetails> testdetails { get; set; }
         [JsonIgnore]
         public string TestDescription { get; set; }
         [JsonIgnore]
         public string TestStatus { get; set; }
     }
-    public class labtestdetails
+    public class Labtestdetails
     {
         public string TestDescription { get; set; }
 
@@ -77,14 +77,14 @@ namespace Service.Model.Integration
         public int ResultTypeNo { get; set; }
 
     }
-    public class reportresponsediscreetdetails
+    public class Reportresponsediscreetdetails
     {
         public string referenceno { get; set; }
         public string responsecode { get; set; }
         public string responsemsg { get; set; }
-        public List<labreportdiscreetdetails> reportdetails { get; set; }
+        public List<Labreportdiscreetdetails> reportdetails { get; set; }
     }
-    public class labreportdiscreetdetails
+    public class Labreportdiscreetdetails
     {
         [MaxLength(10)]
         public string labrequestNo { get; set; }

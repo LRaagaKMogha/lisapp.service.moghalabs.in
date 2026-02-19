@@ -130,14 +130,14 @@ namespace BloodBankManagement.Controllers
             var errors = new List<Error>();
             request.BloodSampleInventories.ForEach(sampleResult =>
             {
-                ErrorOr<Models.BloodSampleInventory> sampleRequestResult = Models.BloodSampleInventory.From(sampleResult, httpContextAccessor.HttpContext!);
-                if (sampleRequestResult.IsError)
+                ErrorOr<Models.BloodSampleInventory> sampleRequestresult = Models.BloodSampleInventory.From(sampleResult, httpContextAccessor.HttpContext!);
+                if (sampleRequestresult.IsError)
                 {
-                    errors.AddRange(sampleRequestResult.Errors);
+                    errors.AddRange(sampleRequestresult.Errors);
                 }
                 else
                 {
-                    BloodSampleInventories.Add(sampleRequestResult.Value);
+                    BloodSampleInventories.Add(sampleRequestresult.Value);
                 }
             });
             if (errors.Count > 0)

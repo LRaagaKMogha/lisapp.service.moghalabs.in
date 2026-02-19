@@ -37,23 +37,23 @@ namespace Service.Model.EF
         public virtual DbSet<AllergyTypeResponse> InsertAllergyTypeData { get; set; }
         public virtual DbSet<lstAllergyMaster> GetAllergyMasterData { get; set; }
         public virtual DbSet<rtnAllergyMaster> InsertAllergyMasterData { get; set; }
-        public virtual DbSet<lstDiseaseCategory> GetDiseaseCategoryData { get; set; }
-        public virtual DbSet<rtnDiseaseCategory> InsertDiseaseCategoryData { get; set; }
-        public virtual DbSet<lstDiseaseMaster> GetDiseaseMasterData { get; set; }
-        public virtual DbSet<rtnDiseaseMaster> InsertDiseaseMasterData { get; set; }
+        public virtual DbSet<LstDiseaseCategory> GetDiseaseCategoryData { get; set; }
+        public virtual DbSet<RtnDiseaseCategory> InsertDiseaseCategoryData { get; set; }
+        public virtual DbSet<LstDiseaseMaster> GetDiseaseMasterData { get; set; }
+        public virtual DbSet<RtnDiseaseMaster> InsertDiseaseMasterData { get; set; }
         public virtual DbSet<OPDBulkFileUpload> GetPatientDocumentDetails { get; set; }
-        public virtual DbSet<displaylist> displaylistEF { get; set; }
+        public virtual DbSet<Displaylist> DisplaylistEF { get; set; }
         public virtual DbSet<PhysicianAmount> GetOPDPhysicianAmount { get; set; }
         public virtual DbSet<AllergyTypeResponse> InsertAllergyTypes { get; set; }
-        public virtual DbSet<drugresponse> GetDrugDetails { get; set; }
-        public virtual DbSet<lstDiseaseTemplateList> GetTemplateList { get; set; }
+        public virtual DbSet<Drugresponse> GetDrugDetails { get; set; }
+        public virtual DbSet<LstDiseaseTemplateList> GetTemplateList { get; set; }
         public virtual DbSet<OPDBeforeAfterImageList> OPDBeforeAfterImageList { get; set; }
         public virtual DbSet<DiseaseVsProductMapping> GetDiseaseVsDrugMaster { get; set; }
         public virtual DbSet<DiseaseVsTestMapping> GetDiseaseVsTestMaster { get; set; }
         public virtual DbSet<lstOPDReasonMaster> GetOPDResonMasterData { get; set; }
         public virtual DbSet<rtnOPDReasonMaster> InsertOPDResonMasterData { get; set; }
-        public virtual DbSet<rtnDisVsDrugMaster> InsertDisVsDrugMaster { get; set; }
-        public virtual DbSet<rtnDisVsInvMaster> InsertDisVsInvMaster { get; set; }
+        public virtual DbSet<RtnDisVsDrugMaster> InsertDisVsDrugMaster { get; set; }
+        public virtual DbSet<RtnDisVsInvMaster> InsertDisVsInvMaster { get; set; }
         public virtual DbSet<OPDPatientDisVsDrugDetails> GetOPDMasterDefinedDrugDetails { get; set; }
         public virtual DbSet<OPDPatientDisVsInvDetails> GetOPDMasterDefinedInvDetails { get; set; }
         public virtual DbSet<OPDApptDetails> GetOPDApptDetails { get; set; }
@@ -73,7 +73,7 @@ namespace Service.Model.EF
         public virtual DbSet<PatientDrugDetailRes> InsetPatientPrescription { get; set; }
         public virtual DbSet<PrintPatientPrescription> GetPatientPrescriptionPrint { get; set; }
         public virtual DbSet<MachineMasterDTO> GetMachineResult { get; set; }
-        public virtual DbSet<reqMachineMasterResponse> InsertMachineResult { get; set; }
+        public virtual DbSet<ReqMachineMasterResponse> InsertMachineResult { get; set; }
         public virtual DbSet<ImageListResponse> OPDImagingIncludingreport { get; set; }
         public virtual DbSet<OPDDashBoardRes> GetOPDDashBoardDTO { get; set; }
         public virtual DbSet<OPDStatusLogListResponse> OPDStatusLogList { get; set; }
@@ -248,25 +248,25 @@ namespace Service.Model.EF
                 entity.ToTable("pro_InsertAllergyMaster");
                 entity.Property(e => e.AllergyMasterNo).HasColumnName("AllergyMasterNo");
             });
-            modelBuilder.Entity<lstDiseaseCategory>(entity =>
+            modelBuilder.Entity<LstDiseaseCategory>(entity =>
             {
                 entity.HasKey(e => e.DiseaseCategoryNo);
                 entity.ToTable("pro_GetDiseaseCategory");
                 entity.Property(e => e.DiseaseCategoryNo).HasColumnName("DiseaseCategoryNo");
             });
-            modelBuilder.Entity<rtnDiseaseCategory>(entity =>
+            modelBuilder.Entity<RtnDiseaseCategory>(entity =>
             {
                 entity.HasKey(e => e.DiseaseCategoryNo);
                 entity.ToTable("pro_InsertDiseaseCategory");
                 entity.Property(e => e.DiseaseCategoryNo).HasColumnName("DiseaseCategoryNo");
             });
-            modelBuilder.Entity<lstDiseaseMaster>(entity =>
+            modelBuilder.Entity<LstDiseaseMaster>(entity =>
             {
                 entity.HasKey(e => e.DiseaseMasterNo);
                 entity.ToTable("pro_GetDiseaseMaster");
                 entity.Property(e => e.DiseaseMasterNo).HasColumnName("DiseaseMasterNo");
             });
-            modelBuilder.Entity<rtnDiseaseMaster>(entity =>
+            modelBuilder.Entity<RtnDiseaseMaster>(entity =>
             {
                 entity.HasKey(e => e.DiseaseMasterNo);
                 entity.ToTable("pro_InsertDiseaseMaster");
@@ -278,7 +278,7 @@ namespace Service.Model.EF
                 entity.ToTable("pro_GetEntityDocument");
                 entity.Property(e => e.patientNumber).HasColumnName("patientNumber");
             });
-            modelBuilder.Entity<displaylist>(entity =>
+            modelBuilder.Entity<Displaylist>(entity =>
             {
                 entity.HasKey(e => e.Row_Num);
                 entity.ToTable("Pro_GetOPD_Display");
@@ -296,13 +296,13 @@ namespace Service.Model.EF
                 entity.ToTable("Pro_GetOPDPhysicianAmount");
                 entity.Property(e => e.PhysicianNo).HasColumnName("PhysicianNo");
             });
-            modelBuilder.Entity<drugresponse>(entity =>
+            modelBuilder.Entity<Drugresponse>(entity =>
             {
                 entity.HasKey(e => e.productNo);
                 entity.ToTable("pro_GetDrugDetails");
                 entity.Property(e => e.productNo).HasColumnName("productNo");
             });
-            modelBuilder.Entity<lstDiseaseTemplateList>(entity =>
+            modelBuilder.Entity<LstDiseaseTemplateList>(entity =>
             {
                 entity.HasKey(e => e.templateNo);
                 entity.ToTable("pro_GetDiseaseTemplate");
@@ -338,13 +338,13 @@ namespace Service.Model.EF
                 entity.ToTable("Pro_InsertOPDResonMaster");
                 entity.Property(e => e.OPDReasonMastNo).HasColumnName("OPDReasonMastNo");
             });
-            modelBuilder.Entity<rtnDisVsDrugMaster>(entity =>
+            modelBuilder.Entity<RtnDisVsDrugMaster>(entity =>
             {
                 entity.HasKey(e => e.DiseaseVsProductMappingNo);
                 entity.ToTable("pro_InsertDisVsDrugMaster");
                 entity.Property(e => e.DiseaseVsProductMappingNo).HasColumnName("DiseaseVsProductMappingNo");
             });
-            modelBuilder.Entity<rtnDisVsInvMaster>(entity =>
+            modelBuilder.Entity<RtnDisVsInvMaster>(entity =>
             {
                 entity.HasKey(e => e.DiseaseVsTestMappingNo);
                 entity.ToTable("pro_InsertDisVsInvMaster");
@@ -473,7 +473,7 @@ namespace Service.Model.EF
                 entity.ToTable("pro_GetMachineMaster");
                 entity.Property(e => e.machineNo).HasColumnName("machineNo");
             });
-            modelBuilder.Entity<reqMachineMasterResponse>(entity =>
+            modelBuilder.Entity<ReqMachineMasterResponse>(entity =>
             {
                 entity.HasKey(e => e.machineNo);
                 entity.ToTable("pro_InsertMachineMaster");

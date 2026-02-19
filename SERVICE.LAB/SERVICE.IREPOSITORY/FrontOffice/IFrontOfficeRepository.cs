@@ -19,10 +19,10 @@ namespace Service.IRepository
         CustomerList GetCustomerDetails(long Customerno, int VenueNo, int VenueBranchNo);
         List<GroupTestDTO> GetGrouptest(int ServiceNo, string ServiceType, int VenueNo, int VenueBranchNo);
         List<TblCurrency> GetCurrency(int VenueNo);
-        List<ServiceSearchDTO> GetService(int VenueNo, int VenueBranchNo, int IsApproval);
-        ServiceRateList GetServiceDetails(int ServiceNo, string ServiceType, int ClientNo, int VenueNo, int VenueBranchNo, int physicianNo, int splratelisttype);
+        List<ServiceSearchDTO> Getservice(int VenueNo, int VenueBranchNo, int IsApproval);
+        ServiceRateList GetserviceDetails(int ServiceNo, string ServiceType, int ClientNo, int VenueNo, int VenueBranchNo, int physicianNo, int splratelisttype);
         FrontOffficeResponse InsertFrontOfficeMaster(FrontOffficeDTO objDTO);
-        MassRegistrationResponse InsertMassRegistration([FromBody] ExternalBulkFile objDTO);
+        MassRegistrationResponse Insertmassregistration([FromBody] ExternalBulkFile objDTO);
         Task<ReportOutput> PrintBill(ReportRequestDTO req);
         GetPatientDetailsWithServices GetPatientDetails(long visitNo, int VenueNo, int VenueBranchNo, string searchType = null, int PatientNo = 0, int Isprocedure = 0);
         List<QueueOrderDTO> GetQueueOrderDetails(CommonFilterRequestDTO RequestItem);
@@ -30,11 +30,11 @@ namespace Service.IRepository
         List<massPatientBarcode> DownloadMassFile(int MassFileNo, int VenueNo, int VenueBranchNo);
         FrontOffficeQueueResponse UpdateQueueOrder(CommonFilterRequestDTO RequestItem);
         List<rescheckExists> checkExists(reqcheckExists req);
-        DoctorDetails InsertDoctor(DoctorDetails objDTO);
+        Doctordetails InsertDoctor(Doctordetails objDTO);
         int PushNotifyMessage(int patientVisitNo, int venueno, int venuebranchno, int userno, string messagetype, string message);
         int InsertPatientNotifyLog(PatientNotifyLog objDTO);
         List<PatientNotifyLog> GetPatientNotifyLog(PatientNotifyLog req);
-        ExternalVisitDetailsResponse CheckExternalVistIdExists(ExternalVisitDetails req);
+        ExternalVisitdetailsResponse CheckExternalVistIdExists(ExternalVisitdetails req);
         List<TestPrePrintDetailsResponse> GetTestPrePrintDetails(TestPrePrintDetailsRequest req);
         List<CreateManageSampleResponse> PrePrintManageSample(List<PrePrintBarcodeRequest> createManageSample);
         FrontOffficeValidatetest getvalidatetest(List<ServiceParamDTO> req);

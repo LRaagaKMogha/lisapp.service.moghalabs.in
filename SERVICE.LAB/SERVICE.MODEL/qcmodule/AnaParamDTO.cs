@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace Service.Model
 {
@@ -19,12 +17,10 @@ namespace Service.Model
         public int? ModifiedBy { get; set; }
         public int? venuebranchno { get; set; }
     }
-
     public class AnaParamDtoResponse
     {
         public Int16 AnalyzerMasterNo { get; set; }
     }
-
     public class AnaParamGetDto
     {
         public Int16 AnalyzerParamNo { get; set; }
@@ -37,7 +33,6 @@ namespace Service.Model
         public Int16 AnalyzerMasterNo { get; set; }
         public int SampleNo { get; set; }
     }
-
     public class FetchAnaParamDto
     {
         public Int16 AnalyzerParamNo { get; set; }
@@ -50,25 +45,23 @@ namespace Service.Model
         public Int16 AnalyzerMasterNo { get; set; }
         public int SampleNo { get; set; }
     }
-
     public partial class TblAnalyzerdata
     {
         public Int16 analyzerMasterNo { get; set; }
     }
-
     public partial class TblAnalyzerresponse
     {
         public Int16 analyzerMasterNo { get; set; }
         public string serialNo { get; set; }
-        public string? description { get; set; }
-        public string? assetCode { get; set; }
+        public string description { get; set; }
+        public string assetCode { get; set; }
         public int venuebranchNo { get; set; }
         public bool? status { get; set; }
         public Int16 venueNo { get; set; }
         public int userNo { get; set; }
         public double PerUnitConsumption { get; set; }
     }
-    public partial class testmapRequest
+    public partial class TestmapRequest
     {
         public int analyzerparamTestNo { get; set; }
         public Int16 venueNo { get; set; }
@@ -79,7 +72,6 @@ namespace Service.Model
         public int subtestNo { get; set; }
         public int pageIndex { get; set; }
     }
-
     public partial class TbltestMap
     {
         public int analyzerparamTestNo { get; set; }
@@ -87,10 +79,10 @@ namespace Service.Model
         public Int16 analyzerParamNo { get; set; }
         public int testNo { get; set; }
         public int subtestNo { get; set; }
-        public string? testName { get; set; }
-        public string? subtestName { get; set; }
-        public string? analyzerName { get; set; }
-        public string? paramName { get; set; }
+        public string testName { get; set; }
+        public string subtestName { get; set; }
+        public string analyzerName { get; set; }
+        public string paramName { get; set; }
         public Int16 venueNo { get; set; }
         public int userNo { get; set; }
         public bool? tstatus { get; set; }
@@ -104,7 +96,7 @@ namespace Service.Model
         public string ReagentName { get; set; }
         public string UnitName { get; set; }
     }
-    public partial class responseTest
+    public partial class ResponseTest
     {
         public int analyzerparamTestNo { get; set; }
         public Int16 analyzerMasterNo { get; set; }
@@ -122,19 +114,19 @@ namespace Service.Model
         public string ReagentName { get; set; }
         public string UnitName { get; set; }
     }
-    public partial class analVsparamVstestMap
+    public partial class AnalVsparamVstestMap
     {
         public int analyzerparamTestNo { get; set; }
     }
-    public partial class subrequest
+    public partial class Subrequest
     {
         public int venueNo { get; set; }
         public int testNo { get; set; }
     }
-    public partial class subresponse
+    public partial class Subresponse
     {
         public int RowNo { get; set; }
-        public string? subtestName { get; set; }
+        public string subtestName { get; set; }
         public int subtestNo { get; set; }
         public int testNo { get; set; }
     }

@@ -8,8 +8,8 @@ namespace Service.IRepository
         List<VitalSignDTO> GetVitalSignList(VitalSignDTORequest RequestItem);
         SaveVitalSignDTOResponse InsertVitalSign(SaveVitalSignDTORequest req);
         List<VitalSignMastersResponse> GetVitalSignMasters(VitalSignMastersRequest RequestItem);
-        List<GetAllergyResponse> GetAllergyDetails(GetAllergyRequest RequestItem);
-        SaveAllergyResponse SaveAllergyDetails(SaveAllergyRequest objDTO);
+        List<GetAllergyResponse> GetAllergydetails(GetAllergyRequest RequestItem);
+        SaveAllergyResponse SaveAllergydetails(SaveAllergyRequest objDTO);
         List<GetDiseasesResponse> GetDiseasesDetails(GetDiseasesRequest RequestItem);
         SaveDiseasesResponse SaveDiseasesDetails(SaveDiseasesRequest objDTO);
         string GetVitalResultHistory(GetAllergyRequest RequestItem);

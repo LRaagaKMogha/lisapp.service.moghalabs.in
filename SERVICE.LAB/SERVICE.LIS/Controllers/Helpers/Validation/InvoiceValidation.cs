@@ -9,7 +9,7 @@ namespace Service.API.SERVICE.Controllers
     public class InvoiceValidation
     {
         // Credit Note Report //
-        public static ErrorResponse InsertInvoiceCreditNote(objInvoiceCreditNote req)
+        public static ErrorResponse InsertInvoiceCreditNote(ObjInvoiceCreditNote req)
         {
             ErrorResponse errorResponse = new ErrorResponse();
             List<string> errors = new List<string>();
@@ -51,7 +51,7 @@ namespace Service.API.SERVICE.Controllers
             }
             return errorResponse;
         }
-        public static ErrorResponse InsertInvoiceCreate(objInvoiceCreate req)
+        public static ErrorResponse InsertInvoiceCreate(ObjInvoiceCreate req)
         {
             ErrorResponse errorResponse = new ErrorResponse();
             List<string> errors = new List<string>();
@@ -103,7 +103,7 @@ namespace Service.API.SERVICE.Controllers
         }
 
         // Invoice Payment Report //
-        public static ErrorResponse InsertInvoicePayment(objInvoicePayment req)
+        public static ErrorResponse InsertInvoicePayment(ObjInvoicePayment req)
         {
             ErrorResponse errorResponse = new ErrorResponse();
             List<string> errors = new List<string>();
@@ -180,7 +180,7 @@ namespace Service.API.SERVICE.Controllers
         }
 
         // Invoice Cancel //
-        public static ErrorResponse InvoiceCancel(objInvoiceCancel req)
+        public static ErrorResponse InvoiceCancel(ObjInvoiceCancel req)
         { 
             ErrorResponse errorResponse = new ErrorResponse();
             List<string> errors = new List<string>();

@@ -31,7 +31,7 @@ namespace Service.Repository.Integration.externalservices
             config = _config;
             _logger = logger;
             _jwtUtils = jwtUtils;
-            this.url = config["Urls:BloodBank"]; ///BBMgmtService/BloodBankRegistration
+            this.url = config["Urls:BloodBank"];
         }
         private List<TestAdditionalInformation> GetTestAdditionalInformation(IntegrationOrderDetailsResponse order, FrontOffficeDTO input)
         {

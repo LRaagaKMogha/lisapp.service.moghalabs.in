@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace Service.Model
 {
-    public partial class reqtest
+    public partial class Reqtest
     {
         public string? pageCode { get; set; }
         public int deptNo { get; set; }
@@ -20,8 +20,7 @@ namespace Service.Model
         public int pageSize { get; set; }
         public int Userstatus { get; set; }
     }
-
-    public partial class lsttest
+    public partial class Lsttest
     {
         public int rowNo { get; set; }
         public int testNo { get; set; }
@@ -45,7 +44,7 @@ namespace Service.Model
         public bool isSelectMultiSample { get; set; }
         public List<MultiSamplesReferenceList>? lstmultisamplesreferencelist { get; set; }
     }
-    public partial class objTestList
+    public partial class ObjtestList
     {
         public int rowNo { get; set; }
         public int testNo { get; set; }
@@ -75,14 +74,14 @@ namespace Service.Model
         public int venueNo { get; set; }
         public int venueBranchNo { get; set; }
         public int userNo { get; set; }
-        public List<lsttestsequence> lsttestsequence { get; set; }
+        public List<Lsttestsequence> Lsttestsequence { get; set; }
     }
-    public partial class lsttestsequence
+    public partial class Lsttestsequence
     {
         public int testNo { get; set; }
         public int sequenceNo { get; set; }
     }
-    public partial class objtestdbl
+    public partial class Objtestdbl
     {
         public int testNo { get; set; }
         public string machineCode { get; set; }
@@ -108,7 +107,6 @@ namespace Service.Model
         public int processingMinutes { get; set; }
         public int statMinutes { get; set; }
         public string processingDays { get; set; }
-
         public bool isNonBillable { get; set; }
         public bool isQtyChange { get; set; }
         public bool isRateEditable { get; set; }
@@ -138,7 +136,6 @@ namespace Service.Model
         public string testPickList { get; set; }
         public string testTemplate { get; set; }
         public int tcNo { get; set; }
-        //    public string selectMultiSampleJson { get; set; }
         public bool isSelectMultiSample { get; set; }
         public bool isNonConcurrentTest { get; set; }
         public string multisampleXml { get; set; }
@@ -147,14 +144,14 @@ namespace Service.Model
         public bool isFormulaFor { get; set; }
         public decimal samplequantity { get; set; }
         public bool isunacceptable { get; set; }
-        public string? unacceptcondition { get; set; }
+        public string unacceptcondition { get; set; }
         public bool isincludeinstruction { get; set; }
-        public string? includeinstruction { get; set; }
+        public string includeinstruction { get; set; }
         public bool isSecondReview { get; set; }
         public string testCode { get; set; }
         public string languageText { get; set; }
-        public string? fromDate { get; set; }
-        public string? toDate { get; set; }
+        public string fromDate { get; set; }
+        public string toDate { get; set; }
         public string testProcessTime { get; set; }
         public string testanlyrange { get; set; }
         public bool isResultInWL { get; set; }
@@ -177,8 +174,7 @@ namespace Service.Model
         public string nehrinternotes { get; set; }
         public bool IsSpecialCategory { get; set; }
     }
-
-    public partial class objtest
+    public partial class Objtest
     {
         public int testNo { get; set; }
         public string machineCode { get; set; }
@@ -229,32 +225,32 @@ namespace Service.Model
         public string testrefrange { get; set; }
         public string testPickList { get; set; }
         public int tcNo { get; set; }
-        public List<lsttestrefrange> lsttestrefrange { get; set; }
-        public List<lsttestPickList> lsttestPickList { get; set; }
-        public string? testTemplate { get; set; }
-        public List<lstTemplateList> lstTemplateList { get; set; }
-        public string? selectMultiSampleJson { get; set; }
+        public List<Lsttestrefrange> Lsttestrefrange { get; set; }
+        public List<LsttestPickList> LsttestPickList { get; set; }
+        public string testTemplate { get; set; }
+        public List<LstTemplateList> LstTemplateList { get; set; }
+        public string selectMultiSampleJson { get; set; }
         public bool isSelectMultiSample { get; set; }
         public bool isNonConcurrentTest { get; set; }
-        public List<MultiSampleList>? lstMultiSampleList { get; set; }
-        public List<MultiSamplesReferenceList>? lstmultisamplesreferencelist { get; set; }
+        public List<MultiSampleList> lstMultiSampleList { get; set; }
+        public List<MultiSamplesReferenceList> lstmultisamplesreferencelist { get; set; }
         public bool isUploadOption { get; set; }
         public int isMultiEditor { get; set; }
         public bool isFormulaFor { get; set; }
         public decimal samplequantity { get; set; }
         public bool isunacceptable { get; set; }
-        public string? unacceptcondition { get; set; }
+        public string unacceptcondition { get; set; }
         public bool isincludeinstruction { get; set; }
-        public string? includeinstruction { get; set; }
+        public string includeinstruction { get; set; }
         public string interNotesHigh { get; set; }
         public string interNotesLow { get; set; }
         public bool isSecondReview { get; set; }
         public string testCode { get; set; }
         public string languageText { get; set; }
-        public string? fromDate { get; set; }
-        public string? toDate { get; set; }
+        public string fromDate { get; set; }
+        public string toDate { get; set; }
         public string testProcessTime { get; set; }
-        public List<lsttestanalyrange> lsttestanalyrange { get; set; }
+        public List<Lsttestanalyrange> Lsttestanalyrange { get; set; }
         public bool isResultInWL { get; set; }
         public bool IsApproval { get; set; }
         public bool IsReject { get; set; }
@@ -278,7 +274,7 @@ namespace Service.Model
         public string nehrInterpreditationnotes { get; set; }
         public bool IsSpecialCategory { get; set; }
     }
-    public partial class lsttestanalyrange
+    public partial class Lsttestanalyrange
     {
         public int analyticalRangeNo { get; set; }
         public int testNo { get; set; }
@@ -293,7 +289,6 @@ namespace Service.Model
         public int oldAnalRangeNo { get; set; }
         public int fastingOrNonfasting { get; set; }
     }
-
     public class MultiSamplesReferenceList
     {
         public int ID { get; set; }
@@ -330,7 +325,6 @@ namespace Service.Model
         public bool isincludeinstruction { get; set; }
         public string includeinstruction { get; set; }
         public int fastingOrNonfasting { get; set; }
-
     }
     public class MultiSampleList
     {
@@ -343,7 +337,6 @@ namespace Service.Model
         public string SampleName { get; set; }
         public bool IsSelect { get; set; }
         public bool IsPriority { get; set; }
-
     }
     public class GetManageOptionalResponse
     {
@@ -385,7 +378,7 @@ namespace Service.Model
     {
         public int TestNo { get; set; }
     }
-    public partial class lsttestrefrange
+    public partial class Lsttestrefrange
     {
         public int referrenceRangeNo { get; set; }
         public int testNo { get; set; }
@@ -393,10 +386,8 @@ namespace Service.Model
         public string genderCode { get; set; }
         public int ageFrom { get; set; }
         public string ageFromType { get; set; }
-        //public int ageFromdays { get; set; }
         public int ageTo { get; set; }
         public string ageToType { get; set; }
-        //public int ageTodays { get; set; }
         public string rangeFrom { get; set; }
         public string rangeTo { get; set; }
         public string displayRR { get; set; }
@@ -412,14 +403,14 @@ namespace Service.Model
         public int containerNo { get; set; }
         public int methodNo { get; set; }
         public bool isSelectMultiSampleRecord { get; set; }
-        public string? fromDate { get; set; }
-        public string? toDate { get; set; }
+        public string fromDate { get; set; }
+        public string toDate { get; set; }
         public int unitNo { get; set; }
         public int oldRefRangeNo { get; set; }
         public int fastingOrNonfasting { get; set; }
         public int processingBranch { get; set; }
     }
-    public partial class lsttestPickList
+    public partial class LsttestPickList
     {
         public int testPickListNo { get; set; }
         public int testNo { get; set; }
@@ -432,7 +423,7 @@ namespace Service.Model
         public bool status { get; set; }
         public string comments { get; set; }
     }
-    public partial class lstTemplateList
+    public partial class LstTemplateList
     {
         public int templateNo { get; set; }
         public int testNo { get; set; }
@@ -450,32 +441,32 @@ namespace Service.Model
         public bool IsReject { get; set; }
         public bool? IsApprovalTestTemplate {  get; set; }
     }
-    public partial class rtntemplateNo
+    public partial class RtntemplateNo
     {
         public int templateNo { get; set; }
         public int templateApprovalNo { get; set; }
     }
-    public partial class returntemplateNo
+    public partial class ReturntemplateNo
     {
         public int templateNo { get; set; }
         public int templateApprovalNo { get; set; }
         public string? templateText { get; set; }
     }
-    public partial class templateNoresponse
+    public partial class TemplateNoresponse
     {
         public int templateNo { get; set; }
         public int templateApprovalNo { get; set; }
     }
-    public partial class rtntest
+    public partial class Rtntest
     {
         public int testNo { get; set; }
     }
-    public partial class rtntemplateText
+    public partial class RtntemplateText
     {
         public string templateText { get; set; }
         public int templateNo { get; set; }
     }
-    public partial class lstgrppkg
+    public partial class Lstgrppkg
     {
         public int rowNo { get; set; }
         public int pageIndex { get; set; }
@@ -495,8 +486,7 @@ namespace Service.Model
         public Int16 bufferDays { get; set; }
         public DateTime? bufferDate { get; set; }
     }
-
-    public partial class objgrppkgdbl
+    public partial class Objgrppkgdbl
     {
         public int serviceNo { get; set; }
         public int tcNo { get; set; }
@@ -526,8 +516,8 @@ namespace Service.Model
         public string grppkgtests { get; set; }
         public bool isunacceptable { get; set; }
         public bool isincludeinstruction { get; set; }
-        public string? FromDate { get; set; }
-        public string? ToDate { get; set; }
+        public string FromDate { get; set; }
+        public string ToDate { get; set; }
         public bool isSecondReview { get; set; }
         public string testCode { get; set; }
         public string languageText { get; set; }
@@ -543,14 +533,14 @@ namespace Service.Model
         public int ChoiceCount { get; set; }
         public string nehrInterPnotes { get; set; }
         public Int16 bufferDays { get; set; }
-        public string? bufferDate { get; set; }
+        public string bufferDate { get; set; }
         public bool isdisplayinreport { get; set; }
         public bool isSpecimen { get; set; }
         public bool IsSpecialCategory { get; set; }
         public string includeinstruction { get; set; }
         public bool isUploadOption { get; set; }
     }
-    public partial class objgrppkg
+    public partial class Objgrppkg
     {
         public string pageCode { get; set; }
         public int serviceNo { get; set; }
@@ -588,9 +578,9 @@ namespace Service.Model
         public string unacceptcondition { get; set; }
         public bool isincludeinstruction { get; set; }
         public string includeinstruction { get; set; }
-        public string? FromDate { get; set; }
-        public string? ToDate { get; set; }
-        public List<lstgrppkgservice> lstgrppkgservice { get; set; }
+        public string FromDate { get; set; }
+        public string ToDate { get; set; }
+        public List<Lstgrppkgservice> Lstgrppkgservice { get; set; }
         public bool isSecondReview { get; set; }
         public string testCode { get; set; }
         public string languageText { get; set; }
@@ -616,7 +606,7 @@ namespace Service.Model
         public bool IsSpecialCategory { get; set; }
         public bool isUploadOption { get; set; }
     }
-    public partial class lstgrppkgservice
+    public partial class Lstgrppkgservice
     {
         public int rowNo { get; set; }
         public int parentNo { get; set; }
@@ -630,7 +620,7 @@ namespace Service.Model
         public decimal Amount { get; set; }
         public bool isOptional { get; set; }
     }
-    public partial class reqsearchservice
+    public partial class Reqsearchservice
     {
         public int deptNo { get; set; }
         public int searchby { get; set; }
@@ -638,7 +628,7 @@ namespace Service.Model
         public int venueNo { get; set; }
         public int venueBranchNo { get; set; }
     }
-    public partial class lststestdbl
+    public partial class Lststestdbl
     {
         public int rowNo { get; set; }
         public int testNo { get; set; }
@@ -655,7 +645,7 @@ namespace Service.Model
         public int stSequenceNo { get; set; }
         public bool isActive { get; set; }
     }
-    public partial class lststest
+    public partial class Lststest
     {
         public int rowNo { get; set; }
         public int testNo { get; set; }
@@ -663,9 +653,9 @@ namespace Service.Model
         public string departmentName { get; set; }
         public string sampleName { get; set; }
         public string containerName { get; set; }
-        public List<lstsubtest> lstsubtest { get; set; }
+        public List<Lstsubtest> Lstsubtest { get; set; }
     }
-    public partial class lstsubtest
+    public partial class Lstsubtest
     {
         public int testNo { get; set; }
         public int departmentNo { get; set; }
@@ -678,7 +668,7 @@ namespace Service.Model
         public int stSequenceNo { get; set; }
         public bool isActive { get; set; }
     }
-    public partial class objsubtestdbl
+    public partial class Objsubtestdbl
     {
         public int testNo { get; set; }
         public string testName { get; set; }
@@ -714,7 +704,7 @@ namespace Service.Model
         public bool IsNoPrintInRpt { get; set; }
         public string testanlyrange { get; set; }
     }
-    public partial class objsubtest
+    public partial class Objsubtest
     {
         public int testNo { get; set; }
         public string testName { get; set; }
@@ -738,8 +728,8 @@ namespace Service.Model
         public int venueNo { get; set; }
         public int venueBranchNo { get; set; }
         public int userNo { get; set; }
-        public List<lsttestrefrange> lsttestrefrange { get; set; }
-        public List<lsttestPickList> lsttestPickList { get; set; }
+        public List<Lsttestrefrange> Lsttestrefrange { get; set; }
+        public List<LsttestPickList> LsttestPickList { get; set; }
         public string languageText { get; set; }
         public bool isExtraSubTest { get; set; }
         public bool IsDeltaApproval { get; set; }
@@ -748,7 +738,7 @@ namespace Service.Model
         public Int16 languagecode { get; set; }
         public string testCode { get; set; }
         public bool IsNoPrintInRpt { get; set; }
-        public List<lsttestanalyrange> lsttestanalyrange { get; set; }
+        public List<Lsttestanalyrange> Lsttestanalyrange { get; set; }
     }
     public class SaveFormulaRequest
     {
@@ -794,13 +784,12 @@ namespace Service.Model
         public int venueNo { get; set; }
         public int venueBranchNo { get; set; }
     }
-
     public class CheckTestcodeExistsRes
     {
         public int outNo { get; set; }
         public string existing { get; set; }
     }
-    public partial class reqtestapprove
+    public partial class Reqtestapprove
     {
         public string FromDate { get; set; }
         public string ToDate { get; set; }
@@ -811,7 +800,7 @@ namespace Service.Model
         public int VenueBranchNo { get; set; }
         public int pageIndex { get; set; }
     }
-    public partial class restestapprove
+    public partial class Restestapprove
     {
         public int RowNo { get; set; }
         public string ServiceTypeName { get; set; }
@@ -834,9 +823,9 @@ namespace Service.Model
         public int STSequenceNo { get; set; }
         public bool IsActive { get; set; }
         public int OldServiceNo { get; set; }
-        public List<lstsubtestApp> lstsubtestApp { get; set; }
+        public List<LstsubtestApp> LstsubtestApp { get; set; }
     }
-    public partial class lstsubtestApp
+    public partial class LstsubtestApp
     {
         public int Id { get; set; }
         public int ServiceNo { get; set; }
@@ -847,8 +836,7 @@ namespace Service.Model
         public int STSequenceNo { get; set; }
         public bool IsActive { get; set; }
     }
-
-    public partial class restestappHistory
+    public partial class RestestappHistory
     {
         public int RowNo { get; set; }
         public string ServiceTypeName { get; set; }
@@ -883,7 +871,6 @@ namespace Service.Model
         public int TotalRecords { get; set; }
         public int pageIndex { get; set; }
     }
-
     public partial class GetTATReq
     {
         public Int16 MainDeptNo { get; set; }
@@ -900,7 +887,6 @@ namespace Service.Model
         public int userNo { get; set; }
         public List<ServiceDTO> testXML { get; set; }
     }
-
     public class ServiceDTO
     {
         public string cutoffTime { get; set; }
@@ -911,12 +897,10 @@ namespace Service.Model
         public string processingDays { get; set; }
         public int processingMinutes { get; set; }
     }
-
     public class InsTATRes
     {
         public bool? Status { get; set; }
     }
-
     public partial class GetloincReq
     {
         public int LoincNo { get; set; }
@@ -1059,7 +1043,6 @@ namespace Service.Model
         public string Specimen { get; set; }
         public string VenueBranchDisplayText { get; set; }
         public string Address { get; set; }
-
     }
     public class StainMasterInsertReq
     {
@@ -1089,4 +1072,3 @@ namespace Service.Model
         public int totalRecords { get; set; }
     }
 }
-

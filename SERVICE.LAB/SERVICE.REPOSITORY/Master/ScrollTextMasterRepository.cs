@@ -43,7 +43,7 @@ namespace Service.Repository.Master
 
         public SaveScrollTextMasterResponse InsertScrollTextMaster(SaveScrollTextMasterRequest request)
         {
-            SaveScrollTextMasterResponse objresult = new SaveScrollTextMasterResponse();
+            SaveScrollTextMasterResponse Objresult = new SaveScrollTextMasterResponse();
             try
             {
                 using (var context = new MasterContext(_config.GetConnectionString(ConfigKeys.DefaultConnection)))
@@ -56,7 +56,7 @@ namespace Service.Repository.Master
                     var obj = context.SaveScrollTextMasterDTO.FromSqlRaw(
                     "Execute dbo.Pro_InsertScrollTextMaster @XmlData", _xmlData).ToList();
 
-                    objresult.Result = obj[0].Result;
+                    Objresult.Result = obj[0].Result;
                 }
             }
             catch (Exception ex)
@@ -64,7 +64,7 @@ namespace Service.Repository.Master
 
                 MyDevException.Error(ex, "ScrollTextMasterRepository.InsertScrollTextMastermaster" + request.CreatedBy.ToString(), ExceptionPriority.Low, ApplicationType.REPOSITORY, request.VenueNo, request.VenueBranchNo, 0);
             }
-            return objresult;
+            return Objresult;
         }
     }
 }

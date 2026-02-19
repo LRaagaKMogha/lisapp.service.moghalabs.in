@@ -11,10 +11,10 @@ namespace Service.IRepository.PatientInfo
         List<PatientInfoResponse> GetPatientInfoDetails(CommonFilterRequestDTO RequestItem);
         List<PatientInfoListResponse> GetPatientListDetails(CommonFilterRequestDTO RequestItem);
         List<CustomSearchResponse> GetCustomSearch(CommonSearchRequest searchRequest);
-        EditPatientResponse UpdatePatientDetails(EditPatientRequest editPatientRequest);
+        EditPatientResponse UpdatePatientdetails(EditPatientRequest editPatientRequest);
         Task<ReportOutput> PrintPatientReport(ReportRequestDTO requestDTO);
         List<PatientInfoResponse> GetPatientVisitHistory(CommonFilterRequestDTO RequestItem);
-        List<ReasonDetailsResponse> GetServiceRejectReason(ReasonDetailsRequest RequestItem);
+        List<ReasonDetailsResponse> GetserviceRejectReason(ReasonDetailsRequest RequestItem);
         int UpdateMasterData(SyncMasterRequestDTO RequestItem);
         List<PatientsMasterResponse> GetPatientsMaster(PatientsMasterRequest RequestItem);
         int SavePatientsMaster(PatientsMasterSave RequestItem);

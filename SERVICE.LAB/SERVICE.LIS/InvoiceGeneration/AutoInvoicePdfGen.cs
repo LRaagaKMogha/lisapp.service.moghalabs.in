@@ -51,7 +51,7 @@ namespace Service.API.SERVICE.InvoiceGeneration
                                 _billCollected += x.collectedAmount;
                                 _invoiceGross += x.dueAmount;
                             }
-                            objInvoiceCreate obj = new objInvoiceCreate();
+                            ObjInvoiceCreate obj = new ObjInvoiceCreate();
                             obj.invoiceNo = 0;
                             obj.customerNo = customer;
                             obj.billGross = _billGross;

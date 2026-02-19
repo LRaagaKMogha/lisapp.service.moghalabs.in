@@ -5,6 +5,6 @@ namespace Service.IRepository.External.CommonMasters
 {
     public interface ITestMastRepository
     {
-        List<LstTestInfo> GetTestList(int a, int b);
+        List<LsttestInfo> GetTestList(int a, int b);
     }
 }

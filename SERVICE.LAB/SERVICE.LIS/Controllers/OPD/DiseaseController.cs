@@ -23,9 +23,9 @@ namespace Service.API.SERVICE.Controllers
 
         [HttpPost]
         [Route("api/DiseaseCategory/GetDiseaseCategory")]
-        public List<lstDiseaseCategory> GetDiseaseCategorys(reqDiseaseCategory disCat)
+        public List<LstDiseaseCategory> GetDiseaseCategorys(ReqDiseaseCategory disCat)
         {
-            List<lstDiseaseCategory> result = new List<lstDiseaseCategory>();
+            List<LstDiseaseCategory> result = new List<LstDiseaseCategory>();
             try
             {
                 result = _diseaseRepository.GetDiseaseCategorys(disCat);
@@ -39,12 +39,12 @@ namespace Service.API.SERVICE.Controllers
 
         [HttpPost]
         [Route("api/DiseaseCategory/InsertDiseaseCategory")]
-        public rtnDiseaseCategory InsertDiseaseCategorys(TblDiseaseCategory resq)
+        public RtnDiseaseCategory InsertDiseaseCategorys(TblDiseaseCategory resq)
         {
-            rtnDiseaseCategory objresult = new rtnDiseaseCategory();
+            RtnDiseaseCategory Objresult = new RtnDiseaseCategory();
             try
             {
-                objresult = _diseaseRepository.InsertDiseaseCategorys(resq);
+                Objresult = _diseaseRepository.InsertDiseaseCategorys(resq);
                 string _CacheKey = CacheKeys.CommonMaster + "DISEASE" + resq.VenueNo + resq.VenueBranchNo;
                 MemoryCacheRepository.RemoveItem(_CacheKey);
             }
@@ -52,14 +52,14 @@ namespace Service.API.SERVICE.Controllers
             {
                 MyDevException.Error(ex, "DiseaseController.InsertDiseaseCategorys" + resq.DiseaseCategoryNo.ToString(), ExceptionPriority.Low, ApplicationType.REPOSITORY, resq.VenueNo, resq.VenueBranchNo, 0);
             }
-            return objresult;
+            return Objresult;
         }
 
         [HttpPost]
         [Route("api/DiseaseMaster/GetDiseaseMaster")]
-        public List<lstDiseaseMaster> GetDiseaseMasters(reqDiseaseMaster disName)
+        public List<LstDiseaseMaster> GetDiseaseMasters(ReqDiseaseMaster disName)
         {
-            List<lstDiseaseMaster> result = new List<lstDiseaseMaster>();
+            List<LstDiseaseMaster> result = new List<LstDiseaseMaster>();
             try
             {
                 result = _diseaseRepository.GetDiseaseMasters(disName);
@@ -73,12 +73,12 @@ namespace Service.API.SERVICE.Controllers
 
         [HttpPost]
         [Route("api/DiseaseMaster/InsertDiseaseMaster")]
-        public rtnDiseaseMaster InsertDiseaseMasters(TblDiseaseMaster ress)
+        public RtnDiseaseMaster InsertDiseaseMasters(TblDiseaseMaster ress)
         {
-            rtnDiseaseMaster objresult = new rtnDiseaseMaster();
+            RtnDiseaseMaster Objresult = new RtnDiseaseMaster();
             try
             {
-                objresult = _diseaseRepository.InsertDiseaseMasters(ress);
+                Objresult = _diseaseRepository.InsertDiseaseMasters(ress);
                 string _CacheKey = CacheKeys.CommonMaster + "DISEASE" + ress.VenueNo + ress.VenueBranchNo;
                 MemoryCacheRepository.RemoveItem(_CacheKey);
 
@@ -87,13 +87,13 @@ namespace Service.API.SERVICE.Controllers
             {
                 MyDevException.Error(ex, "DiseaseController.InsertDiseaseMasters" + ress.DiseaseMasterNo.ToString(), ExceptionPriority.Low, ApplicationType.REPOSITORY, ress.VenueNo, ress.VenueBranchNo, 0);
             }
-            return objresult;
+            return Objresult;
         }
 
         #region InsertDiseaseTemplateText
         [HttpPost]
         [Route("api/DiseaseMaster/InsertDiseaseTemplateText")]
-        public int InsertDiseaseTemplateText(lstDiseaseTemplateList req)
+        public int InsertDiseaseTemplateText(LstDiseaseTemplateList req)
         {
             int i = 0;
             try
@@ -113,9 +113,9 @@ namespace Service.API.SERVICE.Controllers
         #region GetDiseaseTemplateText
         [HttpPost]
         [Route("api/DiseaseMaster/GetDiseaseTemplateText")]
-        public reqresponse GetDiseaseTemplateText(lstDiseaseTemplateList req)
+        public Reqresponse GetDiseaseTemplateText(LstDiseaseTemplateList req)
         {
-            reqresponse obj = new reqresponse();
+            Reqresponse obj = new Reqresponse();
             try
             {
                 obj = _diseaseRepository.GetDiseaseTemplateText(req);
@@ -131,24 +131,24 @@ namespace Service.API.SERVICE.Controllers
         #region GetTemplateList
         [HttpGet]
         [Route("api/DiseaseMaster/GetTemplateList")]
-        public List<lstDiseaseTemplateList> GetTemplateList(int VenueNo, int VenueBranchNo, int TemplateNo, int TempDiseaseNo)
+        public List<LstDiseaseTemplateList> GetTemplateList(int VenueNo, int VenueBranchNo, int TemplateNo, int TempDiseaseNo)
         {
-            List<lstDiseaseTemplateList> objresult = new List<lstDiseaseTemplateList>();
+            List<LstDiseaseTemplateList> Objresult = new List<LstDiseaseTemplateList>();
             try
             {
-                objresult = _diseaseRepository.GetTemplateList(VenueNo, VenueBranchNo, TemplateNo,TempDiseaseNo);
+                Objresult = _diseaseRepository.GetTemplateList(VenueNo, VenueBranchNo, TemplateNo,TempDiseaseNo);
             }
             catch (Exception ex)
             {
                 MyDevException.Error(ex, "DiseaseController.GetTemplateList", ExceptionPriority.Low, ApplicationType.APPSERVICE, VenueNo, VenueBranchNo, 0);
             }
-            return objresult;
+            return Objresult;
         }
         #endregion
 
         [HttpPost]
         [Route("api/DiseaseMaster/GetDiseaseVsDrugMaster")]
-        public List<DiseaseVsProductMapping> GetDiseaseVsDrugMaster(reqDiseaseMaster disName)
+        public List<DiseaseVsProductMapping> GetDiseaseVsDrugMaster(ReqDiseaseMaster disName)
         {
             List<DiseaseVsProductMapping> result = new List<DiseaseVsProductMapping>();
             try
@@ -164,7 +164,7 @@ namespace Service.API.SERVICE.Controllers
 
         [HttpPost]
         [Route("api/DiseaseMaster/GetDiseaseVsTestMaster")]
-        public List<DiseaseVsTestMapping> GetDiseaseVsTestMaster(reqDiseaseMaster disName)
+        public List<DiseaseVsTestMapping> GetDiseaseVsTestMaster(ReqDiseaseMaster disName)
         {
             List<DiseaseVsTestMapping> result = new List<DiseaseVsTestMapping>();
             try
@@ -180,39 +180,39 @@ namespace Service.API.SERVICE.Controllers
 
         [HttpPost]
         [Route("api/DiseaseMaster/InsertDisVsDrugMaster")]
-        public rtnDisVsDrugMaster InsertDisVsDrugMaster(reqDisVsDrugMaster res)
+        public RtnDisVsDrugMaster InsertDisVsDrugMaster(ReqDisVsDrugMaster res)
         {
-            rtnDisVsDrugMaster objresult = new rtnDisVsDrugMaster();
+            RtnDisVsDrugMaster Objresult = new RtnDisVsDrugMaster();
             try
             {
-                objresult = _diseaseRepository.InsertDisVsDrugMaster(res);
+                Objresult = _diseaseRepository.InsertDisVsDrugMaster(res);
             }
             catch (Exception ex)
             {
                 MyDevException.Error(ex, "DiseaseController.InsertDisVsDrugMaster" + res.DiseaseMasterNo.ToString(), ExceptionPriority.Low, ApplicationType.REPOSITORY, res.VenueNo, res.VenueBranchNo, 0);
             }
-            return objresult;
+            return Objresult;
         }
 
         [HttpPost]
         [Route("api/DiseaseMaster/InsertDisVsInvMaster")]
-        public rtnDisVsInvMaster InsertDisVsInvMaster(reqDisVsInvMaster res)
+        public RtnDisVsInvMaster InsertDisVsInvMaster(ReqDisVsInvMaster res)
         {
-            rtnDisVsInvMaster objresult = new rtnDisVsInvMaster();
+            RtnDisVsInvMaster Objresult = new RtnDisVsInvMaster();
             try
             {
-                objresult = _diseaseRepository.InsertDisVsInvMaster(res);
+                Objresult = _diseaseRepository.InsertDisVsInvMaster(res);
             }
             catch (Exception ex)
             {
                 MyDevException.Error(ex, "DiseaseController.InsertDisVsDrugMaster" + res.DiseaseMasterNo.ToString(), ExceptionPriority.Low, ApplicationType.REPOSITORY, res.VenueNo, res.VenueBranchNo, 0);
             }
-            return objresult;
+            return Objresult;
         }
       
         [HttpPost]
         [Route("api/Machine/GetMachineMaster")]
-        public List<MachineMasterDTO> GetMachineMaster(reqMachineMaster param)
+        public List<MachineMasterDTO> GetMachineMaster(ReqMachineMaster param)
         {
             List<MachineMasterDTO> result = new List<MachineMasterDTO>();
             try
@@ -228,18 +228,18 @@ namespace Service.API.SERVICE.Controllers
 
         [HttpPost]
         [Route("api/Machine/InsertMachineResult")]
-        public reqMachineMasterResponse InsertMachineResult(InvMachineMasterRequest res)
+        public ReqMachineMasterResponse InsertMachineResult(InvMachineMasterRequest res)
         {
-            reqMachineMasterResponse objresult = new reqMachineMasterResponse();
+            ReqMachineMasterResponse Objresult = new ReqMachineMasterResponse();
             try
             {
-                objresult = _diseaseRepository.InsertMachineResult(res);
+                Objresult = _diseaseRepository.InsertMachineResult(res);
             }
             catch (Exception ex)
             {
                 MyDevException.Error(ex, "DiseaseController.InsertMachineResult" + res.machineNo.ToString(), ExceptionPriority.Low, ApplicationType.REPOSITORY, res.VenueNo, res.VenueBranchNo, 0);
             }
-            return objresult;
+            return Objresult;
         }
     }
 }

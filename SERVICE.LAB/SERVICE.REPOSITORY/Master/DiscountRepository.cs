@@ -18,7 +18,7 @@ namespace Service.Repository.Master
 
         public List<GetDiscountDetails> GetDiscountMasters(DiscountMasterRequest discountItem)
         {
-            List<GetDiscountDetails> objresult = new List<GetDiscountDetails>();
+            List<GetDiscountDetails> Objresult = new List<GetDiscountDetails>();
             try
             {
                 using (var context = new MasterContext(_config.GetConnectionString(ConfigKeys.DefaultConnection)))
@@ -28,7 +28,7 @@ namespace Service.Repository.Master
                     var _venueBranchno = new SqlParameter("venueBranchno", discountItem?.venueBranchno);
                     var _pageIndex = new SqlParameter("pageIndex", discountItem?.pageIndex);
 
-                    objresult = context.GetDiscountMasterData.FromSqlRaw(
+                    Objresult = context.GetDiscountMasterData.FromSqlRaw(
                     "Execute dbo.pro_GetDiscountmaster @discountNo,@venueNo,@venueBranchno,@pageIndex",
                     _discountNo, _venueNo, _venueBranchno, _pageIndex).ToList();
                 }
@@ -38,7 +38,7 @@ namespace Service.Repository.Master
                 MyDevException.Error(ex, "DiscountRepository.GetDiscountMasters", ExceptionPriority.Low, ApplicationType.REPOSITORY, discountItem.venueNo, discountItem.venueBranchno, 0);
 
             }
-            return objresult;
+            return Objresult;
         }
         public DiscountMasterReponse InsertDiscountMasters(DiscountInsertData disResponse)
         {

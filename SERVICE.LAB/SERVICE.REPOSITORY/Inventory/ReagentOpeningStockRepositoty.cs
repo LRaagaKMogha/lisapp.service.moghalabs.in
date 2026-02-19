@@ -17,7 +17,7 @@ namespace Service.Repository.Inventory
         public ReagentOpeningStockRepositoty(IConfiguration config) { _config = config; }
         public List<ReagentOpeningStockResponse> GetAllReagentOpeningStock(GetReagentStockRequest request)
         {
-            List<ReagentOpeningStockResponse> objresult = new List<ReagentOpeningStockResponse>();
+            List<ReagentOpeningStockResponse> Objresult = new List<ReagentOpeningStockResponse>();
             try
             {
                 using (var context = new MasterContext(_config.GetConnectionString(ConfigKeys.DefaultConnection)))
@@ -31,7 +31,7 @@ namespace Service.Repository.Inventory
                     var _storeNo = new SqlParameter("MainDeptNo", request.storeNo);
                     var _productNo = new SqlParameter("ProductNo", request.productNo);
 
-                    objresult = context.GetReagentOpeningStockDTO.FromSqlRaw(
+                    Objresult = context.GetReagentOpeningStockDTO.FromSqlRaw(
                     "Execute dbo.pro_GetAllReagentOpeningStock @VenueNo,@VenueBranchNo,@MasterNo,@UserNo,@PageIndex,@BranchNo,@MainDeptNo,@SubdeptNo,@ProductNo",
                     _venueNo, _venueBranchNo, _masterNo, _userNo, _pageIndex, _branchNo, _storeNo, _productNo).ToList();
                 }
@@ -40,7 +40,7 @@ namespace Service.Repository.Inventory
             {
                 MyDevException.Error(ex, "ReagentOpeningStockRepositoty.GetAllReagentOpeningStock", ExceptionPriority.High, ApplicationType.REPOSITORY, request.venueno, (int)request.venuebranchno, (int)request.masterNo);
             }
-            return objresult;
+            return Objresult;
         }
         public CommonAdminResponse InsertReagentOpeningStock(InsertReagentOpeningStockRequest insertReagentStock)
         {
@@ -58,11 +58,11 @@ namespace Service.Repository.Inventory
                     var _ReagentXML = new SqlParameter("ReagentXML", reagentXML);
                     var _UserNo = new SqlParameter("UserNo", insertReagentStock?.Createdby);
 
-                    var objresult = context.CreateReagentOpeningStockDTO.FromSqlRaw(
+                    var Objresult = context.CreateReagentOpeningStockDTO.FromSqlRaw(
                     "Execute dbo.Pro_InsertReagentOpeningStock @VenueNo,@VenueBranchNo,@ReagentXML,@UserNo",
                     _VenueNo, _VenueBranchNo, _ReagentXML, _UserNo).ToList();
 
-                    response = objresult[0];
+                    response = Objresult[0];
                 }
             }
             catch (Exception ex)

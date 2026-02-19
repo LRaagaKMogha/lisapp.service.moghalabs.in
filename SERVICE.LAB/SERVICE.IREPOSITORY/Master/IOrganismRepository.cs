@@ -5,6 +5,6 @@ namespace Service.IRepository
 {
     public interface IOrganismRepository
     {
-        List<lstorganism> GetOrganismMaster(reqsearchorganism req);
+        List<Lstorganism> GetOrganismMaster(Reqsearchorganism req);
     }
 }

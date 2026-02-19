@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace Service.Model
 {
@@ -8,20 +7,20 @@ namespace Service.Model
     {
         public int RowNo { get; set; }
         public int CommonNo { get; set; }
-        public string? CommonKey { get; set; }
-        public string? CommonCode { get; set; }
-        public string? CommonName { get; set; }
-        public string? CommonValue { get; set; }
+        public string CommonKey { get; set; }
+        public string CommonCode { get; set; }
+        public string CommonName { get; set; }
+        public string CommonValue { get; set; }
         public bool IsDefault { get; set; }
         public int SequenceNo { get; set; }
         public bool? IsAbnormal { get; set; } = false;
     }
     public partial class RequestCommonSearch
     {
-        public string? pagecode { get; set; }
+        public string pagecode { get; set; }
         public int viewvenuebranchno { get; set; }
         public int searchby { get; set; }
-        public string? searchtext { get; set; }
+        public string searchtext { get; set; }
         public int venueno { get; set; }
         public int venuebranchno { get; set; }
         public int userno { get; set; }
@@ -29,8 +28,8 @@ namespace Service.Model
     public partial class RequestCommonMasterSearch
     {
         public int viewvenuebranchno { get; set; }
-        public string? searchby { get; set; }
-        public string? searchtext { get; set; }
+        public string searchby { get; set; }
+        public string searchtext { get; set; }
         public int venueno { get; set; }
         public int venuebranchno { get; set; }
         public int userno { get; set; }
@@ -38,48 +37,47 @@ namespace Service.Model
     public partial class LstMasterSearch
     {
         public int masterno { get; set; }
-        public string? displaytext { get; set; }
-        public string? searchdisplaytext { get; set; }
+        public string displaytext { get; set; }
+        public string searchdisplaytext { get; set; }
     }
     public partial class TimeDto
     {
-        public string? currenttime { get; set; }
+        public string currenttime { get; set; }
     }
     public partial class LstSearch
     {
         public int patientvisitno { get; set; }
-        public string? displaytext { get; set; }
-        public string? searchdisplaytext { get; set; }
+        public string displaytext { get; set; }
+        public string searchdisplaytext { get; set; }
         public int? venueBranchNo { get; set; }
         public int? patientno { get; set; }
     }
     public partial class ConfigurationDto
     {
         public int RowNo { get; set; }
-        public string? ConfigurationKey { get; set; }
-        public string? Description { get; set; }
-        public string? Control { get; set; }
-        public string? ConfigType { get; set; }
+        public string ConfigurationKey { get; set; }
+        public string Description { get; set; }
+        public string Control { get; set; }
+        public string ConfigType { get; set; }
         public int ConfigValue { get; set; }
     }
     public partial class RequestCommonFilter
     {
-        public string? filterKey { get; set; }
+        public string filterKey { get; set; }
         public int venueNo { get; set; }
         public int venueBranchNo { get; set; }
     }
     public partial class LstFilter
     {
-        public string? filterCode { get; set; }
-        public string? filterValue { get; set; }
+        public string filterCode { get; set; }
+        public string filterValue { get; set; }
     }
     public partial class AppSettingResponse
     {
         public int ConfigNo { get; set; }
-        public string? ConfigValue { get; set; }
-        public string? Description { get; set; }
+        public string ConfigValue { get; set; }
+        public string Description { get; set; }
     }
-
     public class ApprovalRequestDTO
     {
         public int userNo { get; set; }
@@ -96,11 +94,10 @@ namespace Service.Model
         public string restype { get; set; }
         public string Description { get; set; }
     }
-
     public class GetCriticalResultsReq
     {
         public int userNo { get; set; }
-        public string? pageCode { get; set; }
+        public string pageCode { get; set; }
         public int venueNo { get; set; }
         public int venueBranchNo { get; set; }
     }
@@ -153,7 +150,7 @@ namespace Service.Model
     {
         public int userNo { get; set; }
         public int modifyUserNo { get; set; }
-        public string? pageCode { get; set; }
+        public string pageCode { get; set; }
         public int venueNo { get; set; }
         public int venueBranchNo { get; set; }
         public List<GetCriticalResultsResponse> lstSaveData { get; set; }
@@ -195,15 +192,14 @@ namespace Service.Model
         public int userno { get; set; }
         public bool IsAck { get; set; }
     }
-
     public class RefTypeCommonMasterDto
     {
         public int RowNo { get; set; }
         public int CommonNo { get; set; }
-        public string? CommonKey { get; set; }
-        public string? CommonCode { get; set; }
-        public string? CommonName { get; set; }
-        public string? CommonValue { get; set; }
+        public string CommonKey { get; set; }
+        public string CommonCode { get; set; }
+        public string CommonName { get; set; }
+        public string CommonValue { get; set; }
         public bool IsDefault { get; set; }
         public int SequenceNo { get; set; }
         public bool suppressDueInBill { get; set; }

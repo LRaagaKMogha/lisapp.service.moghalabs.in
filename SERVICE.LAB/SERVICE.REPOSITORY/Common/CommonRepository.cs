@@ -215,7 +215,7 @@ namespace Service.Repository
                     "Execute dbo.Pro_InsertCriticalResultNotifyForUser @VenueNo,@venuebranchno,@UserNo,@ModifyUserNo,@Data",
                     _venueNo, _venueBranchNo, _userNo, _modifyUserNo, _data).ToList();
                     
-                    outs.oStatus = result != null && result.Count > 0 && result[0].oStatus != null ? result[0].oStatus : 0;
+                    outs.oStatus = result != null && result.Count > 0 ? result[0].oStatus : 0;
                 }
             }
             catch (Exception ex)

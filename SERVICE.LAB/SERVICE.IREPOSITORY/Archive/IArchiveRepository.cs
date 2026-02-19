@@ -6,7 +6,7 @@ namespace Service.IRepository
     public interface IArchiveRepository
     {
         List<LstSearch> ArchivePatientSearch(RequestCommonSearch req);
-        List<GetArchivePatientResponse> GetArchivePatientDetails(GetArchivePatientRequest req);
+        List<GetArchivePatientResponse> GetArchivePatientdetails(GetArchivePatientRequest req);
     }
 }
 

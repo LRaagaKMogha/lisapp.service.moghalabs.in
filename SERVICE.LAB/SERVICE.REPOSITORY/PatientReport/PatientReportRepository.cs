@@ -1,26 +1,27 @@
-﻿using Service.Model;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using Service.IRepository;
+﻿using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
-using Service.Model.EF;
-using Microsoft.Data.SqlClient;
-using Newtonsoft.Json;
-using System.IO;
 using Microsoft.Extensions.Configuration;
-using Service.Common;
-using System.Data;
-using PdfSharp.Pdf;
-using PdfSharp.Pdf.IO;
-using RtfPipe;
-using System.Drawing;
-using System.Drawing.Imaging;
-using System.Windows.Forms;
 using Microsoft.Office.Interop.Word;
 using MigraDoc.DocumentObjectModel;
 using MigraDoc.Rendering;
+using Newtonsoft.Json;
+using PdfSharp.Pdf;
+using PdfSharp.Pdf.IO;
+using RtfPipe;
+using Service.Common;
+using Service.IRepository;
+using Service.Model;
+using Service.Model.EF;
+using System;
+using System.Collections.Generic;
+using System.Data;
+using System.Drawing;
+using System.Drawing.Imaging;
+using System.IO;
+using System.Linq;
+using System.Runtime.Versioning;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace Service.Repository
 {
@@ -28,9 +29,9 @@ namespace Service.Repository
     {
         private IConfiguration _config;
         public PatientReportRepository(IConfiguration config) { _config = config; }
-        public List<lstpatientreport> GetPatientReport(requestpatientreport req)
+        public List<Lstpatientreport> GetPatientReport(requestpatientreport req)
         {
-            List<lstpatientreport> lst = new List<lstpatientreport>();
+            List<Lstpatientreport> lst = new List<Lstpatientreport>();
             try
             {
                 TempalteSearchResponse objOut = new TempalteSearchResponse();
@@ -100,7 +101,7 @@ namespace Service.Repository
                         if (patientvisitno != v.patientvisitno)
                         {
                             patientvisitno = v.patientvisitno;
-                            lstpatientreport obj = new lstpatientreport();
+                            Lstpatientreport obj = new Lstpatientreport();
                             obj.ischecked = false;
                             obj.patientno = v.patientno;
                             obj.rhNo = v.rhNo;
@@ -250,7 +251,7 @@ namespace Service.Repository
             string directapprovalvisitid = "";
             try
             {
-                Int16 languagecode = PatientItem.pritlanguagetype != null && PatientItem.pritlanguagetype>0? PatientItem.pritlanguagetype: Convert.ToInt16(0);
+                Int16 languagecode = PatientItem.pritlanguagetype > 0 ? PatientItem.pritlanguagetype: Convert.ToInt16(0);
                 MasterRepository _IMasterRepository = new MasterRepository(_config);
                 ConfigurationDto objConfigurationDTO = new ConfigurationDto();
                 AppSettingResponse objAppSettingResponse = new AppSettingResponse();
@@ -321,8 +322,6 @@ namespace Service.Repository
 
                     if (PatientItem?.pagecode == "PCRE" || PatientItem?.pagecode == "PCRV" || PatientItem?.pagecode == "PCRA")
                     {
-                        //MasterRepository _IMasterRepository = new MasterRepository(_config);
-                        //ConfigurationDto objConfigurationDTO = new ConfigurationDto();
                         objConfigurationDTO = new ConfigurationDto();
                         string watermarkinreportconfig = "IsWaterMarkinReport";
                         objConfigurationDTO = _IMasterRepository.GetSingleConfiguration(PatientItem?.venueno, PatientItem?.venuebranchno, watermarkinreportconfig);
@@ -347,8 +346,6 @@ namespace Service.Repository
                     objdictionary.Add("printlanguagetype", languagecode.ToString());
                     if (Key == ReportKey.MBPATIENTREPORT)
                     {
-                        //MasterRepository _IMasterRepository = new MasterRepository(_config);
-                        //ConfigurationDto objConfigurationDTO = new ConfigurationDto();
                         objConfigurationDTO = new ConfigurationDto();
                         string resultStatusDDAvailConfig = "IsRsultStatusDDAvail";
                         objConfigurationDTO = _IMasterRepository.GetSingleConfiguration(PatientItem.venueno, PatientItem.venuebranchno, resultStatusDDAvailConfig);
@@ -405,28 +402,23 @@ namespace Service.Repository
                             objAppSettingResponse = new AppSettingResponse();
                             string AppTransTemplateFilePath = "TransTemplateFilePath";
                             objAppSettingResponse = _IMasterRepository.GetSingleAppSetting(AppTransTemplateFilePath);
-                            // string path = _config.GetConnectionString(ConfigKeys.TransTemplateFilePath);
                             string path = objAppSettingResponse != null && objAppSettingResponse.ConfigValue != null && objAppSettingResponse.ConfigValue != ""
                                 ? objAppSettingResponse.ConfigValue : "";
                             objAppSettingResponse = new AppSettingResponse();
                             string AppMasterFilePath = "MasterFilePath";
                             objAppSettingResponse = _IMasterRepository.GetSingleAppSetting(AppMasterFilePath);
-                            string pathForReportDis = objAppSettingResponse != null && objAppSettingResponse.ConfigValue != null && objAppSettingResponse.ConfigValue != ""
-                                ? objAppSettingResponse.ConfigValue : "";
+                            string pathForReportDis = objAppSettingResponse != null && objAppSettingResponse.ConfigValue != null && objAppSettingResponse.ConfigValue != "" ? objAppSettingResponse.ConfigValue : "";
                             pathForReportDis = pathForReportDis + PatientItem?.venueno.ToString() + "/T/";
                             //
                             objAppSettingResponse = new AppSettingResponse();
                             string AppDevExpressEditorConfig = "DevExpressEditorConfig";
                             objAppSettingResponse = _IMasterRepository.GetSingleAppSetting(AppDevExpressEditorConfig);
-                            string deveditorconfigvalue = objAppSettingResponse != null && objAppSettingResponse.ConfigValue != null && objAppSettingResponse.ConfigValue != ""
-                                ? objAppSettingResponse.ConfigValue : "";// _config.GetConnectionString(ConfigKeys.DevExpressEditorConfig);
+                            string deveditorconfigvalue = objAppSettingResponse != null && objAppSettingResponse.ConfigValue != null && objAppSettingResponse.ConfigValue != "" ? objAppSettingResponse.ConfigValue : "";
                             string devExpressEditor = string.Empty;
                             List<ConfigurationDto> lstConfigList = new List<ConfigurationDto>();
                             IMasterRepository objMasterRepository = new MasterRepository(_config);
                             lstConfigList = objMasterRepository.GetConfigurationList(PatientItem.venueno, PatientItem.venuebranchno);
                             devExpressEditor = lstConfigList != null ? lstConfigList.Where(d => d.ConfigurationKey == deveditorconfigvalue).Select(d => d.ConfigValue).SingleOrDefault().ToString() : "";
-                            //if (devExpressEditor != null && devExpressEditor == "1")
-                            //{
                             string restorePath = path;
                             for (int j = 0; j < datable.Rows.Count; j++)
                             {
@@ -440,11 +432,6 @@ namespace Service.Repository
                                     ? objAppSettingResponse.ConfigValue : "";// _config.GetConnectionString(ConfigKeys.TransTemplateFilePath);
                                     path = path + PatientItem?.venueno.ToString() + "/" + datable?.Rows[j]["orderListNo"]?.ToString() + "/" + datable?.Rows[j]["serviceNo"]?.ToString() + ".ym";
                                 }
-                                // }
-                                //else
-                                //{
-                                //    path = path + PatientItem?.venueno.ToString() + "/" + datable?.Rows[0]["orderListNo"]?.ToString() + "/" + datable?.Rows[0]["serviceNo"]?.ToString() + ".ym";                       
-                                //}
                                 if (File.Exists(path))
                                 {
                                     string content = File.ReadAllText(path);
@@ -476,8 +463,7 @@ namespace Service.Repository
                                                             objAppSettingResponse = new AppSettingResponse();
                                                             string AppMultiTemplateFormat = "MultiTemplateFormat";
                                                             objAppSettingResponse = _IMasterRepository.GetSingleAppSetting(AppMultiTemplateFormat);
-                                                            string fileformat = objAppSettingResponse != null && objAppSettingResponse.ConfigValue != null && objAppSettingResponse.ConfigValue != ""
-                                    ? objAppSettingResponse.ConfigValue : "";//_config.GetConnectionString(ConfigKeys.MultiTemplateFormat);
+                                                            string fileformat = objAppSettingResponse != null && objAppSettingResponse.ConfigValue != null && objAppSettingResponse.ConfigValue != "" ? objAppSettingResponse.ConfigValue : "";
                                                             string overallpath = path + "/" + row["SubTestNo"].ToString() + fileformat;
                                                             if (File.Exists(overallpath))
                                                             {
@@ -503,37 +489,32 @@ namespace Service.Repository
                         }
                         else if (Key == "MBPATIENTREPORT" || Key == "MBPATIENTREPORTWATERMARK")
                         {
-
                             int tno = 0;
                             string tstnotes = "";
-                            //foreach (DataRow dr in datable.Rows)
-                            //{
-                                    if (datable.Rows[0].Table.Columns.Contains("ServiceNo") && tno != Convert.ToInt32(datable.Rows[0]["ServiceNo"]))
+
+                            if (datable.Rows[0].Table.Columns.Contains("ServiceNo") && tno != Convert.ToInt32(datable.Rows[0]["ServiceNo"]))
+                            {
+                                tstnotes = "";
+                                tno = Convert.ToInt32(datable.Rows[0]["ServiceNo"]);
+                                    tstnotes = "";
+                                    tno = Convert.ToInt32(datable.Rows[0]["ServiceNo"]);
+                                    if (datable.Rows[0].Table.Columns.Contains("TestInter") && Convert.ToInt32(datable.Rows[0]["TestInter"]) == 1)
                                     {
-                                        tstnotes = "";
-                                        tno = Convert.ToInt32(datable.Rows[0]["ServiceNo"]);
-                                            tstnotes = "";
-                                            tno = Convert.ToInt32(datable.Rows[0]["ServiceNo"]);
-                                            if (datable.Rows[0].Table.Columns.Contains("TestInter") && Convert.ToInt32(datable.Rows[0]["TestInter"]) == 1)
-                                            {
-                                                string FPath = Convert.ToInt32(datable.Rows[0]["ServiceNo"]).ToString() + ".ym";
-                                                objAppSettingResponse = new AppSettingResponse();
-                                                string AppMasterFilePath = "MasterFilePath";
-                                                objAppSettingResponse = _IMasterRepository.GetSingleAppSetting(AppMasterFilePath);
-                                                string path = objAppSettingResponse != null && objAppSettingResponse.ConfigValue != null && objAppSettingResponse.ConfigValue != ""
-                                                              ? objAppSettingResponse.ConfigValue : "";// _config.GetConnectionString(ConfigKeys.MasterFilePath);
-                                                path = path + PatientItem?.venueno.ToString() + "/T/InterNotes/" + FPath;
-                                                if (datable.Rows[0].Table.Columns.Contains("TestInterNotes") && File.Exists(path))
-                                                {
-                                                      tstnotes = File.ReadAllText(path);
-                                                       //  dr["TestInterNotes"] = tstnotes != null ? tstnotes:"";
-                                                      datable.AsEnumerable()
-                                                             .ToList()
-                                                             .ForEach(row => row.SetField("TestInterNotes", !String.IsNullOrEmpty(tstnotes) ? tstnotes : ""));
-                                                 }   
+                                        string FPath = Convert.ToInt32(datable.Rows[0]["ServiceNo"]).ToString() + ".ym";
+                                        objAppSettingResponse = new AppSettingResponse();
+                                        string AppMasterFilePath = "MasterFilePath";
+                                        objAppSettingResponse = _IMasterRepository.GetSingleAppSetting(AppMasterFilePath);
+                                        string path = objAppSettingResponse != null && objAppSettingResponse.ConfigValue != null && objAppSettingResponse.ConfigValue != "" ? objAppSettingResponse.ConfigValue : "";
+                                        path = path + PatientItem?.venueno.ToString() + "/T/InterNotes/" + FPath;
+                                        if (datable.Rows[0].Table.Columns.Contains("TestInterNotes") && File.Exists(path))
+                                        {
+                                            tstnotes = File.ReadAllText(path);
+                                            datable.AsEnumerable()
+                                                    .ToList()
+                                                    .ForEach(row => row.SetField("TestInterNotes", !String.IsNullOrEmpty(tstnotes) ? tstnotes : ""));
                                             }   
-                                    } 
-                           // }
+                                    }   
+                            } 
                         }
 
                         else if (Key == "PATIENTREPORT" || Key == "LANGPATIENTREPORT" || Key == "TRNDPATIENTREPORT" || Key == "PATIENTREPORTWATERMARK")
@@ -556,8 +537,7 @@ namespace Service.Repository
                                             objAppSettingResponse = new AppSettingResponse();
                                             string AppTransFilePath = "TransFilePath";
                                             objAppSettingResponse = _IMasterRepository.GetSingleAppSetting(AppTransFilePath);
-                                            string path = objAppSettingResponse != null && objAppSettingResponse.ConfigValue != null && objAppSettingResponse.ConfigValue != ""
-                                ? objAppSettingResponse.ConfigValue : "";// _config.GetConnectionString(ConfigKeys.TransFilePath);
+                                            string path = objAppSettingResponse != null && objAppSettingResponse.ConfigValue != null && objAppSettingResponse.ConfigValue != "" ? objAppSettingResponse.ConfigValue : "";
                                             path = path + PatientItem?.venueno.ToString() + "/G/InterNotes/" + Convert.ToInt32(dr["OrderListNo"]).ToString() + ".ym";
                                             if (File.Exists(path))
                                             {
@@ -570,8 +550,7 @@ namespace Service.Repository
                                             objAppSettingResponse = new AppSettingResponse();
                                             string AppMasterFilePath = "MasterFilePath";
                                             objAppSettingResponse = _IMasterRepository.GetSingleAppSetting(AppMasterFilePath);
-                                            string path = objAppSettingResponse != null && objAppSettingResponse.ConfigValue != null && objAppSettingResponse.ConfigValue != ""
-                                ? objAppSettingResponse.ConfigValue : "";// _config.GetConnectionString(ConfigKeys.MasterFilePath);
+                                            string path = objAppSettingResponse != null && objAppSettingResponse.ConfigValue != null && objAppSettingResponse.ConfigValue != "" ? objAppSettingResponse.ConfigValue : "";
                                             path = path + PatientItem?.venueno.ToString() + "/G/InterNotes/" + Convert.ToInt32(dr["ServiceNo"]).ToString() + ".ym";
                                             if (File.Exists(path))
                                             {
@@ -596,8 +575,7 @@ namespace Service.Repository
                                             objAppSettingResponse = new AppSettingResponse();
                                             string AppTransFilePath = "TransFilePath";
                                             objAppSettingResponse = _IMasterRepository.GetSingleAppSetting(AppTransFilePath);
-                                            string path = objAppSettingResponse != null && objAppSettingResponse.ConfigValue != null && objAppSettingResponse.ConfigValue != ""
-                                ? objAppSettingResponse.ConfigValue : "";// _config.GetConnectionString(ConfigKeys.TransFilePath);
+                                            string path = objAppSettingResponse != null && objAppSettingResponse.ConfigValue != null && objAppSettingResponse.ConfigValue != "" ? objAppSettingResponse.ConfigValue : "";
                                             path = path + PatientItem?.venueno.ToString() + "/T/InterNotes/" + Convert.ToInt32(dr["OrderDetailsNo"]).ToString() + ".ym";
                                             if (File.Exists(path))
                                             {
@@ -612,8 +590,7 @@ namespace Service.Repository
                                             objAppSettingResponse = new AppSettingResponse();
                                             string AppMasterFilePath = "MasterFilePath";
                                             objAppSettingResponse = _IMasterRepository.GetSingleAppSetting(AppMasterFilePath);
-                                            string path = objAppSettingResponse != null && objAppSettingResponse.ConfigValue != null && objAppSettingResponse.ConfigValue != ""
-                                ? objAppSettingResponse.ConfigValue : "";// _config.GetConnectionString(ConfigKeys.MasterFilePath);
+                                            string path = objAppSettingResponse != null && objAppSettingResponse.ConfigValue != null && objAppSettingResponse.ConfigValue != "" ? objAppSettingResponse.ConfigValue : "";
                                             path = path + PatientItem?.venueno.ToString() + "/T/InterNotes/" + FPath;
                                             if (File.Exists(path))
                                             {
@@ -634,9 +611,9 @@ namespace Service.Repository
                                         objAppSettingResponse = new AppSettingResponse();
                                         string AppMasterFilePath = "MasterFilePath";
                                         objAppSettingResponse = _IMasterRepository.GetSingleAppSetting(AppMasterFilePath);
-                                        string path = objAppSettingResponse != null && objAppSettingResponse.ConfigValue != null && objAppSettingResponse.ConfigValue != ""
-                            ? objAppSettingResponse.ConfigValue : "";// _config.GetConnectionString(ConfigKeys.MasterFilePath);
+                                        string path = objAppSettingResponse != null && objAppSettingResponse.ConfigValue != null && objAppSettingResponse.ConfigValue != "" ? objAppSettingResponse.ConfigValue : "";
                                         path = path + PatientItem?.venueno.ToString() + "/G/ReportDisclaimer/" + dr["ServiceNo"].ToString() + ".ym";
+                                        
                                         if (File.Exists(path))
                                         {
                                             dr["GrpReportDisclaimer"] = File.ReadAllText(path).ToString();
@@ -654,9 +631,9 @@ namespace Service.Repository
                                         objAppSettingResponse = new AppSettingResponse();
                                         string AppMasterFilePath = "MasterFilePath";
                                         objAppSettingResponse = _IMasterRepository.GetSingleAppSetting(AppMasterFilePath);
-                                        string path = objAppSettingResponse != null && objAppSettingResponse.ConfigValue != null && objAppSettingResponse.ConfigValue != ""
-                            ? objAppSettingResponse.ConfigValue : "";// _config.GetConnectionString(ConfigKeys.MasterFilePath);
+                                        string path = objAppSettingResponse != null && objAppSettingResponse.ConfigValue != null && objAppSettingResponse.ConfigValue != "" ? objAppSettingResponse.ConfigValue : "";
                                         path = path + PatientItem?.venueno.ToString() + "/T/ReportDisclaimer/" + dr["ServiceNo"].ToString() + ".ym";
+                                        
                                         if (File.Exists(path))
                                         {
                                             dr["TestReportDisclaimer"] = File.ReadAllText(path).ToString();
@@ -674,11 +651,10 @@ namespace Service.Repository
                                     objAppSettingResponse = new AppSettingResponse();
                                     string AppMachineImagePath = "MachineImagePath";
                                     objAppSettingResponse = _IMasterRepository.GetSingleAppSetting(AppMachineImagePath);
-                                    string actualmachineimagepath = objAppSettingResponse != null && objAppSettingResponse.ConfigValue != null && objAppSettingResponse.ConfigValue != ""
-                                ? objAppSettingResponse.ConfigValue : "";// _config.GetConnectionString(ConfigKeys.MachineImagePath);                                
-                                    string machineimagepath = objAppSettingResponse != null && objAppSettingResponse.ConfigValue != null && objAppSettingResponse.ConfigValue != ""
-                                ? objAppSettingResponse.ConfigValue : "";//  _config.GetConnectionString(ConfigKeys.MachineImagePath);
+                                    string actualmachineimagepath = objAppSettingResponse != null && objAppSettingResponse.ConfigValue != null && objAppSettingResponse.ConfigValue != "" ? objAppSettingResponse.ConfigValue : "";
+                                    string machineimagepath = objAppSettingResponse != null && objAppSettingResponse.ConfigValue != null && objAppSettingResponse.ConfigValue != "" ? objAppSettingResponse.ConfigValue : "";
                                     machineimagepath = machineimagepath + "//" + PatientItem?.venueno + "//" + PatientItem?.venuebranchno + "//" + dr["BarcodeNoNew"].ToString();
+                                    
                                     if (Directory.Exists(machineimagepath))
                                     {
                                         string[] files = Directory.GetFiles(machineimagepath);
@@ -839,11 +815,10 @@ namespace Service.Repository
                         objAppSettingResponse = new AppSettingResponse();
                         string AppReportServiceURL = "ReportServiceURL";
                         objAppSettingResponse = _IMasterRepository.GetSingleAppSetting(AppReportServiceURL);
-                        string ReportServiceURL = objAppSettingResponse != null && objAppSettingResponse.ConfigValue != null && objAppSettingResponse.ConfigValue != ""
-                                ? objAppSettingResponse.ConfigValue : "";
+                        string ReportServiceURL = objAppSettingResponse != null && objAppSettingResponse.ConfigValue != null && objAppSettingResponse.ConfigValue != "" ? objAppSettingResponse.ConfigValue : "";
                         string filename = await ExportReportService.ExportPrint(ReportParam, ReportServiceURL);
                         if (PatientItem?.process == 3)
-                            item.PatientExportFile = tblReportMaster.ExportURL + filename;// CommonHelper.URLShorten(tblReportMaster.ExportURL + filename, _config.GetConnectionString(ConfigKeys.FireBaseAPIkey));
+                            item.PatientExportFile = tblReportMaster.ExportURL + filename;
                         else
                             item.PatientExportFile = tblReportMaster.ExportURL + filename;
 
@@ -852,15 +827,14 @@ namespace Service.Repository
                         objAppSettingResponse = new AppSettingResponse();
                         string AppResultAckUpload = "ResultAckUpload";
                         objAppSettingResponse = _IMasterRepository.GetSingleAppSetting(AppResultAckUpload);
-                        string ackpath = objAppSettingResponse != null && objAppSettingResponse.ConfigValue != null && objAppSettingResponse.ConfigValue != ""
-                                ? objAppSettingResponse.ConfigValue : "";// _config.GetConnectionString(ConfigKeys.ResultAckUpload);
+                        string ackpath = objAppSettingResponse != null && objAppSettingResponse.ConfigValue != null && objAppSettingResponse.ConfigValue != "" ? objAppSettingResponse.ConfigValue : "";
                         int oldtestno = 0; int newtestno = 0;
                         int isbillmerged = 0, isDeltaMerged = 0;
                         foreach (DataRow row in datable.Rows)
                         {
                             if (datable.Columns.Contains("BillIncluded") && isbillmerged == 0 && (PatientItem?.patientreportwithbill != null && PatientItem?.patientreportwithbill > 0))
                             {
-                                int BillIncluded = row["BillIncluded"] != null && row["BillIncluded"] != "" ? Convert.ToInt32(row["BillIncluded"]) : 0;
+                                int BillIncluded = row["BillIncluded"] != null ? Convert.ToInt32(row["BillIncluded"]) : 0;
                                 if (BillIncluded > 0)
                                 {
                                     foreach (DataColumn column in datable.Columns)
@@ -874,7 +848,7 @@ namespace Service.Repository
                                         reqstbill.VenueBranchNo = PatientItem.venuebranchno;
                                         reqstbill.visitNo = PatientItem?.patientvisitno != null && PatientItem?.patientvisitno != "" ? Convert.ToInt32(PatientItem?.patientvisitno) : 0;
                                         reqstbill.userNo = PatientItem.userno;
-                                        reqstbill.print = "PATIENTBILL";//"PATIENTBILLSFORMAT"
+                                        reqstbill.print = "PATIENTBILL";
                                         obj = await _IFrontOfficeRepository.PrintBill(reqstbill);
                                         billfullpath = obj != null ? obj.PatientExportFolderPath : "";
 
@@ -896,7 +870,7 @@ namespace Service.Repository
                             }
                             if (datable.Columns.Contains("DeltaReportIncluded") && isDeltaMerged == 0)
                             {
-                                int DeltaReportIncluded = row["DeltaReportIncluded"] != null && row["DeltaReportIncluded"] != "" ? Convert.ToInt32(row["DeltaReportIncluded"]) : 0;
+                                int DeltaReportIncluded = row["DeltaReportIncluded"] != null ? Convert.ToInt32(row["DeltaReportIncluded"]) : 0;
                                 if (DeltaReportIncluded > 0)
                                 {
                                     foreach (DataColumn column in datable.Columns)
@@ -975,9 +949,9 @@ namespace Service.Repository
                                             AppResultAckUpload = "ResultAckUpload";
                                             objAppSettingResponse = _IMasterRepository.GetSingleAppSetting(AppResultAckUpload);
                                             ackpath = objAppSettingResponse != null && objAppSettingResponse.ConfigValue != null && objAppSettingResponse.ConfigValue != "" ?
-                                                objAppSettingResponse.ConfigValue : "";// _config.GetConnectionString(ConfigKeys.ResultAckUpload);
-                                            //ackpath = ackpath + "//" + PatientItem?.venueno + "//" + PatientItem?.venuebranchno + "//" + row["VisitID"] + "//" + row["TestNo"];
+                                                objAppSettingResponse.ConfigValue : "";
                                             ackpath = ackpath + "//" + PatientItem?.venueno + "//" + PatientItem?.patientvisitno + "//" + row["ACK_TestNo"];
+                                            
                                             if (Directory.Exists(ackpath))
                                             {
                                                 string[] files = Directory.GetFiles(ackpath);
@@ -1020,117 +994,110 @@ namespace Service.Repository
                     if (resultackuplod != null && resultackuplod != "" && directapprovaltestno != null && directapprovaltestno !="")
                     {
                         item = new ReportOutput();
-                        var overallackfiles = new List<string>();                        
-                        //if (result != null && result.Count > 0)
-                        //{
-                        //}
-                        //else
+                        var overallackfiles = new List<string>();  
+                        
+                        if (directapprovaltestno != null && directapprovaltestno != "")
                         {
-                            if (directapprovaltestno != null && directapprovaltestno != "")
+                            var directapprovaltestnolst = directapprovaltestno.Split(',');
+                            if (directapprovaltestnolst != null && directapprovaltestnolst.Length > 0)
                             {
-                                var directapprovaltestnolst = directapprovaltestno.Split(',');
-                                if (directapprovaltestnolst != null && directapprovaltestnolst.Length > 0)
+                                for (int p = 0; p < directapprovaltestnolst.Length; p++)
                                 {
-                                    for (int p = 0; p < directapprovaltestnolst.Length; p++)
+                                    string ackfolderName = PatientItem.venueno.ToString() +  "//" + PatientItem?.patientvisitno + "//" + directapprovaltestnolst[p].ToString();
+                                    string ackfolderNameNew = PatientItem.venueno.ToString() + "//" + PatientItem?.patientvisitno + "//" + directapprovaltestnolst[p].ToString() + "//MergedFolder";
+                                    string newPath = Path.Combine(resultackuplod, ackfolderName);
+                                    string newPathNew = Path.Combine(resultackuplod, ackfolderNameNew);                                        
+                                    if (!Directory.Exists(newPathNew))
                                     {
-                                        //string ackfolderName = PatientItem.venueno.ToString() + "//" + PatientItem.venuebranchno.ToString() + "//" + directapprovalvisitid + "//" + directapprovaltestnolst[p].ToString();
-                                        //string ackfolderNameNew = PatientItem.venueno.ToString() + "//" + PatientItem.venuebranchno.ToString() + "//" + directapprovalvisitid + "//" + directapprovaltestnolst[p].ToString()+"//MergedFolder";
-                                        string ackfolderName = PatientItem.venueno.ToString() +  "//" + PatientItem?.patientvisitno + "//" + directapprovaltestnolst[p].ToString();
-                                        string ackfolderNameNew = PatientItem.venueno.ToString() + "//" + PatientItem?.patientvisitno + "//" + directapprovaltestnolst[p].ToString() + "//MergedFolder";
-                                        string newPath = Path.Combine(resultackuplod, ackfolderName);
-                                        string newPathNew = Path.Combine(resultackuplod, ackfolderNameNew);                                        
-                                        if (!Directory.Exists(newPathNew))
+                                        Directory.CreateDirectory(newPathNew);
+                                    }
+                                    else
+                                    {
+                                        System.IO.DirectoryInfo di = new DirectoryInfo(newPathNew);
+                                        foreach (FileInfo itemv in di.GetFiles())
                                         {
-                                            Directory.CreateDirectory(newPathNew);
+                                            itemv.Delete();
                                         }
-                                        else
+                                    }
+                                    newPathNew = newPathNew + "//" + directapprovalvisitid+".pdf";                                        
+                                    if (Directory.Exists(newPath))
+                                    {
+                                        string[] filePaths = Directory.GetFiles(newPath);
+                                        if (filePaths != null && filePaths.Length > 1)
                                         {
-                                            System.IO.DirectoryInfo di = new DirectoryInfo(newPathNew);
-                                            foreach (FileInfo itemv in di.GetFiles())
+                                            for (int f = 0; f < filePaths.Length; f++)
                                             {
-                                                itemv.Delete();
-                                            }
-                                        }
-                                        newPathNew = newPathNew + "//" + directapprovalvisitid+".pdf";                                        
-                                        if (Directory.Exists(newPath))
-                                        {
-                                            string[] filePaths = Directory.GetFiles(newPath);
-                                            if (filePaths != null && filePaths.Length > 1)
-                                            {
-                                                for (int f = 0; f < filePaths.Length; f++)
+                                                if (f == 0)
                                                 {
-                                                    if (f == 0)
-                                                    {
-                                                        string path = filePaths[f].ToString();
-                                                        Byte[] bytes = System.IO.File.ReadAllBytes(path);
-                                                        String base64String = Convert.ToBase64String(bytes);
-                                                        byte[] imageBytes = Convert.FromBase64String(base64String);
-                                                        System.IO.File.WriteAllBytes(newPathNew, imageBytes);
-                                                    }                                                                                                        
-                                                    if (f >0 && f < filePaths.Length)
-                                                    {
-                                                        string path2 = filePaths[f].ToString();
+                                                    string path = filePaths[f].ToString();
+                                                    Byte[] bytes = System.IO.File.ReadAllBytes(path);
+                                                    String base64String = Convert.ToBase64String(bytes);
+                                                    byte[] imageBytes = Convert.FromBase64String(base64String);
+                                                    System.IO.File.WriteAllBytes(newPathNew, imageBytes);
+                                                }                                                                                                        
+                                                if (f >0 && f < filePaths.Length)
+                                                {
+                                                    string path2 = filePaths[f].ToString();
 
-                                                        using (PdfDocument one = PdfReader.Open(newPathNew, PdfDocumentOpenMode.Import))
-                                                        using (PdfDocument two = PdfReader.Open(path2, PdfDocumentOpenMode.Import))
-                                                        using (PdfDocument outPdf = new PdfDocument())
-                                                        {
-                                                            CopyPages(one, outPdf);
-                                                            CopyPages(two, outPdf);
+                                                    using (PdfDocument one = PdfReader.Open(newPathNew, PdfDocumentOpenMode.Import))
+                                                    using (PdfDocument two = PdfReader.Open(path2, PdfDocumentOpenMode.Import))
+                                                    using (PdfDocument outPdf = new PdfDocument())
+                                                    {
+                                                        CopyPages(one, outPdf);
+                                                        CopyPages(two, outPdf);
 
-                                                            outPdf.Save(newPathNew);
-                                                        }
+                                                        outPdf.Save(newPathNew);
                                                     }
                                                 }
                                             }
-                                            else if (filePaths != null && filePaths.Length > 0)
-                                            {
-                                                string path = filePaths[0].ToString();
-                                                Byte[] bytes = System.IO.File.ReadAllBytes(path);
-                                                String base64String = Convert.ToBase64String(bytes);
-                                                byte[] imageBytes = Convert.FromBase64String(base64String);
-                                                System.IO.File.WriteAllBytes(newPathNew, imageBytes);
-                                            }
-                                            overallackfiles.Add(newPathNew);
-                                        }                                           
-                                    }
-                                    tblReportMaster.ExportPath = tblReportMaster?.ExportPath;
-                                    if (!Directory.Exists(tblReportMaster?.ExportPath))
-                                    {
-                                        Directory.CreateDirectory(tblReportMaster?.ExportPath);
-                                    }                                    
-                                    string iFile2 = directapprovalvisitid + "_" + Guid.NewGuid().ToString("N").Substring(0, 6) + ".pdf";
-                                    string actpath = tblReportMaster?.ExportPath + "//" + iFile2;
-                                    if (overallackfiles != null && overallackfiles.Count > 0)
-                                    {
-                                        for (int j = 0; j < overallackfiles.Count; j++)
+                                        }
+                                        else if (filePaths != null && filePaths.Length > 0)
                                         {
-                                            if (j == 0)
+                                            string path = filePaths[0].ToString();
+                                            Byte[] bytes = System.IO.File.ReadAllBytes(path);
+                                            String base64String = Convert.ToBase64String(bytes);
+                                            byte[] imageBytes = Convert.FromBase64String(base64String);
+                                            System.IO.File.WriteAllBytes(newPathNew, imageBytes);
+                                        }
+                                        overallackfiles.Add(newPathNew);
+                                    }                                           
+                                }
+                                tblReportMaster.ExportPath = tblReportMaster?.ExportPath;
+                                if (!Directory.Exists(tblReportMaster?.ExportPath))
+                                {
+                                    Directory.CreateDirectory(tblReportMaster?.ExportPath);
+                                }                                    
+                                string iFile2 = directapprovalvisitid + "_" + Guid.NewGuid().ToString("N").Substring(0, 6) + ".pdf";
+                                string actpath = tblReportMaster?.ExportPath + "//" + iFile2;
+                                if (overallackfiles != null && overallackfiles.Count > 0)
+                                {
+                                    for (int j = 0; j < overallackfiles.Count; j++)
+                                    {
+                                        if (j == 0)
+                                        {
+                                            string path = overallackfiles[0].ToString();
+                                            Byte[] bytes = System.IO.File.ReadAllBytes(path);
+                                            String base64String = Convert.ToBase64String(bytes);
+                                            byte[] imageBytes = Convert.FromBase64String(base64String);
+                                            System.IO.File.WriteAllBytes(actpath, imageBytes);
+                                        }
+                                        else
+                                        {
+                                            string path2 = overallackfiles[j].ToString();
+                                            using (PdfDocument one = PdfReader.Open(actpath, PdfDocumentOpenMode.Import))
+                                            using (PdfDocument two = PdfReader.Open(path2, PdfDocumentOpenMode.Import))
+                                            using (PdfDocument outPdf = new PdfDocument())
                                             {
-                                                string path = overallackfiles[0].ToString();
-                                                Byte[] bytes = System.IO.File.ReadAllBytes(path);
-                                                String base64String = Convert.ToBase64String(bytes);
-                                                byte[] imageBytes = Convert.FromBase64String(base64String);
-                                                System.IO.File.WriteAllBytes(actpath, imageBytes);
-                                            }
-                                            else
-                                            {
-                                                string path2 = overallackfiles[j].ToString();
-                                                using (PdfDocument one = PdfReader.Open(actpath, PdfDocumentOpenMode.Import))
-                                                using (PdfDocument two = PdfReader.Open(path2, PdfDocumentOpenMode.Import))
-                                                using (PdfDocument outPdf = new PdfDocument())
-                                                {
-                                                    CopyPages(one, outPdf);
-                                                    CopyPages(two, outPdf);
+                                                CopyPages(one, outPdf);
+                                                CopyPages(two, outPdf);
 
-                                                    outPdf.Save(actpath);
-                                                }
+                                                outPdf.Save(actpath);
                                             }
                                         }
-                                        item.PatientExportFile = tblReportMaster.ExportURL + iFile2;
-                                        item.PatientExportFolderPath = actpath;
-                                        result.Add(item);
                                     }
+                                    item.PatientExportFile = tblReportMaster.ExportURL + iFile2;
+                                    item.PatientExportFolderPath = actpath;
+                                    result.Add(item);
                                 }
                             }
                         }
@@ -1159,7 +1126,7 @@ namespace Service.Repository
         /// <returns></returns>
         public List<TblCsatransaction> GetCsaTransaction(CsaRequest req)
         {
-            List<TblCsatransaction> objresult = new List<TblCsatransaction>();
+            List<TblCsatransaction> Objresult = new List<TblCsatransaction>();
             try
             {
                 using (var context = new PatientReportContext(_config.GetConnectionString(ConfigKeys.DefaultConnection)))
@@ -1170,7 +1137,7 @@ namespace Service.Repository
                     var _pageIndex = new SqlParameter("PageIndex", req.pageIndex);
                     var _VenueNo = new SqlParameter("VenueNo", req.VenueNo);
                     var _VenueBranchNo = new SqlParameter("VenueBranchNo", req.VenueBranchNo);
-                    objresult = context.TblCsatransaction.FromSqlRaw("Execute dbo.Pro_CsaTransactionDetails @FROMDate,@ToDate,@Type,@PageIndex,@VenueNo,@VenueBranchNo", _FromDate, _ToDate, _Type, _pageIndex, _VenueNo, _VenueBranchNo).ToList();
+                    Objresult = context.TblCsatransaction.FromSqlRaw("Execute dbo.Pro_CsaTransactionDetails @FROMDate,@ToDate,@Type,@PageIndex,@VenueNo,@VenueBranchNo", _FromDate, _ToDate, _Type, _pageIndex, _VenueNo, _VenueBranchNo).ToList();
                 }
 
             }
@@ -1178,7 +1145,7 @@ namespace Service.Repository
             {
                 MyDevException.Error(ex, "PatientReportRepository.GetCsaTransaction", ExceptionPriority.High, ApplicationType.REPOSITORY, req.VenueNo, req.VenueBranchNo, 0);
             }
-            return objresult;
+            return Objresult;
         }
         /// <summary>
         /// Insert CSA Acknowledged
@@ -1193,8 +1160,8 @@ namespace Service.Repository
                 using (var context = new PatientReportContext(_config.GetConnectionString(ConfigKeys.DefaultConnection)))
                 {
                     var _CsatransactionNo = new SqlParameter("CsatransactionNo", req.CsatransactionNo);
-                    var objresult = context.InsertCsatransaction.FromSqlRaw("Execute dbo.Pro_InsertCSAAcknowledgement @CsatransactionNo", _CsatransactionNo).FirstOrDefault();
-                    result = objresult?.result ?? 0;
+                    var Objresult = context.InsertCsatransaction.FromSqlRaw("Execute dbo.Pro_InsertCSAAcknowledgement @CsatransactionNo", _CsatransactionNo).FirstOrDefault();
+                    result = Objresult?.result ?? 0;
                 }
             }
             catch (Exception ex)
@@ -1222,12 +1189,12 @@ namespace Service.Repository
                     var _VenueBranchNo = new SqlParameter("VenueBranchNo", results.VenueBranchNo);
                     var _ReportUserNo = new SqlParameter("ReportUserNo", results.ReportUserNo);
 
-                    var objresult = context.InsertReportLog.FromSqlRaw(
+                    var Objresult = context.InsertReportLog.FromSqlRaw(
                         "Execute dbo.Pro_InsertPatientReportLog " +
                         "@PatientVisitNo, @OrderListNo, @VisitTestNo, @VisitTestType, @LogType, @UserType, @VenueNo, @VenueBranchNo, @ReportUserNo",
                         _PatientVisitNo, _OrderListNo, _VisitTestNo, _VisitTestType, _LogType, _UserType, _VenueNo, _VenueBranchNo, _ReportUserNo).ToList();
 
-                    rtnresult = objresult?[0]?.ReportLogNo ?? 0;
+                    rtnresult = Objresult?[0]?.ReportLogNo ?? 0;
                 }
             }
             catch (Exception ex)
@@ -1290,15 +1257,8 @@ namespace Service.Repository
                     DefaultConnection = _config.GetConnectionString(ConfigKeys.ArchiveDefaultConnection);
 
                 var lstresulttypenos = PatientItem?.resulttypenos.Split(',');
-                var Key = "";
                 for (int i = 0; i < lstresulttypenos?.Length; i++)
-                {
-                    Key = "";
-                    if (lstresulttypenos[i] == "6")
-                    {
-                        Key = "DELTAREPORT";
-                    }
-
+                {                    
                     ReportOutput item = new ReportOutput();
                     Dictionary<string, string> objdictionary = new Dictionary<string, string>();
                     objdictionary.Add("PageCode", PatientItem?.pagecode);
@@ -1312,6 +1272,7 @@ namespace Service.Repository
                     objdictionary.Add("VenueBranchNo", PatientItem?.venuebranchno.ToString());
                     ReportContext objReportContext = new ReportContext(DefaultConnection);
                     TblReportMaster tblReportMaster = new TblReportMaster();
+
                     using (var context = new LIMSContext(DefaultConnection))
                     {
                         tblReportMaster = context.TblReportMaster.Where(x => x.ReportKey == "DELTAREPORT" && x.VenueNo == PatientItem.venueno
@@ -1321,6 +1282,7 @@ namespace Service.Repository
                             Directory.CreateDirectory(tblReportMaster.ExportPath);
                         }
                     }
+
                     string PatientName = string.Concat(PatientItem?.patientvisitno.Where(c => !char.IsWhiteSpace(c)));
                     string iFile = "d_" + Guid.NewGuid().ToString("N").Substring(0, 6) + ".pdf";
                     objdictionary.Add("QRCodeURL", tblReportMaster.ExportURL + iFile);
@@ -1362,6 +1324,7 @@ namespace Service.Repository
         {
             TempalteSearchResponse objOut = new TempalteSearchResponse();
             List<PatientImpressionResponse> lstPatientInfoResponse = new List<PatientImpressionResponse>();
+
             try
             {
                 using (var context = new PatientReportContext(_config.GetConnectionString(ConfigKeys.DefaultConnection)))
@@ -1457,7 +1420,7 @@ namespace Service.Repository
         }
         public List<GetAuditReportRes> GetAuditTrailReport(GetAuditReportReq req)
         {
-            List<GetAuditReportRes> objresult = new List<GetAuditReportRes>();
+            List<GetAuditReportRes> Objresult = new List<GetAuditReportRes>();
             try
             {
                 using (var context = new PatientReportContext(_config.GetConnectionString(ConfigKeys.DefaultConnection)))
@@ -1569,7 +1532,11 @@ namespace Service.Repository
                             {
                                 height = defaultHeight;
                             }
-                            ConvertRtfToImage(ReadPath + OldFile + ".rtf", ReadPath + OldFile + ".png", width, height);
+
+                            if (OperatingSystem.IsWindows())
+                            {
+                                ConvertRtfToImage(ReadPath + OldFile + ".rtf", ReadPath + OldFile + ".png", width, height);
+                            }
 
                             //pageCount = GetRtfPageCount(ReadPath + NewFile + ".rtf");
                             if (pageCount > 0)
@@ -1580,7 +1547,11 @@ namespace Service.Repository
                             {
                                 height = defaultHeight;
                             }
-                            ConvertRtfToImage(ReadPath + NewFile + ".rtf", ReadPath + NewFile + ".png", width, height);
+
+                            if (OperatingSystem.IsWindows())
+                            {
+                                ConvertRtfToImage(ReadPath + NewFile + ".rtf", ReadPath + NewFile + ".png", width, height);
+                            }
 
                             //if (File.Exists(ReadPath + OldFile + ".png"))
                             //{
@@ -1602,8 +1573,7 @@ namespace Service.Repository
                                 objTemp.NewTemplateUrl = TemplateAuditFileUrl + req.VenueNo.ToString() + "/" + objTemp.OutputFolderName + "/" + NewFile + ".png";
                             }
                         }
-
-                        objresult.Add(objTemp);
+                        Objresult.Add(objTemp);
                     }
                 }
             }
@@ -1611,12 +1581,11 @@ namespace Service.Repository
             {
                 MyDevException.Error(ex, "PatientReportRepository.GetAuditTrailReport", ExceptionPriority.High, ApplicationType.REPOSITORY, req.VenueNo, req.VenueBranchNo, req.UserNo);
             }
-            return objresult;
+            return Objresult;
         }
-
         public AuditTrailVisitHistoryResponse GetAuditTrailVisitHistory(GetAuditTrailVisitReq req)
         {
-            AuditTrailVisitHistoryResponse objResult = new AuditTrailVisitHistoryResponse();
+            AuditTrailVisitHistoryResponse Objresult = new AuditTrailVisitHistoryResponse();
             try
             {
                 using (var context = new PatientReportContext(_config.GetConnectionString(ConfigKeys.DefaultConnection)))
@@ -1626,49 +1595,48 @@ namespace Service.Repository
                     var _PatientvisitNo = new SqlParameter("Patientvisitno", req.Patientvisitno);
 
                     var lst = context.GetAuditTrailVisitHistory.FromSqlRaw(
-                        "Execute dbo.pro_getPatientVisitNoHistory " +
-                        "@PatientvisitNo, @VenueNo, @VenueBranchNo ",
-                        _PatientvisitNo, _VenueNo, _VenueBranchNo).ToList();
+                    "Execute dbo.pro_getPatientVisitNoHistory " +
+                    "@PatientvisitNo, @VenueNo, @VenueBranchNo ",
+                    _PatientvisitNo, _VenueNo, _VenueBranchNo).ToList();
 
-                    objResult.RowNo = lst[0].RowNo;
-                    objResult.PtId = lst[0].PtId;
-                    objResult.PtNo = lst[0].PtNo;
-                    objResult.PtName = lst[0].PtName;
-                    objResult.PtAgeType = lst[0].PtAgeType;
-                    objResult.PtGender = lst[0].PtGender;
-                    objResult.PtAgeGender = lst[0].PtAgeGender;
-                    objResult.PtMobileNo = lst[0].PtMobileNo;
-                    objResult.PtEmailId = lst[0].PtEmailId;
-                    objResult.RefTypeDesc = lst[0].RefTypeDesc;
-                    objResult.RefTypeName = lst[0].RefTypeName;
-                    objResult.Physician = lst[0].Physician;
-                    objResult.PatientVisitNo = lst[0].PatientVisitNo;
-                    objResult.LabAccessionNo = lst[0].LabAccessionNo;
-                    objResult.RegDtTm = lst[0].RegDtTm;
-                    objResult.IdNumber = lst[0].IdNumber;
+                    Objresult.RowNo = lst[0].RowNo;
+                    Objresult.PtId = lst[0].PtId;
+                    Objresult.PtNo = lst[0].PtNo;
+                    Objresult.PtName = lst[0].PtName;
+                    Objresult.PtAgeType = lst[0].PtAgeType;
+                    Objresult.PtGender = lst[0].PtGender;
+                    Objresult.PtAgeGender = lst[0].PtAgeGender;
+                    Objresult.PtMobileNo = lst[0].PtMobileNo;
+                    Objresult.PtEmailId = lst[0].PtEmailId;
+                    Objresult.RefTypeDesc = lst[0].RefTypeDesc;
+                    Objresult.RefTypeName = lst[0].RefTypeName;
+                    Objresult.Physician = lst[0].Physician;
+                    Objresult.PatientVisitNo = lst[0].PatientVisitNo;
+                    Objresult.LabAccessionNo = lst[0].LabAccessionNo;
+                    Objresult.RegDtTm = lst[0].RegDtTm;
+                    Objresult.IdNumber = lst[0].IdNumber;
 
-                    objResult.RegistrationList = JsonConvert.DeserializeObject<List<AuditTrailRegistration>>(lst[0].lstRegistration);
-                    objResult.EditRegistrationList = JsonConvert.DeserializeObject<List<AuditTrailEditRegistration>>(lst[0].lstEditRegistration);
-                    objResult.SampleCollectionList = JsonConvert.DeserializeObject<List<AuditTrailSampleCollection>>(lst[0].lstSampleCollection);
-                    objResult.SampleAccessionList = JsonConvert.DeserializeObject<List<AuditTrailSampleAccession>>(lst[0].lstSampleAccession);
-                    objResult.SampleRejectionList = JsonConvert.DeserializeObject<List<AuditTrailSampleRejection>>(lst[0].lstSampleRejection);
-                    objResult.ResultEntryList = JsonConvert.DeserializeObject<List<AuditTrailResultEntry>>(lst[0].lstResultEntry);
-                    objResult.ResultEntrySecondReview = JsonConvert.DeserializeObject<List<AuditTrailResultSecondReview>>(lst[0].lstResultEntrySecondReview);
-                    objResult.RerunResultList = JsonConvert.DeserializeObject<List<AuditTrailRerunResult>>(lst[0].lstRerunResult);
-                    objResult.ResultRecallList = JsonConvert.DeserializeObject<List<AuditTrailRecallResult>>(lst[0].lstRecallResult);
-                    objResult.ResultValidationList = JsonConvert.DeserializeObject<List<AuditTrailResultValidation>>(lst[0].lstResultValidation);
-                    objResult.ReportPrintList = JsonConvert.DeserializeObject<List<AuditTrailReportPrint>>(lst[0].lstReportPrint);
-                    objResult.CancelRegistrationList = JsonConvert.DeserializeObject<List<AuditTrailCancelRegistration>>(lst[0].lstCancelRegistration);
-                    objResult.SendOutList = JsonConvert.DeserializeObject<List<AuditTrailSendOut>>(lst[0].lstSendOut);
+                    Objresult.RegistrationList = JsonConvert.DeserializeObject<List<AuditTrailRegistration>>(lst[0].lstRegistration);
+                    Objresult.EditRegistrationList = JsonConvert.DeserializeObject<List<AuditTrailEditRegistration>>(lst[0].lstEditRegistration);
+                    Objresult.SampleCollectionList = JsonConvert.DeserializeObject<List<AuditTrailSampleCollection>>(lst[0].lstSampleCollection);
+                    Objresult.SampleAccessionList = JsonConvert.DeserializeObject<List<AuditTrailSampleAccession>>(lst[0].lstSampleAccession);
+                    Objresult.SampleRejectionList = JsonConvert.DeserializeObject<List<AuditTrailSampleRejection>>(lst[0].lstSampleRejection);
+                    Objresult.ResultEntryList = JsonConvert.DeserializeObject<List<AuditTrailResultEntry>>(lst[0].lstResultEntry);
+                    Objresult.ResultEntrySecondReview = JsonConvert.DeserializeObject<List<AuditTrailResultSecondReview>>(lst[0].lstResultEntrySecondReview);
+                    Objresult.RerunResultList = JsonConvert.DeserializeObject<List<AuditTrailRerunResult>>(lst[0].lstRerunResult);
+                    Objresult.ResultRecallList = JsonConvert.DeserializeObject<List<AuditTrailRecallResult>>(lst[0].lstRecallResult);
+                    Objresult.ResultValidationList = JsonConvert.DeserializeObject<List<AuditTrailResultValidation>>(lst[0].lstResultValidation);
+                    Objresult.ReportPrintList = JsonConvert.DeserializeObject<List<AuditTrailReportPrint>>(lst[0].lstReportPrint);
+                    Objresult.CancelRegistrationList = JsonConvert.DeserializeObject<List<AuditTrailCancelRegistration>>(lst[0].lstCancelRegistration);
+                    Objresult.SendOutList = JsonConvert.DeserializeObject<List<AuditTrailSendOut>>(lst[0].lstSendOut);
                 }
             }
             catch (Exception ex)
             {
                 MyDevException.Error(ex, "PatientReportRepository.GetAuditTrailVisitHistoty", ExceptionPriority.High, ApplicationType.REPOSITORY, req.VenueNo, req.VenueBranchNo, req.UserNo);
             }
-            return objResult;
+            return Objresult;
         }
-
         public static string ConvertRtfToHtml(string rtfText)
         {
             var html = Rtf.ToHtml(CleanRtfContent(rtfText.Trim()));
@@ -1683,6 +1651,8 @@ namespace Service.Repository
             }
             return rtfContent.Trim();
         }
+
+        [SupportedOSPlatform("windows")]
         public static void ConvertRtfToImage(string rtfFilePath, string outputImagePath, int width, int height)
         {
             string rtfContent = File.ReadAllText(rtfFilePath);
@@ -1705,6 +1675,8 @@ namespace Service.Repository
                 }
             }
         }
+
+        [SupportedOSPlatform("windows")]
         public static int GetPageCount(string filePath)
         {
             Microsoft.Office.Interop.Word.Application wordApp = new Microsoft.Office.Interop.Word.Application();
@@ -1733,6 +1705,7 @@ namespace Service.Repository
             }
         }
 
+        [SupportedOSPlatform("windows")]
         public static int GetRtfPageCount(string rtfPath)
         {
             try
@@ -1747,6 +1720,7 @@ namespace Service.Repository
                 PdfDocumentRenderer pdfRenderer = new PdfDocumentRenderer(true);
                 pdfRenderer.Document = document;
                 pdfRenderer.RenderDocument();
+
                 return pdfRenderer.PdfDocument.PageCount;
             }
             catch (Exception ex)
@@ -1755,7 +1729,6 @@ namespace Service.Repository
                 return -1;
             }
         }
-
         public List<lstamendedpatientreport> GetAmendedPatientReport(requestamendedpatientreport req)
         {
             List<lstamendedpatientreport> lst = new List<lstamendedpatientreport>();
@@ -1787,15 +1760,16 @@ namespace Service.Repository
                     var _maindeptNo = new SqlParameter("maindeptNo", req?.maindeptNo);
 
                     var rtndblst = context.GetAmendedPatientReport.FromSqlRaw(
-                        "Execute dbo.pro_AmendedPatientReport" +
-                        " @pagecode, @venueno, @venuebranchno, @userno, @viewvenuebranchno, @pageindex, @type, @fromdate, @todate," +
-                        " @patientno, @patientvisitno, @maindeptNo, @deptno, @serviceno, @servicetype, @refferraltypeno, @customerno, @physicianno, " +
-                        " @orderstatus, @printstatus, @cpprintstatus, @loginType",
-                        _pagecode, _venueno, _venuebranchno, _userno, _viewvenuebranchno, _pageindex, _type, _fromdate, _todate, 
-                        _patientno, _patientvisitno, _maindeptNo, _deptno, _serviceno, _servicetype, _refferraltypeno, _customerno, _physicianno,
-                        _orderstatus, _printstatus, _cpprintstatus, _loginType).ToList();
+                    "Execute dbo.pro_AmendedPatientReport" +
+                    " @pagecode, @venueno, @venuebranchno, @userno, @viewvenuebranchno, @pageindex, @type, @fromdate, @todate," +
+                    " @patientno, @patientvisitno, @maindeptNo, @deptno, @serviceno, @servicetype, @refferraltypeno, @customerno, @physicianno, " +
+                    " @orderstatus, @printstatus, @cpprintstatus, @loginType",
+                    _pagecode, _venueno, _venuebranchno, _userno, _viewvenuebranchno, _pageindex, _type, _fromdate, _todate, 
+                    _patientno, _patientvisitno, _maindeptNo, _deptno, _serviceno, _servicetype, _refferraltypeno, _customerno, _physicianno,
+                    _orderstatus, _printstatus, _cpprintstatus, _loginType).ToList();
 
                     int amendmentno = 0;
+
                     foreach (var v in rtndblst)
                     {
                         if (amendmentno != v.amendmentno)
@@ -1944,7 +1918,7 @@ namespace Service.Repository
             List<ReportOutput> result = new List<ReportOutput>();
             try
             {
-                Int16 languagecode = PatientItem.pritlanguagetype != null && PatientItem.pritlanguagetype > 0 ? PatientItem.pritlanguagetype : Convert.ToInt16(0);
+                Int16 languagecode = PatientItem.pritlanguagetype > 0 ? PatientItem.pritlanguagetype : Convert.ToInt16(0);
                 MasterRepository _IMasterRepository = new MasterRepository(_config);
                 ConfigurationDto objConfigurationDTO = new ConfigurationDto();
                 AppSettingResponse objAppSettingResponse = new AppSettingResponse();
@@ -2678,7 +2652,7 @@ namespace Service.Repository
 
         public List<GetATSubCatyMasterSearchResponse> GetATSubCatyMasters(GetATSubCatyMasterSearchReq req)
         {
-            List<GetATSubCatyMasterSearchResponse> objresult = new List<GetATSubCatyMasterSearchResponse>();
+            List<GetATSubCatyMasterSearchResponse> Objresult = new List<GetATSubCatyMasterSearchResponse>();
             try
             {
                 using (var context = new PatientReportContext(_config.GetConnectionString(ConfigKeys.DefaultConnection)))
@@ -2690,7 +2664,7 @@ namespace Service.Repository
                     var _searchTypeCode = new SqlParameter("SearchTypeCode", req.searchByCode);
                     var _searchTypeText = new SqlParameter("SearchTypeText", req.searchByText);
 
-                    objresult = context.GetATSubCatyMastersData.FromSqlRaw("Execute dbo.Pro_GetATSubCatyMastersData " +
+                    Objresult = context.GetATSubCatyMastersData.FromSqlRaw("Execute dbo.Pro_GetATSubCatyMastersData " +
                         "@VenueNo, @VenueBranchNo, @UserNo, @PageCode, @SearchTypeCode, @SearchTypeText",
                         _VenueNo, _VenueBranchNo, _UserNo, _PageCode, _searchTypeCode, _searchTypeText).ToList();
                 }
@@ -2699,7 +2673,7 @@ namespace Service.Repository
             {
                 MyDevException.Error(ex, "PatientReportRepository.GetATSubCatyMasters", ExceptionPriority.High, ApplicationType.REPOSITORY, req.VenueNo, req.VenueBranchNo, req.UserNo);
             }
-            return objresult;
+            return Objresult;
         }
         public  async Task <string> GetPdfFileName(List<PatientReportDTO> PatientItem)
         {

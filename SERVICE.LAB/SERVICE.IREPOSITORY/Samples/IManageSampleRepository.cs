@@ -33,7 +33,7 @@ namespace Service.IRepository
         List<BarcodePrintResponse> GetBarcodePrintDetails(BarcodePrintRequest RequestItem);
         List<SearchBranchSampleBarcodeResponse> SearchBranchSampleByBarcode(requestCommonSearch req);
         List<BranchSampleActionDTO> GetBranchSampleActionDetails(SampleActionRequest req);
-        List<PrePrintBarcodeOrderResponse> GetPrePrintBarcodelist(long visitNo, int VenueNo, int VenueBranchNo);
+        List<PrePrintBarcodeOrderresponse> GetPrePrintBarcodelist(long visitNo, int VenueNo, int VenueBranchNo);
     }
 }
 

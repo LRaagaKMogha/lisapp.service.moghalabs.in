@@ -19,7 +19,7 @@ namespace Service.Model.Integration
         OptionalPackage = 3,
         OptedOut = 4
     }
-    public enum ngender
+    public enum nGender
     {
         Male = 1,
         Female = 2,
@@ -52,7 +52,6 @@ namespace Service.Model.Integration
             }
         }
     }
-
     public class RequiredEMRAttribute : ValidationAttribute
     {
         protected override ValidationResult IsValid(object value, ValidationContext validationContext)
@@ -74,15 +73,6 @@ namespace Service.Model.Integration
         protected override ValidationResult IsValid(object value, ValidationContext validationContext)
         {
             var visit = (patientdetails)validationContext.ObjectInstance;
-
-            //if (visit != null && visit.sourcesystem == nsourcesystem.BB)
-            //{
-            //    return ValidationResult.Success;
-            //}
-            //else
-            //{
-            //    return new ValidationResult("This field is mandatory for EMR");
-            //}
             return ValidationResult.Success;
         }
     }

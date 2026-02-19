@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace Service.Model
 {
@@ -62,14 +61,12 @@ namespace Service.Model
         public bool IsAutoSMS { get; set; }
         public bool IsAutoWhatsApp { get; set; }
         public bool isSelf { get; set; }        
-        public List<FrontOfficeOrderList>? Orders { get; set; }
-        public List<FrontOfficePayment>? Payments { get; set; }
+        public List<FrontOfficeOrderList> Orders { get; set; }
+        public List<FrontOfficePayment> Payments { get; set; }
         public string ExternalVisitID { get; set; }
         public string VaccinationType { get; set; }
         public string VaccinationDate { get; set; }
         public bool IsFranchise { get; set; }
-
-        //arun changes
         public string Base64Data { get; set; }
         public string FileFormat { get; set; }
         public string FileName { get; set; }
@@ -112,14 +109,14 @@ namespace Service.Model
         public string SampleCollectionDT { get; set;}
         public bool isFasting { get; set; }
         public string ExternalPatientID {  get; set; }
-        public string? OPDAppoinmentNo { get; set; }
+        public string OPDAppoinmentNo { get; set; }
         public bool? C2PReportSMSPatient { get; set; }
         public bool? C2PReportEmailPatient {  get; set; }
         public bool? C2PReportWhatsappPatient {  get; set; }
         public bool? C2PBillSMSPatient { get; set; }
         public bool? C2PBillEmailPatient { get;set; }
         public bool? C2PBillWhatsappPatient { get; set; }
-        public string? loyalcardno { get; set; }
+        public string loyalcardno { get; set; }
     }
     public class FrontOffficePatientResponse
     {
@@ -164,7 +161,7 @@ namespace Service.Model
         public int RateListNo { get; set; }
         public string status { get; set; }
         public string ClientServiceCode { get; set; }
-        public string? DiscDescription { get; set; }
+        public string DiscDescription { get; set; }
     }
     public class FrontOfficePayment
     {
@@ -176,7 +173,6 @@ namespace Service.Model
         public decimal? CurrencyRate { get; set; }
         public decimal? CurrencyAmount { get; set; }
     }
-
     public class reqcheckExists
     {
         public string check { get; set; }
@@ -200,7 +196,6 @@ namespace Service.Model
         public string idTypeDesc { get; set; }
         public string idTypeNo { get; set; }
     }
-    //arun changes multi file uploaded
     public class BulkFileUpload
     {
         public string ActualFileName { get; set; }
@@ -216,7 +211,7 @@ namespace Service.Model
         public string docType { get; set; }
     }
     //add physician/doctor name in registration
-    public class DoctorDetails
+    public class Doctordetails
     {
         public string DoctorName { get; set; }
         public string DoctorQualification { get; set; }
@@ -226,12 +221,10 @@ namespace Service.Model
         public int VenueBranchNo { get; set; }
         public int userNo { get; set; }
     }
-
     public class ClinicalSummary
     {
         public string Summary { get; set; }
     }
-
     public class PatientNotifyLog
     {
         public int LogNo { get; set; }
@@ -271,7 +264,7 @@ namespace Service.Model
         public bool applyPrefix { get; set; }
         public bool applySuffix { get; set; }
     }
-    public class ExternalVisitDetails
+    public class ExternalVisitdetails
     {
         public string Value { get; set; }
         public char ValueType { get; set; }
@@ -280,7 +273,7 @@ namespace Service.Model
         public int VenueNo { get; set; }
         public int VenueBranchNo { get; set; }
     }
-    public class ExternalVisitDetailsResponse
+    public class ExternalVisitdetailsResponse
     {
         public string Outpt { get; set; }
     }
@@ -295,7 +288,7 @@ namespace Service.Model
         public string testype { get; set; }
         public string validfrom { get; set; }
         public string validto { get; set; }
-        public List<ExternalmassPatient>? patientlst { get; set; }
+        public List<ExternalmassPatient> patientlst { get; set; }
         public int UserNo { get; set; }
         public int VenueNo { get; set; }
         public int iadditionalrecords { get; set; }
@@ -382,20 +375,20 @@ namespace Service.Model
     }
     public class OPDReportOutput
     {
-        public string? PatientExportFile { get; set; }
-        public string? PatientExportFolderPath { get; set; }
-        public string? ExportURL { get; set; }
+        public string PatientExportFile { get; set; }
+        public string PatientExportFolderPath { get; set; }
+        public string ExportURL { get; set; }
     }
     public class TblloyalReq
     {
-        public string? loyalcardno { get; set; }
+        public string loyalcardno { get; set; }
         public int venueNo { get; set; }
         public int venuebranchno { get; set; }
     }
     public class Tblloyal
     {
         public int rowNo { get; set; }
-        public string? loyaltytype { get; set; }
+        public string loyaltytype { get; set; }
     }
     public class PatientVisitPatternIDGenReq
     {

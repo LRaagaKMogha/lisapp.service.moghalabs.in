@@ -1,14 +1,15 @@
-﻿using Service.Model;
+﻿using Microsoft.Extensions.Configuration;
+using Microsoft.IdentityModel.Tokens;
+using Service.Common;
+using Service.IRepository;
+using Service.Model;
 using System;
 using System.Collections.Generic;
-using System.Text;
-using System.Linq;
-using Service.IRepository;
-using Microsoft.Extensions.Configuration;
 using System.IdentityModel.Tokens.Jwt;
-using Microsoft.IdentityModel.Tokens;
+using System.Linq;
 using System.Security.Claims;
 using System.Security.Cryptography;
+using System.Text;
 
 namespace Service.Repository
 {
@@ -80,8 +81,9 @@ namespace Service.Repository
                 // return user id from JWT token if validation successful
                 return new UserClaimsIdentity { UserNo = userNo, UserName = userName, VenueNo = venueNo, VenueBranchNo = venueBranchNo, Roles = roles };
             }
-            catch (Exception exp)
+            catch (Exception ex)
             {
+                MyDevException.Error(ex, "ValidateToken", ExceptionPriority.High, ApplicationType.REPOSITORY, 0, 0, 0);
                 return null;
             }
         }

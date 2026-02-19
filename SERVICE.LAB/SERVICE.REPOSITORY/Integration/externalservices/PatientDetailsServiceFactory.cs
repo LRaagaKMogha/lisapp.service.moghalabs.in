@@ -2,20 +2,20 @@
 
 namespace Service.Repository.Integration.externalservices
 {
-    public class PatientDetailsServiceFactory
+    public class PatientdetailsServiceFactory
     {
-        public static IPatientDetailsService Create(string serviceType, IConfiguration config)
+        public static IPatientdetailsService Create(string serviceType, IConfiguration config)
         {
             switch(serviceType)
             {
                 case "RCMS":
-                    return new RCMSPatientDetailsService(config);
+                    return new RCMSPatientdetailsService(config);
                 case "SAP":
-                    return new SAPPatientDetailsService(config);
+                    return new SAPPatientdetailsService(config);
                 case "EMR":
-                    return new SAPPatientDetailsService(config);
+                    return new SAPPatientdetailsService(config);
                 default:
-                    return new RCMSPatientDetailsService(config);
+                    return new RCMSPatientdetailsService(config);
             }
         }
     }

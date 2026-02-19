@@ -108,7 +108,7 @@ namespace Service.Repository
 
         public QcMasterResponse InsertqcmasterDetails(saveqcDTO req)
         {
-            QcMasterResponse objresult = new QcMasterResponse();
+            QcMasterResponse Objresult = new QcMasterResponse();
             CommonHelper commonUtility = new CommonHelper();
             var lotXML = commonUtility.ToXML(req?.newlst);
             var levelXML = commonUtility.ToXML(req?.levellst);
@@ -130,14 +130,14 @@ namespace Service.Repository
                     "Execute dbo.pro_InsertQcmaster  @venueNo,@userNo,@venueBranchno,@analyzerNo,@paramNo,@lotNo,@lotXML,@levelXML",
                     _venueNo,_userNo,_venueBranchno,_analyzerNo,_paramNo,_lotNo,_lotXML, _levelXML).ToList();
 
-                    objresult = obj[0];
+                    Objresult = obj[0];
                 }
             }
             catch (Exception ex)
             {
                 MyDevException.Error(ex, " QcmasterRepository.InsertQcmaster", ExceptionPriority.Low, ApplicationType.REPOSITORY, req?.venueNo, 0, 0);
             }
-            return objresult;
+            return Objresult;
         }
         public List<Qclotresponse> Getqclot(Qclotreq req)
         {

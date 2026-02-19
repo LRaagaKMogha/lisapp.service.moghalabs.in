@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace Service.Model
 {
@@ -30,7 +29,6 @@ namespace Service.Model
         public string fontColor { get; set; }
         public string fontWeight { get; set; }
     }
-
     public partial class getrequest
     {
         public string pagecode { get; set; }
@@ -39,8 +37,6 @@ namespace Service.Model
         public int userno { get; set; }
         public int patientvisitno { get; set; }
     }
-
-
     public class dblCancelVisit
     {
         public int rowNo { get; set; }
@@ -59,8 +55,7 @@ namespace Service.Model
         public decimal collectedAmount { get; set; }
         public decimal dueAmount { get; set; }
         public decimal cancelAmount { get; set; }
-        public decimal refundAmount { get; set; }
-        
+        public decimal refundAmount { get; set; }        
         public int patientBillDetailsNo { get; set; }
         public int orderNo { get; set; }
         public string serviceType { get; set; }
@@ -119,14 +114,12 @@ namespace Service.Model
         public bool isCancelled { get; set; }
         public string cancelReason { get; set; }
     }
-
     public partial class rtnCancelTest
     {
         public int cancelTestNo { get; set; }
         public int patientVisitNo { get; set; }        
         public string receiptNo { get; set; }
     }
-
     public class GetReqCancelParam
     {
         public int venueno { get; set; }
@@ -134,9 +127,9 @@ namespace Service.Model
         public int didByUser { get; set; }
         public Int16 isApproved { get; set; }
         public int pageIndex { get; set; }
-        public string? type { get; set; }
-        public string? fromdate { get; set; }
-        public string? todate { get; set; }
+        public string type { get; set; }
+        public string fromdate { get; set; }
+        public string todate { get; set; }
     }
     public class GetReqCancelResponse
     {
@@ -178,10 +171,9 @@ namespace Service.Model
         public int TotalRecords { get; set; }
         public int CanceledByUser { get; set; }
         public string cancellogid { get; set; }
-        public string? CancelRequestdOn { get; set; }
-        public string? ActionBy { get; set; }
-        public string? ActionOn { get; set; }
-
+        public string CancelRequestdOn { get; set; }
+        public string ActionBy { get; set; }
+        public string ActionOn { get; set; }
     }
     public class UpdateReqCancelParam
     {
@@ -205,6 +197,3 @@ namespace Service.Model
         public int ApprovedStatus { get; set; }
     }
 }
-
-
-

@@ -9,7 +9,7 @@ namespace Service.API.SERVICE.Controllers
 {
     public class PatientInformationValidation
     {
-        public static ErrorResponse UpdatePatientDetails(EditPatientRequest editPatientRequest)
+        public static ErrorResponse UpdatePatientdetails(EditPatientRequest editPatientRequest)
         {
             ErrorResponse errorResponse = new ErrorResponse();
             List<string> errors = new List<string>();

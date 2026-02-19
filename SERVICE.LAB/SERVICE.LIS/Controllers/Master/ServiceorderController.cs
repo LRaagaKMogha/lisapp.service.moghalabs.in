@@ -19,21 +19,21 @@ namespace Service.API.SERVICE.Controllers
         }
 
         [HttpPost]
-        [Route("api/ServiceOrder/GetServiceOrderMaster")]
-        public IEnumerable<GetServiceDetails> GetServiceOrderMaster(ServiceOrderMasterRequest serviceOrderItem)
+        [Route("api/ServiceOrder/GetserviceOrderMaster")]
+        public IEnumerable<GetserviceDetails> GetserviceOrderMaster(ServiceOrderMasterRequest serviceOrderItem)
         {
-            List<GetServiceDetails> objresult = new List<GetServiceDetails>();
+            List<GetserviceDetails> Objresult = new List<GetserviceDetails>();
             try
             {
               
-                objresult = _ServiceOrderRepository.GetServiceOrderMaster(serviceOrderItem);
+                Objresult = _ServiceOrderRepository.GetserviceOrderMaster(serviceOrderItem);
                 
             }
             catch (Exception ex)
             {
-                MyDevException.Error(ex, "ServiceOrderController.GetServiceOrderMaster", ExceptionPriority.Low, ApplicationType.APPSERVICE, serviceOrderItem.VenueNo, serviceOrderItem.ServiceNo, 0);
+                MyDevException.Error(ex, "ServiceOrderController.GetserviceOrderMaster", ExceptionPriority.Low, ApplicationType.APPSERVICE, serviceOrderItem.VenueNo, serviceOrderItem.ServiceNo, 0);
             }
-            return objresult;
+            return Objresult;
         }   
 
         [HttpPost]

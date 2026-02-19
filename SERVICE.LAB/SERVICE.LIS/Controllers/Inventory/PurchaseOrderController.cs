@@ -29,35 +29,35 @@ namespace Service.API.SERVICE.Controllers.Inventory
         [CustomAuthorize("INVOPERATIONS")]
         [HttpPost]
         [Route("api/PurchaseOrder/GetPurchaseOrderDetails")]
-        public List<GetPurchaseOrderResponse> GetPurchaseOrders(GetAllPORequest masterRequest)
+        public List<GetPurchaseOrderresponse> GetPurchaseOrders(GetAllPORequest masterRequest)
         {
-            List<GetPurchaseOrderResponse> objresult = new List<GetPurchaseOrderResponse>();
+            List<GetPurchaseOrderresponse> Objresult = new List<GetPurchaseOrderresponse>();
             try
             {
-                objresult = _PurchaseOrderRepository.GetPurchaseOrders(masterRequest);
+                Objresult = _PurchaseOrderRepository.GetPurchaseOrders(masterRequest);
             }
             catch (Exception ex)
             {
                 MyDevException.Error(ex, "PurchaseOrderController.GetPurchaseOrders-", ExceptionPriority.Low, ApplicationType.APPSERVICE, masterRequest.venueno, (int)masterRequest.venuebranchno, 0);
             }
-            return objresult;
+            return Objresult;
         }
 
         [CustomAuthorize("INVOPERATIONS")]
         [HttpGet]
         [Route("api/PurchaseOrder/GetSupplierServiceDetails")]
-        public List<GetSupplierServiceDTO> GetService(int VenueNo, int VenueBranchNo, int SupplierNo, int StoreNo = 0, string type = "")
+        public List<GetSupplierServiceDTO> Getservice(int VenueNo, int VenueBranchNo, int SupplierNo, int StoreNo = 0, string type = "")
         {
-            List<GetSupplierServiceDTO> objresult = new List<GetSupplierServiceDTO>();
+            List<GetSupplierServiceDTO> Objresult = new List<GetSupplierServiceDTO>();
             try
             {
-                objresult = _PurchaseOrderRepository.GetSupplierServiceDetails(VenueNo, VenueBranchNo, SupplierNo, StoreNo, type).ToList();
+                Objresult = _PurchaseOrderRepository.GetSupplierServiceDetails(VenueNo, VenueBranchNo, SupplierNo, StoreNo, type).ToList();
             }
             catch (Exception ex)
             {
                 MyDevException.Error(ex, "PurchaseOrderController.GetSupplierServiceDetails", ExceptionPriority.Medium, ApplicationType.APPSERVICE, VenueNo, VenueBranchNo, 0);
             }
-            return objresult;
+            return Objresult;
         }
 
         [CustomAuthorize("INVOPERATIONS")]
@@ -82,17 +82,17 @@ namespace Service.API.SERVICE.Controllers.Inventory
         [Route("api/PurchaseOrder/GetPurchaseDetailsById")]
         public List<GetPurchaseDetailsDTO> GetPurchaseDetailsById(int venueNo, int venueBranchNo, int PurchaseNo)
         {
-            List<GetPurchaseDetailsDTO> objresult = new List<GetPurchaseDetailsDTO>();
+            List<GetPurchaseDetailsDTO> Objresult = new List<GetPurchaseDetailsDTO>();
             try
             {
-                objresult = _PurchaseOrderRepository.GetPurchaseDetailsById(venueNo, venueBranchNo, PurchaseNo).ToList();
+                Objresult = _PurchaseOrderRepository.GetPurchaseDetailsById(venueNo, venueBranchNo, PurchaseNo).ToList();
 
             }
             catch (Exception ex)
             {
                 MyDevException.Error(ex, "PurchaseOrderController.GetPurchaseDetailsById", ExceptionPriority.Medium, ApplicationType.APPSERVICE, venueNo, venueBranchNo, PurchaseNo);
             }
-            return objresult;
+            return Objresult;
         }
 
         [CustomAuthorize("INVOPERATIONS")]
@@ -100,16 +100,16 @@ namespace Service.API.SERVICE.Controllers.Inventory
         [Route("api/PurchaseOrder/GetPOProductDetailsById")]
         public List<POProductDetailsDTO> GetPOProductDetailsById(int venueNo, int venueBranchNo, int PurchaseNo)
         {
-            List<POProductDetailsDTO> objresult = new List<POProductDetailsDTO>();
+            List<POProductDetailsDTO> Objresult = new List<POProductDetailsDTO>();
             try
             {
-                objresult = _PurchaseOrderRepository.GetPOProductDetailsById(venueNo, venueBranchNo, PurchaseNo).ToList();
+                Objresult = _PurchaseOrderRepository.GetPOProductDetailsById(venueNo, venueBranchNo, PurchaseNo).ToList();
             }
             catch (Exception ex)
             {
                 MyDevException.Error(ex, "PurchaseOrderController.GetPOProductDetailsById", ExceptionPriority.Medium, ApplicationType.APPSERVICE, venueNo, venueBranchNo, 0);
             }
-            return objresult;
+            return Objresult;
         }
 
         [CustomAuthorize("INVOPERATIONS")]
@@ -117,17 +117,17 @@ namespace Service.API.SERVICE.Controllers.Inventory
         [Route("api/PurchaseOrder/GetPOTaxDetailsById")]
         public List<GetTaxDatilsResponse> GetPOTaxDetailsById(int venueNo, int venueBranchNo, int PurchaseNo)
         {
-            List<GetTaxDatilsResponse> objresult = new List<GetTaxDatilsResponse>();
+            List<GetTaxDatilsResponse> Objresult = new List<GetTaxDatilsResponse>();
             try
             {
-                objresult = _PurchaseOrderRepository.GetPOTaxDetailsById(venueNo, venueBranchNo, PurchaseNo).ToList();
+                Objresult = _PurchaseOrderRepository.GetPOTaxDetailsById(venueNo, venueBranchNo, PurchaseNo).ToList();
 
             }
             catch (Exception ex)
             {
                 MyDevException.Error(ex, "PurchaseOrderController.GetPOTaxDetailsById", ExceptionPriority.Medium, ApplicationType.APPSERVICE, venueNo, venueBranchNo, 0);
             }
-            return objresult;
+            return Objresult;
         }
 
         [CustomAuthorize("INVOPERATIONS")]
@@ -135,16 +135,16 @@ namespace Service.API.SERVICE.Controllers.Inventory
         [Route("api/PurchaseOrder/GetPOOCDetailsById")]
         public List<otherChargeModal> GetPOOCDetailsById(int venueNo, int venueBranchNo, int PurchaseNo)
         {
-            List<otherChargeModal> objresult = new List<otherChargeModal>();
+            List<otherChargeModal> Objresult = new List<otherChargeModal>();
             try
             {
-                objresult = _PurchaseOrderRepository.GetPOOCDetailsById(venueNo, venueBranchNo, PurchaseNo).ToList();
+                Objresult = _PurchaseOrderRepository.GetPOOCDetailsById(venueNo, venueBranchNo, PurchaseNo).ToList();
             }
             catch (Exception ex)
             {
                 MyDevException.Error(ex, "PurchaseOrderController.GetPOOCDetailsById", ExceptionPriority.Medium, ApplicationType.APPSERVICE, venueNo, venueBranchNo, 0);
             }
-            return objresult;
+            return Objresult;
         }
 
         [CustomAuthorize("INVOPERATIONS")]
@@ -152,17 +152,17 @@ namespace Service.API.SERVICE.Controllers.Inventory
         [Route("api/PurchaseOrder/GetPOTermsDetailsById")]
         public List<Termsconditionlist> GetPOTermsDetailsById(int venueNo, int venueBranchNo, int PurchaseNo)
         {
-            List<Termsconditionlist> objresult = new List<Termsconditionlist>();
+            List<Termsconditionlist> Objresult = new List<Termsconditionlist>();
             try
             {
-                objresult = _PurchaseOrderRepository.GetPOTermsDetailsById(venueNo, venueBranchNo, PurchaseNo).ToList();
+                Objresult = _PurchaseOrderRepository.GetPOTermsDetailsById(venueNo, venueBranchNo, PurchaseNo).ToList();
 
             }
             catch (Exception ex)
             {
                 MyDevException.Error(ex, "PurchaseOrderController.GetPOTermsDetailsById", ExceptionPriority.Medium, ApplicationType.APPSERVICE, venueNo, venueBranchNo, 0);
             }
-            return objresult;
+            return Objresult;
         }
         #endregion
     }

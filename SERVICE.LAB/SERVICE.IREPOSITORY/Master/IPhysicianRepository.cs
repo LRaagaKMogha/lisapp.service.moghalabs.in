@@ -14,7 +14,7 @@ namespace Service.IRepository
         List<PhysicianDocUploadDetailRes> GetPhysicianDocumentDetails(PhysicianDocUploadReq Req);
         List<OPDMachineRes> GetMachineTimeDetails(OPDMachineReq Req);
         List<OPDPhysicianRes> GetPhysicianOPDDetails(OPDPhysicianReq Req);
-        int OPDPatientDetails(List<OPDPhysicianDetail> opdPhysiciandetail, TblPhysician tblPhysician);
+        int OPDPatientdetails(List<OPDPhysicianDetail> opdPhysiciandetail, TblPhysician tblPhysician);
         List<PhysicianOrClientCodeResponse> GetLastPhysicianCode(int VenueNo, int VenueBranchNo,string CodeType, string CodeToCheck = null);
         List<consultantdetails> GetConsultant(getconsultant getconsultant);
         int SaveConsultant(saveConsultant saveConsultant);

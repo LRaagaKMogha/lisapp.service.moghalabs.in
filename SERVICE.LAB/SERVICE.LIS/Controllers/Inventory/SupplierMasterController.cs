@@ -25,16 +25,16 @@ namespace Service.API.SERVICE.Controllers.Inventory
         [Route("api/SupplierMaster/GetSupplierMasterDetails")]
         public List<GetSupplierMasterResponse> GetSupplierDetails(SupplierMasterRequest masterRequest)
         {
-            List<GetSupplierMasterResponse> objResult = new List<GetSupplierMasterResponse>();
+            List<GetSupplierMasterResponse> Objresult = new List<GetSupplierMasterResponse>();
             try
             {
-                objResult = _supplierMasterRepository.GetSupplierDetails(masterRequest);               
+                Objresult = _supplierMasterRepository.GetSupplierDetails(masterRequest);               
             }
             catch (Exception ex)
             {
                 MyDevException.Error(ex, "SupplierMasterController.GetSupplierMasters - " + masterRequest.supplierNo.ToString(), ExceptionPriority.Low, ApplicationType.APPSERVICE, masterRequest.venueNo, masterRequest.venueBranchNo, masterRequest.userNo);
             }
-            return objResult;
+            return Objresult;
         }
             
         [CustomAuthorize("INVMASTERS")]

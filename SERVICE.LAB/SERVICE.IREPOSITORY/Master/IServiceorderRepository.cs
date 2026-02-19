@@ -5,7 +5,7 @@ namespace Service.IRepository
 {
     public interface IServiceOrderRepository
     {
-        List<GetServiceDetails> GetServiceOrderMaster(ServiceOrderMasterRequest serviceOrderItem);
+        List<GetserviceDetails> GetserviceOrderMaster(ServiceOrderMasterRequest serviceOrderItem);
         ServiceOrderMasterResponse InsertServiceOrderMaster(TblServiceOrder resultItem);
     }
 }

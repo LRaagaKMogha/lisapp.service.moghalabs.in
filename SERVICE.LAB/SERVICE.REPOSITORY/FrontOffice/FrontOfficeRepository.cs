@@ -29,19 +29,19 @@ namespace Service.Repository
         /// <returns></returns>
         public List<TblCountryList> GetCountry(int VenueNo)
         {
-            List<TblCountryList> objresult = new List<TblCountryList>();
+            List<TblCountryList> Objresult = new List<TblCountryList>();
             try
             {
                 using (var context = new FrontOfficeContext(_config.GetConnectionString(ConfigKeys.DefaultConnection)))
                 {
-                    objresult = context.TblCountry.Where(x => x.VenueNo == VenueNo).ToList();
+                    Objresult = context.TblCountry.Where(x => x.VenueNo == VenueNo).ToList();
                 }
             }
             catch (Exception ex)
             {
                 MyDevException.Error(ex, "FrontOfficeRepository.GetCountry", ExceptionPriority.Medium, ApplicationType.REPOSITORY, 0, 0, 0);
             }
-            return objresult;
+            return Objresult;
         }
 
         /// <summary>
@@ -51,19 +51,19 @@ namespace Service.Repository
         /// <returns></returns>
         public List<TblState> GetState(int VenueNo)
         {
-            List<TblState> objresult = new List<TblState>();
+            List<TblState> Objresult = new List<TblState>();
             try
             {
                 using (var context = new FrontOfficeContext(_config.GetConnectionString(ConfigKeys.DefaultConnection)))
                 {
-                    objresult = context.TblState.Where(x => x.VenueNo == VenueNo).ToList();
+                    Objresult = context.TblState.Where(x => x.VenueNo == VenueNo).ToList();
                 }
             }
             catch (Exception ex)
             {
                 MyDevException.Error(ex, "FrontOfficeRepository.GetState", ExceptionPriority.Medium, ApplicationType.REPOSITORY, 0, 0, 0);
             }
-            return objresult;
+            return Objresult;
         }
 
         /// <summary>
@@ -73,24 +73,24 @@ namespace Service.Repository
         /// <returns></returns>
         public List<TblCity> GetCity(int VenueNo)
         {
-            List<TblCity> objresult = new List<TblCity>();
+            List<TblCity> Objresult = new List<TblCity>();
             try
             {
                 using (var context = new FrontOfficeContext(_config.GetConnectionString(ConfigKeys.DefaultConnection)))
                 {
-                    objresult = context.TblCity.Where(x => x.VenueNo == VenueNo).ToList();
+                    Objresult = context.TblCity.Where(x => x.VenueNo == VenueNo).ToList();
                 }
             }
             catch (Exception ex)
             {
                 MyDevException.Error(ex, "FrontOfficeRepository.GetCity", ExceptionPriority.Medium, ApplicationType.REPOSITORY, 0, 0, 0);
             }
-            return objresult;
+            return Objresult;
         }
 
         public GetDetailsByPincode GetDetailsByPincode(int VenueNo, int VenueBranchNo, string PinCode)
         {
-            GetDetailsByPincode objresult = new GetDetailsByPincode();
+            GetDetailsByPincode Objresult = new GetDetailsByPincode();
             try
             {
                 using (var context = new FrontOfficeContext(_config.GetConnectionString(ConfigKeys.DefaultConnection)))
@@ -102,14 +102,14 @@ namespace Service.Repository
                     var result = context.GetDetailsByPincodeDTO.FromSqlRaw(
                         "Execute dbo.Pro_GetDetailsByPinCode @VenueNo, @VenueBranchNo, @Pincode",
                      _VenueNo, _VenueBranchNo, _Pincode).ToList();
-                    objresult = result?.AsEnumerable()?.FirstOrDefault();
+                    Objresult = result?.AsEnumerable()?.FirstOrDefault();
                 }
             }
             catch (Exception ex)
             {
                 MyDevException.Error(ex, "FrontOfficeRepository.GetDetailsByPincode", ExceptionPriority.Medium, ApplicationType.REPOSITORY, 0, 0, 0);
             }
-            return objresult;
+            return Objresult;
         }
 
         /// <summary>
@@ -118,19 +118,19 @@ namespace Service.Repository
         /// <returns></returns>
         public List<TblCurrency> GetCurrency(int VenueNo)
         {
-            List<TblCurrency> objresult = new List<TblCurrency>();
+            List<TblCurrency> Objresult = new List<TblCurrency>();
             try
             {
                 using (var context = new FrontOfficeContext(_config.GetConnectionString(ConfigKeys.DefaultConnection)))
                 {
-                    objresult = context.TblCurrency.Where(a => a.VenueNo == VenueNo).ToList();
+                    Objresult = context.TblCurrency.Where(a => a.VenueNo == VenueNo).ToList();
                 }
             }
             catch (Exception ex)
             {
                 MyDevException.Error(ex, "FrontOfficeRepository.GetCurrency", ExceptionPriority.Medium, ApplicationType.REPOSITORY, VenueNo, 0, 0);
             }
-            return objresult;
+            return Objresult;
         }
         /// <summary>
         /// GetCustomers
@@ -138,7 +138,7 @@ namespace Service.Repository
         /// <returns></returns>
         public List<CustomerList> GetCustomers(int VenueNo, int VenueBranchNo, int UserNo, int IsFranchisee, bool ExcludePostpaid = false, bool ExcludePrepaid = false, bool ExcludeCash = false, bool IsApproval = false, int IsClinical = -1, int clientType = 0, bool IsMapping = false)
         {
-            List<CustomerList> objresult = new List<CustomerList>();
+            List<CustomerList> Objresult = new List<CustomerList>();
             try
             {
                 using (var context = new FrontOfficeContext(_config.GetConnectionString(ConfigKeys.DefaultConnection)))
@@ -155,7 +155,7 @@ namespace Service.Repository
                     var _IsMapping = new SqlParameter("IsMapping", IsMapping);                    
                     var _clientType = new SqlParameter("ClientType", clientType);
 
-                    objresult = context.CustomerList.FromSqlRaw(
+                    Objresult = context.CustomerList.FromSqlRaw(
                     "Execute dbo.Pro_GetSearchCustomer @VenueNo, @VenueBranchNo, @UserNo, @IsFranchisee, " +
                     "@ExcludePostpaid, @ExcludePrepaid, @ExcludeCash, @IsApproval, @IsClinic, @ClientType, @IsMapping",
                      _VenueNo, _VenueBranchNo, _UserNo, _IsFranchisee, _ExcludePostpaid, _ExcludePrepaid, _ExcludeCash, _IsApproval, _IsClinical, _clientType,_IsMapping).ToList();
@@ -165,7 +165,7 @@ namespace Service.Repository
             {
                 MyDevException.Error(ex, "FrontOfficeRepository.GetCustomers", ExceptionPriority.High, ApplicationType.REPOSITORY, VenueNo, VenueBranchNo, 0);
             }
-            return objresult;
+            return Objresult;
         }
 
         /// <summary>
@@ -174,7 +174,7 @@ namespace Service.Repository
         /// <returns></returns>
         public CustomerList GetCustomerDetails(long Customerno, int VenueNo, int VenueBranchNo)
         {
-            CustomerList objresult = new CustomerList();
+            CustomerList Objresult = new CustomerList();
             try
             {
                 using (var context = new FrontOfficeContext(_config.GetConnectionString(ConfigKeys.DefaultConnection)))
@@ -186,14 +186,14 @@ namespace Service.Repository
                          "Execute dbo.Pro_GetSearchCustomer @VenueNo,@VenueBranchNo",
                       _VenueNo, _VenueBranchNo).ToList();
 
-                    objresult = result.Where(a => a.customerNo == Customerno).AsEnumerable()?.FirstOrDefault();
+                    Objresult = result.Where(a => a.customerNo == Customerno).AsEnumerable()?.FirstOrDefault();
                 }
             }
             catch (Exception ex)
             {
                 MyDevException.Error(ex, "FrontOfficeRepository.GetCustomerDetails/Customerno-" + Customerno, ExceptionPriority.High, ApplicationType.REPOSITORY, VenueNo, VenueBranchNo, 0);
             }
-            return objresult;
+            return Objresult;
         }
         /// <summary>
         /// Customer CurrentBalance Details
@@ -201,7 +201,7 @@ namespace Service.Repository
         /// <returns></returns>
         public CustomerCurrentBalance GetCustomerCurrentBalance(long Customerno, int VenueNo, int VenueBranchNo)
         {
-            CustomerCurrentBalance objresult = new CustomerCurrentBalance();
+            CustomerCurrentBalance Objresult = new CustomerCurrentBalance();
             try
             {
                 using (var context = new FrontOfficeContext(_config.GetConnectionString(ConfigKeys.DefaultConnection)))
@@ -209,7 +209,7 @@ namespace Service.Repository
                     var _Customerno = new SqlParameter("Customerno", Customerno);
                     var _VenueNo = new SqlParameter("VenueNo", VenueNo);
                     var _VenueBranchNo = new SqlParameter("VenueBranchNo", VenueBranchNo);
-                    objresult = context.CustomerCurrentBalance.FromSqlRaw(
+                    Objresult = context.CustomerCurrentBalance.FromSqlRaw(
                         "Execute dbo.Pro_GetCustomerBalance @Customerno,@VenueNo,@VenueBranchNo",
                      _Customerno, _VenueNo, _VenueBranchNo).AsEnumerable()?.FirstOrDefault();
 
@@ -219,7 +219,7 @@ namespace Service.Repository
             {
                 MyDevException.Error(ex, "FrontOfficeRepository.GetCustomerCurrentBalance/Customerno-" + Customerno, ExceptionPriority.High, ApplicationType.REPOSITORY, VenueNo, VenueBranchNo, 0);
             }
-            return objresult;
+            return Objresult;
         }
 
         /// <summary>
@@ -228,17 +228,17 @@ namespace Service.Repository
         /// <returns></returns>
         public List<TblDiscount> GetDiscountMaster(int VenueNo, int VenueBranchNo)
         {
-            List<TblDiscount> objresult = new List<TblDiscount>();
+            List<TblDiscount> Objresult = new List<TblDiscount>();
             try
             {
                 using (var context = new FrontOfficeContext(_config.GetConnectionString(ConfigKeys.DefaultConnection)))
                 {
-                    //objresult = context.TblDiscount.Where(a => a.VenueNo == VenueNo
+                    //Objresult = context.TblDiscount.Where(a => a.VenueNo == VenueNo
                     //&& a.VenueBranchNo == VenueBranchNo).ToList();
                     var _VenueNo = new SqlParameter("VenueNo", VenueNo);
                     var _VenueBranchNo = new SqlParameter("VenueBranchNo", VenueBranchNo);                                        
 
-                    objresult = context.GetDiscountMaster.FromSqlRaw(
+                    Objresult = context.GetDiscountMaster.FromSqlRaw(
                          "Execute dbo.pro_GetDiscountMaster_All @VenueNo,@VenueBranchNo",
                       _VenueNo, _VenueBranchNo).ToList();
                 }
@@ -247,7 +247,7 @@ namespace Service.Repository
             {
                 MyDevException.Error(ex, "FrontOfficeRepository.GetDiscountMaster", ExceptionPriority.High, ApplicationType.REPOSITORY, VenueNo, VenueBranchNo, 0);
             }
-            return objresult;
+            return Objresult;
         }
         /// <summary>
         /// GetPhysicianDetails
@@ -255,12 +255,12 @@ namespace Service.Repository
         /// <returns></returns>
         public List<TblPhysician> GetPhysicianDetails(int VenueNo, int VenueBranchNo)
         {
-            List<TblPhysician> objresult = new List<TblPhysician>();
+            List<TblPhysician> Objresult = new List<TblPhysician>();
             try
             {
                 using (var context = new FrontOfficeContext(_config.GetConnectionString(ConfigKeys.DefaultConnection)))
                 {
-                    objresult = context.TblPhysician.Where(a => a.VenueNo == VenueNo
+                    Objresult = context.TblPhysician.Where(a => a.VenueNo == VenueNo
                     && a.VenueBranchNo == VenueBranchNo).ToList();
                 }
             }
@@ -268,7 +268,7 @@ namespace Service.Repository
             {
                 MyDevException.Error(ex, "FrontOfficeRepository.GetPhysicianDetails", ExceptionPriority.High, ApplicationType.REPOSITORY, VenueNo, VenueBranchNo, 0);
             }
-            return objresult;
+            return Objresult;
         }
         /// <summary>
         /// GetPhysicianDetails
@@ -276,7 +276,7 @@ namespace Service.Repository
         /// <returns></returns>
         public List<TblPhysicianSearch> GetPhysicianDetailsbyName(int VenueNo, int VenueBranchNo, string physicianName,int type=0)
         {
-            List<TblPhysicianSearch> objresult = new List<TblPhysicianSearch>();
+            List<TblPhysicianSearch> Objresult = new List<TblPhysicianSearch>();
             try
             {
                 using (var context = new FrontOfficeContext(_config.GetConnectionString(ConfigKeys.DefaultConnection)))
@@ -287,7 +287,7 @@ namespace Service.Repository
                     var _physicianName = new SqlParameter("physicianName", physicianName.ValidateEmpty());
                     var _type = new SqlParameter("type", type);
                     
-                    objresult = context.Physiciandetails.FromSqlRaw(
+                    Objresult = context.Physiciandetails.FromSqlRaw(
                          "Execute dbo.Pro_SearchPhysicianDetail @VenueNo,@VenueBranchNo,@physicianName,@type",
                       _VenueNo, _VenueBranchNo, _physicianName, _type).ToList();
                 }
@@ -296,7 +296,7 @@ namespace Service.Repository
             {
                 MyDevException.Error(ex, "FrontOfficeRepository.GetPhysicianDetailsbyName", ExceptionPriority.High, ApplicationType.REPOSITORY, VenueNo, VenueBranchNo, 0);
             }
-            return objresult;
+            return Objresult;
         }
 
         /// <summary>
@@ -304,21 +304,21 @@ namespace Service.Repository
         /// </summary>
         /// <param name="ServiceName"></param>
         /// <returns></returns>
-        public List<ServiceSearchDTO> GetService(int VenueNo, int VenueBranchNo, int IsApproval)
+        public List<ServiceSearchDTO> Getservice(int VenueNo, int VenueBranchNo, int IsApproval)
         {
-            List<ServiceSearchDTO> objresult = new List<ServiceSearchDTO>();
+            List<ServiceSearchDTO> Objresult = new List<ServiceSearchDTO>();
             try
             {
                 string _CacheKey = CacheKeys.ServiceList + VenueNo;// + VenueBranchNo;
-                objresult = MemoryCacheRepository.GetCacheItem<List<ServiceSearchDTO>>(_CacheKey);
-                if (objresult == null)
+                Objresult = MemoryCacheRepository.GetCacheItem<List<ServiceSearchDTO>>(_CacheKey);
+                if (Objresult == null)
                 {
                     using (var context = new FrontOfficeContext(_config.GetConnectionString(ConfigKeys.DefaultConnection)))
                     {
                         var _VenueNo = new SqlParameter("VenueNo", VenueNo);
                         var _VenueBranchNo = new SqlParameter("VenueBranchNo", VenueBranchNo);
                         var _IsApproval = new SqlParameter("IsApproval", IsApproval);
-                        objresult = context.ServiceSearchDTO.FromSqlRaw(
+                        Objresult = context.ServiceSearchDTO.FromSqlRaw(
                             "Execute dbo.pro_SearchService @VenueNo,@VenueBranchNo,@IsApproval",
                          _VenueNo, _VenueBranchNo, _IsApproval).ToList();
                     }
@@ -326,13 +326,13 @@ namespace Service.Repository
             }
             catch (Exception ex)
             {
-                MyDevException.Error(ex, "FrontOfficeRepository.GetService", ExceptionPriority.High, ApplicationType.REPOSITORY, VenueNo, VenueBranchNo, 0);
+                MyDevException.Error(ex, "FrontOfficeRepository.Getservice", ExceptionPriority.High, ApplicationType.REPOSITORY, VenueNo, VenueBranchNo, 0);
             }
-            return objresult;
+            return Objresult;
         }
         public List<OptionalTestDTO> GetOptionalSelectedInPackages(int ServiceNo, int VenueNo, int VenueBranchNo, int PatientVisitNo)
         {
-            List<OptionalTestDTO> objresult = new List<OptionalTestDTO>();
+            List<OptionalTestDTO> Objresult = new List<OptionalTestDTO>();
             try
             {
                 using (var context = new FrontOfficeContext(_config.GetConnectionString(ConfigKeys.DefaultConnection)))
@@ -341,7 +341,7 @@ namespace Service.Repository
                     var _VenueBranchNo = new SqlParameter("VenueBranchNo", VenueBranchNo);
                     var _ServiceNo = new SqlParameter("ServiceNo", ServiceNo);
                     var _PatientVisitNo = new SqlParameter("PatientVisitNo", PatientVisitNo);
-                    objresult = context.GetOptionalSelectedInPackages.FromSqlRaw(
+                    Objresult = context.GetOptionalSelectedInPackages.FromSqlRaw(
                         "Execute dbo.Pro_GetOptionalSelectedInPackages @VenueNo,@VenueBranchNo,@ServiceNo,@PatientVisitNo",
                         _VenueNo, _VenueBranchNo, _ServiceNo, _PatientVisitNo).ToList();
                 }
@@ -350,16 +350,16 @@ namespace Service.Repository
             {
                 MyDevException.Error(ex, "FrontOfficeRepository.GetGrouptest", ExceptionPriority.High, ApplicationType.REPOSITORY, VenueNo, VenueBranchNo, 0);
             }
-            return objresult;
+            return Objresult;
         }
         public List<GroupTestDTO> GetGrouptest(int ServiceNo, string ServiceType, int VenueNo, int VenueBranchNo)
         {
-            List<GroupTestDTO> objresult = new List<GroupTestDTO>();
+            List<GroupTestDTO> Objresult = new List<GroupTestDTO>();
             try
             {
                 string _CacheKey = CacheKeys.tblGroupList + VenueNo + VenueBranchNo;
-                objresult = MemoryCacheRepository.GetCacheItem<List<GroupTestDTO>>(_CacheKey);
-                if (objresult == null)
+                Objresult = MemoryCacheRepository.GetCacheItem<List<GroupTestDTO>>(_CacheKey);
+                if (Objresult == null)
                 {
                     using (var context = new FrontOfficeContext(_config.GetConnectionString(ConfigKeys.DefaultConnection)))
                     {
@@ -367,7 +367,7 @@ namespace Service.Repository
                         var _VenueBranchNo = new SqlParameter("VenueBranchNo", VenueBranchNo);
                         var _ServiceNo = new SqlParameter("ServiceNo", ServiceNo);
                         var _ServiceType = new SqlParameter("ServiceType", ServiceType);
-                        objresult = context.GroupServiceDTO.FromSqlRaw(
+                        Objresult = context.GroupServiceDTO.FromSqlRaw(
                             "Execute dbo.pro_GrouptestDetails @VenueNo,@VenueBranchNo,@ServiceNo,@ServiceType",
                          _VenueNo, _VenueBranchNo, _ServiceNo, _ServiceType).ToList();
                     }
@@ -377,11 +377,11 @@ namespace Service.Repository
             {
                 MyDevException.Error(ex, "FrontOfficeRepository.GetGrouptest", ExceptionPriority.High, ApplicationType.REPOSITORY, VenueNo, VenueBranchNo, 0);
             }
-            return objresult;
+            return Objresult;
         }
         public FrontOffficeValidatetest getvalidatetest(List<ServiceParamDTO> req)
         {
-            FrontOffficeValidatetest objresult = new FrontOffficeValidatetest();
+            FrontOffficeValidatetest Objresult = new FrontOffficeValidatetest();
             try
             {
                 XElement XMLNode = new XElement("ServiceXML", req.Select(kv => new XElement("Service",
@@ -392,7 +392,7 @@ namespace Service.Repository
                     var _VenueNo = new SqlParameter("VenueNo", req[0].venueNo);
                     var _VenueBranchNo = new SqlParameter("VenueBranchNo", req[0].venueBranchNo);
                     var _ServiceXML = new SqlParameter("ServiceXML", XMLNode.ToString());
-                    objresult = context.validatetestresult.FromSqlRaw(
+                    Objresult = context.validatetestresult.FromSqlRaw(
                         "Execute dbo.pro_ValidateService @VenueNo,@VenueBranchNo,@ServiceXML",
                      _VenueNo, _VenueBranchNo, _ServiceXML).AsEnumerable()?.FirstOrDefault();
 
@@ -402,11 +402,11 @@ namespace Service.Repository
             {
                 MyDevException.Error(ex, "FrontOfficeRepository.GetGrouptest", ExceptionPriority.High, ApplicationType.REPOSITORY, req[0].venueNo, req[0].venueBranchNo, 0);
             }
-            return objresult;
+            return Objresult;
         }
-        public ServiceRateList GetServiceDetails(int ServiceNo, string ServiceType, int ClientNo, int VenueNo, int VenueBranchNo, int physicianNo, int splratelisttype)
+        public ServiceRateList GetserviceDetails(int ServiceNo, string ServiceType, int ClientNo, int VenueNo, int VenueBranchNo, int physicianNo, int splratelisttype)
         {
-            ServiceRateList objresult = new ServiceRateList();
+            ServiceRateList Objresult = new ServiceRateList();
             try
             {
                 using (var context = new FrontOfficeContext(_config.GetConnectionString(ConfigKeys.DefaultConnection)))
@@ -419,16 +419,16 @@ namespace Service.Repository
                     var _physicianNo = new SqlParameter("PhysicianNo", physicianNo);
                     var _splratelisttype = new SqlParameter("SplRateListType", splratelisttype);
 
-                    objresult = context.ServiceRateList.FromSqlRaw(
+                    Objresult = context.ServiceRateList.FromSqlRaw(
                     "Execute dbo.pro_ServiceDetails @VenueNo, @VenueBranchNo, @ServiceNo, @ServiceType, @ClientNo, @physicianNo, @SplRateListType",
                     _VenueNo, _VenueBranchNo, _ServiceNo, _ServiceType, _ClientNo, _physicianNo, _splratelisttype)?.AsEnumerable()?.FirstOrDefault();
                 }
             }
             catch (Exception ex)
             {
-                MyDevException.Error(ex, "FrontOfficeRepository.GetServiceDetails/ServiceN0/ServiceType/ClientNo-" + ServiceNo + "/" + ServiceType + "/" + ClientNo, ExceptionPriority.High, ApplicationType.REPOSITORY, VenueNo, VenueBranchNo, 0);
+                MyDevException.Error(ex, "FrontOfficeRepository.GetserviceDetails/ServiceN0/ServiceType/ClientNo-" + ServiceNo + "/" + ServiceType + "/" + ClientNo, ExceptionPriority.High, ApplicationType.REPOSITORY, VenueNo, VenueBranchNo, 0);
             }
-            return objresult;
+            return Objresult;
         }
         public List<CreateManageSampleResponse> PrePrintManageSample(List<PrePrintBarcodeRequest> createManageSample)
         {
@@ -558,9 +558,9 @@ namespace Service.Repository
             }
             return lstMulti;
         }
-        public ExternalVisitDetailsResponse CheckExternalVistIdExists(ExternalVisitDetails req)
+        public ExternalVisitdetailsResponse CheckExternalVistIdExists(ExternalVisitdetails req)
         {
-            ExternalVisitDetailsResponse objresult = new ExternalVisitDetailsResponse();
+            ExternalVisitdetailsResponse Objresult = new ExternalVisitdetailsResponse();
             try
             {
                 using (var context = new FrontOfficeContext(_config.GetConnectionString(ConfigKeys.DefaultConnection)))
@@ -571,7 +571,7 @@ namespace Service.Repository
                     var _VisitNo = new SqlParameter("VisitNo", req.VisitNo);
                     var _VenueNo = new SqlParameter("VenueNo", req.VenueNo);
                     var _VenueBranchNo = new SqlParameter("VenueBranchNo", req.VenueBranchNo);
-                    objresult = context.CheckExternalVistIdExists.FromSqlRaw(
+                    Objresult = context.CheckExternalVistIdExists.FromSqlRaw(
                         "Execute dbo.pro_CheckExternalVistIdExists @VenueNo,@VenueBranchNo,@UserNo,@Value,@ValueType,@VisitNo",
                     _VenueNo, _VenueBranchNo, _UserNo, _Value, _ValueType, _VisitNo).AsEnumerable()?.FirstOrDefault();
                 }
@@ -580,7 +580,7 @@ namespace Service.Repository
             {
                 MyDevException.Error(ex, "FrontOfficeRepository.CheckExternalVistIdExists/VisitId-" + req.Value, ExceptionPriority.High, ApplicationType.REPOSITORY, req.VenueNo, req.VenueBranchNo, 0);
             }
-            return objresult;
+            return Objresult;
         }
 
         /// <summary>
@@ -594,9 +594,9 @@ namespace Service.Repository
             FrontOffficeResponse result = new FrontOffficeResponse(); ;
             try
             {
-                int agedays = objDTO.ageDays != null ? objDTO.ageDays :0;
-                int agemonth = objDTO.ageMonths != null ? objDTO.ageMonths : 0;
-                int ageyear = objDTO.ageYears != null ? objDTO.ageYears : objDTO.Age;
+                int agedays = objDTO.ageDays;
+                int agemonth = objDTO.ageMonths;
+                int ageyear = objDTO.ageYears > 0 ? objDTO.ageYears : objDTO.Age;
                 using (var context = new FrontOfficeContext(_config.GetConnectionString(ConfigKeys.DefaultConnection)))
                 {
                     string Password = Guid.NewGuid().ToString("N").Substring(0, 7);
@@ -1139,7 +1139,7 @@ namespace Service.Repository
         /// <returns></returns>
         public GetPatientDetailsWithServices GetPatientDetails(long visitNo, int VenueNo, int VenueBranchNo, string searchType = null, int PatientNo = 0, int Isprocedure = 0)
         {
-            GetPatientDetailsWithServices objresult = new GetPatientDetailsWithServices();
+            GetPatientDetailsWithServices Objresult = new GetPatientDetailsWithServices();
             try
             {
                 using (var context = new LIMSContext(_config.GetConnectionString(ConfigKeys.DefaultConnection)))
@@ -1156,8 +1156,8 @@ namespace Service.Repository
                     else
                         _SearchType = new SqlParameter("SearchType", searchType);
 
-                    var response = context.GetPatientDetailsDTO.FromSqlRaw(
-                        "Execute dbo.Pro_GetPatientDetails @VenueNo, @VenueBranchNo, @VisitNo, @SearchType, @PatientNo, @Isprocedure",
+                    var response = context.GetPatientdetailsDTO.FromSqlRaw(
+                        "Execute dbo.Pro_GetPatientdetails @VenueNo, @VenueBranchNo, @VisitNo, @SearchType, @PatientNo, @Isprocedure",
                      _VenueNo, _VenueBranchNo, _VisitNo, _SearchType, _PatientNo, _Isprocedure).ToList();
 
                     List<ServiceSearchDTO> serviceRateLists = new List<ServiceSearchDTO>();
@@ -1165,56 +1165,56 @@ namespace Service.Repository
                     {
                         if (response.Any())
                         {
-                            objresult.PatientNo = (int)(response?.FirstOrDefault()?.PatientNo ?? 0);
-                            objresult.FullName = response?.FirstOrDefault()?.FullName;
-                            objresult.PatientID = response?.FirstOrDefault()?.PatientID;
-                            objresult.TitleCode = response?.FirstOrDefault()?.TitleCode;
-                            objresult.FirstName = response?.FirstOrDefault()?.FirstName;
-                            objresult.MiddleName = response?.FirstOrDefault()?.MiddleName;
-                            objresult.LastName = response?.FirstOrDefault()?.LastName;
-                            objresult.Age = (int)(response?.FirstOrDefault()?.Age ?? 0);
-                            objresult.AgeType = response?.FirstOrDefault()?.AgeType;
-                            objresult.ageDays = (int)(response?.FirstOrDefault()?.ageDays ?? 0);
-                            objresult.ageMonths = (int)(response?.FirstOrDefault()?.ageMonths ?? 0);
-                            objresult.ageYears = (int)(response?.FirstOrDefault()?.ageYears ?? 0);
-                            objresult.dOB = response?.FirstOrDefault()?.dOB;
-                            objresult.Gender = (int)(response?.FirstOrDefault()?.Gender ?? 0);
-                            objresult.MobileNumber = response?.FirstOrDefault()?.MobileNumber;
-                            objresult.AltMobileNumber = response?.FirstOrDefault()?.AltMobileNumber;
-                            objresult.EmailID = response?.FirstOrDefault()?.EmailID;
-                            objresult.SecondaryEmailID = response?.FirstOrDefault()?.SecondaryEmailID;
-                            objresult.Address = response?.FirstOrDefault()?.Address;
-                            objresult.CountryNo = (int)response?.FirstOrDefault()?.CountryNo;
-                            objresult.StateNo = (int)response?.FirstOrDefault()?.StateNo;
-                            objresult.CityNo = (int)response?.FirstOrDefault()?.CityNo;
-                            objresult.AreaName = response?.FirstOrDefault()?.AreaName;
-                            objresult.Pincode = response?.FirstOrDefault()?.Pincode;
-                            objresult.SecondaryAddress = response?.FirstOrDefault()?.SecondaryAddress;
-                            objresult.maritalStatus = (short)(response?.FirstOrDefault()?.maritalStatus);
-                            objresult.uRNID = response?.FirstOrDefault()?.uRNID;
-                            objresult.uRNType = response?.FirstOrDefault()?.uRNType;
-                            objresult.ExternalVisitID = response?.FirstOrDefault()?.ExternalVisitID;
-                            objresult.RefferralTypeNo = (int)response?.FirstOrDefault()?.RefferralTypeNo;
-                            objresult.PhysicianNo = (int)response?.FirstOrDefault()?.PhysicianNo;
-                            objresult.WardNo = (int)response?.FirstOrDefault()?.WardNo;
-                            objresult.RefferralName = response?.FirstOrDefault()?.RefferralName;
-                            objresult.VaccinationDate = response?.FirstOrDefault()?.VaccinationDate;
-                            objresult.VaccinationType = response?.FirstOrDefault()?.VaccinationType;
-                            objresult.HCPatientNo = (int)response?.FirstOrDefault()?.HCPatientNo;
+                            Objresult.PatientNo = (int)(response?.FirstOrDefault()?.PatientNo ?? 0);
+                            Objresult.FullName = response?.FirstOrDefault()?.FullName;
+                            Objresult.PatientID = response?.FirstOrDefault()?.PatientID;
+                            Objresult.TitleCode = response?.FirstOrDefault()?.TitleCode;
+                            Objresult.FirstName = response?.FirstOrDefault()?.FirstName;
+                            Objresult.MiddleName = response?.FirstOrDefault()?.MiddleName;
+                            Objresult.LastName = response?.FirstOrDefault()?.LastName;
+                            Objresult.Age = (int)(response?.FirstOrDefault()?.Age ?? 0);
+                            Objresult.AgeType = response?.FirstOrDefault()?.AgeType;
+                            Objresult.ageDays = (int)(response?.FirstOrDefault()?.ageDays ?? 0);
+                            Objresult.ageMonths = (int)(response?.FirstOrDefault()?.ageMonths ?? 0);
+                            Objresult.ageYears = (int)(response?.FirstOrDefault()?.ageYears ?? 0);
+                            Objresult.dOB = response?.FirstOrDefault()?.dOB;
+                            Objresult.Gender = (int)(response?.FirstOrDefault()?.Gender ?? 0);
+                            Objresult.MobileNumber = response?.FirstOrDefault()?.MobileNumber;
+                            Objresult.AltMobileNumber = response?.FirstOrDefault()?.AltMobileNumber;
+                            Objresult.EmailID = response?.FirstOrDefault()?.EmailID;
+                            Objresult.SecondaryEmailID = response?.FirstOrDefault()?.SecondaryEmailID;
+                            Objresult.Address = response?.FirstOrDefault()?.Address;
+                            Objresult.CountryNo = (int)response?.FirstOrDefault()?.CountryNo;
+                            Objresult.StateNo = (int)response?.FirstOrDefault()?.StateNo;
+                            Objresult.CityNo = (int)response?.FirstOrDefault()?.CityNo;
+                            Objresult.AreaName = response?.FirstOrDefault()?.AreaName;
+                            Objresult.Pincode = response?.FirstOrDefault()?.Pincode;
+                            Objresult.SecondaryAddress = response?.FirstOrDefault()?.SecondaryAddress;
+                            Objresult.maritalStatus = (short)(response?.FirstOrDefault()?.maritalStatus);
+                            Objresult.uRNID = response?.FirstOrDefault()?.uRNID;
+                            Objresult.uRNType = response?.FirstOrDefault()?.uRNType;
+                            Objresult.ExternalVisitID = response?.FirstOrDefault()?.ExternalVisitID;
+                            Objresult.RefferralTypeNo = (int)response?.FirstOrDefault()?.RefferralTypeNo;
+                            Objresult.PhysicianNo = (int)response?.FirstOrDefault()?.PhysicianNo;
+                            Objresult.WardNo = (int)response?.FirstOrDefault()?.WardNo;
+                            Objresult.RefferralName = response?.FirstOrDefault()?.RefferralName;
+                            Objresult.VaccinationDate = response?.FirstOrDefault()?.VaccinationDate;
+                            Objresult.VaccinationType = response?.FirstOrDefault()?.VaccinationType;
+                            Objresult.HCPatientNo = (int)response?.FirstOrDefault()?.HCPatientNo;
 
-                            objresult.NRICNumber = response?.FirstOrDefault()?.NRICNumber;
-                            objresult.RaceNo = response.FirstOrDefault().RaceNo;
-                            objresult.PatientBlock = response?.FirstOrDefault()?.PatientBlock;
-                            objresult.PatientUnitNo = response?.FirstOrDefault()?.PatientUnitNo;
-                            objresult.PatientFloor = response?.FirstOrDefault()?.PatientFloor;
-                            objresult.PatientBuilding = response?.FirstOrDefault()?.PatientBuilding;
-                            objresult.PatientHomeNo = response?.FirstOrDefault()?.PatientHomeNo;
-                            objresult.AlternateId = response?.FirstOrDefault()?.AlternateId;
-                            objresult.AlternateIdType = response?.FirstOrDefault()?.AlternateIdType;
-                            objresult.NationalityNo = response?.FirstOrDefault()?.NationalityNo;
-                            objresult.Amount = response.FirstOrDefault().Amount;
+                            Objresult.NRICNumber = response?.FirstOrDefault()?.NRICNumber;
+                            Objresult.RaceNo = response.FirstOrDefault().RaceNo;
+                            Objresult.PatientBlock = response?.FirstOrDefault()?.PatientBlock;
+                            Objresult.PatientUnitNo = response?.FirstOrDefault()?.PatientUnitNo;
+                            Objresult.PatientFloor = response?.FirstOrDefault()?.PatientFloor;
+                            Objresult.PatientBuilding = response?.FirstOrDefault()?.PatientBuilding;
+                            Objresult.PatientHomeNo = response?.FirstOrDefault()?.PatientHomeNo;
+                            Objresult.AlternateId = response?.FirstOrDefault()?.AlternateId;
+                            Objresult.AlternateIdType = response?.FirstOrDefault()?.AlternateIdType;
+                            Objresult.NationalityNo = response?.FirstOrDefault()?.NationalityNo;
+                            Objresult.Amount = response.FirstOrDefault().Amount;
                             //
-                            objresult.loyalcardno = response.FirstOrDefault().loyalcardno;
+                            Objresult.loyalcardno = response.FirstOrDefault().loyalcardno;
                         }
                         foreach (var patientdetail in response)
                         {
@@ -1226,14 +1226,14 @@ namespace Service.Repository
                             serviceRateLists.Add(serviceRateList);
                         }
                     }
-                    objresult.serviceRateLists = serviceRateLists;
+                    Objresult.serviceRateLists = serviceRateLists;
                 }
             }
             catch (Exception ex)
             {
-                MyDevException.Error(ex, "FrontOfficeRepository.GetPatientDetails - visitNo : " + visitNo, ExceptionPriority.High, ApplicationType.REPOSITORY, VenueNo, VenueBranchNo, 0);
+                MyDevException.Error(ex, "FrontOfficeRepository.GetPatientdetails - visitNo : " + visitNo, ExceptionPriority.High, ApplicationType.REPOSITORY, VenueNo, VenueBranchNo, 0);
             }
-            return objresult;
+            return Objresult;
         }
         public List<QueueOrderDTO> GetQueueOrderDetails(CommonFilterRequestDTO RequestItem)
         {
@@ -1314,9 +1314,9 @@ namespace Service.Repository
             }
             return lst;
         }
-        public DoctorDetails InsertDoctor(DoctorDetails objDTO)
+        public Doctordetails InsertDoctor(Doctordetails objDTO)
         {
-            DoctorDetails objresult = new DoctorDetails();
+            Doctordetails Objresult = new Doctordetails();
             int VenueNo = objDTO.VenueNo;
             int venueBranchNo = objDTO.VenueBranchNo;
             try
@@ -1330,7 +1330,7 @@ namespace Service.Repository
                     var _venueBranchNo = new SqlParameter("VenueBranchNo", objDTO.VenueBranchNo);
                     var _userNo = new SqlParameter("UserNo", objDTO.userNo);
 
-                    objresult = context.DoctorDetails.FromSqlRaw(
+                    Objresult = context.Doctordetails.FromSqlRaw(
                         "Execute dbo.Pro_InsertPhysician @DoctorName, @DoctorQualification, @DoctorMobile, @VenueNo, @VenueBranchNo, @UserNo",
                     _doctorName, _doctorQualification, _doctorMobile, _venueNo, _venueBranchNo, _userNo).AsEnumerable()?.FirstOrDefault();
                 }
@@ -1339,7 +1339,7 @@ namespace Service.Repository
             {
                 MyDevException.Error(ex, "FrontOfficeRepository.InsertDoctor/", ExceptionPriority.High, ApplicationType.REPOSITORY, objDTO.VenueNo, objDTO.VenueBranchNo, objDTO.userNo);
             }
-            return objresult;
+            return Objresult;
         }
         //from result entry/patient info screen,push the message send to patient regarding late result entry
         public int PushNotifyMessage(int patientVisitNo, int venueno, int venuebranchno, int userno, string messagetype, string message)
@@ -1392,7 +1392,7 @@ namespace Service.Repository
         public int InsertPatientNotifyLog(PatientNotifyLog objDTO)
         {
             int result = 0;
-            PatientNotifyLogResponse objresult = new PatientNotifyLogResponse();
+            PatientNotifyLogResponse Objresult = new PatientNotifyLogResponse();
             int VenueNo = objDTO != null ? objDTO.VenueNo : 0;
             int venueBranchNo = objDTO != null ? objDTO.VenueBranchNo : 0;
             try
@@ -1412,12 +1412,12 @@ namespace Service.Repository
                     var _NotifyLogDTTM = new SqlParameter("NotifyLogDTTM", SqlDbType.DateTime);
                     _NotifyLogDTTM.Value = notifyLogDTTM.HasValue ? notifyLogDTTM.Value : DBNull.Value;
 
-                    objresult = context.InsertPatientNotifyLogDetails.FromSqlRaw(
+                    Objresult = context.InsertPatientNotifyLogDetails.FromSqlRaw(
                         "Execute dbo.Pro_InsertPatientNotifyLog " +
                         "@PatientVisitNo, @VisitTestNo, @LogType, @Content, @UserType, @UserNo, @VenueNo, @VenueBranchNo, @LogUserName, @NotifyLogDTTM ",
                         _PatientVisitNo, _VisitTestNo, _LogType, _Content, _UserType, _UserNo, _VenueNo, _VenueBranchNo, _LogUserName, _NotifyLogDTTM).AsEnumerable()?.FirstOrDefault();
 
-                    result = objresult != null ? objresult.PatientNotifyLogNo : 0;
+                    result = Objresult != null ? Objresult.PatientNotifyLogNo : 0;
                 }
             }
             catch (Exception ex)
@@ -1549,7 +1549,7 @@ namespace Service.Repository
         }
         public dynamic ValidateNricNo(int ServiceNo, string ServiceType, string NricNo, int VenueNo, int VenueBranchNo, bool IsNonConcurrent = false)
         {
-            int objresult = 0;
+            int Objresult = 0;
             try
             {
                 using (var context = new FrontOfficeContext(_config.GetConnectionString(ConfigKeys.DefaultConnection)))
@@ -1564,18 +1564,18 @@ namespace Service.Repository
                         "Execute dbo.pro_ValidateNricNo @VenueNo,@VenueBranchNo,@ServiceNo,@ServiceType,@NricNo,@IsNonConcurrent",
                     _VenueNo, _VenueBranchNo, _ServiceNo, _ServiceType, _NricNo, _IsNonConcurrent).ToList();
 
-                    objresult = finalResult.FirstOrDefault().status;
+                    Objresult = finalResult.FirstOrDefault().status;
                 }
             }
             catch (Exception ex)
             {
                 MyDevException.Error(ex, "FrontOfficeRepository.ValidateNricNo/ServiceNo/ServiceType/NricNo - " + ServiceNo + "/" + ServiceType + "/" + NricNo, ExceptionPriority.High, ApplicationType.REPOSITORY, VenueNo, VenueBranchNo, 0);
             }
-            return objresult;
+            return Objresult;
         }
         #endregion Discount Approval
 
-        public MassRegistrationResponse InsertMassRegistration([FromBody] ExternalBulkFile objDTO)
+        public MassRegistrationResponse Insertmassregistration([FromBody] ExternalBulkFile objDTO)
         {
             MassRegistrationResponse result = new MassRegistrationResponse();
             try
@@ -1615,15 +1615,15 @@ namespace Service.Repository
                     var _iadditionalrecords = new SqlParameter("additionalrecords", objDTO.iadditionalrecords);
 
 
-                    result = context.MassRegistrationResponse.FromSqlRaw(
-                        "Execute dbo.pro_InsertMassRegistration @CustomerNo,@physicianno,@contractno,@ServiceNo,@ServiceType,@ServiceName,@FileName,@ValidFrom,@ValidTo,@PatientXML,@VenueNo,@VenueBranchNo,@userNo,@additionalrecords",
+                    result = context.massregistrationResponse.FromSqlRaw(
+                        "Execute dbo.pro_Insertmassregistration @CustomerNo,@physicianno,@contractno,@ServiceNo,@ServiceType,@ServiceName,@FileName,@ValidFrom,@ValidTo,@PatientXML,@VenueNo,@VenueBranchNo,@userNo,@additionalrecords",
                     _CustomerNo, _physicianno, _contractno, _ServiceNo, _ServiceType, _ServiceName, _FileName, _ValidFrom, _ValidTo, _PatientXML, _VenueNo, _VenueBranchNo, _UserNo, _iadditionalrecords)?.AsEnumerable()?.FirstOrDefault();
 
                 }
             }
             catch (Exception ex)
             {
-                MyDevException.Error(ex, "FrontOfficeRepository.InsertMassRegistration", ExceptionPriority.High, ApplicationType.REPOSITORY, objDTO.VenueNo, objDTO.VenueBranchNo, 0);
+                MyDevException.Error(ex, "FrontOfficeRepository.Insertmassregistration", ExceptionPriority.High, ApplicationType.REPOSITORY, objDTO.VenueNo, objDTO.VenueBranchNo, 0);
             }
             return result;
 
@@ -1742,7 +1742,7 @@ namespace Service.Repository
         }
         public List<Tblloyal> getloyalcard(TblloyalReq req)
         {
-            List<Tblloyal> objresult = new List<Tblloyal>();
+            List<Tblloyal> Objresult = new List<Tblloyal>();
             if (!string.IsNullOrEmpty(req.loyalcardno))
             {
                 if (req.loyalcardno.StartsWith("LTM"))
@@ -1759,7 +1759,7 @@ namespace Service.Repository
                     var _venueNo = new SqlParameter("venueNo", req.venueNo);
                     var _venuebranchno = new SqlParameter("venuebranchno", req.venuebranchno);
 
-                    objresult = context.getloyalcard.FromSqlRaw(
+                    Objresult = context.getloyalcard.FromSqlRaw(
                         "Execute dbo.Pro_GetLoyaltyType @loyalcardno, @venueNo, @venuebranchno",
                    _loyalcardno, _venueNo, _venuebranchno).ToList();
                 }
@@ -1768,12 +1768,12 @@ namespace Service.Repository
             {
                 MyDevException.Error(ex, "FrontOfficeRepository.getloyalcard - " + req.loyalcardno, ExceptionPriority.High, ApplicationType.REPOSITORY, (int)req.venueNo, (int)req.venuebranchno, 0);
             }
-            return objresult;
+            return Objresult;
         }
 
         public PatientVisitPatternIDGenRes GetVisitPatternID(PatientVisitPatternIDGenReq req)
         {
-            PatientVisitPatternIDGenRes objresult = new PatientVisitPatternIDGenRes();
+            PatientVisitPatternIDGenRes Objresult = new PatientVisitPatternIDGenRes();
             try
             {
                 using (var context = new FrontOfficeContext(_config.GetConnectionString(ConfigKeys.DefaultConnection)))
@@ -1781,7 +1781,7 @@ namespace Service.Repository
                     var _PatternType = new SqlParameter("PatternType", req.PatternType);                 
                     var _VenueNo = new SqlParameter("VenueNo", req.VenueNo);
                     var _VenueBranchNo = new SqlParameter("VenueBranchNo", req.VenueBranchNo);
-                    objresult = context.GetVisitPatternID.FromSqlRaw(
+                    Objresult = context.GetVisitPatternID.FromSqlRaw(
                         "Execute dbo.pro_GetPatternIDNew @PatternType,@VenueNo,@VenueBranchNo",
                     _PatternType, _VenueNo, _VenueBranchNo).AsEnumerable()?.FirstOrDefault();
                 }
@@ -1790,7 +1790,7 @@ namespace Service.Repository
             {
                 MyDevException.Error(ex, "FrontOfficeRepository.GetVisitPatternID/", ExceptionPriority.High, ApplicationType.REPOSITORY, req.VenueNo, req.VenueBranchNo, 0);
             }
-            return objresult;
+            return Objresult;
         }
         public List<PreBookingtDTO> GetPreBookingDetails(CommonFilterRequestDTO RequestItem)
         {
@@ -1871,7 +1871,7 @@ namespace Service.Repository
 
         public AutoLoyaltyIDGenResponse GetLoyaltyCardPatternID(AutoLoyaltyIDGenRequest req)
         {
-            AutoLoyaltyIDGenResponse objresult = new AutoLoyaltyIDGenResponse();
+            AutoLoyaltyIDGenResponse Objresult = new AutoLoyaltyIDGenResponse();
             try
             {
                 using (var context = new FrontOfficeContext(_config.GetConnectionString(ConfigKeys.DefaultConnection)))
@@ -1883,9 +1883,9 @@ namespace Service.Repository
                     var result = context.GetLoyaltyCardPatternID.FromSqlRaw(
                         "Execute dbo.pro_GetLoyaltyPatternID @DiscountNo,@VenueNo, @VenueBranchNo",
                      _DiscountNo,_VenueNo, _VenueBranchNo).ToList();
-                    if (objresult != null)
+                    if (Objresult != null)
                     {
-                        objresult = result?.AsEnumerable()?.FirstOrDefault();
+                        Objresult = result?.AsEnumerable()?.FirstOrDefault();
                     }
                 }
             }
@@ -1893,7 +1893,7 @@ namespace Service.Repository
             {
                 MyDevException.Error(ex, "FrontOfficeRepository.GetLoyaltyCardPatternID", ExceptionPriority.Medium, ApplicationType.REPOSITORY, 0, 0, 0);
             }
-            return objresult;
+            return Objresult;
         }
     }
 }

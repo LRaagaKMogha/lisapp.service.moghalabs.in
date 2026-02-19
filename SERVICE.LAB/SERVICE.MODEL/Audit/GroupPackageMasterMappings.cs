@@ -7,14 +7,14 @@ using Shared.Audit;
 
 namespace Service.Model.Audit
 {
-    [DtoMapping(typeof(objgrppkg), "GRPMAS")]
-    public class TblGroupMasterMapping : DtoToTableMapping<objgrppkg>
+    [DtoMapping(typeof(Objgrppkg), "GRPMAS")]
+    public class TblGroupMasterMapping : DtoToTableMapping<Objgrppkg>
     {
         public override void SetUp()
         {
             IsAutoMap = false;
             TableName = "tbl_Group";
-            EntityIdProperty = nameof(objgrppkg.serviceNo);
+            EntityIdProperty = nameof(Objgrppkg.serviceNo);
             AddProperty(x => x.serviceNo, "GroupNo");
             AddProperty(x => x.tcNo, "tcNo");
             AddProperty(x => x.shortName, "GroupShortName", value => new { MasterKey = "Group Short Name" });
@@ -50,14 +50,14 @@ namespace Service.Model.Audit
             AddProperty(x => x.FromDate, "FromDate", value => new { MasterKey = "From Date" });
             AddProperty(x => x.ToDate, "ToDate", value => new { MasterKey = "To Date" });
             AddProperty(x => x.loincNo, "loincNo", value => new { MasterKey = "LOINC" });
-            AddProperty(x => x.lstgrppkgservice, "", null, dto =>
+            AddProperty(x => x.Lstgrppkgservice, "", null, dto =>
             {
-                return dto.lstgrppkgservice.Select(test =>
+                return dto.Lstgrppkgservice.Select(test =>
                 {
                     return new { serviceName = test.serviceName, childSequenceNo = test.childsequenceNo };
                 }).ToList();
             });
-            IgnoreProperties = new List<System.Linq.Expressions.Expression<Func<objgrppkg, object>>>
+            IgnoreProperties = new List<System.Linq.Expressions.Expression<Func<Objgrppkg, object>>>
             {
                 x => x.bufferDate, x => x.bufferDays, x => x.ChoiceCount, x => x.IsChoice, x => x.billDisclaimer, x => x.reportDisclaimer,
                 x => x.consentNotes, x => x.samplequantity, x => x.isunacceptable, x => x.unacceptcondition, x =>x.isincludeinstruction, x => x.includeinstruction,
@@ -66,14 +66,14 @@ namespace Service.Model.Audit
         }
     }
 
-    [DtoMapping(typeof(objgrppkg), "PKGMAS")]
-    public class TblPackageMasterMapping : DtoToTableMapping<objgrppkg>
+    [DtoMapping(typeof(Objgrppkg), "PKGMAS")]
+    public class TblPackageMasterMapping : DtoToTableMapping<Objgrppkg>
     {
         public override void SetUp()
         {
             IsAutoMap = false;
             TableName = "tbl_Package";
-            EntityIdProperty = nameof(objgrppkg.serviceNo);
+            EntityIdProperty = nameof(Objgrppkg.serviceNo);
             AddProperty(x => x.serviceNo, "PackageNo");
             AddProperty(x => x.serviceName, "PackageName", value => new { MasterKey = "Package Name" });
             AddProperty(x => x.displayName, "PackageDisplayName", value => new { MasterKey = "Package Display Name" });
@@ -102,14 +102,14 @@ namespace Service.Model.Audit
             AddProperty(x => x.isdisplayinreport, "isdisplayinreport", value => new { Toggle = "Yes/No", Label = "Display Name In Report" });
             AddProperty(x => x.loincNo, "loincNo", value => new { MasterKey = "LOINC" });
 
-            AddProperty(x => x.lstgrppkgservice, "", null, dto =>
+            AddProperty(x => x.Lstgrppkgservice, "", null, dto =>
             {
-                return dto.lstgrppkgservice.Select(test =>
+                return dto.Lstgrppkgservice.Select(test =>
                 {
                     return new { serviceName = test.serviceName, childSequenceNo = test.childsequenceNo };
                 }).ToList();
             });
-            IgnoreProperties = new List<System.Linq.Expressions.Expression<Func<objgrppkg, object>>>
+            IgnoreProperties = new List<System.Linq.Expressions.Expression<Func<Objgrppkg, object>>>
             {
                 x => x.deptNo, x => x.cutoffTime, x => x.processingMinutes, x => x.processingDays, x => x.ReptDeptHeaderNo, x => x.BarShortName,
                 x => x.nehrInterpreditationnotes, x => x.isSecondReview, x => x.IsInfectionCtrlRept, x => x.consentNotes, x => x.comments,

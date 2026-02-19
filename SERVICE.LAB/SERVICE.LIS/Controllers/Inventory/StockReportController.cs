@@ -21,10 +21,10 @@ namespace Service.API.SERVICE.Controllers.Inventory
         [Route("api/stockreport/GetStockReport")]
         public List<GetStockReportResponse> GetStockReport(GetStockReportRequest stockreport)
         {
-            List<GetStockReportResponse> objresult = new List<GetStockReportResponse>();
+            List<GetStockReportResponse> Objresult = new List<GetStockReportResponse>();
             try
             {
-                objresult = _StockReport.GetStockReport(stockreport);
+                Objresult = _StockReport.GetStockReport(stockreport);
 
             }
             catch (Exception ex)
@@ -32,7 +32,7 @@ namespace Service.API.SERVICE.Controllers.Inventory
                 MyDevException.Error(ex, "StockReport.GetStockReportResponse/VenuNo-" + stockreport.venueNo, ExceptionPriority.Medium, ApplicationType.APPSERVICE,stockreport.venueNo, stockreport.venueBranchNo, stockreport.userNo);
 
             }
-            return objresult;
+            return Objresult;
         }
     }
 }

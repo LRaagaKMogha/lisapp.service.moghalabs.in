@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace Service.Model
 {
@@ -30,12 +28,10 @@ namespace Service.Model
         public int orderListNo { get; set; }
         public int TATFlag { get; set; }
         public bool IsSample { get; set; }
-
         public string IDnumber { get; set; }
         public bool IsVipIndication { get; set; }
         public int notifyCount { get; set; }
         public bool IsOutSource { get; set; }
-
     }
     public partial class SampleActionRequest
     {
@@ -69,47 +65,45 @@ namespace Service.Model
         public string searchdisplaytext { get; set; }
         public int statusno { get; set; }
     }
-
     public partial class BranchSampleActionDTO
     {
         public Int64 Row_Num { get; set; }
         public string? BarCodeNo { get; set; }
         public Int32 patientno { get; set; }
-        public string? PatientName { get; set; }
-        public string? AgeType { get; set; }
-        public string? Gender { get; set; }
-        public string? Physician { get; set; }
-        public string? PatientId { get; set; }
+        public string PatientName { get; set; }
+        public string AgeType { get; set; }
+        public string Gender { get; set; }
+        public string Physician { get; set; }
+        public string PatientId { get; set; }
         public int SampleNo { get; set; }
-        public string? SampleName { get; set; }
+        public string SampleName { get; set; }
         public int patientVisitNo { get; set; }
-        public string? VisitId { get; set; }
-        public string? SampleCollectedDTTM { get; set; }
+        public string VisitId { get; set; }
+        public string SampleCollectedDTTM { get; set; }
         public int TestNo { get; set; }
-        public string? TestName { get; set; }
-        public string? DepartmentName { get; set; }
+        public string TestName { get; set; }
+        public string DepartmentName { get; set; }
         public int PageIndex { get; set; }
         public Int32 TotalRecords { get; set; }
         public bool IsAccept { get; set; }
         public bool IsReject { get; set; }
-        public string? Remarks { get; set; }
+        public string Remarks { get; set; }
         public int orderListNo { get; set; }
         public int TATFlag { get; set; }
         public bool IsSample { get; set; }
-        public string? PhysicianEmail { get; set; }
-        public string? PhysicianMobileNumber { get; set; }
-        public string? PhysicianWhatsAppNo { get; set; }
-        public string? CustomerEmail { get; set; }
-        public string? CustomerMobileNumber { get; set; }
-        public string? MobileNumber { get; set; }
-        public string? EmailID { get; set; }
-        public string? testShortName { get; set; }
+        public string PhysicianEmail { get; set; }
+        public string PhysicianMobileNumber { get; set; }
+        public string PhysicianWhatsAppNo { get; set; }
+        public string CustomerEmail { get; set; }
+        public string CustomerMobileNumber { get; set; }
+        public string MobileNumber { get; set; }
+        public string EmailID { get; set; }
+        public string testShortName { get; set; }
         public bool IsStat { get; set; }
-        public string? VenueBranchName { get; set; }
+        public string VenueBranchName { get; set; }
         public Int32 OrderTransactionNo { get; set; }
     }
-
-    public class PrePrintBarcodeOrderResponse
+    public class PrePrintBarcodeOrderresponse
     {
         public Int64 Row_Num { get; set; }
         public string PatientName { get; set; }

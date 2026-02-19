@@ -5,11 +5,11 @@ namespace Service.IRepository
 {
     public interface IPharmacyRepository
     { 
-        List<TblGeneric> GetGeneric(reqgeneric req);
+        List<TblGeneric> GetGeneric(Reqgeneric req);
         GenericMasterResponse InsertGeneric(TblGeneric tblGeneric);
-        List<TblMedtype> GetMedicinetype(reqmedtype medtype);
+        List<TblMedtype> GetMedicinetype(Reqmedtype medtype);
         MedtypeMasterResponse InsertMedtype(TblMedtype tblmedtype);
-        List<TblMedstr> GetMedstr(reqmedstr medstr);
+        List<TblMedstr> GetMedstr(Reqmedstr medstr);
         MedstrMasterResponse InsertMedstr(TblMedstr tblmedstr);
     }
 }

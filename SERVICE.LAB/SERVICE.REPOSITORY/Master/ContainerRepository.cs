@@ -18,7 +18,7 @@ namespace Service.Repository
 
         public List<TblContainer> Getcontainermaster(ContainerMasterRequest containerRequest)
         {
-            List<TblContainer> objresult = new List<TblContainer>();
+            List<TblContainer> Objresult = new List<TblContainer>();
             try
             {
                 using (var context = new LIMSContext(_config.GetConnectionString(ConfigKeys.DefaultConnection)))
@@ -28,7 +28,7 @@ namespace Service.Repository
                     var _venueBranchno = new SqlParameter("venueBranchno", containerRequest?.venueBranchno);
                     var _pageIndex = new SqlParameter("pageIndex", containerRequest?.pageIndex);
                     
-                    objresult = context.Getcontainer.FromSqlRaw(
+                    Objresult = context.Getcontainer.FromSqlRaw(
                     "Execute dbo.pro_GetContainermaster @containerNo, @venueNo, @venueBranchno,@pageIndex",
                     _containerNo, _venueNo, _venueBranchno, _pageIndex).ToList();
                 }
@@ -37,11 +37,11 @@ namespace Service.Repository
             {
                 MyDevException.Error(ex, "ContainerRepository.GetcontainerDetails" + containerRequest.containerNo.ToString(), ExceptionPriority.Low, ApplicationType.REPOSITORY, containerRequest.venueNo, containerRequest.venueBranchno, 0);
             }
-            return objresult;
+            return Objresult;
         }
         public ContainerMasterResponse Insertcontainermaster(TblContainer tblContainer)
         {
-            ContainerMasterResponse objresult = new ContainerMasterResponse();
+            ContainerMasterResponse Objresult = new ContainerMasterResponse();
             try
             {
                 using (var context = new LIMSContext(_config.GetConnectionString(ConfigKeys.DefaultConnection)))
@@ -60,7 +60,7 @@ namespace Service.Repository
                     var _userNo = new SqlParameter("userNo", tblContainer?.userNo);
                     var _imageColor = new SqlParameter("imageColor", tblContainer?.imageColor);
 
-                    objresult = context.Insertcontainer.FromSqlRaw(
+                    Objresult = context.Insertcontainer.FromSqlRaw(
                     "Execute dbo.pro_InsertContainer @containerNo,@containerCode,@containerName,@description," +
                     "@containerVolume,@isContainerimage,@containerImagename,@status,@venueNo,@venueBranchno,@userNo,@imageColor",
                     _containerNo, _containerCode, _containerName, _description, _containerVolume,
@@ -71,7 +71,7 @@ namespace Service.Repository
             {
                 MyDevException.Error(ex, "ContainerRepository.Insertcontainermaster" + tblContainer.containerNo.ToString(), ExceptionPriority.Low, ApplicationType.REPOSITORY, tblContainer.venueNo, tblContainer.venueBranchno, 0);
             }
-            return objresult;
+            return Objresult;
         }
     }
 }

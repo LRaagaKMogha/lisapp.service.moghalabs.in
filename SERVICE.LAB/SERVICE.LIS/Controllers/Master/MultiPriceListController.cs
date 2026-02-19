@@ -27,16 +27,16 @@ namespace Service.API.SERVICE.Controllers
         [Route("api/MultiPriceList/GetMultiPriceListDetails")]
         public List<GetmultiPriceListResponse> GetMultiPriceListDetails(GetmultiPriceListRequest getRequest)
         {
-            List<GetmultiPriceListResponse> objresult = new List<GetmultiPriceListResponse>();
+            List<GetmultiPriceListResponse> Objresult = new List<GetmultiPriceListResponse>();
             try
             {
-                objresult = _multiPriceListRepository.GetMultiPriceListDetails(getRequest);
+                Objresult = _multiPriceListRepository.GetMultiPriceListDetails(getRequest);
             }
             catch (Exception ex)
             {
                 MyDevException.Error(ex, "GetMultiPriceListDetails", ExceptionPriority.Low, ApplicationType.APPSERVICE, getRequest.venueNo, getRequest.venueBranchNo, 0);
             }
-            return objresult;
+            return Objresult;
         }
         #endregion
 

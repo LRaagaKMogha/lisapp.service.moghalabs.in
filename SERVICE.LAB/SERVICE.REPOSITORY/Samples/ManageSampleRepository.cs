@@ -20,7 +20,7 @@ namespace Service.Repository
 
         public List<GetManagesampleResponse> GetManageSampleDetails(CommonFilterRequestDTO RequestItem)
         {
-            List<GetManageSampleDTO> objresult1 = new List<GetManageSampleDTO>();
+            List<GetManageSampleDTO> Objresult1 = new List<GetManageSampleDTO>();
             List<GetManagesampleResponse> lstManagesampleResponses = new List<GetManagesampleResponse>();
             try
             {
@@ -43,7 +43,7 @@ namespace Service.Repository
                     var _specimenQty = new SqlParameter("specimenQty", 1);
                     var _PatientNo = new SqlParameter("PatientNo", RequestItem?.PatientNo);
 
-                    var objresult = context.GetManageSampleDTO.FromSqlRaw(
+                    var Objresult = context.GetManageSampleDTO.FromSqlRaw(
                     "Execute dbo.Pro_Getmanagesample @FromDate, @ToDate, @Type, @VenueNo, @VenueBranchNo, @VisitNo, @RefferalType, @CustomerNo, @PhysicianNo, @PageIndex, @PageCode, @OrderStatus, @RouteNo, @FranchiseNo, @specimenQty, @PatientNo",
                     _FromDate, _ToDate, _Type, _VenueNo, _VenueBranchNo, _VisitNo, _RefferalType, _CustomerNo, _PhysicianNo, _PageIndex, _PageCode, _OrderStatus, _RouteNo, _FranchiseNo, _specimenQty, _PatientNo).ToList();
 
@@ -56,14 +56,14 @@ namespace Service.Repository
                     int oldTestNo = 0;
                     int newTestNo = 0;
 
-                    foreach (var obj in objresult)
+                    foreach (var obj in Objresult)
                     {
                         GetManagesampleResponse getManagesampleResponse = new GetManagesampleResponse();
                         List<SampleDetails> lstSample = new List<SampleDetails>();
-                        List<TestDetails> lstTestDetails = new List<TestDetails>();
+                        List<TestDetails> LsttestDetails = new List<TestDetails>();
 
                         newVisitNO = obj.VisitNo;
-                        var sampleDetailsById = objresult.Where(x => x.VisitNo == newVisitNO).Select(x => new { x.SampleName, x.SampleNo, x.OldSampleNo, x.ContainerName, x.ContainerNo, x.OldContainerNo, x.SampleCollectedDate, x.collectatsource, x.specimenQty, x.fastingOrNonfasting, x.BarcodeNo }).ToList().Distinct();
+                        var sampleDetailsById = Objresult.Where(x => x.VisitNo == newVisitNO).Select(x => new { x.SampleName, x.SampleNo, x.OldSampleNo, x.ContainerName, x.ContainerNo, x.OldContainerNo, x.SampleCollectedDate, x.collectatsource, x.specimenQty, x.fastingOrNonfasting, x.BarcodeNo }).ToList().Distinct();
 
                         if (newVisitNO != oldVisitNo)
                         {
@@ -95,7 +95,7 @@ namespace Service.Repository
                             
                             foreach (var sample in sampleDetailsById)
                             {
-                                lstTestDetails = new List<TestDetails>();
+                                LsttestDetails = new List<TestDetails>();
                                 newSampleNo = sample.SampleNo;
                                 newContainerNo = sample.ContainerNo;
                                
@@ -112,7 +112,7 @@ namespace Service.Repository
                                         SampleNo = sample.SampleNo,
                                         OldSampleNo = sample.OldSampleNo,
                                         SelectSample = false,
-                                        testDetails = lstTestDetails,
+                                        testDetails = LsttestDetails,
                                         collectatsource = sample.collectatsource,
                                         specimenQty = sample.specimenQty,
                                         fastingOrNonfasting = sample.fastingOrNonfasting
@@ -121,7 +121,7 @@ namespace Service.Repository
                                     oldContainerNo = newContainerNo;
                                     lstSample.Add(sampleDetails);
 
-                                    var testDetailsById = objresult.Where(x => x.VisitNo == newVisitNO && x.SampleNo == newSampleNo && x.ContainerNo == sample.ContainerNo)//same sample with different container name, should be separate
+                                    var testDetailsById = Objresult.Where(x => x.VisitNo == newVisitNO && x.SampleNo == newSampleNo && x.ContainerNo == sample.ContainerNo)//same sample with different container name, should be separate
                                         .Select(x => new { x.TestName, x.TestNo, x.SampleNo, x.OrderCode, x.OrderListNo, x.ServiceNo, x.OrdersNo, x.OrderType, x.IsSelectMultiSample, x.multiSampleTestno }).ToList();
                                     oldTestNo = 0;
                                    
@@ -173,7 +173,7 @@ namespace Service.Repository
                                                 lstMultiSamples = lstMultiSample
                                             };
                                             oldTestNo = newTestNo;
-                                            lstTestDetails.Add(testDetails);
+                                            LsttestDetails.Add(testDetails);
                                         }
                                     }
 
@@ -305,7 +305,7 @@ namespace Service.Repository
 
         public List<SampleActionDTO> GetSampleActionDetails(SampleActionRequest req)
         {
-            List<SampleActionDTO> objresult = new List<SampleActionDTO>();
+            List<SampleActionDTO> Objresult = new List<SampleActionDTO>();
             try
             {
                 using (var context = new LIMSContext(_config.GetConnectionString(ConfigKeys.DefaultConnection)))
@@ -323,7 +323,7 @@ namespace Service.Repository
                     var _VisiNo = new SqlParameter("VisitNo", req?.VisitNo);
                     var _PatientNo = new SqlParameter("PatientNo", req?.PatientNo);
 
-                    objresult = context.SampleActionDTO.FromSqlRaw(
+                    Objresult = context.SampleActionDTO.FromSqlRaw(
                     "Execute dbo.pro_GetSampleActionDetails @PageCode,@VenueNo,@VenueBranchNo,@PageIndex,@Type,@FromDate,@ToDate,@DeptNo,@Searchkey,@userNo,@VisitNo,@PatientNo",
                     _PageCode, _VenueNo, _VenueBranchNo, _PageIndex, _Type, _FromDate, _ToDate, _deptno, _Searchkey, _UserNo, _VisiNo, _PatientNo).ToList();
                 }
@@ -332,7 +332,7 @@ namespace Service.Repository
             {
                 MyDevException.Error(ex, "ManageSampleRepository.GetSampleActionDetails", ExceptionPriority.Medium, ApplicationType.REPOSITORY, req?.VenueNo, req?.VenueBranchNo, 0);
             }
-            return objresult;
+            return Objresult;
         }
 
         public CreateSampleActionResponse CreateSampleACK(List<CreateSampleActionRequest> insertActionDTOs)
@@ -706,7 +706,7 @@ namespace Service.Repository
                     var _TenantBranchID = new SqlParameter("VenueBranchNo", createBranchReceive?.FirstOrDefault()?.venueBranchNo);
                     
                     response = context.CreateSampleTransfer.FromSqlRaw(
-                    "Execute dbo.Pro_InsertBranchReceive @SampleXML,@CreatedBy,@VenueBranchNo,@VenueNo,@UserNo",
+                    "Execute dbo.Pro_InsertbranchReceive @SampleXML,@CreatedBy,@VenueBranchNo,@VenueNo,@UserNo",
                     _SampleXML, _CreatedBy, _UserNo, _TenantID, _TenantBranchID).ToList();
                 }
             }
@@ -882,7 +882,7 @@ namespace Service.Repository
 
         public List<BranchSampleActionDTO> GetBranchSampleActionDetails(SampleActionRequest req)
         {
-            List<BranchSampleActionDTO> objresult = new List<BranchSampleActionDTO>();
+            List<BranchSampleActionDTO> Objresult = new List<BranchSampleActionDTO>();
             try
             {
                 using (var context = new LIMSContext(_config.GetConnectionString(ConfigKeys.DefaultConnection)))
@@ -902,7 +902,7 @@ namespace Service.Repository
                     var _Barcode = new SqlParameter("BarcodeNo", req.Barcode.ValidateEmpty());
                     var _ISAck = new SqlParameter("ISAckData", req.ISAck);
 
-                    objresult = context.BranchSampleActionDTO.FromSqlRaw(
+                    Objresult = context.BranchSampleActionDTO.FromSqlRaw(
                     "Execute dbo.pro_GetBranchSampleActionDetails @PageCode,@VenueNo,@VenueBranchNo,@PageIndex,@Type,@FromDate,@ToDate,@DeptNo,@Searchkey,@userNo,@VisitNo,@BarcodeNo,@ISAckData",
                     _PageCode, _VenueNo, _VenueBranchNo, _PageIndex, _Type, _FromDate, _ToDate, _deptno, _Searchkey, _UserNo, _VisiNo, _Barcode, _ISAck).ToList();
                 }
@@ -911,12 +911,12 @@ namespace Service.Repository
             {
                 MyDevException.Error(ex, "ManageSampleRepository.GetBranchSampleActionDetails", ExceptionPriority.Medium, ApplicationType.REPOSITORY, req.VenueNo, req.VenueBranchNo, 0);
             }
-            return objresult;
+            return Objresult;
         }
 
-        public List<PrePrintBarcodeOrderResponse> GetPrePrintBarcodelist(long visitNo, int VenueNo, int VenueBranchNo)
+        public List<PrePrintBarcodeOrderresponse> GetPrePrintBarcodelist(long visitNo, int VenueNo, int VenueBranchNo)
         {
-            List<PrePrintBarcodeOrderResponse> objresult = new List<PrePrintBarcodeOrderResponse>();
+            List<PrePrintBarcodeOrderresponse> Objresult = new List<PrePrintBarcodeOrderresponse>();
             try
             {
                 using (var context = new LIMSContext(_config.GetConnectionString(ConfigKeys.DefaultConnection)))
@@ -925,7 +925,7 @@ namespace Service.Repository
                     var _VenueBranchNo = new SqlParameter("VenueBranchNo", VenueBranchNo.ToString());
                     var _VisitNo = new SqlParameter("VisitNo", visitNo);
                     
-                    objresult = context.PrePrintBarcodeOrderrequest.FromSqlRaw(
+                    Objresult = context.PrePrintBarcodeOrderrequest.FromSqlRaw(
                     "Execute dbo.Pro_GetPrePrintBarCodeOrder @VenueNo,@VenueBranchNo,@VisitNo",
                     _VenueNo, _VenueBranchNo, _VisitNo).ToList();
                 }
@@ -934,7 +934,7 @@ namespace Service.Repository
             {
                 MyDevException.Error(ex, "ManageSampleRepository.GetPrePrintBarcodelist/visitNo-" + visitNo, ExceptionPriority.High, ApplicationType.REPOSITORY, VenueNo, VenueBranchNo, 0);
             }
-            return objresult;
+            return Objresult;
         }
     }
 }

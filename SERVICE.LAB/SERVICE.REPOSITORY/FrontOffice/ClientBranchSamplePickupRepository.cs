@@ -19,7 +19,7 @@ namespace Service.Repository.FrontOffice
 
         public List<ClientBranchSamplePickupResponse> GetClientBranchSamplePickup(ClientBranchSamplePickupRequest RequestItem)
         {
-            List<ClientBranchSamplePickupResponse> objresult = new List<ClientBranchSamplePickupResponse>();
+            List<ClientBranchSamplePickupResponse> Objresult = new List<ClientBranchSamplePickupResponse>();
 
             try
             {
@@ -35,7 +35,7 @@ namespace Service.Repository.FrontOffice
                     var _RiderNo = new SqlParameter("RiderNo", RequestItem.RiderNo);
                     var _PageIndex = new SqlParameter("PageIndex", RequestItem.PageIndex);
 
-                    objresult = context.GetClientBranchSamplePickup.FromSqlRaw(
+                    Objresult = context.GetClientBranchSamplePickup.FromSqlRaw(
                     "EXEC dbo.Pro_GetClientBranchSamplePickup @FROMDate,@ToDate,@Type,@VenueNo,@VenueBranchNo,@SPType,@SPTypeNo,@RiderNo,@PageIndex",
                     _FromDate, _ToDate, _Type, _VenueNo, _VenueBranchNo, _SPType, _SPTypeNo, _RiderNo, _PageIndex
                     ).ToList();
@@ -46,11 +46,11 @@ namespace Service.Repository.FrontOffice
                 MyDevException.Error(ex, "ClientBranchSamplePickupRepository.GetClientBranchSamplePickup",
                 ExceptionPriority.Medium, ApplicationType.REPOSITORY, RequestItem.VenueNo, RequestItem.VenueBranchNo, 0);
             }
-            return objresult;
+            return Objresult;
         }
         public ClientBranchSamplePickupInsertResponse InsertClientBranchSamplePickup(ClientBranchSamplePickupInsertRequest request)
         {
-            ClientBranchSamplePickupInsertResponse objResult = new ClientBranchSamplePickupInsertResponse();
+            ClientBranchSamplePickupInsertResponse Objresult = new ClientBranchSamplePickupInsertResponse();
 
             try
             {
@@ -67,7 +67,7 @@ namespace Service.Repository.FrontOffice
                     var _VenueBranchNo = new SqlParameter("VenueBranchNo", request.VenueBranchNo);
                     var _UserNo = new SqlParameter("UserNo", request.UserNo);
 
-                    objResult = context.InsertClientBranchSamplePickup
+                    Objresult = context.InsertClientBranchSamplePickup
                     .FromSqlRaw(
                     "EXEC dbo.Pro_InsertCilentBranchSamplePickup @SamplePickupNo, @SPType, @SPTypeNo, @SampleCount, @PickupDateTime, @RequesterInfo, @Status, @VenueNo, @VenueBranchNo, @UserNo",
                     _SamplePickupNo, _SPType, _SPTypeNo, _SampleCount, _PickupDateTime, _RequesterInfo, _Status, _VenueNo, _VenueBranchNo, _UserNo
@@ -80,11 +80,11 @@ namespace Service.Repository.FrontOffice
                 ExceptionPriority.Medium, ApplicationType.REPOSITORY, request.VenueNo, request.VenueBranchNo, request.UserNo);
             }
 
-            return objResult;
+            return Objresult;
         }
         public ClientBranchSamplePickupRiderInsertResponse InsertRiderClientBranchSamplePickup(ClientBranchSamplePickupRiderInsertRequest request)
         {
-            ClientBranchSamplePickupRiderInsertResponse objResult = new ClientBranchSamplePickupRiderInsertResponse();
+            ClientBranchSamplePickupRiderInsertResponse Objresult = new ClientBranchSamplePickupRiderInsertResponse();
 
             try
             {
@@ -96,7 +96,7 @@ namespace Service.Repository.FrontOffice
                     var _VenueBranchNo = new SqlParameter("VenueBranchNo", request.VenueBranchNo);
                     var _UserNo = new SqlParameter("UserNo", request.UserNo);
 
-                    objResult = context.InsertRiderClientBranchSamplePickup
+                    Objresult = context.InsertRiderClientBranchSamplePickup
                     .FromSqlRaw(
                         "EXEC dbo.Pro_InsertAssignRiderToSamplePickup @SamplePickupNo, @RiderNo, @VenueNo, @VenueBranchNo, @UserNo",
                         _SamplePickupNo, _RiderNo, _VenueNo, _VenueBranchNo, _UserNo
@@ -109,7 +109,7 @@ namespace Service.Repository.FrontOffice
                 ExceptionPriority.Medium, ApplicationType.REPOSITORY, request.VenueNo, request.VenueBranchNo, request.UserNo);
             }
 
-            return objResult;
+            return Objresult;
         }
     }
 }

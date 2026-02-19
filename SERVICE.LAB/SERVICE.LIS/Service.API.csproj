@@ -5,7 +5,7 @@
 		<TargetFramework>net8.0</TargetFramework>
 		<AspNetCoreHostingModel>OutOfProcess</AspNetCoreHostingModel>
 		<AspNetCoreModuleName>AspNetCoreModuleV2</AspNetCoreModuleName>
-		<Nullable>disable</Nullable>
+		<Nullable>enable</Nullable>
 		<OutputType>Exe</OutputType>
 
 		<!-- Prevent file lock failures -->

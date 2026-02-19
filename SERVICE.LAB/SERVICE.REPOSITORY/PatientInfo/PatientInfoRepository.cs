@@ -251,7 +251,7 @@ namespace Service.Repository.PatientInfo
             return result;
         }
 
-        public EditPatientResponse UpdatePatientDetails(EditPatientRequest editPatientRequest)
+        public EditPatientResponse UpdatePatientdetails(EditPatientRequest editPatientRequest)
         {
             CommonHelper commonUtility = new CommonHelper();
             EditPatientResponse editPatientResponse = new EditPatientResponse();
@@ -261,20 +261,20 @@ namespace Service.Repository.PatientInfo
                 using (var context = new LIMSContext(_config.GetConnectionString(ConfigKeys.DefaultConnection)))
                 {
 
-                    var _PaymentDetails = new SqlParameter("PatientDetails", editDetails);
+                    var _PaymentDetails = new SqlParameter("Patientdetails", editDetails);
                     var _VenueNo = new SqlParameter("VenueNo", editPatientRequest.venueNo);
                     var _VenueBranchNo = new SqlParameter("VenueBranchNo", editPatientRequest.venueBranchNo);
                     var _UserID = new SqlParameter("UserNo", editPatientRequest.userNo);
-                    var dbResponse = context.UpdatePatientDetailsDTO.FromSqlRaw(
+                    var dbResponse = context.UpdatePatientdetailsDTO.FromSqlRaw(
                     
-                    "Execute dbo.pro_UpdateEditPatientDetails @VenueNo,@VenueBranchNo,@UserNo,@PatientDetails",
+                    "Execute dbo.pro_UpdateEditPatientdetails @VenueNo,@VenueBranchNo,@UserNo,@Patientdetails",
                     _VenueNo, _VenueBranchNo, _UserID, _PaymentDetails).ToList();
                     editPatientResponse = dbResponse[0];
                 }
             }
             catch (Exception ex)
             {
-                MyDevException.Error(ex, "PatientInfoRepository.UpdatePatientDetails", ExceptionPriority.High, ApplicationType.REPOSITORY, editPatientRequest.venueNo, editPatientRequest.venueBranchNo, editPatientRequest.userNo);
+                MyDevException.Error(ex, "PatientInfoRepository.UpdatePatientdetails", ExceptionPriority.High, ApplicationType.REPOSITORY, editPatientRequest.venueNo, editPatientRequest.venueBranchNo, editPatientRequest.userNo);
             }
             return editPatientResponse;
         }
@@ -306,7 +306,7 @@ namespace Service.Repository.PatientInfo
             return lstPatientInfoResponse;
         }
 
-        public List<ReasonDetailsResponse> GetServiceRejectReason(ReasonDetailsRequest RequestItem)
+        public List<ReasonDetailsResponse> GetserviceRejectReason(ReasonDetailsRequest RequestItem)
         {
             List<ReasonDetailsResponse> lstPatientReason = new List<ReasonDetailsResponse>();
             try
@@ -326,14 +326,14 @@ namespace Service.Repository.PatientInfo
                     var _PatientNo = new SqlParameter("PatientNo", RequestItem.PatientNo);
                     var _SearchStatus = new SqlParameter("SearchStatus", RequestItem.SearchStatus);
 
-                    lstPatientReason = context.GetServiceRejectReason.FromSqlRaw(
+                    lstPatientReason = context.GetserviceRejectReason.FromSqlRaw(
                     "Execute dbo.pro_GetRejectedReasonByVisit @PageCode,@ViewVenueBranchNo,@VenueNo,@VenueBranchNo,@UserNo,@ServiceNo,@ServiceType,@PatientVisitNo,@OrderDetailsNo,@OrderListNo,@PatientNo,@SearchStatus",
                     _PageCode, _ViewVenueBranchNo, _VenueNo, _VenueBranchNo, _UserNo, _ServiceNo, _ServieType, _PatientVisitNo, _OrderDetailsNo, _OrderListNo, _PatientNo, _SearchStatus).ToList();
                 }
             }
             catch (Exception ex)
             {
-                MyDevException.Error(ex, "PatientInfoRepository.GetServiceRejectReason", ExceptionPriority.High, ApplicationType.REPOSITORY, RequestItem.VenueNo, RequestItem.VenueBranchNo, RequestItem.UserNo);
+                MyDevException.Error(ex, "PatientInfoRepository.GetserviceRejectReason", ExceptionPriority.High, ApplicationType.REPOSITORY, RequestItem.VenueNo, RequestItem.VenueBranchNo, RequestItem.UserNo);
             }
             return lstPatientReason;
         }
@@ -448,7 +448,7 @@ namespace Service.Repository.PatientInfo
         }
         public PatientmergeResponseDTO SavePatientMerge(PatientmergeDTO RequestItem)
         {
-            PatientmergeResponseDTO objresult = new PatientmergeResponseDTO();
+            PatientmergeResponseDTO Objresult = new PatientmergeResponseDTO();
             try
             {
                 using (var context = new LIMSContext(_config.GetConnectionString(ConfigKeys.DefaultConnection)))
@@ -473,14 +473,14 @@ namespace Service.Repository.PatientInfo
                     _FpatientvisitNo, _TpatientvisitNo, _isfirstname, _islastname, _ismiddlename, _isdob, _isgender, _isidnumber, _ismobile, _isemail, 
                     _VenueNo, _VenueBranchNo, _UserNo).AsEnumerable().FirstOrDefault();
                     
-                    objresult.result = 1;
+                    Objresult.result = 1;
                 }
             }
             catch (Exception ex)
             {
                 MyDevException.Error(ex, "SavePatientMerge", ExceptionPriority.Medium, ApplicationType.REPOSITORY, RequestItem.venueno, RequestItem.venuebranchno, RequestItem.userno);
             }
-            return objresult;
+            return Objresult;
         }
 
         public EditPatientResponse UpdateSampleDetails(List<EditSampleRequest> editSampleRequest)
@@ -492,10 +492,10 @@ namespace Service.Repository.PatientInfo
                 string editDetails = commonUtility.ToXML(editSampleRequest);
                 using (var context = new LIMSContext(_config.GetConnectionString(ConfigKeys.DefaultConnection)))
                 {
-                    var _PaymentDetails = new SqlParameter("PatientDetails", editDetails);
-                    var dbResponse = context.UpdatePatientDetailsDTO.FromSqlRaw(
+                    var _PaymentDetails = new SqlParameter("Patientdetails", editDetails);
+                    var dbResponse = context.UpdatePatientdetailsDTO.FromSqlRaw(
                     
-                    "Execute dbo.pro_UpdateEditSampleDetails @PatientDetails",
+                    "Execute dbo.pro_UpdateEditSampleDetails @Patientdetails",
                     _PaymentDetails).ToList();
                     editPatientResponse = dbResponse[0];
                 }
@@ -549,7 +549,7 @@ namespace Service.Repository.PatientInfo
                     var _BarcodeNo = new SqlParameter("BarcodeNo", editSampleRequest.BarcodeNo);
                     var _VisitID = new SqlParameter("VisitID", editSampleRequest.VisitID);
                     
-                    var dbResponse = context.UpdatePatientDetailsDTONew.FromSqlRaw(
+                    var dbResponse = context.UpdatePatientdetailsDTONew.FromSqlRaw(
                     "Execute dbo.pro_UpdateEditSampleDetailsNew @specimenQty,@PatientSamplesNo,@UserNo,@VenueNo,@PatientVisitNo,@SampleNo,@ContainerNo,@SampleSourceNo,@SampleSource,@ServiceNo,@BarcodeNo,@VisitID",
                     _specimenQty, _PatientSamplesNo, _UserNo, _VenueNo, _PatientVisitNo, _SampleNo, _ContainerNo,_SampleSourceNo, _SampleSource,_ServiceNo,_BarcodeNo, _VisitID).ToList();
                     

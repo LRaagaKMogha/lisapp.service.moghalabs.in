@@ -45,7 +45,7 @@ namespace Service.Repository
 
         public Titlemasterresponse InsertTitlemaster(TblName tbltitle)
         {
-            Titlemasterresponse objresult = new Titlemasterresponse();
+            Titlemasterresponse Objresult = new Titlemasterresponse();
             try
             {
                 using (var context = new LIMSContext(_config.GetConnectionString(ConfigKeys.DefaultConnection)))
@@ -66,14 +66,14 @@ namespace Service.Repository
                     _CommonNo,_CommonCode, _IsDefault,_commonBranchNo, _venueNo, _venueBranchno, _userNo, _commonValue,
                     _sequenceNo, _status).ToList();
 
-                    objresult.commonBranchNo = obj[0].commonBranchNo;
+                    Objresult.commonBranchNo = obj[0].commonBranchNo;
                 }
             }
             catch (Exception ex)
             {
                 MyDevException.Error(ex, "TitleRepository.InsertTitlemaster" + tbltitle.CommonNo.ToString(), ExceptionPriority.Low, ApplicationType.REPOSITORY, tbltitle.venueNo, tbltitle.venueBranchno, 0);
             }
-            return objresult;
+            return Objresult;
         }
     }
 }

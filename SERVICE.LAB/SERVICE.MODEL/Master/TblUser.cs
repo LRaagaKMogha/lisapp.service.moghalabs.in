@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics.Metrics;
 
 namespace Service.Model
 {
@@ -24,14 +22,14 @@ namespace Service.Model
         public int? ModifiedBy { get; set; }
         public bool? IsRider { get; set; }
         public bool? IsSuperAdmin { get; set; }
-        public string? Latitude { get; set; }
-        public string? Longitude { get; set; }
-        public string? otp { get; set; }
+        public string Latitude { get; set; }
+        public string Longitude { get; set; }
+        public string otp { get; set; }
         public DateTime? otpexpiry { get; set; }
         public int IsAdmin { get; set; }
         public bool? IsProvisional { get; set; }
         public int LoginAttempt { get; set; }
-        public string? RefreshToken { get; set; }
+        public string RefreshToken { get; set; }
         public DateTime? RefreshTokenExpiryTime { get; set; }
         public bool? IsEditLabResults { get; set; }
         public bool? IsResultEntryHIV { get; set; }
@@ -40,7 +38,7 @@ namespace Service.Model
         public bool? isLock { get; set; }
         public bool? Isadaccess { get; set; }
         public bool? IsadmultifactorAccess { get; set; }
-        public string? ladpsecretkey { get; set; }
+        public string ladpsecretkey { get; set; }
         public bool? IsAbnormalAvail { get; set; }
         public bool? IsPOApproval { get; set; }
         public bool? IsGrnApproval { get; set; }
@@ -48,6 +46,6 @@ namespace Service.Model
         public bool? IsStockAdjustmentApproval { get; set; }
         public bool? IsConsumptionApproval { get; set; }
         public bool? IsClientApproval { get; set; }
-        public string? Gender { get; set; }
+        public string Gender { get; set; }
     }
 }

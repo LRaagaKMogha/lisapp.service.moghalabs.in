@@ -27,21 +27,21 @@ namespace Service.API.SERVICE.Controllers
         [Route("api/Route/GetRouteDetails")]
         public IEnumerable<TblRoute> GetRouteDetails(GetCommonMasterRequest getCommonMaster)
         {
-            List<TblRoute> objresult = new List<TblRoute>();
+            List<TblRoute> Objresult = new List<TblRoute>();
             try
             {
-                // objresult = MemoryCacheRepository.GetCacheItem<List<TblRoute>>(CacheKeys.RouteMaster);
-                //if (objresult == null)
+                // Objresult = MemoryCacheRepository.GetCacheItem<List<TblRoute>>(CacheKeys.RouteMaster);
+                //if (Objresult == null)
                 //{
-                objresult = _RouteRepository.GetRouteDetails(getCommonMaster);
-                //    MemoryCacheRepository.AddItem(CacheKeys.RouteMaster, objresult, 1000);
+                Objresult = _RouteRepository.GetRouteDetails(getCommonMaster);
+                //    MemoryCacheRepository.AddItem(CacheKeys.RouteMaster, Objresult, 1000);
                 //}
             }
             catch (Exception ex)
             {
                 MyDevException.Error(ex, "GetRouteDetails-", ExceptionPriority.Low, ApplicationType.APPSERVICE, getCommonMaster.venueno, (int)getCommonMaster.venuebranchno, 0);
             }
-            return objresult;
+            return Objresult;
         }
 
         #endregion
@@ -92,16 +92,16 @@ namespace Service.API.SERVICE.Controllers
         [Route("api/route/InsertRouteMaster")]
         public RouteMasterResponse InsertRouteMaster(Routelst route)
         {
-            RouteMasterResponse objresult = new RouteMasterResponse();
+            RouteMasterResponse Objresult = new RouteMasterResponse();
             try
             {
-                objresult = _RouteRepository.InsertRouteMaster(route);
+                Objresult = _RouteRepository.InsertRouteMaster(route);
             }
             catch (Exception ex)
             {
                 MyDevException.Error(ex, "RouteController.InsertRouteMaster" + route.RouteNo.ToString(), ExceptionPriority.Low, ApplicationType.APPSERVICE, route.VenueNo, route.VenueBranchNo, 0);
             }
-            return objresult;
+            return Objresult;
         }
     }
 }

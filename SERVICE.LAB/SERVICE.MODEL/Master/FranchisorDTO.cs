@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
 namespace Service.Model.Master
 {
@@ -20,7 +16,7 @@ namespace Service.Model.Master
         public int VenueNo { get; set; }
         public int VenueBranchNo { get; set; }
         public int? DepartmentNo { get; set; }
-        public string? ServiceType { get; set; }
+        public string ServiceType { get; set; }
         public int? ServiceNo { get; set; }
         public int FranchiseNo { get; set; }
         public int FranchisorNo { get; set; }
@@ -38,7 +34,6 @@ namespace Service.Model.Master
         public int RateServicesNo { get; set; }
         public string RevenueType { get; set; }
     }
-
     public class FranchiseRevenueSharingInsertDTO
     {
         public int VenueNo { get; set; }
@@ -47,7 +42,6 @@ namespace Service.Model.Master
         public int FranchiseNo { get; set; }
         public List<FranchiseRevenueSharingItemDTO> FranchiseRevenueSharingList { get; set; }
     }
-
     public class FranchiseRevenueSharingItemDTO
     {
         public int ServiceRevenueID { get; set; }
@@ -56,5 +50,4 @@ namespace Service.Model.Master
         public string RevenueType { get; set; }
         public decimal RevenueValue { get; set; }
     }
-
 }

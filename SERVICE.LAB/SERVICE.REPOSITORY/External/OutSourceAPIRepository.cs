@@ -42,7 +42,8 @@ namespace Service.Repository
         {
             int OutStatus = 0;
             int ackno = 0;
-            ackno = results.APIOutsourceSendNo != null ? Convert.ToInt32(results.APIOutsourceSendNo):0;
+            ackno = Convert.ToInt32(results.APIOutsourceSendNo);
+
             try
             {
                 using (var context = new ResultContext(_config.GetConnectionString(ConfigKeys.DefaultConnection)))

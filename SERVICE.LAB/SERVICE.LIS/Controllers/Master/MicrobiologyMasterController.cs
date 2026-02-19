@@ -23,9 +23,9 @@ namespace Service.API.SERVICE.Controllers
 
         [HttpPost]
         [Route("api/MicrobiologyMaster/GetOrgAntibioticRange")]
-        public List<lstorgAntiRange> GetOrgAntibioticRange(reqorgAntiRange req)
+        public List<LstorgAntiRange> GetOrgAntibioticRange(reqorgAntiRange req)
         {
-            List<lstorgAntiRange> lst = new List<lstorgAntiRange>();
+            List<LstorgAntiRange> lst = new List<LstorgAntiRange>();
             try
             {
                 lst = _MicrobiologyMasterRepository.GetOrgAntibioticRange(req);
@@ -45,7 +45,7 @@ namespace Service.API.SERVICE.Controllers
             int testno = 0;
             try
             {
-                using(var auditScoped = new AuditScope<lstorgAntiRange>(req.lstorgAntiRange, _auditService))
+                using(var auditScoped = new AuditScope<LstorgAntiRange>(req.LstorgAntiRange, _auditService))
                 {
                     var _errormsg = MBMasterValidation.SaveOrganismAntibioticRange(req);
                     if (!_errormsg.status)
@@ -66,9 +66,9 @@ namespace Service.API.SERVICE.Controllers
 
         [HttpPost]
         [Route("api/MicrobiologyMaster/GetOrgmaster")]
-        public List<orggetresponse> GetOrgmaster(reqorgAntiRange orggetreq)
+        public List<Orggetresponse> GetOrgmaster(reqorgAntiRange orggetreq)
         {
-            List<orggetresponse> lst = new List<orggetresponse>();
+            List<Orggetresponse> lst = new List<Orggetresponse>();
             try
             {
                 lst = _MicrobiologyMasterRepository.GetOrgmaster(orggetreq);
@@ -82,9 +82,9 @@ namespace Service.API.SERVICE.Controllers
 
         [HttpPost]
         [Route("api/MicrobiologyMaster/GetOrgGrpmaster")]
-        public List<orgGrpresponse> GetOrgGrpmaster(reqorgGroupAntiRange orggetreq)
+        public List<Orggrpresponse> GetOrgGrpmaster(reqorgGroupAntiRange orggetreq)
         {
-            List<orgGrpresponse> lst = new List<orgGrpresponse>();
+            List<Orggrpresponse> lst = new List<Orggrpresponse>();
             try
             {
                 lst = _MicrobiologyMasterRepository.GetOrgGrpmaster(orggetreq);
@@ -98,17 +98,17 @@ namespace Service.API.SERVICE.Controllers
 
         [HttpPost]
         [Route("api/MicrobiologyMaster/InsertOrgmaster")]
-        public ActionResult<orginsertresponse> InsertOrgmaster(orgresponse orginsertreq)
+        public ActionResult<Orginsertresponse> InsertOrgmaster(Orgresponse orginsertreq)
         {
-            orginsertresponse objresult = new orginsertresponse();
+            Orginsertresponse Objresult = new Orginsertresponse();
             try
             {
-                using (var auditScoped = new AuditScope<orgresponse>(orginsertreq, _auditService))
+                using (var auditScoped = new AuditScope<Orgresponse>(orginsertreq, _auditService))
                 {
                     var _errormsg = MBMasterValidation.InsertOrgmaster(orginsertreq);
                     if (!_errormsg.status)
                     {
-                        objresult = _MicrobiologyMasterRepository.InsertOrgmaster(orginsertreq);
+                        Objresult = _MicrobiologyMasterRepository.InsertOrgmaster(orginsertreq);
                         string _CacheKey = CacheKeys.CommonMaster + "ORGANISM" + orginsertreq.venueno + orginsertreq.venuebranchno;
                         MemoryCacheRepository.RemoveItem(_CacheKey);
                     }
@@ -120,17 +120,17 @@ namespace Service.API.SERVICE.Controllers
             {
                 MyDevException.Error(ex, "MicrobiologyMasterController.InsertOrgmaster - " + orginsertreq.organismno.ToString(), ExceptionPriority.Low, ApplicationType.APPSERVICE, orginsertreq.venueno, orginsertreq.venuebranchno, orginsertreq.userno);
             }
-            return Ok(objresult);
+            return Ok(Objresult);
         }
 
         [HttpPost]
         [Route("api/MicrobiologyMaster/InsertOrgGrpmaster")]
-        public orginsertGrpresponse InsertOrgGrpmaster(orggrpresponse orginsertreq)
+        public OrginsertGrpresponse InsertOrgGrpmaster(Orggrpresponse orginsertreq)
         {
-            orginsertGrpresponse objresult = new orginsertGrpresponse();
+            OrginsertGrpresponse Objresult = new OrginsertGrpresponse();
             try
             {
-                objresult = _MicrobiologyMasterRepository.InsertOrgGrpmaster(orginsertreq);
+                Objresult = _MicrobiologyMasterRepository.InsertOrgGrpmaster(orginsertreq);
                 string _CacheKey = CacheKeys.CommonMaster + "ORGANISMGROUP" + orginsertreq.venueno + orginsertreq.venuebranchno;
                 MemoryCacheRepository.RemoveItem(_CacheKey);
             }
@@ -138,14 +138,14 @@ namespace Service.API.SERVICE.Controllers
             {
                 MyDevException.Error(ex, "MicrobiologyMasterController.InsertOrgGrpmaster" + orginsertreq.organismgrpno.ToString(), ExceptionPriority.Low, ApplicationType.APPSERVICE, orginsertreq.venueno, orginsertreq.venuebranchno, orginsertreq.userno);
             }
-            return objresult;
+            return Objresult;
         }
 
         [HttpPost]
         [Route("api/MicrobiologyMaster/GetOrgtypemaster")]
-        public List<orgtyperesponse> GetOrgtypemaster(orgtypereq orgtygetreq)
+        public List<Orgtyperesponse> GetOrgtypemaster(Orgtypereq orgtygetreq)
         {
-            List<orgtyperesponse> lst = new List<orgtyperesponse>();
+            List<Orgtyperesponse> lst = new List<Orgtyperesponse>();
             try
             {
                 lst = _MicrobiologyMasterRepository.GetOrgtypemaster(orgtygetreq);
@@ -159,17 +159,17 @@ namespace Service.API.SERVICE.Controllers
 
         [HttpPost]
         [Route("api/MicrobiologyMaster/InsertOrgtypemaster")]
-        public ActionResult<orgtypeinsertresponse> InsertOrgtypemaster(orgtyperesponse orgtyinsertreq)
+        public ActionResult<Orgtypeinsertresponse> InsertOrgtypemaster(Orgtyperesponse orgtyinsertreq)
         {
-            orgtypeinsertresponse objresult = new orgtypeinsertresponse();
+            Orgtypeinsertresponse Objresult = new Orgtypeinsertresponse();
             try
             {
-                using(var auditScoped = new AuditScope<orgtyperesponse>(orgtyinsertreq, _auditService))
+                using(var auditScoped = new AuditScope<Orgtyperesponse>(orgtyinsertreq, _auditService))
                 {
                     var _errormsg = MBMasterValidation.InsertOrgtypemaster(orgtyinsertreq);
                     if (!_errormsg.status)
                     {
-                        objresult = _MicrobiologyMasterRepository.InsertOrgtypemaster(orgtyinsertreq);
+                        Objresult = _MicrobiologyMasterRepository.InsertOrgtypemaster(orgtyinsertreq);
                         string _CacheKey = CacheKeys.CommonMaster + "ORGANISMTYPE" + orgtyinsertreq.venueno + orgtyinsertreq.venuebranchno;
                         MemoryCacheRepository.RemoveItem(_CacheKey);
                     }
@@ -181,38 +181,38 @@ namespace Service.API.SERVICE.Controllers
             {
                 MyDevException.Error(ex, "MicrobiologyMasterController.InsertOrgtypemaster - " + orgtyinsertreq.organismtypeno.ToString(), ExceptionPriority.Low, ApplicationType.APPSERVICE, orgtyinsertreq.venueno, orgtyinsertreq.venuebranchno, orgtyinsertreq.userno);
             }
-            return Ok(objresult);
+            return Ok(Objresult);
         }
 
         [HttpPost]
         [Route("api/MicrobiologyMaster/GetAntimaster")]
-        public List<antiresponse> GetAntimaster(antireq antireq)
+        public List<Antiresponse> GetAntimaster(Antireq Antireq)
         {
-            List<antiresponse> lst = new List<antiresponse>();
+            List<Antiresponse> lst = new List<Antiresponse>();
             try
             {
-                lst = _MicrobiologyMasterRepository.GetAntimaster(antireq);
+                lst = _MicrobiologyMasterRepository.GetAntimaster(Antireq);
             }
             catch (Exception ex)
             {
-                MyDevException.Error(ex, "MicrobiologyMasterController.GetAntimaster" + antireq.antibioticno.ToString(), ExceptionPriority.Low, ApplicationType.APPSERVICE, antireq.venueno, antireq.venuebranchno, 0);
+                MyDevException.Error(ex, "MicrobiologyMasterController.GetAntimaster" + Antireq.antibioticno.ToString(), ExceptionPriority.Low, ApplicationType.APPSERVICE, Antireq.venueno, Antireq.venuebranchno, 0);
             }
             return lst;
         }
 
         [HttpPost]
         [Route("api/MicrobiologyMaster/Insertantimaster")]
-        public ActionResult<antinsertresponse> Insertantimaster(antiresponse antinsertreq)
+        public ActionResult<Antinsertresponse> Insertantimaster(Antiresponse antinsertreq)
         {
-            antinsertresponse objresult = new antinsertresponse();
+            Antinsertresponse Objresult = new Antinsertresponse();
             try
             {
-                using(var auditScoped = new AuditScope<antiresponse>(antinsertreq, _auditService))
+                using(var auditScoped = new AuditScope<Antiresponse>(antinsertreq, _auditService))
                 {
                     var _errormsg = MBMasterValidation.Insertantimaster(antinsertreq);
                     if (!_errormsg.status)
                     {
-                        objresult = _MicrobiologyMasterRepository.Insertantimaster(antinsertreq);
+                        Objresult = _MicrobiologyMasterRepository.Insertantimaster(antinsertreq);
                     }
                     else
                         return BadRequest(_errormsg);
@@ -222,14 +222,14 @@ namespace Service.API.SERVICE.Controllers
             {
                 MyDevException.Error(ex, "MicrobiologyMasterController.Insertantibioticmaster - " + antinsertreq.antibioticno.ToString(), ExceptionPriority.Low, ApplicationType.APPSERVICE, antinsertreq.venueno, antinsertreq.venuebranchno, antinsertreq.userno);
             }
-            return Ok(objresult);
+            return Ok(Objresult);
         }
 
         [HttpPost]
         [Route("api/MicrobiologyMaster/GetorgAntimaster")]
-        public List<orgAntiresponse> GetorgAntimaster(orgAntirequest reqorgAnti)
+        public List<OrgAntiresponse> GetorgAntimaster(OrgAntirequest reqorgAnti)
         {
-            List<orgAntiresponse> lst = new List<orgAntiresponse>();
+            List<OrgAntiresponse> lst = new List<OrgAntiresponse>();
             try
             {
                 lst = _MicrobiologyMasterRepository.GetorgAntimaster(reqorgAnti);
@@ -243,17 +243,17 @@ namespace Service.API.SERVICE.Controllers
 
         [HttpPost]
         [Route("api/MicrobiologyMaster/Insertorgantimaster")]
-        public ActionResult<organtinsertresponse> InsertorgAntimaster(orgAntinsertresponse orgAntinsertreq)
+        public ActionResult<OrgAntinsertresponse> InsertorgAntimaster(OrgAntinsertresponse orgAntinsertreq)
         {
-            organtinsertresponse objresult = new organtinsertresponse();
+            OrgAntinsertresponse Objresult = new OrgAntinsertresponse();
             try
             {
-                using (var auditScoped = new AuditScope<orgAntinsertresponse>(orgAntinsertreq, _auditService))
+                using (var auditScoped = new AuditScope<OrgAntinsertresponse>(orgAntinsertreq, _auditService))
                 {
                     var _errormsg = MBMasterValidation.InsertorgAntimaster(orgAntinsertreq);
                     if (!_errormsg.status)
                     {
-                        objresult = _MicrobiologyMasterRepository.InsertorgAntimaster(orgAntinsertreq);
+                        Objresult = _MicrobiologyMasterRepository.InsertorgAntimaster(orgAntinsertreq);
                     }
                     else
                         return BadRequest(_errormsg);
@@ -263,7 +263,7 @@ namespace Service.API.SERVICE.Controllers
             {
                 MyDevException.Error(ex, "MicrobiologyMasterController.Insertantimaster" + orgAntinsertreq.antibioticno.ToString(), ExceptionPriority.Low, ApplicationType.APPSERVICE, orgAntinsertreq.venueno, orgAntinsertreq.venuebranchno, orgAntinsertreq.userno);
             }
-            return Ok(objresult);
+            return Ok(Objresult);
         }
     }
 }

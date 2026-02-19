@@ -30,18 +30,18 @@ namespace Service.API.SERVICE.Controllers
         [Route("api/TariffMaster/GetTariffMasterDetails")]
         public IEnumerable<GetTariffMasterResponse> GetTariffMasterDetails(GetTariffMasterRequest getRequest)
         {
-            List<GetTariffMasterResponse> objresult = new List<GetTariffMasterResponse>();
+            List<GetTariffMasterResponse> Objresult = new List<GetTariffMasterResponse>();
             try
             {
 
-                objresult = _tariffMasterRepository.GetTariffMasterDetails(getRequest);
+                Objresult = _tariffMasterRepository.GetTariffMasterDetails(getRequest);
 
             }
             catch (Exception ex)
             {
                 MyDevException.Error(ex, "GetTariffMasterDetails", ExceptionPriority.Low, ApplicationType.APPSERVICE, getRequest.venueNo, getRequest.venueBranchNo, 0);
             }
-            return objresult;
+            return Objresult;
         }
         #endregion
 
@@ -82,19 +82,19 @@ namespace Service.API.SERVICE.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpPost]
-        [Route("api/TariffMaster/GetServiceDetails")]
-        public IEnumerable<GetServices> GetServiceDetails(GetTariffMasterRequest getRequest)
+        [Route("api/TariffMaster/GetserviceDetails")]
+        public IEnumerable<Getservices> GetserviceDetails(GetTariffMasterRequest getRequest)
         {
-            List<GetServices> objresult = new List<GetServices>();
+            List<Getservices> Objresult = new List<Getservices>();
             try
             {
-                objresult = _tariffMasterRepository.GetTariffService(getRequest);                
+                Objresult = _tariffMasterRepository.GetTariffService(getRequest);                
             }
             catch (Exception ex)
             {
-                MyDevException.Error(ex, "TariffMaster - GetServiceDetails", ExceptionPriority.Low, ApplicationType.APPSERVICE, getRequest.venueNo, getRequest.venueBranchNo, 0);
+                MyDevException.Error(ex, "TariffMaster - GetserviceDetails", ExceptionPriority.Low, ApplicationType.APPSERVICE, getRequest.venueNo, getRequest.venueBranchNo, 0);
             }
-            return objresult;
+            return Objresult;
         }
         #endregion
 
@@ -107,16 +107,16 @@ namespace Service.API.SERVICE.Controllers
         [Route("api/TariffMaster/GetTariffMasterList")]
         public IEnumerable<GetTariffMasterListResponse> GetTariffMasterList(GetTariffMasterListRequest getRequest)
         {
-            List<GetTariffMasterListResponse> objresult = new List<GetTariffMasterListResponse>();
+            List<GetTariffMasterListResponse> Objresult = new List<GetTariffMasterListResponse>();
             try
             {
-                objresult = _tariffMasterRepository.GetTariffMasterList(getRequest);
+                Objresult = _tariffMasterRepository.GetTariffMasterList(getRequest);
             }
             catch (Exception ex)
             {
                 MyDevException.Error(ex, "GetTariffMasterList", ExceptionPriority.Low, ApplicationType.APPSERVICE, getRequest.venueNo, getRequest.venueBranchNo, getRequest.userNo);
             }
-            return objresult;
+            return Objresult;
         }
         #endregion
 
@@ -129,16 +129,16 @@ namespace Service.API.SERVICE.Controllers
         [Route("api/TariffMaster/GetTariffMasterServiceList")]
         public IEnumerable<TariffMastServicesResponse> GetTariffMasterServiceList(GetTariffMasterListRequest getRequest)
         {
-            List<TariffMastServicesResponse> objresult = new List<TariffMastServicesResponse>();
+            List<TariffMastServicesResponse> Objresult = new List<TariffMastServicesResponse>();
             try
             {
-                objresult = _tariffMasterRepository.GetTariffMasterServiceList(getRequest);
+                Objresult = _tariffMasterRepository.GetTariffMasterServiceList(getRequest);
             }
             catch (Exception ex)
             {
                 MyDevException.Error(ex, "TariffMaster - TariffMasterServiceDetails", ExceptionPriority.Low, ApplicationType.APPSERVICE, getRequest.venueNo, getRequest.venueBranchNo, getRequest.userNo);
             }
-            return objresult;
+            return Objresult;
         }
         #endregion
 
@@ -183,16 +183,16 @@ namespace Service.API.SERVICE.Controllers
         [Route("api/TariffMaster/GetClientTariffMasterList")]
         public IEnumerable<GetClientTariffMasterListResponse> GetClientTariffMasterList(GetClientTariffMasterRequest getRequest)
         {
-            List<GetClientTariffMasterListResponse> objresult = new List<GetClientTariffMasterListResponse>();
+            List<GetClientTariffMasterListResponse> Objresult = new List<GetClientTariffMasterListResponse>();
             try
             {
-                objresult = _tariffMasterRepository.GetClientTariffMasterList(getRequest);
+                Objresult = _tariffMasterRepository.GetClientTariffMasterList(getRequest);
             }
             catch (Exception ex)
             {
                 MyDevException.Error(ex, "GetClientTariffMasterList", ExceptionPriority.Low, ApplicationType.APPSERVICE, getRequest.venueNo, getRequest.venueBranchNo, getRequest.userNo);
             }
-            return objresult;
+            return Objresult;
         }
         #endregion
 
@@ -229,31 +229,31 @@ namespace Service.API.SERVICE.Controllers
         [Route("api/TariffMaster/GetClientTariffServiceList")]
         public IEnumerable<ClientTariffServicesResponse> GetClientTariffServiceList(GetClientTariffMasterRequest getRequest)
         {
-            List<ClientTariffServicesResponse> objresult = new List<ClientTariffServicesResponse>();
+            List<ClientTariffServicesResponse> Objresult = new List<ClientTariffServicesResponse>();
             try
             {
-                objresult = _tariffMasterRepository.GetClientTariffServiceList(getRequest);
+                Objresult = _tariffMasterRepository.GetClientTariffServiceList(getRequest);
             }
             catch (Exception ex)
             {
                 MyDevException.Error(ex, "ClientTariff - ServiceDetails", ExceptionPriority.Low, ApplicationType.APPSERVICE, getRequest.venueNo, getRequest.venueBranchNo, getRequest.userNo);
             }
-            return objresult;
+            return Objresult;
         }
         [HttpPost]
         [Route("api/TariffMaster/GetTariffupdateList")]
         public GetTariffupdateResponse GetTariffupdateList(GetTariffupdateRequest getRequest)
         {
-            GetTariffupdateResponse objresult = new GetTariffupdateResponse();
+            GetTariffupdateResponse Objresult = new GetTariffupdateResponse();
             try
             {
-                objresult = _tariffMasterRepository.GetTariffupdateList(getRequest);
+                Objresult = _tariffMasterRepository.GetTariffupdateList(getRequest);
             }
             catch (Exception ex)
             {
                 MyDevException.Error(ex, "ClientTariff - ServiceDetails", ExceptionPriority.Low, ApplicationType.APPSERVICE, getRequest.venueNo, getRequest.venueBranchNo, 0);
             }
-            return objresult;
+            return Objresult;
         }
         #endregion
         
@@ -261,16 +261,16 @@ namespace Service.API.SERVICE.Controllers
         [Route("api/TariffMaster/GetContractMaster")]
         public IEnumerable<GetContractRes> GetContractMaster(GetContractReq req)
         {
-            List<GetContractRes> objresult = new List<GetContractRes>();
+            List<GetContractRes> Objresult = new List<GetContractRes>();
             try
             {
-                objresult = _tariffMasterRepository.GetContractMaster(req);
+                Objresult = _tariffMasterRepository.GetContractMaster(req);
             }
             catch (Exception ex)
             {
                 MyDevException.Error(ex, "GetContractMaster", ExceptionPriority.Low, ApplicationType.APPSERVICE, req.VenueNo,0);
             }
-            return objresult;
+            return Objresult;
         }
 
         [HttpPost]
@@ -301,32 +301,32 @@ namespace Service.API.SERVICE.Controllers
         [Route("api/TariffMaster/GetContractMasterServiceList")]
         public IEnumerable<TariffMastServicesResponse> GetContractMasterServiceList(GetContractMasterListRequest getRequest)
         {
-            List<TariffMastServicesResponse> objresult = new List<TariffMastServicesResponse>();
+            List<TariffMastServicesResponse> Objresult = new List<TariffMastServicesResponse>();
             try
             {
-                objresult = _tariffMasterRepository.GetContractMasterServiceList(getRequest);
+                Objresult = _tariffMasterRepository.GetContractMasterServiceList(getRequest);
             }
             catch (Exception ex)
             {
                 MyDevException.Error(ex, "TariffMaster - GetContractMasterServiceList", ExceptionPriority.Low, ApplicationType.APPSERVICE, getRequest.venueNo, getRequest.venueBranchNo, getRequest.userNo);
             }
-            return objresult;
+            return Objresult;
         }
         
         [HttpPost]
         [Route("api/TariffMaster/GetContractVsClient")]
         public IEnumerable<ContractVsCustomerMap> GetContractVsClient(GetContractVsClientReq getRequest)
         {
-            List<ContractVsCustomerMap> objresult = new List<ContractVsCustomerMap>();
+            List<ContractVsCustomerMap> Objresult = new List<ContractVsCustomerMap>();
             try
             {
-                objresult = _tariffMasterRepository.GetContractVsClient(getRequest);
+                Objresult = _tariffMasterRepository.GetContractVsClient(getRequest);
             }
             catch (Exception ex)
             {
                 MyDevException.Error(ex, "TariffMaster - GetContractMasterServiceList", ExceptionPriority.Low, ApplicationType.APPSERVICE, getRequest.VenueNo, getRequest.ContractNo,0);
             }
-            return objresult;
+            return Objresult;
         }
         
         [HttpPost]
@@ -358,48 +358,48 @@ namespace Service.API.SERVICE.Controllers
         [Route("api/TariffMaster/GetClienttTariffMap")]
         public IEnumerable<GetTariffRes> GetClienttTariffMap (GetTariffReq req)
         {
-            List<GetTariffRes> objresult = new List<GetTariffRes>();
+            List<GetTariffRes> Objresult = new List<GetTariffRes>();
             try
             {
-                objresult = _tariffMasterRepository.GetClienttTariffMap(req);
+                Objresult = _tariffMasterRepository.GetClienttTariffMap(req);
             }
             catch (Exception ex)
             {
                 MyDevException.Error(ex, "TariffMaster - GetClienttTariffMap", ExceptionPriority.Low, ApplicationType.APPSERVICE, req.VenueNo, 0, 0);
             }
-            return objresult;
+            return Objresult;
         }
         
         [HttpPost]
         [Route("api/TariffMaster/GetRefSplRateServiceList")]
         public IEnumerable<TariffMastServicesResponse> GetRefSplRateServiceList(GetContractMasterListRequest getRequest)
         {
-            List<TariffMastServicesResponse> objresult = new List<TariffMastServicesResponse>();
+            List<TariffMastServicesResponse> Objresult = new List<TariffMastServicesResponse>();
             try
             {
-                objresult = _tariffMasterRepository.GetRefSplRateServiceList(getRequest);
+                Objresult = _tariffMasterRepository.GetRefSplRateServiceList(getRequest);
             }
             catch (Exception ex)
             {
                 MyDevException.Error(ex, "TariffMaster - GetRefSplRateServiceList", ExceptionPriority.Low, ApplicationType.APPSERVICE, getRequest.venueNo, getRequest.venueBranchNo, getRequest.userNo);
             }
-            return objresult;
+            return Objresult;
         }
         
         [HttpPost]
         [Route("api/TariffMaster/GetReflst")]
         public IEnumerable<GetReflstRes> GetReflst(GetContractReq req)
         {
-            List<GetReflstRes> objresult = new List<GetReflstRes>();
+            List<GetReflstRes> Objresult = new List<GetReflstRes>();
             try
             {
-                objresult = _tariffMasterRepository.GetReflst(req);
+                Objresult = _tariffMasterRepository.GetReflst(req);
             }
             catch (Exception ex)
             {
                 MyDevException.Error(ex, "GetReflst", ExceptionPriority.Low, ApplicationType.APPSERVICE, req.VenueNo, 0);
             }
-            return objresult;
+            return Objresult;
         }
         
         [HttpPost]
@@ -428,64 +428,64 @@ namespace Service.API.SERVICE.Controllers
         [Route("api/TariffMaster/GetTariffDeptDiscount")]
         public IEnumerable<Tariffdeptdisreq> GetTariffDeptDiscount(Tariffdeptdis req)
         {
-            List<Tariffdeptdisreq> objresult = new List<Tariffdeptdisreq>();
+            List<Tariffdeptdisreq> Objresult = new List<Tariffdeptdisreq>();
             try
             {
-                objresult = _tariffMasterRepository.GetTariffDeptDiscount(req);
+                Objresult = _tariffMasterRepository.GetTariffDeptDiscount(req);
             }
             catch (Exception ex)
             {
                 MyDevException.Error(ex, "GetTariffDeptDiscount", ExceptionPriority.Low, ApplicationType.APPSERVICE, req.VenueNo, req.RateListNo, req.IsApproval);
             }
-            return objresult;
+            return Objresult;
         }
 
         [HttpPost]
         [Route("api/CommercialMaster/PriceHistoryService")]
         public RateHistoryServiceResponse PriceHistoryService(RateHistoryServiceRequest req)
         {
-            RateHistoryServiceResponse objresult = new RateHistoryServiceResponse();
+            RateHistoryServiceResponse Objresult = new RateHistoryServiceResponse();
             try
             {
-                objresult = _tariffMasterRepository.GetPriceHistory(req);
+                Objresult = _tariffMasterRepository.GetPriceHistory(req);
             }
             catch (Exception ex)
             {
                 MyDevException.Error(ex, "PriceHistoryService", ExceptionPriority.Low, ApplicationType.APPSERVICE, req.VenueNo, req.VenueBranchNo, req.UserNo);
             }
-            return objresult;
+            return Objresult;
         }
         
         [HttpPost]
         [Route("api/CommercialMaster/GetBasePrice")]
         public List<BaseRateResponse> GetBasePrice(RateHistoryServiceRequest req)
         {
-            List<BaseRateResponse> objresult = new List<BaseRateResponse>();
+            List<BaseRateResponse> Objresult = new List<BaseRateResponse>();
             try
             {
-                objresult = _tariffMasterRepository.GetBasePrice(req);
+                Objresult = _tariffMasterRepository.GetBasePrice(req);
             }
             catch (Exception ex)
             {
                 MyDevException.Error(ex, "GetBasePrice", ExceptionPriority.Low, ApplicationType.APPSERVICE, req.VenueNo, req.VenueBranchNo, req.UserNo);
             }
-            return objresult;
+            return Objresult;
         }
         
         [HttpPost]
         [Route("api/CommercialMaster/InsertBaseRate")]
         public int InsertBaseRate(List<BaseRateResponse> req)
         {
-            int objresult = 0;
+            int Objresult = 0;
             try
             {
-                objresult = _tariffMasterRepository.InsertBaseRate(req);
+                Objresult = _tariffMasterRepository.InsertBaseRate(req);
             }
             catch (Exception ex)
             {
                 MyDevException.Error(ex, "InsertBaseRate", ExceptionPriority.Low, ApplicationType.APPSERVICE, 0, 0, 0);
             }
-            return objresult;
+            return Objresult;
         }        
     }
 }

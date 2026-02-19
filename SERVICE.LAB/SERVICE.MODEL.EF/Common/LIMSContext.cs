@@ -51,11 +51,11 @@ namespace Service.Model.EF
         public virtual DbSet<TblReportMaster> TblReportMaster { get; set; }
         public virtual DbSet<PatientDueResponse> GetPatientDueInfoDTO { get; set; }
         public virtual DbSet<CreatePatientDueResponse> InsertPatientDueDTO { get; set; }
-        public virtual DbSet<EditPatientResponse> UpdatePatientDetailsDTO { get; set; }
+        public virtual DbSet<EditPatientResponse> UpdatePatientdetailsDTO { get; set; }
         public virtual DbSet<TblCustomer> TblCustomer { get; set; }
-        public virtual DbSet<GetPatientDetailsResponse> GetPatientDetailsDTO { get; set; }
-        public virtual DbSet<GetEditPatientDetailsResponse> GetEditPatientDetailsDTO { get; set; }
-        public virtual DbSet<GetEditPatientDetailsResponse> GetEditBillingPatientDetailsDTO { get; set; }
+        public virtual DbSet<GetPatientDetailsResponse> GetPatientdetailsDTO { get; set; }
+        public virtual DbSet<GetEditPatientDetailsResponse> GetEditPatientdetailsDTO { get; set; }
+        public virtual DbSet<GetEditPatientDetailsResponse> GetEditBillingPatientdetailsDTO { get; set; }
         public virtual DbSet<GetEditBillPaymentDetails> GetEditBillPaymentDetailsDTO { get; set; }
         public virtual DbSet<GetBillInvoiceExists> GetBillInvoiceExists { get; set; }
         public virtual DbSet<SampleActionDTO> SampleActionDTO { get; set; }
@@ -64,7 +64,7 @@ namespace Service.Model.EF
         public virtual DbSet<DashBoardResponse> GetDashBoardsDTO { get; set; }
         public virtual DbSet<CommonAdminResponse> UpdateCustomerDetailsDTO { get; set; }
         public virtual DbSet<CommonAdminResponse> UpdateOrderDatesDTO { get; set; }
-        public virtual DbSet<SearchVisitDetailsResponse> SearchVisitIdDTO { get; set; }
+        public virtual DbSet<SearchVisitdetailsResponse> SearchVisitIdDTO { get; set; }
         public virtual DbSet<SearchUpdateDatesResponse> SearchUpdateDatesDTO { get; set; }
         public virtual DbSet<rescheckExists> checkExists { get; set; }
         public virtual DbSet<TblUserSession> TblUserSession { get; set; }
@@ -73,7 +73,7 @@ namespace Service.Model.EF
         public virtual DbSet<dblCancelVisit> GetPatientCancelTestInfo { get; set; }
         public virtual DbSet<rtnCancelTest> InsertCancelTest { get; set; }
         public virtual DbSet<LstSearch> GetArchivePatientDTO { get; set; }
-        public virtual DbSet<GetArchivePatientResponse> GetArchivePatientDetailsDTO { get; set; }
+        public virtual DbSet<GetArchivePatientResponse> GetArchivePatientdetailsDTO { get; set; }
         public virtual DbSet<GetICMRResponse> GetICMRResponseDTO { get; set; }
         public virtual DbSet<AuditLogDTO> AuditLogDTO { get; set; }
         public virtual DbSet<AuditHistory> AuditHistory { get; set; }
@@ -85,9 +85,9 @@ namespace Service.Model.EF
         public virtual DbSet<GetMultiplsSampleResponse> GetMultiplsSampleByTestId { get; set; }
         public virtual DbSet<GetManageOptionalResponse> ManageOptionalTestPackage { get; set; }
         public virtual DbSet<UpdateRefRangeResponse> UpdateMultiSampleRefRange { get; set; }
-        public virtual DbSet<ReasonDetailsResponse> GetServiceRejectReason { get; set; }
+        public virtual DbSet<ReasonDetailsResponse> GetserviceRejectReason { get; set; }
         public virtual DbSet<PatientsMasterResponse> GetPatientMaster { get; set; }
-        public virtual DbSet<rtnpatient> SavePatientsMaster { get; set; }
+        public virtual DbSet<Rtnpatient> SavePatientsMaster { get; set; }
         public virtual DbSet<Tblspecialization> Getspecialization { get; set; }
         public virtual DbSet<SpecializationMasterResponse> Insertspecialization { get; set; }
         public virtual DbSet<CheckMasterNameExistsResponse> Checkspecialization { get; set; }
@@ -129,7 +129,7 @@ namespace Service.Model.EF
         public virtual DbSet<UserDeptmentDetails> GetDeptDetails { get; set; }
         public virtual DbSet<SingleTestCheckRes> getSubtestCheck { get; set; }
         public virtual DbSet<DenguTestRes> getDenguTestDetails { get; set; }
-        public virtual DbSet<GetSlidePrintPatientDetailsResponse> GetSlidePrintingPatientDTO { get; set; }
+        public virtual DbSet<GetSlidePrintPatientdetailsResponse> GetSlidePrintingPatientDTO { get; set; }
         public virtual DbSet<CommonTokenResponse> GetGenerateRCHNoDTO { get; set; }
         public virtual DbSet<ExistingRCHNoResponse> GetExistngRCHNoDTO { get; set; }
         public virtual DbSet<GetBulkSlidePrintingDetails> GetBulkSlidePrintingDTO { get; set; }
@@ -140,7 +140,7 @@ namespace Service.Model.EF
         public virtual DbSet<InsertDeptRes> InsertDeptMaster { get; set; }
         public virtual DbSet<SpecimenMappingoutput> SpecimenMappingoutput { get; set; }
         public virtual DbSet<SpecimenMappingResponse> SpecimenMappingResponse { get; set; }
-        public virtual DbSet<EditPatientResponseNew> UpdatePatientDetailsDTONew { get; set; }
+        public virtual DbSet<EditPatientResponseNew> UpdatePatientdetailsDTONew { get; set; }
         public virtual DbSet<BarcodePrintResponse> BarcodePrintInfo { get; set; }
         public virtual DbSet<SearchBranchSampleBarcodeResponse> SearchBranchSampleByBarcode { get; set; }
         public virtual DbSet<GetPatientVisitActionHistoryResponse> GetPatientVisitActionHistory { get; set; }
@@ -149,12 +149,12 @@ namespace Service.Model.EF
         public virtual DbSet<InsertCashExpenseDTO> ApproveExpenses { get; set; }
         public virtual DbSet<GetReqCancelResponse> GetRefundCancelRequest { get; set; }
         public virtual DbSet<UpdateReqCancelResponse> ApproveRefundCancel { get; set; }
-        public virtual DbSet<PrePrintBarcodeOrderResponse> PrePrintBarcodeOrderrequest { get; set; }
+        public virtual DbSet<PrePrintBarcodeOrderresponse> PrePrintBarcodeOrderrequest { get; set; }
         public virtual DbSet<InventoryDashBoardRes> GetInventoryDashBoardDTO { get; set; }
         public virtual DbSet<GetHcDocumentsDetailsResponse> GetHcDocumentsDetails { get; set; }
         public virtual DbSet<Routelst> GetrouteMaster { get; set; }
         public virtual DbSet<RouteMasterResponse> InsertRouteMaster { get; set; }
-        public virtual DbSet<responsehistory> DeleteHistory { get; set; }
+        public virtual DbSet<Responsehistory> DeleteHistory { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -495,7 +495,7 @@ namespace Service.Model.EF
             modelBuilder.Entity<EditPatientResponse>(entity =>
             {
                 entity.HasKey(e => e.statusCode);
-                entity.ToTable("pro_UpdateEditPatientDetails");
+                entity.ToTable("pro_UpdateEditPatientdetails");
                 entity.Property(e => e.statusCode).HasColumnName("statusCode");
             });
 
@@ -536,7 +536,7 @@ namespace Service.Model.EF
             modelBuilder.Entity<GetPatientDetailsResponse>(entity =>
             {
                 entity.HasKey(e => e.Sno);
-                entity.ToTable("Pro_GetPatientDetails");
+                entity.ToTable("Pro_GetPatientdetails");
                 entity.Property(e => e.Sno).HasColumnName("Sno");
             });
 
@@ -575,10 +575,10 @@ namespace Service.Model.EF
                 entity.Property(e => e.status).HasColumnName("status");
             });
 
-            modelBuilder.Entity<SearchVisitDetailsResponse>(entity =>
+            modelBuilder.Entity<SearchVisitdetailsResponse>(entity =>
             {
                 entity.HasKey(e => e.Row_num);
-                entity.ToTable("Pro_GetVisitDetails");
+                entity.ToTable("Pro_GetVisitdetails");
                 entity.Property(e => e.Row_num).HasColumnName("Row_num");
             });
 
@@ -719,7 +719,7 @@ namespace Service.Model.EF
             modelBuilder.Entity<GetEditPatientDetailsResponse>(entity =>
             {
                 entity.HasKey(e => e.Row_Num);
-                entity.ToTable("Pro_GetEditPatientDetails");
+                entity.ToTable("Pro_GetEditPatientdetails");
                 entity.Property(e => e.Row_Num).HasColumnName("Row_Num");
                 entity.Property(e => e.SNetAmount).IsRequired(false);
             });
@@ -734,7 +734,7 @@ namespace Service.Model.EF
             modelBuilder.Entity<GetEditPatientDetailsResponse>(entity =>
             {
                 entity.HasKey(e => e.Row_Num);
-                entity.ToTable("Pro_GetEditBillingPatientDetails");
+                entity.ToTable("Pro_GetEditBillingPatientdetails");
                 entity.Property(e => e.Row_Num).HasColumnName("Row_Num");
                 entity.Property(e => e.SNetAmount).IsRequired(false);
             });
@@ -830,7 +830,7 @@ namespace Service.Model.EF
                 entity.Property(e => e.RowNo).HasColumnName("RowNo");
             });
 
-            modelBuilder.Entity<rtnpatient>(entity =>
+            modelBuilder.Entity<Rtnpatient>(entity =>
             {
                 entity.HasKey(e => e.PatientNo);
                 entity.ToTable("pro_InsertPatientMaster");
@@ -1147,10 +1147,10 @@ namespace Service.Model.EF
                 entity.Property(e => e.rowNo).HasColumnName("rowNo");
             });
 
-            modelBuilder.Entity<GetSlidePrintPatientDetailsResponse>(entity =>
+            modelBuilder.Entity<GetSlidePrintPatientdetailsResponse>(entity =>
             {
                 entity.HasKey(e => e.Sno);
-                entity.ToTable("pro_GetSlidePrintPatientDetails");
+                entity.ToTable("pro_GetSlidePrintPatientdetails");
                 entity.Property(e => e.Sno).HasColumnName("Sno");
             });
 
@@ -1313,7 +1313,7 @@ namespace Service.Model.EF
                 entity.Property(e => e.ApprovedStatus).HasColumnName("ApprovedStatus");
             });
 
-            modelBuilder.Entity<PrePrintBarcodeOrderResponse>(entity =>
+            modelBuilder.Entity<PrePrintBarcodeOrderresponse>(entity =>
             {
                 entity.HasKey(e => e.Row_Num);
                 entity.ToTable("Pro_GetPrePrintBarCodeOrder");
@@ -1348,7 +1348,7 @@ namespace Service.Model.EF
                 entity.Property(e => e.RouteNo).HasColumnName("RouteNo");
             });
            
-            modelBuilder.Entity<responsehistory>(entity =>
+            modelBuilder.Entity<Responsehistory>(entity =>
             {
                 entity.HasKey(e => e.visitId);
                 entity.ToTable("pro_DeleteHistory");

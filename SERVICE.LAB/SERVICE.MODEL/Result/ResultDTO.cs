@@ -8,7 +8,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace Service.Model
 {
 
-    public partial class requestsearchresultvisit
+    public partial class Requestsearchresultvisit
     {
         public string pagecode { get; set; }
         public int viewvenuebranchno { get; set; }
@@ -18,14 +18,14 @@ namespace Service.Model
         public int venuebranchno { get; set; }
         public int userno { get; set; }
     }
-    public partial class lstsearchresultvisit
+    public partial class Lstsearchresultvisit
     {
         public int patientvisitno { get; set; }
         public string displaytext { get; set; }
         public string searchdisplaytext { get; set; }
         public int patientno { get; set; }
     }
-    public partial class requestresultvisit
+    public partial class Requestresultvisit
     {
         public Int16 maindeptNo { get; set; }
         public string pagecode { get; set; }
@@ -60,7 +60,7 @@ namespace Service.Model
         public int patientno { get; set; }
         public string multiFieldsSearch { get; set; }
     }
-    public partial class lstresultvisitdbl
+    public partial class Lstresultvisitdbl
     {
         public int rowno { get; set; }
         public int patientno { get; set; }
@@ -111,7 +111,7 @@ namespace Service.Model
         public bool isVipIndication { get; set; }
         public bool isSecondReviewAvail { get; set; }
     }
-    public partial class lstresultvisit
+    public partial class Lstresultvisit
     {
         public Int16 maindeptNo { get; set; }
         public int rowno { get; set; }
@@ -136,13 +136,13 @@ namespace Service.Model
         public bool visRemarks { get; set; }
         public bool visCPRemarks { get; set; }
         public int totalRecords { get; set; }
-        public List<lstservice> lstservice { get; set; }
+        public List<Lstservice> Lstservice { get; set; }
         public string venueBranchName { get; set; }
         public string nricnumber { get; set; }
         public bool isVipIndication { get; set; }
         public bool isSecondReviewAvail { get; set; }
     }
-    public partial class lstservice
+    public partial class Lstservice
     {
         public int patientvisitno { get; set; }
         public int orderlistno { get; set; }
@@ -170,7 +170,7 @@ namespace Service.Model
         public bool isVipIndication { get; set; }
     }
 
-    public partial class requestdeltaresult
+    public partial class requestDeltaresult
     {
         public int venueno { get; set; }
         public int venuebranchno { get; set; }
@@ -181,8 +181,7 @@ namespace Service.Model
         public string mrdnumber { get; set; }
         public string nricnumber { get; set; }
     }
-
-    public partial class deltaresult
+    public partial class Deltaresult
     {
         public int rowno { get; set; }
         public int patientno { get; set; }
@@ -197,7 +196,7 @@ namespace Service.Model
         public string unitName { get; set; }
     }
 
-    public partial class requestresult
+    public partial class Requestresult
     {
         public string pagecode { get; set; }
         public int venueno { get; set; }
@@ -213,7 +212,7 @@ namespace Service.Model
         public int viewvenuebranchno { get; set; }
 
     }
-    public partial class lstresultdbl
+    public partial class Lstresultdbl
     {
         public int rowno { get; set; }
         public int patientno { get; set; }
@@ -291,9 +290,9 @@ namespace Service.Model
         public bool isformulaparameter { get; set; }
         public int formulaserviceno { get; set; }
         public string formulaservicetype { get; set; }
-        public string formulajson { get; set; }
-        public string formulaparameterjson { get; set; }
-        public string picklistjson { get; set; }
+        public string Formulajson { get; set; }
+        public string Formulaparameterjson { get; set; }
+        public string Picklistjson { get; set; }
         public int headerno { get; set; }
         public bool isedit { get; set; }
         public int testinter { get; set; }
@@ -398,17 +397,17 @@ namespace Service.Model
         public string prevABORHResult { get; set; }
         public bool isAbnormalRemove { get; set; }
     }
-    public partial class objresult
+    public partial class Objresult
     {
         public int venueno { get; set; }
         public int venuebranchno { get; set; }
         public int userno { get; set; }
         public string pagecode { get; set; }
         public string action { get; set; }
-        public List<lstvisit> lstvisit { get; set; }
+        public List<Lstvisit> Lstvisit { get; set; }
         public string odxml { get; set; }
     }
-    public partial class lstvisit
+    public partial class Lstvisit
     {
         public int patientno { get; set; }
         public int patientvisitno { get; set; }
@@ -424,7 +423,6 @@ namespace Service.Model
         public string physicianname { get; set; }
         public bool visstat { get; set; }
         public bool visremarks { get; set; }
-
         public string address { get; set; }
         public string dob { get; set; }
         public string urntype { get; set; }
@@ -433,7 +431,7 @@ namespace Service.Model
         public string enteredon { get; set; }
         public string validatedon { get; set; }
         public string approvedon { get; set; }
-        public List<lstorderlist> lstorderlist { get; set; }
+        public List<Lstorderlist> Lstorderlist { get; set; }
         public int NotifyCount { get; set; }
         public string venueBranchName { get; set; }
         public string nricNumber { get; set; }
@@ -444,7 +442,7 @@ namespace Service.Model
         public string taskdttm { get; set; }
         public string allergyInfo { get; set; } 
     }
-    public partial class lstorderlist
+    public partial class Lstorderlist
     {
         public int patientvisitno { get; set; }
         public int orderlistno { get; set; }
@@ -476,7 +474,7 @@ namespace Service.Model
         public bool isrecollect { get; set; }
         public bool isrecheck { get; set; }
         public bool isgrouptd { get; set; }
-        public List<lstorderdetail> lstorderdetail { get; set; }
+        public List<Lstorderdetail> Lstorderdetail { get; set; }
         public int isMultiEditor { get; set; }
         public bool isabnormal { get; set; }
         public bool iscritical { get; set; }
@@ -515,7 +513,7 @@ namespace Service.Model
         public bool IsPartialValidationTrans { get; set; }
         public bool isUploadOption { get; set; }
     }
-    public partial class lstorderdetail
+    public partial class Lstorderdetail
     {
         public int id { get; set; }
         public int orderlistno { get; set; }
@@ -548,9 +546,9 @@ namespace Service.Model
         public bool isformulaparameter { get; set; }
         public int formulaserviceno { get; set; }
         public string formulaservicetype { get; set; }
-        public List<formulajson> formulajson { get; set; }
-        public List<formulaparameterjson> formulaparameterjson { get; set; }
-        public List<picklistjson> picklistjson { get; set; }
+        public List<Formulajson> Formulajson { get; set; }
+        public List<Formulaparameterjson> Formulaparameterjson { get; set; }
+        public List<Picklistjson> Picklistjson { get; set; }
         public int headerno { get; set; }
         public bool isedit { get; set; }
         public int testinter { get; set; }
@@ -616,7 +614,7 @@ namespace Service.Model
         public bool isDeltaApprovalRestriction { get; set; }
         public string approvedprevresult { get; set; }
         public bool isLogicNeeded { get; set; }
-        public List<logicConceptResponse> logicneededjson { get; set; }
+        public List<LogicConceptResponse> logicneededjson { get; set; }
         public bool isExtraSubtestEnable { get; set; }
         public bool isprevdiresultavail { get; set; }
         public bool isIndRerun { get; set; }
@@ -641,7 +639,7 @@ namespace Service.Model
         public bool isAbnormalRemove { get; set; }
     }
 
-    public partial class lsthistorydbl
+    public partial class Lsthistorydbl
     {
         public int rowno { get; set; }
         public int patientno { get; set; }
@@ -682,33 +680,32 @@ namespace Service.Model
         public string resultcomments { get; set; }
         public string resultcommentsflag { get; set; }
     }
-
-    public partial class resultrtn
+    public partial class Resultrtn
     {
         public int patientvisitno { get; set; }
         public int isMultiEditor { get; set; }
         public int multieditorcount { get; set; }
         public int RsltAmendNo { get; set; }
         public string RsltAmendCode { get; set; }
-        public List<RecallTestDetailsResponse> lstTestDetails { get; set; }
+        public List<RecallTestDetailsResponse> LsttestDetails { get; set; }
     }
-    public partial class recallResponse
+    public partial class RecallResponse
     {
         public int patientvisitno { get; set; }
         public int isMultiEditor { get; set; }
         public int multieditorcount { get; set; }
         public int RsltAmendNo { get; set; }
         public string RsltAmendCode { get; set; }
-        public List<RecallTestDetailsResponse> lstTestDetails { get; set; }
+        public List<RecallTestDetailsResponse> LsttestDetails { get; set; }
     }
-    public partial class recallDataResponse
+    public partial class RecallDataResponse
     {
         public int patientvisitno { get; set; }
         public int isMultiEditor { get; set; }
         public int multieditorcount { get; set; }
         public int RsltAmendNo { get; set; }
         public string RsltAmendCode { get; set; }
-        public string? lstTestDetails { get; set; }
+        public string? LsttestDetails { get; set; }
     }
     public partial class RecallTestDetailsResponse
     {
@@ -718,7 +715,7 @@ namespace Service.Model
         public int resultTypeNo { get; set; }
         public string resultType { get; set; }
     }
-    public partial class formulajson
+    public partial class Formulajson
     {
         public int parameterserviceno { get; set; }
         public string parameterservicetype { get; set; }
@@ -726,20 +723,18 @@ namespace Service.Model
         public decimal value { get; set; }
         public string foperator { get; set; }
     }
-
-    public partial class formulaparameterjson
+    public partial class Formulaparameterjson
     {
         public int serviceno { get; set; }
         public string servicetype { get; set; }
     }
-    public partial class picklistjson
+    public partial class Picklistjson
     {
         public string pickvalue { get; set; }
         public bool isdefault { get; set; }
         public bool isabnormal { get; set; }
         public string comments { get; set; }
     }
-
     public partial class CustomerMsgDetails
     {
         public int rowno { get; set; }
@@ -751,9 +746,8 @@ namespace Service.Model
         public bool Isembed { get; set; }
         public decimal DueAmount { get; set; }
     }
-
     //MB
-    public partial class objresultmbdbl
+    public partial class Objresultmbdbl
     {
         public int rowno { get; set; }
         public int patientno { get; set; }
@@ -770,7 +764,6 @@ namespace Service.Model
         public string physicianname { get; set; }
         public bool visstat { get; set; }
         public bool visremarks { get; set; }
-
         public string address { get; set; }
         public string dob { get; set; }
         public string urntype { get; set; }
@@ -834,21 +827,17 @@ namespace Service.Model
         public string AllergyInfo { get; set; }
         public string ColonyCountText { get; set; }
     }
-
-    public partial class lstgramstainmb
+    public partial class Lstgramstainmb
     {
         public int gsno { get; set; }
         public int gsvno { get; set; }
     }
-
-
-    public partial class lstgramstainmbbottle
+    public partial class Lstgramstainmbbottle
     {
         public int gsbno { get; set; }
         public int gsvbno { get; set; }
     }
-
-    public partial class lstmbdrugjson
+    public partial class Lstmbdrugjson
     {
         public int organismtypeno { get; set; }
         public int organismno { get; set; }
@@ -867,15 +856,13 @@ namespace Service.Model
         public int resultpattern { get; set; }
         public string resultpatterntext { get; set; }
         public int colonycount { get; set; }
-
         public string colonycounttext { get; set; }
         public string orgbasednotes { get; set; }
         public int orgno { get; set; }
         public bool isInterface { get; set; }
         public string orgType { get; set; }
     }
-
-    public partial class objresultmb
+    public partial class Objresultmb
     {
         public int venueno { get; set; }
         public int venuebranchno { get; set; }
@@ -897,7 +884,6 @@ namespace Service.Model
         public string physicianname { get; set; }
         public bool visstat { get; set; }
         public bool visremarks { get; set; }
-
         public string address { get; set; }
         public string dob { get; set; }
         public string urntype { get; set; }
@@ -940,12 +926,12 @@ namespace Service.Model
         public string patterndescription { get; set; }
         public int colonycount { get; set; }
         public string wetpreparation { get; set; }
-        public List<lstgramstainmb> lstgramstainmb { get; set; }
-        public List<lstgramstainmbbottle> lstgramstainmbbottle { get; set; }
+        public List<Lstgramstainmb> Lstgramstainmb { get; set; }
+        public List<Lstgramstainmbbottle> Lstgramstainmbbottle { get; set; }
         public string gramstaintext { get; set; }
         public string gramstainbottletext { get; set; }
         public string comments { get; set; }
-        public List<lstorg> lstorg { get; set; }
+        public List<Lstorg> Lstorg { get; set; }
         public string organtixml { get; set; }
         public Int16 approvalDoctor { get; set; }
         public string venueBranchName { get; set; }
@@ -966,8 +952,7 @@ namespace Service.Model
         public string AllergyInfo { get; set; }
         public string ColonyCountText { get; set; }
     }
-
-    public partial class lstorg
+    public partial class Lstorg
     {
         public int organismtypeno { get; set; }
         public int organismno { get; set; }
@@ -981,11 +966,11 @@ namespace Service.Model
         public int colonycount { get; set; }
         public string colonycounttext { get; set; }
         public string orgbasednotes { get; set; }
-        public List<lstdrug> lstdrug { get; set; }
+        public List<Lstdrug> Lstdrug { get; set; }
         public int orgno { get; set; }
         public bool isInterface { get; set; }
     }
-    public partial class lstdrug
+    public partial class Lstdrug
     {
         public int organismno { get; set; }
         public int antibioticno { get; set; }
@@ -998,8 +983,7 @@ namespace Service.Model
         public bool isshow { get; set; }
         public string orgType { get; set; }
     }
-
-    public partial class objresulttemplatedbl
+    public partial class Objresulttemplatedbl
     {
         public int patientno { get; set; }
         public int patientvisitno { get; set; }
@@ -1015,7 +999,6 @@ namespace Service.Model
         public string physicianname { get; set; }
         public bool visstat { get; set; }
         public bool visremarks { get; set; }
-
         public string address { get; set; }
         public string dob { get; set; }
         public string urntype { get; set; }
@@ -1067,8 +1050,7 @@ namespace Service.Model
         public string malignantCase { get; set; }
         public int defaultPathologist { get; set; }
     }
-
-    public partial class objresulttemplate
+    public partial class Objresulttemplate
     {
         public int venueno { get; set; }
         public int venuebranchno { get; set; }
@@ -1156,9 +1138,7 @@ namespace Service.Model
         public bool IsPartialValidationTrans { get; set; }
         public int defaultPathologist { get; set; }
     }
-
-
-    public partial class lstrecalldbl
+    public partial class Lstrecalldbl
     {
         public int rowno { get; set; }
         public int patientVisitNo { get; set; }
@@ -1179,7 +1159,7 @@ namespace Service.Model
         public string orderListStatusText { get; set; }
         public string venueBranchName { get; set; }
     }
-    public partial class objrecall
+    public partial class Objrecall
     {
         public int venueno { get; set; }
         public int venuebranchno { get; set; }
@@ -1193,11 +1173,10 @@ namespace Service.Model
         public string extenalVisitID { get; set; }
         public string visitDTTM { get; set; }
         public string referredBy { get; set; }
-        public List<lstRecallServicves> lstRecallServicves { get; set; }
+        public List<LstRecallServicves> LstRecallServicves { get; set; }
         public string venueBranchName { get; set; }
     }
-
-    public partial class lstRecallServicves
+    public partial class LstRecallServicves
     {
         public bool isChecked { get; set; }
         public int patientVisitNo { get; set; }
@@ -1210,8 +1189,7 @@ namespace Service.Model
         public string orderListStatusText { get; set; }
         public string comments { get; set; }
     }
-
-    public partial class objbulkresultdbl
+    public partial class Objbulkresultdbl
     {
         public int patientno { get; set; }
         public int patientvisitno { get; set; }
@@ -1227,7 +1205,6 @@ namespace Service.Model
         public string physicianname { get; set; }
         public bool visstat { get; set; }
         public bool visremarks { get; set; }
-
         public string address { get; set; }
         public string dob { get; set; }
         public string urntype { get; set; }
@@ -1236,7 +1213,6 @@ namespace Service.Model
         public string enteredon { get; set; }
         public string validatedon { get; set; }
         public string approvedon { get; set; }
-        //--
         public int orderlistno { get; set; }
         public int departmentno { get; set; }
         public string departmentname { get; set; }
@@ -1261,7 +1237,6 @@ namespace Service.Model
         public bool isabnormal { get; set; }
         public bool iscritical { get; set; }
         public bool ischecked { get; set; }
-        //-- 
         public string icmrPatientId { get; set; }
         public string srfNumber { get; set; }
         public int templateno { get; set; }
@@ -1273,18 +1248,16 @@ namespace Service.Model
         public bool IsPartialEntryTrans { get; set; }
         public bool IsPartialValidationTrans { get; set; }
     }
-
-    public partial class objbulkresulttemplate
+    public partial class Objbulkresulttemplate
     {
         public int venueno { get; set; }
         public int venuebranchno { get; set; }
         public int userno { get; set; }
         public string pagecode { get; set; }
         public string action { get; set; }
-        public List<objresulttemplate> lstbulkresult { get; set; }
+        public List<Objresulttemplate> lstbulkresult { get; set; }
     }
-
-    public class orgtypeantibiotic
+    public class Orgtypeantibiotic
     {
         public bool isshow { get; set; }
         public int antibioticno { get; set; }
@@ -1299,8 +1272,7 @@ namespace Service.Model
         public int? resistantTo { get; set; }
         public string interprange { get; set; }
     }
-
-    public class covidWorkOrderreq
+    public class CovidWorkOrderreq
     {
         public string pagecode { get; set; }
         public int venueno { get; set; }
@@ -1318,17 +1290,15 @@ namespace Service.Model
         public int orderstatus { get; set; }
         public int routeNo { get; set; }
     }
-
-    public class covidWorkOrder
+    public class CovidWorkOrder
     {
         public string pagecode { get; set; }
         public int venueno { get; set; }
         public int venuebranchno { get; set; }
         public int userno { get; set; }
-        public List<covidresult> lstcovidresult { get; set; }
+        public List<Covidresult> lstCovidresult { get; set; }
     }
-
-    public class covidresult
+    public class Covidresult
     {
         public int PatientVisitNo { get; set; }
         public int OrderListNo { get; set; }
@@ -1362,7 +1332,6 @@ namespace Service.Model
         public int venuebranchno { get; set; }
         public int userno { get; set; }
         public int deptNo { get; set; }
-
     }
     public partial class ApprovalDoctorResponse
     {
@@ -1402,10 +1371,9 @@ namespace Service.Model
         public string dob { get; set; }
         public string gender { get; set; }
         public int refferalType { get; set; }
-
     }
     //merging concept
-    public class mergeresultrequest
+    public class Mergeresultrequest
     {
         public int patientVisitNo { get; set; }
         public int venueNo { get; set; }
@@ -1416,7 +1384,7 @@ namespace Service.Model
         public int subtestno { get; set; }
         public string nricNo { get; set; }
     }
-    public class mergeresultresponse
+    public class Mergeresultresponse
     {
         public int rowNo { get; set; }
         public int orderDetailsNo { get; set; }
@@ -1450,21 +1418,21 @@ namespace Service.Model
         public string resultflag { get; set; }
         public int headerNo { get; set; }
     }
-    public class savemergeresultrequest
+    public class Savemergeresultrequest
     {
         public string pagecode { get; set; }
         public string action { get; set; }
-        public List<mergeresultresponse> lstmergedresult { get; set; }
+        public List<Mergeresultresponse> lstmergedresult { get; set; }
         public int venueNo { get; set; }
         public int venueBranchNo { get; set; }
         public int userNo { get; set; }
     }
-    public class savemergeresultresponse
+    public class Savemergeresultresponse
     {
         public int status { get; set; }
     }
     //
-    public class culturehistoryrequest
+    public class Culturehistoryrequest
     {
         public int venueNo { get; set; }
         public int venueBranchNo { get; set; }
@@ -1473,7 +1441,7 @@ namespace Service.Model
         public int patientvisitno { get; set; }
         public string nricNo { get; set; }
     }
-    public class culturehistoryreponse
+    public class Culturehistoryreponse
     {
         public int rowNo { get; set; }
         public string visitID { get; set; }
@@ -1485,7 +1453,7 @@ namespace Service.Model
         public string testType { get; set; }
         public int resultTypeNo { get; set; }
     }
-    public partial class analyserrequestresult
+    public partial class AnalyserRequestresult
     {
         public string pagecode { get; set; }
         public int venueno { get; set; }
@@ -1505,7 +1473,7 @@ namespace Service.Model
         public Int16 testfilterflag { get; set; }
         public int patientno { get; set; }
     }
-    public partial class objbulkresult
+    public partial class Objbulkresult
     {
         public int rowno { get; set; }
         public int venueno { get; set; }
@@ -1517,11 +1485,11 @@ namespace Service.Model
         public string servicetype { get; set; }
         public string servicename { get; set; }
         public string oTTestCode { get; set; }
-        public List<objbulkresultdetails> lstbulkresultdetails { get; set; }
+        public List<Objbulkresultdetails> lstbulkresultdetails { get; set; }
         public bool IsPartialEntryMaster { get; set; }
         public bool IsPartialValidationMaster { get; set; }
     }
-    public class objbulkresultdetails
+    public class Objbulkresultdetails
     {
         public int sno { get; set; }
         public string labaccessionno { get; set; }
@@ -1553,9 +1521,9 @@ namespace Service.Model
         public bool isformulaparameter { get; set; }
         public int formulaserviceno { get; set; }
         public string formulaservicetype { get; set; }
-        public List<formulajson> formulajson { get; set; }
-        public List<formulaparameterjson> formulaparameterjson { get; set; }
-        public List<picklistjson> picklistjson { get; set; }
+        public List<Formulajson> Formulajson { get; set; }
+        public List<Formulaparameterjson> Formulaparameterjson { get; set; }
+        public List<Picklistjson> Picklistjson { get; set; }
         public string formularesult { get; }
         public string masterllcolumn { get; set; }
         public string masterhlcolumn { get; set; }
@@ -1611,7 +1579,7 @@ namespace Service.Model
         public bool IsPartialValidationTrans { get; set; }
         public string prevABORHResult { get; set; }
     }
-    public partial class lstbulkresultdbl
+    public partial class Lstbulkresultdbl
     {
         public int rowno { get; set; }
         public int patientno { get; set; }
@@ -1628,7 +1596,6 @@ namespace Service.Model
         public string physicianname { get; set; }
         public bool visstat { get; set; }
         public bool visremarks { get; set; }
-
         public string address { get; set; }
         public string dob { get; set; }
         public string urntype { get; set; }
@@ -1637,7 +1604,6 @@ namespace Service.Model
         public string enteredon { get; set; }
         public string validatedon { get; set; }
         public string approvedon { get; set; }
-        //--
         public int orderlistno { get; set; }
         public int departmentno { get; set; }
         public string departmentname { get; set; }
@@ -1660,8 +1626,7 @@ namespace Service.Model
         public bool istat { get; set; }
         public bool iscontestinter { get; set; }
         public int groupinter { get; set; }
-        public bool ischecked { get; set; }
-        //-- 
+        public bool ischecked { get; set; } 
         public int orderdetailsno { get; set; }
         public string testtype { get; set; }
         public int testno { get; set; }
@@ -1690,13 +1655,12 @@ namespace Service.Model
         public bool isformulaparameter { get; set; }
         public int formulaserviceno { get; set; }
         public string formulaservicetype { get; set; }
-        public string formulajson { get; set; }
-        public string formulaparameterjson { get; set; }
-        public string picklistjson { get; set; }
+        public string Formulajson { get; set; }
+        public string Formulaparameterjson { get; set; }
+        public string Picklistjson { get; set; }
         public int headerno { get; set; }
         public bool isedit { get; set; }
         public int testinter { get; set; }
-        //
         public int methodno { get; set; }
         public string methodname { get; set; }
         public int unitno { get; set; }
@@ -1878,8 +1842,8 @@ namespace Service.Model
         public string fresult { get; set; }
         public int fresulttypeno { get; set; }
         public string fresulttype { get; set; }
-        public string fpicklistjson { get; set; }
-        public List<picklistjson> fpicklistjsondata { get; set; }
+        public string fPicklistjson { get; set; }
+        public List<Picklistjson> fPicklistjsondata { get; set; }
         public string fbarcode { get; set; }
         public int fserviceseqno { get; set; }
         public int ftestseqno { get; set; }
@@ -1916,8 +1880,8 @@ namespace Service.Model
         public string tresult { get; set; }
         public int tresulttypeno { get; set; }
         public string tresulttype { get; set; }
-        public string tpicklistjson { get; set; }
-        public List<picklistjson> tpicklistjsondata { get; set; }
+        public string tPicklistjson { get; set; }
+        public List<Picklistjson> tPicklistjsondata { get; set; }
         public string tbarcode { get; set; }
         public int tserviceseqno { get; set; }
         public int ttestseqno { get; set; }
@@ -1963,7 +1927,7 @@ namespace Service.Model
         public string fresult { get; set; }
         public int fresulttypeno { get; set; }
         public string fresulttype { get; set; }
-        public string fpicklistjson { get; set; }
+        public string fPicklistjson { get; set; }
         public string fbarcode { get; set; }
         public int fserviceseqno { get; set; }
         public int ftestseqno { get; set; }
@@ -2000,7 +1964,7 @@ namespace Service.Model
         public string tresult { get; set; }
         public int tresulttypeno { get; set; }
         public string tresulttype { get; set; }
-        public string tpicklistjson { get; set; }
+        public string tPicklistjson { get; set; }
         public string tbarcode { get; set; }
         public int tserviceseqno { get; set; }
         public int ttestseqno { get; set; }
@@ -2021,7 +1985,7 @@ namespace Service.Model
     {
         public int OStatus { get; set; }
     }
-    public partial class logicConceptResponse
+    public partial class LogicConceptResponse
     {
         public int logicNeededServiceNo { get; set; }
         public string logicNeededServiceType { get; set; }
@@ -2044,7 +2008,7 @@ namespace Service.Model
         public string mailto { get; set; }
         public string visitid { get; set; }
     }
-    public class logicCommentsRequest
+    public class LogicCommentsRequest
     {
         public int venueNo { get; set; }
         public string logicName { get; set; }
@@ -2053,13 +2017,13 @@ namespace Service.Model
         public int venueBranchNo { get; set; }
         public int userNo { get; set; }
     }
-    public class logicCommentsRespose
+    public class LogicCommentsRespose
     {
         public int LogicCommentsId { get; set; }
         public string LogicComments { get; set; }
     }
     //Dc - IsExtra subtest flag based calculation
-    public partial class extrasubtestflagbasedformularequest
+    public partial class Extrasubtestflagbasedformularequest
     {
         public int venueNo { get; set; }
         public string pageCode { get; set; }
@@ -2069,13 +2033,13 @@ namespace Service.Model
         public int serviceNo { get; set; }
         public string serviceType { get; set; }
     }
-    public partial class extrasubtestflagbasedformularesponse
+    public partial class Extrasubtestflagbasedformularesponse
     {
         public int id { get; set; }
-        public string formulaJson { get; set; }
-        public string formulaParameterJson { get; set; }
+        public string Formulajson { get; set; }
+        public string Formulaparameterjson { get; set; }
     }
-    public class saveinfectioncontroldetrequest
+    public class Saveinfectioncontroldetrequest
     {
         public int PatientVisitNo { get; set; }
         public int VenueNo { get; set; }
@@ -2083,7 +2047,7 @@ namespace Service.Model
         public int Type { get; set; }
         public int UserNo { get; set; }
     }
-    public class saveinfectioncontroldetresponse
+    public class Saveinfectioncontroldetresponse
     {
         public int OutStatus { get; set; }
     }
@@ -2129,7 +2093,7 @@ namespace Service.Model
         public int status { get; set; }
         public string resultComment { get; set; }        
     }
-    public partial class objUpdPartialEntryFlagRequest
+    public partial class ObjUpdPartialEntryFlagRequest
     {
         public int venueno { get; set; }
         public int venuebranchno { get; set; }
@@ -2140,7 +2104,7 @@ namespace Service.Model
         public bool entryFlag { get; set; }
         public bool validationFlag { get; set; }
     }
-    public partial class objUpdPartialEntryFlagResponse
+    public partial class ObjUpdPartialEntryFlagResponse
     {
         public int patientvisitno { get; set; }
     }
@@ -2151,9 +2115,9 @@ namespace Service.Model
         public int OrderListNo { get; set; }
         public int TestNo { get; set; }
         public Int16 TemplateNo { get; set; }
-        public string? PageAction { get; set; }
-        public string? PageCode { get; set; }
-        public string? Result { get; set; }
+        public string PageAction { get; set; }
+        public string PageCode { get; set; }
+        public string Result { get; set; }
         public Int16 VenueNo { get; set; }
         public Int16 BranchNo { get; set; }
         public bool Status { get; set; }
@@ -2170,10 +2134,10 @@ namespace Service.Model
         public int OrderListNo { get; set; }
         public int TestNo { get; set; }
         public Int16 TemplateNo { get; set; }
-        public string? PageCode { get; set; }
-        public string? Result { get; set; }
+        public string PageCode { get; set; }
+        public string Result { get; set; }
     }
-    public partial class PendingVisitDetailsReq
+    public partial class PendingVisitdetailsReq
     {
         public int venueno { get; set; }
         public string pagecode { get; set; }
@@ -2181,9 +2145,9 @@ namespace Service.Model
         public int userno { get; set; }
         public int viewvenuebranchno { get; set; }
         public int pageindex { get; set; }
-        public string? type { get; set; }
-        public string? fromdate { get; set; }
-        public string? todate { get; set; }
+        public string type { get; set; }
+        public string fromdate { get; set; }
+        public string todate { get; set; }
         public int patientno { get; set; }
         public int patientvisitno { get; set; }
         public int deptno { get; set; }
@@ -2193,11 +2157,10 @@ namespace Service.Model
         public int physicianno { get; set; }
         public int orderstatus { get; set; }
         public Int16 maindeptNo { get; set; }
-        public string? servicetype { get; set; }
+        public string servicetype { get; set; }
         public int pageCount { get; set; }
-
     }
-    public partial class PendingVisitDetailsRes
+    public partial class PendingVisitdetailsRes
     {
         public int TotalVisitCount { get; set; }
         public int TotalRecords {  get; set; }
@@ -2221,8 +2184,7 @@ namespace Service.Model
         public Int16 MainDeptNo { get; set; }
         public int VenueBranchNo { get; set; }
         public int RefferralTypeNo { get; set; }
-        public string Colorcode { get; set; }
-     
+        public string Colorcode { get; set; }     
     }
     public partial class HeaderFooterRestrictionReq
     {

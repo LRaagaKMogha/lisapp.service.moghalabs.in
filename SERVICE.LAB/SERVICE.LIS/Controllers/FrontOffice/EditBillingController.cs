@@ -4,6 +4,7 @@ using Service.Model;
 using Microsoft.AspNetCore.Mvc;
 using Serilog;
 using Microsoft.AspNetCore.Authorization;
+using System.Threading.Tasks;
 
 namespace Service.API.SERVICE.Controllers
 {
@@ -18,32 +19,33 @@ namespace Service.API.SERVICE.Controllers
         }
 
         [HttpGet]        
-        [Route("api/EditBilling/GetEditPatientDetails")]
-        public GetEditPatientDetailsFinalResponse GetEditPatientDetails(long visitNo, int VenueNo, int VenueBranchNo)
+        [Route("api/EditBilling/GetEditPatientdetails")]
+        public async Task<GetEditPatientDetailsFinalResponse> GetEditPatientdetails(long visitNo, int VenueNo, int VenueBranchNo)
         {
-            GetEditPatientDetailsFinalResponse objresult = new GetEditPatientDetailsFinalResponse();
+            GetEditPatientDetailsFinalResponse Objresult = new GetEditPatientDetailsFinalResponse();
             try
             {
-                objresult = _IEditBillingRepository.GetEditPatientDetails(visitNo, VenueNo, VenueBranchNo);
+                Objresult = await _IEditBillingRepository.GetEditPatientDetails(visitNo, VenueNo, VenueBranchNo);
             }
             catch (Exception ex)
             {
                 Log.Error(ex, ex.Message);
             }
-            return objresult;
+            return Objresult;
         }
 
         [HttpPost]
         [Route("api/EditBilling/InsertEditBilling")]
-        public ActionResult<FrontOffficeResponse> InsertEditBilling([FromBody] FrontOffficeDTO objDTO)
+        public async Task<ActionResult<FrontOffficeResponse>> InsertEditBilling([FromBody] FrontOffficeDTO objDTO)
         {
             FrontOffficeResponse result = new FrontOffficeResponse();
+
             try
             {
                 var _errormsg = RegistrationValidation.InsertEditBilling(objDTO);
                 if (!_errormsg.status)
                 {
-                    result = _IEditBillingRepository.InsertEditBilling(objDTO);
+                    result = await _IEditBillingRepository.InsertEditBilling(objDTO);
                 }
                 else
                     return BadRequest(_errormsg);
@@ -59,16 +61,16 @@ namespace Service.API.SERVICE.Controllers
         [Route("api/EditBilling/ValidatePTTTest")]
         public dynamic ValidatePTTTest(int ServiceNo, string ServiceType, int VisitNo, int VenueNo, int VenueBranchNo)
         {
-            int objresult = 0;
+            int Objresult = 0;
             try
             {
-                objresult = _IEditBillingRepository.ValidatePTTTest(ServiceNo, ServiceType, VisitNo, VenueNo, VenueBranchNo);
+                Objresult = _IEditBillingRepository.ValidatePTTTest(ServiceNo, ServiceType, VisitNo, VenueNo, VenueBranchNo);
             }
             catch (Exception ex)
             {
                 Log.Error(ex, ex.Message);
             }
-            return objresult;
+            return Objresult;
         }
     }
 }

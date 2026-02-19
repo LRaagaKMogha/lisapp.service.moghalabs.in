@@ -1,9 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 
 namespace Service.Model
-{
-   
+{   
     public partial class TblGeneric
     {
         public int genericNo { get; set; }
@@ -17,22 +15,16 @@ namespace Service.Model
         public int pageIndex { get; set; }
         public int TotalRecords { get; set; }
     }
-
-    public partial class reqgeneric
+    public partial class Reqgeneric
     {
             public int genericNo { get; set; }
             public Int16 venueNo { get; set; }
             public int pageIndex { get; set; }
-
     }
-
     public class GenericMasterResponse
     {
-            public int genericNo { get; set; }
-           
+            public int genericNo { get; set; }           
     }
-    
-
     public partial class TblMedtype
     {
         public int medicineTypeNo { get; set; }
@@ -46,17 +38,14 @@ namespace Service.Model
         public int userNo { get; set; }
         public int pageIndex { get; set; }
         public int TotalRecords { get; set; }
-
     }
-    public partial class reqmedtype
+    public partial class Reqmedtype
     {
         public int medicineTypeNo { get; set; }
         public Int16 venueNo { get; set; }
         public int unitNo { get; set; }
-        public int pageIndex { get; set; }
-       
+        public int pageIndex { get; set; }       
     }
-
     public class MedtypeMasterResponse
     {
         public int medicineTypeNo { get; set; }
@@ -74,9 +63,8 @@ namespace Service.Model
         public int userNo { get; set; }
         public int pageIndex { get; set; }
         public int TotalRecords { get; set; }
-
     }
-    public partial class reqmedstr
+    public partial class Reqmedstr
     {
         public int strengthNo { get; set; }
         public Int16 venueNo { get; set; }

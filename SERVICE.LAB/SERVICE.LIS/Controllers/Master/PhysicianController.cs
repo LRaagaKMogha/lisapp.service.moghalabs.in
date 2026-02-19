@@ -39,16 +39,16 @@ namespace Service.API.SERVICE.Controllers.Master
         [Route("api/Physician/GetPhysicianDetails")]
         public IEnumerable<PhysicianDetailsResponse> GetPhysicianDetails(GetCommonMasterRequest masterRequest)
         {
-            List<PhysicianDetailsResponse> objresult = new List<PhysicianDetailsResponse>();
+            List<PhysicianDetailsResponse> Objresult = new List<PhysicianDetailsResponse>();
             try
             {               
-                objresult = _PhysicianRepository.GetPhysicianDetails(masterRequest);
+                Objresult = _PhysicianRepository.GetPhysicianDetails(masterRequest);
             }
             catch (Exception ex)
             {
                 MyDevException.Error(ex, "GetPhysicianDetails" , ExceptionPriority.Low, ApplicationType.APPSERVICE, masterRequest.venueno, masterRequest.venuebranchno, 0);
             }
-            return objresult;
+            return Objresult;
         }
 
         #endregion
@@ -59,7 +59,7 @@ namespace Service.API.SERVICE.Controllers.Master
         /// </summary>
         /// <param name="Physicianitem"></param>
         /// <returns></returns>        
-        [CustomAuthorize("LIMSMasters")]
+        [CustomAuthorize("LIMSFINMASTERS")]
         [HttpPost]
         [Route("api/Physician/InsertPhysicianDetails")]
         public ActionResult InsertPhysicianDetails([FromBody] PostPhysicianMaster Physicianitem)
@@ -67,7 +67,10 @@ namespace Service.API.SERVICE.Controllers.Master
             int physicianNo = 0;
             try
             {
-                using(var auditScoped = new AuditScope<TblPhysician>(Physicianitem.tblPhysician, _auditService))
+                if (Physicianitem?.tblPhysician == null)
+                    return BadRequest("Invalid physician data.");
+
+                using (var auditScoped = new AuditScope<TblPhysician>(Physicianitem.tblPhysician, _auditService))
                 {
                     var _errormsg = MasterValidation.InsertPhysicianDetails(Physicianitem);
                     if (!_errormsg.status)
@@ -80,14 +83,14 @@ namespace Service.API.SERVICE.Controllers.Master
                             Physicianitem.tblPhysician.CreatedBy ?? 0,
                             Physicianitem.tblPhysician.PhysicianNo);
                         
-                        if (Physicianitem.documentUploadlst.Count > 0 && Physicianitem.documentUploadlst != null)
+                        if (Physicianitem.documentUploadlst != null && Physicianitem.documentUploadlst.Count > 0)
                         {
                             _PhysicianRepository.DocumentUploadDetails(Physicianitem.documentUploadlst, Physicianitem.tblPhysician.VenueNo ?? 0, Physicianitem.tblPhysician.CreatedBy ?? 0, Physicianitem.tblPhysician.PhysicianNo);
                         }
 
-                        if (Physicianitem.opdPhysiciandetail.Count > 0)
+                        if (Physicianitem.opdPhysiciandetail != null && Physicianitem.opdPhysiciandetail.Count > 0)
                         {
-                            _PhysicianRepository.OPDPatientDetails(Physicianitem.opdPhysiciandetail, Physicianitem.tblPhysician);
+                            _PhysicianRepository.OPDPatientdetails(Physicianitem.opdPhysiciandetail, Physicianitem.tblPhysician);
                         }
 
                         string _CommonCommonCatch = CacheKeys.CommonMaster + "COMMON" + Physicianitem.tblPhysician.VenueNo + Physicianitem.tblPhysician.VenueBranchNo;
@@ -183,16 +186,16 @@ namespace Service.API.SERVICE.Controllers.Master
         [Route("api/Physician/GetPhysicianDocumentDetails")]
         public IEnumerable<PhysicianDocUploadDetailRes> GetPhysicianDocumentDetails(PhysicianDocUploadReq Req)
         {
-            List<PhysicianDocUploadDetailRes> objresult = new List<PhysicianDocUploadDetailRes>();
+            List<PhysicianDocUploadDetailRes> Objresult = new List<PhysicianDocUploadDetailRes>();
             try
             {
-                objresult = _PhysicianRepository.GetPhysicianDocumentDetails(Req);
+                Objresult = _PhysicianRepository.GetPhysicianDocumentDetails(Req);
             }
             catch (Exception ex)
             {
                 MyDevException.Error(ex, "PhysicianController.GetPhysicianDocumentDetails", ExceptionPriority.Low, ApplicationType.APPSERVICE, Req.venueNo, Req.venueBranchNo, 0);
             }
-            return objresult;
+            return Objresult;
         }
 
         [CustomAuthorize("LIMSMasters")]
@@ -297,16 +300,16 @@ namespace Service.API.SERVICE.Controllers.Master
         [Route("api/Physician/GetMachineTimeDetails")]
         public IEnumerable<OPDMachineRes> GetMachineTimeDetails(OPDMachineReq Req)
         {
-            List<OPDMachineRes> objresult = new List<OPDMachineRes>(); ;
+            List<OPDMachineRes> Objresult = new List<OPDMachineRes>();
             try
             {
-                objresult = _PhysicianRepository.GetMachineTimeDetails(Req);
+                Objresult = _PhysicianRepository.GetMachineTimeDetails(Req);
             }
             catch (Exception ex)
             {
-                MyDevException.Error(ex, "PhysicianController.GetMachineTimeDetails", ExceptionPriority.Low, ApplicationType.APPSERVICE, (int)Req.VenueNo, (int)Req.Venuebno, (int)Req.MachineNo);
+                MyDevException.Error(ex, "PhysicianController.GetMachineTimeDetails", ExceptionPriority.Low, ApplicationType.APPSERVICE, Req.VenueNo, Req.Venuebno, Req.MachineNo);
             }
-            return objresult;
+            return Objresult;
         }
 
         [CustomAuthorize("LIMSMasters")]
@@ -314,48 +317,48 @@ namespace Service.API.SERVICE.Controllers.Master
         [Route("api/Physician/GetPhysicianOPDDetails")]
         public IEnumerable<OPDPhysicianRes> GetPhysicianOPDDetails(OPDPhysicianReq Req)
         {
-            List<OPDPhysicianRes> objresult = new List<OPDPhysicianRes>(); ;
+            List<OPDPhysicianRes> Objresult = new List<OPDPhysicianRes>(); ;
             try
             {
-                objresult = _PhysicianRepository.GetPhysicianOPDDetails(Req);
+                Objresult = _PhysicianRepository.GetPhysicianOPDDetails(Req);
             }
             catch (Exception ex)
             {
-                MyDevException.Error(ex, "PhysicianController.GetPhysicianOPDDetails", ExceptionPriority.Low, ApplicationType.APPSERVICE, (int)Req.VenueNo, (int)Req.Venuebno, (int)Req.PhysicianNo);
+                MyDevException.Error(ex, "PhysicianController.GetPhysicianOPDDetails", ExceptionPriority.Low, ApplicationType.APPSERVICE, Req.VenueNo, Req.Venuebno, Req.PhysicianNo);
             }
-            return objresult;
+            return Objresult;
         }
 
         [CustomAuthorize("LIMSMasters")]
         [HttpGet]
         [Route("api/Physician/LastPhysicianCode")]
-        public List<PhysicianOrClientCodeResponse> GetLastPhysicianCode(int VenueNo, int VenueBranchNo,string CodeType, string CodeToCheck = null)
+        public List<PhysicianOrClientCodeResponse> GetLastPhysicianCode(int VenueNo, int VenueBranchNo,string CodeType, string? CodeToCheck = null)
         {
-            List<PhysicianOrClientCodeResponse> objResult = new List<PhysicianOrClientCodeResponse>();
+            List<PhysicianOrClientCodeResponse> Objresult = new List<PhysicianOrClientCodeResponse>();
             try
             {
-                objResult = _PhysicianRepository.GetLastPhysicianCode(VenueNo, VenueBranchNo, CodeType, CodeToCheck);
+                Objresult = _PhysicianRepository.GetLastPhysicianCode(VenueNo, VenueBranchNo, CodeType, CodeToCheck);
             }
             catch (Exception ex)
             {
                 MyDevException.Error(ex, "GetLastPhysicianCode", ExceptionPriority.Low, ApplicationType.APPSERVICE, VenueNo, 0, 0);
             }
-            return objResult;
+            return Objresult;
         }
         [HttpPost]
         [Route("api/Physician/GetConsultant")]
         public IEnumerable<consultantdetails> GetConsultant(getconsultant getconsultant)
         {
-            List<consultantdetails> objresult = new List<consultantdetails>(); ;
+            List<consultantdetails> Objresult = new List<consultantdetails>(); ;
             try
             {
-                objresult = _PhysicianRepository.GetConsultant(getconsultant);
+                Objresult = _PhysicianRepository.GetConsultant(getconsultant);
             }
             catch (Exception ex)
             {
                 MyDevException.Error(ex, "PhysicianController.GetConsultant", ExceptionPriority.Low, ApplicationType.APPSERVICE, getconsultant.venueNo, getconsultant.venuebranchNo, 0);
             }
-            return objresult;
+            return Objresult;
         }
         [HttpPost]
         [Route("api/Physician/SaveConsultant")]

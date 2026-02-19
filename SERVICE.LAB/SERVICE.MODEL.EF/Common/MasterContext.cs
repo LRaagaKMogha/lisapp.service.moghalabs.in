@@ -31,7 +31,7 @@ namespace Service.Model.EF
         public virtual DbSet<TblPhysician> TblPhysician { get; set; }
         public virtual DbSet<TblUnits> TblUnits { get; set; }
         public virtual DbSet<TblOrganism> TblOrganism { get; set; }
-        public virtual DbSet<lstotdrugmap> GetOrgTypeAntiMapList { get; set; }
+        public virtual DbSet<Lstotdrugmap> GetOrgTypeAntiMapList { get; set; }
         public virtual DbSet<TblTemplate> GetTemplateList { get; set; }
         public virtual DbSet<CustomerResponse> GetClientMasterDTO { get; set; }
         public virtual DbSet<InsertCustomerResponse> InsertClientMaster { get; set; }
@@ -40,7 +40,7 @@ namespace Service.Model.EF
         //Start of Tariff
         public virtual DbSet<GetTariffMasterResponse> GetTariffMasterDTO { get; set; }
         public virtual DbSet<InsertTariffMasterResponse> InsertTariffMasterDTO { get; set; }
-        public virtual DbSet<GetServices> GetServiceDetailsDTO { get; set; }
+        public virtual DbSet<Getservices> GetserviceDetailsDTO { get; set; }
         public virtual DbSet<GetTariffMasterListResponse> GetTariffMasterListDTO { get; set; }
         public virtual DbSet<TariffMastServicesResponse> TariffMasterServiceListDTO { get; set; }
         public virtual DbSet<TariffMasterInsertResponse> TariffMasterInsertDTO { get; set; }
@@ -58,28 +58,28 @@ namespace Service.Model.EF
         public virtual DbSet<UserMenuNosResponseDTO> GetUserMenuNosEF { get; set; }
 
         //Start Test Master
-        public virtual DbSet<objTestList> GetTestList { get; set; }
-        public virtual DbSet<objtestdbl> GetEditTest { get; set; }
-        public virtual DbSet<rtntest> InsertTest { get; set; }
-        public virtual DbSet<rtntemplateNo> InsertTemplateText { get; set; }
-        //public virtual DbSet<returntemplateNo> GetTemplateMasterDetails { get; set; }
-        public virtual DbSet<rtntest> UpdateSequence { get; set; }
+        public virtual DbSet<ObjtestList> GetTestList { get; set; }
+        public virtual DbSet<Objtestdbl> GetEditTest { get; set; }
+        public virtual DbSet<Rtntest> InsertTest { get; set; }
+        public virtual DbSet<RtntemplateNo> InsertTemplateText { get; set; }
+        //public virtual DbSet<ReturntemplateNo> GetTemplateMasterDetails { get; set; }
+        public virtual DbSet<Rtntest> UpdateSequence { get; set; }
         //End Test Master
 
         //Start Group/Package Master
-        public virtual DbSet<lstgrppkg> GetGroupPackageList { get; set; }
-        public virtual DbSet<objgrppkgdbl> GetEditGroupPackage { get; set; }
-        public virtual DbSet<rtntest> InsertGroupPackage { get; set; }
-        public virtual DbSet<lstgrppkgservice> GetSearchService { get; set; }
+        public virtual DbSet<Lstgrppkg> GetGroupPackageList { get; set; }
+        public virtual DbSet<Objgrppkgdbl> GetEditGroupPackage { get; set; }
+        public virtual DbSet<Rtntest> InsertGroupPackage { get; set; }
+        public virtual DbSet<Lstgrppkgservice> GetSearchService { get; set; }
         //End Group/Package Master
 
         //Sub test master
-        public virtual DbSet<lststestdbl> GetSubTestList { get; set; }
-        public virtual DbSet<objsubtestdbl> GetEditSubTest { get; set; }
-        public virtual DbSet<rtntest> InsertSubTest { get; set; }
+        public virtual DbSet<Lststestdbl> GetSubTestList { get; set; }
+        public virtual DbSet<Objsubtestdbl> GetEditSubTest { get; set; }
+        public virtual DbSet<Rtntest> InsertSubTest { get; set; }
         //End
-        public virtual DbSet<lstorgAntiRange> GetOrgAntibioticRange { get; set; }
-        public virtual DbSet<rtntest> SaveOrganismAntibioticRange { get; set; }
+        public virtual DbSet<LstorgAntiRange> GetOrgAntibioticRange { get; set; }
+        public virtual DbSet<Rtntest> SaveOrganismAntibioticRange { get; set; }
         public virtual DbSet<CustomerMappingDTO> GetCustomerMapping { get; set; }
         public virtual DbSet<CustomerMappingDTO> GetCLinic { get; set; }
         public virtual DbSet<ClientSubClientMappingDTO> GetAllClients { get; set; }
@@ -93,8 +93,8 @@ namespace Service.Model.EF
         public virtual DbSet<TblProductCategory> GetProductCategory { get; set; }
         public virtual DbSet<ProductcategoryResponse> InsertproductCategory { get; set; }
         public virtual DbSet<GetProductMainbyDeptRes> GetProductSubyMaindept { get; set; }
-        public virtual DbSet<lstdrugresponse> GetProdVsDrug { get; set; }
-        public virtual DbSet<savedruglstresponse> InsertProdVsDrugs { get; set; }
+        public virtual DbSet<LstDrugresponse> GetProdVsDrug { get; set; }
+        public virtual DbSet<Savedruglstresponse> InsertProdVsDrugs { get; set; }
         public virtual DbSet<GetProductMasterResponse> GetProductMasterDTO { get; set; }
         public virtual DbSet<GetSupplierMappingDTO> GetSupplierMappingDTO { get; set; }
         public virtual DbSet<GetDepartmentMappingDTO> GetDepartmentMappingDTO { get; set; }
@@ -103,7 +103,7 @@ namespace Service.Model.EF
         public virtual DbSet<UpdateSupplierMaster> Tbl_IV_Suppliers { get; set; }
         public virtual DbSet<GetManufacturerMasterResponse> GetManufacturersDetail { get; set; }
         public virtual DbSet<postManufacturerMasterDTO> InsertManufacturerDetails { get; set; }
-        public virtual DbSet<GetPurchaseOrderResponse> GetPurchaseOrderDTO { get; set; }
+        public virtual DbSet<GetPurchaseOrderresponse> GetPurchaseOrderDTO { get; set; }
         public virtual DbSet<GetSupplierServiceDTO> GetSupplierServiceDTO { get; set; }
         public virtual DbSet<GetPOBySupplierResponse> GetPOBySupplierDetailsDTO { get; set; }
         public virtual DbSet<GetStockProductListResponse> GetProductListByDeapartmentDTO { get; set; }
@@ -152,8 +152,8 @@ namespace Service.Model.EF
         //Multi price list
         public virtual DbSet<GetmultiPriceListResponse> GetMultiPriceListDTO { get; set; }
         public virtual DbSet<InsertMultiPriceListResponse> InsertMultiPriceListDTO { get; set; }
-        public virtual DbSet<rtnUnit> InsertUnit { get; set; }
-        public virtual DbSet<lstunits> GetUnitList { get; set; }
+        public virtual DbSet<RtnUnit> InsertUnit { get; set; }
+        public virtual DbSet<Lstunits> GetUnitList { get; set; }
         public virtual DbSet<IndentDetailsSaveResponse> CreateIndentProductDTO { get; set; }
         public virtual DbSet<IndentDetailsResponse> GetIndentDetails { get; set; }
         public virtual DbSet<IndentProductDetailsNewResponse> GetIndentProductDetailsls { get; set; }
@@ -162,20 +162,20 @@ namespace Service.Model.EF
         public virtual DbSet<SaveIssueProductResponse> InsertIssueProduct { get; set; }
         public virtual DbSet<SaveFormulaResponse> InsertTestFormula { get; set; }
         public virtual DbSet<GetFormulaResponse> GetTestFormula { get; set; }
-        public virtual DbSet<orggetresponse> GetOrgmaster { get; set; }
-        public virtual DbSet<orgGrpresponse> GetOrgGrpmaster { get; set; }
-        public virtual DbSet<orginsertresponse> InsertOrgmaster { get; set; }
-        public virtual DbSet<orginsertGrpresponse> InsertOrgGrpmaster { get; set; }
-        public virtual DbSet<orgtyperesponse> GetOrgtypemaster { get; set; }
-        public virtual DbSet<orgtypeinsertresponse> InsertOrgtypemaster { get; set; }
+        public virtual DbSet<Orggetresponse> GetOrgmaster { get; set; }
+        public virtual DbSet<Orggrpresponse> GetOrgGrpmaster { get; set; }
+        public virtual DbSet<Orginsertresponse> InsertOrgmaster { get; set; }
+        public virtual DbSet<OrginsertGrpresponse> InsertOrgGrpmaster { get; set; }
+        public virtual DbSet<Orgtyperesponse> GetOrgtypemaster { get; set; }
+        public virtual DbSet<Orgtypeinsertresponse> InsertOrgtypemaster { get; set; }
         public virtual DbSet<CheckMasterNameExistsResponse> CheckfunMasterExists { get; set; }
         public virtual DbSet<CheckMasterNameExistsResponse> Checkfun2MasterExists { get; set; }
         public virtual DbSet<TblProductType> Getproducttype { get; set; }
         public virtual DbSet<ProductTypeMasterResponse> Insertproducttype { get; set; }
-        public virtual DbSet<antiresponse> Getantibiotic { get; set; }
-        public virtual DbSet<antinsertresponse> Insertantimaster { get; set; }
-        public virtual DbSet<orgAntiresponse> Getantirog { get; set; }
-        public virtual DbSet<organtinsertresponse> Insertantiorg { get; set; }
+        public virtual DbSet<Antiresponse> Getantibiotic { get; set; }
+        public virtual DbSet<Antinsertresponse> Insertantimaster { get; set; }
+        public virtual DbSet<OrgAntiresponse> Getantirog { get; set; }
+        public virtual DbSet<OrgAntinsertresponse> Insertantiorg { get; set; }
         public virtual DbSet<TblHSN> GetHSNMasters { get; set; }
         public virtual DbSet<HSNMasterResponse> InsertHSNmaster { get; set; }
         public virtual DbSet<TblHSNRange> GetHSNRangeMaster { get; set; }
@@ -189,7 +189,7 @@ namespace Service.Model.EF
         public virtual DbSet<MedtypeMasterResponse> InsertMedtype { get; set; }
         public virtual DbSet<MedstrMasterResponse> InsertMedstr { get; set; }
 
-        public virtual DbSet<responsegetvendor> GetVendorMaster { get; set; }
+        public virtual DbSet<Responsegetvendor> GetVendorMaster { get; set; }
         public virtual DbSet<StoreVendorMaster> InsertVendorMaster { get; set; }
         public virtual DbSet<TblCountry> GetCountrymaster { get; set; }
         public virtual DbSet<CountryMasteResponse> InsertCountrymaster { get; set; }
@@ -206,12 +206,12 @@ namespace Service.Model.EF
         public virtual DbSet<NationalityLst> GetNationalityMaster { get; set; }
         public virtual DbSet<NationalityResponse> InsertNationalitymaster { get; set; }
         public virtual DbSet<PhysicianNo> SavePhysicianDetaile { get; set; }
-        public virtual DbSet<GetServiceDetails> GetServiceOrder { get; set; }
+        public virtual DbSet<GetserviceDetails> GetserviceOrder { get; set; }
         public virtual DbSet<ServiceOrderMasterResponse> InsertServiceOrder { get; set; }
-        public virtual DbSet<getcontactlst> GetVendorvsContactmaster { get; set; }
+        public virtual DbSet<Getcontactlst> GetVendorvsContactmaster { get; set; }
         public virtual DbSet<StorecontactMaster> InsertVendorContactmaster { get; set; }
-        public virtual DbSet<getservicelst> GetVendorvsservices { get; set; }
-        public virtual DbSet<storeservice> InsertVendorService { get; set; }
+        public virtual DbSet<Getservicelst> GetVendorvsservices { get; set; }
+        public virtual DbSet<Storeservice> InsertVendorService { get; set; }
         public virtual DbSet<Fetchlookalike> lookalike { get; set; }
         public virtual DbSet<Fetchsoundalike> Soundalike { get; set; }
         public virtual DbSet<responsebranch> GetProcessingbranch { get; set; }
@@ -245,8 +245,8 @@ namespace Service.Model.EF
         public virtual DbSet<QcresultResponse> Insertqcresult { get; set; }
         public virtual DbSet<Tblqcresult> editqcresult { get; set; }
         public virtual DbSet<TbltestMap> GetAnalVsParamVsTest { get; set; }
-        public virtual DbSet<analVsparamVstestMap> InsertAnalVsParamVsTest { get; set; }
-        public virtual DbSet<subresponse> GetSubTest { get; set; }
+        public virtual DbSet<AnalVsparamVstestMap> InsertAnalVsParamVsTest { get; set; }
+        public virtual DbSet<Subresponse> GetSubTest { get; set; }
         public virtual DbSet<SubProductRes> SubProduct { get; set; }
         public virtual DbSet<CommentGetRes> Getcomment { get; set; }
         public virtual DbSet<CommentInsRes> Insertcomment { get; set; }
@@ -263,8 +263,8 @@ namespace Service.Model.EF
         public virtual DbSet<CheckTestcodeExistsRes> GetCheckTestcodeExists { get; set; }
         public virtual DbSet<GSTGetRes> GetGST { get; set; }
         public virtual DbSet<GSTInsRes> InsertGST { get; set; }
-        public virtual DbSet<restestapprove> GetTestApprove { get; set; }
-        public virtual DbSet<restestappHistory> GetApproveHistory { get; set; }
+        public virtual DbSet<Restestapprove> GetTestApprove { get; set; }
+        public virtual DbSet<RestestappHistory> GetApproveHistory { get; set; }
         public virtual DbSet<GetTATRes> GetTATMaster { get; set; }
         public virtual DbSet<InsTATRes> InsertTATMaster { get; set; }
         public virtual DbSet<GetloincRes> GetLoincMaster { get; set; }
@@ -292,20 +292,20 @@ namespace Service.Model.EF
         public virtual DbSet<PriceHistoryServiceResponse> GetPriceHistory { get; set; }
         public virtual DbSet<BaseRateResponse> GetBasePrice { get; set; }        
         public virtual DbSet<TemplateCommentRes> TemplateInsertcomment { get; set; }
-        public virtual DbSet<objgrppkgdbl> GetPackageInstrauction { get; set; }
+        public virtual DbSet<Objgrppkgdbl> GetPackageInstrauction { get; set; }
         public virtual DbSet<PrintPackageDetails> GetPrintPakg { get; set; }
         public virtual DbSet<GetStatinMasterDetailsRes> GetStainMasterDetails { get; set; }
         public virtual DbSet<StainMasterInsertRes> insertStainMaster { get; set; }
         public virtual DbSet<RefTypeCommonMasterDto> RefTypeListDTO { get; set; }
         public virtual DbSet<GetUserDepartmentDTO> GetUserDepartment { get; set; }
-        public virtual DbSet<templateresponse> InsertDiseaseTemplateText { get; set; }
+        public virtual DbSet<Templateresponse> InsertDiseaseTemplateText { get; set; }
         public virtual DbSet<TreatmentPlanMasterResponse> InsertTreatmentplan { get; set; }
         public virtual DbSet<reqTreatmentMaster> GetTreatmentMaster { get; set; }
         public virtual DbSet<TreatmentPlanProMaster> GetTreatmentMasterDetailsPRO { get; set; }
         public virtual DbSet<TreatmentPlanPrmMaster> GetTreatmentMasterDetailsPRM { get; set; }
         public virtual DbSet<OPDMachineRes> GetOPDMachineRes { get; set; }
         public virtual DbSet<OPDPhysicianRes> GetPhysicianOPDDetails { get; set; }
-        public virtual DbSet<CommonResponse> OPDPatientDetails { get; set; }
+        public virtual DbSet<CommonResponse> OPDPatientdetails { get; set; }
         //
         public virtual DbSet<GetAssetManagementResponse> GetInstrumentDetail { get; set; }
         public virtual DbSet<postAssetManagementDTO> InsertInstrumentDetails { get; set; }
@@ -540,7 +540,7 @@ namespace Service.Model.EF
                     .HasDefaultValueSql("((1))");
             });
 
-            modelBuilder.Entity<lstotdrugmap>(entity =>
+            modelBuilder.Entity<Lstotdrugmap>(entity =>
             {
                 entity.HasKey(e => e.organismantibioticmapno);
                 entity.ToTable("pro_GetOrgTypeAntiMap");
@@ -614,7 +614,7 @@ namespace Service.Model.EF
                 entity.Property(e => e.resultStatus).HasColumnName("resultStatus");
             });
 
-            modelBuilder.Entity<GetServices>(entity =>
+            modelBuilder.Entity<Getservices>(entity =>
             {
                 entity.HasKey(e => e.sNo);
                 entity.ToTable("pro_TariffSearchService");
@@ -680,42 +680,42 @@ namespace Service.Model.EF
                 entity.Property(e => e.Row_Num).HasColumnName("Row_Num");
             });
 
-            modelBuilder.Entity<objTestList>(entity =>
+            modelBuilder.Entity<ObjtestList>(entity =>
             {
                 entity.HasKey(e => e.testNo);
                 entity.ToTable("pro_GetTestMaster");
                 entity.Property(e => e.testNo).HasColumnName("testNo");
             });
 
-            modelBuilder.Entity<objtestdbl>(entity =>
+            modelBuilder.Entity<Objtestdbl>(entity =>
             {
                 entity.HasKey(e => e.testNo);
                 entity.ToTable("pro_GetSingleTestMaster");
                 entity.Property(e => e.testNo).HasColumnName("testNo");
             });
 
-            modelBuilder.Entity<rtntest>(entity =>
+            modelBuilder.Entity<Rtntest>(entity =>
             {
                 entity.HasKey(e => e.testNo);
                 entity.ToTable("pro_InsertTest");
                 entity.Property(e => e.testNo).HasColumnName("testNo");
             });
 
-            modelBuilder.Entity<rtntemplateNo>(entity =>
+            modelBuilder.Entity<RtntemplateNo>(entity =>
             {
                 entity.HasKey(e => e.templateNo);
                 entity.ToTable("pro_InsertTemplateText");
                 entity.Property(e => e.templateNo).HasColumnName("templateNo");
             });
 
-            modelBuilder.Entity<rtntest>(entity =>
+            modelBuilder.Entity<Rtntest>(entity =>
             {
                 entity.HasKey(e => e.testNo);
                 entity.ToTable("pro_UpdateSequence");
                 entity.Property(e => e.testNo).HasColumnName("testNo");
             });
 
-            modelBuilder.Entity<lstgrppkg>(entity =>
+            modelBuilder.Entity<Lstgrppkg>(entity =>
             {
                 entity.HasKey(e => e.serviceNo);
                 entity.ToTable("pro_GetGroupPackageMaster");
@@ -724,28 +724,28 @@ namespace Service.Model.EF
                 entity.Property(x => x.ToDate).IsRequired(false);
             });
 
-            modelBuilder.Entity<objgrppkgdbl>(entity =>
+            modelBuilder.Entity<Objgrppkgdbl>(entity =>
             {
                 entity.HasKey(e => e.serviceNo);
                 entity.ToTable("pro_GetSingleGroupPackageMaster");
                 entity.Property(e => e.serviceNo).HasColumnName("serviceNo");
             });
 
-            modelBuilder.Entity<rtntest>(entity =>
+            modelBuilder.Entity<Rtntest>(entity =>
             {
                 entity.HasKey(e => e.testNo);
                 entity.ToTable("pro_InsertGroup");
                 entity.Property(e => e.testNo).HasColumnName("testNo");
             });
 
-            modelBuilder.Entity<lstgrppkgservice>(entity =>
+            modelBuilder.Entity<Lstgrppkgservice>(entity =>
             {
                 entity.HasKey(e => e.rowNo);
                 entity.ToTable("pro_SearchTestGroupPackage");
                 entity.Property(e => e.rowNo).HasColumnName("rowNo");
             });
 
-            modelBuilder.Entity<lststestdbl>(entity =>
+            modelBuilder.Entity<Lststestdbl>(entity =>
             {
                 entity.HasKey(e => e.rowNo);
                 entity.ToTable("pro_GetSubTestList");
@@ -771,7 +771,7 @@ namespace Service.Model.EF
                 entity.Property(e => e.CustomerSubUserNo).HasColumnName("CustomerSubUserNo");
             });
 
-            modelBuilder.Entity<objsubtestdbl>(entity =>
+            modelBuilder.Entity<Objsubtestdbl>(entity =>
             {
                 entity.HasKey(e => e.subTestNo);
                 entity.ToTable("pro_GetSingleSubTestMaster");
@@ -785,21 +785,21 @@ namespace Service.Model.EF
                 entity.Property(e => e.CustomerNo).HasColumnName("CustomerNo");
             });
 
-            modelBuilder.Entity<rtntest>(entity =>
+            modelBuilder.Entity<Rtntest>(entity =>
             {
                 entity.HasKey(e => e.testNo);
                 entity.ToTable("pro_InsertSubTest");
                 entity.Property(e => e.testNo).HasColumnName("testNo");
             });
 
-            modelBuilder.Entity<rtntest>(entity =>
+            modelBuilder.Entity<Rtntest>(entity =>
             {
                 entity.HasKey(e => e.testNo);
                 entity.ToTable("pro_InsertOrganismAntibioticRange");
                 entity.Property(e => e.testNo).HasColumnName("testNo");
             });
 
-            modelBuilder.Entity<lstorgAntiRange>(entity =>
+            modelBuilder.Entity<LstorgAntiRange>(entity =>
             {
                 entity.HasKey(e => e.antibioticno);
                 entity.ToTable("pro_GetOrgAntibioticRangeMaster");
@@ -900,7 +900,7 @@ namespace Service.Model.EF
                     .HasDefaultValueSql("((1))");
             });
 
-            modelBuilder.Entity<GetPurchaseOrderResponse>(entity =>
+            modelBuilder.Entity<GetPurchaseOrderresponse>(entity =>
             {
                 entity.HasKey(e => e.Sno)
                     .HasName("SupplierMasterNo");
@@ -939,14 +939,14 @@ namespace Service.Model.EF
                     .HasDefaultValueSql("((1))");
             });
 
-            modelBuilder.Entity<rtnUnit>(entity =>
+            modelBuilder.Entity<RtnUnit>(entity =>
             {
                 entity.HasKey(e => e.unitNo);
                 entity.ToTable("pro_InsertUnit");
                 entity.Property(e => e.unitNo).HasColumnName("unitNo");
             });
 
-            modelBuilder.Entity<lstunits>(entity =>
+            modelBuilder.Entity<Lstunits>(entity =>
             {
                 entity.HasKey(e => e.unitsno);
                 entity.ToTable("pro_GetUnitMaster");
@@ -1080,27 +1080,27 @@ namespace Service.Model.EF
                 entity.Property(e => e.ID).HasColumnName("id");
             });
 
-            modelBuilder.Entity<orggetresponse>(entity =>
+            modelBuilder.Entity<Orggetresponse>(entity =>
             {
                 entity.HasKey(e => e.organismno);
                 entity.ToTable("pro_GetOrganismmaster");
                 entity.Property(e => e.organismno).HasColumnName("organismNo");
             });
-            modelBuilder.Entity<orgGrpresponse>(entity =>
+            modelBuilder.Entity<Orggrpresponse>(entity =>
             {
                 entity.HasKey(e => e.organismgrpno);
                 entity.ToTable("pro_GetOrganismGroupMaster");
                 entity.Property(e => e.organismgrpno).HasColumnName("organismgrpno");
             });
 
-            modelBuilder.Entity<orginsertresponse>(entity =>
+            modelBuilder.Entity<Orginsertresponse>(entity =>
             {
                 entity.HasKey(e => e.organismno);
                 entity.ToTable("pro_InsertOrganismmaster");
                 entity.Property(e => e.organismno).HasColumnName("organismNo");
             });
 
-            modelBuilder.Entity<orginsertGrpresponse>(entity =>
+            modelBuilder.Entity<OrginsertGrpresponse>(entity =>
             {
                 entity.HasKey(e => e.organismGrpno);
                 entity.ToTable("pro_InsertOrganismGrpmaster");
@@ -1109,14 +1109,14 @@ namespace Service.Model.EF
 
 
 
-            modelBuilder.Entity<orgtyperesponse>(entity =>
+            modelBuilder.Entity<Orgtyperesponse>(entity =>
             {
                 entity.HasKey(e => e.organismtypeno);
                 entity.ToTable("pro_GetOrganismTypemaster");
                 entity.Property(e => e.organismtypeno).HasColumnName("organismtypeno");
             });
 
-            modelBuilder.Entity<orgtypeinsertresponse>(entity =>
+            modelBuilder.Entity<Orgtypeinsertresponse>(entity =>
             {
                 entity.HasKey(e => e.organismtypeno);
                 entity.ToTable("pro_InsertOrganismTypemaster");
@@ -1200,28 +1200,28 @@ namespace Service.Model.EF
                 entity.Property(e => e.RowNo).HasColumnName("RowNo");
             });
 
-            modelBuilder.Entity<antiresponse>(entity =>
+            modelBuilder.Entity<Antiresponse>(entity =>
             {
                 entity.HasKey(e => e.antibioticno);
                 entity.ToTable("pro_GetAntibioticmaster");
                 entity.Property(e => e.antibioticno).HasColumnName("antibioticno");
             });
 
-            modelBuilder.Entity<antinsertresponse>(entity =>
+            modelBuilder.Entity<Antinsertresponse>(entity =>
             {
                 entity.HasKey(e => e.antibioticno);
                 entity.ToTable("pro_InsertAntibioticsmaster");
                 entity.Property(e => e.antibioticno).HasColumnName("antibioticno");
             });
 
-            modelBuilder.Entity<orgAntiresponse>(entity =>
+            modelBuilder.Entity<OrgAntiresponse>(entity =>
             {
                 entity.HasKey(e => e.organismAntibioticMapNo);
                 entity.ToTable("pro_GetOrganismtypeandantibioticmaster");
                 entity.Property(e => e.organismAntibioticMapNo).HasColumnName("organismAntibioticMapNo");
             });
 
-            modelBuilder.Entity<organtinsertresponse>(entity =>
+            modelBuilder.Entity<OrgAntinsertresponse>(entity =>
             {
                 entity.HasKey(e => e.organismAntibioticMapNo);
                 entity.ToTable("pro_InsertOrganismtypeandantibioticmaster");
@@ -1284,7 +1284,7 @@ namespace Service.Model.EF
                 entity.Property(e => e.medicineTypeNo).HasColumnName("medicineTypeNo");
             });
 
-            modelBuilder.Entity<responsegetvendor>(entity =>
+            modelBuilder.Entity<Responsegetvendor>(entity =>
             {
                 entity.HasKey(e => e.vendorno);
                 entity.ToTable("pro_GetVendormaster");
@@ -1502,7 +1502,7 @@ namespace Service.Model.EF
                 entity.Property(e => e.physicianNo).HasColumnName("physicianNo");
             });
 
-            modelBuilder.Entity<getcontactlst>(entity =>
+            modelBuilder.Entity<Getcontactlst>(entity =>
             {
                 entity.HasKey(e => e.vendorContactNo);
                 entity.ToTable("pro_GetVendorvsContactmaster");
@@ -1516,14 +1516,14 @@ namespace Service.Model.EF
                 entity.Property(e => e.VendorContactNo).HasColumnName("VendorContactNo");
             });
 
-            modelBuilder.Entity<getservicelst>(entity =>
+            modelBuilder.Entity<Getservicelst>(entity =>
             {
                 entity.HasKey(e => e.vendorServiceNo);
                 entity.ToTable("pro_GetVendorVsServices");
                 entity.Property(e => e.vendorServiceNo).HasColumnName("VendorServiceNo");
             });
 
-            modelBuilder.Entity<storeservice>(entity =>
+            modelBuilder.Entity<Storeservice>(entity =>
             {
                 entity.HasKey(e => e.VendorServiceNo);
                 entity.ToTable("pro_InsertVendorVsServices");
@@ -1604,10 +1604,10 @@ namespace Service.Model.EF
                 entity.Property(e => e.MethodNo).HasColumnName("MethodNo");
             });
 
-            modelBuilder.Entity<GetServiceDetails>(entity =>
+            modelBuilder.Entity<GetserviceDetails>(entity =>
             {
                 entity.HasKey(e => e.RowNo);
-                entity.ToTable("pro_GetServiceOrder");
+                entity.ToTable("pro_GetserviceOrder");
                 entity.Property(e => e.RowNo).HasColumnName("RowNo");
             });
 
@@ -1627,7 +1627,7 @@ namespace Service.Model.EF
             modelBuilder.Entity<returnquotationlst>(entity =>
             {
                 entity.HasKey(e => e.quotationMasterNo);
-                entity.ToTable("pro_GetServiceQuotation");
+                entity.ToTable("pro_GetserviceQuotation");
                 entity.Property(e => e.quotationMasterNo).HasColumnName("QuotationMasterNo");
             });
             modelBuilder.Entity<storequotationlst>(entity =>
@@ -1639,7 +1639,7 @@ namespace Service.Model.EF
             modelBuilder.Entity<DocVsSerResponse>(entity =>
             {
                 entity.HasKey(e => e.DoctorNo);
-                entity.ToTable("pro_GetDoctorDetails");
+                entity.ToTable("pro_GetDoctordetails");
                 entity.Property(e => e.DoctorNo).HasColumnName("DoctorNo");
             });
             modelBuilder.Entity<DocVsSerGetRes>(entity =>
@@ -1757,13 +1757,13 @@ namespace Service.Model.EF
                 entity.ToTable("pro_GetAnalVsParamVsTest");
                 entity.Property(e => e.analyzerparamTestNo).HasColumnName("analyzerparamTestNo");
             });
-            modelBuilder.Entity<analVsparamVstestMap>(entity =>
+            modelBuilder.Entity<AnalVsparamVstestMap>(entity =>
             {
                 entity.HasKey(e => e.analyzerparamTestNo);
                 entity.ToTable("pro_InsertAnalVsParamVsTest");
                 entity.Property(e => e.analyzerparamTestNo).HasColumnName("analyzerparamTestNo");
             });
-            modelBuilder.Entity<subresponse>(entity =>
+            modelBuilder.Entity<Subresponse>(entity =>
             {
                 entity.HasKey(e => e.RowNo);
                 entity.ToTable("pro_GetSubTest");
@@ -1865,13 +1865,13 @@ namespace Service.Model.EF
                 entity.ToTable("Pro_InsertGSTTaxMaster");
                 entity.Property(e => e.TaxMastNo).HasColumnName("TaxMastNo");
             });
-            modelBuilder.Entity<restestapprove>(entity =>
+            modelBuilder.Entity<Restestapprove>(entity =>
             {
                 entity.HasKey(e => e.RowNo);
                 entity.ToTable("pro_GetTestApproveDetails");
                 entity.Property(e => e.RowNo).HasColumnName("RowNo");
             });
-            modelBuilder.Entity<restestappHistory>(entity =>
+            modelBuilder.Entity<RestestappHistory>(entity =>
             {
                 entity.HasKey(e => e.RowNo);
                 entity.ToTable("pro_GetApproveHistory");
@@ -2088,13 +2088,13 @@ namespace Service.Model.EF
                 entity.ToTable("pro_GetUserDepartment");
                 entity.Property(e => e.rowNo).HasColumnName("rowNo");
             });
-            modelBuilder.Entity<lstdrugresponse>(entity =>
+            modelBuilder.Entity<LstDrugresponse>(entity =>
             {
                 entity.HasKey(e => e.drugPresTempNo);
                 entity.ToTable("pro_GetProductVsDrugs");
                 entity.Property(e => e.drugPresTempNo).HasColumnName("drugPresTempNo");
             });
-            modelBuilder.Entity<savedruglstresponse>(entity =>
+            modelBuilder.Entity<Savedruglstresponse>(entity =>
             {
                 entity.HasKey(e => e.DrugPresTempNo);
                 entity.ToTable("pro_InsertProductVsDrugs");
@@ -2142,7 +2142,7 @@ namespace Service.Model.EF
                 entity.ToTable("pro_GetTreatmentMasterDetailsByPRM");
                 entity.Property(e => e.treatmentPlanPharmacyNo).HasColumnName("treatmentPlanPharmacyNo");
             });
-            modelBuilder.Entity<templateresponse>(entity =>
+            modelBuilder.Entity<Templateresponse>(entity =>
             {
                 entity.HasKey(e => e.templateNo);
                 entity.ToTable("pro_InsertDiseaseTemplateText");

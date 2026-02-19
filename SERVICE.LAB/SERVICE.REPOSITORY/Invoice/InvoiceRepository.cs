@@ -27,7 +27,7 @@ namespace Service.Repository
                     var _customerNo = new SqlParameter("customerNo", req.customerNo);
                     var _venueno = new SqlParameter("venueno", req.venueNo);
                     var _venuebranchno = new SqlParameter("venuebranchno", req.venueBranchNo);
-                    var _isAutoInviceGenerate = new SqlParameter("isAutoInvoiceGenerate", req.isAutoInvoiceGenerate == null ? 0 : req.isAutoInvoiceGenerate);
+                    var _isAutoInviceGenerate = new SqlParameter("isAutoInvoiceGenerate", req.isAutoInvoiceGenerate);
                     
                     lst = context.GetCustomerVisit.FromSqlRaw(
                     "Execute dbo.pro_GetCustomerVisit @fromdate, @todate, @customerNo, @venueno, @venuebranchno, @isAutoInvoiceGenerate",
@@ -62,9 +62,9 @@ namespace Service.Repository
             }
             return lst;
         }
-        public rtninvoice InsertInvoiceCreate(objInvoiceCreate req)
+        public Rtninvoice InsertInvoiceCreate(ObjInvoiceCreate req)
         {
-            rtninvoice obj = new rtninvoice();
+            Rtninvoice obj = new Rtninvoice();
             CommonHelper commonUtility = new CommonHelper();
             try
             {
@@ -99,9 +99,9 @@ namespace Service.Repository
             }
             return obj;
         }
-        public rtninvoiceCredit InsertInvoiceCreditNote(objInvoiceCreditNote req)
+        public RtninvoiceCredit InsertInvoiceCreditNote(ObjInvoiceCreditNote req)
         {
-            rtninvoiceCredit obj = new rtninvoiceCredit();
+            RtninvoiceCredit obj = new RtninvoiceCredit();
             CommonHelper commonUtility = new CommonHelper();
             
             try
@@ -131,9 +131,9 @@ namespace Service.Repository
             }
             return obj;
         }
-        public List<lstCustomerInvoice> GetCustomerInvoice(reqinvoice req)
+        public List<LstCustomerInvoice> GetCustomerInvoice(reqinvoice req)
         {
-            List<lstCustomerInvoice> lst = new List<lstCustomerInvoice>();
+            List<LstCustomerInvoice> lst = new List<LstCustomerInvoice>();
             try
             {
                 using (var context = new InvoiceContext(_config.GetConnectionString(ConfigKeys.DefaultConnection)))
@@ -161,9 +161,9 @@ namespace Service.Repository
             }
             return lst;
         }
-        public objInvoice GetInvoiceInfo(reqinvoice req)
+        public ObjInvoice GetInvoiceInfo(reqinvoice req)
         {
-            objInvoice obj = new objInvoice();
+            ObjInvoice obj = new ObjInvoice();
             try
             {
                 using (var context = new InvoiceContext(_config.GetConnectionString(ConfigKeys.DefaultConnection)))
@@ -185,9 +185,9 @@ namespace Service.Repository
             }
             return obj;
         }
-        public rtninvoicePayment InsertInvoicePayment(objInvoicePayment req)
+        public RtninvoicePayment InsertInvoicePayment(ObjInvoicePayment req)
         {
-            rtninvoicePayment obj = new rtninvoicePayment();
+            RtninvoicePayment obj = new RtninvoicePayment();
             CommonHelper commonUtility = new CommonHelper();
 
             string paymentModeXML = "";
@@ -294,7 +294,7 @@ namespace Service.Repository
             }
             return lst;
         }
-        public rtnCancelInvoice InvoiceCancel(objInvoiceCancel req)
+        public rtnCancelInvoice InvoiceCancel(ObjInvoiceCancel req)
         {
             rtnCancelInvoice obj = new rtnCancelInvoice();
             CommonHelper commonUtility = new CommonHelper();

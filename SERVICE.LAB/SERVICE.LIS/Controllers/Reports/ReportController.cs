@@ -220,31 +220,31 @@ namespace Service.API.SERVICE.Controllers
         [Route("api/Report/GetAdvancePayment")]
         public List<AdvancePaymentList> GetAdvancePayment(CommonFilterRequestDTO RequestItem)
         {
-            List<AdvancePaymentList> objresult = new List<AdvancePaymentList>();
+            List<AdvancePaymentList> Objresult = new List<AdvancePaymentList>();
             try
             {
-                objresult = _IReportRepository.GetAdvancePayment(RequestItem);
+                Objresult = _IReportRepository.GetAdvancePayment(RequestItem);
             }
             catch (Exception ex)
             {
                 MyDevException.Error(ex, "ReportController.GetAdvancePayment", ExceptionPriority.Medium, ApplicationType.APPSERVICE, 0, 0, 0);
             }
-            return objresult;
+            return Objresult;
         }
         [HttpPost]
         [Route("api/Report/InsertAdvancePayment")]
         public AdvancePaymentListResponse InsertAdvancePayment(AdvancePaymentListRequest RequestItem)
         {
-            AdvancePaymentListResponse objresult = new AdvancePaymentListResponse();
+            AdvancePaymentListResponse Objresult = new AdvancePaymentListResponse();
             try
             {
-                objresult = _IReportRepository.InsertAdvancePayment(RequestItem);
+                Objresult = _IReportRepository.InsertAdvancePayment(RequestItem);
             }
             catch (Exception ex)
             {
                 MyDevException.Error(ex, "ReportController.InsertAdvancePayment", ExceptionPriority.Medium, ApplicationType.APPSERVICE, 0, 0, 0);
             }
-            return objresult;
+            return Objresult;
         }
 
         #region Cash Expenses
@@ -252,31 +252,31 @@ namespace Service.API.SERVICE.Controllers
         [Route("api/Report/GetCashExpenses")]
         public List<CashExpenseDTO> GetCashExpenses(GetCashExpenseParam RequestItem)
         {
-            List<CashExpenseDTO> objresult = new List<CashExpenseDTO>();
+            List<CashExpenseDTO> Objresult = new List<CashExpenseDTO>();
             try
             {
-                objresult = _IReportRepository.GetCashExpenses(RequestItem);
+                Objresult = _IReportRepository.GetCashExpenses(RequestItem);
             }
             catch (Exception ex)
             {
                 MyDevException.Error(ex, "ReportController.GetCashExpenses", ExceptionPriority.Medium, ApplicationType.APPSERVICE, 0, 0, 0);
             }
-            return objresult;
+            return Objresult;
         }
         [HttpPost]
         [Route("api/Report/InsertCashExpenses")]
         public InsertCashExpenseDTO InsertCashExpenses(SaveCashExpenseDTO RequestItem)
         {
-            InsertCashExpenseDTO objresult = new InsertCashExpenseDTO();
+            InsertCashExpenseDTO Objresult = new InsertCashExpenseDTO();
             try
             {
-                objresult = _IReportRepository.InsertCashExpenses(RequestItem);
+                Objresult = _IReportRepository.InsertCashExpenses(RequestItem);
             }
             catch (Exception ex)
             {
                 MyDevException.Error(ex, "ReportController.InsertCashExpenses", ExceptionPriority.Medium, ApplicationType.APPSERVICE, 0, 0, 0);
             }
-            return objresult;
+            return Objresult;
         }
         #endregion
         [HttpPost]
@@ -403,32 +403,32 @@ namespace Service.API.SERVICE.Controllers
         [Route("api/Report/GetReqExpenses")]
         public List<GetReqExpensesResponse> GetReqExpenses(GetReqExpensesParam RequestItem)
         {
-            List<GetReqExpensesResponse> objresult = new List<GetReqExpensesResponse>();
+            List<GetReqExpensesResponse> Objresult = new List<GetReqExpensesResponse>();
             try
             {
-                objresult = _IReportRepository.GetReqExpenses(RequestItem);
+                Objresult = _IReportRepository.GetReqExpenses(RequestItem);
             }
             catch (Exception ex)
             {
                 MyDevException.Error(ex, "ReportController.GetReqExpenses", ExceptionPriority.Medium, ApplicationType.APPSERVICE, 0, 0, 0);
             }
-            return objresult;
+            return Objresult;
         }
 
         [HttpPost]
         [Route("api/Report/ApproveExpenses")]
         public InsertCashExpenseDTO ApproveExpenses(ApproveExpenses RequestItem)
         {
-            InsertCashExpenseDTO objresult = new InsertCashExpenseDTO();
+            InsertCashExpenseDTO Objresult = new InsertCashExpenseDTO();
             try
             {
-                objresult = _IReportRepository.ApproveExpenses(RequestItem);
+                Objresult = _IReportRepository.ApproveExpenses(RequestItem);
             }
             catch (Exception ex)
             {
                 MyDevException.Error(ex, "ReportController.ApproveExpenses", ExceptionPriority.Medium, ApplicationType.APPSERVICE, 0, 0, 0);
             }
-            return objresult;
+            return Objresult;
         }
         [HttpPost]
         [Route("api/Report/GetStaffBillingDetailsMIS")]

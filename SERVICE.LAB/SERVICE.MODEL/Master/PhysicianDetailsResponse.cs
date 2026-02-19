@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace Service.Model
 {
@@ -51,8 +49,7 @@ namespace Service.Model
         public Int16 SpecializationNo { get; set; }
         public int PhysicianBranchNo { get; set; }
         public int physicianUserNo { get; set; }
-        public string? PortalURL { get; set; }
-        public string? physicianusername { get; set; }
-
+        public string PortalURL { get; set; }
+        public string physicianusername { get; set; }
     }    
 }

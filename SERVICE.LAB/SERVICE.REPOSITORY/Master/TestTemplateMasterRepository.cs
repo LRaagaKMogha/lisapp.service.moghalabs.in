@@ -22,7 +22,7 @@ namespace Service.Repository.Master
         public TestTemplateMasterRepository(IConfiguration config) { _config = config; }
         public List<GetTestTemplateMasterRes> GetTestTemplateMasterList(GetTestTemplateMasterReq req)
         {
-            List<GetTestTemplateMasterRes> objResult = new List<GetTestTemplateMasterRes>();
+            List<GetTestTemplateMasterRes> Objresult = new List<GetTestTemplateMasterRes>();
             try
             {
                 using (var context = new MasterContext(_config.GetConnectionString(ConfigKeys.DefaultConnection)))
@@ -34,7 +34,7 @@ namespace Service.Repository.Master
                     var _PageIndex = new SqlParameter("PageIndex", req.PageIndex);
                     var _PageSize = new SqlParameter("PageSize", req.PageSize);
 
-                    objResult = context.GetTestTemplateMasterList
+                    Objresult = context.GetTestTemplateMasterList
                         .FromSqlRaw(
                             "EXEC dbo.pro_GetTestTemplateMaster @DeptNo, @VenueNo, @VenueBranchNo, @TestNo, @PageIndex, @PageSize",
                             _DeptNo, _VenueNo, _VenueBranchNo, _TestNo, _PageIndex, _PageSize
@@ -45,7 +45,7 @@ namespace Service.Repository.Master
             {
                 MyDevException.Error(ex, "TemplateTestRepository.GetTestTemplateMasterList " + req.TestNo, ExceptionPriority.Low, ApplicationType.REPOSITORY, req.VenueNo, req.VenueBranchNo, 0);
             }
-            return objResult;
+            return Objresult;
         }
         public GetEditTemplateTestMasterResponseDto GetEditTemplateTestMaster(GetEditTemplateTestMasterRequestDto req)
         {
@@ -546,7 +546,7 @@ namespace Service.Repository.Master
         }
         public List<GetTemplateApprovalRes> GetTemplateApprovalList(GetTemplateApprovalReq req)
         {
-            List<GetTemplateApprovalRes> objResult = new List<GetTemplateApprovalRes>();
+            List<GetTemplateApprovalRes> Objresult = new List<GetTemplateApprovalRes>();
             try
             {
                 using (var context = new MasterContext(_config.GetConnectionString(ConfigKeys.DefaultConnection)))
@@ -558,7 +558,7 @@ namespace Service.Repository.Master
                     var _PageIndex = new SqlParameter("PageIndex", req.PageIndex);
                     var _PageSize = new SqlParameter("PageSize", req.PageSize);
 
-                    objResult = context.GetTemplateApprovalList
+                    Objresult = context.GetTemplateApprovalList
                         .FromSqlRaw(
                             "EXEC dbo.pro_GetTemplateApproval @VenueNo, @VenueBranchNo, @DeptNo, @TestNo, @PageIndex, @PageSize",
                             _VenueNo, _VenueBranchNo, _DeptNo, _TestNo, _PageIndex, _PageSize
@@ -569,7 +569,7 @@ namespace Service.Repository.Master
             {
                 MyDevException.Error(ex, "TemplateTestRepository.GetTemplateApprovalList " + req.TestNo, ExceptionPriority.Low, ApplicationType.REPOSITORY, req.VenueNo, req.VenueBranchNo, 0);
             }
-            return objResult;
+            return Objresult;
         }
 
     }

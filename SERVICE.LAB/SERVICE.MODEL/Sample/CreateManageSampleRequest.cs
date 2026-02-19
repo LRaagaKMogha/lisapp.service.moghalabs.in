@@ -43,7 +43,7 @@ namespace Service.Model.Sample
         public bool isSampleChanged { get; set; }
         public int serviceNo { get; set; }
         public string rejectedReason { get; set; }
-        public string? rejectedReasonDesc { get; set; }
+        public string rejectedReasonDesc { get; set; }
     }
     public class SampleTestDetails
     {

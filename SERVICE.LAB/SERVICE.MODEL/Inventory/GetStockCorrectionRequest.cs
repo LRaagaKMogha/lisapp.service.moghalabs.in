@@ -15,6 +15,5 @@ namespace Service.Model
         public int BranchNo { get; set; }
         public int StoreNo { get; set; }
         public int ProductNo { get; set; }
-        public string MenuType { get; set; }
     }
 }

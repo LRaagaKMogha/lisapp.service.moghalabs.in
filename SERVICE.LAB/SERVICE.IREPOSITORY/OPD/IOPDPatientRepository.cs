@@ -29,7 +29,7 @@ namespace Service.IRepository
         OPDTreatmentPlan GetOPDTreatmentPlanDetails(OPDTreatmentPlan req);
         List<OPDBulkFileUpload> GetPatientDocumentDetails(PatientDocUploadReq Req);
         List<DocumentInfo> GetPatientDocumentAll(PatientDocUploadReq obj);
-        List<drugresponse> GetDrugDetails(drugreq RequestItem);
+        List<Drugresponse> GetDrugDetails(Drugreq RequestItem);
         List<ClinicalHistory> GetSkinHistory(SkinHistoryReq req);
         List<ClinicalHistory> GetopdclinicalHistory(SkinHistoryReq req);
         OPDDiagnosisDTOFollowupResponse InsertFollowUpAppointment(OPDDiagnosisDTORequest req);
@@ -39,7 +39,7 @@ namespace Service.IRepository
         OPDBeforeAfterImageListResponse InserOPDImaging(OPDBeforeAfterImageList objDTO);
         TreatmentPlanResponse InsertTreatmentPlan(OPDTreatmentPlan req);
         ImageListResponse OPDImagingIncludingreport(OPDBeforeAfterImageList objDTO);
-        List<displaylist> GetDisplayView(int VenueNo, int VenueBranchNo, int type);
+        List<Displaylist> GetDisplayView(int VenueNo, int VenueBranchNo, int type);
         List<OPDStatusLogListResponse> GetOPDStatusLogList(OPDStatusLogListRequest RequestItem);
         List<SearchOPDMachinePatient> GetPatientMachineData(SearchOPDPatientRequest RequestItem);
         List<OPDPatientMachineBookingList> GetPatientMachineBookingList(OPDPatientBookingRequest RequestItem);

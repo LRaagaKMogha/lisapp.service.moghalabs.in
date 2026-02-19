@@ -35,7 +35,7 @@ namespace Service.Model.Sample
 
 
     }
-    public class GetSlidePrintPatientDetailsResponse
+    public class GetSlidePrintPatientdetailsResponse
     {
 
         public Int64 Sno { get; set; }
@@ -97,7 +97,7 @@ namespace Service.Model.Sample
         public string RejectionCode { get; set; }
 
     }
-    public class SlidePrintPatientDetailsResponse
+    public class SlidePrintPatientdetailsResponse
     {
         public Int64 Sno { get; set; }
         public bool RCNo { get; set; }

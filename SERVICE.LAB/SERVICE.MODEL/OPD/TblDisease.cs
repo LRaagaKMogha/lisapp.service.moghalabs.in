@@ -18,11 +18,11 @@ namespace Service.Model
         public int UserNo { get; set; }
         public int PageIndex { get; set; }
     }
-    public partial class rtnDiseaseCategory
+    public partial class RtnDiseaseCategory
     {
         public Int16 DiseaseCategoryNo { get; set; }
     }
-    public partial class reqDiseaseCategory
+    public partial class ReqDiseaseCategory
     {
         public Int16 DiseaseCategoryNo { get; set; }
         public bool? DisCatStatus { get; set; }
@@ -32,8 +32,7 @@ namespace Service.Model
         public int PageIndex { get; set; }
         public int TotalRecords { get; set; }
     }
-
-    public partial class lstDiseaseCategory
+    public partial class LstDiseaseCategory
     {
         public Int16 DiseaseCategoryNo { get; set; }
         public string DiseaseDescription { get; set; }
@@ -45,7 +44,6 @@ namespace Service.Model
         public int PageIndex { get; set; }
         public int TotalRecords { get; set; }
     }
-
     public partial class TblDiseaseMaster
     {
         public Int16 DiseaseCategoryNo { get; set; }
@@ -64,11 +62,11 @@ namespace Service.Model
         public int UserNo { get; set; }
         public int PageIndex { get; set; }
     }
-    public partial class rtnDiseaseMaster
+    public partial class RtnDiseaseMaster
     {
         public Int16 DiseaseMasterNo { get; set; }
     }
-    public partial class reqDiseaseMaster
+    public partial class ReqDiseaseMaster
     {
         public Int16 DiseaseCategoryNo { get; set; }
         public Int16 DiseaseMasterNo { get; set; }
@@ -79,8 +77,7 @@ namespace Service.Model
         public int PageIndex { get; set; }
         public int TotalRecords { get; set; }
     }
-
-    public partial class lstDiseaseMaster
+    public partial class LstDiseaseMaster
     {
         public Int16 DiseaseCategoryNo { get; set; }
         public Int16 DiseaseMasterNo { get; set; }
@@ -96,12 +93,12 @@ namespace Service.Model
         public int PageIndex { get; set; }
         public int TotalRecords { get; set; }
     }
-    public partial class lstDiseaseTemplateList
+    public partial class LstDiseaseTemplateList
     {
         public int templateNo { get; set; }
         public int tempdiseaseNo { get; set; }
-        public string? templateName { get; set; }
-        public string? templateText { get; set; }
+        public string templateName { get; set; }
+        public string templateText { get; set; }
         public bool isDefault { get; set; }
         public int sequenceNo { get; set; }
         public bool status { get; set; }
@@ -109,13 +106,13 @@ namespace Service.Model
         public int venueBranchNo { get; set; }
         public int userNo { get; set; }
     }
-    public partial class templateresponse
+    public partial class Templateresponse
     {
         public int templateNo { get; set; }
     }
-    public partial class reqresponse
+    public partial class Reqresponse
     {
-        public string? templateText { get; set; }
+        public string templateText { get; set; }
     }
     public partial class DiseaseVsProductMapping
     {
@@ -143,7 +140,7 @@ namespace Service.Model
         public int PageIndex { get; set; }
         public int TotalRecords { get; set; }
     }
-    public partial class reqDisVsDrugMaster
+    public partial class ReqDisVsDrugMaster
     {
         public int DiseaseVsProductMappingNo { get; set; }
         public Int16 DiseaseMasterNo { get; set; }
@@ -159,11 +156,11 @@ namespace Service.Model
         public int? ModifiedBy { get; set; }
         public int UserNo { get; set; }
     }
-    public partial class rtnDisVsDrugMaster
+    public partial class RtnDisVsDrugMaster
     {
         public int DiseaseVsProductMappingNo { get; set; }
     }
-    public partial class reqDisVsInvMaster
+    public partial class ReqDisVsInvMaster
     {
         public int DiseaseVsTestMappingNo { get; set; }
         public Int16 DiseaseMasterNo { get; set; }
@@ -179,7 +176,7 @@ namespace Service.Model
         public int? ModifiedBy { get; set; }
         public int UserNo { get; set; }
     }
-    public partial class rtnDisVsInvMaster
+    public partial class RtnDisVsInvMaster
     {
         public int DiseaseVsTestMappingNo { get; set; }
     }
@@ -194,18 +191,17 @@ namespace Service.Model
         public int PageIndex { get; set; }
         public int TotalRecords { get; set; }
     }
-    public partial class reqMachineMaster
+    public partial class ReqMachineMaster
     {
         public Int16 machineNo { get; set; }
         public Int16 VenueNo { get; set; }
         public int VenueBranchNo { get; set; }
         public int PageIndex { get; set; }
     }
-    public partial class reqMachineMasterResponse
+    public partial class ReqMachineMasterResponse
     {
         public int machineNo { get; set; }
-    }
-      
+    }      
     public partial class InvMachineMasterRequest
     {
         public Int16 machineNo { get; set; }

@@ -44,8 +44,8 @@ namespace Service.Repository.External.Patient
 
                     objResponse = response;
 
-                    string patientDetails = JsonConvert.SerializeObject(objResponse.FirstOrDefault());
-                    objFinalResponse = JsonConvert.DeserializeObject<LstPatientBillingInfo>(patientDetails);
+                    string Patientdetails = JsonConvert.SerializeObject(objResponse.FirstOrDefault());
+                    objFinalResponse = JsonConvert.DeserializeObject<LstPatientBillingInfo>(Patientdetails);
 
                     foreach (var patientdetail in response)
                     {
@@ -102,8 +102,8 @@ namespace Service.Repository.External.Patient
 
                     objResponse = response;
 
-                    string patientDetails = JsonConvert.SerializeObject(objResponse.FirstOrDefault());
-                    objFinalResponse = JsonConvert.DeserializeObject<LstPatientCancelBillingInfo>(patientDetails);
+                    string Patientdetails = JsonConvert.SerializeObject(objResponse.FirstOrDefault());
+                    objFinalResponse = JsonConvert.DeserializeObject<LstPatientCancelBillingInfo>(Patientdetails);
 
                     foreach (var patientdetail in response)
                     {
@@ -154,7 +154,7 @@ namespace Service.Repository.External.Patient
                            " @VenueNo, @VenueBranchNo, @FromDate, @ToDate ",
                              _venueNo, _venueBranchNo, _dtFrom, _dtTo).ToList();
 
-                    string patientDetails = JsonConvert.SerializeObject(objListProcess);
+                    string Patientdetails = JsonConvert.SerializeObject(objListProcess);
 
                     foreach (var patientdetail in response.ToList())
                     {

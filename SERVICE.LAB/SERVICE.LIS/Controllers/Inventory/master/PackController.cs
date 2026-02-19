@@ -40,10 +40,10 @@ namespace Service.API.SERVICE.Controllers
         [Route("api/Pack/Insertpackmaster")]
         public PackMasterResponse Insertpackmaster(TblPack tblPack)
         {
-            PackMasterResponse objresult = new PackMasterResponse();
+            PackMasterResponse Objresult = new PackMasterResponse();
             try
             {
-                objresult = _packRepository.Insertpackmaster(tblPack);
+                Objresult = _packRepository.Insertpackmaster(tblPack);
                 string _CacheKey = CacheKeys.CommonMaster + "PACK" + tblPack.venueNo + tblPack.venueBranchno;
                 MemoryCacheRepository.RemoveItem(_CacheKey);
             }
@@ -51,7 +51,7 @@ namespace Service.API.SERVICE.Controllers
             {
                 MyDevException.Error(ex, "PackController.Insertpackmaster" + tblPack.packNo.ToString(), ExceptionPriority.Low, ApplicationType.APPSERVICE, tblPack.venueNo, tblPack.venueBranchno, tblPack.userNo);
             }
-            return objresult;
+            return Objresult;
         }
     }
 }

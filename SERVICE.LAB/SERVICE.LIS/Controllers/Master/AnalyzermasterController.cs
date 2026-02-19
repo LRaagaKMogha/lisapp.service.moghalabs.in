@@ -25,23 +25,23 @@ namespace Service.API.SERVICE.Controllers
         [Route("api/AnalyzerMaster/GetAnalyzerMasterDetails")]
         public IEnumerable<TblAnalyzer> GetAnalyzerMasterDetails(GetCommonMasterRequest getanalyzer)
         {
-            List<TblAnalyzer> objresult = new List<TblAnalyzer>();
+            List<TblAnalyzer> Objresult = new List<TblAnalyzer>();
             try
             {                
-                objresult = _AnalyzerMasterRepository.GetAnalyzerMasterDetails(getanalyzer); 
+                Objresult = _AnalyzerMasterRepository.GetAnalyzerMasterDetails(getanalyzer); 
             }
             catch (Exception ex)
             {
                MyDevException.Error(ex, "AnalyzemasterController.GetAnalyzerMasterDetails", ExceptionPriority.Low, ApplicationType.APPSERVICE, getanalyzer.venueno, getanalyzer.venuebranchno, 0);
             }
-            return objresult;
+            return Objresult;
         }       
        
         [HttpPost]
         [Route("api/AnalyzerMaster/InsertAnalyzerDetails")]
         public ActionResult<TblAnalyzerdata> InsertAnalyzerDetails([FromBody] TblAnalyzerresponse analyzeritem)
         {
-            TblAnalyzerdata objresult = new TblAnalyzerdata();
+            TblAnalyzerdata Objresult = new TblAnalyzerdata();
             try
             {
                 using(var auditScoped = new AuditScope<TblAnalyzerresponse>(analyzeritem, _auditService))
@@ -49,7 +49,7 @@ namespace Service.API.SERVICE.Controllers
                     var _errormsg = DeviceInterfaceValidation.InsertAnalyzerDetails(analyzeritem);
                     if (!_errormsg.status)
                     {
-                        objresult = _AnalyzerMasterRepository.InsertAnalyzerDetails(analyzeritem);
+                        Objresult = _AnalyzerMasterRepository.InsertAnalyzerDetails(analyzeritem);
                         string _CacheKey = CacheKeys.CommonMaster + "AnalyzerMaster" + analyzeritem.venueNo + analyzeritem.venuebranchNo;
                         MemoryCacheRepository.RemoveItem(CacheKeys.AnalyzerMaster);
                         MemoryCacheRepository.RemoveItem(_CacheKey);
@@ -62,7 +62,7 @@ namespace Service.API.SERVICE.Controllers
             {
                 MyDevException.Error(ex, "AnalyzemasterController.InsertAnalyzerDetails - ", ExceptionPriority.Low, ApplicationType.APPSERVICE, analyzeritem.venueNo, analyzeritem.venuebranchNo, 0);
             }
-            return Ok(objresult);
+            return Ok(Objresult);
         }
 
         [HttpGet]
@@ -105,33 +105,33 @@ namespace Service.API.SERVICE.Controllers
 
         [HttpPost]
         [Route("api/AnalyzerMaster/GetAnalVsParamVsTest")]
-        public IEnumerable<TbltestMap> GetAnalVsParamVsTest(testmapRequest testmapRequest)
+        public IEnumerable<TbltestMap> GetAnalVsParamVsTest(TestmapRequest TestmapRequest)
         {
-            List<TbltestMap> objresult = new List<TbltestMap>();
+            List<TbltestMap> Objresult = new List<TbltestMap>();
             try
             {
-                objresult = _AnalyzerMasterRepository.GetAnalVsParamVsTest(testmapRequest);
+                Objresult = _AnalyzerMasterRepository.GetAnalVsParamVsTest(TestmapRequest);
             }
             catch (Exception ex)
             {
-                MyDevException.Error(ex, "GetAnalVsParamVsTest", ExceptionPriority.Low, ApplicationType.APPSERVICE, testmapRequest.venueNo, 0, 0);
+                MyDevException.Error(ex, "GetAnalVsParamVsTest", ExceptionPriority.Low, ApplicationType.APPSERVICE, TestmapRequest.venueNo, 0, 0);
             }
-            return objresult;
+            return Objresult;
         }
 
         [HttpPost]
         [Route("api/AnalyzerMaster/InsertAnalVsParamVsTest")]
-        public ActionResult<analVsparamVstestMap> InsertAnalVsParamVsTest(responseTest responseTest)
+        public ActionResult<AnalVsparamVstestMap> InsertAnalVsParamVsTest(ResponseTest ResponseTest)
         {
-            analVsparamVstestMap objresult = new analVsparamVstestMap();
+            AnalVsparamVstestMap Objresult = new AnalVsparamVstestMap();
             try
             {
-                using(var auditScoped = new AuditScope<responseTest>(responseTest, _auditService))
+                using(var auditScoped = new AuditScope<ResponseTest>(ResponseTest, _auditService))
                 {
-                    var _errormsg = DeviceInterfaceValidation.InsertAnalVsParamVsTest(responseTest);
+                    var _errormsg = DeviceInterfaceValidation.InsertAnalVsParamVsTest(ResponseTest);
                     if (!_errormsg.status)
                     {
-                        objresult = _AnalyzerMasterRepository.InsertAnalVsParamVsTest(responseTest);
+                        Objresult = _AnalyzerMasterRepository.InsertAnalVsParamVsTest(ResponseTest);
                     }
                     else
                         return BadRequest(_errormsg);
@@ -139,25 +139,25 @@ namespace Service.API.SERVICE.Controllers
             }
             catch (Exception ex)
             {
-                MyDevException.Error(ex, "AnalyzemasterController.InsertAnalVsParamVsTest - " + responseTest.analyzerparamTestNo.ToString(), ExceptionPriority.Low, ApplicationType.APPSERVICE, responseTest.venueNo, 0, 0);
+                MyDevException.Error(ex, "AnalyzemasterController.InsertAnalVsParamVsTest - " + ResponseTest.analyzerparamTestNo.ToString(), ExceptionPriority.Low, ApplicationType.APPSERVICE, ResponseTest.venueNo, 0, 0);
             }
-            return Ok(objresult);
+            return Ok(Objresult);
         }
 
         [HttpPost]
         [Route("api/AnalyzerMaster/GetSubTest")]
-        public List<subresponse> GetSubTest(subrequest subrequest)
+        public List<Subresponse> GetSubTest(Subrequest Subrequest)
         {
-            List<subresponse> objresult = new List<subresponse>();
+            List<Subresponse> Objresult = new List<Subresponse>();
             try
             {
-                objresult = _AnalyzerMasterRepository.GetSubTest(subrequest);
+                Objresult = _AnalyzerMasterRepository.GetSubTest(Subrequest);
             }
             catch (Exception ex)
             {
-                MyDevException.Error(ex, "GetSubTest", ExceptionPriority.Low, ApplicationType.APPSERVICE, subrequest.venueNo, 0, 0);
+                MyDevException.Error(ex, "GetSubTest", ExceptionPriority.Low, ApplicationType.APPSERVICE, Subrequest.venueNo, 0, 0);
             }
-            return objresult;
+            return Objresult;
         }
     }
 }  

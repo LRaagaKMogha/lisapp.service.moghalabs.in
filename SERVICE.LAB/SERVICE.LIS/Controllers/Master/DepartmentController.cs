@@ -30,16 +30,16 @@ namespace Service.API.SERVICE.Controllers
         [Route("api/Department/GetDepartmentDetails")]
         public IEnumerable<TblDepartment> GetDepartmentDetails(GetCommonMasterRequest getCommonMaster)
         {
-            List<TblDepartment> objresult = new List<TblDepartment>();
+            List<TblDepartment> Objresult = new List<TblDepartment>();
             try
             {
-                objresult = _DepartmentRepository.GetDepartmentDetails(getCommonMaster);
+                Objresult = _DepartmentRepository.GetDepartmentDetails(getCommonMaster);
             }
             catch (Exception ex)
             {
                 MyDevException.Error(ex, "GetDepartmentDetails-", ExceptionPriority.Low, ApplicationType.APPSERVICE, getCommonMaster.venueno, getCommonMaster.venuebranchno, 0);
             }
-            return objresult;
+            return Objresult;
         }
 
         #endregion
@@ -82,48 +82,48 @@ namespace Service.API.SERVICE.Controllers
         [Route("api/Department/GetMaindepartmentdetail")]
         public IEnumerable<GetMaindepartment> GetMaindepartmentdetail(GetDeptMasterRequest getCommonMaster)
         {
-            List<GetMaindepartment> objresult = new List<GetMaindepartment>();
+            List<GetMaindepartment> Objresult = new List<GetMaindepartment>();
             try
             {
-                objresult = _DepartmentRepository.GetMaindepartmentdetail(getCommonMaster);
+                Objresult = _DepartmentRepository.GetMaindepartmentdetail(getCommonMaster);
             }
             catch (Exception ex)
             {
                 MyDevException.Error(ex, "GetMaindepartment-", ExceptionPriority.Low, ApplicationType.APPSERVICE, getCommonMaster.venueno, getCommonMaster.venuebranchno, 0);
             }
-            return objresult;
+            return Objresult;
         }
 
         [HttpPost]
         [Route("api/Department/InsertLangCodeDeptMaster")]
         public IEnumerable<DepartMentLangCodeRes> InsertLangCodeDeptMaster(DepartMentLangCodeReq req)
         {
-            List<DepartMentLangCodeRes> objresult = new List<DepartMentLangCodeRes>();
+            List<DepartMentLangCodeRes> Objresult = new List<DepartMentLangCodeRes>();
             try
             {
-                objresult = _DepartmentRepository.InsertLangCodeDeptMaster(req);
+                Objresult = _DepartmentRepository.InsertLangCodeDeptMaster(req);
             }
             catch (Exception ex)
             {
                 MyDevException.Error(ex, "InsertLangCodeDeptMaster-", ExceptionPriority.Low, ApplicationType.APPSERVICE, req.VenueNo, req.VenueBranchNo, 0);
             }
-            return objresult;
+            return Objresult;
         }
 
         [HttpPost]
         [Route("api/Department/GetLangCodeDeptMaster")]
         public IEnumerable<GetDeptLangCodeRes> GetLangCodeDeptMaster(GetDeptLangCodeReq req)
         {
-            List<GetDeptLangCodeRes> objresult = new List<GetDeptLangCodeRes>();
+            List<GetDeptLangCodeRes> Objresult = new List<GetDeptLangCodeRes>();
             try
             {
-                objresult = _DepartmentRepository.GetLangCodeDeptMaster(req);
+                Objresult = _DepartmentRepository.GetLangCodeDeptMaster(req);
             }
             catch (Exception ex)
             {
                 MyDevException.Error(ex, "GetMaindepartment-", ExceptionPriority.Low, ApplicationType.APPSERVICE, req.VenueNo, req.VenueBranchNo, 0);
             }
-            return objresult;
+            return Objresult;
         }
         #endregion
     }

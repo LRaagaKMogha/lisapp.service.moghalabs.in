@@ -41,7 +41,7 @@ namespace Service.API.SERVICE.Controllers
         [Route("api/Subtestheadermaster/InsertSubtestheadermaster")]
         public ActionResult<SubtestheaderMasterResponse> InsertSubtestheadermaster(TblSubtestheader testheader)
         {
-            SubtestheaderMasterResponse objresult = new SubtestheaderMasterResponse();
+            SubtestheaderMasterResponse Objresult = new SubtestheaderMasterResponse();
             try
             {
                 using (var auditScoped = new AuditScope<TblSubtestheader>(testheader, _auditService))
@@ -49,7 +49,7 @@ namespace Service.API.SERVICE.Controllers
                     var _errormsg = LaboratoryMasterValidation.InsertSubtestheadermaster(testheader);
                     if (!_errormsg.status)
                     {
-                        objresult = _SubtestheaderRepository.InsertSubtestheadermaster(testheader);
+                        Objresult = _SubtestheaderRepository.InsertSubtestheadermaster(testheader);
                     }
                     else
                         return BadRequest(_errormsg);
@@ -59,7 +59,7 @@ namespace Service.API.SERVICE.Controllers
             {
                 MyDevException.Error(ex, "SubtestheaderController.InsertSubtestheadermaster - " + testheader.headerNo.ToString(), ExceptionPriority.Low, ApplicationType.REPOSITORY, testheader.venueNo, testheader.venueBranchno, 0);
             }
-            return Ok(objresult);
+            return Ok(Objresult);
         }
     }
 }

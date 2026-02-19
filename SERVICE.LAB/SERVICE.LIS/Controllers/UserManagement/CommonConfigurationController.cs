@@ -26,17 +26,17 @@ namespace Service.API.SERVICE.Controllers.UserManagement
         [Route("api/CommonConfiguration/GetCommonConfiguration")]
         public List<CommonConfigurationResponseDTO> GetCommonConfiguration(CommonConfigurationRequestDTO request)
         {
-            List<CommonConfigurationResponseDTO> objResult = new List<CommonConfigurationResponseDTO>();
+            List<CommonConfigurationResponseDTO> Objresult = new List<CommonConfigurationResponseDTO>();
             try
             {
-                objResult = _CommonConfigurationRepository.GetCommonConfiguration(request);
+                Objresult = _CommonConfigurationRepository.GetCommonConfiguration(request);
             }
             catch (Exception ex)
             {
                 MyDevException.Error(ex, "CommonConfigurationController.GetCommonConfiguration",
                     ExceptionPriority.Low, ApplicationType.APPSERVICE, 0, 0, 0);
             }
-            return objResult;
+            return Objresult;
         }
         [AllowAnonymous]
         [HttpPost]
@@ -68,17 +68,17 @@ namespace Service.API.SERVICE.Controllers.UserManagement
         [Route("api/CommonConfiguration/GetAllBranches")]
         public List<CommonMasterDto> GetAllBranches([FromBody] CommonMasterRequestDTO request)
         {
-            List<CommonMasterDto> objResult = new List<CommonMasterDto>();
+            List<CommonMasterDto> Objresult = new List<CommonMasterDto>();
             try
             {
-                objResult = _CommonConfigurationRepository.GetAllBranches(request);
+                Objresult = _CommonConfigurationRepository.GetAllBranches(request);
             }
             catch (Exception ex)
             {
                 MyDevException.Error(ex, "CommonConfigurationController.GetAllBranches",
                     ExceptionPriority.Low, ApplicationType.APPSERVICE, request.VenueNo, 0, 0);
             }
-            return objResult;
+            return Objresult;
         }
 
     }

@@ -26,17 +26,17 @@ namespace Service.API.SERVICE.Controllers.UserManagement
         [Route("api/VenueVsMenu/GetVenueVsMenu")]
         public List<VenueVsMenuResponseDTO> GetVenueVsMenu(VenueVsMenuRequestDTO request)
         {
-            List<VenueVsMenuResponseDTO> objResult = new List<VenueVsMenuResponseDTO>();
+            List<VenueVsMenuResponseDTO> Objresult = new List<VenueVsMenuResponseDTO>();
             try
             {
-                objResult = _VenueVsMenuRepository.GetVenueVsMenu(request);
+                Objresult = _VenueVsMenuRepository.GetVenueVsMenu(request);
             }
             catch (Exception ex)
             {
                 MyDevException.Error(ex, "VenueVsMenuController.GetVenueVsMenu",
                     ExceptionPriority.Low, ApplicationType.APPSERVICE, 0, 0, 0);
             }
-            return objResult;
+            return Objresult;
         }
 
         [AllowAnonymous]

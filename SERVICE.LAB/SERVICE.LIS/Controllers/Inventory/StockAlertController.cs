@@ -26,16 +26,16 @@ namespace Service.API.SERVICE.Controllers.Inventory
         [Route("api/Stock/GetStockAlertsDetails")]
         public List<GetStockAlertResponse> GetStockAlertsDetails(StockAlertRequest stockAlertRequest)
         {
-            List<GetStockAlertResponse> objResult = new List<GetStockAlertResponse>();
+            List<GetStockAlertResponse> Objresult = new List<GetStockAlertResponse>();
             try
             {
-                objResult = _stockAlertRepository.GetStockAlertsDetails(stockAlertRequest);
+                Objresult = _stockAlertRepository.GetStockAlertsDetails(stockAlertRequest);
             }
             catch (Exception ex)
             {
                 MyDevException.Error(ex, "GetStockAlertsDetails", ExceptionPriority.Low, ApplicationType.APPSERVICE, stockAlertRequest.VenueNo, 0, 0);
             }
-            return objResult;
+            return Objresult;
         }
 
     }

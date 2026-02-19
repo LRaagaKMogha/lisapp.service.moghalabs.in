@@ -18,7 +18,7 @@ namespace Service.Repository
 
         public List<lstAllergyType> GetAllergyTypes(reqAllergyType allType)
         {
-            List<lstAllergyType> objresult = new List<lstAllergyType>();
+            List<lstAllergyType> Objresult = new List<lstAllergyType>();
             try
             {
                 using (var context = new OPDContext(_config.GetConnectionString(ConfigKeys.DefaultConnection)))
@@ -27,7 +27,7 @@ namespace Service.Repository
                     var _VenueNo = new SqlParameter("VenueNo", allType?.VenueNo);
                     var _PageIndex = new SqlParameter("PageIndex", allType?.PageIndex);
 
-                    objresult = context.GetAllergyTypeData.FromSqlRaw(
+                    Objresult = context.GetAllergyTypeData.FromSqlRaw(
                     "Execute dbo.pro_GetAllergyType @AllergyTypeNo, @VenueNo, @PageIndex",
                     _AllergyTypeNo, _VenueNo, _PageIndex).ToList();
                 }
@@ -36,7 +36,7 @@ namespace Service.Repository
             {
                 MyDevException.Error(ex, "AllergyRepository.GetAllergyTypes", ExceptionPriority.Low, ApplicationType.REPOSITORY, allType.VenueNo, 0, 0);
             }
-            return objresult;
+            return Objresult;
         }
         public AllergyTypeResponse InsertAllergyTypes(TblAllergyType req)
         {
@@ -69,7 +69,7 @@ namespace Service.Repository
 
         public List<lstAllergyMaster> GetAllergyMasters(reqAllergyMaster allyName)
         {
-            List<lstAllergyMaster> objresult = new List<lstAllergyMaster>();
+            List<lstAllergyMaster> Objresult = new List<lstAllergyMaster>();
             try
             {
                 using (var context = new OPDContext(_config.GetConnectionString(ConfigKeys.DefaultConnection)))
@@ -79,7 +79,7 @@ namespace Service.Repository
                     var _VenueNo = new SqlParameter("VenueNo", allyName?.VenueNo);
                     var _PageIndex = new SqlParameter("PageIndex", allyName?.PageIndex);
 
-                    objresult = context.GetAllergyMasterData.FromSqlRaw(
+                    Objresult = context.GetAllergyMasterData.FromSqlRaw(
                     "Execute dbo.pro_GetAllergyMaster @AllergyMasterNo, @AllergyTypeNo, @VenueNo, @PageIndex",
                     _AllergyMasterNo,_AllergyTypeNo, _VenueNo, _PageIndex).ToList();
                 }
@@ -88,7 +88,7 @@ namespace Service.Repository
             {
                 MyDevException.Error(ex, "AllergyRepository.GetAllergyMasters", ExceptionPriority.Low, ApplicationType.REPOSITORY, allyName.VenueNo, 0, 0);
             }
-            return objresult;
+            return Objresult;
         }
         public rtnAllergyMaster InsertAllergyMasters(TblAllergyMaster res)
         {
@@ -122,7 +122,7 @@ namespace Service.Repository
 
         public List<lstOPDReasonMaster> GetOPDReasonMaster(reqOPDReasonMaster resMas)
         {
-            List<lstOPDReasonMaster> objresult = new List<lstOPDReasonMaster>();
+            List<lstOPDReasonMaster> Objresult = new List<lstOPDReasonMaster>();
             try
             {
                 using (var context = new OPDContext(_config.GetConnectionString(ConfigKeys.DefaultConnection)))
@@ -133,7 +133,7 @@ namespace Service.Repository
                     var _VenueBranchNo = new SqlParameter("VenueBranchNo", resMas?.VenueBranchNo);
                     var _PageIndex = new SqlParameter("PageIndex", resMas?.PageIndex);
 
-                    objresult = context.GetOPDResonMasterData.FromSqlRaw(
+                    Objresult = context.GetOPDResonMasterData.FromSqlRaw(
                     "Execute dbo.pro_GetOPDResonMaster @OPDReasonMastNo, @TypeNo, @VenueNo, @VenueBranchNo, @PageIndex",
                     _OPDReasonMastNo, _TypeNo, _VenueNo, _VenueBranchNo, _PageIndex).ToList();
                 }
@@ -142,7 +142,7 @@ namespace Service.Repository
             {
                 MyDevException.Error(ex, "AllergyRepository.GetOPDReasonMaster", ExceptionPriority.Low, ApplicationType.REPOSITORY, resMas.VenueNo, resMas.VenueBranchNo, 0);
             }
-            return objresult;
+            return Objresult;
         }
         public rtnOPDReasonMaster InsertOPDReasonMaster(TblOPDReasonMaster reasonMas)
         {
@@ -177,7 +177,7 @@ namespace Service.Repository
         }
         public rtnAllergyReaction InsertAllergyReaction(TblAllergyReaction res)
         {
-            rtnAllergyReaction objresult = new rtnAllergyReaction();
+            rtnAllergyReaction Objresult = new rtnAllergyReaction();
             try
             {
                 using (var context = new OPDContext(_config.GetConnectionString(ConfigKeys.DefaultConnection)))
@@ -200,11 +200,11 @@ namespace Service.Repository
             {
                 MyDevException.Error(ex, "AllergyRepository.InsertAllergyReaction", ExceptionPriority.Low, ApplicationType.REPOSITORY, res.VenueNo, 0, 0);
             }
-            return objresult;
+            return Objresult;
         }
         public List<rtnAllergyReactionres> GetAllergyReactionl(rtnAllergyReactionreq masterRequest)
         {
-            List<rtnAllergyReactionres> objResult = new List<rtnAllergyReactionres>();
+            List<rtnAllergyReactionres> Objresult = new List<rtnAllergyReactionres>();
             try
             {
                 using (var context = new OPDContext(_config.GetConnectionString(ConfigKeys.DefaultConnection)))
@@ -213,7 +213,7 @@ namespace Service.Repository
                     var _VenueNo = new SqlParameter("VenueNo", masterRequest.VenueNo);
                     var _PageIndex = new SqlParameter("PageIndex", masterRequest.PageIndex);                 
 
-                    objResult = context.GetAllergyReactionl.FromSqlRaw(
+                    Objresult = context.GetAllergyReactionl.FromSqlRaw(
                     "Execute dbo.Pro_GetAllergyReaction @AllergyReactionNo, @VenueNo, @PageIndex",
                     _AllergyReactionNo, _VenueNo, _PageIndex).ToList();
                 }
@@ -222,7 +222,7 @@ namespace Service.Repository
             {
                 MyDevException.Error(ex, "GetAllergyReactionl", ExceptionPriority.Low, ApplicationType.REPOSITORY, masterRequest.VenueNo, 0, 0);
             }
-            return objResult;
+            return Objresult;
         }
     }
 }

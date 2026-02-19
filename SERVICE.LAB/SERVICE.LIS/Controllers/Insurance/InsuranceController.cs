@@ -22,16 +22,16 @@ namespace Service.API.SERVICE.Controllers
         [Route("api/Insurance/GetNetworkMasterDetails")]
         public List<NetworkMasterDTO> GetNetworkMasterDetails(int venueNo, int venueBranchNo, int pageIndex)
         {
-            List<NetworkMasterDTO> objresult = new List<NetworkMasterDTO>();
+            List<NetworkMasterDTO> Objresult = new List<NetworkMasterDTO>();
             try
             {
-                objresult = _InsuranceRepository.GetNetworkMasterDetails(venueNo, venueBranchNo, pageIndex);
+                Objresult = _InsuranceRepository.GetNetworkMasterDetails(venueNo, venueBranchNo, pageIndex);
             }
             catch (Exception ex)
             {
                 MyDevException.Error(ex, "InsuranceController.GetNetworkMasterDetails", ExceptionPriority.Medium, ApplicationType.APPSERVICE, venueNo, venueBranchNo, 0);
             }
-            return objresult;
+            return Objresult;
         }
         [HttpPost]
         [Route("api/Insurance/InsertNetworkMasterDetails")]
@@ -53,16 +53,16 @@ namespace Service.API.SERVICE.Controllers
         [Route("api/Insurance/GetCompanyMasterDetails")]
         public List<CompanyMasterDTO> GetCompanyMasterDetails(int venueNo, int venueBranchNo, int pageIndex)
         {
-            List<CompanyMasterDTO> objresult = new List<CompanyMasterDTO>();
+            List<CompanyMasterDTO> Objresult = new List<CompanyMasterDTO>();
             try
             {
-                objresult = _InsuranceRepository.GetCompanyMasterDetails(venueNo, venueBranchNo, pageIndex);
+                Objresult = _InsuranceRepository.GetCompanyMasterDetails(venueNo, venueBranchNo, pageIndex);
             }
             catch (Exception ex)
             {
                 MyDevException.Error(ex, "InsuranceController.GetCompanyMasterDetails", ExceptionPriority.Medium, ApplicationType.APPSERVICE, venueNo, venueBranchNo, 0);
             }
-            return objresult;
+            return Objresult;
         }
         [HttpPost]
         [Route("api/Insurance/InsertCompanyMasterDetails")]

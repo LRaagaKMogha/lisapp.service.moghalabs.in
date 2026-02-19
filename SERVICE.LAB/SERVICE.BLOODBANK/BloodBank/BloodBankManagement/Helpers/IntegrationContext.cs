@@ -16,7 +16,7 @@ namespace Service.Model.EF
         {
         }
         public virtual DbSet<labresponsedetails> GetPDFReportDetails { get; set; }
-        public virtual DbSet<labtestdetails> GetPDFReportTestDetails { get; set; }
+        public virtual DbSet<Labtestdetails> GetPDFReportTestDetails { get; set; }
         public virtual DbSet<LabReportTestDetails> GetDiscreetLabData { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -37,7 +37,7 @@ namespace Service.Model.EF
                 entity.Ignore("reportdetails");
                 entity.ToTable("Pro_GetPDFReportDetails");
             });
-            modelBuilder.Entity<labtestdetails>(entity =>
+            modelBuilder.Entity<Labtestdetails>(entity =>
             {
                 entity.HasNoKey();
                 entity.ToTable("Pro_GetPDFReportTestDetails");

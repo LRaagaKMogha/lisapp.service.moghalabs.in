@@ -41,10 +41,10 @@ namespace Service.API.SERVICE.Controllers
         [Route("api/AllergyType/InsertAllergyType")]
         public AllergyTypeResponse InsertAllergyType(TblAllergyType req)
         {
-            AllergyTypeResponse objresult = new AllergyTypeResponse();
+            AllergyTypeResponse Objresult = new AllergyTypeResponse();
             try
             {
-                objresult = _allergyRepository.InsertAllergyTypes(req);
+                Objresult = _allergyRepository.InsertAllergyTypes(req);
                 string _CacheKey = CacheKeys.CommonMaster + "ALLERGY" + req.VenueNo + req.VenueBranchNo;
                 MemoryCacheRepository.RemoveItem(_CacheKey);
             }
@@ -52,7 +52,7 @@ namespace Service.API.SERVICE.Controllers
             {
                 MyDevException.Error(ex, "AllergyController.InsertAllergyType" + req.AllergyTypeNo.ToString(), ExceptionPriority.Low, ApplicationType.REPOSITORY, req.VenueNo, req.VenueBranchNo, 0);
             }
-            return objresult;
+            return Objresult;
         }
 
         [HttpPost]
@@ -75,10 +75,10 @@ namespace Service.API.SERVICE.Controllers
         [Route("api/AllergyMaster/InsertAllergyMaster")]
         public rtnAllergyMaster InsertAllergyMaster(TblAllergyMaster res)
         {
-            rtnAllergyMaster objresult = new rtnAllergyMaster();
+            rtnAllergyMaster Objresult = new rtnAllergyMaster();
             try
             {
-                objresult = _allergyRepository.InsertAllergyMasters(res);
+                Objresult = _allergyRepository.InsertAllergyMasters(res);
                 string _CacheKey = CacheKeys.CommonMaster + "ALLERGY" + res.VenueNo + res.VenueBranchNo;
                 MemoryCacheRepository.RemoveItem(_CacheKey);
             }
@@ -86,7 +86,7 @@ namespace Service.API.SERVICE.Controllers
             {
                 MyDevException.Error(ex, "AllergyController.InsertAllergyMaster" + res.AllergyMasterNo.ToString(), ExceptionPriority.Low, ApplicationType.REPOSITORY, res.VenueNo, res.VenueBranchNo, 0);
             }
-            return objresult;
+            return Objresult;
         }
 
         [HttpPost]
@@ -109,26 +109,26 @@ namespace Service.API.SERVICE.Controllers
         [Route("api/OPDReasonMaster/InsertOPDReasonMaster")]
         public rtnOPDReasonMaster InsertOPDReasonMaster(TblOPDReasonMaster reasonMas)
         {
-            rtnOPDReasonMaster objresult = new rtnOPDReasonMaster();
+            rtnOPDReasonMaster Objresult = new rtnOPDReasonMaster();
             try
             {
-                objresult = _allergyRepository.InsertOPDReasonMaster(reasonMas);
+                Objresult = _allergyRepository.InsertOPDReasonMaster(reasonMas);
             }
             catch (Exception ex)
             {
                 MyDevException.Error(ex, "AllergyController.InsertOPDReasonMaster" + reasonMas.OPDReasonMastNo.ToString(), ExceptionPriority.Low, ApplicationType.REPOSITORY, reasonMas.VenueNo, reasonMas.VenueBranchNo, 0);
             }
-            return objresult;
+            return Objresult;
         }
 
         [HttpPost]
         [Route("api/AllergyReaction/InsertAllergyReaction")]
         public rtnAllergyReaction InsertAllergyMaster(TblAllergyReaction res)
         {
-            rtnAllergyReaction objresult = new rtnAllergyReaction();
+            rtnAllergyReaction Objresult = new rtnAllergyReaction();
             try
             {
-                objresult = _allergyRepository.InsertAllergyReaction(res);
+                Objresult = _allergyRepository.InsertAllergyReaction(res);
                 string _CacheKey = CacheKeys.CommonMaster + "ALLERGYREACTION" + res.VenueNo ;
                 MemoryCacheRepository.RemoveItem(_CacheKey);
             }
@@ -136,7 +136,7 @@ namespace Service.API.SERVICE.Controllers
             {
                 MyDevException.Error(ex, "AllergyController.InsertAllergyMaster" + res.AllergyReactionNo.ToString(), ExceptionPriority.Low, ApplicationType.REPOSITORY, res.VenueNo, 0, 0);
             }
-            return objresult;
+            return Objresult;
         }
 
 
@@ -145,16 +145,16 @@ namespace Service.API.SERVICE.Controllers
         public List<rtnAllergyReactionres> GetAllergyReactionl(rtnAllergyReactionreq masterRequest)
         {
 
-            List<rtnAllergyReactionres> objResult = new List<rtnAllergyReactionres>();
+            List<rtnAllergyReactionres> Objresult = new List<rtnAllergyReactionres>();
             try
             {
-                objResult = _allergyRepository.GetAllergyReactionl(masterRequest);
+                Objresult = _allergyRepository.GetAllergyReactionl(masterRequest);
             }
             catch (Exception ex)
             {
                 MyDevException.Error(ex, "GetAllergyMaster", ExceptionPriority.Low, ApplicationType.APPSERVICE, masterRequest.VenueNo, 0, 0);
             }
-            return objResult;
+            return Objresult;
         }
     }
 }

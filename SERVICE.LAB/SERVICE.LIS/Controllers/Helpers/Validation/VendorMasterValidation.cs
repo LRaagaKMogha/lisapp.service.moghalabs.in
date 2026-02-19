@@ -9,7 +9,7 @@ namespace Service.API.SERVICE.Controllers
     public class VendorMasterValidation
     {
         // Vendor Master //
-        public static ErrorResponse InsertVendorMaster(responsevendor obj1)
+        public static ErrorResponse InsertVendorMaster(Responsevendor obj1)
         {
             ErrorResponse errorResponse = new ErrorResponse();
             List<string> errors = new List<string>();
@@ -35,14 +35,14 @@ namespace Service.API.SERVICE.Controllers
         }
 
         // Vendor Vs Contact //
-        public static ErrorResponse InsertVendorContactmaster(savecontact creq1)
+        public static ErrorResponse InsertVendorContactmaster(Savecontact creq1)
         {
             ErrorResponse errorResponse = new ErrorResponse();
             List<string> errors = new List<string>();
 
-            if (creq1.getcontactlst != null && creq1.getcontactlst.Count > 0)
+            if (creq1.Getcontactlst != null && creq1.Getcontactlst.Count > 0)
             {
-                foreach (var contact in creq1.getcontactlst)
+                foreach (var contact in creq1.Getcontactlst)
                 {
                     if (string.IsNullOrEmpty(contact.cname) || contact.cname.TrimStart() == string.Empty)
                     {
@@ -65,14 +65,14 @@ namespace Service.API.SERVICE.Controllers
         }
 
         // Vendor Vs Services //
-        public static ErrorResponse InsertVendorService(saveservice serviceobj)
+        public static ErrorResponse InsertVendorService(Saveservice serviceobj)
         {
             ErrorResponse errorResponse = new ErrorResponse();
             List<string> errors = new List<string>();
 
-            if (serviceobj.getservicelst != null && serviceobj.getservicelst.Count > 0)
+            if (serviceobj.Getservicelst != null && serviceobj.Getservicelst.Count > 0)
             {
-                foreach (var service in serviceobj.getservicelst)
+                foreach (var service in serviceobj.Getservicelst)
                 {
                     if (string.IsNullOrEmpty(service.serviceName) || service.serviceName.TrimStart() == string.Empty)
                     {
@@ -86,15 +86,18 @@ namespace Service.API.SERVICE.Controllers
             }
 
             // Validate for Duplicate Service Names //
-            for (int i = 0; i < serviceobj.getservicelst.Count; i++)
+            if (serviceobj.Getservicelst != null)
             {
-                var v = serviceobj.getservicelst[i];
-                if (v.serviceNo > 0)
+                for (int i = 0; i < serviceobj.Getservicelst.Count; i++)
                 {
-                    var isduplicate = serviceobj.getservicelst.Where(x => x.serviceName == v.serviceName).ToList();
-                    if (isduplicate.Count > 1)
+                    var v = serviceobj.Getservicelst[i];
+                    if (v.serviceNo > 0)
                     {
-                        errors.Add("This Service Name Is Already Exists In This Vendor");
+                        var isduplicate = serviceobj.Getservicelst.Where(x => x.serviceName == v.serviceName).ToList();
+                        if (isduplicate.Count > 1)
+                        {
+                            errors.Add("This Service Name Is Already Exists In This Vendor");
+                        }
                     }
                 }
             }

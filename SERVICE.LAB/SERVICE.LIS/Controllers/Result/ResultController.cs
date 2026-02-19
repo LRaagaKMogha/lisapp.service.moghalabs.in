@@ -24,16 +24,15 @@ namespace Service.API.SERVICE.Controllers
             _ResultRepository = noteRepository;
             _config = config;
         }
-
         #region Common Result
 
         #region SearchResultVisit
         [CustomAuthorize("LIMSPATIENTRESULTS")]
         [HttpPost]
         [Route("api/Result/SearchResultVisit")]
-        public List<lstsearchresultvisit> SearchResultVisit([FromBody] requestsearchresultvisit req)
+        public List<Lstsearchresultvisit> SearchResultVisit([FromBody] Requestsearchresultvisit req)
         {
-            List<lstsearchresultvisit> lst = new List<lstsearchresultvisit>();
+            List<Lstsearchresultvisit> lst = new List<Lstsearchresultvisit>();
             try
             {
                 lst = _ResultRepository.SearchResultVisit(req);
@@ -50,9 +49,9 @@ namespace Service.API.SERVICE.Controllers
         [CustomAuthorize("LIMSPATIENTRESULTS")]
         [HttpPost]
         [Route("api/Result/GetResultVisit")]
-        public ActionResult GetResultVisit([FromBody] requestresultvisit req)
+        public ActionResult GetResultVisit([FromBody] Requestresultvisit req)
         {
-            List<lstresultvisit> lst = new List<lstresultvisit>();
+            List<Lstresultvisit> lst = new List<Lstresultvisit>();
             try
             {
                 var _errormsg = PatientResultValidation.GetResultVisit(req);
@@ -75,9 +74,9 @@ namespace Service.API.SERVICE.Controllers
         [CustomAuthorize("LIMSPATIENTRESULTS")]
         [HttpPost]
         [Route("api/Result/GetResult")]
-        public async Task<IActionResult> GetResult([FromBody] requestresult req)
+        public async Task<IActionResult> GetResult([FromBody] Requestresult req)
         {
-            objresult obj = new objresult();
+            Objresult obj = new Objresult();
             try
             {
                 obj = await _ResultRepository.GetResult(req);
@@ -95,21 +94,21 @@ namespace Service.API.SERVICE.Controllers
         [CustomAuthorize("LIMSPATIENTRESULTS")]
         [HttpPost]
         [Route("api/Result/GetNewResult")]
-        public async Task<IActionResult> GetNewResult([FromBody] List<requestresult> req, int serviceNo = 0, string serviceType = "")
+        public async Task<IActionResult> GetNewResult([FromBody] List<Requestresult> req, int serviceNo = 0, string serviceType = "")
         {
-            List<objresult> lstobj = new List<objresult>();
+            List<Objresult> lstobj = new List<Objresult>();
             try
             {
-                foreach (requestresult item in req)
+                foreach (Requestresult item in req)
                 {
-                    objresult obj = await _ResultRepository.GetResult(item);
+                    Objresult obj = await _ResultRepository.GetResult(item);
                     if (serviceNo != 0 && !string.IsNullOrEmpty(serviceType))
                     {
-                        List<lstorderlist> lstorder = obj.lstvisit[0].lstorderlist.Where(x => x.serviceno == serviceNo && x.servicetype == serviceType).ToList();
+                        List<Lstorderlist> lstorder = obj.Lstvisit[0].Lstorderlist.Where(x => x.serviceno == serviceNo && x.servicetype == serviceType).ToList();
                         if (lstorder.Any())
                         {
-                            obj.lstvisit[0].lstorderlist = new List<lstorderlist>();
-                            obj.lstvisit[0].lstorderlist.AddRange(lstorder);
+                            obj.Lstvisit[0].Lstorderlist = new List<Lstorderlist>();
+                            obj.Lstvisit[0].Lstorderlist.AddRange(lstorder);
                             lstobj.Add(obj);
                         }
                     }
@@ -128,20 +127,20 @@ namespace Service.API.SERVICE.Controllers
         }
         #endregion
 
-        #region GetDeltaResult
+        #region GetDeltaresult
         [CustomAuthorize("LIMSPATIENTRESULTS")]
         [HttpPost]
-        [Route("api/Result/GetDeltaResult")]
-        public List<deltaresult> GetDeltaResult([FromBody] requestdeltaresult req)
+        [Route("api/Result/GetDeltaresult")]
+        public List<Deltaresult> GetDeltaresult([FromBody] requestDeltaresult req)
         {
-            List<deltaresult> lst = new List<deltaresult>();
+            List<Deltaresult> lst = new List<Deltaresult>();
             try
             {
-                lst = _ResultRepository.GetDeltaResult(req);
+                lst = _ResultRepository.GetDeltaresult(req);
             }
             catch (Exception ex)
             {
-                MyDevException.Error(ex, "ResultController.GetDeltaResult", ExceptionPriority.Low, ApplicationType.APPSERVICE, req.venueno, req.venuebranchno, req.userno);
+                MyDevException.Error(ex, "ResultController.GetDeltaresult", ExceptionPriority.Low, ApplicationType.APPSERVICE, req.venueno, req.venuebranchno, req.userno);
             }
             return lst;
         }
@@ -151,9 +150,9 @@ namespace Service.API.SERVICE.Controllers
         [CustomAuthorize("LIMSPATIENTRESULTS")]
         [HttpPost]
         [Route("api/Result/InsertResult")]
-        public async Task<IActionResult> InsertResult(objresult req)
+        public async Task<IActionResult> InsertResult(Objresult req)
         {
-            resultrtn obj = new resultrtn();
+            Resultrtn obj = new Resultrtn();
             try
             {
                 obj = await _ResultRepository.InsertResult(req);
@@ -163,7 +162,7 @@ namespace Service.API.SERVICE.Controllers
                 MyDevException.Error(ex, "ResultController.InsertResult", ExceptionPriority.High, ApplicationType.APPSERVICE, req.venueno, req.venuebranchno, req.userno);
             }
             return Ok(obj);
-            //resultrtn obj = new resultrtn();
+            //Resultrtn obj = new Resultrtn();
             //try
             //{
             //    var _errormsg = PatientResultValidation.InsertResult(req);
@@ -186,12 +185,12 @@ namespace Service.API.SERVICE.Controllers
         [CustomAuthorize("LIMSPATIENTRESULTS")]
         [HttpPost]
         [Route("api/Result/InsertNewResult")]
-        public async Task<IActionResult> InsertNewResult([FromBody] List<objresult> req)
+        public async Task<IActionResult> InsertNewResult([FromBody] List<Objresult> req)
         {
-            resultrtn obj = new resultrtn();
+            Resultrtn obj = new Resultrtn();
             try
             {
-                foreach (objresult item in req)
+                foreach (Objresult item in req)
                 {
                     obj = await _ResultRepository.InsertResult(item);
                 }
@@ -208,9 +207,9 @@ namespace Service.API.SERVICE.Controllers
         [CustomAuthorize("LIMSPATIENTRESULTS")]
         [HttpPost]
         [Route("api/Result/GetVisitHistoy")]
-        public objresult GetVisitHistoy([FromBody] requestdeltaresult req)
+        public Objresult GetVisitHistoy([FromBody] requestDeltaresult req)
         {
-            objresult obj = new objresult();
+            Objresult obj = new Objresult();
             try
             {
                 obj = _ResultRepository.GetVisitHistoy(req);
@@ -230,9 +229,9 @@ namespace Service.API.SERVICE.Controllers
         [CustomAuthorize("LIMSPATIENTRESULTS")]
         [HttpPost]
         [Route("api/Result/GetResultMB")]
-        public objresultmb GetResultMB(requestresult req)
+        public Objresultmb GetResultMB(Requestresult req)
         {
-            objresultmb obj = new objresultmb();
+            Objresultmb obj = new Objresultmb();
             try
             {
                 obj = _ResultRepository.GetResultMB(req);
@@ -249,15 +248,15 @@ namespace Service.API.SERVICE.Controllers
         [CustomAuthorize("LIMSPATIENTRESULTS")]
         [HttpPost]
         [Route("api/Result/InsertResultMB")]
-        public ActionResult<resultrtn> InsertResultMB(objresultmb req)
+        public async Task<ActionResult<Resultrtn>> InsertResultMB(Objresultmb req)
         {
-            resultrtn obj = new resultrtn();
+            Resultrtn obj = new Resultrtn();
             try
             {
                 var _errormsg = PatientResultValidation.InsertResultMB(req);
                 if (!_errormsg.status)
                 {
-                    obj = _ResultRepository.InsertResultMB(req);
+                    obj = await _ResultRepository.InsertResultMB(req);
                 }
                 else
                     return BadRequest(_errormsg);
@@ -271,20 +270,20 @@ namespace Service.API.SERVICE.Controllers
 
         #endregion
 
-        #region GetOrgTypeAntibiotic
+        #region GetOrgtypeantibiotic
         [CustomAuthorize("LIMSPATIENTRESULTS")]
         [HttpPost]
-        [Route("api/Result/GetOrgTypeAntibiotic")]
-        public List<orgtypeantibiotic> GetOrgTypeAntibiotic(requestresult req)
+        [Route("api/Result/GetOrgtypeantibiotic")]
+        public List<Orgtypeantibiotic> GetOrgtypeantibiotic(Requestresult req)
         {
-            List<orgtypeantibiotic> lst = new List<orgtypeantibiotic>();
+            List<Orgtypeantibiotic> lst = new List<Orgtypeantibiotic>();
             try
             {
-                lst = _ResultRepository.GetOrgTypeAntibiotic(req);
+                lst = _ResultRepository.GetOrgtypeantibiotic(req);
             }
             catch (Exception ex)
             {
-                MyDevException.Error(ex, "ResultController.GetOrgTypeAntibiotic", ExceptionPriority.Medium, ApplicationType.APPSERVICE, req.venueno, req.venuebranchno, req.userno);
+                MyDevException.Error(ex, "ResultController.GetOrgtypeantibiotic", ExceptionPriority.Medium, ApplicationType.APPSERVICE, req.venueno, req.venuebranchno, req.userno);
             }
             return lst;
         }
@@ -298,9 +297,9 @@ namespace Service.API.SERVICE.Controllers
         [CustomAuthorize("LIMSPATIENTRESULTS")]
         [HttpPost]
         [Route("api/Result/GetResultTemplate")]
-        public objresulttemplate GetResultTemplate(requestresult req)
+        public Objresulttemplate GetResultTemplate(Requestresult req)
         {
-            objresulttemplate obj = new objresulttemplate();
+            Objresulttemplate obj = new Objresulttemplate();
             try
             {
                 obj = _ResultRepository.GetResultTemplate(req);
@@ -317,12 +316,12 @@ namespace Service.API.SERVICE.Controllers
         [CustomAuthorize("LIMSPATIENTRESULTS")]
         [HttpPost]
         [Route("api/Result/InsertResultTemplate")]
-        public ActionResult<resultrtn> InsertResultTemplate(objresulttemplate req)
+        public async Task<ActionResult<Resultrtn>> InsertResultTemplate(Objresulttemplate req)
         {
-            resultrtn obj = new resultrtn();
+            Resultrtn obj = new Resultrtn();
             try
             {
-                obj = _ResultRepository.InsertResultTemplate(req);
+                obj = await _ResultRepository.InsertResultTemplate(req);
             }
             catch (Exception ex)
             {
@@ -340,9 +339,9 @@ namespace Service.API.SERVICE.Controllers
         [CustomAuthorize("LIMSPATIENTRESULTS")]
         [HttpPost]
         [Route("api/Result/GetRecall")]
-        public objrecall GetRecall(requestresult req)
+        public Objrecall GetRecall(Requestresult req)
         {
-            objrecall obj = new objrecall();
+            Objrecall obj = new Objrecall();
             try
             {
                 obj = _ResultRepository.GetRecall(req);
@@ -359,9 +358,9 @@ namespace Service.API.SERVICE.Controllers
         [CustomAuthorize("LIMSPATIENTRESULTS")]
         [HttpPost]
         [Route("api/Result/InsertRecall")]
-        public ActionResult<recallResponse> InsertRecall(objrecall req)
+        public ActionResult<RecallResponse> InsertRecall(Objrecall req)
         {
-            recallResponse obj = new recallResponse();
+            RecallResponse obj = new RecallResponse();
             try
             {
                 var _errormsg = ResultAckValidation.InsertRecall(req);
@@ -386,9 +385,9 @@ namespace Service.API.SERVICE.Controllers
         [CustomAuthorize("LIMSPATIENTRESULTS")]
         [HttpPost]
         [Route("api/Result/GetBulkResult")]
-        public List<objresulttemplate> GetBulkResult(requestresultvisit req)
+        public List<Objresulttemplate> GetBulkResult(Requestresultvisit req)
         {
-            List<objresulttemplate> lst = new List<objresulttemplate>();
+            List<Objresulttemplate> lst = new List<Objresulttemplate>();
             try
             {
                 lst = _ResultRepository.GetBulkResult(req);
@@ -404,12 +403,12 @@ namespace Service.API.SERVICE.Controllers
         [CustomAuthorize("LIMSPATIENTRESULTS")]
         [HttpPost]
         [Route("api/Result/InsertBulkResult")]
-        public resultrtn InsertBulkResult(objbulkresulttemplate req)
+        public async Task<Resultrtn> InsertBulkResult(Objbulkresulttemplate req)
         {
-            resultrtn obj = new resultrtn();
+            Resultrtn obj = new Resultrtn();
             try
             {
-                obj = _ResultRepository.InsertBulkResult(req);
+                obj = await _ResultRepository.InsertBulkResult(req);
             }
             catch (Exception ex)
             {
@@ -426,9 +425,9 @@ namespace Service.API.SERVICE.Controllers
         [CustomAuthorize("LIMSPATIENTRESULTS")]
         [HttpPost]
         [Route("api/Result/GetCovidWorkOrder")]
-        public List<covidresult> GetCovidWorkOrder(covidWorkOrderreq req)
+        public List<Covidresult> GetCovidWorkOrder(CovidWorkOrderreq req)
         {
-            List<covidresult> lst = new List<covidresult>();
+            List<Covidresult> lst = new List<Covidresult>();
             try
             {
                 lst = _ResultRepository.GetCovidWorkOrder(req);
@@ -445,9 +444,9 @@ namespace Service.API.SERVICE.Controllers
         [CustomAuthorize("LIMSPATIENTRESULTS")]
         [HttpPost]
         [Route("api/Result/InsertCovidWorkOrder")]
-        public resultrtn InsertCovidWorkOrder(covidWorkOrder req)
+        public Resultrtn InsertCovidWorkOrder(CovidWorkOrder req)
         {
-            resultrtn obj = new resultrtn();
+            Resultrtn obj = new Resultrtn();
             try
             {
                 obj = _ResultRepository.InsertCovidWorkOrder(req);
@@ -487,7 +486,7 @@ namespace Service.API.SERVICE.Controllers
                     var manualfilename = objDTO.ManualFileName;
                     string folderName = objDTO.InsertPath;
                     string ConfigValuePath = objDTO.ConfigValuePath;
-                    string webRootPath = _config.GetValue<string>(ConfigValuePath);
+                    string? webRootPath = _config.GetValue<string>(ConfigValuePath) ?? string.Empty;
                     string newPath = Path.Combine(webRootPath, folderName);
                     if (!Directory.Exists(newPath))
                     {
@@ -519,7 +518,7 @@ namespace Service.API.SERVICE.Controllers
             BulkDocumentUpload result = new BulkDocumentUpload();
             try
             {
-                string Pathinit = _config.GetValue<string>(objDTO.ConfigValuePath);
+                string? Pathinit = _config.GetValue<string>(objDTO.ConfigValuePath) ?? string.Empty;
                 var getpath = objDTO.InsertPath;
                 var visitno = objDTO.PatientVisitNo;
                 string newPath = Path.Combine(Pathinit, getpath);
@@ -628,9 +627,9 @@ namespace Service.API.SERVICE.Controllers
         [CustomAuthorize("LIMSPATIENTRESULTS")]
         [HttpPost]
         [Route("api/Result/GetResultExceptUserMapped")]
-        public async Task<IActionResult> GetResultExceptUserMapped([FromBody] requestresult req)
+        public async Task<IActionResult> GetResultExceptUserMapped([FromBody] Requestresult req)
         {
-            objresult obj = new objresult();
+            Objresult obj = new Objresult();
             try
             {
                 obj = await _ResultRepository.GetResultExceptUserMapped(req);
@@ -648,9 +647,9 @@ namespace Service.API.SERVICE.Controllers
         [CustomAuthorize("LIMSPATIENTRESULTS")]
         [HttpPost]
         [Route("api/Result/GetMergedResult")]
-        public List<mergeresultresponse> GetMergedResult(mergeresultrequest req)
+        public List<Mergeresultresponse> GetMergedResult(Mergeresultrequest req)
         {
-            List<mergeresultresponse> lst = new List<mergeresultresponse>();
+            List<Mergeresultresponse> lst = new List<Mergeresultresponse>();
             try
             {
                 lst = _ResultRepository.GetMergedResult(req);
@@ -664,9 +663,9 @@ namespace Service.API.SERVICE.Controllers
         [CustomAuthorize("LIMSPATIENTRESULTS")]
         [HttpPost]
         [Route("api/Result/InsertMergedResult")]
-        public savemergeresultresponse InsertMergedResult(savemergeresultrequest req)
+        public Savemergeresultresponse InsertMergedResult(Savemergeresultrequest req)
         {
-            savemergeresultresponse obj = new savemergeresultresponse();
+            Savemergeresultresponse obj = new Savemergeresultresponse();
             try
             {
                 obj = _ResultRepository.InsertMergedResult(req);
@@ -681,9 +680,9 @@ namespace Service.API.SERVICE.Controllers
         [CustomAuthorize("LIMSPATIENTRESULTS")]
         [HttpPost]
         [Route("api/Result/GetCultureHistory")]
-        public List<culturehistoryreponse> GetCultureHistory(culturehistoryrequest req)
+        public List<Culturehistoryreponse> GetCultureHistory(Culturehistoryrequest req)
         {
-            List<culturehistoryreponse> obj = new List<culturehistoryreponse>();
+            List<Culturehistoryreponse> obj = new List<Culturehistoryreponse>();
             try
             {
                 obj = _ResultRepository.GetCultureHistory(req);
@@ -698,9 +697,9 @@ namespace Service.API.SERVICE.Controllers
         [CustomAuthorize("LIMSPATIENTRESULTS")]
         [HttpPost]
         [Route("api/Result/GetAnalyserResult")]
-        public async Task<IActionResult> GetAnalyserResult(analyserrequestresult req)
+        public async Task<IActionResult> GetAnalyserResult(AnalyserRequestresult req)
         {
-            objresult obj = new objresult();
+            Objresult obj = new Objresult();
             try
             {
                 var _errormsg = AnalyserResultValidation.GetAnalyserResult(req);
@@ -720,9 +719,9 @@ namespace Service.API.SERVICE.Controllers
         [CustomAuthorize("LIMSPATIENTRESULTS")]
         [HttpPost]
         [Route("api/Result/InsertAnalyserResult")]
-        public async Task<IActionResult> InsertAnalyserResult(objresult req)
+        public async Task<IActionResult> InsertAnalyserResult(Objresult req)
         {
-            resultrtn obj = new resultrtn();
+            Resultrtn obj = new Resultrtn();
             try
             {
                // var _errormsg = AnalyserResultValidation.InsertAnalyserResult(req);
@@ -743,9 +742,9 @@ namespace Service.API.SERVICE.Controllers
         [CustomAuthorize("LIMSPATIENTRESULTS")]
         [HttpPost]
         [Route("api/Result/GetBulkResultEtry")]
-        public ActionResult<objbulkresult> GetBulkResultEtry(analyserrequestresult req)
+        public ActionResult<Objbulkresult> GetBulkResultEtry(AnalyserRequestresult req)
         {
-            List<objbulkresult> obj = new List<objbulkresult>();
+            List<Objbulkresult> obj = new List<Objbulkresult>();
             try
             {
                 var _errormsg = BulkResultValidation.GetBulkResultEtry(req);
@@ -766,7 +765,7 @@ namespace Service.API.SERVICE.Controllers
         [CustomAuthorize("LIMSPATIENTRESULTS")]
         [HttpPost]
         [Route("api/Result/SaveBulkResultEtry")]
-        public ActionResult<BulkResultSaveResponse> SaveBulkResultEtry(List<objbulkresult> req)
+        public ActionResult<BulkResultSaveResponse> SaveBulkResultEtry(List<Objbulkresult> req)
         {
             BulkResultSaveResponse obj = new BulkResultSaveResponse();
             try
@@ -885,13 +884,13 @@ namespace Service.API.SERVICE.Controllers
         [Route("api/Result/GetVisitMerge")]
         public ActionResult<GetResultforVisitMergeResponse> GetVisitMerge(VisitMergeRequest req)
         {
-            List<GetResultforVisitMergeResponse> lstVisitMerge = new List<GetResultforVisitMergeResponse>();
+            List<GetResultforVisitMergeResponse> LstvisitMerge = new List<GetResultforVisitMergeResponse>();
             try
             {
                 var _errormsg = ResultAckValidation.GetVisitMerge(req);
                 if (!_errormsg.status)
                 {
-                    lstVisitMerge = _ResultRepository.GetVisitMerge(req);
+                    LstvisitMerge = _ResultRepository.GetVisitMerge(req);
                 }
                 else
                     return BadRequest(_errormsg);
@@ -900,16 +899,16 @@ namespace Service.API.SERVICE.Controllers
             {
                 MyDevException.Error(ex, "ResultRepository.GetVisitMerge", ExceptionPriority.High, ApplicationType.REPOSITORY, req.venueno, req.venuebranchno, 0);
             }
-            return Ok(lstVisitMerge);
+            return Ok(LstvisitMerge);
         }
 
         #endregion
         [CustomAuthorize("LIMSPATIENTRESULTS")]
         [HttpPost]
         [Route("api/Result/GetLogicComments")]
-        public List<logicCommentsRespose> GetLogicComments(logicCommentsRequest req)
+        public List<LogicCommentsRespose> GetLogicComments(LogicCommentsRequest req)
         {
-            List<logicCommentsRespose> lst = new List<logicCommentsRespose>();
+            List<LogicCommentsRespose> lst = new List<LogicCommentsRespose>();
             try
             {
                 lst = _ResultRepository.GetLogicComments(req);
@@ -923,9 +922,9 @@ namespace Service.API.SERVICE.Controllers
         [CustomAuthorize("LIMSPATIENTRESULTS")]
         [HttpPost]
         [Route("api/Result/GetExtrasubtestbasedformula")]
-        public extrasubtestflagbasedformularesponse GetExtrasubtestbasedformula(extrasubtestflagbasedformularequest req)
+        public Extrasubtestflagbasedformularesponse GetExtrasubtestbasedformula(Extrasubtestflagbasedformularequest req)
         {
-            extrasubtestflagbasedformularesponse obj = new extrasubtestflagbasedformularesponse();
+            Extrasubtestflagbasedformularesponse obj = new Extrasubtestflagbasedformularesponse();
             try
             {
                 obj = _ResultRepository.GetExtrasubtestbasedformula(req);
@@ -958,24 +957,23 @@ namespace Service.API.SERVICE.Controllers
         [AllowAnonymous]
         [HttpPost]
         [Route("api/Result/Calculator")]
-        public List<ExternalResultCalculation> Calculator(List<ExternalResultCalculation> req)
+        public List<ExternalResultCalculation> Calculator(List<ExternalResultCalculation>? req)
         {
-            List<ExternalResultCalculation> lst = null;
+            List<ExternalResultCalculation>? lst = new();
             try
             {
                 var formulaTest = "";
-                //var val = 0;
 
                 formulaTest = "(";
-                //for (var i = 0; i < req.formulajson.Count(); i++)
+                //for (var i = 0; i < req.Formulajson.Count(); i++)
                 //{
-                //    if (req.formulajson[i].value == 0)
+                //    if (req.Formulajson[i].value == 0)
                 //    {
-                //        if (req.formulajson[i].parameterservicetype == "T")
+                //        if (req.Formulajson[i].parameterservicetype == "T")
                 //        {
 
                 //        }
-                //        else if (req.formulajson[i].parameterservicetype == "S")
+                //        else if (req.Formulajson[i].parameterservicetype == "S")
                 //        {
 
                 //        }
@@ -983,66 +981,64 @@ namespace Service.API.SERVICE.Controllers
                 //    }
 
                 //    //for differential count - when i enterd result for 1st subtest, it should calculate and show the formula result, but its not shown because of empty result is not taken as 0
-                //    if (req.formulajson[i].foperator == "")
+                //    if (req.Formulajson[i].foperator == "")
                 //    {
                 //        if (val != 0)
-                //            formulaTest += req.formulajson[i].foperator + val;
+                //            formulaTest += req.Formulajson[i].foperator + val;
                 //        else
-                //            formulaTest += req.formulajson[i].foperator;
+                //            formulaTest += req.Formulajson[i].foperator;
                 //    }
-                //    else if (req.formulajson[i].foperator == "+")
+                //    else if (req.Formulajson[i].foperator == "+")
                 //    {
                 //        if (val != 0)
-                //            formulaTest += req.formulajson[i].foperator + val;
+                //            formulaTest += req.Formulajson[i].foperator + val;
                 //        else
-                //            formulaTest += req.formulajson[i].foperator;
+                //            formulaTest += req.Formulajson[i].foperator;
                 //    }
-                //    else if (req.formulajson[i].foperator == "-")
+                //    else if (req.Formulajson[i].foperator == "-")
                 //    {
                 //        if (val != 0)
-                //            formulaTest += req.formulajson[i].foperator + val;
+                //            formulaTest += req.Formulajson[i].foperator + val;
                 //        else
-                //            formulaTest += req.formulajson[i].foperator;
+                //            formulaTest += req.Formulajson[i].foperator;
                 //    }
-                //    else if (req.formulajson[i].foperator == "*")
+                //    else if (req.Formulajson[i].foperator == "*")
                 //    {
                 //        if (val != 0)
-                //            formulaTest += req.formulajson[i].foperator + val;
+                //            formulaTest += req.Formulajson[i].foperator + val;
                 //        else
-                //            formulaTest += req.formulajson[i].foperator;
+                //            formulaTest += req.Formulajson[i].foperator;
                 //    }
-                //    else if (req.formulajson[i].foperator == "/")
+                //    else if (req.Formulajson[i].foperator == "/")
                 //    {
                 //        if (val != 0)
-                //            formulaTest += req.formulajson[i].foperator + val;
+                //            formulaTest += req.Formulajson[i].foperator + val;
                 //        else
-                //            formulaTest += req.formulajson[i].foperator;
+                //            formulaTest += req.Formulajson[i].foperator;
                 //    }
-                //    else if (req.formulajson[i].foperator == "(")
+                //    else if (req.Formulajson[i].foperator == "(")
                 //    {
                 //        if (val != 0)
-                //            formulaTest += req.formulajson[i].foperator + val;
+                //            formulaTest += req.Formulajson[i].foperator + val;
                 //        else
-                //            formulaTest += req.formulajson[i].foperator;
+                //            formulaTest += req.Formulajson[i].foperator;
                 //    }
-                //    else if (req.formulajson[i].foperator == ")")
+                //    else if (req.Formulajson[i].foperator == ")")
                 //    {
                 //        if (val != 0)
-                //            formulaTest += req.formulajson[i].foperator + val;
+                //            formulaTest += req.Formulajson[i].foperator + val;
                 //        else
-                //            formulaTest += req.formulajson[i].foperator;
+                //            formulaTest += req.Formulajson[i].foperator;
                 //    }
-                //    else if (req.formulajson[i].foperator == "^")
+                //    else if (req.Formulajson[i].foperator == "^")
                 //    {
                 //        if (val != 0)
-                //            formulaTest += req.formulajson[i].foperator + val; //Math.pow(height, 0.725)
+                //            formulaTest += req.Formulajson[i].foperator + val; //Math.pow(height, 0.725)
                 //        else
-                //            formulaTest += req.formulajson[i].foperator;
+                //            formulaTest += req.Formulajson[i].foperator;
                 //    }
                 //}
                 formulaTest += ")";
-
-
             }
             catch (Exception ex)
             {
@@ -1056,9 +1052,9 @@ namespace Service.API.SERVICE.Controllers
         [CustomAuthorize("LIMSPATIENTRESULTS")]
         [HttpPost]
         [Route("api/Result/UpdatePartialResultFlag")]
-        public async Task<IActionResult> UpdatePartialResultFlag(objUpdPartialEntryFlagRequest req)
+        public async Task<IActionResult> UpdatePartialResultFlag(ObjUpdPartialEntryFlagRequest req)
         {
-            objUpdPartialEntryFlagResponse objResponse = new objUpdPartialEntryFlagResponse();
+            ObjUpdPartialEntryFlagResponse objResponse = new ObjUpdPartialEntryFlagResponse();
             try
             {
                 objResponse = await _ResultRepository.UpdatePartialResultFlag(req);
@@ -1070,19 +1066,20 @@ namespace Service.API.SERVICE.Controllers
             return Ok(objResponse);
         }
         #endregion
+        
         #region Patient Result - Pending Test
         [HttpPost]
-        [Route("api/Result/GetPendingVisitDetails")]
-        public List<PendingVisitDetailsRes> GetPendingVisitDetails(PendingVisitDetailsReq req)
+        [Route("api/Result/GetPendingVisitdetails")]
+        public List<PendingVisitdetailsRes> GetPendingVisitdetails(PendingVisitdetailsReq req)
         {
-            List<PendingVisitDetailsRes> lst = new List<PendingVisitDetailsRes>();
+            List<PendingVisitdetailsRes> lst = new List<PendingVisitdetailsRes>();
             try
             {
-                lst = _ResultRepository.GetPendingVisitDetails(req);
+                lst = _ResultRepository.GetPendingVisitdetails(req);
             }
             catch (Exception ex)
             {
-                MyDevException.Error(ex, "ResultController.GetPendingVisitDetails", ExceptionPriority.High, ApplicationType.APPSERVICE, req.venueno, req.venuebranchno, req.userno);
+                MyDevException.Error(ex, "ResultController.GetPendingVisitdetails", ExceptionPriority.High, ApplicationType.APPSERVICE, req.venueno, req.venuebranchno, req.userno);
             }
 
             return lst;

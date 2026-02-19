@@ -19,7 +19,7 @@ namespace Service.Repository.Inventory
 
         public List<GetAllGRNResponse> GetAllGRN(GetAllGRNRequest masterRequest)
         {
-            List<GetAllGRNResponse> objresult = new List<GetAllGRNResponse>();
+            List<GetAllGRNResponse> Objresult = new List<GetAllGRNResponse>();
             try
             {
                 using (var context = new MasterContext(_config.GetConnectionString(ConfigKeys.DefaultConnection)))
@@ -37,7 +37,7 @@ namespace Service.Repository.Inventory
                     var _GRNStatus = new SqlParameter("GRNStatus", masterRequest?.GRNStatus);
                     var _InvoiceNo = new SqlParameter("InvoiceNo", masterRequest?.InvoiceNo);
 
-                    objresult = context.GetAllGRNDetailsDTO.FromSqlRaw(
+                    Objresult = context.GetAllGRNDetailsDTO.FromSqlRaw(
                     "Execute dbo.pro_GetAllGRN @VenueNo, @VenueBranchNo, @GRNNo, @UserNo, @PageIndex, @FromDate, @ToDate, @Type, @SupplierNo, @MenuType, @GRNStatus, @InvoiceNo",
                     _venueNo, _venueBranchNo, _grnNo,_UserNo,_PageIndex, _FromDate, _ToDate, _Type, _SupplierNo, _MenuType, _GRNStatus, _InvoiceNo).ToList();
                 }
@@ -46,11 +46,11 @@ namespace Service.Repository.Inventory
             {
                 MyDevException.Error(ex, "GRNMasterReposistory.GetGRNList", ExceptionPriority.High, ApplicationType.REPOSITORY, masterRequest.venueno, (int)masterRequest.venuebranchno, (int)masterRequest.masterNo);
             }
-            return objresult;
+            return Objresult;
         }
         public List<GetPOBySupplierResponse> GetPOBySupplierDetails(int venueNo, int venueBranchNo, int supplierNo)
         {
-            List<GetPOBySupplierResponse> objresult = new List<GetPOBySupplierResponse>();
+            List<GetPOBySupplierResponse> Objresult = new List<GetPOBySupplierResponse>();
             try
             {              
                 using (var context = new MasterContext(_config.GetConnectionString(ConfigKeys.DefaultConnection)))
@@ -59,7 +59,7 @@ namespace Service.Repository.Inventory
                     var _VenueBranchNo = new SqlParameter("VenueBranchNo", venueBranchNo);
                     var _SupplierNo = new SqlParameter("SupplierNo", supplierNo);
                     
-                    objresult = context.GetPOBySupplierDetailsDTO.FromSqlRaw(
+                    Objresult = context.GetPOBySupplierDetailsDTO.FromSqlRaw(
                     "Execute dbo.pro_GetPOBySupplier @VenueNo, @VenueBranchNo, @SupplierNo",
                     _VenueNo, _VenueBranchNo, _SupplierNo).ToList();
                 }
@@ -68,11 +68,11 @@ namespace Service.Repository.Inventory
             {
                 MyDevException.Error(ex, "GRNMasterReposistory.GetPOBySupplierDetails", ExceptionPriority.High, ApplicationType.REPOSITORY, venueNo, venueBranchNo, supplierNo);
             }
-            return objresult;
+            return Objresult;
         }
         public List<GetProductsByPOResponse> GetProductByPO(int venueNo, int venueBranchNo, int poNumber)
         {
-            List<GetProductsByPOResponse> objresult = new List<GetProductsByPOResponse>();
+            List<GetProductsByPOResponse> Objresult = new List<GetProductsByPOResponse>();
             try
             {
                 using (var context = new MasterContext(_config.GetConnectionString(ConfigKeys.DefaultConnection)))
@@ -81,7 +81,7 @@ namespace Service.Repository.Inventory
                     var _VenueBranchNo = new SqlParameter("VenueBranchNo", venueBranchNo);
                     var _poNumber = new SqlParameter("PONo", poNumber);
 
-                    objresult = context.GetProductByPODTO.FromSqlRaw(
+                    Objresult = context.GetProductByPODTO.FromSqlRaw(
                     "Execute dbo.pro_IV_GetProductsByPO @VenueNo, @VenueBranchNo, @PONo",
                     _VenueNo, _VenueBranchNo, _poNumber).ToList();
                 }
@@ -90,7 +90,7 @@ namespace Service.Repository.Inventory
             {
                 MyDevException.Error(ex, "GRNMasterReposistory.GetProductByPO", ExceptionPriority.High, ApplicationType.REPOSITORY, venueNo, venueBranchNo, poNumber);
             }
-            return objresult;
+            return Objresult;
         }
         public CommonAdminResponse InsertGRNMaster(InsertGRNMasterRequest insertGRNMaster)
         {
@@ -109,11 +109,11 @@ namespace Service.Repository.Inventory
                     var _UserNo = new SqlParameter("UserNo", insertGRNMaster?.createdby);
                     var _MenuCode = new SqlParameter("MenuCode", insertGRNMaster?.MenuType);
 
-                    var objresult = context.CreateGRNMasterDTO.FromSqlRaw(
+                    var Objresult = context.CreateGRNMasterDTO.FromSqlRaw(
                     "Execute dbo.Pro_InsertGRNMaster @VenueNo, @VenueBranchNo, @GRNMasterXML, @UserNo, @MenuCode",
                     _VenueNo, _VenueBranchNo, _grnMasterXML, _UserNo, _MenuCode).ToList();
                     
-                    response = objresult[0];
+                    response = Objresult[0];
                 }
             }
             catch (Exception ex)
@@ -125,7 +125,7 @@ namespace Service.Repository.Inventory
 
         public List<otherChargeModal> GetGRNOCDetailsById(int venueNo, int venueBranchNo, int grnMasterNo)
         {
-            List<otherChargeModal> objresult = new List<otherChargeModal>();
+            List<otherChargeModal> Objresult = new List<otherChargeModal>();
             try
             {
                 using (var context = new MasterContext(_config.GetConnectionString(ConfigKeys.DefaultConnection)))
@@ -134,7 +134,7 @@ namespace Service.Repository.Inventory
                     var _VenueBranchNo = new SqlParameter("VenueBranchNo", venueBranchNo);
                     var _GRNMasterNo = new SqlParameter("GRNMasterNo", grnMasterNo);
 
-                    objresult = context.GetGRNOCDetailsDTO.FromSqlRaw(
+                    Objresult = context.GetGRNOCDetailsDTO.FromSqlRaw(
                     "Execute dbo.pro_GetGRNOCDetailsById @VenueNo, @VenueBranchNo, @GRNMasterNo",
                     _VenueNo, _VenueBranchNo, _GRNMasterNo).ToList();
                 }
@@ -143,11 +143,11 @@ namespace Service.Repository.Inventory
             {
                 MyDevException.Error(ex, "GRNMasterReposistory.GetGRNOCDetailsById", ExceptionPriority.High, ApplicationType.REPOSITORY, venueNo, venueBranchNo, grnMasterNo);
             }
-            return objresult;
+            return Objresult;
         }
         public List<GetProductsByPOResponse> GetGRNProductDetails(int venueNo, int venueBranchNo, int grnMasterNo)
         {
-            List<GetProductsByPOResponse> objresult = new List<GetProductsByPOResponse>();
+            List<GetProductsByPOResponse> Objresult = new List<GetProductsByPOResponse>();
             try
             {
                 using (var context = new MasterContext(_config.GetConnectionString(ConfigKeys.DefaultConnection)))
@@ -156,7 +156,7 @@ namespace Service.Repository.Inventory
                     var _VenueBranchNo = new SqlParameter("VenueBranchNo", venueBranchNo);
                     var _grnMasterNo = new SqlParameter("GRNNo", grnMasterNo);
                     
-                    objresult = context.GetGRNDetailsByGRNDTO.FromSqlRaw(
+                    Objresult = context.GetGRNDetailsByGRNDTO.FromSqlRaw(
                     "Execute dbo.pro_GetGRNByGRNNo @VenueNo,@VenueBranchNo,@GRNNo",
                     _VenueNo, _VenueBranchNo, _grnMasterNo).ToList();
                 }
@@ -174,7 +174,7 @@ namespace Service.Repository.Inventory
 
                         if (response != null)
                         {
-                            objresult.ForEach(product =>
+                            Objresult.ForEach(product =>
                             {
                                 product.Batchdetails = response
                                     .Where(batch => batch.GRNProductNo == product.GRNProductNo && batch.productNo == product.ProductNo)
@@ -192,7 +192,7 @@ namespace Service.Repository.Inventory
             {
                 MyDevException.Error(ex, "GRNMasterReposistory.GetGRNProductDetails", ExceptionPriority.High, ApplicationType.REPOSITORY, venueNo, venueBranchNo, grnMasterNo);
             }
-            return objresult;
+            return Objresult;
         }
 
         public CommonAdminResponse UpdateInvoiceDetails(InvoiceUpdateRequest req)
@@ -210,11 +210,11 @@ namespace Service.Repository.Inventory
                     var _InvoiceDate = new SqlParameter("InvoiceDate", req?.InvoiceDate);
                     var _InvoiceNo = new SqlParameter("InvoiceNo", req?.InvoiceNo);
 
-                    var objresult = context.UpdateGRNInvoiceDTO.FromSqlRaw(
+                    var Objresult = context.UpdateGRNInvoiceDTO.FromSqlRaw(
                     "Execute dbo.Pro_IV_UpdateGRNInvoiceDetails @VenueNo, @BranchNo, @UserNo, @GrnNo, @InvoiceDate, @InvoiceNo",
                     _VenueNo, _BranchNo, _UserNo, _GrnNo, _InvoiceDate, _InvoiceNo).ToList();
 
-                    response = objresult[0];
+                    response = Objresult[0];
                 }
             }
             catch (Exception ex)

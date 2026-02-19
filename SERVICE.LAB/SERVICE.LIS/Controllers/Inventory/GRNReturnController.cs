@@ -25,16 +25,16 @@ namespace Service.API.SERVICE.Controllers.Inventory
         [Route("api/GRNReturn/GetAllGRNReturn")]
         public List<GetAllGRNReturnResponse> GetAllGRNReturn(GetAllGRNReturnRequest masterRequest)
         {
-            List<GetAllGRNReturnResponse> objresult = new List<GetAllGRNReturnResponse>();
+            List<GetAllGRNReturnResponse> Objresult = new List<GetAllGRNReturnResponse>();
             try
             {
-                objresult = _GRNReturnRepository.GetAllGRNReturn(masterRequest).ToList();
+                Objresult = _GRNReturnRepository.GetAllGRNReturn(masterRequest).ToList();
             }
             catch (Exception ex)
             {
                 MyDevException.Error(ex, "GRNReturnController.GetAllGRNReturn", ExceptionPriority.Medium, ApplicationType.APPSERVICE, masterRequest.venueno, (int)masterRequest.venuebranchno, (int)masterRequest.masterNo);
             }
-            return objresult;
+            return Objresult;
         }
 
         [CustomAuthorize("INVOPERATIONS")]
@@ -42,16 +42,16 @@ namespace Service.API.SERVICE.Controllers.Inventory
         [Route("api/GRNReturn/GetGRNBySupplierDetails")]
         public List<GetGRNBySupplierResponse> GetGRNBySupplierDetails(int venueNo, int venueBranchNo, int supplierNo)
         {
-            List<GetGRNBySupplierResponse> objresult = new List<GetGRNBySupplierResponse>();
+            List<GetGRNBySupplierResponse> Objresult = new List<GetGRNBySupplierResponse>();
             try
             {
-                objresult = _GRNReturnRepository.GetGRNBySupplierDetails(venueNo, venueBranchNo, supplierNo).ToList();
+                Objresult = _GRNReturnRepository.GetGRNBySupplierDetails(venueNo, venueBranchNo, supplierNo).ToList();
             }
             catch (Exception ex)
             {
                 MyDevException.Error(ex, "GRNReturnController.GetGRNBySupplierDetails", ExceptionPriority.Medium, ApplicationType.APPSERVICE, venueNo, venueBranchNo, supplierNo);
             }
-            return objresult;
+            return Objresult;
         }
 
         [CustomAuthorize("INVOPERATIONS")]
@@ -59,16 +59,16 @@ namespace Service.API.SERVICE.Controllers.Inventory
         [Route("api/GRNReturn/GetProductByGRN")]
         public List<GetProductsByGRNResponse> GetProductByGRN(int venueNo, int venueBranchNo, int grnNo)
         {
-            List<GetProductsByGRNResponse> objresult = new List<GetProductsByGRNResponse>();
+            List<GetProductsByGRNResponse> Objresult = new List<GetProductsByGRNResponse>();
             try
             {
-                objresult = _GRNReturnRepository.GetProductByGRN(venueNo, venueBranchNo, grnNo).ToList();
+                Objresult = _GRNReturnRepository.GetProductByGRN(venueNo, venueBranchNo, grnNo).ToList();
             }
             catch (Exception ex)
             {
                 MyDevException.Error(ex, "GRNReturnController.GetProductByGRN", ExceptionPriority.Medium, ApplicationType.APPSERVICE, venueNo, venueBranchNo,Convert.ToInt16(grnNo));
             }
-            return objresult;
+            return Objresult;
         }
 
         [CustomAuthorize("INVOPERATIONS")]
@@ -76,16 +76,16 @@ namespace Service.API.SERVICE.Controllers.Inventory
         [Route("api/GRNReturn/GetGRNReturnProduct")]
         public List<GetProductsByGRNNo> GetGRNReturnProduct(int venueNo, int venueBranchNo, int grnRtnNo)
         {
-            List<GetProductsByGRNNo> objresult = new List<GetProductsByGRNNo>();
+            List<GetProductsByGRNNo> Objresult = new List<GetProductsByGRNNo>();
             try
             {
-                objresult = _GRNReturnRepository.GetGRNReturnProduct(venueNo, venueBranchNo, grnRtnNo).ToList();
+                Objresult = _GRNReturnRepository.GetGRNReturnProduct(venueNo, venueBranchNo, grnRtnNo).ToList();
             }
             catch (Exception ex)
             {
                 MyDevException.Error(ex, "GRNReturnController.GetGRNReturnProduct", ExceptionPriority.Medium, ApplicationType.APPSERVICE, venueNo, venueBranchNo, Convert.ToInt16(grnRtnNo));
             }
-            return objresult;
+            return Objresult;
         }
 
         [CustomAuthorize("INVOPERATIONS")]
@@ -110,16 +110,16 @@ namespace Service.API.SERVICE.Controllers.Inventory
         [Route("api/GRNReturn/GetGRNOCDetailsById")]
         public List<otherChargeModal> GetGRNOCDetailsById(int venueNo, int venueBranchNo, int GRNReturnNo)
         {
-            List<otherChargeModal> objresult = new List<otherChargeModal>();
+            List<otherChargeModal> Objresult = new List<otherChargeModal>();
             try
             {
-                objresult = _GRNReturnRepository.GetGRNOCDetailsById(venueNo, venueBranchNo, GRNReturnNo).ToList();
+                Objresult = _GRNReturnRepository.GetGRNOCDetailsById(venueNo, venueBranchNo, GRNReturnNo).ToList();
             }
             catch (Exception ex)
             {
                 MyDevException.Error(ex, "GRNReturnController.GetGRNOCDetailsById", ExceptionPriority.Medium, ApplicationType.APPSERVICE, venueNo, venueBranchNo, 0);
             }
-            return objresult;
+            return Objresult;
         }
     }
 }

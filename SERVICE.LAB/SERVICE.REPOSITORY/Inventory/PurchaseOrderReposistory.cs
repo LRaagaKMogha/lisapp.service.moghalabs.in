@@ -17,9 +17,9 @@ namespace Service.Repository.Inventory
         private IConfiguration _config;
         public PurchaseOrderReposistory(IConfiguration config) { _config = config; }
 
-        public List<GetPurchaseOrderResponse> GetPurchaseOrders(GetAllPORequest masterRequest)
+        public List<GetPurchaseOrderresponse> GetPurchaseOrders(GetAllPORequest masterRequest)
         {
-            List<GetPurchaseOrderResponse> objresult = new List<GetPurchaseOrderResponse>();
+            List<GetPurchaseOrderresponse> Objresult = new List<GetPurchaseOrderresponse>();
 
             try
             {
@@ -36,7 +36,7 @@ namespace Service.Repository.Inventory
                     var _SupplierNo = new SqlParameter("SupplierNo", masterRequest?.SupplierNo);
                     var _MenuType = new SqlParameter("MenuType", masterRequest?.MenuType);
 
-                    objresult = context.GetPurchaseOrderDTO.FromSqlRaw(
+                    Objresult = context.GetPurchaseOrderDTO.FromSqlRaw(
                     "Execute dbo.Pro_GetPurchaseOrder @PurchaseOrderNo,@VenueNo,@VenueBranchNo,@UserNo,@PageIndex,@FromDate,@ToDate,@Type,@SupplierNo,@MenuType",
                     _ProductNo, _VenueNo, _VenueBranchNo, _UserNo, _PageIndex, _FromDate, _ToDate, _Type, _SupplierNo, _MenuType).ToList();
                 }
@@ -45,11 +45,11 @@ namespace Service.Repository.Inventory
             {
                 MyDevException.Error(ex, "PurchaseOrderReposistory.GetPurchaseOrders", ExceptionPriority.Low, ApplicationType.REPOSITORY, masterRequest.venueno, (int)masterRequest.venuebranchno, 0);
             }
-            return objresult;
+            return Objresult;
         }
         public List<GetSupplierServiceDTO> GetSupplierServiceDetails(int venueNo, int venueBranchNo, int supplierNo, int StoreNo, string type)
         {
-            List<GetSupplierServiceDTO> objresult = new List<GetSupplierServiceDTO>();
+            List<GetSupplierServiceDTO> Objresult = new List<GetSupplierServiceDTO>();
             try
             {               
                 using (var context = new MasterContext(_config.GetConnectionString(ConfigKeys.DefaultConnection)))
@@ -60,7 +60,7 @@ namespace Service.Repository.Inventory
                     var _StoreNo = new SqlParameter("StoreNo", StoreNo);
                     var _type = new SqlParameter("type", type);
                         
-                    objresult = context.GetSupplierServiceDTO.FromSqlRaw(
+                    Objresult = context.GetSupplierServiceDTO.FromSqlRaw(
                     "Execute dbo.pro_GetSupplierServiceDetails @VenueNo, @VenueBranchNo, @SupplierNo, @StoreNo, @type",
                     _VenueNo, _VenueBranchNo, _SupplierNo, _StoreNo, _type).ToList();
                 }
@@ -69,7 +69,7 @@ namespace Service.Repository.Inventory
             {
                 MyDevException.Error(ex, "PurchaseOrderReposistory.GetSupplierServiceDetails", ExceptionPriority.High, ApplicationType.REPOSITORY, venueNo, venueBranchNo, supplierNo);
             }
-            return objresult;
+            return Objresult;
         }
         public CommonAdminResponse InsertPurchaseOrder(InsertPurchaseOrder insertPurchaseOrder)
         {
@@ -89,11 +89,11 @@ namespace Service.Repository.Inventory
                     var _UserNo = new SqlParameter("UserNo", insertPurchaseOrder?.createdby);
                     var _MenuCode = new SqlParameter("MenuCode", insertPurchaseOrder?.menuCode);
 
-                    var objresult = context.CreatePurchaseOrderDTO.FromSqlRaw(
+                    var Objresult = context.CreatePurchaseOrderDTO.FromSqlRaw(
                     "Execute dbo.Pro_InsertPurchaseOrder @VenueNo,@VenueBranchNo,@PurchaseOrderNo,@PurchaseOrderXML,@UserNo,@MenuCode",
                     _VenueNo, _VenueBranchNo, _PurchaseOrderNo, _PurchaseOrderXML, _UserNo, _MenuCode).ToList();
                     
-                    response = objresult[0];
+                    response = Objresult[0];
                 }
             }
             catch (Exception ex)
@@ -104,7 +104,7 @@ namespace Service.Repository.Inventory
         }
         public List<GetPurchaseDetailsDTO> GetPurchaseDetailsById(int venueNo, int venueBranchNo, int PurchaseNo)
         {
-            List<GetPurchaseDetailsDTO> objresult = new List<GetPurchaseDetailsDTO>();
+            List<GetPurchaseDetailsDTO> Objresult = new List<GetPurchaseDetailsDTO>();
             try
             {               
                 using (var context = new MasterContext(_config.GetConnectionString(ConfigKeys.DefaultConnection)))
@@ -113,7 +113,7 @@ namespace Service.Repository.Inventory
                     var _VenueBranchNo = new SqlParameter("VenueBranchNo", venueBranchNo);
                     var _PurchaseNo = new SqlParameter("PurchaseNo", PurchaseNo);
                     
-                    objresult = context.GetPurchaseDetailsDTO.FromSqlRaw(
+                    Objresult = context.GetPurchaseDetailsDTO.FromSqlRaw(
                     "Execute dbo.pro_GetPurchaseDetailsById @VenueNo,@VenueBranchNo,@PurchaseNo",
                     _VenueNo, _VenueBranchNo, _PurchaseNo).ToList();
                 }
@@ -122,11 +122,11 @@ namespace Service.Repository.Inventory
             {
                 MyDevException.Error(ex, "PurchaseOrderReposistory.GetPurchaseDetailsById", ExceptionPriority.High, ApplicationType.REPOSITORY, venueNo, venueBranchNo, PurchaseNo);
             }
-            return objresult;
+            return Objresult;
         }
         public List<POProductDetailsDTO> GetPOProductDetailsById(int venueNo, int venueBranchNo, int PurchaseNo)
         {
-            List<POProductDetailsDTO> objresult = new List<POProductDetailsDTO>();
+            List<POProductDetailsDTO> Objresult = new List<POProductDetailsDTO>();
             try
             {
                 using (var context = new MasterContext(_config.GetConnectionString(ConfigKeys.DefaultConnection)))
@@ -135,7 +135,7 @@ namespace Service.Repository.Inventory
                     var _VenueBranchNo = new SqlParameter("VenueBranchNo", venueBranchNo);
                     var _PurchaseNo = new SqlParameter("PurchaseNo", PurchaseNo);
 
-                    objresult = context.GetPOProductDetailsDTO.FromSqlRaw(
+                    Objresult = context.GetPOProductDetailsDTO.FromSqlRaw(
                     "Execute dbo.pro_GetPOProductDetailsById @VenueNo, @VenueBranchNo, @PurchaseNo",
                     _VenueNo, _VenueBranchNo, _PurchaseNo).ToList();
                 }
@@ -144,11 +144,11 @@ namespace Service.Repository.Inventory
             {
                 MyDevException.Error(ex, "PurchaseOrderReposistory.GetPOProductDetailsById", ExceptionPriority.High, ApplicationType.REPOSITORY, venueNo, venueBranchNo, PurchaseNo);
             }
-            return objresult;
+            return Objresult;
         }
         public List<GetTaxDatilsResponse> GetPOTaxDetailsById(int venueNo, int venueBranchNo, int PurchaseNo)
         {
-            List<GetTaxDatilsResponse> objresult = new List<GetTaxDatilsResponse>();
+            List<GetTaxDatilsResponse> Objresult = new List<GetTaxDatilsResponse>();
             try
             {
                 using (var context = new MasterContext(_config.GetConnectionString(ConfigKeys.DefaultConnection)))
@@ -157,7 +157,7 @@ namespace Service.Repository.Inventory
                     var _VenueBranchNo = new SqlParameter("VenueBranchNo", venueBranchNo);
                     var _PurchaseNo = new SqlParameter("PurchaseNo", PurchaseNo);
 
-                    objresult = context.GetPOTaxDetailsDTO.FromSqlRaw(
+                    Objresult = context.GetPOTaxDetailsDTO.FromSqlRaw(
                     "Execute dbo.pro_GetPOTaxDetailsById @VenueNo,@VenueBranchNo,@PurchaseNo",
                     _VenueNo, _VenueBranchNo, _PurchaseNo).ToList();
                 }
@@ -166,11 +166,11 @@ namespace Service.Repository.Inventory
             {
                 MyDevException.Error(ex, "PurchaseOrderReposistory.GetPOTaxDetailsById", ExceptionPriority.High, ApplicationType.REPOSITORY, venueNo, venueBranchNo, PurchaseNo);
             }
-            return objresult;
+            return Objresult;
         }
         public List<otherChargeModal> GetPOOCDetailsById(int venueNo, int venueBranchNo, int PurchaseNo)
         {
-            List<otherChargeModal> objresult = new List<otherChargeModal>();
+            List<otherChargeModal> Objresult = new List<otherChargeModal>();
             try
             {
                 using (var context = new MasterContext(_config.GetConnectionString(ConfigKeys.DefaultConnection)))
@@ -179,7 +179,7 @@ namespace Service.Repository.Inventory
                     var _VenueBranchNo = new SqlParameter("VenueBranchNo", venueBranchNo);
                     var _PurchaseNo = new SqlParameter("PurchaseNo", PurchaseNo);
 
-                    objresult = context.GetPOOCDetailsDTO.FromSqlRaw(
+                    Objresult = context.GetPOOCDetailsDTO.FromSqlRaw(
                     "Execute dbo.pro_GetPOOCDetailsById @VenueNo,@VenueBranchNo,@PurchaseNo",
                     _VenueNo, _VenueBranchNo, _PurchaseNo).ToList();
                 }
@@ -188,11 +188,11 @@ namespace Service.Repository.Inventory
             {
                 MyDevException.Error(ex, "PurchaseOrderReposistory.GetPOOCDetailsById", ExceptionPriority.High, ApplicationType.REPOSITORY, venueNo, venueBranchNo, PurchaseNo);
             }
-            return objresult;
+            return Objresult;
         }
         public List<Termsconditionlist> GetPOTermsDetailsById(int venueNo, int venueBranchNo, int PurchaseNo)
         {
-            List<Termsconditionlist> objresult = new List<Termsconditionlist>();
+            List<Termsconditionlist> Objresult = new List<Termsconditionlist>();
             try
             {
                 using (var context = new MasterContext(_config.GetConnectionString(ConfigKeys.DefaultConnection)))
@@ -201,7 +201,7 @@ namespace Service.Repository.Inventory
                     var _VenueBranchNo = new SqlParameter("VenueBranchNo", venueBranchNo);
                     var _PurchaseNo = new SqlParameter("PurchaseNo", PurchaseNo);
                     
-                    objresult = context.GetPOTermsDetailsDTO.FromSqlRaw(
+                    Objresult = context.GetPOTermsDetailsDTO.FromSqlRaw(
                     "Execute dbo.pro_GetPOTermsDetailsById @VenueNo,@VenueBranchNo,@PurchaseNo",
                     _VenueNo, _VenueBranchNo, _PurchaseNo).ToList();
                 }
@@ -210,7 +210,7 @@ namespace Service.Repository.Inventory
             {
                 MyDevException.Error(ex, "PurchaseOrderReposistory.pro_GetPOOCDetailsById", ExceptionPriority.High, ApplicationType.REPOSITORY, venueNo, venueBranchNo, PurchaseNo);
             }
-            return objresult;
+            return Objresult;
         }
     }
 }

@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.Text;
 
 namespace Service.Model
 {
@@ -47,7 +45,7 @@ namespace Service.Model
         public int pageCount { get; set; }
         public string multiFieldsSearch { get; set; }
     }
-    public partial class lstpatientreportdbl
+    public partial class Lstpatientreportdbl
     {
         public int rowno { get; set; }
         public int patientno { get; set; }
@@ -159,8 +157,7 @@ namespace Service.Model
         public string emailIdToShow { get; set; }
         public string mobileNumberToShow { get; set; }
     }
-
-    public partial class lstpatientreport
+    public partial class Lstpatientreport
     {
         public Int16 maindeptNo { get; set; }
         public bool ischecked { get; set; }
@@ -232,7 +229,6 @@ namespace Service.Model
         public bool isPhysicianreportWhatsapp { get; set; }
         public string emailIdToShow { get; set; }
         public string mobileNumberToShow { get; set; }
-        //public string pageCount { get; set; }
     }
     public partial class lstreportorderlist
     {
@@ -305,14 +301,13 @@ namespace Service.Model
         public int PatientVisitNo { get; set; }
         public int OrderListNo { get; set; }
         public int VisitTestNo { get; set; }
-        public string? VisitTestType { get; set; }
-        public string? LogType { get; set; }
+        public string VisitTestType { get; set; }
+        public string LogType { get; set; }
         public int ReportUserNo { get; set; }
         public int UserType { get; set; }
         public int VenueNo { get; set; }
         public int VenueBranchNo { get; set; }
     }
-
     public partial class PatientReportLogRespose
     {
         public int LogNo { get; set; }
@@ -739,10 +734,10 @@ namespace Service.Model
         public string VenueBranchName { get; set; }
         public string IDnumber { get; set; }
         public bool IsVipIndication { get; set; }
-        public string? amendmentcode { get; set; }
+        public string amendmentcode { get; set; }
         public int amendmentno { get; set; }
-        public string? amendmenton { get; set; }
-        public string? amendmentby { get; set; }
+        public string amendmenton { get; set; }
+        public string amendmentby { get; set; }
         public string patientmobile { get; set; }
         public string patientemailid { get; set; }
         public string customeremailid { get; set; }
@@ -793,14 +788,12 @@ namespace Service.Model
         public int cpprintstatus { get; set; }
         public int smsstatus { get; set; }
         public int emailstatus { get; set; }
-        //public int pageIndex { get; set; }
         public int loginType { get; set; }
         public int routeNo { get; set; }
         public int deliverymode { get; set; }
         public int wardNo { get; set; }
         public string searchKey { get; set; }
     }
-
     public partial class lstamendedpatientreportdbl
     {
         public int rowno { get; set; }
@@ -885,11 +878,11 @@ namespace Service.Model
         public string IDnumber { get; set; }
         public bool IsVipIndication { get; set; }
         public bool istrand { get; set; }
-        public string? amendmentcode { get; set; }
+        public string amendmentcode { get; set; }
         public int amendmentno { get; set; }
-        public string? amendmenton { get; set; }
-        public string? amendmentby { get; set; }
-        public string? amendmentreason { get; set; }
+        public string amendmenton { get; set; }
+        public string amendmentby { get; set; }
+        public string amendmentreason { get; set; }
         public string patientmobile { get; set; }
         public string patientemailid { get; set; }
         public string customeremailid { get; set; }
@@ -950,9 +943,8 @@ namespace Service.Model
         public bool iscpremarks { get; set; }
         public bool isservicestatus { get; set; }
         public bool istrand { get; set; }
-        public string? amendmentreason { get; set; }
+        public string amendmentreason { get; set; }
     }
-
     public partial class AmendedPatientReportDTO
     {
         public string fullname { get; set; }
@@ -989,13 +981,12 @@ namespace Service.Model
         public int fieldValue { get; set; }
         public string fieldName { get; set; }
     }
-
     public partial class PatientReportOPDDTO
     {
-        public string? AppointmentNo { get; set; }
-        public string? AppointmentDate { get; set; }
+        public string AppointmentNo { get; set; }
+        public string AppointmentDate { get; set; }
         public int PhysicianNo { get; set; }
-        public string? OutputTypeNo { get; set; }
+        public string OutputTypeNo { get; set; }
         public int UserNo { get; set; }
         public int VenueNo { get; set; }
         public int VenueBranchNo { get; set; }

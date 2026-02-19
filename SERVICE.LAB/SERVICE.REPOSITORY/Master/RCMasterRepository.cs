@@ -159,23 +159,23 @@ namespace Service.Repository
         }
         public List<RCPriceList> GetEditRCMaster(int venueNo, int venueBranchNo, int rcNo)
         {
-            List<RCPriceList> objresult = new List<RCPriceList>();
+            List<RCPriceList> Objresult = new List<RCPriceList>();
             try
             {
                 using (var context = new LIMSContext(_config.GetConnectionString(ConfigKeys.DefaultConnection)))
                 {
-                    objresult = context.RCPriceLists.Where(x => x.RCNo == rcNo && x.VenueNo == venueNo && x.VenueBranchNo == venueBranchNo).OrderBy(x => x.RCPNo).ToList();
+                    Objresult = context.RCPriceLists.Where(x => x.RCNo == rcNo && x.VenueNo == venueNo && x.VenueBranchNo == venueBranchNo).OrderBy(x => x.RCPNo).ToList();
                 }
             }
             catch (Exception ex)
             {
                 MyDevException.Error(ex, "RCMasterRepository.GetEditRCMaster", ExceptionPriority.High, ApplicationType.REPOSITORY, venueNo, venueBranchNo, 0);
             }
-            return objresult;
+            return Objresult;
         }
         public List<GetRCMasterResponse> GetRCDetails(int venueNo, int venueBranchNo, int pageIndex, int RcNo)
         {
-            List<GetRCMasterResponse> objresult = new List<GetRCMasterResponse>();
+            List<GetRCMasterResponse> Objresult = new List<GetRCMasterResponse>();
             try
             {
                 using (var context = new LIMSContext(_config.GetConnectionString(ConfigKeys.DefaultConnection)))
@@ -184,7 +184,7 @@ namespace Service.Repository
                     var _VenueBranchNo = new SqlParameter("VenueBranchNo", venueBranchNo.ToString());
                     var _PageIndex = new SqlParameter("PageIndex", pageIndex.ToString());
                     var _RcNo = new SqlParameter("RcNo", RcNo.ToString());
-                    objresult = context.GetRCMasterDTO.FromSqlRaw(
+                    Objresult = context.GetRCMasterDTO.FromSqlRaw(
                     "Execute dbo.pro_GetRCDetails @venueNo,@venueBranchNo,@pageIndex,@RcNo", _VenueNo, _VenueBranchNo, _PageIndex, _RcNo).ToList();
                 }
             }
@@ -192,23 +192,23 @@ namespace Service.Repository
             {
                 MyDevException.Error(ex, "RCMasterRepository.GetRCDetails", ExceptionPriority.High, ApplicationType.REPOSITORY, venueNo, venueBranchNo, 0);
             }
-            return objresult;
+            return Objresult;
         }
         public List<TblRC> GetRCMasterDetails(GetCommonMasterRequest masterRequest)
         {
-            List<TblRC> objresult = new List<TblRC>();
+            List<TblRC> Objresult = new List<TblRC>();
             try
             {
                 using (var context = new LIMSContext(_config.GetConnectionString(ConfigKeys.DefaultConnection)))
                 {
-                    objresult = context.TblRCs.Where(x => x.VenueNo == masterRequest.venueno && x.VenueBranchNo == masterRequest.venuebranchno && x.Status == true).ToList();
+                    Objresult = context.TblRCs.Where(x => x.VenueNo == masterRequest.venueno && x.VenueBranchNo == masterRequest.venuebranchno && x.Status == true).ToList();
                 }
             }
             catch (Exception ex)
             {
                 MyDevException.Error(ex, "RCMasterRepository.GetRCMasterDetails", ExceptionPriority.Low, ApplicationType.REPOSITORY, masterRequest.venueno, masterRequest.venuebranchno, 0);
             }
-            return objresult;
+            return Objresult;
         }
     }
 }

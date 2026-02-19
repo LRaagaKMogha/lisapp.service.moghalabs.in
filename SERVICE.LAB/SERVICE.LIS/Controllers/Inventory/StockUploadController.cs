@@ -25,16 +25,16 @@ namespace Service.API.SERVICE.Controllers.Inventory
         [Route("api/StockUpload/GetProductListByDepartment")]
         public List<GetStockProductListResponse> GetProductListByDepartment(int venueNo, int venueBranchNo, int branchNo, int StoreNo)
         {
-            List<GetStockProductListResponse> objresult = new List<GetStockProductListResponse>();
+            List<GetStockProductListResponse> Objresult = new List<GetStockProductListResponse>();
             try
             {
-                objresult = _StockUploadRepository.GetProductListByDepartment(venueNo, venueBranchNo, branchNo, StoreNo).ToList();
+                Objresult = _StockUploadRepository.GetProductListByDepartment(venueNo, venueBranchNo, branchNo, StoreNo).ToList();
             }
             catch (Exception ex)
             {
                 MyDevException.Error(ex, "StockUploadController.GetProductListByDepartment", ExceptionPriority.Medium, ApplicationType.APPSERVICE, venueNo, venueBranchNo, branchNo);
             }
-            return objresult;
+            return Objresult;
         }
 
         [CustomAuthorize("INVOPERATIONS")]
@@ -59,16 +59,16 @@ namespace Service.API.SERVICE.Controllers.Inventory
         [Route("api/StockUpload/GetProductSubMaindept")]
         public List<GetProductMainbyDeptRes> GetProductSubyMaindept(GetProductMainbyDeptReq Req)
         {
-            List<GetProductMainbyDeptRes> objresult = new List<GetProductMainbyDeptRes>();
+            List<GetProductMainbyDeptRes> Objresult = new List<GetProductMainbyDeptRes>();
             try
             {
-                objresult = _StockUploadRepository.GetProductSubyMaindept(Req);
+                Objresult = _StockUploadRepository.GetProductSubyMaindept(Req);
             }
             catch (Exception ex)
             {
                 MyDevException.Error(ex, "StockUploadController.GetProductSubyMaindept-", ExceptionPriority.Low, ApplicationType.APPSERVICE, Req.VenueNo, Req.VenueBranchNo, Req.StoreNo);
             }
-            return objresult;
+            return Objresult;
         }
     }
 }

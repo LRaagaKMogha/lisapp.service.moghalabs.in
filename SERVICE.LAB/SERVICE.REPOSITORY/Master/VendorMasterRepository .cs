@@ -16,9 +16,9 @@ namespace Service.Repository
         private IConfiguration _config;
         public VendorMasterRepository(IConfiguration config) { _config = config; }
 
-        public List<responsegetvendor> GetVendorMaster(requestvendor req)
+        public List<Responsegetvendor> GetVendorMaster(Requestvendor req)
         {
-            List<responsegetvendor> lst = new List<responsegetvendor>();
+            List<Responsegetvendor> lst = new List<Responsegetvendor>();
             try
             {
                 using (var context = new MasterContext(_config.GetConnectionString(ConfigKeys.DefaultConnection)))
@@ -39,9 +39,9 @@ namespace Service.Repository
             }
             return lst;
         }
-        public StoreVendorMaster InsertVendorMaster(responsevendor obj1)
+        public StoreVendorMaster InsertVendorMaster(Responsevendor obj1)
         {
-            StoreVendorMaster objresult = new StoreVendorMaster();
+            StoreVendorMaster Objresult = new StoreVendorMaster();
             try
             {
                 using (var context = new MasterContext(_config.GetConnectionString(ConfigKeys.DefaultConnection)))
@@ -72,18 +72,18 @@ namespace Service.Repository
                     _vendorNo, _vendorName, _mobileno, _whatsAppNo, _phone, _status, _address, _place, _cityNo, _stateNo, _countryNo,
                     _pinCode, _email, _venueNo, _venuebranchNo, _webSite, _gstNo, _userNo, _vendorCode).ToList();
                     
-                    objresult.vendorno = obj[0].vendorno;
+                    Objresult.vendorno = obj[0].vendorno;
                 }
             }
             catch (Exception ex)
             {
                 MyDevException.Error(ex, "VendorMasterRepository.InsertVendorMaster" + obj1.vendorno.ToString(), ExceptionPriority.Low, ApplicationType.REPOSITORY, obj1.venueno, obj1.venuebranchno, 0);
             }
-            return objresult;
+            return Objresult;
         }
-        public List<getcontactlst> GetVendorvsContactmaster(getcontact creq)
+        public List<Getcontactlst> GetVendorvsContactmaster(Getcontact creq)
         {
-            List<getcontactlst> lst = new List<getcontactlst>();
+            List<Getcontactlst> lst = new List<Getcontactlst>();
             try
             {
                 using (var context = new MasterContext(_config.GetConnectionString(ConfigKeys.DefaultConnection)))
@@ -102,11 +102,11 @@ namespace Service.Repository
             }
             return lst;
         }
-        public int InsertVendorContactmaster(savecontact creq1)
+        public int InsertVendorContactmaster(Savecontact creq1)
         {
 
             CommonHelper commonUtility = new CommonHelper();
-            string savecontactXML = commonUtility.ToXML(creq1.getcontactlst);
+            string SavecontactXML = commonUtility.ToXML(creq1.Getcontactlst);
             int i = 0;
             try
             {
@@ -115,11 +115,11 @@ namespace Service.Repository
                     var _venueno = new SqlParameter("venueno", creq1?.venueno);
                     var _VendorMasterNo = new SqlParameter("VendorMasterNo", creq1?.vendorMasterNo);
                     var _userNo = new SqlParameter("userNo", creq1?.userNo);
-                    var _savecontactXML = new SqlParameter("savecontactXML", savecontactXML);
+                    var _SavecontactXML = new SqlParameter("SavecontactXML", SavecontactXML);
 
                     var lst = context.InsertVendorContactmaster.FromSqlRaw(
-                    "Execute dbo.pro_InsertVendorVsContact @venueNo,@VendorMasterNo,@userNo,@savecontactXML",
-                    _venueno, _VendorMasterNo, _userNo, _savecontactXML).ToList();
+                    "Execute dbo.pro_InsertVendorVsContact @venueNo,@VendorMasterNo,@userNo,@SavecontactXML",
+                    _venueno, _VendorMasterNo, _userNo, _SavecontactXML).ToList();
 
                     i = lst[0].VendorContactNo;
                 }
@@ -130,9 +130,9 @@ namespace Service.Repository
             }
             return i;
         }
-        public List<getservicelst> GetVendorvsservices(getservice sobj)
+        public List<Getservicelst> GetVendorvsservices(Getservice sobj)
         {
-            List<getservicelst> lst = new List<getservicelst>();
+            List<Getservicelst> lst = new List<Getservicelst>();
             try
             {
                 using (var context = new MasterContext(_config.GetConnectionString(ConfigKeys.DefaultConnection)))
@@ -153,10 +153,10 @@ namespace Service.Repository
             }
             return lst;
         }
-        public int InsertVendorService(saveservice serviceobj)
+        public int InsertVendorService(Saveservice serviceobj)
         {
             CommonHelper commonUtility = new CommonHelper();
-            string ServicelstXML = commonUtility.ToXML(serviceobj.getservicelst);
+            string ServicelstXML = commonUtility.ToXML(serviceobj.Getservicelst);
             int i = 0;
             
             try

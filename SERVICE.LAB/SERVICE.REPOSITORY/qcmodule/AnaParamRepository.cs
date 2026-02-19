@@ -51,7 +51,7 @@ namespace Service.Repository
         }
         public List<AnaParamGetDto> GetAnaParamDetails(int VenueNo, int VenueBranchNo, int Analyzerno, int Sampleno)
         {
-            List<AnaParamGetDto> objresult = new List<AnaParamGetDto>();
+            List<AnaParamGetDto> Objresult = new List<AnaParamGetDto>();
             try
             {
                 using (var context = new MasterContext(_config.GetConnectionString(ConfigKeys.DefaultConnection)))
@@ -61,18 +61,18 @@ namespace Service.Repository
                     var _analyzerno = new SqlParameter("Analyzerno", Analyzerno);
                     var _sampleno = new SqlParameter("Sampleno", Sampleno);
 
-                    objresult = context.GetAnalyzerParameter.FromSqlRaw("Execute dbo.pro_GetAnalyzerVsParameters @VenueNo,@VenueBranchNo,@Analyzerno,@Sampleno", _venueno, _venuebranchno, _analyzerno, _sampleno).ToList();
+                    Objresult = context.GetAnalyzerParameter.FromSqlRaw("Execute dbo.pro_GetAnalyzerVsParameters @VenueNo,@VenueBranchNo,@Analyzerno,@Sampleno", _venueno, _venuebranchno, _analyzerno, _sampleno).ToList();
                 }
             }
             catch (Exception ex)
             {
                 MyDevException.Error(ex, "AnaParamRepository.GetAnaParamDetails", ExceptionPriority.High, ApplicationType.REPOSITORY, VenueNo, VenueBranchNo, 0);
             }
-            return objresult;
+            return Objresult;
         }
         public List<FetchAnaParamDto> FetchAnalyzerParamDetails(int VenueNo, int VenueBranchNo, int Analyzerno, int Sampleno)
         {
-            List<FetchAnaParamDto> objresult = new List<FetchAnaParamDto>();
+            List<FetchAnaParamDto> Objresult = new List<FetchAnaParamDto>();
             try
             {
                 using (var context = new MasterContext(_config.GetConnectionString(ConfigKeys.DefaultConnection)))
@@ -82,7 +82,7 @@ namespace Service.Repository
                     var _analyzerno = new SqlParameter("Analyzerno", Analyzerno);
                     var _sampleno = new SqlParameter("Sampleno", Sampleno);
 
-                    objresult = context.FetchAnalyzerParameter.FromSqlRaw("Execute dbo.pro_FetchAnalyzerVsParametersMapping " +
+                    Objresult = context.FetchAnalyzerParameter.FromSqlRaw("Execute dbo.pro_FetchAnalyzerVsParametersMapping " +
                     "@VenueNo, @VenueBranchNo, @Analyzerno, @Sampleno", 
                     _venueno, _venuebranchno, _analyzerno, _sampleno).ToList();
                 }
@@ -91,7 +91,7 @@ namespace Service.Repository
             {
                 MyDevException.Error(ex, "AnaParamRepository.FetchAnalyzerParameter", ExceptionPriority.High, ApplicationType.REPOSITORY, VenueNo, VenueBranchNo, 0);
             }
-            return objresult;
+            return Objresult;
         }
     }
 }

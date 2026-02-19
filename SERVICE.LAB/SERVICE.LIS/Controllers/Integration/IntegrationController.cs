@@ -35,15 +35,15 @@ namespace Service.API.SERVICE.Controllers
             _mapper = mapper;
         }
 
-        [HttpPost]
-        [Route("api/Integration/GetPatientDetailsForEditing")]
-        public async Task<GetPatientDetailsResponse> GetPatientDetailsForEditing(EditPatientDetailsRequest request)
-        {
-            GetPatientDetailsResponse response = new GetPatientDetailsResponse();
-            var user = HttpContext.Items["User"] as UserClaimsIdentity;
-            response = await _IngtegrationRepository.GetPatientDetailsForEditing(request, user);
-            return response;
-        }
+        //[HttpPost]
+        //[Route("api/Integration/GetPatientdetailsForEditing")]
+        //public async Task<GetPatientDetailsResponse> GetPatientdetailsForEditing(EditPatientDetailsRequest request)
+        //{
+        //    GetPatientDetailsResponse response = new GetPatientDetailsResponse();
+        //    var user = HttpContext.Items["User"] as UserClaimsIdentity;
+        //    response = await _IngtegrationRepository.GetPatientDetailsForEditing(request, user);
+        //    return response;
+        //}
 
         [HttpPost]
         [Route("api/Integration/GetWaitingList")]
@@ -55,12 +55,13 @@ namespace Service.API.SERVICE.Controllers
                 response = await _IngtegrationRepository.GetWaitingList(waitinglistrequest, user);
             else
                 response = await _IngtegrationRepository.GetMassRegistrationResponse(waitinglistrequest, user);
+
             return response;
         }
 
         [HttpPost]
-        [Route("api/Integration/GetMassRegistrationResponse")]
-        public async Task<waitinglistresponse> GetMassRegistrationResponse(waitinglistrequest waitinglistrequest)
+        [Route("api/Integration/GetmassregistrationResponse")]
+        public async Task<waitinglistresponse> GetmassregistrationResponse(waitinglistrequest waitinglistrequest)
         {
             waitinglistresponse response = new waitinglistresponse();
             var user = HttpContext.Items["User"] as UserClaimsIdentity;
@@ -112,7 +113,9 @@ namespace Service.API.SERVICE.Controllers
             {
                 var user = HttpContext.Items["User"] as UserClaimsIdentity;
                 var serviceResponse = await _IngtegrationRepository.AddTest(request, user, 0);
-                return serviceResponse.FirstOrDefault();
+
+                if(serviceResponse != null && serviceResponse.Count > 0)
+                    return serviceResponse.First();
             }
             catch (Exception ex)
             {
@@ -123,14 +126,16 @@ namespace Service.API.SERVICE.Controllers
 
         [HttpPost]
         [Route("api/Integration/CreateManageSample")]
-        public async Task<WaitingListSaveRequest> CreateManageSample(WaitingListSaveRequest request)
+        public async Task<WaitingListSaveRequest?> CreateManageSample(WaitingListSaveRequest request)
         {
             WaitingListSaveRequest response = new WaitingListSaveRequest();
 
             try
             {
                 var validateInput = await _IngtegrationRepository.GetTestValidation(request);
-                if (validateInput != null && validateInput.Count > 0) return null;
+                if (validateInput != null && validateInput.Count > 0) 
+                    return null;
+
                 var user = HttpContext.Items["User"] as UserClaimsIdentity;
                 var serviceResponse = await _IngtegrationRepository.CreateManageSample(request, user);
                 response = serviceResponse;
@@ -141,7 +146,6 @@ namespace Service.API.SERVICE.Controllers
             }
             return response;
         }
-
 
         [HttpPost]
         [Route("api/Integration/updateRegistrations")]
@@ -162,7 +166,7 @@ namespace Service.API.SERVICE.Controllers
 
         [HttpPost]
         [Route("api/Integration/updatemassregistration")]
-        public async Task<bool> UpdateMassRegistration(UpdateMassRegistrationRequest request)
+        public async Task<bool> Updatemassregistration(UpdateMassRegistrationRequest request)
         {
             var user = HttpContext.Items["User"] as UserClaimsIdentity;
             var response = await _IngtegrationRepository.UpdateMassRegistration(request);
@@ -170,7 +174,7 @@ namespace Service.API.SERVICE.Controllers
         }
 
         [HttpGet]
-        [Route("api/Integration/PatientDetails/{patientVisitId}/{system}")]
+        [Route("api/Integration/Patientdetails/{patientVisitId}/{system}")]
         public async Task<ExternalPatientDetailsResponse> GetPatientInformation(string patientVisitId, string system)
         {
             var user = HttpContext.Items["User"] as UserClaimsIdentity;
@@ -181,9 +185,9 @@ namespace Service.API.SERVICE.Controllers
 
         [HttpPost]
         [Route("api/Integration/SendOrderDetails")]
-        public Task<orderrespondetails> SendOrderDetails(orderrequestdetails orderrequestdetails)
+        public Task<OrderResponDetails> SendOrderDetails(orderrequestdetails orderrequestdetails)
         {
-            orderrespondetails response = new orderrespondetails();
+            OrderResponDetails response = new OrderResponDetails();
             try
             {
                 if (orderrequestdetails == null)
@@ -250,7 +254,6 @@ namespace Service.API.SERVICE.Controllers
                     response.responsecode = StatusCodes.Status400BadRequest.ToString();
                     return Task.FromResult(response);
                 }
-
 
                 var user = HttpContext.Items["User"] as UserClaimsIdentity;
 
@@ -348,18 +351,18 @@ namespace Service.API.SERVICE.Controllers
 
         [HttpGet]
         [Route("api/Integration/GetReportPDFDetails")]
-        public async Task<reportresponsedetails> GetReportPDFDetails(reportrequestdetails reportrequestdetails)
+        public async Task<Reportresponsedetails> GetReportPDFDetails(reportrequestdetails reportrequestdetails)
         {
-            reportresponsedetails response = new reportresponsedetails();
+            Reportresponsedetails response = new Reportresponsedetails();
 
             try
             {
                 var user = HttpContext.Items["User"] as UserClaimsIdentity;
-                response.labresponsedetails = new List<labresponsedetails>();
+                response.labresponsedetails = new List<Labresponsedetails>();
                 response.labresponsedetails = _IngtegrationRepository.GetPDFReportDetails(reportrequestdetails, user);
                 foreach (var labdetail in response.labresponsedetails)
                 {
-                    var labtestdetails = _IngtegrationRepository.GetPDFReportTestDetails(labdetail.lisvisitno, user);
+                    var Labtestdetails = _IngtegrationRepository.GetPDFReportTestDetails(labdetail.lisvisitno, user);
                     try
                     {
                         PatientReportDTO PatientItem = new PatientReportDTO
@@ -377,21 +380,21 @@ namespace Service.API.SERVICE.Controllers
                             pritlanguagetype = 1                            
                         };
 
-                        foreach (var test in labtestdetails)
+                        foreach (var test in Labtestdetails)
                         {
                             PatientItem.resulttypenos = string.IsNullOrEmpty(PatientItem.resulttypenos) ? test.ResultTypeNo.ToString() : string.Concat(PatientItem.resulttypenos, ",", test.ResultTypeNo.ToString());
                             PatientItem.orderlistnos = string.IsNullOrEmpty(PatientItem.orderlistnos) ? test.OrderListNo.ToString() : string.Concat(PatientItem.orderlistnos, ",", test.OrderListNo.ToString());
                         }
 
                         var result = await _PatientReportRepository.PrintPatientReport(PatientItem);
-                        labdetail.reportdetails = new List<labreportdetails>();
-                        labdetail.reportdetails.Add(new labreportdetails
+                        labdetail.reportdetails = new List<Labreportdetails>();
+                        labdetail.reportdetails.Add(new Labreportdetails
                         {
                             reportdata = System.IO.File.ReadAllBytes(result[0].PatientExportFolderPath),
                             accessionno = labdetail.accessionno,
-                            testdetails = new List<labtestdetails>()
+                            testdetails = new List<Labtestdetails>()
                         });
-                        labdetail.reportdetails.FirstOrDefault(x => x.accessionno == labdetail.accessionno).testdetails = labtestdetails;
+                        labdetail.reportdetails.FirstOrDefault(x => x.accessionno == labdetail.accessionno).testdetails = Labtestdetails;
                     }
                     catch (Exception ex)
                     {
@@ -422,10 +425,10 @@ namespace Service.API.SERVICE.Controllers
 
         [HttpGet]
         [Route("api/Integration/GetLabResults")]
-        public Task<reportresponsediscreetdetails> GetLabResults(reportrequestdetails reportrequestdetails)
+        public Task<Reportresponsediscreetdetails> GetLabResults(reportrequestdetails reportrequestdetails)
         {
-            reportresponsediscreetdetails response = new reportresponsediscreetdetails();
-            response.reportdetails = new List<labreportdiscreetdetails>();
+            Reportresponsediscreetdetails response = new Reportresponsediscreetdetails();
+            response.reportdetails = new List<Labreportdiscreetdetails>();
 
             
             List<string> abnormallist = new List<string> { "L", "H", "CH", "CL" };
@@ -437,7 +440,7 @@ namespace Service.API.SERVICE.Controllers
                 request.IsDelta = false;
                 var testMasters = _IngtegrationRepository.GetTestDetails(request, user);
 
-                List<labresponsedetails> labresponsedetails = new List<labresponsedetails>();
+                List<Labresponsedetails> labresponsedetails = new List<Labresponsedetails>();
                 labresponsedetails = _IngtegrationRepository.GetPDFReportDetails(reportrequestdetails, user);
                 foreach (var labdetail in labresponsedetails)
                 {
@@ -446,8 +449,7 @@ namespace Service.API.SERVICE.Controllers
                     {
                         foreach (var result in results)
                         {
-
-                            response.reportdetails.Add(new labreportdiscreetdetails()
+                            response.reportdetails.Add(new Labreportdiscreetdetails()
                             {
                                 labrequestNo = result.VisitID,
                                 labregistereddttm = string.IsNullOrEmpty(result.VisitDTTM) ? string.Empty : DateTime.ParseExact(result.VisitDTTM, "dd/MM/yyyy HH:mm", CultureInfo.InvariantCulture).ToString("s"),
@@ -515,13 +517,13 @@ namespace Service.API.SERVICE.Controllers
 
                 if (requestTrendReport.TestCode != null && requestTrendReport.TestCode.Count > 0)
                 {
-                    response.testcode = new List<testcode>();
+                    response.testcode = new List<Testcode>();
                     foreach (string sTestCode in requestTrendReport.TestCode)
                     {
                         var output = _IngtegrationRepository.GetTestTrendReportDetails(requestTrendReport, sTestCode, user);
                         if (output != null)
                         {
-                            response.testcode.Add(new testcode
+                            response.testcode.Add(new Testcode
                             {
                                 TestCode = sTestCode,
                                 trendReport = output

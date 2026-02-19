@@ -57,7 +57,7 @@ namespace Service.Model.Integration
         public string Room { get; set;  }
         public string Bed { get; set; }
         public bool IsAllergy { get; set; }
-        public string AllergyDetails { get; set; }
+        public string Allergydetails { get; set; }
         public string PostalCode { get; set; }
         public string DocumentNumber { get; set; }
         public string PatientNumber { get; set; }

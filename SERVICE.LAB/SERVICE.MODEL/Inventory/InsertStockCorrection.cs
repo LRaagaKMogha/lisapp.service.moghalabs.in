@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace Service.Model
 {
@@ -64,7 +63,6 @@ namespace Service.Model
         public decimal AvgPurcRateWTX { get; set; }
         public decimal AvgPurcRateWOT { get; set; }
     }
-
     public class GetStockAdjustProductDetailsResponse
     {
         public Int16 BranchNo { get; set; }
@@ -104,7 +102,6 @@ namespace Service.Model
         public string MenuType { get; set; }
         public List<ConsumptionProductList> ProductDetails { get; set; }
     }
-
     public class ConsumptionProductList
     {
         public Int64 ProductNo { get; set; }
@@ -128,8 +125,8 @@ namespace Service.Model
         public string productName { get; set; }
         public Int16 consUnitNo { get; set; }
         public string consUnit { get; set; }
-        public string? batchNo { get; set; }
-        public string? expDate { get; set; }
+        public string batchNo { get; set; }
+        public string expDate { get; set; }
         public Int16 consQty { get; set; } = 0;
         public int closeQty { get; set; } = 0;
         public decimal AvgPurcRateWTX { get; set; }
@@ -139,18 +136,18 @@ namespace Service.Model
     {
         public Int16 RowNo { get; set; }
         public Int16 BranchNo { get; set; }
-        public string? BranchName { get; set; }
+        public string BranchName { get; set; }
         public Int16 StoreNo { get; set; }
-        public string? StoreName { get; set; }
+        public string StoreName { get; set; }
         public List<GetConsumptionProductListResponse> prdConsumptionLst { get; set; }
     }
     public class ConsumptionDetailsInListResponse
     {
         public Int16 RowNo { get; set; }
         public Int16 BranchNo { get; set; }
-        public string? BranchName { get; set; }
+        public string BranchName { get; set; }
         public Int16 StoreNo { get; set; }
-        public string? StoreName { get; set; }
-        public string? prdConsumptionLst { get; set; }
+        public string StoreName { get; set; }
+        public string prdConsumptionLst { get; set; }
     }
 }

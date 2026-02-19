@@ -18,7 +18,7 @@ namespace Service.Repository.Inventory
         public StockCorrectionRepositoty(IConfiguration config) { _config = config; }
         public List<GetStockCorrectionResponse> GetAllStockCorrection(GetStockCorrectionRequest request)
         {
-            List<GetStockCorrectionResponse> objresult = new List<GetStockCorrectionResponse>();
+            List<GetStockCorrectionResponse> Objresult = new List<GetStockCorrectionResponse>();
             try
             {
                 using (var context = new MasterContext(_config.GetConnectionString(ConfigKeys.DefaultConnection)))
@@ -32,7 +32,7 @@ namespace Service.Repository.Inventory
                     var _storeNo = new SqlParameter("StoreNo", request.StoreNo);
                     var _productNo = new SqlParameter("ProductNo", request.ProductNo);
 
-                    objresult = context.GetStockCorrectionDTO.FromSqlRaw(
+                    Objresult = context.GetStockCorrectionDTO.FromSqlRaw(
                     "Execute dbo.pro_GetAllStockCorrection @VenueNo, @VenueBranchNo, @MasterNo, @BranchNo, @StoreNo, @ProductNo, @UserNo, @PageIndex",
                     _venueNo, _venueBranchNo, _consumptionNo, _branchNo, _storeNo, _productNo, _userNo, _pageIndex).ToList();
                 }
@@ -41,7 +41,7 @@ namespace Service.Repository.Inventory
             {
                 MyDevException.Error(ex, "StockCorrectionRepositoty.GetAllStockCorrection", ExceptionPriority.High, ApplicationType.REPOSITORY, request.venueno, (int)request.venuebranchno, (int)request.masterNo);
             }
-            return objresult;
+            return Objresult;
         }
         public CommonAdminResponse InsertStockCorrection(InsertStockCorrection stockCorrection)
         {
@@ -64,12 +64,12 @@ namespace Service.Repository.Inventory
                     var _Status = new SqlParameter("Status", stockCorrection?.Status);
                     var _UserNo = new SqlParameter("UserNo", stockCorrection?.UserNo);
 
-                    var objresult = context.CreateStockCorrectionDTO.FromSqlRaw(
+                    var Objresult = context.CreateStockCorrectionDTO.FromSqlRaw(
                     "Execute dbo.Pro_InsertStockCorrection " +
                     "@StockCorrectionNo, @VenueNo, @VenueBranchNo, @BranchNo, @StoreNo, @ProductNo, @OpenQty, @CloseQty, @AdjustQty, @Reason, @Status, @UserNo",
                     _StockCorrectionNo, _VenueNo, _VenueBranchNo, _BranchNo, _StoreNo, _ProductNo, _OpenQty, _CloseQty, _AdjustQty, _Reason, _Status, _UserNo).ToList();
 
-                    response = objresult[0];
+                    response = Objresult[0];
                 }
             }
             catch (Exception ex)
@@ -80,7 +80,7 @@ namespace Service.Repository.Inventory
         }
         public List<GetProductStockResponse> GetProductStock(GetProductStockRequest request)
         {
-            List<GetProductStockResponse> objresult = new List<GetProductStockResponse>();
+            List<GetProductStockResponse> Objresult = new List<GetProductStockResponse>();
             try
             {
                 using (var context = new MasterContext(_config.GetConnectionString(ConfigKeys.DefaultConnection)))
@@ -90,7 +90,7 @@ namespace Service.Repository.Inventory
                     var _storeNo = new SqlParameter("StoreNo", request.StoreNo);
                     var _productNo = new SqlParameter("ProductNo", request.ProductNo);
 
-                    objresult = context.GetProductStockDTO.FromSqlRaw(
+                    Objresult = context.GetProductStockDTO.FromSqlRaw(
                     "Execute dbo.pro_GetProductStock @VenueNo, @BranchNo, @StoreNo, @ProductNo",
                     _venueNo, _BranchNo, _storeNo, _productNo).ToList();
                 }
@@ -99,7 +99,7 @@ namespace Service.Repository.Inventory
             {
                 MyDevException.Error(ex, "StockCorrectionRepositoty.GetProductStock", ExceptionPriority.High, ApplicationType.REPOSITORY, request.VenueNo, request.BranchNo, 0);
             }
-            return objresult;
+            return Objresult;
         }
         public CommonAdminResponse InsertStockAdjustment(InsertStockAdjustment req)
         {
@@ -123,12 +123,12 @@ namespace Service.Repository.Inventory
                     var _prodDetailXML = new SqlParameter("ProdDetailXML", prodDetailXML);
                     var _menuType = new SqlParameter("MenuType", req?.MenuType);
 
-                    var objresult = context.CreateStockAdjustmentDTO.FromSqlRaw(
+                    var Objresult = context.CreateStockAdjustmentDTO.FromSqlRaw(
                     "Execute dbo.Pro_InsertStockAdjustment " +
                     "@StockAdjustNo, @VenueNo, @VenueBranchNo, @BranchNo, @StoreNo, @ProductNo, @Reason, @UserNo, @prodDetailXML, @MenuType",
                     _StockAdjustNo, _VenueNo, _VenueBranchNo, _BranchNo, _StoreNo, _ProductNo, _Reason, _UserNo, _prodDetailXML, _menuType).ToList();
 
-                    response = objresult[0];
+                    response = Objresult[0];
                 }
             }
             catch (Exception ex)
@@ -139,7 +139,7 @@ namespace Service.Repository.Inventory
         }
         public List<GetStockAdjustmentResponse> GetAllStockAdjustment(GetStockAdjustmentRequest request)
         {
-            List<GetStockAdjustmentResponse> objresult = new List<GetStockAdjustmentResponse>();
+            List<GetStockAdjustmentResponse> Objresult = new List<GetStockAdjustmentResponse>();
             try
             {
                 using (var context = new MasterContext(_config.GetConnectionString(ConfigKeys.DefaultConnection)))
@@ -157,7 +157,7 @@ namespace Service.Repository.Inventory
                     var _fromDate = new SqlParameter("FromDate", request?.FromDate);
                     var _toDate = new SqlParameter("ToDate", request?.ToDate);
 
-                    objresult = context.GetStockAdjustmentDTO.FromSqlRaw(
+                    Objresult = context.GetStockAdjustmentDTO.FromSqlRaw(
                     "Execute dbo.pro_GetAllStockAdjustment @Type, @FromDate, @ToDate, @VenueNo, @VenueBranchNo, @MasterNo, @BranchNo, @StoreNo, @ProductNo, @UserNo, @MenuType, @PageIndex",
                     _type, _fromDate, _toDate, _venueNo, _venueBranchNo, _adjustmentNo, _branchNo, _storeNo, _productNo, _userNo, _menuType, _pageIndex).ToList();
                 }
@@ -166,11 +166,11 @@ namespace Service.Repository.Inventory
             {
                 MyDevException.Error(ex, "StockCorrectionRepositoty.GetAllStockAdjustment", ExceptionPriority.High, ApplicationType.REPOSITORY, request.venueno, (int)request.venuebranchno, (int)request.masterNo);
             }
-            return objresult;
+            return Objresult;
         }
         public GetStockAdjustProductDetailsResponse GetStockAdjustProductDetails(int venueNo, int venueBranchNo, int StkadjNo)
         {
-            GetStockAdjustProductDetailsResponse objresult = new GetStockAdjustProductDetailsResponse();
+            GetStockAdjustProductDetailsResponse Objresult = new GetStockAdjustProductDetailsResponse();
             try
             {
                 using (var context = new MasterContext(_config.GetConnectionString(ConfigKeys.DefaultConnection)))
@@ -185,17 +185,17 @@ namespace Service.Repository.Inventory
                     
                     if (lst != null)
                     {
-                        objresult.BranchNo = lst.BranchNo;
-                        objresult.BranchName = lst.BranchName;
-                        objresult.StoreNo = lst.StoreNo;
-                        objresult.StoreName = lst.StoreName;
-                        objresult.ProductNo = lst.ProductNo;
-                        objresult.ProductName = lst.ProductName;
-                        objresult.Reason = lst.Reason;
+                        Objresult.BranchNo = lst.BranchNo;
+                        Objresult.BranchName = lst.BranchName;
+                        Objresult.StoreNo = lst.StoreNo;
+                        Objresult.StoreName = lst.StoreName;
+                        Objresult.ProductNo = lst.ProductNo;
+                        Objresult.ProductName = lst.ProductName;
+                        Objresult.Reason = lst.Reason;
                         
                         if (!string.IsNullOrEmpty(lst.productDetails))
                         {
-                            objresult.productDetails = JsonConvert.DeserializeObject<List<GetProductStockResponse>>(lst.productDetails);
+                            Objresult.productDetails = JsonConvert.DeserializeObject<List<GetProductStockResponse>>(lst.productDetails);
                         }
                     }
                 }
@@ -204,11 +204,11 @@ namespace Service.Repository.Inventory
             {
                 MyDevException.Error(ex, "StockCorrectionRepositoty.GetStockAdjustProductDetails", ExceptionPriority.High, ApplicationType.REPOSITORY, venueNo, venueBranchNo, 0);
             }
-            return objresult;
+            return Objresult;
         }
         public List<GetStoreStockProductListResponse> GetStoreStockProductList(int venueNo, int BranchNo, int StoreNo)
         {
-            List<GetStoreStockProductListResponse> objresult = new List<GetStoreStockProductListResponse>();
+            List<GetStoreStockProductListResponse> Objresult = new List<GetStoreStockProductListResponse>();
             try
             {
                 using (var context = new MasterContext(_config.GetConnectionString(ConfigKeys.DefaultConnection)))
@@ -217,7 +217,7 @@ namespace Service.Repository.Inventory
                     var _BranchNo = new SqlParameter("BranchNo", BranchNo);
                     var _StoreNo = new SqlParameter("StoreNo", StoreNo);
 
-                    objresult = context.GetStockStockProductListDTO.FromSqlRaw(
+                    Objresult = context.GetStockStockProductListDTO.FromSqlRaw(
                     "Execute dbo.pro_GetStoreStockProductDetails @VenueNo, @BranchNo, @StoreNo",
                     _VenueNo, _BranchNo, _StoreNo).ToList();
                 }
@@ -226,7 +226,7 @@ namespace Service.Repository.Inventory
             {
                 MyDevException.Error(ex, "StockCorrectionRepositoty.GetStoreStockProductList", ExceptionPriority.High, ApplicationType.REPOSITORY, venueNo, BranchNo, 0);
             }
-            return objresult;
+            return Objresult;
         }
         public CommonAdminResponse InsertStockConsumption(InsertStockConsumption req)
         {
@@ -248,12 +248,12 @@ namespace Service.Repository.Inventory
                     var _MenuType = new SqlParameter("MenuType", req?.MenuType);
                     var _ProdDetailXML = new SqlParameter("ProdDetailXML", prodDetailXML);
 
-                    var objresult = context.CreateStockConsumptionDTO.FromSqlRaw(
+                    var Objresult = context.CreateStockConsumptionDTO.FromSqlRaw(
                     "Execute dbo.Pro_IV_InsertStockConsumption " +
                     "@ConsMastNo, @VenueNo, @VenueBranchNo, @BranchNo, @StoreNo, @UserNo, @MenuType, @ProdDetailXML",
                     _ConsMastNo, _VenueNo, _VenueBranchNo, _BranchNo, _StoreNo, _UserNo, _MenuType, _ProdDetailXML).ToList();
 
-                    response = objresult[0];
+                    response = Objresult[0];
                 }
             }
             catch (Exception ex)
@@ -264,7 +264,7 @@ namespace Service.Repository.Inventory
         }
         public List<GetAllConsumptionListResponse> GetAllConsumptionList(GetAllConsumptionEntryRequest request)
         {
-            List<GetAllConsumptionListResponse> objresult = new List<GetAllConsumptionListResponse>();
+            List<GetAllConsumptionListResponse> Objresult = new List<GetAllConsumptionListResponse>();
             try
             {
                 using (var context = new MasterContext(_config.GetConnectionString(ConfigKeys.DefaultConnection)))
@@ -281,7 +281,7 @@ namespace Service.Repository.Inventory
                     var _PageIndex = new SqlParameter("PageIndex", request.pageIndex);
                     var _MenuType = new SqlParameter("MenuType", request?.MenuType);
 
-                    objresult = context.GetAllConsumptionListDTO.FromSqlRaw(
+                    Objresult = context.GetAllConsumptionListDTO.FromSqlRaw(
                     "Execute dbo.pro_IV_GetAllConsumptionList " +
                     "@Type, @FromDate, @ToDate, @VenueNo, @VenueBranchNo, @BranchNo, @StoreNo, " +
                     "@ConsumptionNo, @UserNo, @PageIndex, @MenuType",
@@ -293,11 +293,11 @@ namespace Service.Repository.Inventory
             {
                 MyDevException.Error(ex, "StockCorrectionRepositoty.GetAllConsumptionList", ExceptionPriority.High, ApplicationType.REPOSITORY, request.venueno, request.BranchNo, request.userno);
             }
-            return objresult;
+            return Objresult;
         }
         public List<ConsumptionDetailsResponse> GetStockConsumptionDetails(GetConsumptionListRequest request)
         {
-            List<ConsumptionDetailsResponse> objresult = new List<ConsumptionDetailsResponse>();
+            List<ConsumptionDetailsResponse> Objresult = new List<ConsumptionDetailsResponse>();
             List<ConsumptionDetailsInListResponse> objRslt = new List<ConsumptionDetailsInListResponse>();
 
             try
@@ -323,7 +323,7 @@ namespace Service.Repository.Inventory
                             prdConsumptionLst = JsonConvert.DeserializeObject<List<GetConsumptionProductListResponse>>(objRslt[0].prdConsumptionLst)
                         };
 
-                        objresult.Add(response);
+                        Objresult.Add(response);
                     }
                 }
             }
@@ -331,7 +331,7 @@ namespace Service.Repository.Inventory
             {
                 MyDevException.Error(ex, "StockCorrectionRepositoty.GetStockConsumptionDetails", ExceptionPriority.High, ApplicationType.REPOSITORY, request.venueno, request.venuebranchno, request.userno);
             }
-            return objresult;
+            return Objresult;
         }
     }
 }

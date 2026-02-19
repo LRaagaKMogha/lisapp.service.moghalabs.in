@@ -215,7 +215,7 @@ namespace Service.Repository
                     var _Searchvalue = new SqlParameter("Searchvalue", RequestItem.Searchvalue);
                     var _VenueNo = new SqlParameter("VenueNo", RequestItem.VenueNo);
                     var _VenueBranchNo = new SqlParameter("VenueBranchNo", RequestItem.VenueBranchNo);
-                    var _Userno = new SqlParameter("Userno", RequestItem.Userno != null ? RequestItem.Userno:0);
+                    var _Userno = new SqlParameter("Userno", RequestItem.Userno);
 
                     result = context.SearchOPDPatient.FromSqlRaw(
                     "Execute dbo.pro_GetOPDPatientdata @Searchkey, @Searchvalue, @VenueNo, @VenueBranchNo,@userno",
@@ -363,12 +363,12 @@ namespace Service.Repository
         }
         public List<ServiceSearchDTO> GetOPDService(int VenueNo, int VenueBranchNo, int doctorNo, int type)
         {
-            List<ServiceSearchDTO> objresult = new List<ServiceSearchDTO>();
+            List<ServiceSearchDTO> Objresult = new List<ServiceSearchDTO>();
             try
             {
                 string _CacheKey = CacheKeys.ServiceList + VenueNo;// + VenueBranchNo;
-                objresult = MemoryCacheRepository.GetCacheItem<List<ServiceSearchDTO>>(_CacheKey);
-                if (objresult == null)
+                Objresult = MemoryCacheRepository.GetCacheItem<List<ServiceSearchDTO>>(_CacheKey);
+                if (Objresult == null)
                 {
                     using (var context = new OPDContext(_config.GetConnectionString(ConfigKeys.DefaultConnection)))
                     {
@@ -377,7 +377,7 @@ namespace Service.Repository
                         var _VenueNo = new SqlParameter("VenueNo", VenueNo);
                         var _VenueBranchNo = new SqlParameter("VenueBranchNo", VenueBranchNo);
 
-                        objresult = context.ServiceSearchDTO.FromSqlRaw(
+                        Objresult = context.ServiceSearchDTO.FromSqlRaw(
                         "Execute dbo.pro_OPDSearchService @doctorNo,@TestType,@VenueNo,@VenueBranchNo",
                         _doctorNo, _TestType, _VenueNo, _VenueBranchNo).ToList();
                     }
@@ -387,7 +387,7 @@ namespace Service.Repository
             {
                 MyDevException.Error(ex, "OPDPatientRepository.GetOPDService", ExceptionPriority.High, ApplicationType.REPOSITORY, VenueNo, VenueBranchNo, 0);
             }
-            return objresult;
+            return Objresult;
         }
         public OPDDiagnosisDTOResponse InsertPhysicianDiagnosis(OPDDiagnosisDTORequest objDTO)
         {
@@ -545,7 +545,7 @@ namespace Service.Repository
         }
         public List<OPDDoctorMainList> GetOPDDoctorResponse(List<OPDDoctorList> listDTO)
         {
-            List<OPDDoctorMainList> objresult = new List<OPDDoctorMainList>();
+            List<OPDDoctorMainList> Objresult = new List<OPDDoctorMainList>();
             try
             {
                 int oldPhysicianNo = 0;
@@ -616,7 +616,7 @@ namespace Service.Repository
                             Responseitem.BranchList = lstBranchDetail;
 
                         }
-                        objresult.Add(Responseitem);
+                        Objresult.Add(Responseitem);
                     }
                 }
             }
@@ -624,7 +624,7 @@ namespace Service.Repository
             {
                 MyDevException.Error(ex, "OPDPatientRepository.GetOPDDoctorResponse", ExceptionPriority.Low, ApplicationType.REPOSITORY, 0, 0, 0);
             }
-            return objresult;
+            return Objresult;
         }
 
         public int GetOPDPhysicianAmount(OPDPatientOfficeDTO RequestItem)
@@ -657,12 +657,12 @@ namespace Service.Repository
 
         public List<Humanbodyparts> Gethumanbodyparts(int VenueNo, int VenueBranchNo, int type)
         {
-            List<Humanbodyparts> objresult = new List<Humanbodyparts>();
+            List<Humanbodyparts> Objresult = new List<Humanbodyparts>();
             try
             {
                 string _CacheKey = CacheKeys.ServiceList + VenueNo;
-                objresult = MemoryCacheRepository.GetCacheItem<List<Humanbodyparts>>(_CacheKey);
-                if (objresult == null)
+                Objresult = MemoryCacheRepository.GetCacheItem<List<Humanbodyparts>>(_CacheKey);
+                if (Objresult == null)
                 {
                     using (var context = new OPDContext(_config.GetConnectionString(ConfigKeys.DefaultConnection)))
                     {
@@ -670,7 +670,7 @@ namespace Service.Repository
                         var _VenueNo = new SqlParameter("VenueNo", VenueNo);
                         var _VenueBranchNo = new SqlParameter("VenueBranchNo", VenueBranchNo);
 
-                        objresult = context.Humanbodyparts.FromSqlRaw(
+                        Objresult = context.Humanbodyparts.FromSqlRaw(
                         "Execute dbo.pro_humanbodyparts @Type, @VenueNo, @VenueBranchNo",
                         _Type, _VenueNo, _VenueBranchNo).ToList();
                     }
@@ -680,7 +680,7 @@ namespace Service.Repository
             {
                 MyDevException.Error(ex, "OPDPatientRepository.Gethumanbodyparts", ExceptionPriority.High, ApplicationType.REPOSITORY, VenueNo, VenueBranchNo, 0);
             }
-            return objresult;
+            return Objresult;
         }
 
         public List<OPDPatientDisVsInvDetails> GetOPDPatientMasterDefinedInvDetails(string type, int PatientNo, int VenueNo, int VenueBranchNo)
@@ -736,7 +736,7 @@ namespace Service.Repository
 
         public OPDTreatmentPlan GetOPDTreatmentPlanDetails(OPDTreatmentPlan req)
         {
-            OPDTreatmentPlan objresult = new OPDTreatmentPlan();
+            OPDTreatmentPlan Objresult = new OPDTreatmentPlan();
             List<OPDTreatmentPlanProcedures> resultPRO = new List<OPDTreatmentPlanProcedures>();
             List<OPDTreatmentPlanPharmacy> resultPRM = new List<OPDTreatmentPlanPharmacy>();
             List<OPDTreatmentPlanRes> resultplan = new List<OPDTreatmentPlanRes>();
@@ -770,22 +770,22 @@ namespace Service.Repository
 
                 if (resultplan.Count > 0)
                 {
-                    objresult.appointmentNo = resultplan[0].appointmentNo;
-                    objresult.oPDTreatmentNo = resultplan[0].oPDTreatmentNo;
-                    objresult.patientNo = resultplan[0].patientNo;
-                    objresult.nextAppointmentDate = resultplan[0].nextAppointmentDate;
+                    Objresult.appointmentNo = resultplan[0].appointmentNo;
+                    Objresult.oPDTreatmentNo = resultplan[0].oPDTreatmentNo;
+                    Objresult.patientNo = resultplan[0].patientNo;
+                    Objresult.nextAppointmentDate = resultplan[0].nextAppointmentDate;
                 }
-                objresult.totalAmount = req.totalAmount;
-                objresult.venueNo = req.venueNo;
-                objresult.venueBranchNo = req.venueBranchNo;
-                objresult.lstpharmacy = resultPRM;
-                objresult.lstProcedures = resultPRO;
+                Objresult.totalAmount = req.totalAmount;
+                Objresult.venueNo = req.venueNo;
+                Objresult.venueBranchNo = req.venueBranchNo;
+                Objresult.lstpharmacy = resultPRM;
+                Objresult.lstProcedures = resultPRO;
             }
             catch (Exception ex)
             {
                 MyDevException.Error(ex, "DiseaseRepository.GetTreatmentMasterDetails", ExceptionPriority.Low, ApplicationType.REPOSITORY, req.venueNo, req.venueBranchNo, 0);
             }
-            return objresult;
+            return Objresult;
         }
         public List<OPDPatientDisVsDrugDetails> GetOPDPatientMasterDefinedDrugDetails(string type, int PatientNo, int VenueNo, int VenueBranchNo)
         {
@@ -926,9 +926,9 @@ namespace Service.Repository
             return lstresult;
         }
 
-        public List<drugresponse> GetDrugDetails(drugreq RequestItem)
+        public List<Drugresponse> GetDrugDetails(Drugreq RequestItem)
         {
-            List<drugresponse> result = new List<drugresponse>();
+            List<Drugresponse> result = new List<Drugresponse>();
             try
             {
                 using (var context = new OPDContext(_config.GetConnectionString(ConfigKeys.DefaultConnection)))
@@ -1276,7 +1276,7 @@ namespace Service.Repository
 
         public TreatmentPlanResponse InsertTreatmentPlan(OPDTreatmentPlan req)
         {
-            TreatmentPlanResponse objresult = new TreatmentPlanResponse();
+            TreatmentPlanResponse Objresult = new TreatmentPlanResponse();
             try
             {
                 XDocument TreatmentProXML = new XDocument(new XElement("TreatmentProxml", from Item in req.lstProcedures
@@ -1334,14 +1334,14 @@ namespace Service.Repository
                     "Execute dbo.Pro_OPDInsertTreatmentPlan @Type, @OPDTreatmentNo,@AppointmentNo,@PatientNo,@NextAppointMentDate,@TotalAmount,@TreatmentProxml,@TreatmentPrmxml,@VenueNo,@VenueBranchNo,@UserNo",
                     _Type, _OPDTreatmentNo, _AppointmentNo, _PatientNo, _NextAppointMentDate, _TotalAmount, _TreatmentProxml, _TreatmentPrmxml, _VenueNo, _VenueBranchNo, _UserNo).AsEnumerable().FirstOrDefault();
 
-                    objresult.oPDTreatmentNo = dbResponse.oPDTreatmentNo;
+                    Objresult.oPDTreatmentNo = dbResponse.oPDTreatmentNo;
                 }
             }
             catch (Exception ex)
             {
                 MyDevException.Error(ex, "OPDPatientController.InsertTreatmentPlan", ExceptionPriority.Low, ApplicationType.REPOSITORY, req.venueNo, req.venueBranchNo, 0);
             }
-            return objresult;
+            return Objresult;
         }
 
         public ImageListResponse OPDImagingIncludingreport(OPDBeforeAfterImageList objImageList)
@@ -1408,9 +1408,9 @@ namespace Service.Repository
             return result;
         }
 
-        public List<displaylist> GetDisplayView(int VenueNo, int VenueBranchNo, int type)
+        public List<Displaylist> GetDisplayView(int VenueNo, int VenueBranchNo, int type)
         {
-            List<displaylist> objresult = new List<displaylist>();
+            List<Displaylist> Objresult = new List<Displaylist>();
             try
             {
                 using (var context = new OPDContext(_config.GetConnectionString(ConfigKeys.DefaultConnection)))
@@ -1419,7 +1419,7 @@ namespace Service.Repository
                     var _VenueBranchNo = new SqlParameter("VenueBranchNo", VenueBranchNo);
                     var _type = new SqlParameter("type", type);
 
-                    objresult = context.displaylistEF.FromSqlRaw(
+                    Objresult = context.DisplaylistEF.FromSqlRaw(
                         "Execute dbo.Pro_GetOPD_Display @VenueNo,@VenueBranchNo,@type", _VenueNo, _VenueBranchNo, _type).ToList();
                 }
             }
@@ -1427,7 +1427,7 @@ namespace Service.Repository
             {
                 MyDevException.Error(ex, "OPDPatientRepository.GetDisplayView", ExceptionPriority.High, ApplicationType.REPOSITORY, VenueNo, VenueBranchNo, 0);
             }
-            return objresult;
+            return Objresult;
         }
 
         public List<SearchOPDMachinePatient> GetPatientMachineData(SearchOPDPatientRequest RequestItem)

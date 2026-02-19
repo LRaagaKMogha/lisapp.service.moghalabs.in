@@ -36,17 +36,17 @@ namespace Service.API.SERVICE.Controllers
         [Route("api/DocVsServiceMap/GetdocVsSerlst")]
         public List<DocVsSerGetRes> GetdocVsSerlst(DocVsSerGetReq Req)
         {
-            List<DocVsSerGetRes> objresult = new List<DocVsSerGetRes>();
+            List<DocVsSerGetRes> Objresult = new List<DocVsSerGetRes>();
             try
             {
-                objresult = _DocVsServiceMapRepository.GetdocVsSerlst(Req);
+                Objresult = _DocVsServiceMapRepository.GetdocVsSerlst(Req);
 
             }
             catch (Exception ex)
             {
                 MyDevException.Error(ex, "DocVsServiceMapController.GetdocVsSerlst" + Req.DoctorNo.ToString(), ExceptionPriority.Low, ApplicationType.APPSERVICE, Req.venueNo, 0, 0);
             }
-            return objresult;
+            return Objresult;
         }
         [HttpPost]
         [Route("api/DocVsServiceMap/InsertdocVsSer")]

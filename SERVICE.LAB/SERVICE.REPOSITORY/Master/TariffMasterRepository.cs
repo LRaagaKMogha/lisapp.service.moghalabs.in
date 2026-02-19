@@ -23,7 +23,7 @@ namespace Service.Repository
         /// <returns></returns>
         public List<GetTariffMasterResponse> GetTariffMasterDetails(GetTariffMasterRequest getRequest)
         {
-            List<GetTariffMasterResponse> objresult = new List<GetTariffMasterResponse>();
+            List<GetTariffMasterResponse> Objresult = new List<GetTariffMasterResponse>();
             try
             {
                 using (var context = new MasterContext(_config.GetConnectionString(ConfigKeys.DefaultConnection)))
@@ -37,7 +37,7 @@ namespace Service.Repository
                     var _IsFranchisee = new SqlParameter("IsFranchisee", getRequest?.IsFranchisee);
                     var _DoctorNo = new SqlParameter("DoctorNo", getRequest?.filterDoctorNo);
 
-                    objresult = context.GetTariffMasterDTO.FromSqlRaw(
+                    Objresult = context.GetTariffMasterDTO.FromSqlRaw(
                     "Execute dbo.Pro_GetTariff @VenueNo,@VenueBranchNo,@rateListNo,@PageIndex,@type,@ClientNo,@IsFranchisee,@DoctorNo",
                     _VenueNo, _VenueBranchNo, _RateListNo, _PageIndex, _Type, _ClientNo, _IsFranchisee, _DoctorNo).ToList();
                 }
@@ -46,7 +46,7 @@ namespace Service.Repository
             {
                 MyDevException.Error(ex, "TariffMasterRepository.GetTariffMasterDetails", ExceptionPriority.High, ApplicationType.REPOSITORY, getRequest?.venueNo, getRequest?.venueBranchNo, getRequest?.userNo);
             }
-            return objresult;
+            return Objresult;
         }
 
         /// <summary>
@@ -100,9 +100,9 @@ namespace Service.Repository
         /// </summary>
         /// <returns></returns>
 
-        public List<GetServices> GetTariffService(GetTariffMasterRequest getRequest)
+        public List<Getservices> GetTariffService(GetTariffMasterRequest getRequest)
         {
-            List<GetServices> objresult = new List<GetServices>();
+            List<Getservices> Objresult = new List<Getservices>();
             try
             {
                 using (var context = new MasterContext(_config.GetConnectionString(ConfigKeys.DefaultConnection)))
@@ -115,7 +115,7 @@ namespace Service.Repository
                     var _clientNo = new SqlParameter("clientNo", getRequest?.clientNo);
                     var _PhysicianNo = new SqlParameter("physicianNo", getRequest?.physicianNo);
 
-                    objresult = context.GetServiceDetailsDTO.FromSqlRaw(
+                    Objresult = context.GetserviceDetailsDTO.FromSqlRaw(
                     "Execute dbo.pro_TariffSearchService @VenueNo,@VenueBranchNo,@departmentNo,@rateListNo,@type,@clientNo,@physicianNo",
                     _VenueNo, _VenueBranchNo, _DeptNo, _RateListNo, _Type, _clientNo, _PhysicianNo).ToList();
                 }
@@ -124,11 +124,11 @@ namespace Service.Repository
             {
                 MyDevException.Error(ex, "TariffMasterRepository.GetTariffService", ExceptionPriority.High, ApplicationType.REPOSITORY, getRequest?.venueNo, getRequest?.venueBranchNo, getRequest?.userNo);
             }
-            return objresult;
+            return Objresult;
         }
         public List<GetTariffMasterListResponse> GetTariffMasterList(GetTariffMasterListRequest getRequest)
         {
-            List<GetTariffMasterListResponse> objresult = new List<GetTariffMasterListResponse>();
+            List<GetTariffMasterListResponse> Objresult = new List<GetTariffMasterListResponse>();
             try
             {
                 using (var context = new MasterContext(_config.GetConnectionString(ConfigKeys.DefaultConnection)))
@@ -140,7 +140,7 @@ namespace Service.Repository
                     var _IsApproval = new SqlParameter("IsApproval", getRequest?.IsApproval);
                     var _CommercialType = new SqlParameter("CommercialType", getRequest?.CommercialType);
 
-                    objresult = context.GetTariffMasterListDTO.FromSqlRaw(
+                    Objresult = context.GetTariffMasterListDTO.FromSqlRaw(
                     "Execute dbo.Pro_GetTariffList @VenueNo,@VenueBranchNo,@rateListNo,@PageIndex,@IsApproval,@CommercialType",
                     _VenueNo, _VenueBranchNo, _RateListNo, _PageIndex, _IsApproval, _CommercialType).ToList();
                 }
@@ -149,7 +149,7 @@ namespace Service.Repository
             {
                 MyDevException.Error(ex, "TariffMasterRepository.GetTariffMasterDetails", ExceptionPriority.High, ApplicationType.REPOSITORY, getRequest?.venueNo, getRequest?.venueBranchNo, getRequest?.userNo);
             }
-            return objresult;
+            return Objresult;
         }
 
         /// <summary>
@@ -158,7 +158,7 @@ namespace Service.Repository
         /// <returns></returns>
         public List<TariffMastServicesResponse> GetTariffMasterServiceList(GetTariffMasterListRequest getRequest)
         {
-            List<TariffMastServicesResponse> objresult = new List<TariffMastServicesResponse>();
+            List<TariffMastServicesResponse> Objresult = new List<TariffMastServicesResponse>();
             try
             {
                 using (var context = new MasterContext(_config.GetConnectionString(ConfigKeys.DefaultConnection)))
@@ -170,7 +170,7 @@ namespace Service.Repository
                     var _IsApproval = new SqlParameter("IsApproval", getRequest?.IsApproval);
                     var _IsRateShow = new SqlParameter("IsRateShow", getRequest?.israteshow);
 
-                    objresult = context.TariffMasterServiceListDTO.FromSqlRaw(
+                    Objresult = context.TariffMasterServiceListDTO.FromSqlRaw(
                     "Execute dbo.pro_TariffMasterSearchService @VenueNo,@VenueBranchNo,@departmentNo,@rateListNo,@IsApproval,@IsRateShow",
                     _VenueNo, _VenueBranchNo, _DeptNo, _RateListNo, _IsApproval, _IsRateShow).ToList();
                 }
@@ -179,7 +179,7 @@ namespace Service.Repository
             {
                 MyDevException.Error(ex, "TariffMasterRepository.GetTariffMasterServiceList", ExceptionPriority.High, ApplicationType.REPOSITORY, getRequest?.venueNo, getRequest?.venueBranchNo, getRequest?.userNo);
             }
-            return objresult;
+            return Objresult;
         }
         public TariffMasterInsertResponse InsertTariffMaster(InsertTariffMasterRequest tariffMasteritem)
         {
@@ -235,7 +235,7 @@ namespace Service.Repository
         }
         public List<GetClientTariffMasterListResponse> GetClientTariffMasterList(GetClientTariffMasterRequest getRequest)
         {
-            List<GetClientTariffMasterListResponse> objresult = new List<GetClientTariffMasterListResponse>();
+            List<GetClientTariffMasterListResponse> Objresult = new List<GetClientTariffMasterListResponse>();
             try
             {
                 using (var context = new MasterContext(_config.GetConnectionString(ConfigKeys.DefaultConnection)))
@@ -248,7 +248,7 @@ namespace Service.Repository
                     var _ClientNo = new SqlParameter("ClientNo", getRequest?.filterClientNo);
                     var _DoctorNo = new SqlParameter("DoctorNo", getRequest?.filterDoctorNo);
 
-                    objresult = context.GetClientTariffMasterListDTO.FromSqlRaw(
+                    Objresult = context.GetClientTariffMasterListDTO.FromSqlRaw(
                     "Execute dbo.Pro_GetClientTariffList @VenueNo,@VenueBranchNo,@rateListNo,@PageIndex,@type,@ClientNo,@DoctorNo",
                     _VenueNo, _VenueBranchNo, _RateListNo, _PageIndex, _Type, _ClientNo, _DoctorNo).ToList();
                 }
@@ -257,7 +257,7 @@ namespace Service.Repository
             {
                 MyDevException.Error(ex, "TariffMasterRepository.GetTariffMasterDetails", ExceptionPriority.High, ApplicationType.REPOSITORY, getRequest?.venueNo, getRequest?.venueBranchNo, getRequest?.userNo);
             }
-            return objresult;
+            return Objresult;
         }
         public CTMInsertResponse InsertClientTariffMaster(InsertCTMRequest tariffMasteritem)
         {
@@ -304,7 +304,7 @@ namespace Service.Repository
 
         public List<ClientTariffServicesResponse> GetClientTariffServiceList(GetClientTariffMasterRequest getRequest)
         {
-            List<ClientTariffServicesResponse> objresult = new List<ClientTariffServicesResponse>();
+            List<ClientTariffServicesResponse> Objresult = new List<ClientTariffServicesResponse>();
             try
             {
                 using (var context = new MasterContext(_config.GetConnectionString(ConfigKeys.DefaultConnection)))
@@ -317,7 +317,7 @@ namespace Service.Repository
                     var _clientNo = new SqlParameter("clientNo", getRequest?.clientNo);
                     var _PhysicianNo = new SqlParameter("physicianNo", getRequest?.physicianNo);
 
-                    objresult = context.ClientTariffServiceListDTO.FromSqlRaw(
+                    Objresult = context.ClientTariffServiceListDTO.FromSqlRaw(
                     "Execute dbo.pro_ClientTariffSearchService @VenueNo,@VenueBranchNo,@departmentNo,@rateListNo,@type,@clientNo,@physicianNo",
                     _VenueNo, _VenueBranchNo, _DeptNo, _RateListNo, _Type, _clientNo, _PhysicianNo).ToList();
                 }
@@ -326,7 +326,7 @@ namespace Service.Repository
             {
                 MyDevException.Error(ex, "TariffMasterRepository.GetClientTariffServiceList", ExceptionPriority.High, ApplicationType.REPOSITORY, getRequest?.venueNo, getRequest?.venueBranchNo, getRequest?.userNo);
             }
-            return objresult;
+            return Objresult;
         }
         public GetTariffupdateResponse GetTariffupdateList(GetTariffupdateRequest getRequest)
         {
@@ -355,7 +355,7 @@ namespace Service.Repository
 
         public List<GetContractRes> GetContractMaster(GetContractReq req)
         {
-            List<GetContractRes> objresult = new List<GetContractRes>();
+            List<GetContractRes> Objresult = new List<GetContractRes>();
             try
             {
                 using (var context = new MasterContext(_config.GetConnectionString(ConfigKeys.DefaultConnection)))
@@ -364,7 +364,7 @@ namespace Service.Repository
                     var _ContractNo = new SqlParameter("ContractNo", req?.ContractNo);
                     var _PageIndex = new SqlParameter("PageIndex", req?.pageIndex);
 
-                    objresult = context.GetContractMaster.FromSqlRaw(
+                    Objresult = context.GetContractMaster.FromSqlRaw(
                     "Execute dbo.Pro_GetContractMaster @VenueNo,@ContractNo,@pageIndex",
                     _VenueNo, _ContractNo, _PageIndex).ToList();
                 }
@@ -373,7 +373,7 @@ namespace Service.Repository
             {
                 MyDevException.Error(ex, "TariffMasterRepository.GetContractMaster", ExceptionPriority.High, ApplicationType.REPOSITORY, req.VenueNo, 0);
             }
-            return objresult;
+            return Objresult;
         }
         public InsertContractRes InserContractMaster(InsertContractReq req)
         {
@@ -423,7 +423,7 @@ namespace Service.Repository
         }
         public List<TariffMastServicesResponse> GetContractMasterServiceList(GetContractMasterListRequest getRequest)
         {
-            List<TariffMastServicesResponse> objresult = new List<TariffMastServicesResponse>();
+            List<TariffMastServicesResponse> Objresult = new List<TariffMastServicesResponse>();
             try
             {
                 using (var context = new MasterContext(_config.GetConnectionString(ConfigKeys.DefaultConnection)))
@@ -436,7 +436,7 @@ namespace Service.Repository
                     var _ServiceNo = new SqlParameter("ServiceNo", getRequest?.ServiceNo);
                     var _IsApproval = new SqlParameter("IsApproval", getRequest?.IsApproval);
 
-                    objresult = context.ContractMasterServiceListDTO.FromSqlRaw(
+                    Objresult = context.ContractMasterServiceListDTO.FromSqlRaw(
                     "Execute dbo.pro_ContractMasterSearchService @VenueNo,@VenueBranchNo,@departmentNo,@ContractNo,@ServiceType,@ServiceNo,@IsApproval",
                     _VenueNo, _VenueBranchNo, _DeptNo, _ContractNo, _Servicetype, _ServiceNo, _IsApproval).ToList();
                 }
@@ -445,11 +445,11 @@ namespace Service.Repository
             {
                 MyDevException.Error(ex, "TariffMasterRepository.GetContractMasterServiceList", ExceptionPriority.High, ApplicationType.REPOSITORY, getRequest?.venueNo, getRequest?.venueBranchNo, getRequest?.userNo);
             }
-            return objresult;
+            return Objresult;
         }
         public List<ContractVsCustomerMap> GetContractVsClient(GetContractVsClientReq getRequest)
         {
-            List<ContractVsCustomerMap> objresult = new List<ContractVsCustomerMap>();
+            List<ContractVsCustomerMap> Objresult = new List<ContractVsCustomerMap>();
             try
             {
                 using (var context = new MasterContext(_config.GetConnectionString(ConfigKeys.DefaultConnection)))
@@ -463,7 +463,7 @@ namespace Service.Repository
                     int oldClientNo = 0;
                     int newClientNo = 0;
 
-                    objresult = new List<ContractVsCustomerMap>();
+                    Objresult = new List<ContractVsCustomerMap>();
                     foreach (var obj in clientlst)
                     {
                         ContractVsCustomerMap ClientItem = new ContractVsCustomerMap();
@@ -496,7 +496,7 @@ namespace Service.Repository
                                 ClientItem.SubCustomerMap = lstSubCustomerMap;
 
                             }
-                            objresult.Add(ClientItem);
+                            Objresult.Add(ClientItem);
                         }
                     }
                 }
@@ -505,7 +505,7 @@ namespace Service.Repository
             {
                 MyDevException.Error(ex, "TariffMasterRepository.GetContractVsClient", ExceptionPriority.High, ApplicationType.REPOSITORY, getRequest?.VenueNo, getRequest?.ContractNo, 0);
             }
-            return objresult;
+            return Objresult;
         }
         public InsTariffRes InsertClienttTariffMap(InsTariffReq req)
         {
@@ -543,7 +543,7 @@ namespace Service.Repository
         }
         public List<GetTariffRes> GetClienttTariffMap(GetTariffReq req)
         {
-            List<GetTariffRes> objresult = new List<GetTariffRes>();
+            List<GetTariffRes> Objresult = new List<GetTariffRes>();
             try
             {
                 using (var context = new MasterContext(_config.GetConnectionString(ConfigKeys.DefaultConnection)))
@@ -556,7 +556,7 @@ namespace Service.Repository
                     var _VenueBranchNo = new SqlParameter("VenueBranchNo", req?.VenueBranchNo);
                     var _pageIndex = new SqlParameter("pageIndex", req?.pageIndex);
 
-                    objresult = context.GetClienttTariffMap.FromSqlRaw(
+                    Objresult = context.GetClienttTariffMap.FromSqlRaw(
                     "Execute dbo.pro_GetClientTariffMapping @ClientTariffMapNo, @RefTypeNo, @ReferrerNo, @RateListNo, @VenueNo, @VenueBranchNo, @pageIndex",
                     _ClientTariffMapNo, _RefTypeNo, _ReferrerNo, _RateListNo, _VenueNo, _VenueBranchNo, _pageIndex).ToList();
                 }
@@ -565,11 +565,11 @@ namespace Service.Repository
             {
                 MyDevException.Error(ex, "TariffMasterRepository.GetClienttTariffMap", ExceptionPriority.High, ApplicationType.REPOSITORY, req?.VenueNo, 0, 0);
             }
-            return objresult;
+            return Objresult;
         }
         public List<TariffMastServicesResponse> GetRefSplRateServiceList(GetContractMasterListRequest getRequest)
         {
-            List<TariffMastServicesResponse> objresult = new List<TariffMastServicesResponse>();
+            List<TariffMastServicesResponse> Objresult = new List<TariffMastServicesResponse>();
             try
             {
                 using (var context = new MasterContext(_config.GetConnectionString(ConfigKeys.DefaultConnection)))
@@ -582,7 +582,7 @@ namespace Service.Repository
                     var _ServiceNo = new SqlParameter("ServiceNo", getRequest?.ServiceNo);
                     var _IsRateShow = new SqlParameter("IsRateShow", getRequest?.ismodified);
 
-                    objresult = context.GetRefSplRateServiceList.FromSqlRaw(
+                    Objresult = context.GetRefSplRateServiceList.FromSqlRaw(
                     "Execute dbo.pro_RefSplPriceSearchService @VenueNo,@VenueBranchNo,@departmentNo,@ContractNo,@ServiceType,@ServiceNo,@IsRateShow",
                     _VenueNo, _VenueBranchNo, _DeptNo, _ContractNo, _Servicetype, _ServiceNo, _IsRateShow).ToList();
                 }
@@ -591,11 +591,11 @@ namespace Service.Repository
             {
                 MyDevException.Error(ex, "TariffMasterRepository.GetRefSplRateServiceList", ExceptionPriority.High, ApplicationType.REPOSITORY, getRequest?.venueNo, getRequest?.venueBranchNo, getRequest?.userNo);
             }
-            return objresult;
+            return Objresult;
         }
         public List<GetReflstRes> GetReflst(GetContractReq req)
         {
-            List<GetReflstRes> objresult = new List<GetReflstRes>();
+            List<GetReflstRes> Objresult = new List<GetReflstRes>();
             try
             {
                 using (var context = new MasterContext(_config.GetConnectionString(ConfigKeys.DefaultConnection)))
@@ -604,7 +604,7 @@ namespace Service.Repository
                     var _ContractNo = new SqlParameter("ContractNo", req?.ContractNo);
                     var _PageIndex = new SqlParameter("PageIndex", req?.pageIndex);
 
-                    objresult = context.GetReflst.FromSqlRaw(
+                    Objresult = context.GetReflst.FromSqlRaw(
                     "Execute dbo.Pro_GetRefSplPrice @VenueNo,@ContractNo,@pageIndex",
                     _VenueNo, _ContractNo, _PageIndex).ToList();
                 }
@@ -613,7 +613,7 @@ namespace Service.Repository
             {
                 MyDevException.Error(ex, "TariffMasterRepository.GetReflst", ExceptionPriority.High, ApplicationType.REPOSITORY, req.VenueNo, 0);
             }
-            return objresult;
+            return Objresult;
         }
         public InsertContractRes InsertReferrerlst(InsertReflstReq req)
         {
@@ -652,7 +652,7 @@ namespace Service.Repository
         }
         public List<Tariffdeptdisreq> GetTariffDeptDiscount(Tariffdeptdis req)
         {
-            List<Tariffdeptdisreq> objresult = new List<Tariffdeptdisreq>();
+            List<Tariffdeptdisreq> Objresult = new List<Tariffdeptdisreq>();
             try
             {
                 using (var context = new MasterContext(_config.GetConnectionString(ConfigKeys.DefaultConnection)))
@@ -661,7 +661,7 @@ namespace Service.Repository
                     var _VenueNo = new SqlParameter("VenueNo", req?.VenueNo);
                     var _IsApproval = new SqlParameter("IsApproval", req?.IsApproval);
 
-                    objresult = context.GetTariffDeptDiscount.FromSqlRaw(
+                    Objresult = context.GetTariffDeptDiscount.FromSqlRaw(
                     "Execute dbo.pro_GetTariffDeptDiscount @RateListNo,@VenueNo,@IsApproval",
                     _RateListNo, _VenueNo, _IsApproval).ToList();
                 }
@@ -670,11 +670,11 @@ namespace Service.Repository
             {
                 MyDevException.Error(ex, "TariffMasterRepository.GetTariffDeptDiscount", ExceptionPriority.High, ApplicationType.REPOSITORY, 0, 0);
             }
-            return objresult;
+            return Objresult;
         }
         public RateHistoryServiceResponse GetPriceHistory(RateHistoryServiceRequest req)
         {
-            RateHistoryServiceResponse objresult = new RateHistoryServiceResponse();
+            RateHistoryServiceResponse Objresult = new RateHistoryServiceResponse();
             try
             {
                 using (var context = new MasterContext(_config.GetConnectionString(ConfigKeys.DefaultConnection)))
@@ -694,22 +694,22 @@ namespace Service.Repository
                     "@VenueNo, @VenueBranchNo, @PageCode, @RateListNo, @ContractNo, @RefTypeNo, @ReferrerNo, @ServiceType, @ServiceNo",
                     _VenueNo, _VenueBranchNo, _PageCode, _RateListNo, _ContractNo, _RefTypeNo, _ReferrerNo, _ServiceType, _ServiceNo).AsEnumerable().FirstOrDefault();
 
-                    objresult.RowNo = objRes.RowNo;
-                    objresult.EntityName = objRes.EntityName;
-                    objresult.ServiceType = objRes.ServiceType;
-                    objresult.ServiceName = objRes.ServiceName;
-                    objresult.RateHistory = JsonConvert.DeserializeObject<List<PriceHistoryService>>(objRes.RateHistory);
+                    Objresult.RowNo = objRes.RowNo;
+                    Objresult.EntityName = objRes.EntityName;
+                    Objresult.ServiceType = objRes.ServiceType;
+                    Objresult.ServiceName = objRes.ServiceName;
+                    Objresult.RateHistory = JsonConvert.DeserializeObject<List<PriceHistoryService>>(objRes.RateHistory);
                 }
             }
             catch (Exception ex)
             {
                 MyDevException.Error(ex, "TariffMasterRepository.GetReflst", ExceptionPriority.High, ApplicationType.REPOSITORY, (short)req.VenueNo, req.VenueBranchNo, req.UserNo);
             }
-            return objresult;
+            return Objresult;
         }
         public List<BaseRateResponse> GetBasePrice(RateHistoryServiceRequest req)
         {
-            List<BaseRateResponse> objresult = new List<BaseRateResponse>();
+            List<BaseRateResponse> Objresult = new List<BaseRateResponse>();
             try
             {
                 using (var context = new MasterContext(_config.GetConnectionString(ConfigKeys.DefaultConnection)))
@@ -719,7 +719,7 @@ namespace Service.Repository
                     var _ServiceType = new SqlParameter("ServiceType", req?.ServiceType);
                     var _ServiceNo = new SqlParameter("ServiceNo", req?.ServiceNo);
 
-                    objresult = context.GetBasePrice.FromSqlRaw(
+                    Objresult = context.GetBasePrice.FromSqlRaw(
                     "Execute dbo.Pro_GetBaseRate " +
                     "@VenueNo, @VenueBranchNo, @ServiceType, @ServiceNo", _VenueNo, _VenueBranchNo, _ServiceType, _ServiceNo).ToList();
                 }
@@ -728,12 +728,12 @@ namespace Service.Repository
             {
                 MyDevException.Error(ex, "TariffMasterRepository.GetBasePrice", ExceptionPriority.High, ApplicationType.REPOSITORY, (short)req.VenueNo, req.VenueBranchNo, req.UserNo);
             }
-            return objresult;
+            return Objresult;
         }
         public int InsertBaseRate(List<BaseRateResponse> req)
         {
             CommonHelper commonUtility = new CommonHelper();
-            int objresult = 0;
+            int Objresult = 0;
             try
             {
                 using (var context = new MasterContext(_config.GetConnectionString(ConfigKeys.DefaultConnection)))
@@ -745,14 +745,14 @@ namespace Service.Repository
                     "Execute dbo.Pro_InsertBaseRate " +
                     "@BasePriceListXml", _BasePriceListXml).AsEnumerable().FirstOrDefault();
 
-                    objresult = result.result;
+                    Objresult = result.result;
                 }
             }
             catch (Exception ex)
             {
                 MyDevException.Error(ex, "TariffMasterRepository.InsertBaseRate", ExceptionPriority.High, ApplicationType.REPOSITORY, 0, 0, 0);
             }
-            return objresult;
+            return Objresult;
         }
     }
 }

@@ -50,7 +50,7 @@ namespace Service.API.SERVICE.Controllers
             {
                 var bloodbankregistrations =  await _integrationService.GetPDFReportDetails(reportrequestdetails, 1, 1);
                 
-                List<labtestdetails> labtestdetails = new List<labtestdetails>();
+                List<Labtestdetails> Labtestdetails = new List<Labtestdetails>();
 
                 if (bloodbankregistrations.Value.Count > 0)
                 {
@@ -83,19 +83,19 @@ namespace Service.API.SERVICE.Controllers
 
                         var bloodsampleresults = await _integrationService.GetTestDetails(bloodbankreg.RegistrationId);
 
-                        List<labtestdetails> lstdata = new List<labtestdetails>();
+                        List<Labtestdetails> lstdata = new List<Labtestdetails>();
 
                         foreach (var results in bloodsampleresults.Value)
                         {
-                            lstdata.Add(new Model.Integration.labtestdetails()
+                            lstdata.Add(new Model.Integration.Labtestdetails()
                             {
                                 TestDescription = results.TestName,
                                 TestStatus = results.Status
                             });
                         }
-                        labdetail.reportdetails = new List<labreportdetails>
+                        labdetail.reportdetails = new List<Labreportdetails>
                         {
-                            new labreportdetails
+                            new Labreportdetails
                             {
                                 reportdata = patinetDetail.Value.Count > 0 ? System.IO.File.ReadAllBytes(patinetDetail.Value[0].PatientExportFolderPath) : null,
                                 accessionno = bloodbankreg.LabAccessionNumber,
@@ -142,7 +142,7 @@ namespace Service.API.SERVICE.Controllers
             {
                 var bloodbankregistrations = await _integrationService.GetPDFReportDetails(reportrequestdetails, 1, 1);
 
-                List<labtestdetails> labtestdetails = new List<labtestdetails>();
+                List<Labtestdetails> Labtestdetails = new List<Labtestdetails>();
 
                 if (bloodbankregistrations.Value.Count > 0)
                 {
@@ -175,19 +175,19 @@ namespace Service.API.SERVICE.Controllers
 
                         var bloodsampleresults = await _integrationService.GetTestDetails(bloodbankreg.RegistrationId);
 
-                        List<labtestdetails> lstdata = new List<labtestdetails>();
+                        List<Labtestdetails> lstdata = new List<Labtestdetails>();
 
                         foreach (var results in bloodsampleresults.Value)
                         {
-                            lstdata.Add(new Model.Integration.labtestdetails()
+                            lstdata.Add(new Model.Integration.Labtestdetails()
                             {
                                 TestDescription = results.TestName,
                                 TestStatus = results.Status
                             });
                         }
-                        labdetail.reportdetails = new List<labreportdetails>
+                        labdetail.reportdetails = new List<Labreportdetails>
                         {
-                            new labreportdetails
+                            new Labreportdetails
                             {
                                 reportdata = patinetDetail.Value.Count > 0 ? System.IO.File.ReadAllBytes(patinetDetail.Value[0].PatientExportFolderPath) : null,
                                 accessionno = bloodbankreg.LabAccessionNumber,
@@ -225,9 +225,9 @@ namespace Service.API.SERVICE.Controllers
 
         [HttpGet]
         [Route("/api/Integration/GetLabResults")]
-        public Task<reportresponsediscreetdetails> GetLabResults(reportrequestdetails reportrequestdetails)
+        public Task<Reportresponsediscreetdetails> GetLabResults(reportrequestdetails reportrequestdetails)
         {
-            reportresponsediscreetdetails response = new reportresponsediscreetdetails();              
+            Reportresponsediscreetdetails response = new Reportresponsediscreetdetails();              
            
             return Task.FromResult(response);
         }

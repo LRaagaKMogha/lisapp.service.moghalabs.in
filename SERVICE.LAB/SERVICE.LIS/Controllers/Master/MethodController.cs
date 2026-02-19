@@ -30,17 +30,17 @@ namespace Service.API.SERVICE.Controllers.Master
         [Route("api/Method/GetMethodDetails")]
         public IEnumerable<TblMethod> GetMethodDetails(GetCommonMasterRequest masterRequest)
         {
-            List<TblMethod> objresult = new List<TblMethod>();
+            List<TblMethod> Objresult = new List<TblMethod>();
             try
             {
-                objresult = _MethodRepository.GetMethods(masterRequest);
+                Objresult = _MethodRepository.GetMethods(masterRequest);
 
             }
             catch (Exception ex)
             {
                 MyDevException.Error(ex, "MethodController.GetMethodDetails-", ExceptionPriority.Low, ApplicationType.APPSERVICE, masterRequest.venueno, masterRequest.venuebranchno, 0);
             }
-            return objresult;
+            return Objresult;
         }
         #endregion
 
@@ -54,7 +54,7 @@ namespace Service.API.SERVICE.Controllers.Master
         [Route("api/Method/InsertMethodDetails")]
         public IActionResult InsertMethodDetails([FromBody] TblMethod Methoditem)
         {
-            List<MethodResponse> objresult = new List<MethodResponse>();
+            List<MethodResponse> Objresult = new List<MethodResponse>();
             try
             {
                 using (var auditScope = new AuditScope<TblMethod>(Methoditem, _auditService))
@@ -63,7 +63,7 @@ namespace Service.API.SERVICE.Controllers.Master
                     if (!_errormsg.status)
                     {
                         string _CacheKey = CacheKeys.CommonMaster + "METHOD" + Methoditem.VenueNo;
-                        objresult = _MethodRepository.InsertMethodDetails(Methoditem);
+                        Objresult = _MethodRepository.InsertMethodDetails(Methoditem);
                         MemoryCacheRepository.RemoveItem(_CacheKey);
                     }
                     else
@@ -74,7 +74,7 @@ namespace Service.API.SERVICE.Controllers.Master
             {
                 MyDevException.Error(ex, "MethodController.InsertMethodDetails" + Methoditem.MethodNo.ToString(), ExceptionPriority.Low, ApplicationType.REPOSITORY, Methoditem.VenueNo, Methoditem.VenueBranchNo, 0);
             }
-            return Ok(objresult);
+            return Ok(Objresult);
         }
         #endregion
     }

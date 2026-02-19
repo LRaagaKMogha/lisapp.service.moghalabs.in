@@ -20,7 +20,7 @@ namespace Service.Repository.Master
 
         public List<GetFranchiseResponse> GetFranchises(int VenueNo,int VenueBranchNo)
         {
-           List<GetFranchiseResponse> objresult=new List<GetFranchiseResponse>();
+           List<GetFranchiseResponse> Objresult=new List<GetFranchiseResponse>();
 
             try
             {
@@ -28,7 +28,7 @@ namespace Service.Repository.Master
                 {
                     var _VenueNo = new SqlParameter("VenueNo", VenueNo.ToString());
                     var _VenueBranchNo = new SqlParameter("VenueBranchNo", VenueBranchNo.ToString());
-                    objresult = context.GetFranchises.FromSqlRaw
+                    Objresult = context.GetFranchises.FromSqlRaw
                     ("Execute dbo.pro_GetIsFranchise @venueNo,@VenueBranchNo", _VenueNo, _VenueBranchNo).ToList();
                 }
             }
@@ -36,7 +36,7 @@ namespace Service.Repository.Master
             {
                 MyDevException.Error(ex, "FranchisorRepository.GetFranchises", ExceptionPriority.High, ApplicationType.REPOSITORY, VenueNo, VenueBranchNo, 0);
             }
-            return objresult;
+            return Objresult;
         }
         public List<FranchiseRevenueSharingServiceDto> GetFranchiseRevenueSharingByService(GetFranchiseRevenueSharingByServiceRequest request)
         {

@@ -43,9 +43,9 @@ namespace Service.Repository
             }
             return lst;
         }
-        public Storeprocessingbranch InsertProcessingbranch(insertbranch obj1)
+        public Storeprocessingbranch InsertProcessingbranch(Insertbranch obj1)
         {
-            Storeprocessingbranch objresult = new Storeprocessingbranch();
+            Storeprocessingbranch Objresult = new Storeprocessingbranch();
             try
             {
                 using (var context = new MasterContext(_config.GetConnectionString(ConfigKeys.DefaultConnection)))
@@ -61,7 +61,7 @@ namespace Service.Repository
                     var obj = context.InsertProcessingbranch.FromSqlRaw(
                     "Execute dbo.pro_InsertProcessingBranch @ProcessingBranchMapNo,@BillingBranchNo,@ProcessingBranchNo,@TestNo,@VenueNo,@Status,@userNo",
                     _processingBranchMapNo, _billedBranchNo, _processingNo, _testNo, _venueNo, _status, _userNo).ToList();
-                    objresult.processingBranchMapNo = obj[0].processingBranchMapNo;
+                    Objresult.processingBranchMapNo = obj[0].processingBranchMapNo;
 
                 }
             }
@@ -69,7 +69,7 @@ namespace Service.Repository
             {
                 MyDevException.Error(ex, "ProcessingbranchRepository.InsertProcessingbranch" + obj1.processingBranchMapNo.ToString(), ExceptionPriority.Low, ApplicationType.REPOSITORY, obj1.venueNo, obj1.userNo, 0);
             }
-            return objresult;
+            return Objresult;
         }
 
 

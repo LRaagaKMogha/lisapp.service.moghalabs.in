@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace Service.Model
 {
@@ -9,24 +7,24 @@ namespace Service.Model
         public Int32 TotalRecords { get; set; }
         public Int32 PageIndex { get; set; }
         public int? CustomerNo { get; set; }
-        public string? CustomerCode { get; set; }
-        public string? CustomerName { get; set; }
-        public string? CustomerEmail { get; set; }
-        public string? UserName { get; set; }
-        public string? CustomerMobileNo { get; set; }
+        public string CustomerCode { get; set; }
+        public string CustomerName { get; set; }
+        public string CustomerEmail { get; set; }
+        public string UserName { get; set; }
+        public string CustomerMobileNo { get; set; }
         public decimal? CreditLimit { get; set; }
         public int CreditPeriod { get; set; }
         public int CustomerType { get; set; }
-        public string? CustomerTypeValue { get; set; }
-        public string? ContactPersonName { get; set; }
+        public string CustomerTypeValue { get; set; }
+        public string ContactPersonName { get; set; }
         public int? ClientPayType { get; set; }
-        public string? ClientPayTypeValue { get; set; }
-        public string? Address { get; set; }
-        public string? Area { get; set; }
+        public string ClientPayTypeValue { get; set; }
+        public string Address { get; set; }
+        public string Area { get; set; }
         public int? City { get; set; }
-        public string? CityName { get; set; }
-        public string? Pincode { get; set; }
-        public string? ClientUsername { get; set; }
+        public string CityName { get; set; }
+        public string Pincode { get; set; }
+        public string ClientUsername { get; set; }
         public bool? CpBilling { get; set; }
         public bool? CpReportView { get; set; }
         public bool? CpBillView { get; set; }
@@ -36,7 +34,7 @@ namespace Service.Model
         public bool? ClientBlock { get; set; }
         public bool? Active { get; set; }
         public bool? status { get; set; }
-        public string? password { get; set; }
+        public string password { get; set; }
         public int? state { get; set; }
         public int? country { get; set; }
         public bool? IsReportEmail { get; set; }
@@ -44,14 +42,13 @@ namespace Service.Model
         public bool IsShowAmount { get; set; }
         public int MarketingNo { get; set; }
         public int RiderNo { get; set; }
-        public string? secondaryemail { get; set; }
-        public string? hcicode { get; set; }
-       
+        public string secondaryemail { get; set; }
+        public string hcicode { get; set; }       
         public int RouteNo { get; set; }
         public int RestrictionDays { get; set; }
         public bool IsBillEmail { get; set; }
         public bool IsBillSMS { get; set; }
-        public string? CShortName { get; set; }
+        public string CShortName { get; set; }
         public bool? fCBilling { get; set; }
         public bool? sampleScreen { get; set; }
         public bool isbillwhatsapp { get; set; }
@@ -61,7 +58,7 @@ namespace Service.Model
         public string ModifiedBy { get; set; }
         public string ModifiedOn { get; set; }
         public int OldCustomerNo { get; set; }
-        public string? ApprovedBy { get; set; }
+        public string ApprovedBy { get; set; }
         public string ApprovedOn { get; set; }
         public string RejectedBy { get; set; }
         public string RejectedOn { get; set; } 
@@ -92,13 +89,12 @@ namespace Service.Model
         public bool IsPatientInfoPortal { get; set; }
         public bool IsRegistrationPortal { get; set; }
     }
-
     public class InsertCustomerResponse
     {
-        public string? userName { get; set; }
-        public string? password { get; set; }
-        public string? Url { get; set; }
-        public string? email { get; set; }
+        public string userName { get; set; }
+        public string password { get; set; }
+        public string Url { get; set; }
+        public string email { get; set; }
         public int CustomerNo { get; set; }
     }
     public class InsertCustomersubuserResponse
@@ -110,10 +106,10 @@ namespace Service.Model
         public Int32 TotalRecords { get; set; }
         public Int32 PageIndex { get; set; }
         public int? CustomerSubUserNo { get; set; }
-        public string? userName { get; set; }
-        public string? LoginName { get; set; }
-        public string? Email { get; set; }
-        public string? PhoneNo { get; set; }
+        public string userName { get; set; }
+        public string LoginName { get; set; }
+        public string Email { get; set; }
+        public string PhoneNo { get; set; }
         public string CustomerNo { get; set; }
         public bool status { get; set; }
     }

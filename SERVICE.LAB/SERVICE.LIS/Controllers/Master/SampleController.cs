@@ -25,7 +25,7 @@ namespace Service.API.SERVICE.Controllers
         [Route("api/Sample/InsertSampleDetails")]
         public IActionResult InsertSampleDetails([FromBody] TblSample Sampleitem)
         {
-            List<sampleMasterResponse> objresult = new List<sampleMasterResponse>();
+            List<sampleMasterResponse> Objresult = new List<sampleMasterResponse>();
             try
             {
                 using (var auditScope = new AuditScope<TblSample>(Sampleitem, _auditService))
@@ -33,7 +33,7 @@ namespace Service.API.SERVICE.Controllers
                     var _errormsg = LaboratoryMasterValidation.InsertSampleDetails(Sampleitem);
                     if (!_errormsg.status)
                     {
-                        objresult = _SampleRepository.InsertSampleDetails(Sampleitem);
+                        Objresult = _SampleRepository.InsertSampleDetails(Sampleitem);
                         string _CacheKey = CacheKeys.CommonMaster + "SAMPLE" + Sampleitem.VenueNo + Sampleitem.VenueBranchNo;
 
                         MemoryCacheRepository.RemoveItem(CacheKeys.SampleMaster);
@@ -43,30 +43,30 @@ namespace Service.API.SERVICE.Controllers
                     {
                         return BadRequest(_errormsg);
                     }
-                    auditScope.IsRollBack = objresult[0].SampleNo == -1 ? true : false;
+                    auditScope.IsRollBack = Objresult[0].SampleNo == -1 ? true : false;
                 }
             }
             catch (Exception ex)
             {
                 MyDevException.Error(ex, "InsertSampleDetails", ExceptionPriority.Low, ApplicationType.APPSERVICE, Sampleitem.VenueNo, Sampleitem.VenueBranchNo, 0);
             }
-            return Ok(objresult);
+            return Ok(Objresult);
         }
 
         [HttpPost]
         [Route("api/Sample/GetSampleDetails")]
         public IEnumerable<TblSample> GetSampleDetails(GetCommonMasterRequest sampleMasterRequest)
         {
-            List<TblSample> objresult = new List<TblSample>();
+            List<TblSample> Objresult = new List<TblSample>();
             try
             {
-                objresult = _SampleRepository.GetSampleDetails(sampleMasterRequest);
+                Objresult = _SampleRepository.GetSampleDetails(sampleMasterRequest);
             }
             catch (Exception ex)
             {
                 MyDevException.Error(ex, "SampleRepository.GetSampleDetails" + sampleMasterRequest.SampleNo.ToString(), ExceptionPriority.Low, ApplicationType.APPSERVICE, sampleMasterRequest.venueno, sampleMasterRequest.venuebranchno, 0);
             }
-            return objresult;
+            return Objresult;
         }
     }
 }

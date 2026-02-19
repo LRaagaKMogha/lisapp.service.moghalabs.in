@@ -58,7 +58,7 @@ namespace BloodBankManagement.Helpers
             {
                 entity.HasNoKey();                
             });
-            modelBuilder.Entity<labreportdetails>(entity =>
+            modelBuilder.Entity<Labreportdetails>(entity =>
             {
                 entity.HasNoKey();
             });
@@ -67,7 +67,7 @@ namespace BloodBankManagement.Helpers
                 entity.HasNoKey();
                 entity.Ignore("reportdetails");
             });
-            modelBuilder.Entity<labtestdetails>(entity =>
+            modelBuilder.Entity<Labtestdetails>(entity =>
             {
                 entity.HasNoKey();
             });
@@ -98,7 +98,7 @@ namespace BloodBankManagement.Helpers
         public DbSet<BBTblReportMasterDetails> TblReportMaster { get; set; }
 
         public  DbSet<labresponsedetails> GetPDFReportDetails { get; set; }
-        public  DbSet<labtestdetails> GetPDFReportTestDetails { get; set; }
+        public  DbSet<Labtestdetails> GetPDFReportTestDetails { get; set; }
         public  DbSet<LabReportTestDetails> GetDiscreetLabData { get; set; }
     }
 }

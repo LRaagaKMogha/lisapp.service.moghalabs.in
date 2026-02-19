@@ -6,7 +6,7 @@ namespace Service.IRepository.Inventory
 {
     public interface IPurchaseOrderReposistory
     {
-        List<GetPurchaseOrderResponse> GetPurchaseOrders(GetAllPORequest masterRequest);
+        List<GetPurchaseOrderresponse> GetPurchaseOrders(GetAllPORequest masterRequest);
         List<GetSupplierServiceDTO> GetSupplierServiceDetails(int venueNo, int venueBranchNo, int supplierNo, int StoreNo, string type);
         CommonAdminResponse InsertPurchaseOrder(InsertPurchaseOrder insertPurchaseOrder);
         List<GetPurchaseDetailsDTO> GetPurchaseDetailsById(int venueNo, int venueBranchNo, int PurchaseNo);

@@ -19,7 +19,7 @@ namespace Service.Repository
         public InsuranceRepository(IConfiguration config) { _config = config; }
         public List<NetworkMasterDTO> GetNetworkMasterDetails(int venueNo, int venueBranchNo, int pageIndex)
         {
-            List<NetworkMasterDTO> objresult = new List<NetworkMasterDTO>();
+            List<NetworkMasterDTO> Objresult = new List<NetworkMasterDTO>();
             try
             {
                 using (var context = new InsuranceContext(_config.GetConnectionString(ConfigKeys.DefaultConnection)))
@@ -28,7 +28,7 @@ namespace Service.Repository
                     var _VenueNo = new SqlParameter("VenueNo", venueNo.ToString());
                     var _VenueBranchNo = new SqlParameter("VenueBranchNo", venueBranchNo.ToString());
                     var _PageIndex = new SqlParameter("PageIndex", pageIndex.ToString());
-                    objresult = context.GetNetworkMasters.FromSqlRaw
+                    Objresult = context.GetNetworkMasters.FromSqlRaw
                         ("Execute dbo.Pro_GetInsuranceNetwork @venueNo,@venueBranchNo,@pageIndex", _VenueNo, _VenueBranchNo, _PageIndex).ToList();
 
                 }
@@ -37,7 +37,7 @@ namespace Service.Repository
             {
                 MyDevException.Error(ex, "GetNetworkMasterDetails", ExceptionPriority.High, ApplicationType.REPOSITORY, venueNo, venueBranchNo, 0);
             }
-            return objresult;
+            return Objresult;
         }
         public NetworkMasterDTOResponse InsertNetworkMasterDetails(NetworkMasterRequest objDTO)
         {
@@ -75,7 +75,7 @@ namespace Service.Repository
 
         public List<CompanyMasterDTO> GetCompanyMasterDetails(int venueNo, int venueBranchNo, int pageIndex)
         {
-            List<CompanyMasterDTO> objresult = new List<CompanyMasterDTO>();
+            List<CompanyMasterDTO> Objresult = new List<CompanyMasterDTO>();
             try
             {
                 using (var context = new InsuranceContext(_config.GetConnectionString(ConfigKeys.DefaultConnection)))
@@ -84,7 +84,7 @@ namespace Service.Repository
                     var _VenueNo = new SqlParameter("VenueNo", venueNo.ToString());
                     var _VenueBranchNo = new SqlParameter("VenueBranchNo", venueBranchNo.ToString());
                     var _PageIndex = new SqlParameter("PageIndex", pageIndex.ToString());
-                    objresult = context.GetCompanyMaster.FromSqlRaw
+                    Objresult = context.GetCompanyMaster.FromSqlRaw
                         ("Execute dbo.Pro_GetInsuranceCompany @venueNo,@venueBranchNo,@pageIndex", _VenueNo, _VenueBranchNo, _PageIndex).ToList();
 
                 }
@@ -93,7 +93,7 @@ namespace Service.Repository
             {
                 MyDevException.Error(ex, "GetCompanyMasterDetails", ExceptionPriority.High, ApplicationType.REPOSITORY, venueNo, venueBranchNo, 0);
             }
-            return objresult;
+            return Objresult;
         }
         public CompanyMasterDTOResponse InsertCompanyMasterDetails(CompanyMasterRequest objDTO)
         {
@@ -201,7 +201,7 @@ namespace Service.Repository
         public List<DeductionResponse> GetDeductionResponse(List<Deductionresult> _Deductionresult, int VenueNo, int VenueBranchNo)
         {
 
-            List<DeductionResponse> objresult = new List<DeductionResponse>();
+            List<DeductionResponse> Objresult = new List<DeductionResponse>();
             try
             {
                 int oldDeductionMasterNo = 0;
@@ -250,7 +250,7 @@ namespace Service.Repository
                             }
                             Responseitem.Deductionlist = lstDetail;
                         }
-                        objresult.Add(Responseitem);
+                        Objresult.Add(Responseitem);
                     }
                 }
             }
@@ -258,7 +258,7 @@ namespace Service.Repository
             {
                 MyDevException.Error(ex, "GetDeductionResponse", ExceptionPriority.Low, ApplicationType.REPOSITORY, VenueNo, VenueBranchNo, 0);
             }
-            return objresult;
+            return Objresult;
         }
     }
 }

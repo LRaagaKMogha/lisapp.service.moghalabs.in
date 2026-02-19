@@ -18,9 +18,9 @@ namespace Service.Repository.External.CommonMasters
         {
             _config = config;
         }
-        public List<LstTestInfo> GetTestList(int pVenueNo, int pVenueBranchNo)
+        public List<LsttestInfo> GetTestList(int pVenueNo, int pVenueBranchNo)
         {
-            List<LstTestInfo> objResponse = new List<LstTestInfo>();
+            List<LsttestInfo> objResponse = new List<LsttestInfo>();
 
             try
             {

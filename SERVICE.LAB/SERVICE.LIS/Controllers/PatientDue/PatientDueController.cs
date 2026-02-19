@@ -24,32 +24,32 @@ namespace Service.API.SERVICE.Controllers
         [Route("api/PatientDue/GetDuePatientInfoDetails")]
         public List<PatientDueResponse> GetDuePatientInfoDetails(CommonFilterRequestDTO RequestItem)
         {
-            List<PatientDueResponse> objresult = new List<PatientDueResponse>();
+            List<PatientDueResponse> Objresult = new List<PatientDueResponse>();
             try
             {
-                objresult = _dueCancelRepository.GetDuePatientInfoDetails(RequestItem);
+                Objresult = _dueCancelRepository.GetDuePatientInfoDetails(RequestItem);
             }
             catch (Exception ex)
             {
                 MyDevException.Error(ex, "PatientDueController.GetDuePatientInfoDetails", ExceptionPriority.Low, ApplicationType.APPSERVICE, RequestItem.VenueNo, RequestItem.VenueBranchNo, 0);
             }
-            return objresult;
+            return Objresult;
         }
 
         [HttpPost]
         [Route("api/PatientDue/InsertPatientDue")]
         public CreatePatientDueResponse InsertPatientDue(CreatePatientDueRequest createPatientDueRequest)
         {
-            CreatePatientDueResponse objresult = new CreatePatientDueResponse();
+            CreatePatientDueResponse Objresult = new CreatePatientDueResponse();
             try
             {
-                objresult = _dueCancelRepository.InsertPatientDue(createPatientDueRequest);
+                Objresult = _dueCancelRepository.InsertPatientDue(createPatientDueRequest);
             }
             catch (Exception ex)
             {
                 MyDevException.Error(ex, "PatientDueController.InsertPatientDue", ExceptionPriority.Low, ApplicationType.APPSERVICE, createPatientDueRequest.venueNo, createPatientDueRequest.venueBranchNo, 0);
             }
-            return objresult;
+            return Objresult;
         }
         #endregion
 
@@ -77,7 +77,7 @@ namespace Service.API.SERVICE.Controllers
             rtnCancelTest obj = new rtnCancelTest();
             try
             {
-                var _errormsg = MassRegistrationValidation.InsertCancelTest(Req);
+                var _errormsg = massregistrationValidation.InsertCancelTest(Req);
                 if (!_errormsg.status)
                 {
                     obj = _dueCancelRepository.InsertCancelTest(Req);
@@ -97,16 +97,16 @@ namespace Service.API.SERVICE.Controllers
         [Route("api/PatientDue/Insertbulkpatientdue")]
         public CreatePatientDueResponse Insertbulkpatientdue(List<CreatePatientDueRequest> createPatientDueRequest)
         {
-            CreatePatientDueResponse objresult = new CreatePatientDueResponse();
+            CreatePatientDueResponse Objresult = new CreatePatientDueResponse();
             try
             {
-                objresult = _dueCancelRepository.Insertbulkpatientdue(createPatientDueRequest);
+                Objresult = _dueCancelRepository.Insertbulkpatientdue(createPatientDueRequest);
             }
             catch (Exception ex)
             {
                 MyDevException.Error(ex, "PatientDueController.Insertbulkpatientdue", ExceptionPriority.Low, ApplicationType.APPSERVICE, createPatientDueRequest[0].venueNo, createPatientDueRequest[0].venueBranchNo, createPatientDueRequest[0].userID);
             }
-            return objresult;
+            return Objresult;
         }
 
         #endregion
@@ -116,16 +116,16 @@ namespace Service.API.SERVICE.Controllers
         [Route("api/PatientDue/GetRefundCancelRequest")]
         public List<GetReqCancelResponse> GetRefundCancelRequest(GetReqCancelParam RequestItem)
         {
-            List<GetReqCancelResponse> objresult = new List<GetReqCancelResponse>();
+            List<GetReqCancelResponse> Objresult = new List<GetReqCancelResponse>();
             try
             {
-                objresult = _dueCancelRepository.GetRefundCancelRequest(RequestItem);
+                Objresult = _dueCancelRepository.GetRefundCancelRequest(RequestItem);
             }
             catch (Exception ex)
             {
                 MyDevException.Error(ex, "PatientDueController.GetRefundCancelRequest", ExceptionPriority.Low, ApplicationType.APPSERVICE, RequestItem.venueno, RequestItem.venuebranchno, 0);
             }
-            return objresult;
+            return Objresult;
         }
         [HttpPost]
         [Route("api/PatientDue/ApproveRefundCancel")]

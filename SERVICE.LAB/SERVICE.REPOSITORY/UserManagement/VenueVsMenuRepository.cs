@@ -22,7 +22,7 @@ namespace Service.Repository.UserManagement
         }
         public List<VenueVsMenuResponseDTO> GetVenueVsMenu(VenueVsMenuRequestDTO request)
         {
-            List<VenueVsMenuResponseDTO> objResult = new List<VenueVsMenuResponseDTO>();
+            List<VenueVsMenuResponseDTO> Objresult = new List<VenueVsMenuResponseDTO>();
             try
             {
                 using (var context = new MasterContext(_config.GetConnectionString(ConfigKeys.DefaultConnection)))
@@ -31,7 +31,7 @@ namespace Service.Repository.UserManagement
                     var _VenueNo = new SqlParameter("@VenueNo", request.VenueNo);
                     var _UserNo = new SqlParameter("@UserNo", request.UserNo);
 
-                    objResult = context.GetVenueVsMenu.FromSqlRaw(
+                    Objresult = context.GetVenueVsMenu.FromSqlRaw(
                     "EXEC dbo.pro_GetVenueVsMenu @ModuleId, @VenueNo, @UserNo",
                     _ModuleId, _VenueNo, _UserNo
                     ).ToList();
@@ -41,7 +41,7 @@ namespace Service.Repository.UserManagement
             {
                 MyDevException.Error(ex, "VenueVsMenuRepository.GetVenueVsMenu", ExceptionPriority.Low, ApplicationType.REPOSITORY, 0, 0, 0);
             }
-            return objResult;
+            return Objresult;
         }
         public int InsertVenueVsMenu(VenueVsMenuInsertDTO dto)
         {

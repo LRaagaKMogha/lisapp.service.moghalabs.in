@@ -60,13 +60,13 @@ namespace Service.API.SERVICE.Controllers
         }
 
         // Result Recall Validation //
-        public static ErrorResponse InsertRecall(objrecall req)
+        public static ErrorResponse InsertRecall(Objrecall req)
         {
             ErrorResponse errorResponse = new ErrorResponse();
             List<string> errors = new List<string>();
 
-            List <lstRecallServicves> objRC = new List<lstRecallServicves>();
-            objRC = req.lstRecallServicves.Where(x => x.isChecked == true).ToList();
+            List <LstRecallServicves> objRC = new List<LstRecallServicves>();
+            objRC = req.LstRecallServicves.Where(x => x.isChecked == true).ToList();
 
             if(objRC.Count <= 0)
             {

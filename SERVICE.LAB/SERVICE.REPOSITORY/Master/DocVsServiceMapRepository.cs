@@ -18,7 +18,7 @@ namespace Service.Repository
 
         public List<DocVsSerResponse> Getdoctorlst(DocVsSerRequest Req)
         {
-            List<DocVsSerResponse> objresult = new List<DocVsSerResponse>();
+            List<DocVsSerResponse> Objresult = new List<DocVsSerResponse>();
             try
             {
                 using (var context = new MasterContext(_config.GetConnectionString(ConfigKeys.DefaultConnection)))
@@ -27,8 +27,8 @@ namespace Service.Repository
                     var _venueNo = new SqlParameter("venueNo", Req?.venueNo);
                     var _pageIndex = new SqlParameter("pageIndex", Req?.pageIndex);
 
-                    objresult = context.Getdoctorlst.FromSqlRaw(
-                    "Execute dbo.pro_GetDoctorDetails @DoctorNo,@venueNo,@pageIndex",
+                    Objresult = context.Getdoctorlst.FromSqlRaw(
+                    "Execute dbo.pro_GetDoctordetails @DoctorNo,@venueNo,@pageIndex",
                     _DoctorNo, _venueNo, _pageIndex).ToList();
                 }
             }
@@ -36,11 +36,11 @@ namespace Service.Repository
             {
                 MyDevException.Error(ex, "DocVsServiceMapRepository.Getdoctorlst" + Req?.DoctorNo.ToString(), ExceptionPriority.Low, ApplicationType.REPOSITORY, Req?.venueNo ?? 0, 0);
             }
-            return objresult;
+            return Objresult;
         }
         public List<DocVsSerGetRes> GetdocVsSerlst(DocVsSerGetReq Req)
         {
-            List<DocVsSerGetRes> objresult = new List<DocVsSerGetRes>();
+            List<DocVsSerGetRes> Objresult = new List<DocVsSerGetRes>();
             try
             {
                 using (var context = new MasterContext(_config.GetConnectionString(ConfigKeys.DefaultConnection)))
@@ -51,7 +51,7 @@ namespace Service.Repository
                     var _ServiceType = new SqlParameter("ServiceType", Req?.ServiceType);
                     var _ServiceNo = new SqlParameter("ServiceNo", Req?.ServiceNo);
 
-                    objresult = context.GetdocVsSerlst.FromSqlRaw(
+                    Objresult = context.GetdocVsSerlst.FromSqlRaw(
                     "Execute dbo.pro_GetDocVsSerDetails @DoctorNo,@DeptNo,@ServiceType,@ServiceNo,@VenueNo",
                     _venueNo, _DoctorNo, _DeptNo, _ServiceType, _ServiceNo).ToList();
                 }
@@ -60,12 +60,12 @@ namespace Service.Repository
             {
                 MyDevException.Error(ex, "DocVsServiceMapRepository.GetdocVsSerlst" + Req?.DoctorNo.ToString(), ExceptionPriority.Low, ApplicationType.REPOSITORY, Req?.venueNo,0, 0);
             }
-            return objresult;
+            return Objresult;
         }
         public int InsertdocVsSer(DocVsSerInsReq Req)
         {          
             CommonHelper commonUtility = new CommonHelper();
-            string DocVsSerXML = commonUtility.ToXML(Req.getdoclst);
+            string DocVsSerXML = commonUtility.ToXML(Req.Getdoclst);
             int i = 0;
 
             try
@@ -93,7 +93,7 @@ namespace Service.Repository
         }
         public List<DocVsSerAppRes> GetdocVsSerApproval(DocVsSerAppReq Req)
         {
-            List<DocVsSerAppRes> objresult = new List<DocVsSerAppRes>();
+            List<DocVsSerAppRes> Objresult = new List<DocVsSerAppRes>();
             try
             {
                 using (var context = new MasterContext(_config.GetConnectionString(ConfigKeys.DefaultConnection)))
@@ -105,7 +105,7 @@ namespace Service.Repository
                     var _Fromdate = new SqlParameter("Fromdate", Req?.Fromdate);
                     var _ToDate = new SqlParameter("ToDate", Req?.ToDate);
 
-                    objresult = context.GetdocVsSerApproval.FromSqlRaw(
+                    Objresult = context.GetdocVsSerApproval.FromSqlRaw(
                     "Execute dbo.pro_getInternalDoctorVsAppraisalVsTransaction @ApprovedBy,@VenueNo,@VenueBranchNo,@Type,@Fromdate,@ToDate",
                     _ApprovedBy, _VenueNo, _VenueBranchNo, _Type, _Fromdate, _ToDate).ToList();
                 }
@@ -114,11 +114,11 @@ namespace Service.Repository
             {
                 MyDevException.Error(ex, "DocVsServiceMapRepository.GetdocVsSerApproval" + Req?.ApprovedBy.ToString(), ExceptionPriority.Low, ApplicationType.REPOSITORY, Req?.VenueNo, Req?.VenueBranchNo, 0);
             }
-            return objresult;
+            return Objresult;
         }
         public List<DocVsSerAppdetailsRes> GetdocVsSerAppDetails(DocVsSerAppdetailsReq Req)
         {
-            List<DocVsSerAppdetailsRes> objresult = new List<DocVsSerAppdetailsRes>();
+            List<DocVsSerAppdetailsRes> Objresult = new List<DocVsSerAppdetailsRes>();
             try
             {
                 using (var context = new MasterContext(_config.GetConnectionString(ConfigKeys.DefaultConnection)))
@@ -127,7 +127,7 @@ namespace Service.Repository
                     var _VenueNo = new SqlParameter("VenueNo", Req?.VenueNo);
                     var _pageIndex = new SqlParameter("pageIndex", Req?.pageIndex);
 
-                    objresult = context.GetdocVsSerAppDetails.FromSqlRaw(
+                    Objresult = context.GetdocVsSerAppDetails.FromSqlRaw(
                     "Execute dbo.pro_GetDocVsSerVsProfCharge @DoctorNo,@VenueNo,@pageIndex",
                     _DoctorNo, _VenueNo, _pageIndex).ToList();
                 }
@@ -136,7 +136,7 @@ namespace Service.Repository
             {
                 MyDevException.Error(ex, "DocVsServiceMapRepository.GetdocVsSerAppDetails" + Req?.DoctorNo.ToString(), ExceptionPriority.Low, ApplicationType.REPOSITORY, Req?.VenueNo, 0, 0);
             }
-            return objresult;
+            return Objresult;
         }
         public int InsertdocVsSerProf(DocVsSerProfInsReq Req)
         {

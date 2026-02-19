@@ -17,11 +17,17 @@ namespace Service.API.SERVICE.Controllers
 
             if (string.IsNullOrEmpty(req.tblPhysician.PhysicianName) || req.tblPhysician.PhysicianName.TrimStart() == string.Empty)
                 errors.Add("Physician Name is required");
-            if (_csvcheck.IsMatch(req.tblPhysician.PhysicianName.ToSubstring(req.tblPhysician.PhysicianName == null ? 0 : req.tblPhysician.PhysicianName.Length)) || _csvcheck.IsMatch(req.tblPhysician.Qualification.ToSubstring(req.tblPhysician.Qualification == null ? 0 : req.tblPhysician.Qualification.Length)) ||
-               _csvcheck.IsMatch(req.tblPhysician.PhysicianEmail.ToSubstring(req.tblPhysician.PhysicianEmail == null ? 0 : req.tblPhysician.PhysicianEmail.Length)) || _csvcheck.IsMatch(req.tblPhysician.PhysicianMobileNo.ToSubstring(req.tblPhysician.PhysicianMobileNo == null ? 0 : req.tblPhysician.PhysicianMobileNo.Length)) ||
-               _csvcheck.IsMatch(req.tblPhysician.WhatsAppNo.ToSubstring(req.tblPhysician.WhatsAppNo == null ? 0 : req.tblPhysician.WhatsAppNo.Length)) || _csvcheck.IsMatch(req.tblPhysician.specification.ToSubstring(req.tblPhysician.specification == null ? 0 : req.tblPhysician.specification.Length)) ||
-                _csvcheck.IsMatch(req.tblPhysician.pincode.ToSubstring(req.tblPhysician.pincode == null ? 0 : req.tblPhysician.pincode.Length)) || _csvcheck.IsMatch(req.tblPhysician.area.ToSubstring(req.tblPhysician.area == null ? 0 : req.tblPhysician.area.Length)))
+
+            if (_csvcheck.IsMatch(req.tblPhysician.PhysicianName ?? "".ToSubstring((req.tblPhysician.PhysicianName ?? "").Length)) || 
+                _csvcheck.IsMatch(req.tblPhysician.Qualification ?? "".ToSubstring((req.tblPhysician.Qualification ?? "").Length)) ||
+                _csvcheck.IsMatch(req.tblPhysician.PhysicianEmail ?? "".ToSubstring((req.tblPhysician.PhysicianEmail ?? "").Length)) || 
+                _csvcheck.IsMatch(req.tblPhysician.PhysicianMobileNo ?? "".ToSubstring((req.tblPhysician.PhysicianMobileNo ?? "").Length)) ||
+                _csvcheck.IsMatch(req.tblPhysician.WhatsAppNo ?? "".ToSubstring((req.tblPhysician.WhatsAppNo ?? "").Length)) || 
+                _csvcheck.IsMatch(req.tblPhysician.specification ?? "".ToSubstring((req.tblPhysician.specification ?? "").Length)) ||
+                _csvcheck.IsMatch(req.tblPhysician.pincode ?? "".ToSubstring((req.tblPhysician.pincode ?? "").Length)) || 
+                _csvcheck.IsMatch(req.tblPhysician.area ?? "".ToSubstring((req.tblPhysician.area ?? "").Length)))
                 errors.Add("Special character not allowed");
+
             if (errors.Count > 0)
             {
                 errorResponse.status = true;
@@ -69,6 +75,7 @@ namespace Service.API.SERVICE.Controllers
                 errors.Add("Common Value is required");
             if (tblTitle.sequenceNo == 0)
                 errors.Add("Sequence No is required");
+
             if (ContainsSpecialCharacters(tblTitle.sequenceNo.ToString(), pattern))
             {
                 errors.Add("Special Characters Are Not Allowed in Sequence No");

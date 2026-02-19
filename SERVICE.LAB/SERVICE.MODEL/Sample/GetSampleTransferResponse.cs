@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace Service.Model.Sample
 {
@@ -33,7 +31,7 @@ namespace Service.Model.Sample
         public int TATFlag { get; set; }
         public int ProcessingBranchNo { get; set; }
         public string VenueBranchName { get; set; }
-        public string? ProcBrachInJsonList { get; set; }
+        public string ProcBrachInJsonList { get; set; }
         public string RegistrationDate { get; set; }
     }
 }

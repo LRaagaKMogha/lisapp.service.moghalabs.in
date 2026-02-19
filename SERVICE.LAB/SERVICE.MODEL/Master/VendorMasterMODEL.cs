@@ -3,15 +3,14 @@ using System.Collections.Generic;
 
 namespace Service.Model
 {    
-    public partial class requestvendor
+    public partial class Requestvendor
     {
         public int venueno { get; set; }
         public int venuebranchno { get; set; }
         public int vendorno { get; set; }
         public int pageIndex { get; set; }
     }
-
-    public partial class responsevendor
+    public partial class Responsevendor
     {
         public int vendorno { get; set; }
         public string vendorName { get; set; }
@@ -33,7 +32,7 @@ namespace Service.Model
         public string gstNo { get; set; }
         public int userNo { get; set; }
     }
-    public partial class responsegetvendor
+    public partial class Responsegetvendor
     {
         public int vendorno { get; set; }
         public string vendorName { get; set; }
@@ -62,21 +61,20 @@ namespace Service.Model
         public int vendorno { get; set; }
     }
     //-----tab 2 CONTACT-------//
-    public class getcontact
+    public class Getcontact
     {
         public int vendorContactNo { get; set; }
         public Int16 venueno { get; set; }
         public int vendorMasterNo { get; set; }
     }
-    public class savecontact
+    public class Savecontact
     {
         public Int16 venueno { get; set; }
         public int vendorMasterNo { get; set; }
         public int userNo { get; set; }
-        public List<getcontactlst> getcontactlst { get; set; }
-
+        public List<Getcontactlst> Getcontactlst { get; set; }
     }
-    public class getcontactlst
+    public class Getcontactlst
     {
         public int vendorContactNo { get; set; }
         public int vendorMasterNo { get; set; }
@@ -91,7 +89,7 @@ namespace Service.Model
         public int VendorContactNo { get; set; }
     }
     //tab 3 SERVICE//
-    public class getservice
+    public class Getservice
     {
         //public int VendorServiceNo { get; set; }
         public Int16 VenueNo { get; set; }
@@ -99,14 +97,14 @@ namespace Service.Model
         public int ServiceNo { get; set; }        
         public int pageindex { get; set; }
     }
-    public class saveservice
+    public class Saveservice
     {
         public Int16 venueno { get; set; }
         public int VendorMasterNo { get; set; }
         public int userNo { get; set; }
-        public List<getservicelst> getservicelst { get; set; }
+        public List<Getservicelst> Getservicelst { get; set; }
     }
-    public class getservicelst
+    public class Getservicelst
     {
         public int vendorServiceNo { get; set; }
         public int vendorMasterNo { get; set; }
@@ -123,14 +121,8 @@ namespace Service.Model
         public int totalRecords { get; set; }
         public int pageSize { get; set; }
     }
-    public class storeservice
+    public class Storeservice
     {
         public int VendorServiceNo { get; set; }
-
     }
-
-
-
-
-
 }

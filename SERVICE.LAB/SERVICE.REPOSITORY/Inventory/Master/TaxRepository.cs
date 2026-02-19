@@ -18,7 +18,7 @@ namespace Service.Repository
 
         public List<TblTax> Gettaxmaster(TaxMasterRequest taxrequest)
         {
-            List<TblTax> objresult = new List<TblTax>();
+            List<TblTax> Objresult = new List<TblTax>();
             try
             {
                 using (var context = new LIMSContext(_config.GetConnectionString(ConfigKeys.DefaultConnection)))
@@ -27,7 +27,7 @@ namespace Service.Repository
                     var _venueNo = new SqlParameter("venueNo", taxrequest?.venueNo);
                     var _pageIndex = new SqlParameter("pageIndex", taxrequest?.pageIndex);
 
-                    objresult = context.Gettax.FromSqlRaw(
+                    Objresult = context.Gettax.FromSqlRaw(
                     "Execute dbo.pro_GetTaxMaster @taxNo, @venueNo,@pageIndex",
                     _taxNo, _venueNo, _pageIndex).ToList();
                 }
@@ -36,11 +36,11 @@ namespace Service.Repository
             {
                 MyDevException.Error(ex, "TaxRepository.Gettaxmaster" + taxrequest.taxNo.ToString(), ExceptionPriority.Low, ApplicationType.REPOSITORY, taxrequest.venueNo, 0, 0);
             }
-            return objresult;
+            return Objresult;
         }
         public TaxMasterResponse Inserttaxmaster(TblTax tbltax)
         {
-            TaxMasterResponse objresult = new TaxMasterResponse();
+            TaxMasterResponse Objresult = new TaxMasterResponse();
             try
             {
                 using (var context = new LIMSContext(_config.GetConnectionString(ConfigKeys.DefaultConnection)))
@@ -61,18 +61,18 @@ namespace Service.Repository
                     "@taxName,@taxPercentage,@sequenceNo,@status,@pageIndex,@totalRecords",
                     _taxNo, _venueNo, _venueBranchno, _userNo, _taxName, _taxPercentage, _sequenceNo, _status, _pageIndex, _totalRecords).ToList();
 
-                    objresult.taxNo = obj[0].taxNo;
+                    Objresult.taxNo = obj[0].taxNo;
                 }
             }
             catch (Exception ex)
             {
                 MyDevException.Error(ex, "TaxRepository.Inserttaxmaster" + tbltax.taxNo.ToString(), ExceptionPriority.Low, ApplicationType.REPOSITORY, tbltax.venueNo, tbltax.venueBranchno, tbltax.userNo);
             }
-            return objresult;
+            return Objresult;
         }
         public List<TblHSN> GetHSNMaster(HSNMasterRequest HSNRequest)
         {
-            List<TblHSN> objresult = new List<TblHSN>();
+            List<TblHSN> Objresult = new List<TblHSN>();
             try
             {
                 using (var context = new MasterContext(_config.GetConnectionString(ConfigKeys.DefaultConnection)))
@@ -83,7 +83,7 @@ namespace Service.Repository
                     var _venueBranchno = new SqlParameter("venueBranchno", HSNRequest ?.venueBranchno);
                     var _pageIndex = new SqlParameter("pageIndex", HSNRequest ?.pageIndex);
 
-                    objresult = context.GetHSNMasters.FromSqlRaw(
+                    Objresult = context.GetHSNMasters.FromSqlRaw(
                     "Execute dbo.pro_GetHSNMaster @venueNo,@venueBranchno,@HSNNo,@taxNo,@pageIndex",
                     _venueNo, _venueBranchno, _HSNNo, _taxNo, _pageIndex).ToList();
                 }
@@ -92,11 +92,11 @@ namespace Service.Repository
             {
                 MyDevException.Error(ex, "TaxRepository.GetHSNMaster" + HSNRequest.HSNNo.ToString(), ExceptionPriority.Low, ApplicationType.REPOSITORY, HSNRequest.venueNo, HSNRequest.venueBranchno, 0);
             }
-            return objresult;
+            return Objresult;
         }
         public HSNMasterResponse InsertHSNmaster(TblHSN tblhsn)
         {
-            HSNMasterResponse objresult = new HSNMasterResponse();
+            HSNMasterResponse Objresult = new HSNMasterResponse();
             try
             {
                 using (var context = new MasterContext(_config.GetConnectionString(ConfigKeys.DefaultConnection)))
@@ -119,18 +119,18 @@ namespace Service.Repository
                     _venueNo, _venueBranchno, _HSNNo, _taxNo, _HSNCode, _taxName,
                     _Description, _status, _userNo, _pageIndex, _totalRecords).ToList();
                     
-                    objresult.HSNNo = obj[0].HSNNo;
+                    Objresult.HSNNo = obj[0].HSNNo;
                 }
             }
             catch (Exception ex)
             {
                 MyDevException.Error(ex, "TaxRepository.InsertHSNmaster" + tblhsn.HSNNo.ToString(), ExceptionPriority.Low, ApplicationType.REPOSITORY, tblhsn.venueNo, tblhsn.venueBranchno, tblhsn.userNo);
             }
-            return objresult;
+            return Objresult;
         }
         public List<TblHSNRange> GetHSNRangeMaster(HSNRangeRequest HSNrangeRequest)
         {
-            List<TblHSNRange> objresult = new List<TblHSNRange>();
+            List<TblHSNRange> Objresult = new List<TblHSNRange>();
             try
             {
                 using (var context = new MasterContext(_config.GetConnectionString(ConfigKeys.DefaultConnection)))
@@ -144,7 +144,7 @@ namespace Service.Repository
                     var _venueBranchno = new SqlParameter("venueBranchno", HSNrangeRequest?.venueBranchno);
                     var _pageIndex = new SqlParameter("pageIndex", HSNrangeRequest?.pageIndex);
 
-                    objresult = context.GetHSNRangeMaster.FromSqlRaw(
+                    Objresult = context.GetHSNRangeMaster.FromSqlRaw(
                     "Execute dbo.pro_GetHSNRangeWiseTax @venueNo,@venueBranchno,@HSNRangeNo,@HSNNo,@taxNo,@RangeFrom,@RangeTo,@pageIndex",
                     _venueNo, _venueBranchno, _HSNRangeNo, _HSNNo,  _taxNo, _RangeFrom, _RangeTo, _pageIndex).ToList();
                 }
@@ -153,11 +153,11 @@ namespace Service.Repository
             {
                 MyDevException.Error(ex, "TaxRepository.GetHSNRangeMaster" + HSNrangeRequest.HSNRangeNo.ToString(), ExceptionPriority.Low, ApplicationType.REPOSITORY, HSNrangeRequest.venueNo, HSNrangeRequest.venueBranchno, 0);
             }
-            return objresult;
+            return Objresult;
         }
         public HSNInsertResponse InsertHSNRangeMaster(TblInsertHSNRange tblhsnrange)
         {
-            HSNInsertResponse objresult = new HSNInsertResponse();
+            HSNInsertResponse Objresult = new HSNInsertResponse();
             try
             {
                 using (var context = new MasterContext(_config.GetConnectionString(ConfigKeys.DefaultConnection)))
@@ -176,14 +176,14 @@ namespace Service.Repository
                     "Execute pro_InsertHSNRangeWiseTax @venueNo,@venueBranchno,@HSNRangeNo,@HSNNo,@RangeFrom,@RangeTo,@taxNo,@status,@userNo",
                     _venueNo, _venueBranchno, _HSNRangeNo,_HSNNo, _RangeFrom, _RangeTo,_taxNo,_status, _userNo).ToList();
                     
-                    objresult.HSNRangeNo = obj[0].HSNRangeNo;
+                    Objresult.HSNRangeNo = obj[0].HSNRangeNo;
                 }
             }
             catch (Exception ex)
             {
                 MyDevException.Error(ex, "TaxRepository.InsertHSNRangeMaster" + tblhsnrange.HSNRangeNo.ToString(), ExceptionPriority.Low, ApplicationType.REPOSITORY, tblhsnrange.venueNo, tblhsnrange.venueBranchno, tblhsnrange.userNo);
             }
-            return objresult;
+            return Objresult;
         }
     }    
 }

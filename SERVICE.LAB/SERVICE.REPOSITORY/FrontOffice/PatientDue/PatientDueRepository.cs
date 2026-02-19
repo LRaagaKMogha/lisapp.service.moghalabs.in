@@ -215,19 +215,19 @@ namespace Service.Repository
             try
             {
                 string payments = commonUtility.ToXML(createPatientDueRequests?.FirstOrDefault()?.payments);
-                string patientDetails = commonUtility.ToXML(createPatientDueRequests);
+                string Patientdetails = commonUtility.ToXML(createPatientDueRequests);
 
                 using (var context = new LIMSContext(_config.GetConnectionString(ConfigKeys.DefaultConnection)))
                 {
                     var _PaymentDetails = new SqlParameter("PaymentDetails", payments);
                     var _VenueNo = new SqlParameter("VenueNo", createPatientDueRequests?.FirstOrDefault()?.venueNo);
                     var _VenueBranchNo = new SqlParameter("VenueBranchNo", createPatientDueRequests?.FirstOrDefault()?.venueBranchNo);
-                    var _PatientDetails = new SqlParameter("PatientDetails", patientDetails);
+                    var _Patientdetails = new SqlParameter("Patientdetails", Patientdetails);
                     var _UserID = new SqlParameter("UserID", createPatientDueRequests?.FirstOrDefault()?.userID);
 
                     var dbResponse = context.InsertBulkPatientDueDTO.FromSqlRaw(
-                    "Execute dbo.Pro_BulkInsertDueClearence @VenueNo, @VenueBranchNo, @PatientDetails, @PaymentDetails, @UserID",
-                    _VenueNo, _VenueBranchNo, _PatientDetails, _PaymentDetails, _UserID).ToList();
+                    "Execute dbo.Pro_BulkInsertDueClearence @VenueNo, @VenueBranchNo, @Patientdetails, @PaymentDetails, @UserID",
+                    _VenueNo, _VenueBranchNo, _Patientdetails, _PaymentDetails, _UserID).ToList();
                     
                     patientDueResponse = dbResponse[0];
                 }
@@ -242,21 +242,21 @@ namespace Service.Repository
         #region refund/cancel approval 
         public List<GetReqCancelResponse> GetRefundCancelRequest(GetReqCancelParam RequestItem)
         {
-            List<GetReqCancelResponse> objresult = new List<GetReqCancelResponse>();
+            List<GetReqCancelResponse> Objresult = new List<GetReqCancelResponse>();
             try
             {
                 using (var context = new LIMSContext(_config.GetConnectionString(ConfigKeys.DefaultConnection)))
                 {
                     var _VenueNo = new SqlParameter("venueNo", RequestItem.venueno);
                     var _VenueBranchNo = new SqlParameter("venueBranchNo", RequestItem.venuebranchno);
-                    var _DidByUser = new SqlParameter("didByUser", RequestItem.didByUser == null ? 0 : RequestItem.didByUser);
-                    var _IsApproved = new SqlParameter("isApproved", RequestItem.isApproved == null ? 0 : RequestItem.isApproved);
+                    var _DidByUser = new SqlParameter("didByUser", RequestItem.didByUser);
+                    var _IsApproved = new SqlParameter("isApproved", RequestItem.isApproved);
                     var _PageIndex = new SqlParameter("pageIndex", RequestItem.pageIndex);
                     var _Type = new SqlParameter("type", RequestItem.type);
                     var _Fromdate = new SqlParameter("fromdate", RequestItem.fromdate);
                     var _Todate = new SqlParameter("todate", RequestItem.todate);
 
-                    objresult = context.GetRefundCancelRequest.FromSqlRaw(
+                    Objresult = context.GetRefundCancelRequest.FromSqlRaw(
                     "Execute dbo.pro_GetRefundCancelApproval @venueno, @venuebranchno, @didByUser, @isApproved, @pageIndex, @type, @fromdate, @toDate",
                    _VenueNo, _VenueBranchNo, _DidByUser, _IsApproved, _PageIndex, _Type, _Fromdate, _Todate).AsEnumerable().ToList();
                 }
@@ -265,11 +265,11 @@ namespace Service.Repository
             {
                 MyDevException.Error(ex, "PatientDueRepository.GetRefundCancelRequest", ExceptionPriority.High, ApplicationType.REPOSITORY, RequestItem.venueno, RequestItem.venuebranchno, 0);
             }
-            return objresult;
+            return Objresult;
         }
         public UpdateReqCancelResponse ApproveRefundCancel(UpdateReqCancelParam RequestItem)
         {
-            UpdateReqCancelResponse objresult = new UpdateReqCancelResponse();
+            UpdateReqCancelResponse Objresult = new UpdateReqCancelResponse();
             try
             {
                 using (var context = new LIMSContext(_config.GetConnectionString(ConfigKeys.DefaultConnection)))
@@ -282,13 +282,13 @@ namespace Service.Repository
                     var _orderListNo = new SqlParameter("orderListNo", RequestItem.orderListNo);
                     var _venueNo = new SqlParameter("venueNo", RequestItem.venueno);
                     var _venueBranchNo = new SqlParameter("venueBranchNo", RequestItem.venuebranchno);
-                    var _userno = new SqlParameter("userno", RequestItem.userno == null ? 0 : RequestItem.userno);
-                    var _didByUser = new SqlParameter("didByUser", RequestItem.didByUser == null ? 0 : RequestItem.didByUser);
-                    var _isApproved = new SqlParameter("isApproved", RequestItem.isApproved == null ? false : RequestItem.isApproved);
+                    var _userno = new SqlParameter("userno", RequestItem.userno);
+                    var _didByUser = new SqlParameter("didByUser", RequestItem.didByUser);
+                    var _isApproved = new SqlParameter("isApproved", RequestItem.isApproved);
                     var _approvalReason = new SqlParameter("approvalReason", RequestItem.approvalReason.ValidateEmpty());
                     var _cancellogid = new SqlParameter("cancellogid", RequestItem.cancellogid.ValidateEmpty());
                     
-                    objresult = context.ApproveRefundCancel.FromSqlRaw(
+                    Objresult = context.ApproveRefundCancel.FromSqlRaw(
                     "Execute dbo.pro_UpdateRefundCancelApproval @refundCancelLogNo, @patientVisitNo, @patientBillNo, @patientBillDetailsNo, @orderNo, @orderListNo, @venueno, @venuebranchno, @userno, @didByUser, @isApproved, @approvalReason, @cancellogid",
                     _refundCancelLogNo, _patientVisitNo, _patientBillNo, _patientBillDetailsNo, _orderNo, _orderListNo, _venueNo, _venueBranchNo, _userno, _didByUser, _isApproved, _approvalReason, _cancellogid).AsEnumerable().FirstOrDefault();
                 }
@@ -297,7 +297,7 @@ namespace Service.Repository
             {
                 MyDevException.Error(ex, "PatientDueRepository.ApproveRefundCancel", ExceptionPriority.High, ApplicationType.REPOSITORY, RequestItem.venueno, RequestItem.venuebranchno, 0);
             }
-            return objresult;
+            return Objresult;
         }
         #endregion
     }

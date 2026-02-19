@@ -15,7 +15,7 @@ namespace Service.Model.EF
         {
         }
 
-        public virtual DbSet<lstpatientreportdbl> GetPatientReport { get; set; }
+        public virtual DbSet<Lstpatientreportdbl> GetPatientReport { get; set; }
         public virtual DbSet<TblCsatransaction> TblCsatransaction { get; set; }
         public virtual DbSet<CsaResponse> InsertCsatransaction { get; set; }
         public virtual DbSet<PatientReportLog> InsertReportLog { get; set; }
@@ -38,7 +38,7 @@ namespace Service.Model.EF
         {
             modelBuilder.HasAnnotation("ProductVersion", "2.2.3-servicing-35854");
 
-            modelBuilder.Entity<lstpatientreportdbl>(entity =>
+            modelBuilder.Entity<Lstpatientreportdbl>(entity =>
             {
                 entity.HasKey(e => e.rowno);
                 entity.ToTable("pro_PatientReport");

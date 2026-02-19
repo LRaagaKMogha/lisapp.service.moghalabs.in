@@ -65,32 +65,32 @@ namespace Service.API.SERVICE.Controllers
         }
 
         [HttpPost]
-        [Route("api/VitalSign/SaveAllergyDetails")]
-        public SaveAllergyResponse SaveAllergyDetails(SaveAllergyRequest objDTO)
+        [Route("api/VitalSign/SaveAllergydetails")]
+        public SaveAllergyResponse SaveAllergydetails(SaveAllergyRequest objDTO)
         {
             SaveAllergyResponse result = new SaveAllergyResponse();
             try
             {
-                result = _VitalSignRepository.SaveAllergyDetails(objDTO);
+                result = _VitalSignRepository.SaveAllergydetails(objDTO);
             }
             catch (Exception ex)
             {
-                MyDevException.Error(ex, "VitalSignController.SaveAllergyDetails", ExceptionPriority.Medium, ApplicationType.APPSERVICE, objDTO.venueno, objDTO.venuebno, objDTO.userno);
+                MyDevException.Error(ex, "VitalSignController.SaveAllergydetails", ExceptionPriority.Medium, ApplicationType.APPSERVICE, objDTO.venueno, objDTO.venuebno, objDTO.userno);
             }
             return result;
         }
         [HttpPost]
-        [Route("api/VitalSign/GetAllergyDetails")]
-        public List<GetAllergyResponse> GetAllergyDetails(GetAllergyRequest RequestItem)
+        [Route("api/VitalSign/GetAllergydetails")]
+        public List<GetAllergyResponse> GetAllergydetails(GetAllergyRequest RequestItem)
         {
             List<GetAllergyResponse> result = new List<GetAllergyResponse>();
             try
             {
-                result = _VitalSignRepository.GetAllergyDetails(RequestItem);
+                result = _VitalSignRepository.GetAllergydetails(RequestItem);
             }
             catch (Exception ex)
             {
-                MyDevException.Error(ex, "VitalSignController.GetAllergyDetails", ExceptionPriority.Medium, ApplicationType.APPSERVICE, RequestItem.venueno, RequestItem.venuebno, RequestItem.userno);
+                MyDevException.Error(ex, "VitalSignController.GetAllergydetails", ExceptionPriority.Medium, ApplicationType.APPSERVICE, RequestItem.venueno, RequestItem.venuebno, RequestItem.userno);
             }
             return result;
         }

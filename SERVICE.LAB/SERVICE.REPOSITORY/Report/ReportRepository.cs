@@ -409,7 +409,7 @@ namespace Service.Repository
         }
         public List<AuditLogResponse> GetAuditResponse(List<AuditLogDTO> auditLogDTO, int VenueNo, int VenueBranchNo)
         {
-            List<AuditLogResponse> objresult = new List<AuditLogResponse>();
+            List<AuditLogResponse> Objresult = new List<AuditLogResponse>();
             try
             {
                 int oldPatientVisitNo = 0;
@@ -460,7 +460,7 @@ namespace Service.Repository
                             }
                             Responseitem.Auditdetail = lstAuditDetail;
                         }
-                        objresult.Add(Responseitem);
+                        Objresult.Add(Responseitem);
                     }
                 }
             }
@@ -468,11 +468,11 @@ namespace Service.Repository
             {
                 MyDevException.Error(ex, "ReportRepository.GetAuditResponse", ExceptionPriority.Low, ApplicationType.REPOSITORY, VenueNo, VenueBranchNo, 0);
             }
-            return objresult;
+            return Objresult;
         }
         public List<AuditHistory> GetAuditHistory(int FirstAuditLogNo, int SecondAuditLogNo, int Type)
         {
-            List<AuditHistory> objresult = new List<AuditHistory>();
+            List<AuditHistory> Objresult = new List<AuditHistory>();
             try
             {
                 using (var context = new LIMSContext(_config.GetConnectionString(ConfigKeys.DefaultConnection)))
@@ -480,7 +480,7 @@ namespace Service.Repository
                     var _FirstAuditLogNo = new SqlParameter("FirstAuditLogNo", FirstAuditLogNo);
                     var _SecondAuditLogNo = new SqlParameter("SecondAuditLogNo", SecondAuditLogNo);
                     var _Type = new SqlParameter("Type", Type);
-                    objresult = context.AuditHistory.FromSqlRaw(
+                    Objresult = context.AuditHistory.FromSqlRaw(
                         "Execute dbo.Pro_GetAuditHistory @FirstAuditLogNo,@SecondAuditLogNo,@Type",
                      _FirstAuditLogNo, _SecondAuditLogNo, _Type).ToList();
                 }
@@ -489,11 +489,11 @@ namespace Service.Repository
             {
                 MyDevException.Error(ex, "FrontOfficeRepository.GetAuditHistory", ExceptionPriority.High, ApplicationType.REPOSITORY, 0, 0, 0);
             }
-            return objresult;
+            return Objresult;
         }
         public List<AdvancePaymentList> GetAdvancePayment(CommonFilterRequestDTO RequestItem)
         {
-            List<AdvancePaymentList> objresult = new List<AdvancePaymentList>();
+            List<AdvancePaymentList> Objresult = new List<AdvancePaymentList>();
             try
             {
                 using (var context = new LIMSContext(_config.GetConnectionString(ConfigKeys.DefaultConnection)))
@@ -506,7 +506,7 @@ namespace Service.Repository
                     var _VenueBranchNo = new SqlParameter("VenueBranchNo", RequestItem.VenueBranchNo);
                     var _PageIndex = new SqlParameter("PageIndex", RequestItem.pageIndex);
 
-                    objresult = context.AdvancePaymentList.FromSqlRaw(
+                    Objresult = context.AdvancePaymentList.FromSqlRaw(
                         "Execute dbo.pro_GetAdvancePayment @FROMDate, @ToDate, @Type, @CustomerNo, @VenueNo, @VenueBranchNo, @PageIndex",
                     _FromDate, _ToDate, _Type, _CustomerNo, _VenueNo, _VenueBranchNo, _PageIndex).ToList();
                 }
@@ -515,11 +515,11 @@ namespace Service.Repository
             {
                 MyDevException.Error(ex, "ReportRepository.GetAdvancePayment", ExceptionPriority.High, ApplicationType.REPOSITORY, 0, 0, 0);
             }
-            return objresult;
+            return Objresult;
         }
         public AdvancePaymentListResponse InsertAdvancePayment(AdvancePaymentListRequest RequestItem)
         {
-            AdvancePaymentListResponse objresult = new AdvancePaymentListResponse();
+            AdvancePaymentListResponse Objresult = new AdvancePaymentListResponse();
             try
             {
                 CommonHelper commonUtility = new CommonHelper();
@@ -536,7 +536,7 @@ namespace Service.Repository
                     var _VenueNo = new SqlParameter("VenueNo", RequestItem.venueno);
                     var _VenueBranchNo = new SqlParameter("VenueBranchNo", RequestItem.venuebranchno);
 
-                    objresult = context.AdvancePaymentListRequest.FromSqlRaw(
+                    Objresult = context.AdvancePaymentListRequest.FromSqlRaw(
                         "Execute dbo.pro_InsertAdvancePayment @CustomerNo, @Type, @TransactionDateTime, @Amount, @Remarks, @userno, @VenueNo, @VenueBranchNo, @PaymentXML",
                     _CustomerNo, _Type, _TransactionDateTime, _Amount, _Remarks, _userno, _VenueNo, _VenueBranchNo, _PaymentXML).AsEnumerable().FirstOrDefault();
                 }
@@ -545,13 +545,13 @@ namespace Service.Repository
             {
                 MyDevException.Error(ex, "ReportRepository.InsertAdvancePayment", ExceptionPriority.High, ApplicationType.REPOSITORY, 0, 0, 0);
             }
-            return objresult;
+            return Objresult;
         }
 
         #region Cash Expenses
         public List<CashExpenseDTO> GetCashExpenses(GetCashExpenseParam RequestItem)
         {
-            List<CashExpenseDTO> objresult = new List<CashExpenseDTO>();
+            List<CashExpenseDTO> Objresult = new List<CashExpenseDTO>();
             try
             {
                 using (var context = new LIMSContext(_config.GetConnectionString(ConfigKeys.DefaultConnection)))
@@ -568,7 +568,7 @@ namespace Service.Repository
                     var _todate = new SqlParameter("todate", RequestItem.ToDate);
                     var _UserNo = new SqlParameter("UserNo", RequestItem.UserNo);
 
-                    objresult = context.GetCashExpenses.FromSqlRaw(
+                    Objresult = context.GetCashExpenses.FromSqlRaw(
                         "Execute dbo.Pro_GetCashExpesnses @venueNo,@venueBranchNo,@issuedByNo,@issuedToTypeNo,@issuedTo,@expenseCategory,@pageindex,@type,@fromdate,@todate,@UserNo",
                     _VenueNo, _VenueBranchNo, _IssuedByNo, _IssuedToTypeNo, _IssuedTo, _ExpenseCategory,_pageindex,_type,_fromdate,_todate, _UserNo).ToList();
                 }
@@ -577,11 +577,11 @@ namespace Service.Repository
             {
                 MyDevException.Error(ex, "ReportRepository.GetCashExpenses", ExceptionPriority.High, ApplicationType.REPOSITORY, 0, 0, 0);
             }
-            return objresult;
+            return Objresult;
         }
         public InsertCashExpenseDTO InsertCashExpenses(SaveCashExpenseDTO RequestItem)
         {
-            InsertCashExpenseDTO objresult = new InsertCashExpenseDTO();
+            InsertCashExpenseDTO Objresult = new InsertCashExpenseDTO();
             try
             {
                 using (var context = new LIMSContext(_config.GetConnectionString(ConfigKeys.DefaultConnection)))
@@ -600,7 +600,7 @@ namespace Service.Repository
                     var _ExpenseEntryNo = new SqlParameter("expenseEntryNo", RequestItem.ExpenseEntryNo);
                     var _Status = new SqlParameter("status", RequestItem.Status);
 
-                    objresult = context.InsertCashExpenses.FromSqlRaw(
+                    Objresult = context.InsertCashExpenses.FromSqlRaw(
                         "Execute dbo.Pro_InsertCashExpesnses @venueNo,@venueBranchNo,@createdBy,@issuedDate,@issueFrom,@issueToType,@issueToUserNo,@issueToUserName,@expenseCate,@amount,@reason,@expenseEntryNo,@status",
                     _VenueNo, _VenueBranchNo, _CreatedBy, _IssuedDate, _IssueFrom, _IssueToType, _IssueToUserNo, _IssueToUserName, _ExpenseCate, _Amount, _Reason, _ExpenseEntryNo, _Status).AsEnumerable().FirstOrDefault();
                 }
@@ -609,12 +609,12 @@ namespace Service.Repository
             {
                 MyDevException.Error(ex, "ReportRepository.InsertCashExpenses", ExceptionPriority.High, ApplicationType.REPOSITORY, 0, 0, 0);
             }
-            return objresult;
+            return Objresult;
         }
 
         public List<GetReqExpensesResponse> GetReqExpenses(GetReqExpensesParam RequestItem)
         {
-            List<GetReqExpensesResponse> objresult = new List<GetReqExpensesResponse>();
+            List<GetReqExpensesResponse> Objresult = new List<GetReqExpensesResponse>();
             try
             {
                 using (var context = new LIMSContext(_config.GetConnectionString(ConfigKeys.DefaultConnection)))
@@ -631,7 +631,7 @@ namespace Service.Repository
                     var _Todate = new SqlParameter("todate", RequestItem.Todate);
                     var _ApprovalReq = new SqlParameter("ApprovalReq", RequestItem.ApprovalReq);
 
-                    objresult = context.GetReqExpenses.FromSqlRaw(
+                    Objresult = context.GetReqExpenses.FromSqlRaw(
                        "Execute dbo.Pro_GetReqExpenses @venueNo,@venueBranchNo,@IssuedByNo,@IssuedToTypeNo,@IssuedTo,@ExpenseCategory,@PageIndex,@Type,@Fromdate,@ToDate,@ApprovalReq",
                    _VenueNo, _VenueBranchNo, _IssuedByNo, _IssuedToTypeNo, _IssuedTo, _ExpenseCategory, _PageIndex, _Type, _Fromdate, _Todate, _ApprovalReq).AsEnumerable().ToList();
                 }
@@ -640,11 +640,11 @@ namespace Service.Repository
             {
                 MyDevException.Error(ex, "ReportRepository.GetReqExpenses", ExceptionPriority.High, ApplicationType.REPOSITORY, 0, 0, 0);
             }
-            return objresult;
+            return Objresult;
         }
         public InsertCashExpenseDTO ApproveExpenses(ApproveExpenses RequestItem)
         {
-            InsertCashExpenseDTO objresult = new InsertCashExpenseDTO();
+            InsertCashExpenseDTO Objresult = new InsertCashExpenseDTO();
             try
             {
                 using (var context = new LIMSContext(_config.GetConnectionString(ConfigKeys.DefaultConnection)))
@@ -657,7 +657,7 @@ namespace Service.Repository
                     var _ExpenseEntryNo = new SqlParameter("ExpenseEntryNo", RequestItem.ExpenseEntryNo == null ? 0 : RequestItem.ExpenseEntryNo);
                     var _IsApprove = new SqlParameter("IsApprove", RequestItem.IsApprove == null ? false : RequestItem.IsApprove);
 
-                    objresult = context.ApproveExpenses.FromSqlRaw(
+                    Objresult = context.ApproveExpenses.FromSqlRaw(
                         "Execute dbo.Pro_ApproveExpenses @VenueNo,@VenueBranchNo,@CreatedBy,@Amount,@Reason,@ExpenseEntryNo,@IsApprove",
                     _VenueNo, _VenueBranchNo, _CreatedBy, _Amount, _Reason, _ExpenseEntryNo, _IsApprove).AsEnumerable().FirstOrDefault();
                 }
@@ -666,13 +666,13 @@ namespace Service.Repository
             {
                 MyDevException.Error(ex, "ReportRepository.ApproveExpenses", ExceptionPriority.High, ApplicationType.REPOSITORY, 0, 0, 0);
             }
-            return objresult;
+            return Objresult;
         }
         #endregion
 
         public async Task<ReportOutput> GetReportbylist(ReportDTO ReportItem)
         {
-            ReportOutput objresult = new ReportOutput();
+            ReportOutput Objresult = new ReportOutput();
             try
             {
                 TblReportMaster tblReportMaster = new TblReportMaster();
@@ -713,13 +713,13 @@ namespace Service.Repository
                 string dpath = objAppSettingResponse != null && objAppSettingResponse.ConfigValue != null && objAppSettingResponse.ConfigValue != ""
                         ? objAppSettingResponse.ConfigValue : "";
                 string filename = await ExportReportService.ExportPrint(ReportParam, dpath);
-                objresult.PatientExportFile = tblReportMaster?.ExportURL + filename;
+                Objresult.PatientExportFile = tblReportMaster?.ExportURL + filename;
             }
             catch (Exception ex)
             {
                 MyDevException.Error(ex, "ReportRepository.GetReport/ReportKey-" + ReportItem.ReportKey, ExceptionPriority.High, ApplicationType.REPOSITORY, ReportItem.venueNo, ReportItem.venueBranchNo, ReportItem.userID);
             }
-            return objresult;
+            return Objresult;
         }
 
         public DataTable ManuallyConvertJsonToDataTable(string sampleJson)

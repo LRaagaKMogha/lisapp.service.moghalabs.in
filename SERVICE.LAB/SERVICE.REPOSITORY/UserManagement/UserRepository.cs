@@ -141,68 +141,71 @@ namespace Service.Repository
                        
                         if (userresult != null)
                         {
-                            if ((bool)userresult.Isadaccess)
-                            {
-                                MasterRepository _IMasterRepository = new MasterRepository(_config);
-                                var LDAPURL = _IMasterRepository.GetSingleAppSetting("LDAPURL").ConfigValue;
-                                try
-                                {
-                                    DirectoryEntry dr = new DirectoryEntry(LDAPURL, req.LoginName, req.Password);
-                                    DirectorySearcher ds = new DirectorySearcher(dr);
-                                    var adresult = ds.FindOne();
-                                    if (adresult != null)
-                                    {
-                                        if (string.IsNullOrEmpty(userresult.PhoneNo))
-                                        {
-                                            result.ResponseStatus = 3;
-                                            result.Token = userresult.ladpsecretkey;
-                                            result.UserName = userresult.UserName;
-                                            result.UserNo = userresult.UserNo;
-                                            result.VenueNo = userresult.VenueNo;
-                                            result.VenueBranchNo = userresult.VenueBranchNo;
-                                            result.DomainCode = "0";
-                                        }
-                                        else if (string.IsNullOrEmpty(userresult.ladpsecretkey))
-                                        {
-                                            var userdata = context.TblUser.Where(user => user.UserNo == userresult.UserNo).FirstOrDefault();
-                                            userdata.LoginAttempt = 0;
-                                            userdata.ladpsecretkey = Base32Encoding.ToString(KeyGeneration.GenerateRandomKey(20));
-                                            context.Update(userdata);
-                                            context.SaveChanges();
-                                            if ((bool)userresult.IsadmultifactorAccess)
-                                            {
-                                                string SMSURL = _IMasterRepository.GetSingleAppSetting("SMSURL").ConfigValue;
-                                                if (!string.IsNullOrEmpty(SMSURL) && !string.IsNullOrEmpty(userresult.PhoneNo))
-                                                {
-                                                    CommonHelper.SendSMS(SMSURL, userresult.ladpsecretkey, userresult.PhoneNo);
-                                                }
-                                            }
-                                            result.ResponseStatus = 2;
-                                            result.Token = userdata.ladpsecretkey;
-                                            result.UserName = userresult.UserName;
-                                            result.UserNo = userresult.UserNo;
-                                            result.VenueNo = userresult.VenueNo;
-                                            result.VenueBranchNo = userresult.VenueBranchNo;
-                                            result.DomainCode = "0";
-                                        }
-                                        else
-                                        {
-                                            result.ResponseStatus = 2;
-                                            result.Token = userresult.ladpsecretkey;
-                                            result.UserName = userresult.UserName;
-                                            result.UserNo = userresult.UserNo;
-                                            result.VenueNo = userresult.VenueNo;
-                                            result.VenueBranchNo = userresult.VenueBranchNo;
-                                            result.DomainCode = "1";
-                                        }
-                                        }
-                                    }
-                                catch (Exception ex)
-                                {
-                                    result.ResponseStatus = -1;
-                                }
-                                return result;
-                            }
+                            //if ((bool)userresult.Isadaccess)
+                            //{
+                            //    MasterRepository _IMasterRepository = new MasterRepository(_config);
+                            //    var LDAPURL = _IMasterRepository.GetSingleAppSetting("LDAPURL").ConfigValue;
+                                
+                            //    try
+                            //    {
+                            //        DirectoryEntry dr = new DirectoryEntry(LDAPURL, req.LoginName, req.Password);
+                            //        DirectorySearcher ds = new DirectorySearcher(dr);
+                            //        var adresult = ds.FindOne();
+
+                            //        if (adresult != null)
+                            //        {
+                            //            if (string.IsNullOrEmpty(userresult.PhoneNo))
+                            //            {
+                            //                result.ResponseStatus = 3;
+                            //                result.Token = userresult.ladpsecretkey;
+                            //                result.UserName = userresult.UserName;
+                            //                result.UserNo = userresult.UserNo;
+                            //                result.VenueNo = userresult.VenueNo;
+                            //                result.VenueBranchNo = userresult.VenueBranchNo;
+                            //                result.DomainCode = "0";
+                            //            }
+                            //            else if (string.IsNullOrEmpty(userresult.ladpsecretkey))
+                            //            {
+                            //                var userdata = context.TblUser.Where(user => user.UserNo == userresult.UserNo).FirstOrDefault();
+                            //                userdata.LoginAttempt = 0;
+                            //                userdata.ladpsecretkey = Base32Encoding.ToString(KeyGeneration.GenerateRandomKey(20));
+                            //                context.Update(userdata);
+                            //                context.SaveChanges();
+                            //                if ((bool)userresult.IsadmultifactorAccess)
+                            //                {
+                            //                    string SMSURL = _IMasterRepository.GetSingleAppSetting("SMSURL").ConfigValue;
+                            //                    if (!string.IsNullOrEmpty(SMSURL) && !string.IsNullOrEmpty(userresult.PhoneNo))
+                            //                    {
+                            //                        CommonHelper.SendSMS(SMSURL, userresult.ladpsecretkey, userresult.PhoneNo);
+                            //                    }
+                            //                }
+                            //                result.ResponseStatus = 2;
+                            //                result.Token = userdata.ladpsecretkey;
+                            //                result.UserName = userresult.UserName;
+                            //                result.UserNo = userresult.UserNo;
+                            //                result.VenueNo = userresult.VenueNo;
+                            //                result.VenueBranchNo = userresult.VenueBranchNo;
+                            //                result.DomainCode = "0";
+                            //            }
+                            //            else
+                            //            {
+                            //                result.ResponseStatus = 2;
+                            //                result.Token = userresult.ladpsecretkey;
+                            //                result.UserName = userresult.UserName;
+                            //                result.UserNo = userresult.UserNo;
+                            //                result.VenueNo = userresult.VenueNo;
+                            //                result.VenueBranchNo = userresult.VenueBranchNo;
+                            //                result.DomainCode = "1";
+                            //            }
+                            //        }
+                            //    }
+                            //    catch (Exception ex)
+                            //    {
+                            //        result.ResponseStatus = -1;
+                            //        MyDevException.Error(ex, "UserRepository.UserLogIn/LoginName - " + req.LoginName, ExceptionPriority.High, ApplicationType.REPOSITORY, 0, 0, 0);
+                            //    }
+                            //    return result;
+                            //}
 
                             var encodingPassword = CommonSecurity.EncodePassword(req.Password, CommonSecurity.GeneratePassword(1));
                             if (userresult.Password == encodingPassword)
@@ -641,7 +644,7 @@ namespace Service.Repository
         }
         public List<UserDetailsDTO> GetUserDetails(int VenueNo, int VenueBranchNo, int PageIndex,int DefaultBranchNo)
         {
-            List<UserDetailsDTO> objresult = new List<UserDetailsDTO>();
+            List<UserDetailsDTO> Objresult = new List<UserDetailsDTO>();
             try
             {
                 using (var context = new MasterContext(_config.GetConnectionString(ConfigKeys.DefaultConnection)))
@@ -651,7 +654,7 @@ namespace Service.Repository
                     var _PageIndex = new SqlParameter("PageIndex", PageIndex);
                     var _DefaultBranchNo = new SqlParameter("DefaultBranchNo", DefaultBranchNo);
                     
-                    objresult = context.UserDetailsEF.FromSqlRaw(
+                    Objresult = context.UserDetailsEF.FromSqlRaw(
                     "Execute dbo.Pro_UserMasterDetails " +
                     "@VenueNo,@VenueBranchNo,@PageIndex,@DefaultBranchNo", 
                     _venueno, _venuebranchno, _PageIndex, _DefaultBranchNo).ToList();
@@ -661,7 +664,7 @@ namespace Service.Repository
             {
                 MyDevException.Error(ex, "UserRepository.GetUserDetails", ExceptionPriority.High, ApplicationType.REPOSITORY, VenueNo, VenueBranchNo, 0);
             }
-            return objresult;
+            return Objresult;
         }
         public int InsertUserMaster(UserDetailsDTO Useritem)
         {
@@ -747,7 +750,7 @@ namespace Service.Repository
         }
         public List<UserModuleDTO> GetUserMenuMapping(int VenueNo, int VenueBranchNo, int userno, int MenuLoadUserNo)
         {
-            List<UserModuleDTO> objresult = new List<UserModuleDTO>();
+            List<UserModuleDTO> Objresult = new List<UserModuleDTO>();
             try
             {
                 using (var context = new MasterContext(_config.GetConnectionString(ConfigKeys.DefaultConnection)))
@@ -767,7 +770,7 @@ namespace Service.Repository
                     int newMenuNo = 0;
                     int oldTaskNo = 0;
                     int newTaskNo = 0;
-                    objresult = new List<UserModuleDTO>();
+                    Objresult = new List<UserModuleDTO>();
                     
                     foreach (var obj in menulst)
                     {
@@ -829,7 +832,7 @@ namespace Service.Repository
                                 }
                             }
 
-                            objresult.Add(UserModuleItem);
+                            Objresult.Add(UserModuleItem);
                         }
                     }
                 }
@@ -838,11 +841,11 @@ namespace Service.Repository
             {
                 MyDevException.Error(ex, "UserRepository.GetUserMenuMapping", ExceptionPriority.High, ApplicationType.REPOSITORY, VenueNo, VenueBranchNo, userno);
             }
-            return objresult;
+            return Objresult;
         }
         public List<UserMenuDTO> GetUserTask(int VenueNo, int VenueBranchNo, int userno)
         {
-            List<UserMenuDTO> objresult = new List<UserMenuDTO>();
+            List<UserMenuDTO> Objresult = new List<UserMenuDTO>();
             try
             {
                 using (var context = new MasterContext(_config.GetConnectionString(ConfigKeys.DefaultConnection)))
@@ -856,7 +859,7 @@ namespace Service.Repository
                     string newMenuCode = string.Empty;
                     string oldTaskcode = string.Empty;
                     string newTaskcode = string.Empty;
-                    objresult = new List<UserMenuDTO>();
+                    Objresult = new List<UserMenuDTO>();
                     
                     foreach (var Mitem in menulst)
                     {
@@ -894,7 +897,7 @@ namespace Service.Repository
                                     lstUserTaskDTO.Add(UserDTO);
                                 }
                             }
-                            objresult.Add(ObjUserMenuDTO);
+                            Objresult.Add(ObjUserMenuDTO);
                         }
                     }
                 }
@@ -903,7 +906,7 @@ namespace Service.Repository
             {
                 MyDevException.Error(ex, "UserRepository.GetUserTask", ExceptionPriority.High, ApplicationType.REPOSITORY, VenueNo, VenueBranchNo, userno);
             }
-            return objresult;
+            return Objresult;
         }
         public int InsertMenuMapping(ReqUserMenu Useritem)
         {
@@ -939,13 +942,13 @@ namespace Service.Repository
         }
         public List<NavDTO> GetPageMenuList(int VenueNo, int VenueBranchNo, int userno, int logintype)
         {
-            List<NavDTO> objresult = new List<NavDTO>();
+            List<NavDTO> Objresult = new List<NavDTO>();
             try
             {
                 string _CacheKey = CacheKeys.UserMenu + userno + VenueNo + VenueBranchNo + logintype;
-                objresult = MemoryCacheRepository.GetCacheItem<List<NavDTO>>(_CacheKey);
+                Objresult = MemoryCacheRepository.GetCacheItem<List<NavDTO>>(_CacheKey);
                 
-                if (objresult == null)
+                if (Objresult == null)
                 {
                     using (var context = new MasterContext(_config.GetConnectionString(ConfigKeys.DefaultConnection)))
                     {
@@ -959,7 +962,7 @@ namespace Service.Repository
                         int newModuleNo = 0;
                         int oldMenuNo = 0;
                         int newMenuNo = 0;
-                        objresult = new List<NavDTO>();
+                        Objresult = new List<NavDTO>();
                         
                         foreach (var obj in menulst)
                         {
@@ -994,7 +997,7 @@ namespace Service.Repository
                                         UserModuleItem.Children = lstUserMenuDTO;
                                     }
                                 }
-                                objresult.Add(UserModuleItem);
+                                Objresult.Add(UserModuleItem);
                                 //
                                 MasterRepository _IMasterRepository = new MasterRepository(_config);
                                 AppSettingResponse objAppSettingResponse = new AppSettingResponse();
@@ -1004,7 +1007,7 @@ namespace Service.Repository
                                 int cachetime = objAppSettingResponse != null && objAppSettingResponse.ConfigValue != null && objAppSettingResponse.ConfigValue != ""
                                     ? Convert.ToInt32(objAppSettingResponse.ConfigValue) : 0;
 
-                                MemoryCacheRepository.AddItem(_CacheKey, objresult, Convert.ToInt32(cachetime));
+                                MemoryCacheRepository.AddItem(_CacheKey, Objresult, Convert.ToInt32(cachetime));
                             }
                         }   
 
@@ -1029,7 +1032,7 @@ namespace Service.Repository
             {
                 MyDevException.Error(ex, "UserRepository.GetPageMenuList", ExceptionPriority.High, ApplicationType.REPOSITORY, VenueNo, VenueBranchNo, 0);
             }
-            return objresult;
+            return Objresult;
         }
         public int ChangePassword(ChangePasswordEntity req)
         {
@@ -1196,9 +1199,9 @@ namespace Service.Repository
             }
             return result;
         }
-        public List<userbranchlist> GetUserBranchList(int userno, int VenueNo, int VenueBranchNo)
+        public List<Userbranchlist> GetUserBranchList(int userno, int VenueNo, int VenueBranchNo)
         {
-            List<userbranchlist> result = new List<userbranchlist>();
+            List<Userbranchlist> result = new List<Userbranchlist>();
             try
             {
                 using (var context = new FrontOfficeContext(_config.GetConnectionString(ConfigKeys.DefaultConnection)))
@@ -1262,7 +1265,7 @@ namespace Service.Repository
         }
         public List<UserModuleDTO> GetRoleMenuMapping(RolegetReqDTO rolereq)
         {
-            List<UserModuleDTO> objresult = new List<UserModuleDTO>();
+            List<UserModuleDTO> Objresult = new List<UserModuleDTO>();
             try
             {
                 using (var context = new MasterContext(_config.GetConnectionString(ConfigKeys.DefaultConnection)))
@@ -1279,7 +1282,7 @@ namespace Service.Repository
                     int newMenuNo = 0;
                     int oldTaskNo = 0;
                     int newTaskNo = 0;
-                    objresult = new List<UserModuleDTO>();
+                    Objresult = new List<UserModuleDTO>();
 
                     foreach (var obj in menulst)
                     {
@@ -1340,7 +1343,7 @@ namespace Service.Repository
                                 }
                             }
 
-                            objresult.Add(UserModuleItem);
+                            Objresult.Add(UserModuleItem);
                         }
                     }
                 }
@@ -1349,7 +1352,7 @@ namespace Service.Repository
             {
                 MyDevException.Error(ex, "UserRepository.GetRoleMenuMapping", ExceptionPriority.High, ApplicationType.REPOSITORY, rolereq.VenueNo, rolereq.VenueBranchNo, 0);
             }
-            return objresult;
+            return Objresult;
         }
         public int InsertRoleMenuMapping(ReqRoleMenu Useritem)
         {
@@ -1421,7 +1424,7 @@ namespace Service.Repository
 
         public List<UserRoleNameDTO> GetUserMenuCode(int UserNo, int VenueNo, int VenueBranchNo, int LoginType)
         {
-            List<UserRoleNameDTO> objResult = new List<UserRoleNameDTO>();
+            List<UserRoleNameDTO> Objresult = new List<UserRoleNameDTO>();
             try
             {
                 using (var context = new MasterContext(_config.GetConnectionString(ConfigKeys.DefaultConnection)))
@@ -1431,7 +1434,7 @@ namespace Service.Repository
                     var _VenueBranchNo = new SqlParameter("VenueBranchNo", VenueBranchNo);
                     var _LoginType = new SqlParameter("LoginType", LoginType);
 
-                    objResult = context.UserRoleNameDTOs.FromSqlRaw(
+                    Objresult = context.UserRoleNameDTOs.FromSqlRaw(
                     "Execute dbo.pro_GetUserRoleNames @VenueNo,@VenueBranchNo, @UserNo, @LoginType",
                     _VenueNo, _VenueBranchNo, _UserNo, _LoginType).ToList();
                 }
@@ -1440,7 +1443,7 @@ namespace Service.Repository
             {
                 MyDevException.Error(ex, "UserRepository.ValidateActionMenu", ExceptionPriority.High, ApplicationType.REPOSITORY, VenueNo, 0, UserNo);
             }
-            return objResult;
+            return Objresult;
         }
         public InsertRoleRes InsertRoleMaster(InsertRoleReq req)
         {
@@ -1469,7 +1472,7 @@ namespace Service.Repository
         }
         public List<GetRoleRes> GetRoleMaster(GetRoleReq req)
         {
-            List<GetRoleRes> objResult = new List<GetRoleRes>();
+            List<GetRoleRes> Objresult = new List<GetRoleRes>();
             try
             {
                 using (var context = new MasterContext(_config.GetConnectionString(ConfigKeys.DefaultConnection)))
@@ -1478,7 +1481,7 @@ namespace Service.Repository
                     var _VenueNo = new SqlParameter("VenueNo", req.VenueNo);
                     var _pageIndex = new SqlParameter("pageIndex", req.pageIndex);
 
-                    objResult = context.GetRoleMaster.FromSqlRaw(
+                    Objresult = context.GetRoleMaster.FromSqlRaw(
                     "Execute dbo.pro_GetRoleMaster @RoleId,@VenueNo, @pageIndex",
                     _RoleId, _VenueNo, _pageIndex).ToList();
                 }
@@ -1487,7 +1490,7 @@ namespace Service.Repository
             {
                 MyDevException.Error(ex, "UserRepository.GetRoleMaster", ExceptionPriority.High, ApplicationType.REPOSITORY, req.VenueNo, req.RoleId, 0);
             }
-            return objResult;
+            return Objresult;
         }
         public UserResponseEntity UserESign(UserRequestEntity req)
         {

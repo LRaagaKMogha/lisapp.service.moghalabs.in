@@ -122,8 +122,8 @@ namespace Service.Repository.Integration
             if (genderId == "1" || genderId == "M" || genderId?.ToUpper() == "MALE") id = 1;
             else if (genderId == "2" || genderId == "F" || genderId?.ToUpper() == "FEMALE") id = 2;
 
-            ngender enumValue = (ngender)id;
-            return Enum.GetName(typeof(ngender), enumValue);
+            nGender enumValue = (nGender)id;
+            return Enum.GetName(typeof(nGender), enumValue);
         }
         public static string getGenderTitle(string genderId)
         {

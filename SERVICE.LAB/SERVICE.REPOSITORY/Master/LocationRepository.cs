@@ -17,7 +17,7 @@ namespace Service.Repository
         public locationMasterRepository(IConfiguration config) { _config = config; }
         public List<TblCountry> GetCountrymaster(CountryMasterRequest countryMasterRequest)
         {
-            List<TblCountry> objresult = new List<TblCountry>();
+            List<TblCountry> Objresult = new List<TblCountry>();
             try
             {
                 using (var context = new MasterContext(_config.GetConnectionString(ConfigKeys.DefaultConnection)))
@@ -27,7 +27,7 @@ namespace Service.Repository
                     var _pageIndex = new SqlParameter("pageIndex", countryMasterRequest?.pageIndex);
                     var _VenueNo = new SqlParameter("VenueNo", countryMasterRequest?.VenueNo);
 
-                    objresult = context.GetCountrymaster.FromSqlRaw(
+                    Objresult = context.GetCountrymaster.FromSqlRaw(
                     "Execute dbo.pro_GetCountrymaster @countryNo,@CurrencyNo,@pageIndex,@VenueNo",
                     _countryNo, _CurrencyNo, _pageIndex, _VenueNo).ToList();
                 }
@@ -36,12 +36,12 @@ namespace Service.Repository
             {
                 MyDevException.Error(ex, "LocationRepository.GetCountrymaster" + countryMasterRequest.countryNo.ToString(), ExceptionPriority.High, ApplicationType.REPOSITORY, 0, 0, 0);               
             }
-            return objresult;
+            return Objresult;
         }
 
         public CountryMasteResponse InsertCountrymaster(Countrytab Country)
         {
-            CountryMasteResponse objresult = new CountryMasteResponse();
+            CountryMasteResponse Objresult = new CountryMasteResponse();
             try
             {
                 using (var context = new MasterContext(_config.GetConnectionString(ConfigKeys.DefaultConnection)))
@@ -63,20 +63,20 @@ namespace Service.Repository
                     _countryNo, _countryName, _Capital, _isdCode,
                     _currencyNo, _sequenceNo, _status, _VenueNo, _userNo, _isoCode).ToList();
 
-                    objresult.countryNo = obj[0].countryNo;
+                    Objresult.countryNo = obj[0].countryNo;
                 }
             }
             catch (Exception ex)
             {
                 MyDevException.Error(ex, "LocationRepository.InsertCountrymaster" + Country.countryNo.ToString(), ExceptionPriority.High, ApplicationType.REPOSITORY, 0, 0, 0);
             }
-            return objresult;
+            return Objresult;
         }
         //state
 
         public List<lstState> GetStatemaster(StateRequest state)
         {
-            List<lstState> objresult = new List<lstState>();
+            List<lstState> Objresult = new List<lstState>();
             try
             {
                 using (var context = new MasterContext(_config.GetConnectionString(ConfigKeys.DefaultConnection)))
@@ -86,7 +86,7 @@ namespace Service.Repository
                     var _pageIndex = new SqlParameter("pageIndex", state?.pageIndex);
                     var _VenueNo = new SqlParameter("VenueNo", state?.venueNo);
 
-                    objresult = context.GetStatemaster.FromSqlRaw(
+                    Objresult = context.GetStatemaster.FromSqlRaw(
                     "Execute dbo.pro_GetStatemaster @stateNo,@CountryNo,@pageIndex,@VenueNo",
                     _stateNo, _CountryNo, _pageIndex, _VenueNo).ToList();
                 }
@@ -95,11 +95,11 @@ namespace Service.Repository
             {
                 MyDevException.Error(ex, "LocationRepository.GetStatemaster" + state.stateNo.ToString(), ExceptionPriority.High, ApplicationType.REPOSITORY, 0, 0, 0);
             }
-            return objresult;
+            return Objresult;
         }
         public StateResponse InsertStatemaster(Statetab state)
         {
-            StateResponse objresult = new StateResponse();
+            StateResponse Objresult = new StateResponse();
             try
             {
                 using (var context = new MasterContext(_config.GetConnectionString(ConfigKeys.DefaultConnection)))
@@ -118,19 +118,19 @@ namespace Service.Repository
                     _stateNo, _stateName, _CountryNo, _status, _isunionTerritory, _sequenceNo, _userNo, _VenueNo
                     ).ToList();
 
-                    objresult.stateNo = obj[0].stateNo;
+                    Objresult.stateNo = obj[0].stateNo;
                 }
             }
             catch (Exception ex)
             {
                 MyDevException.Error(ex, "LocationRepository.InsertStatemaster" + state.stateNo.ToString(), ExceptionPriority.High, ApplicationType.REPOSITORY, 0, 0, 0);                
             }
-            return objresult;
+            return Objresult;
         }
         //City
         public List<CityLst> GetCitymaster(CityRequest city)
         {
-            List<CityLst> objresult = new List<CityLst>();
+            List<CityLst> Objresult = new List<CityLst>();
             
             try
             {
@@ -142,7 +142,7 @@ namespace Service.Repository
                     var _pageIndex = new SqlParameter("pageIndex", city?.pageIndex);
                     var _VenueNo = new SqlParameter("VenueNo", city?.VenueNo);
 
-                    objresult = context.GetCitymaster.FromSqlRaw(
+                    Objresult = context.GetCitymaster.FromSqlRaw(
                     "Execute dbo.pro_GetCitymaster @cityNo,@stateNo,@CountryNo,@pageIndex,@VenueNo",
                     _cityNo, _stateNo, _CountryNo, _pageIndex, _VenueNo).ToList();
                 }
@@ -151,11 +151,11 @@ namespace Service.Repository
             {
                 MyDevException.Error(ex, "LocationRepository.GetCitymaster" + city.cityNo.ToString(),  ExceptionPriority.High, ApplicationType.REPOSITORY, 0, 0, 0);
             }
-            return objresult;
+            return Objresult;
         }
         public CityResponse InsertCitymaster(Citytab city)
         {
-            CityResponse objresult = new CityResponse();
+            CityResponse Objresult = new CityResponse();
             try
             {
                 using (var context = new MasterContext(_config.GetConnectionString(ConfigKeys.DefaultConnection)))
@@ -173,20 +173,20 @@ namespace Service.Repository
                     "Execute dbo.pro_InsertCitymaster @cityNo,@CityName,@stateNo,@CountryNo,@status,@sequenceNo,@userNo,@VenueNo",
                     _cityNo, _cityName, _stateNo, _CountryNo, _status, _sequenceNo, _userNo, _VenueNo).ToList();
 
-                    objresult.cityNo = obj[0].cityNo;
+                    Objresult.cityNo = obj[0].cityNo;
                 }
             }
             catch (Exception ex)
             {
                 MyDevException.Error(ex, "LocationRepository.InsertCitymaster" + city.cityNo.ToString(), ExceptionPriority.High, ApplicationType.REPOSITORY, 0, 0, 0);
             }
-            return objresult;
+            return Objresult;
         }
 
         //Place
         public List<PlaceLst> GetPlacemaster(PlaceRequest place)
         {
-            List<PlaceLst> objresult = new List<PlaceLst>();
+            List<PlaceLst> Objresult = new List<PlaceLst>();
             try
             {
                 using (var context = new MasterContext(_config.GetConnectionString(ConfigKeys.DefaultConnection)))
@@ -198,7 +198,7 @@ namespace Service.Repository
                     var _pageIndex = new SqlParameter("pageIndex", place?.pageIndex);
                     var _VenueNo = new SqlParameter("VenueNo", place?.VenueNo);
 
-                    objresult = context.GetPlacemaster.FromSqlRaw(
+                    Objresult = context.GetPlacemaster.FromSqlRaw(
                     "Execute dbo.pro_GetPlacemaster @placeMasterNo,@cityNo,@stateNo,@CountryNo,@pageIndex,@VenueNo",
                     _placeMasterNo, _cityNo, _stateNo, _CountryNo, _pageIndex, _VenueNo).ToList();
                 }
@@ -207,11 +207,11 @@ namespace Service.Repository
             {
                 MyDevException.Error(ex, "LocationRepository.GetPlacemaster" + place.placeMasterNo.ToString(), ExceptionPriority.High, ApplicationType.REPOSITORY, 0, 0, 0);
             }
-            return objresult;
+            return Objresult;
         }
         public PlaceResponse InsertPlacemaster(PlaceLst place)
         {
-            PlaceResponse objresult = new PlaceResponse();
+            PlaceResponse Objresult = new PlaceResponse();
             try
             {
                 using (var context = new MasterContext(_config.GetConnectionString(ConfigKeys.DefaultConnection)))
@@ -231,20 +231,20 @@ namespace Service.Repository
                     "Execute dbo.pro_InsertPlacemaster @placeMasterNo,@placeName,@cityNo,@pinCode,@stdCode,@stateNo,@CountryNo,@status,@userNo,@VenueNo",
                     _placeMasterNo, _placeName, _cityNo, _pinCode, _stdCode, _stateNo, _CountryNo, _status, _userNo, _VenueNo).ToList();
 
-                    objresult.placeMasterNo = obj[0].placeMasterNo;
+                    Objresult.placeMasterNo = obj[0].placeMasterNo;
                 }
             }
             catch (Exception ex)
             {
                 MyDevException.Error(ex, "LocationRepository.InsertPlacemaster"+place.placeMasterNo.ToString(), ExceptionPriority.High, ApplicationType.REPOSITORY, 0, 0, 0);
             }
-            return objresult;
+            return Objresult;
         }
 
         //Nationality
         public List<NationalityLst> GetNationalityMaster(NationalityRequest Nationality)
         {
-            List<NationalityLst> objresult = new List<NationalityLst>();
+            List<NationalityLst> Objresult = new List<NationalityLst>();
             try
             {
                 using (var context = new MasterContext(_config.GetConnectionString(ConfigKeys.DefaultConnection)))
@@ -253,7 +253,7 @@ namespace Service.Repository
                     var _pageIndex = new SqlParameter("pageIndex", Nationality?.pageIndex);
                     var _VenueNo = new SqlParameter("VenueNo", Nationality?.VenueNo);
                     
-                    objresult = context.GetNationalityMaster.FromSqlRaw(
+                    Objresult = context.GetNationalityMaster.FromSqlRaw(
                     "Execute dbo.pro_GetNationalityMaster @nationalityMasterNo,@pageIndex,@VenueNo",
                     _nationalityMasterNo, _pageIndex, _VenueNo).ToList();
                 }
@@ -262,11 +262,11 @@ namespace Service.Repository
             {
                 MyDevException.Error(ex, "LocationRepository.GetNationalityMaster" + Nationality.nationalityMasterNo.ToString(), ExceptionPriority.High, ApplicationType.REPOSITORY, 0, 0, 0);
             }
-            return objresult;
+            return Objresult;
         }
         public NationalityResponse InsertNationalitymaster(NationalityLst Nationality)
         {
-            NationalityResponse objresult = new NationalityResponse();
+            NationalityResponse Objresult = new NationalityResponse();
             try
             {
                 using (var context = new MasterContext(_config.GetConnectionString(ConfigKeys.DefaultConnection)))
@@ -282,14 +282,14 @@ namespace Service.Repository
                     "Execute dbo.pro_InsertNationalitymaster @nationalityMasterNo,@description,@status,@userNo,@sequenceNo,@VenueNo",
                     _nationalityMasterNo, _description, _status,_userNo,_sequenceNo, _VenueNo).ToList();
 
-                    objresult.nationalityMasterNo = obj[0].nationalityMasterNo;
+                    Objresult.nationalityMasterNo = obj[0].nationalityMasterNo;
                 }
             }
             catch (Exception ex)
             {
                 MyDevException.Error(ex, "LocationRepository.InsertNationalitymaster" + Nationality.nationalityMasterNo.ToString(), ExceptionPriority.High, ApplicationType.REPOSITORY, 0, 0, 0);
             }
-            return objresult;
+            return Objresult;
         }
     }
 }

@@ -47,16 +47,16 @@ namespace Service.API.SERVICE.Controllers
         }
 
         // Analyzer Vs Parameter Master Vs TestMapping Master //
-        public static ErrorResponse InsertAnalVsParamVsTest(responseTest responseTest)
+        public static ErrorResponse InsertAnalVsParamVsTest(ResponseTest ResponseTest)
         {
             ErrorResponse errorResponse = new ErrorResponse();
             List<string> errors = new List<string>();
 
-            if (responseTest.analyzerMasterNo == 0)
+            if (ResponseTest.analyzerMasterNo == 0)
                 errors.Add("Analyzer Master No is required");
-            if (responseTest.analyzerParamNo == 0)
+            if (ResponseTest.analyzerParamNo == 0)
                 errors.Add("Analyzer Param No is required");
-            if (responseTest.testNo == 0)
+            if (ResponseTest.testNo == 0)
                 errors.Add("Test No is required");
 
             if (errors.Count > 0)

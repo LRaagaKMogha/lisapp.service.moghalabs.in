@@ -37,13 +37,13 @@ namespace Service.API.SERVICE.Controllers.PatientInfo
         [Route("api/PatientInfo/GetPatientInfoDetails")]
         public ActionResult GetPatientInfoDetails(CommonFilterRequestDTO RequestItem)
         {
-            List<PatientInfoResponse> objresult = new List<PatientInfoResponse>();
+            List<PatientInfoResponse> Objresult = new List<PatientInfoResponse>();
             try
             {
                 var _errormsg = PatientInformationValidation.GetPatientInfoDetails(RequestItem);
                 if (!_errormsg.status)
                 {
-                    objresult = _patientInfoRepository.GetPatientInfoDetails(RequestItem);
+                    Objresult = _patientInfoRepository.GetPatientInfoDetails(RequestItem);
                 }
                 else
                     return BadRequest(_errormsg);
@@ -52,20 +52,20 @@ namespace Service.API.SERVICE.Controllers.PatientInfo
             {
                 MyDevException.Error(ex, "PatientInfoController.GetPatientInfoDetails", ExceptionPriority.Low, ApplicationType.APPSERVICE, RequestItem.VenueNo, RequestItem.VenueBranchNo, 0);
             }
-            return Ok(objresult);
+            return Ok(Objresult);
         }
 
         [HttpPost]
         [Route("api/PatientInfo/GetPatientListDetails")]
         public ActionResult GetPatientListDetails(CommonFilterRequestDTO RequestItem)
         {
-            List<PatientInfoListResponse> objresult = new List<PatientInfoListResponse>();
+            List<PatientInfoListResponse> Objresult = new List<PatientInfoListResponse>();
             try
             {
                 var _errormsg = PatientInformationValidation.GetPatientInfoDetails(RequestItem);
                 if (!_errormsg.status)
                 {
-                    objresult = _patientInfoRepository.GetPatientListDetails(RequestItem);
+                    Objresult = _patientInfoRepository.GetPatientListDetails(RequestItem);
                 }
                 else
                     return BadRequest(_errormsg);
@@ -74,23 +74,23 @@ namespace Service.API.SERVICE.Controllers.PatientInfo
             {
                 MyDevException.Error(ex, "PatientInfoController.GetPatientInfoDetails", ExceptionPriority.Low, ApplicationType.APPSERVICE, RequestItem.VenueNo, RequestItem.VenueBranchNo, 0);
             }
-            return Ok(objresult);
+            return Ok(Objresult);
         }
 
         [HttpPost]
         [Route("api/PatientInfo/GetCommonSearch")]
         public List<CustomSearchResponse> GetCommonSearch(CommonSearchRequest searchRequest)
         {
-            List<CustomSearchResponse> objresult = new List<CustomSearchResponse>();
+            List<CustomSearchResponse> Objresult = new List<CustomSearchResponse>();
             try
             {
-                objresult = _patientInfoRepository.GetCustomSearch(searchRequest);
+                Objresult = _patientInfoRepository.GetCustomSearch(searchRequest);
             }
             catch (Exception ex)
             {
                 MyDevException.Error(ex, "PatientInfoController.GetCommonSearch Values - " + searchRequest.SearchKey, ExceptionPriority.Low, ApplicationType.APPSERVICE, searchRequest.VenueNo, searchRequest.VenueBranchNo, 0);
             }
-            return objresult;
+            return Objresult;
         }
 
         [HttpPost]
@@ -110,23 +110,23 @@ namespace Service.API.SERVICE.Controllers.PatientInfo
         }
 
         [HttpPost]
-        [Route("api/PatientInfo/UpdatePatientDetails")]
-        public ActionResult<EditPatientResponse> UpdatePatientDetails(EditPatientRequest editPatientRequest)
+        [Route("api/PatientInfo/UpdatePatientdetails")]
+        public ActionResult<EditPatientResponse> UpdatePatientdetails(EditPatientRequest editPatientRequest)
         {
             EditPatientResponse editPatientResponse = new EditPatientResponse();
             try
             {
-                var _errormsg = PatientInformationValidation.UpdatePatientDetails(editPatientRequest);
+                var _errormsg = PatientInformationValidation.UpdatePatientdetails(editPatientRequest);
                 if (!_errormsg.status)
                 {
-                    editPatientResponse = _patientInfoRepository.UpdatePatientDetails(editPatientRequest);
+                    editPatientResponse = _patientInfoRepository.UpdatePatientdetails(editPatientRequest);
                 }
                 else
                     return BadRequest(_errormsg);
             }
             catch (Exception ex)
             {
-                MyDevException.Error(ex, "PatientInfoController.UpdatePatientDetails", ExceptionPriority.Low, ApplicationType.APPSERVICE, editPatientRequest.venueNo, editPatientRequest.venueBranchNo, 0);
+                MyDevException.Error(ex, "PatientInfoController.UpdatePatientdetails", ExceptionPriority.Low, ApplicationType.APPSERVICE, editPatientRequest.venueNo, editPatientRequest.venueBranchNo, 0);
             }
             return Ok(editPatientResponse);
         }
@@ -135,48 +135,48 @@ namespace Service.API.SERVICE.Controllers.PatientInfo
         [Route("api/PatientInfo/GetPatientVisitHistory")]
         public List<PatientInfoResponse> GetPatientVisitHistory(CommonFilterRequestDTO RequestItem)
         {
-            List<PatientInfoResponse> objresult = new List<PatientInfoResponse>();
+            List<PatientInfoResponse> Objresult = new List<PatientInfoResponse>();
             try
             {
-                objresult = _patientInfoRepository.GetPatientVisitHistory(RequestItem);
+                Objresult = _patientInfoRepository.GetPatientVisitHistory(RequestItem);
             }
             catch (Exception ex)
             {
                 MyDevException.Error(ex, "PatientInfoController.GetPatientVisitHistory", ExceptionPriority.Low, ApplicationType.APPSERVICE, RequestItem.VenueNo, RequestItem.VenueBranchNo, 0);
             }
-            return objresult;
+            return Objresult;
         }
 
         [HttpPost]
-        [Route("api/PatientInfo/GetServiceRejectReason")]
-        public List<ReasonDetailsResponse> GetServiceRejectReason(ReasonDetailsRequest RequestItem)
+        [Route("api/PatientInfo/GetserviceRejectReason")]
+        public List<ReasonDetailsResponse> GetserviceRejectReason(ReasonDetailsRequest RequestItem)
         {
-            List<ReasonDetailsResponse> objresult = new List<ReasonDetailsResponse>();
+            List<ReasonDetailsResponse> Objresult = new List<ReasonDetailsResponse>();
             try
             {
-                objresult = _patientInfoRepository.GetServiceRejectReason(RequestItem);
+                Objresult = _patientInfoRepository.GetserviceRejectReason(RequestItem);
             }
             catch (Exception ex)
             {
-                MyDevException.Error(ex, "PatientInfoController.GetServiceRejectReason", ExceptionPriority.Low, ApplicationType.APPSERVICE, RequestItem.VenueNo, RequestItem.VenueBranchNo, 0);
+                MyDevException.Error(ex, "PatientInfoController.GetserviceRejectReason", ExceptionPriority.Low, ApplicationType.APPSERVICE, RequestItem.VenueNo, RequestItem.VenueBranchNo, 0);
             }
-            return objresult;
+            return Objresult;
         }
 
         [HttpPost]
         [Route("api/PatientInfo/UpdateMasterData")]
         public int UpdateMasterData(SyncMasterRequestDTO RequestItem)
         {
-            int objresult = 0;
+            int Objresult = 0;
             try
             {
-                objresult = _patientInfoRepository.UpdateMasterData(RequestItem);
+                Objresult = _patientInfoRepository.UpdateMasterData(RequestItem);
             }
             catch (Exception ex)
             {
                 MyDevException.Error(ex, "PatientInfoController.MasterDataSync", ExceptionPriority.Low, ApplicationType.APPSERVICE, RequestItem.venueNo, RequestItem.venueBranchNo, 0);
             }
-            return objresult;
+            return Objresult;
         }
 
         [HttpPost]
@@ -199,16 +199,16 @@ namespace Service.API.SERVICE.Controllers.PatientInfo
         [Route("api/PatientInfo/SavePatientsMaster")]
         public int SavePatientsMaster(PatientsMasterSave RequestItem)
         {
-            int objresult = 0;
+            int Objresult = 0;
             try
             {
-                objresult = _patientInfoRepository.SavePatientsMaster(RequestItem);
+                Objresult = _patientInfoRepository.SavePatientsMaster(RequestItem);
             }
             catch (Exception ex)
             {
                 MyDevException.Error(ex, "PatientInfoController.SavePatientsMaster", ExceptionPriority.Low, ApplicationType.APPSERVICE, RequestItem.VenueNo, RequestItem.VenueBranchNo, 0);
             }
-            return objresult;
+            return Objresult;
         }
 
         [HttpPost]
@@ -504,45 +504,45 @@ namespace Service.API.SERVICE.Controllers.PatientInfo
         [Route("api/PatientInfo/GetHCAppointsList")]
         public List<ExternalHCAppointment> GetHCAppointsList(CommonFilterRequestDTO RequestItem)
         {
-            List<ExternalHCAppointment> objresult = new List<ExternalHCAppointment>();
+            List<ExternalHCAppointment> Objresult = new List<ExternalHCAppointment>();
             try
             {
-                objresult = _IExternalAPIRepository.GetHCAppointsList(RequestItem);
+                Objresult = _IExternalAPIRepository.GetHCAppointsList(RequestItem);
             }
             catch (Exception ex)
             {
                 MyDevException.Error(ex, "PatientInfoController.GetHCAppointsList", ExceptionPriority.High, ApplicationType.APPSERVICE, RequestItem.VenueNo, RequestItem.VenueBranchNo, 0);
             }
-            return objresult;
+            return Objresult;
         }
         
         [HttpPost]
         [Route("api/PatientInfo/UpdateRiderStatus")]
         public ExternalCommonResponse UpdateRiderStatus(ExternalRiderStatusRequest results)
         {
-            ExternalCommonResponse objresult = new ExternalCommonResponse();
+            ExternalCommonResponse Objresult = new ExternalCommonResponse();
             try
             {
-                objresult = _IExternalAPIRepository.UpdateRiderStatus(results);
+                Objresult = _IExternalAPIRepository.UpdateRiderStatus(results);
             }
             catch (Exception ex)
             {
                 MyDevException.Error(ex, "PatientInfoController.GetHCAppointsList", ExceptionPriority.High, ApplicationType.APPSERVICE, results.VenueNo, results.VenueBranchNo, results.UserNo);
             }
-            return objresult;
+            return Objresult;
         }
 
         [HttpPost]
         [Route("api/PatientInfo/SavePatientMerge")]
         public ActionResult<PatientmergeResponseDTO> SavePatientMerge(PatientmergeDTO RequestItem)
         {
-            PatientmergeResponseDTO objresult = new PatientmergeResponseDTO();
+            PatientmergeResponseDTO Objresult = new PatientmergeResponseDTO();
             try
             {
-                var _errormsg = MassRegistrationValidation.SavePatientMerge(RequestItem);
+                var _errormsg = massregistrationValidation.SavePatientMerge(RequestItem);
                 if (!_errormsg.status)
                 {
-                    objresult = _patientInfoRepository.SavePatientMerge(RequestItem);
+                    Objresult = _patientInfoRepository.SavePatientMerge(RequestItem);
                 }
                 else
                     return BadRequest(_errormsg);
@@ -551,7 +551,7 @@ namespace Service.API.SERVICE.Controllers.PatientInfo
             {
                 MyDevException.Error(ex, "PatientInfoController.SavePatientMerge", ExceptionPriority.Low, ApplicationType.APPSERVICE, RequestItem.venueno, RequestItem.venuebranchno, 0);
             }
-            return Ok(objresult);
+            return Ok(Objresult);
         }
 
         [HttpPost]
@@ -574,16 +574,16 @@ namespace Service.API.SERVICE.Controllers.PatientInfo
         [Route("api/PatientInfo/GetPatientSampleInfo")]
         public List<GetSampleResponse> GetPatientSampleInfo(GetSampleRequest RequestItem)
         {
-            List<GetSampleResponse> objresult = new List<GetSampleResponse>();
+            List<GetSampleResponse> Objresult = new List<GetSampleResponse>();
             try
             {
-                objresult = _patientInfoRepository.GetPatientSampleInfo(RequestItem);
+                Objresult = _patientInfoRepository.GetPatientSampleInfo(RequestItem);
             }
             catch (Exception ex)
             {
                 MyDevException.Error(ex, "PatientInfoController.GetPatientSampleInfo", ExceptionPriority.Low, ApplicationType.APPSERVICE, RequestItem.VenueNo, 0, 0);
             }
-            return objresult;
+            return Objresult;
         }
         
         [HttpPost]
@@ -607,16 +607,16 @@ namespace Service.API.SERVICE.Controllers.PatientInfo
         [Route("api/PatientInfo/GetPatientVisitActionHistory")]
         public List<GetPatientVisitActionHistoryResponse> GetPatientVisitActionHistory(CommonFilterRequestDTO RequestItem)
         {
-            List<GetPatientVisitActionHistoryResponse> objresult = new List<GetPatientVisitActionHistoryResponse>();
+            List<GetPatientVisitActionHistoryResponse> Objresult = new List<GetPatientVisitActionHistoryResponse>();
             try
             {
-                objresult = _patientInfoRepository.GetPatientVisitActionHistory(RequestItem);
+                Objresult = _patientInfoRepository.GetPatientVisitActionHistory(RequestItem);
             }
             catch (Exception ex)
             {
                 MyDevException.Error(ex, "PatientInfoController.GetPatientVisitActionHistory", ExceptionPriority.Low, ApplicationType.APPSERVICE, RequestItem.VenueNo, RequestItem.VenueBranchNo, 0);
             }
-            return objresult;
+            return Objresult;
         }
         
         [HttpPost]
@@ -636,13 +636,13 @@ namespace Service.API.SERVICE.Controllers.PatientInfo
         }
 
         [HttpPost]
-        [Route("api/patientInfo/UpdateHCPatientDetails")]
-        public ExternalupdateCommonResponse UpdateHCPatientDetails(UpdateHcpatient results)
+        [Route("api/patientInfo/UpdateHCPatientdetails")]
+        public ExternalupdateCommonResponse UpdateHCPatientdetails(UpdateHcpatient results)
         {
             ExternalupdateCommonResponse result = new ExternalupdateCommonResponse();
             try
             {
-                result = _IExternalAPIRepository.UpdateHCPatientDetails(results);
+                result = _IExternalAPIRepository.UpdateHCPatientdetails(results);
             }
             catch (Exception ex)
             {
@@ -655,10 +655,10 @@ namespace Service.API.SERVICE.Controllers.PatientInfo
         [Route("api/PatientInfo/GetHcDocumentsDetails")]
         public List<GetHcDocumentsDetailsResponse> GetHcDocumentsDetails(GetHcDocumentsDetailsRequest requestItem)
         {
-            List<GetHcDocumentsDetailsResponse> objresult = new List<GetHcDocumentsDetailsResponse>();
+            List<GetHcDocumentsDetailsResponse> Objresult = new List<GetHcDocumentsDetailsResponse>();
             try
             {
-                objresult = _patientInfoRepository.GetHcDocumentsDetails(requestItem);
+                Objresult = _patientInfoRepository.GetHcDocumentsDetails(requestItem);
             }
             catch (Exception ex)
             {
@@ -666,7 +666,7 @@ namespace Service.API.SERVICE.Controllers.PatientInfo
                     ExceptionPriority.Low, ApplicationType.APPSERVICE,
                     requestItem.VenueNo, requestItem.VenueBranchNo, 0);
             }
-            return objresult;
+            return Objresult;
         }
         
         [HttpPost]
@@ -726,16 +726,16 @@ namespace Service.API.SERVICE.Controllers.PatientInfo
         [Route("api/PatientInfo/UpdateStatusApptDate")]
         public UpdateStatusApptDateResponse UpdateStatusApptDate(UpdateStatusApptDateRequest results)
         {
-            UpdateStatusApptDateResponse objresult = new UpdateStatusApptDateResponse();
+            UpdateStatusApptDateResponse Objresult = new UpdateStatusApptDateResponse();
             try
             {
-                objresult = _IExternalAPIRepository.UpdateStatusApptDate(results);
+                Objresult = _IExternalAPIRepository.UpdateStatusApptDate(results);
             }
             catch (Exception ex)
             {
                 MyDevException.Error(ex, "PatientInfoController.UpdateStatusApptDate", ExceptionPriority.High, ApplicationType.APPSERVICE, results.VenueNo, results.VenueBranchNo, results.UserNo);
             }
-            return objresult;
+            return Objresult;
         }
 
         [CustomAuthorize("LIMSFRONTOFFICE,LIMSDEFAULT")]
@@ -743,13 +743,13 @@ namespace Service.API.SERVICE.Controllers.PatientInfo
         [Route("api/PatientInfo/GeteLabPatientInfoList")]
         public ActionResult GeteLabPatientInfoList(PatientInfoRequestDTO RequestItem)
         {
-            List<PatientInfoeLabResponseDTO> objresult = new List<PatientInfoeLabResponseDTO>();
+            List<PatientInfoeLabResponseDTO> Objresult = new List<PatientInfoeLabResponseDTO>();
             try
             {
                 var _errormsg = PatientInformationValidation.GeteLabPatientInfoDetails(RequestItem);
                 if (!_errormsg.status)
                 {
-                    objresult = _patientInfoRepository.GeteLabPatientInfoList(RequestItem);
+                    Objresult = _patientInfoRepository.GeteLabPatientInfoList(RequestItem);
                 }
                 else
                     return BadRequest(_errormsg);
@@ -758,22 +758,22 @@ namespace Service.API.SERVICE.Controllers.PatientInfo
             {
                 MyDevException.Error(ex, "PatientInfoController.GeteLabPatientInfoList", ExceptionPriority.Low, ApplicationType.APPSERVICE, RequestItem.VenueNo, RequestItem.VenueBranchNo, 0);
             }
-            return Ok(objresult);
+            return Ok(Objresult);
         }
         [HttpPost]
         [Route("api/PatientInfo/GetSlotBooking")]
         public List<TestSlotBookingDTO> GetSlotBooking(CommonFilterRequestDTO RequestItem)
         {
-            List<TestSlotBookingDTO> objresult = new List<TestSlotBookingDTO>();
+            List<TestSlotBookingDTO> Objresult = new List<TestSlotBookingDTO>();
             try
             {
-                objresult = _IExternalAPIRepository.GetSlotBooking(RequestItem);
+                Objresult = _IExternalAPIRepository.GetSlotBooking(RequestItem);
             }
             catch (Exception ex)
             {
                 MyDevException.Error(ex, "PatientInfoController.GetSlotBooking", ExceptionPriority.High, ApplicationType.APPSERVICE, RequestItem.VenueNo, RequestItem.VenueBranchNo, 0);
             }
-            return objresult;
+            return Objresult;
         }
         [HttpPost]
         [Route("api/PatientInfo/InsertTestSlotBooking")]

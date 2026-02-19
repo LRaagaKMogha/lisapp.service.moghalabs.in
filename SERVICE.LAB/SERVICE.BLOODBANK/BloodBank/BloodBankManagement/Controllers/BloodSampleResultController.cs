@@ -38,14 +38,14 @@ namespace BloodBankManagement.Controllers
             request.BloodSampleResults.ForEach(sampleResult =>
             {
                 if (errors == null) errors = new List<Error>();
-                ErrorOr<Models.BloodSampleResult> sampleRequestResult = Models.BloodSampleResult.From(sampleResult, httpContextAccessor.HttpContext!);
-                if (sampleRequestResult.IsError)
+                ErrorOr<Models.BloodSampleResult> sampleRequestresult = Models.BloodSampleResult.From(sampleResult, httpContextAccessor.HttpContext!);
+                if (sampleRequestresult.IsError)
                 {
-                    errors.AddRange(sampleRequestResult.Errors);
+                    errors.AddRange(sampleRequestresult.Errors);
                 }
                 else
                 {
-                    bloodsampleResults.Add(sampleRequestResult.Value);
+                    bloodsampleResults.Add(sampleRequestresult.Value);
                 }
             });
 
@@ -63,14 +63,14 @@ namespace BloodBankManagement.Controllers
             List<Error>? errors = errors = new List<Error>(); ;
             request.BloodSampleResults.ForEach(sampleResult =>
             {
-                ErrorOr<Models.BloodSampleResult> sampleRequestResult = Models.BloodSampleResult.From(sampleResult, httpContextAccessor.HttpContext!);
-                if (sampleRequestResult.IsError)
+                ErrorOr<Models.BloodSampleResult> sampleRequestresult = Models.BloodSampleResult.From(sampleResult, httpContextAccessor.HttpContext!);
+                if (sampleRequestresult.IsError)
                 {
-                    errors.AddRange(sampleRequestResult.Errors);
+                    errors.AddRange(sampleRequestresult.Errors);
                 }
                 else
                 {
-                    bloodsampleResults.Add(sampleRequestResult.Value);
+                    bloodsampleResults.Add(sampleRequestresult.Value);
                 }
             });
             if (errors.Count > 0)

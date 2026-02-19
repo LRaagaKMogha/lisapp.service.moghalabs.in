@@ -1,9 +1,5 @@
-﻿using System;
-using Service.Common;
-using Service.Model.Sample;
+﻿using Service.Common;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata;
-using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace Service.Model.EF
 {
@@ -19,56 +15,52 @@ namespace Service.Model.EF
         {
         }
 
-        public virtual DbSet<lstsearchresultvisit> SearchResultVisit { get; set; }
-        public virtual DbSet<lstresultvisitdbl> GetResultVisit { get; set; }
-        public virtual DbSet<deltaresult> GetDeltaResult { get; set; }
-        public virtual DbSet<lsthistorydbl> GetVisitHistoy { get; set; }
-        public virtual DbSet<lstresultdbl> GetResult { get; set; }
-        public virtual DbSet<resultrtn> InsertResult { get; set; }
-        public virtual DbSet<objresultmbdbl> GetResultMB { get; set; }
-        public virtual DbSet<orgtypeantibiotic> GetOrgTypeAntibiotic { get; set; }
-        public virtual DbSet<resultrtn> InsertResultMB { get; set; }
-        public virtual DbSet<objresulttemplatedbl> GetResultTemplate { get; set; }
-        public virtual DbSet<resultrtn> InsertResultTemplate { get; set; }
+        public virtual DbSet<Lstsearchresultvisit> SearchResultVisit { get; set; }
+        public virtual DbSet<Lstresultvisitdbl> GetResultVisit { get; set; }
+        public virtual DbSet<Deltaresult> GetDeltaresult { get; set; }
+        public virtual DbSet<Lsthistorydbl> GetVisitHistoy { get; set; }
+        public virtual DbSet<Lstresultdbl> GetResult { get; set; }
+        public virtual DbSet<Resultrtn> InsertResult { get; set; }
+        public virtual DbSet<Objresultmbdbl> GetResultMB { get; set; }
+        public virtual DbSet<Orgtypeantibiotic> GetOrgtypeantibiotic { get; set; }
+        public virtual DbSet<Resultrtn> InsertResultMB { get; set; }
+        public virtual DbSet<Objresulttemplatedbl> GetResultTemplate { get; set; }
+        public virtual DbSet<Resultrtn> InsertResultTemplate { get; set; }
         public virtual DbSet<CustomerMsgDetails> GetCustomerMsgDetails { get; set; }
         public virtual DbSet<ExternalResultResponseDTO> InsertExternalResult { get; set; }
         public virtual DbSet<CreateTemplateResultDTO> GetExternalTemplateResult { get; set; }
-        public virtual DbSet<lstrecalldbl> GetRecall { get; set; }
-        public virtual DbSet<recallDataResponse> InsertRecall { get; set; }
-
-        public virtual DbSet<objbulkresultdbl> GetBulkResult { get; set; }
-
-        public virtual DbSet<covidresult> GetCovidWorkOrder { get; set; }
-        public virtual DbSet<resultrtn> InsertCovidWorkOrder { get; set; }
+        public virtual DbSet<Lstrecalldbl> GetRecall { get; set; }
+        public virtual DbSet<RecallDataResponse> InsertRecall { get; set; }
+        public virtual DbSet<Objbulkresultdbl> GetBulkResult { get; set; }
+        public virtual DbSet<Covidresult> GetCovidWorkOrder { get; set; }
+        public virtual DbSet<Resultrtn> InsertCovidWorkOrder { get; set; }
         public virtual DbSet<ApprovalDoctorResponse> GetApprovalDoctorList { get; set; }
         public virtual DbSet<PatientDataImpressionResponse> GetPatientImpressionList { get; set; }
         public virtual DbSet<PatientImpressionResponse> GetPatientImpressionoutput { get; set; }
-        public virtual DbSet<mergeresultresponse> GetMergedResults { get; set; }
-        public virtual DbSet<savemergeresultresponse> InsertMergedResults { get; set; }
-        public virtual DbSet<culturehistoryreponse> GetCultureHistory { get; set; }
-        public virtual DbSet<lstresultdbl> GetAnalyserResult { get; set; }
-        public virtual DbSet<resultrtn> InsertAnalyserResult { get; set; }
-        public virtual DbSet<lstbulkresultdbl> GetBulkEntryResult { get; set; }
+        public virtual DbSet<Mergeresultresponse> GetMergedResults { get; set; }
+        public virtual DbSet<Savemergeresultresponse> InsertMergedResults { get; set; }
+        public virtual DbSet<Culturehistoryreponse> GetCultureHistory { get; set; }
+        public virtual DbSet<Lstresultdbl> GetAnalyserResult { get; set; }
+        public virtual DbSet<Resultrtn> InsertAnalyserResult { get; set; }
+        public virtual DbSet<Lstbulkresultdbl> GetBulkEntryResult { get; set; }
         public virtual DbSet<BulkResultSaveResponse> InsertBulkResult { get; set; }
         public virtual DbSet<BulkCultureResultResponse> GetCultureBulkEntryResults { get; set; }
         public virtual DbSet<BulkCultureResultSaveResponse> InsertCultureBulkResult { get; set; }
         public virtual DbSet<ResultforVisitMergeResponse> GetVisitMergeRequest { get; set; }
         public virtual DbSet<InsertVisitMergeResponse> SaveVisitMergeResponse { get; set; }
-        public virtual DbSet<lstresultdbl> GetResultExceptUserMapped { get; set; }
+        public virtual DbSet<Lstresultdbl> GetResultExceptUserMapped { get; set; }
         public virtual DbSet<InvestigationAvailResponse> CheckInvestigationReport { get; set; }
-        public virtual DbSet<logicCommentsRespose> GetLogicComment { get; set; }
+        public virtual DbSet<LogicCommentsRespose> GetLogicComment { get; set; }
         public virtual DbSet<ExternalCultureResultResponseDTO> InsertCultureInterfaceResult { get; set; }
-        public virtual DbSet<extrasubtestflagbasedformularesponse> GetExtrasubtestbasedformula { get; set; }
-        public virtual DbSet<saveinfectioncontroldetresponse> InsertInfectionControlAvailData { get; set; }
+        public virtual DbSet<Extrasubtestflagbasedformularesponse> GetExtrasubtestbasedformula { get; set; }
+        public virtual DbSet<Saveinfectioncontroldetresponse> InsertInfectionControlAvailData { get; set; }
         public virtual DbSet<GetOldResultThroughDIResponse> GetOldResultThroughDI { get; set; }
         public virtual DbSet<LstExternalResultCalculation> GetExternalFormulaOrderDetails { get; set; }
-        public virtual DbSet<ExternalApprovalResponseDTO> GetExternalApprovalResponseDTO { get; set; }
-       
+        public virtual DbSet<ExternalApprovalResponseDTO> GetExternalApprovalResponseDTO { get; set; }       
         public virtual DbSet<CheckFormulaIsAvailable> CheckFormulaIsAvailable_ForCalculation { get; set; }
-        //public virtual DbSet<RecallTestDetailsResponse> RecallTestDetailsResponse { get; set; }
         public virtual DbSet<PBFTestResponse> GetPBFAutoComments { get; set; }
-        public virtual DbSet<objUpdPartialEntryFlagResponse> InsertPartialResultFlag { get; set; }
-        public virtual DbSet<PendingVisitDetailsRes> PendingVisitDetailsLst { get; set; }
+        public virtual DbSet<ObjUpdPartialEntryFlagResponse> InsertPartialResultFlag { get; set; }
+        public virtual DbSet<PendingVisitdetailsRes> PendingVisitdetailsLst { get; set; }
         public virtual DbSet<OutSourceAPIDTOResponse> GetOutsourceDetailsAPI { get; set; }
         public virtual DbSet<AckOutSourceAPIDTOResponse> AckOutSourceAPIList { get; set; }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -83,59 +75,59 @@ namespace Service.Model.EF
         {
             modelBuilder.HasAnnotation("ProductVersion", "2.2.3-servicing-35854");
 
-            modelBuilder.Entity<lstsearchresultvisit>(entity =>
+            modelBuilder.Entity<Lstsearchresultvisit>(entity =>
             {
                 entity.HasKey(e => e.patientvisitno);
                 entity.ToTable("pro_SearchResultVisit");
                 entity.Property(e => e.patientvisitno).HasColumnName("patientvisitno");
             });
 
-            modelBuilder.Entity<lstresultvisitdbl>(entity =>
+            modelBuilder.Entity<Lstresultvisitdbl>(entity =>
             {
                 entity.HasKey(e => e.rowno);
                 entity.ToTable("pro_GetResultVisit");
                 entity.Property(e => e.rowno).HasColumnName("rowno");
             });
 
-            modelBuilder.Entity<deltaresult>(entity =>
+            modelBuilder.Entity<Deltaresult>(entity =>
             {
                 entity.HasKey(e => e.rowno);
-                entity.ToTable("pro_GetDeltaResult");
+                entity.ToTable("pro_GetDeltaresult");
                 entity.Property(e => e.rowno).HasColumnName("rowno");
             });
 
-            modelBuilder.Entity<lsthistorydbl>(entity =>
+            modelBuilder.Entity<Lsthistorydbl>(entity =>
             {
                 entity.HasKey(e => e.rowno);
                 entity.ToTable("pro_GetVisitHistoy");
                 entity.Property(e => e.rowno).HasColumnName("rowno");
             });
 
-            modelBuilder.Entity<lstresultdbl>(entity =>
+            modelBuilder.Entity<Lstresultdbl>(entity =>
             {
                 entity.HasKey(e => e.rowno);
                 entity.ToTable("pro_GetResult");
                 entity.Property(e => e.rowno).HasColumnName("rowno");
             });
 
-            modelBuilder.Entity<resultrtn>(entity =>
+            modelBuilder.Entity<Resultrtn>(entity =>
             {
                 entity.HasKey(e => e.patientvisitno);
                 entity.ToTable("pro_InsertResult");
                 entity.Property(e => e.patientvisitno).HasColumnName("patientvisitno");
             });
 
-            modelBuilder.Entity<objresultmbdbl>(entity =>
+            modelBuilder.Entity<Objresultmbdbl>(entity =>
             {
                 entity.HasKey(e => e.rowno);
                 entity.ToTable("pro_GetResultMB");
                 entity.Property(e => e.rowno).HasColumnName("rowno");
             });
 
-            modelBuilder.Entity<orgtypeantibiotic>(entity =>
+            modelBuilder.Entity<Orgtypeantibiotic>(entity =>
             {
                 entity.HasKey(e => e.antibioticno);
-                entity.ToTable("pro_GetOrgTypeAntibiotic");
+                entity.ToTable("pro_GetOrgtypeantibiotic");
                 entity.Property(e => e.antibioticno).HasColumnName("antibioticno");
             });
 
@@ -146,21 +138,21 @@ namespace Service.Model.EF
                 entity.Property(e => e.rowno).HasColumnName("rowno");
             });
             
-            modelBuilder.Entity<resultrtn>(entity =>
+            modelBuilder.Entity<Resultrtn>(entity =>
             {
                 entity.HasKey(e => e.patientvisitno);
                 entity.ToTable("pro_InsertResultMB");
                 entity.Property(e => e.patientvisitno).HasColumnName("patientvisitno");
             });
 
-            modelBuilder.Entity<objresulttemplatedbl>(entity =>
+            modelBuilder.Entity<Objresulttemplatedbl>(entity =>
             {
                 entity.HasKey(e => e.patientvisitno);
                 entity.ToTable("pro_GetResultTemplate");
                 entity.Property(e => e.patientvisitno).HasColumnName("patientvisitno");
             });
 
-            modelBuilder.Entity<resultrtn>(entity =>
+            modelBuilder.Entity<Resultrtn>(entity =>
             {
                 entity.HasKey(e => e.patientvisitno);
                 entity.ToTable("pro_InsertResultTemplate");
@@ -181,14 +173,14 @@ namespace Service.Model.EF
                 entity.Property(e => e.orderlistno).HasColumnName("orderlistno");
             });
 
-            modelBuilder.Entity<lstrecalldbl>(entity =>
+            modelBuilder.Entity<Lstrecalldbl>(entity =>
             {
                 entity.HasKey(e => e.rowno);
                 entity.ToTable("pro_GetRecallVisit");
                 entity.Property(e => e.rowno).HasColumnName("rowno");
             });
 
-            modelBuilder.Entity<recallDataResponse>(entity =>
+            modelBuilder.Entity<RecallDataResponse>(entity =>
             {
                 entity.HasKey(r => r.patientvisitno);
                 entity.ToTable("pro_InsertRecall");
@@ -200,21 +192,21 @@ namespace Service.Model.EF
                 entity.HasKey(r => r.orderListNo);
             });
 
-            modelBuilder.Entity<objbulkresultdbl>(entity =>
+            modelBuilder.Entity<Objbulkresultdbl>(entity =>
             {
                 entity.HasKey(e => e.patientvisitno);
                 entity.ToTable("pro_GetBulkResult_Bk");
                 entity.Property(e => e.patientvisitno).HasColumnName("patientvisitno");
             });
 
-            modelBuilder.Entity<covidresult>(entity =>
+            modelBuilder.Entity<Covidresult>(entity =>
             {
                 entity.HasKey(e => e.PatientVisitNo);
                 entity.ToTable("pro_GetCovidWorkOrder");
                 entity.Property(e => e.PatientVisitNo).HasColumnName("PatientVisitNo");
             });
 
-            modelBuilder.Entity<resultrtn>(entity =>
+            modelBuilder.Entity<Resultrtn>(entity =>
             {
                 entity.HasKey(e => e.patientvisitno);
                 entity.ToTable("pro_GetInsertWorkOrder");
@@ -239,37 +231,37 @@ namespace Service.Model.EF
                 entity.Property(e => e.Row_num).HasColumnName("Row_num");
                 entity.Property(e => e.raceName).HasColumnName("raceName");
             });
-            modelBuilder.Entity<mergeresultresponse>(entity =>
+            modelBuilder.Entity<Mergeresultresponse>(entity =>
             {
                 entity.HasKey(e => e.rowNo);
                 entity.ToTable("pro_GetMergeResult");
                 entity.Property(e => e.rowNo).HasColumnName("RowNo");
             });
-            modelBuilder.Entity<savemergeresultresponse>(entity =>
+            modelBuilder.Entity<Savemergeresultresponse>(entity =>
             {
                 entity.HasKey(e => e.status);
                 entity.ToTable("pro_InsertMergedResult");
                 entity.Property(e => e.status).HasColumnName("Status");
             });
-            modelBuilder.Entity<culturehistoryreponse>(entity =>
+            modelBuilder.Entity<Culturehistoryreponse>(entity =>
             {
                 entity.HasKey(e => e.rowNo);
                 entity.ToTable("pro_GetCultureHistory");
                 entity.Property(e => e.rowNo).HasColumnName("rowNo");
             });
-            modelBuilder.Entity<lstresultdbl>(entity =>
+            modelBuilder.Entity<Lstresultdbl>(entity =>
             {
                 entity.HasKey(e => e.rowno);
                 entity.ToTable("pro_GetAnalyserResult");
                 entity.Property(e => e.rowno).HasColumnName("rowno");
             });
-            modelBuilder.Entity<resultrtn>(entity =>
+            modelBuilder.Entity<Resultrtn>(entity =>
             {
                 entity.HasKey(e => e.patientvisitno);
                 entity.ToTable("pro_InsertAnalyserResult");
                 entity.Property(e => e.patientvisitno).HasColumnName("patientvisitno");
             });
-            modelBuilder.Entity<lstbulkresultdbl>(entity =>
+            modelBuilder.Entity<Lstbulkresultdbl>(entity =>
             {
                 entity.HasKey(e => e.rowno);
                 entity.ToTable("pro_GetBulkResultEntry");
@@ -305,7 +297,7 @@ namespace Service.Model.EF
                 entity.ToTable("pro_InsertResultforVisitMerge");
                 entity.Property(e => e.OStatus).HasColumnName("OStatus");
             });
-            modelBuilder.Entity<lstresultdbl>(entity =>
+            modelBuilder.Entity<Lstresultdbl>(entity =>
             {
                 entity.HasKey(e => e.rowno);
                 entity.ToTable("pro_GetResultExceptUserMapped");
@@ -317,7 +309,7 @@ namespace Service.Model.EF
                 entity.ToTable("Pro_CheckInfectionControlAvail");
                 entity.Property(e => e.status).HasColumnName("status");
             });
-            modelBuilder.Entity<logicCommentsRespose>(entity =>
+            modelBuilder.Entity<LogicCommentsRespose>(entity =>
             {
                 entity.HasKey(e => e.LogicCommentsId);
                 entity.ToTable("pro_GetLogicComments");
@@ -329,13 +321,13 @@ namespace Service.Model.EF
                 entity.ToTable("pro_InsertMBInterfaceResults");
                 entity.Property(e => e.Status).HasColumnName("Status");
             });
-            modelBuilder.Entity<extrasubtestflagbasedformularesponse>(entity =>
+            modelBuilder.Entity<Extrasubtestflagbasedformularesponse>(entity =>
             {
                 entity.HasKey(e => e.id);
-                entity.ToTable("pro_GetIndividualTestFormulaJson");
+                entity.ToTable("pro_GetIndividualTestFormulajson");
                 entity.Property(e => e.id).HasColumnName("id");
             });
-            modelBuilder.Entity<saveinfectioncontroldetresponse>(entity =>
+            modelBuilder.Entity<Saveinfectioncontroldetresponse>(entity =>
             {
                 entity.HasKey(e => e.OutStatus);
                 entity.ToTable("Pro_InserInfectionControlAvailData");
@@ -371,16 +363,16 @@ namespace Service.Model.EF
                 entity.ToTable("pro_GetPBFAutoCommentResult");
                 entity.Property(e => e.status).HasColumnName("status");
             });
-            modelBuilder.Entity<objUpdPartialEntryFlagResponse>(entity =>
+            modelBuilder.Entity<ObjUpdPartialEntryFlagResponse>(entity =>
             {
                 entity.HasKey(e => e.patientvisitno);
                 entity.ToTable("pro_UpdatePartialResultFlag");
                 entity.Property(e => e.patientvisitno).HasColumnName("patientvisitno");
             });
-            modelBuilder.Entity<PendingVisitDetailsRes>(entity =>
+            modelBuilder.Entity<PendingVisitdetailsRes>(entity =>
             {
                 entity.HasKey(e => e.RowNo);
-                entity.ToTable("pro_GetPendingVisitDetails");
+                entity.ToTable("pro_GetPendingVisitdetails");
                 entity.Property(e => e.RowNo).HasColumnName("RowNo");
             });
             modelBuilder.Entity<OutSourceAPIDTOResponse>(entity =>

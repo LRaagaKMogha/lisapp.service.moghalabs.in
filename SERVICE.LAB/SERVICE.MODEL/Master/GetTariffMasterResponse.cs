@@ -29,7 +29,7 @@ namespace Service.Model
         //public string RejectedOn { get; set; }
         //public string RejectReason { get; set; }
     }
-    public class GetServices
+    public class Getservices
     {
         public int? sNo { get; set; }
         public int? testNo { get; set; }

@@ -11,7 +11,6 @@ namespace Service.Model
         public string Ipaddress { get; set; }
         public int VenueBranchNo { get; set; }
         public string ClientSysteminfo { get; set; }
-
     }
     public partial class UserResponseEntity
     {
@@ -19,13 +18,13 @@ namespace Service.Model
         public int UserNo { get; set; }
         public string UserName { get; set; }
         public string LoginName { get; set; }
-        public string? DomainCode { get; set; }
+        public string DomainCode { get; set; }
         public int VenueNo { get; set; }
         public int VenueBranchNo { get; set; }
         public bool? IsSuperAdmin { get; set; }
         public bool? IsAdmin { get; set; }
-        public string? Token { get; set; }
-        public string? RefreshToken { get; set; }
+        public string Token { get; set; }
+        public string RefreshToken { get; set; }
         public bool? IsProvisional { get; set; }
         public string menuNos { get; set; }
         public bool? IsEditLabResults { get; set; }
@@ -45,7 +44,7 @@ namespace Service.Model
         public bool? IsStockAdjustmentApproval { get; set; }
         public bool? IsConsumptionApproval { get; set; }
         public bool? IsClientApproval { get; set; }
-        public string? Gender { get; set; }
+        public string Gender { get; set; }
     }
     public class ChangePasswordEntity
     {
@@ -56,7 +55,6 @@ namespace Service.Model
         public int venueBranchNo { get; set; }
         public int usertype { get; set; }
         public int changeUserNo { get; set; }
-
     }
     public partial class UserClaimsIdentity : Shared.User
     {
@@ -70,10 +68,10 @@ namespace Service.Model
         public int UserNo { get; set; }
         public string UserName { get; set; }
         public string LoginName { get; set; }
-        public string? Address { get; set; }
-        public string? PinCode { get; set; }
+        public string Address { get; set; }
+        public string PinCode { get; set; }
         public string Email { get; set; }
-        public string? PhoneNo { get; set; }
+        public string PhoneNo { get; set; }
         public bool IsLogin { get; set; }
         public bool IsRider { get; set; }
         public bool IsMarketing { get; set; }
@@ -87,10 +85,10 @@ namespace Service.Model
         public bool DueReport { get; set; }
         public string dashBoardDetailsJson { get; set; }
         public String branchJson { get; set; }
-        public string? DefaultBranch { get; set; }
+        public string DefaultBranch { get; set; }
         public int Discount { get; set; }
         public int roleId { get; set; }
-        public string? roleName { get; set; }
+        public string roleName { get; set; }
         public string dob { get; set; }
         public string doj { get; set; }
         public string dor { get; set; }
@@ -129,8 +127,6 @@ namespace Service.Model
     {
         public int status { get; set; }
     }
-
-
     public partial class UserMenuMappingDTO
     {
         public Int64 Row_Num { get; set; }
@@ -151,7 +147,6 @@ namespace Service.Model
         public string TaskName { get; set; }
         public bool TaskStatus { get; set; }
     }
-
     public partial class UserModuleDTO
     {
         public int ModuleId { get; set; }
@@ -181,15 +176,15 @@ namespace Service.Model
         public int userNo { get; set; }
         public int venueNo { get; set; }
         public int venueBranchNo { get; set; }
-        public List<usermenudata> usermenuitem { get; set; }
+        public List<Usermenudata> usermenuitem { get; set; }
         public int MenuUserNo { get; set; }
     }
-    public partial class usermenudata
+    public partial class Usermenudata
     {
         public int menuno { get; set; }
         public int taskNo { get; set; }    
     }
-    public partial class userbranchlist
+    public partial class Userbranchlist
     {
         public Int64 Row_Num { get; set; }
         public int VenueBranchNo { get; set; }
@@ -203,14 +198,13 @@ namespace Service.Model
         public int venueNo { get; set; }
         public int venueBranchNo { get; set; }
         public int RoleId { get; set; }
-        public List<usermenudata> usermenuitem { get; set; }
+        public List<Usermenudata> usermenuitem { get; set; }
     }
     public partial class RoleResponseDTO
     {
         public int RoleId { get; set; }
         public int UserNo { get; set; }
         public bool Status { get; set; }
-
     }
     public partial class RolegetReqDTO
     {
@@ -223,7 +217,6 @@ namespace Service.Model
         public string Token { get; set; }
         public string RefreshToken { get; set; }
         public DateTime RefreshTokenExpiryTime { get; set; }
-
     }
     public partial class ActionMenuNoResponseDTO
     {
@@ -233,18 +226,15 @@ namespace Service.Model
     {
         public int Result { get; set; }
     }
-
     public partial class UserMenuNosResponseDTO
     {
         public string menuNos { get; set; }
     }
-
     public class GetRoleReq
     {
         public int RoleId { get; set; }
         public int VenueNo { get; set; }
         public int pageIndex { get; set; }
-
     }
     public partial class GetRoleRes
     {
@@ -268,7 +258,6 @@ namespace Service.Model
         public int RoleId { get; set; }
         public string message { get; set; }
     }
-
     public class Branch
     {
         public int branchNo { get; set; }
@@ -286,7 +275,7 @@ namespace Service.Model
     {
         public int? rowNo { get; set; }
         public int? deptNo { get; set; }
-        public string? deptName { get; set; }
+        public string deptName { get; set; }
         public int? userNo { get; set; }
     }
 }

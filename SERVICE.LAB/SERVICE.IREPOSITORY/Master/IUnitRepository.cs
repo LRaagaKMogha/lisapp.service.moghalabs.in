@@ -5,7 +5,7 @@ namespace Service.IRepository
 {
    public interface IUnitRepository
     {
-        List<lstunits> GetUnits(reqUnits req);
-        rtnUnit InsertUnitDetails(TblUnits Unititem);
+        List<Lstunits> GetUnits(ReqUnits req);
+        RtnUnit InsertUnitDetails(TblUnits Unititem);
     }
 }

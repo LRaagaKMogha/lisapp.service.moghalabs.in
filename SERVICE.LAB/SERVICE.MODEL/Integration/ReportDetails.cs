@@ -1,9 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Reflection;
 using System.Text.Json.Serialization;
-using System.Xml.Linq;
 
 namespace Service.Model.Integration
 {
@@ -21,16 +19,16 @@ namespace Service.Model.Integration
         public DateTime startdate { get; set; }
         public DateTime enddate { get; set; }
     }
-    public class reportresponsedetails
+    public class Reportresponsedetails
     {
         public string referenceno { get; set; }
         public string responsecode { get; set; }
         public string responsemsg { get; set; }
-        public List<labresponsedetails> labresponsedetails { get; set; }
+        public List<Labresponsedetails> labresponsedetails { get; set; }
         [JsonIgnore]
-        public List<labresponsedetails> labdetails { get; set; }
+        public List<Labresponsedetails> Labdetails { get; set; }
     }
-    public class labresponsedetails
+    public class Labresponsedetails
     {
         [JsonIgnore]
         public string accessionno { get; set; }
@@ -45,44 +43,38 @@ namespace Service.Model.Integration
         [MaxLength(36)]
         public string SourceRequestID { get; set; }
         public DateTime labregistereddttm { get; set; }
-        public List<labreportdetails> reportdetails { get; set; }
-
+        public List<Labreportdetails> reportdetails { get; set; }
     }
-    public class labreportdetails
+    public class Labreportdetails
     {
         public string accessionno { get; set; }
-
         public byte[] reportdata { get; set; }
-        public List<labtestdetails> testdetails { get; set; }
+        public List<Labtestdetails> testdetails { get; set; }
         [JsonIgnore]
         public string TestDescription { get; set; }
         [JsonIgnore]
         public string TestStatus { get; set; }
     }
-    public class labtestdetails
+    public class Labtestdetails
     {
         public string TestDescription { get; set; }
-
         public string TestStatus { get; set; }
-
         [JsonIgnore]
         public int OrderListNo { get; set; }
         [JsonIgnore]
         public int ResultTypeNo { get; set; }
-
     }
-    public class reportresponsediscreetdetails
+    public class Reportresponsediscreetdetails
     {
         public string referenceno { get; set; }
         public string responsecode { get; set; }
         public string responsemsg { get; set; }
-        public List<labreportdiscreetdetails> reportdetails { get; set; }
+        public List<Labreportdiscreetdetails> reportdetails { get; set; }
     }
-    public class labreportdiscreetdetails
+    public class Labreportdiscreetdetails
     {
         [MaxLength(10)]
         public string labrequestNo { get; set; }
-
         public string labregistereddttm { get; set; }
         public int PAgeDay { get; set; }
         public int PAgeYear { get; set; }
@@ -93,7 +85,6 @@ namespace Service.Model.Integration
         public string AbNormalStatus { get; set; }
         [MaxLength(100)]
         public string HSSComment { get; set; }
-
         public bool IsMicrobiology { get; set; }
         [MaxLength(50)]
         public string RangeTypeComment { get; set; }
@@ -118,7 +109,6 @@ namespace Service.Model.Integration
         public string TestDesc { get; set; }
         [MaxLength(2)]
         public string TestPrefix { get; set; }
-
         public string TestResult { get; set; }
         [MaxLength(4)]
         public string TestSeq { get; set; }
@@ -127,9 +117,7 @@ namespace Service.Model.Integration
         [MaxLength(10)]
         public string TestUnit { get; set; }
         public string InterpNotes { get;set; }
-
     }
-
     public class LabReportTestDetails
     {
         public int PatientVisitNo { get; set; }
@@ -178,12 +166,11 @@ namespace Service.Model.Integration
     }
     public class responseTrendReport
     {
-        public List<testcode> testcode { get; set; }
+        public List<Testcode> testcode { get; set; }
         public string responsecode { get; set; }
         public string responsemsg { get; set; }
-
     }
-    public class testcode
+    public class Testcode
     {
         public string TestCode { get; set; }
         public List<testdetailsTrendReport> trendReport { get; set; }
@@ -197,7 +184,5 @@ namespace Service.Model.Integration
         public string TestResult { get; set; }
         public string TestUnit { get; set; }
         public string TestReferenceRange { get; set; }
-
     }
 }
-

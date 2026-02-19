@@ -157,13 +157,13 @@ namespace BloodBankManagement.Controllers
             }
             //if (!createPatientRegistrationResult.IsError)
             //{
-            //    Dictionary<string, string> orgPatientDetails = input["PatientInformation"];
-            //    var sampleTypeId = orgPatientDetails["SampleTypeId"] ?? "0";
-            //    var patientDetails = createPatientRegistrationResult.Value;
+            //    Dictionary<string, string> orgPatientdetails = input["PatientInformation"];
+            //    var sampleTypeId = orgPatientdetails["SampleTypeId"] ?? "0";
+            //    var Patientdetails = createPatientRegistrationResult.Value;
             //    var BloodSamples = new List<Models.BloodSample>()
             //    {
-            //        new Models.BloodSample { BarCode = patientDetails.LabAccessionNumber, IsActive = true, LastModifiedDateTime = DateTime.Now, ModifiedBy = request.ModifiedBy, ModifiedByUserName = request.ModifiedByUserName,
-            //        UnitCount = 1, TubeNo = "Tube 1", Tests = orgPatientDetails["TestShortNames"], SampleTypeId = Int32.Parse(sampleTypeId), RegistrationId = patientDetails.RegistrationId, ParentRegistrationId = 0, PatientId = patientDetails.BloodBankPatientId }
+            //        new Models.BloodSample { BarCode = Patientdetails.LabAccessionNumber, IsActive = true, LastModifiedDateTime = DateTime.Now, ModifiedBy = request.ModifiedBy, ModifiedByUserName = request.ModifiedByUserName,
+            //        UnitCount = 1, TubeNo = "Tube 1", Tests = orgPatientdetails["TestShortNames"], SampleTypeId = Int32.Parse(sampleTypeId), RegistrationId = Patientdetails.RegistrationId, ParentRegistrationId = 0, PatientId = Patientdetails.BloodBankPatientId }
             //    };
             //    ErrorOr<List<Models.BloodSample>> upsertBloodSampleResult = await _sampleReceivingService.SaveBloodSamplesList(BloodSamples);
             //}
@@ -180,7 +180,7 @@ namespace BloodBankManagement.Controllers
 
         private UpsertBloodBankRegistrationRequest createRequest(Dictionary<string, Dictionary<string, string>> input)
         {
-            Dictionary<string, string> patientDetails = input["PatientInformation"];
+            Dictionary<string, string> Patientdetails = input["PatientInformation"];
             Dictionary<string, string> orderDetails = input["Results"];
             var results = new List<BloodSampleResultResponse>();
 
@@ -209,41 +209,41 @@ namespace BloodBankManagement.Controllers
                     var bbSubTests = GlobalConstants.SubTests.Where(s => s.TestNo == bbTests.TestNo).ToList();
                     var testResult = new BloodSampleResultResponse(
                         0, 0, 0, bbTests.TestNo, 0, 0, bbTests.TestName, "", "", "", "", "Registered", false, null,
-                        HelperMethods.ParseStringToLong(patientDetails["ModifiedBy"]).GetValueOrDefault(),
-                        patientDetails["ModifiedUserName"], DateTime.Now, false, false, false, null, groupId);
+                        HelperMethods.ParseStringToLong(Patientdetails["ModifiedBy"]).GetValueOrDefault(),
+                        Patientdetails["ModifiedUserName"], DateTime.Now, false, false, false, null, groupId);
                     results.Add(testResult);
                     bbSubTests.ForEach(st =>
                     {
                         var subTestResult = new BloodSampleResultResponse(
                                           0, 0, 0, st.SubTestNo, st.TestNo, 0, st.SubTestName, "", "", "", "", "Registered", false, null,
-                                          HelperMethods.ParseStringToLong(patientDetails["ModifiedBy"]).GetValueOrDefault(),
-                                          patientDetails["ModifiedUserName"], DateTime.Now, false, false, false, null, groupId);
+                                          HelperMethods.ParseStringToLong(Patientdetails["ModifiedBy"]).GetValueOrDefault(),
+                                          Patientdetails["ModifiedUserName"], DateTime.Now, false, false, false, null, groupId);
                         results.Add(subTestResult);
                     });
                 });
                 
             }
-            var residenceId = string.IsNullOrEmpty(patientDetails["Residence"]) ? GlobalConstants.Lookups.FirstOrDefault(x => x.Type == "residence")?.Identifier.ToString() ?? "0" : patientDetails["Residence"];
-            var nationalityId = string.IsNullOrEmpty(patientDetails["Nationality"]) || patientDetails["Nationality"] == "0" ? GlobalConstants.Lookups.FirstOrDefault(x => x.Type == "nationality")?.Identifier.ToString() ?? "0" : patientDetails["Nationality"];
+            var residenceId = string.IsNullOrEmpty(Patientdetails["Residence"]) ? GlobalConstants.Lookups.FirstOrDefault(x => x.Type == "residence")?.Identifier.ToString() ?? "0" : Patientdetails["Residence"];
+            var nationalityId = string.IsNullOrEmpty(Patientdetails["Nationality"]) || Patientdetails["Nationality"] == "0" ? GlobalConstants.Lookups.FirstOrDefault(x => x.Type == "nationality")?.Identifier.ToString() ?? "0" : Patientdetails["Nationality"];
             return new UpsertBloodBankRegistrationRequest(
-                    patientDetails["NRICNumber"],
-                    patientDetails["PatientName"],
-                    HelperMethods.ParseStringToDateTime(patientDetails["PatientDOB"]).GetValueOrDefault(),
-                    patientDetails["CaseOrVisitNumber"],
+                    Patientdetails["NRICNumber"],
+                    Patientdetails["PatientName"],
+                    HelperMethods.ParseStringToDateTime(Patientdetails["PatientDOB"]).GetValueOrDefault(),
+                    Patientdetails["CaseOrVisitNumber"],
                     HelperMethods.ParseStringToLong(nationalityId).GetValueOrDefault(),
-                    HelperMethods.ParseStringToLong(patientDetails["Gender"]).GetValueOrDefault(),
-                    HelperMethods.ParseStringToLong(patientDetails["Race"]).GetValueOrDefault(),
+                    HelperMethods.ParseStringToLong(Patientdetails["Gender"]).GetValueOrDefault(),
+                    HelperMethods.ParseStringToLong(Patientdetails["Race"]).GetValueOrDefault(),
                     HelperMethods.ParseStringToLong(residenceId).GetValueOrDefault(),
-                    HelperMethods.ParseStringToLong(patientDetails["ClinicalDiagnosis"]),
-                    HelperMethods.ParseStringToLong(patientDetails["TransfusionIndicator"]).GetValueOrDefault(),
-                    patientDetails["ClinicalDiagnosisOthers"],
-                    patientDetails["IndicationOfTransfusionOthers"],
-                    patientDetails["DoctorOthers"],
-                    patientDetails["DoctorMCROthers"],
-                    patientDetails["IsEmergency"] == "T",
-                    HelperMethods.ParseStringToLong(patientDetails["WardId"]),
-                    HelperMethods.ParseStringToLong(patientDetails["ClinicId"]),
-                    HelperMethods.ParseStringToLong(patientDetails["DoctorId"]),
+                    HelperMethods.ParseStringToLong(Patientdetails["ClinicalDiagnosis"]),
+                    HelperMethods.ParseStringToLong(Patientdetails["TransfusionIndicator"]).GetValueOrDefault(),
+                    Patientdetails["ClinicalDiagnosisOthers"],
+                    Patientdetails["IndicationOfTransfusionOthers"],
+                    Patientdetails["DoctorOthers"],
+                    Patientdetails["DoctorMCROthers"],
+                    Patientdetails["IsEmergency"] == "T",
+                    HelperMethods.ParseStringToLong(Patientdetails["WardId"]),
+                    HelperMethods.ParseStringToLong(Patientdetails["ClinicId"]),
+                    HelperMethods.ParseStringToLong(Patientdetails["DoctorId"]),
                     new List<PatientRegisteredProducts>(),
                     results,
                     new List<RegisteredSpecialRequirementResponse>(),
@@ -253,8 +253,8 @@ namespace BloodBankManagement.Controllers
                     0,
                     "",
                     "",
-                    HelperMethods.ParseStringToLong(patientDetails["ModifiedBy"]).GetValueOrDefault(),
-                    patientDetails["ModifiedUserName"],
+                    HelperMethods.ParseStringToLong(Patientdetails["ModifiedBy"]).GetValueOrDefault(),
+                    Patientdetails["ModifiedUserName"],
                     0,
                     DateTime.Now
 
@@ -368,8 +368,8 @@ namespace BloodBankManagement.Controllers
             {
                 return new BloodBankBillingResponse(billing.Identifier, billing.ProductId, billing.TestId, billing.ClinicId, billing.EntityId, billing.MRP, billing.Unit, billing.Price, billing.Status, billing.ModifiedBy, billing.ModifiedByUserName, billing.LastModifiedDateTime, billing.IsBilled, billing.ServiceType);
             }).ToList() : new List<BloodBankBillingResponse>();
-            var patientDetails = new BloodBankPatientResponse(patient.Identifier, patient.NRICNumber, patient.PatientName, patient.PatientDOB, patient.NationalityId, patient.GenderId, patient.RaceId, patient.ResidenceStatusId, patient.BloodGroup, patient.NoOfIterations, patient.AntibodyScreening, patient.AntibodyIdentified, patient.ColdAntibodyIdentified, patient.ModifiedBy, patient.ModifiedByUserName, patient.IsTransfusionReaction, patient.Comments, patient.LastModifiedDateTime, patient.BloodGroupingDateTime, patient.AntibodyScreeningDateTime, patient.LatestAntibodyScreeningDateTime);
-            return new Contracts.BloodBankRegistration(response.RegistrationId, response.NRICNumber, response.PatientName, response.PatientDOB, response.CaseOrVisitNumber, response.NationalityId, response.GenderId, response.RaceId, response.ResidenceStatusId, response.ClinicalDiagnosisId, response.IndicationOfTransfusionId, response.ClinicalDiagnosisOthers, response.IndicationOfTransfusionOthers, response.DoctorOthers, response.DoctorMCROthers, response.IsEmergency, response.WardId, response.ClinicId, response.DoctorId, products, specialRequirements, results, transactions, patientDetails, response.ProductTotal, response.IsActive,
+            var Patientdetails = new BloodBankPatientResponse(patient.Identifier, patient.NRICNumber, patient.PatientName, patient.PatientDOB, patient.NationalityId, patient.GenderId, patient.RaceId, patient.ResidenceStatusId, patient.BloodGroup, patient.NoOfIterations, patient.AntibodyScreening, patient.AntibodyIdentified, patient.ColdAntibodyIdentified, patient.ModifiedBy, patient.ModifiedByUserName, patient.IsTransfusionReaction, patient.Comments, patient.LastModifiedDateTime, patient.BloodGroupingDateTime, patient.AntibodyScreeningDateTime, patient.LatestAntibodyScreeningDateTime);
+            return new Contracts.BloodBankRegistration(response.RegistrationId, response.NRICNumber, response.PatientName, response.PatientDOB, response.CaseOrVisitNumber, response.NationalityId, response.GenderId, response.RaceId, response.ResidenceStatusId, response.ClinicalDiagnosisId, response.IndicationOfTransfusionId, response.ClinicalDiagnosisOthers, response.IndicationOfTransfusionOthers, response.DoctorOthers, response.DoctorMCROthers, response.IsEmergency, response.WardId, response.ClinicId, response.DoctorId, products, specialRequirements, results, transactions, Patientdetails, response.ProductTotal, response.IsActive,
             response.Status, response.NurseId, response.IssuingComments, response.LabAccessionNumber, response.ModifiedBy, response.ModifiedByUserName, response.LastModifiedDateTime, response.SampleReceivedDateTime, response.RegistrationDateTime, bloodSampleInventories, billings, response.PatientVisitNo, response.VisitId);
 
         }

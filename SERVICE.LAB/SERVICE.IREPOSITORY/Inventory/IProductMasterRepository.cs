@@ -22,8 +22,8 @@ namespace Service.IRepository.Inventory
         List<Fetchsoundalike> GetSoundalike(GetSoundalikeresponse obj);
         List<GetDeptIssueProductResponse> GetDeptIssueProductlst(GetDeptIssueProductRequest issue);
         List<SubProductRes> GetSubProduct(SubProductReq obj); 
-        List<lstdrugresponse> GetProdVsDrug(lstdrugreq obj); 
-        int InsertProdVsDrugs(savedruglstreq creq1);
+        List<LstDrugresponse> GetProdVsDrug(LstDrugreq obj); 
+        int InsertProdVsDrugs(Savedruglstreq creq1);
         List<ProductUnitDTO> GetProductUnitList(int VenueNo);
         List<BOMMappingDTO> GetBOMMapping(int VenueNo, int TestNo, string TestType);
         BOMMappingResponse InsertBOMMapping(List<BOMMappingRequest> req);

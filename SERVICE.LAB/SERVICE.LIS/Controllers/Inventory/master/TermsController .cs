@@ -40,10 +40,10 @@ namespace Service.API.SERVICE.Controllers
         [Route("api/Terms/InsertTermsmaster")]
         public Termsmasterresponse InsertTermsmaster(TblTerms tblTerms)
         {
-            Termsmasterresponse objresult = new Termsmasterresponse();
+            Termsmasterresponse Objresult = new Termsmasterresponse();
             try
             {
-                objresult = _TermsRepository.InsertTermsmaster(tblTerms);
+                Objresult = _TermsRepository.InsertTermsmaster(tblTerms);
                 string _CacheKey = CacheKeys.CommonMaster + "TERMSMASTER" + tblTerms.venueNo + tblTerms.venuebranchno;
                 MemoryCacheRepository.RemoveItem(_CacheKey);
             }
@@ -51,7 +51,7 @@ namespace Service.API.SERVICE.Controllers
             {
                 MyDevException.Error(ex, "TermsController.InsertTermsmaster", ExceptionPriority.Low, ApplicationType.APPSERVICE, tblTerms.venueNo, tblTerms.venuebranchno, 0);
             }
-            return objresult;
+            return Objresult;
         }
     }
 }

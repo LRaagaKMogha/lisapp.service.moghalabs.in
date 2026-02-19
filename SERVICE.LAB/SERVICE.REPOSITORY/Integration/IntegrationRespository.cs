@@ -14,7 +14,6 @@ using Microsoft.Extensions.Configuration;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using Newtonsoft.Json.Serialization;
-using RCMS;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -120,9 +119,9 @@ namespace Service.Repository
                     var ageDescription = HelperMethods.GetAgeDescription(responseData.IntegrationOrderPatientDetails.dateofbirth).Split(' ');
                     List<ServiceSearchDTO> serviceSearchDTOs = new List<ServiceSearchDTO>();
                     var testDetails = new List<TestDetailsRetrieval>
-                {
-                    new TestDetailsRetrieval { Code = responseData.IntegrationOrderTestDetails[0].PackageId.ToString(), TestType = "2" }
-                };
+                    {
+                        new TestDetailsRetrieval { Code = responseData.IntegrationOrderTestDetails[0].PackageId.ToString(), TestType = "2" }
+                    };
                     var test = this.GetTestInformation(testDetails).FirstOrDefault();
                     ServiceSearchDTO item = new ServiceSearchDTO
                     {
@@ -156,7 +155,7 @@ namespace Service.Repository
                         maritalStatus = (short)HelperMethods.getMaritalStatus(externalPatientDetails.maritalStatus),
                         MobileNumber = massRegistrationData.Contact,
                         NationalityNo = HelperMethods.getAdditionalId(testAdditionalInformation, "Nationality"),
-                        PatientNo = GetExistingPatientDetails(responseData.IntegrationOrderVisitDetails.idnumber,user.VenueNo,user.VenueBranchNo),
+                        PatientNo = GetExistingPatientDetails(responseData.IntegrationOrderVisitDetails.idnumber, user.VenueNo, user.VenueBranchNo),
                         PatientFloor = externalPatientDetails.PatientFloor,
                         PatientBuilding = externalPatientDetails.PatientBuilding,
                         PatientBlock = externalPatientDetails.PatientBlock,
@@ -228,7 +227,7 @@ namespace Service.Repository
                 inputToSave.UserNo = user.UserNo;
                 inputToSave.RegisteredType = "EB";
                 inputToSave.IsAutoEmail = inputToSave.IsAutoSMS = true;
-                var saveResponse = _IEditBillingRepository.InsertEditBilling(inputToSave);
+                var saveResponse = await _IEditBillingRepository.InsertEditBilling(inputToSave);
                 return saveResponse != null && !string.IsNullOrEmpty(saveResponse.visitID);
             }
             catch (Exception exp)
@@ -495,7 +494,7 @@ namespace Service.Repository
                         MobileNumber = externalPatientDetails.MobileNumer,
                         Address = string.Join(",", new List<String> { externalPatientDetails.PatientBlock + " " + externalPatientDetails.Address, "#" + externalPatientDetails.PatientUnitNo + " " + externalPatientDetails.PatientFloor + " " + externalPatientDetails.PatientBuilding, externalPatientDetails.CountryName + " " + externalPatientDetails.PostalCode }.Where(x => !string.IsNullOrEmpty(x.Trim()))),
                         EmailID = externalPatientDetails.EmailID,
-                        PatientNo = GetExistingPatientDetails(responseData.IntegrationOrderVisitDetails.idnumber,user.VenueNo,user.VenueBranchNo),
+                        PatientNo = GetExistingPatientDetails(responseData.IntegrationOrderVisitDetails.idnumber, user.VenueNo, user.VenueBranchNo),
                         PatientFloor = externalPatientDetails.PatientFloor,
                         PatientBuilding = externalPatientDetails.PatientBuilding,
                         PatientBlock = externalPatientDetails.PatientBlock,
@@ -514,7 +513,7 @@ namespace Service.Repository
                         LastName = string.IsNullOrEmpty(externalPatientDetails.LastName) ? string.Empty : externalPatientDetails.LastName,
                         AlternateId = string.IsNullOrEmpty(externalPatientDetails.AlternativeIdNumber) ? responseData.IntegrationOrderPatientDetails.alternateIdnumber : externalPatientDetails.AlternativeIdNumber,
                         AlternateIdType = HelperMethods.getAlternateURNType(string.IsNullOrEmpty(externalPatientDetails.AlternativeIdType) ? responseData.IntegrationOrderPatientDetails.alternateIdtype : externalPatientDetails.AlternativeIdType),
-                        AllergyInfo = string.IsNullOrEmpty(externalPatientDetails.AllergyDetails) ? string.Join(",", responseData.IntegrationOrderAllergyDetails.Where(al => al.IsAllergy == true).Select(row => row.Allergy)) : externalPatientDetails.AllergyDetails,
+                        AllergyInfo = string.IsNullOrEmpty(externalPatientDetails.Allergydetails) ? string.Join(",", responseData.IntegrationOrderAllergyDetails.Where(al => al.IsAllergy == true).Select(row => row.Allergy)) : externalPatientDetails.Allergydetails,
                         IsVipIndication = orderData != null ? orderData.IsVip : (externalPatientDetails.IsVip || responseData.IntegrationOrderPatientDetails.isVIP),
                         registrationDT = DateTime.Now.ToString("yyyy-MM-ddTHH:mm:ss.fff"),
                         Orders = orders.Count > 0 ? orders : bbOrders,
@@ -675,18 +674,18 @@ namespace Service.Repository
                 var saveInput = patientSamples
                     .Where(row => orderData.TubeDetails.Any(x => x.SampleName == row.SampleName && x.ContainerName == row.ContainerName))
                     .Select(row =>
-                {
-                    var tubeCount = orderData.TubeDetails.First(x => x.SampleName == row.SampleName && x.ContainerName == row.ContainerName).TubeCount;
-                    var req = new EditSampleRequest()
                     {
-                        PatientSamplesNo = row.PatientSamplesNo,
-                        UserNo = user.UserNo,
-                        VenueNo = user.VenueNo,
-                        PatientVisitNo = patientVisitNo,
-                        specimenQty = row.specimenQty + tubeCount
-                    };
-                    return req;
-                }).ToList();
+                        var tubeCount = orderData.TubeDetails.First(x => x.SampleName == row.SampleName && x.ContainerName == row.ContainerName).TubeCount;
+                        var req = new EditSampleRequest()
+                        {
+                            PatientSamplesNo = row.PatientSamplesNo,
+                            UserNo = user.UserNo,
+                            VenueNo = user.VenueNo,
+                            PatientVisitNo = patientVisitNo,
+                            specimenQty = row.specimenQty + tubeCount
+                        };
+                        return req;
+                    }).ToList();
                 var saveResponse = patientInfoRepository.UpdateSampleDetails(saveInput);
             }
         }
@@ -699,7 +698,7 @@ namespace Service.Repository
                     var testData = _dbContext.IntegrationOrderTestDetails.Where(x => x.OrderID == orderId).ToList();
                     if (orderData != null)
                     {
-                        var patientDetails = _dbContext.IntegrationOrderPatientDetails.FirstOrDefault(x => x.Status == true && x.OrderID == orderId);
+                        var patientDetails = _dbContext.IntegrationOrderPatientdetails.FirstOrDefault(x => x.Status == true && x.OrderID == orderId);
                         if (patientDetails != null)
                         {
                             patientDetails.gender = orderData.GenderId.ToString();
@@ -721,8 +720,8 @@ namespace Service.Repository
         }
         public async Task<ExternalPatientDetails> GetPatientDetails(string serviceType, string patientId)
         {
-            IPatientDetailsService patientService = PatientDetailsServiceFactory.Create(serviceType, _config);
-            return await patientService.GetPatientDetails(patientId);
+            IPatientdetailsService patientService = PatientdetailsServiceFactory.Create(serviceType, _config);
+            return await patientService.GetPatientdetails(patientId);
         }
 
         public async Task<ExternalPatientDetailsResponse> GetPatientInformation(string patientVisitId, string system, UserClaimsIdentity user)
@@ -782,8 +781,8 @@ namespace Service.Repository
                     ResidenceId = 0,
                     FirstName = externalPatientDetails.FirstName,
                     LastName = externalPatientDetails.LastName,
-                    MiddleName  = externalPatientDetails.MiddleName,
-                    SexId = string.IsNullOrEmpty(externalPatientDetails.SexId)  ? "" : externalPatientDetails.SexId.Substring(0, 1),
+                    MiddleName = externalPatientDetails.MiddleName,
+                    SexId = string.IsNullOrEmpty(externalPatientDetails.SexId) ? "" : externalPatientDetails.SexId.Substring(0, 1),
                     Address = string.Join(",", new List<String> { externalPatientDetails.PatientBlock + " " + externalPatientDetails.Address, "#" + externalPatientDetails.PatientUnitNo + " " + externalPatientDetails.PatientFloor + " " + externalPatientDetails.PatientBuilding, externalPatientDetails.CountryName + " " + externalPatientDetails.PostalCode }.Where(x => !string.IsNullOrEmpty(x.Trim()))),
                     PostalCode = externalPatientDetails.PostalCode ?? "000000",
                     Email = externalPatientDetails.EmailID,
@@ -792,7 +791,6 @@ namespace Service.Repository
                 };
                 return response;
             }
-            return null;
         }
         public async Task<waitinglistresponse> GetMassRegistrationResponse(waitinglistrequest request, UserClaimsIdentity user)
         {
@@ -901,18 +899,18 @@ namespace Service.Repository
                         orderDetails = _dbContext.IntegrationOrderTestDetails.Where(r => r.GroupId == row.TestNo && r.OrderID == row.IntegrationOrderNo && r.SampleTypeId == row.SampleNo).ToList();
                     }
                     orderDetails.ForEach(i =>
-                                        {
-                                            i.IsRejected = row.isReject;
-                                            i.RejectedReason = row.isReject || row.IsOnHold ? row.remarks : "";
-                                            i.RejectedReasonDesc = row.rejectioncomments;
-                                            i.IsOnHold = row.IsOnHold;
-                                            i.ModifiedBy = row.userNo;
-                                            i.ModifiedOn = DateTime.Now;
-                                            if (i.PackageId == 0 && !row.IsOnHold)
-                                            {
-                                                i.Status = false;
-                                            }
-                                        });
+                    {
+                        i.IsRejected = row.isReject;
+                        i.RejectedReason = row.isReject || row.IsOnHold ? row.remarks : "";
+                        i.RejectedReasonDesc = row.rejectioncomments;
+                        i.IsOnHold = row.IsOnHold;
+                        i.ModifiedBy = row.userNo;
+                        i.ModifiedOn = DateTime.Now;
+                        if (i.PackageId == 0 && !row.IsOnHold)
+                        {
+                            i.Status = false;
+                        }
+                    });
 
                 });
                 await _dbContext.SaveChangesAsync();
@@ -1023,7 +1021,7 @@ namespace Service.Repository
                         order.LabAccessionNo = patientVisitDetails.Item1?.LabAccessionNo;
                         order.BBLabAccessionNo = patientVisitDetails.Item1?.BBLabAccessionNo;
                         if (!patientVisitNos.Any(x => x == patientVisitId))
-                            patientVisitNos.Add(patientVisitId);                        
+                            patientVisitNos.Add(patientVisitId);
                     }
                 }
                 using (var context = new IntegrationContext(_config.GetConnectionString(ConfigKeys.DefaultConnection)))
@@ -1139,7 +1137,6 @@ namespace Service.Repository
                     {
                         try
                         {
-                            //var test = await context.MassRegistrations.ToListAsync();
                             var orders1 = await context.MassRegistrations.Where(x => orderIds.Contains(x.MassRegistrationNo)).ToListAsync();
                             var tests1 = context.MassRegistrationSamples.Where(x => orderIds.Contains(x.MassRegistrationNo)).ToList();
                             createManageSample.Where(x => (x.PackageId == 0 || !x.IsRejected) && !x.IsOnHold && !x.isnotgiven).ToList().ForEach(sample =>
@@ -1559,9 +1556,10 @@ namespace Service.Repository
                     var _VenueNo = new SqlParameter("VenueNo", venueNo.ToString());
                     var _VenueBranchNo = new SqlParameter("VenueBranchNo", venueBranchNo.ToString());
                     var _Hours = new SqlParameter("@DownTimeHours", 4);
+
                     massresponse = context.UpdateLabAccessionNoMassRegistration.FromSqlRaw
-                        ("Execute dbo.Pro_UpdateLabAccessionNoDownTimeOrder @OrderNo,@venueNo,@venueBranchNo,@DownTimeHours",
-                        _OrderNo, _VenueNo, _VenueBranchNo, _Hours).ToList();
+                    ("Execute dbo.Pro_UpdateLabAccessionNoDownTimeOrder @OrderNo,@venueNo,@venueBranchNo,@DownTimeHours",
+                    _OrderNo, _VenueNo, _VenueBranchNo, _Hours).ToList();
                 }
             }
             catch (Exception ex)
@@ -1594,9 +1592,9 @@ namespace Service.Repository
             return massresponse;
         }
 
-        public List<massregistration> MassRegistration(List<orderrequestdetails> orderlist, UserClaimsIdentity user)
+        public List<MassRegistrationRef> MassRegistration(List<orderrequestdetails> orderlist, UserClaimsIdentity user)
         {
-            List<massregistration> orderresponse = new List<massregistration>();
+            List<MassRegistrationRef> orderresponse = new List<MassRegistrationRef>();
             List<orderresponse> response = new List<orderresponse>();
             var orderdetails = JsonConvert.SerializeObject(orderlist);
             try
@@ -1611,11 +1609,12 @@ namespace Service.Repository
                         var _LabOrderId = new SqlParameter("LabOrderId", orderrequestdetails.labdetails.orderid);
                         var _IsDownTimeOrder = new SqlParameter("IsDownTimeOrder", orderrequestdetails.labdetails.isDowntimeOrder);
                         var _SourceSystem = new SqlParameter("SourceSystem", orderrequestdetails.sourcesystem);
+                        
                         response = context.SendOrderDetails.FromSqlRaw
                         ("Execute dbo.Pro_InsertIntegrationOrderDetails @orderdetails,@venueNo,@venueBranchNo,@labOrderId,@isDownTimeOrder,@sourceSystem",
                         _OrderDetails, _VenueNo, _VenueBranchNo, _LabOrderId, _IsDownTimeOrder, _SourceSystem).ToList();
                     }
-                    orderresponse.Add(new massregistration { patientdetails = orderrequestdetails.patientdetails, referenceno = response.FirstOrDefault().referenceno });
+                    orderresponse.Add(new MassRegistrationRef { patientdetails = orderrequestdetails.patientdetails, referenceno = response.FirstOrDefault().referenceno });
                 }
             }
             catch (Exception ex)
@@ -1624,9 +1623,9 @@ namespace Service.Repository
             }
             return orderresponse;
         }
-        public List<labresponsedetails> GetPDFReportDetails(reportrequestdetails reportrequestdetails, UserClaimsIdentity user)
+        public List<Labresponsedetails> GetPDFReportDetails(reportrequestdetails reportrequestdetails, UserClaimsIdentity user)
         {
-            List<labresponsedetails> labdetails = new List<labresponsedetails>();
+            List<Labresponsedetails> labdetails = new List<Labresponsedetails>();
             try
             {
                 using (var context = new IntegrationContext(_config.GetConnectionString(ConfigKeys.DefaultConnection)))
@@ -1652,9 +1651,9 @@ namespace Service.Repository
             }
             return labdetails;
         }
-        public List<labtestdetails> GetPDFReportTestDetails(int visitno, UserClaimsIdentity user)
+        public List<Labtestdetails> GetPDFReportTestDetails(int visitno, UserClaimsIdentity user)
         {
-            List<labtestdetails> labtestdetails = new List<labtestdetails>();
+            List<Labtestdetails> labtestdetails = new List<Labtestdetails>();
 
             try
             {
@@ -1714,8 +1713,9 @@ namespace Service.Repository
                 var _VisitNumber = new SqlParameter("VisitNo", visitno);
                 var _VenueNo = new SqlParameter("VenueNo", VenueNo.ToString());
                 var _VenueBranchNo = new SqlParameter("VenueBranchNo", VenueBranchNo.ToString());
+
                 visitdetail = context.GetIntegrationVisitDetails.FromSqlRaw
-                    ("Execute dbo.Pro_GetIntegrationVisitDetails @VisitNo,@venueNo,@venueBranchNo", _VisitNumber, _VenueNo, _VenueBranchNo).ToList().FirstOrDefault();
+                ("Execute dbo.Pro_GetIntegrationVisitDetails @VisitNo,@venueNo,@venueBranchNo", _VisitNumber, _VenueNo, _VenueBranchNo).ToList().FirstOrDefault();
             }
 
             using (var context = new IntegrationContext(_config.GetConnectionString(ConfigKeys.DefaultConnection)))

@@ -40,9 +40,9 @@ namespace Service.API.SERVICE.Controllers.Admin
         
         [HttpPost]
         [Route("api/Admin/SearchVisit")]
-        public List<SearchVisitDetailsResponse> SearchVisit(DeleteVisitRequest RequestItem)
+        public List<SearchVisitdetailsResponse> SearchVisit(DeleteVisitRequest RequestItem)
         {
-            List<SearchVisitDetailsResponse> response = new List<SearchVisitDetailsResponse>();
+            List<SearchVisitdetailsResponse> response = new List<SearchVisitdetailsResponse>();
             try
             {
                 response = _adminRepository.SearchVisitId(RequestItem);
@@ -121,9 +121,9 @@ namespace Service.API.SERVICE.Controllers.Admin
 
         [HttpPost]
         [Route("api/Admin/DeleteHistory")]
-        public List<responsehistory> DeleteHistory(visitRequest obj)
+        public List<Responsehistory> DeleteHistory(visitRequest obj)
         {
-            List<responsehistory> response = new List<responsehistory>();
+            List<Responsehistory> response = new List<Responsehistory>();
             try
             {
                 response = _adminRepository.DeleteHistory(obj);
@@ -163,7 +163,7 @@ namespace Service.API.SERVICE.Controllers.Admin
             }
             catch (Exception ex)
             {
-                MyDevException.Error(ex, "AdminRepository.UpdateVisitPaymentModes/VisitId-" + RequestItem.PatientVisitNo, ExceptionPriority.Medium, ApplicationType.APPSERVICE, RequestItem.VenueNo, RequestItem.VenueBranchNo, (int)RequestItem.UserID);
+                MyDevException.Error(ex, "AdminRepository.UpdateVisitPaymentModes/VisitId-" + RequestItem.PatientVisitNo, ExceptionPriority.Medium, ApplicationType.APPSERVICE, RequestItem.VenueNo, RequestItem.VenueBranchNo, RequestItem.UserID);
             }
             return response;
         }

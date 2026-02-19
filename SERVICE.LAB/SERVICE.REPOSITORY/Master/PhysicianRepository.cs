@@ -23,7 +23,7 @@ namespace Service.Repository
         /// <returns></returns>
         public List<PhysicianDetailsResponse> GetPhysicianDetails(GetCommonMasterRequest masterRequest)
         {
-            List<PhysicianDetailsResponse> objresult = new List<PhysicianDetailsResponse>();
+            List<PhysicianDetailsResponse> Objresult = new List<PhysicianDetailsResponse>();
             try
             {
                 using (var context = new LIMSContext(_config.GetConnectionString(ConfigKeys.DefaultConnection)))
@@ -34,7 +34,7 @@ namespace Service.Repository
                     var _PhysicianNo = new SqlParameter("PhysicianNo", masterRequest.masterNo);
                     var _viewvenuebranchno = new SqlParameter("viewvenuebranchno", masterRequest.viewvenuebranchno);
 
-                    objresult = context.GetPhysicianDetailsDTO.FromSqlRaw(
+                    Objresult = context.GetPhysicianDetailsDTO.FromSqlRaw(
                     "Execute dbo.Pro_GetPhysicianDetails @VenueNo, @VenueBranchNo, @pageIndex, @PhysicianNo,@viewvenuebranchno",
                     _VenueNo, _VenueBranchNo, _PageIndex, _PhysicianNo, _viewvenuebranchno).ToList();
                 }                                               
@@ -43,7 +43,7 @@ namespace Service.Repository
             {
                 MyDevException.Error(ex, "PhysicianRepository.GetPhysicianDetails", ExceptionPriority.Low, ApplicationType.REPOSITORY, masterRequest?.venueno, masterRequest?.venuebranchno, 0);
             }
-            return objresult;
+            return Objresult;
         }
         ///
         public int SavePhysicianDetaile(TblPhysician Physicianitem)
@@ -162,11 +162,11 @@ namespace Service.Repository
                     var _VenueBranchNo = new SqlParameter("VenueBranchNo", tblPhysician.VenueBranchNo);                    
                     var _PhysicianNo = new SqlParameter("PhysicianNo", tblPhysician.PhysicianNo);
 
-                    var objresult = context.PhysicianHaveVisits.FromSqlRaw(
+                    var Objresult = context.PhysicianHaveVisits.FromSqlRaw(
                     "Execute dbo.Pro_PhysicianHaveVisits @VenueNo,@VenueBranchNo,@PhysicianNo",
                     _VenueNo, _VenueBranchNo, _PhysicianNo).ToList();
 
-                    iOutput =  objresult[0]?.status?? 0;
+                    iOutput =  Objresult[0]?.status?? 0;
                 }
             }
             catch (Exception ex)
@@ -203,7 +203,7 @@ namespace Service.Repository
         public List<PhysicianDocUploadDetailRes> GetPhysicianDocumentDetails(PhysicianDocUploadReq Req)
         {
             List<PhysicianDocUploadDetailRes> lstOutput = new List<PhysicianDocUploadDetailRes>();
-            List<PhysicianDocUploadRes> objresult = new List<PhysicianDocUploadRes>();
+            List<PhysicianDocUploadRes> Objresult = new List<PhysicianDocUploadRes>();
             try
             {
                 using (var context = new MasterContext(_config.GetConnectionString(ConfigKeys.DefaultConnection)))
@@ -213,13 +213,13 @@ namespace Service.Repository
                     var _venueNo = new SqlParameter("venueNo", Req?.venueNo);
                     var _VenueBranchNo = new SqlParameter("VenueBranchNo", Req?.venueBranchNo);
 
-                    objresult = context.GetPhysicianDocumentDetails.FromSqlRaw(
+                    Objresult = context.GetPhysicianDocumentDetails.FromSqlRaw(
                     "Execute dbo.pro_GetEntityDocument @EntityType,@EntityNo,@venueNo,@venueBranchNo",
                     _EntityType, _EntityNo, _venueNo, _VenueBranchNo).ToList();
                     
-                    if (objresult != null && objresult.Count > 0)
+                    if (Objresult != null && Objresult.Count > 0)
                     {
-                        foreach (var v in objresult)
+                        foreach (var v in Objresult)
                         {
                             PhysicianDocUploadDetailRes obj = new PhysicianDocUploadDetailRes();
                             obj.documentNo = v.documentNo;
@@ -291,7 +291,7 @@ namespace Service.Repository
 
         public List<OPDMachineRes> GetMachineTimeDetails(OPDMachineReq Req)
         {
-            List<OPDMachineRes> objresult = new List<OPDMachineRes>();
+            List<OPDMachineRes> Objresult = new List<OPDMachineRes>();
             try
             {
                 using (var context = new MasterContext(_config.GetConnectionString(ConfigKeys.DefaultConnection)))
@@ -300,7 +300,7 @@ namespace Service.Repository
                     var _Venuebno = new SqlParameter("Venuebno", Req?.Venuebno);
                     var _MachineNo = new SqlParameter("MachineNo", Req?.MachineNo);
 
-                    objresult = context.GetOPDMachineRes.FromSqlRaw(
+                    Objresult = context.GetOPDMachineRes.FromSqlRaw(
                     "Execute dbo.pro_GetMachineTimelist @VenueNo,@Venuebno,@MachineNo",
                     _VenueNo, _Venuebno, _MachineNo).ToList();
                 }
@@ -309,11 +309,11 @@ namespace Service.Repository
             {
                 MyDevException.Error(ex, "PhysicianRepository.GetMachineTimeDetails" + Req.MachineNo.ToString(), ExceptionPriority.Low, ApplicationType.REPOSITORY, (int)Req.VenueNo, (int)Req.Venuebno, (int)Req.MachineNo);
             }
-            return objresult;
+            return Objresult;
         }
         public List<OPDPhysicianRes> GetPhysicianOPDDetails(OPDPhysicianReq Req)
         {
-            List<OPDPhysicianRes> objresult = new List<OPDPhysicianRes>();
+            List<OPDPhysicianRes> Objresult = new List<OPDPhysicianRes>();
             try
             {
                 using (var context = new MasterContext(_config.GetConnectionString(ConfigKeys.DefaultConnection)))
@@ -323,7 +323,7 @@ namespace Service.Repository
                     var _PhysicianNo = new SqlParameter("PhysicianNo", Req?.PhysicianNo);
                     var _PhysicianBranchNo = new SqlParameter("PhysicianBranchNo", Req?.PhysicianBranchNo);
 
-                    objresult = context.GetPhysicianOPDDetails.FromSqlRaw(
+                    Objresult = context.GetPhysicianOPDDetails.FromSqlRaw(
                     "Execute dbo.pro_GetPhysicianOPDlist @VenueNo,@Venuebno,@PhysicianNo,@PhysicianBranchNo",
                     _VenueNo, _Venuebno, _PhysicianNo, _PhysicianBranchNo).ToList();
                 }
@@ -332,9 +332,9 @@ namespace Service.Repository
             {
                 MyDevException.Error(ex, "PhysicianRepository.GetPhysicianOPDDetails - " + Req.PhysicianNo.ToString(), ExceptionPriority.Low, ApplicationType.REPOSITORY, (int)Req.VenueNo, (int)Req.Venuebno, (int)Req.PhysicianNo);
             }
-            return objresult;
+            return Objresult;
         }
-        public int OPDPatientDetails(List<OPDPhysicianDetail> opdPhysiciandetail, TblPhysician tblPhysician)
+        public int OPDPatientdetails(List<OPDPhysicianDetail> opdPhysiciandetail, TblPhysician tblPhysician)
         {
             int result = 0;
             try
@@ -361,7 +361,7 @@ namespace Service.Repository
                     var _ApptFollowUpAmountPercentage = new SqlParameter("apptFollowUpAmountPercentage", tblPhysician.apptFollowUpAmtPerc);
 
 
-                    var dbResponse = context.OPDPatientDetails.FromSqlRaw(
+                    var dbResponse = context.OPDPatientdetails.FromSqlRaw(
                     "Execute dbo.Pro_InsertOPDPhysicianMaster @OPDPhysicianitem, @PhysicianNo, @VenueNo, @VenueBranchNo, @CreatedBy," +
                     "@PhysicianBranchNo, @apptCount, @OPDTiming, @apptDuration, @apptAmount, @apptVIPAmount, @apptFollowUpAmount,@apptAmountPercentage,@apptVIPAmountPercentage,@apptFollowUpAmountPercentage",
                     _OPDPhysicianitem, _PhysicianNo, _VenueNo, _VenueBranchNo, _CreatedBy, _PhysicianBranchNo, _ApptCount, _OPDTiming,
@@ -372,13 +372,13 @@ namespace Service.Repository
             }
             catch (Exception ex)
             {
-                MyDevException.Error(ex, "PhysicianRepository.OPDPatientDetails" + tblPhysician.PhysicianNo.ToString(), ExceptionPriority.High, ApplicationType.REPOSITORY, tblPhysician.VenueNo, tblPhysician.VenueBranchNo, tblPhysician.CreatedBy);
+                MyDevException.Error(ex, "PhysicianRepository.OPDPatientdetails" + tblPhysician.PhysicianNo.ToString(), ExceptionPriority.High, ApplicationType.REPOSITORY, tblPhysician.VenueNo, tblPhysician.VenueBranchNo, tblPhysician.CreatedBy);
             }
             return result;
         }
         public List<PhysicianOrClientCodeResponse> GetLastPhysicianCode(int VenueNo, int VenueBranchNo,string CodeType, string CodeToCheck = null)
         {
-            List<PhysicianOrClientCodeResponse> objResult = new List<PhysicianOrClientCodeResponse>();
+            List<PhysicianOrClientCodeResponse> Objresult = new List<PhysicianOrClientCodeResponse>();
             try
             {
                 using (var context = new MasterContext(_config.GetConnectionString(ConfigKeys.DefaultConnection)))
@@ -388,7 +388,7 @@ namespace Service.Repository
                     var _CodeType = new SqlParameter("CodeType", CodeType);
                     var _CodeToCheck = new SqlParameter("CodeToCheck", (object)CodeToCheck ?? DBNull.Value);
 
-                    objResult = context.GetLastPhysicianCode.FromSqlRaw(
+                    Objresult = context.GetLastPhysicianCode.FromSqlRaw(
                     "Execute dbo.pro_GetPhysicianOrClinetCode @VenueNo,@VenueBranchNo,@CodeType,@CodeToCheck", _VenueNo, _Venuebranchno, _CodeType,_CodeToCheck).ToList();
                 }
             }
@@ -396,12 +396,12 @@ namespace Service.Repository
             {
                 MyDevException.Error(ex, "GetPhysicianOrClientCode", ExceptionPriority.Low, ApplicationType.REPOSITORY, VenueNo, 0, 0);
             }
-            return objResult;
+            return Objresult;
 
         }
         public List<consultantdetails> GetConsultant(getconsultant getconsultant)
         {
-            List<consultantdetails> objresult = new List<consultantdetails>();
+            List<consultantdetails> Objresult = new List<consultantdetails>();
             try
             {
 
@@ -410,7 +410,7 @@ namespace Service.Repository
                     var _venueNo = new SqlParameter("venueNo", getconsultant?.venueNo);
                     var _venuebranchNo = new SqlParameter("venuebranchNo", getconsultant?.venuebranchNo);
                     var _consultantNo = new SqlParameter("consultantNo", getconsultant?.consultantNo);
-                    objresult = context.GetConsultant.FromSqlRaw(
+                    Objresult = context.GetConsultant.FromSqlRaw(
                         "Execute dbo.pro_GetConsultant @venueNo,@venuebranchNo,@consultantNo",
                       _venueNo, _venuebranchNo, _consultantNo).ToList();
 
@@ -421,7 +421,7 @@ namespace Service.Repository
             {
                 MyDevException.Error(ex, "GetConsultant", ExceptionPriority.Low, ApplicationType.REPOSITORY, 0, 0, 0);
             }
-            return objresult;
+            return Objresult;
         }
         public int SaveConsultant(saveConsultant saveConsultant)
         {

@@ -18,18 +18,18 @@ namespace Service.Win.Service
         public ProjectInstaller()
         {
             InitializeComponent();
-            this.Installers.Add(GetServiceInstaller());
-            this.Installers.Add(GetServiceProcessInstaller());
+            this.Installers.Add(GetserviceInstaller());
+            this.Installers.Add(GetserviceProcessInstaller());
             this.AfterInstall += ProjectInstaller_AfterInstall;
         }
-        private ServiceInstaller GetServiceInstaller()
+        private ServiceInstaller GetserviceInstaller()
         {
             ServiceInstaller installer = new ServiceInstaller();
             installer.ServiceName = GetConfigurationValue("WinServiceName");
             installer.StartType = ServiceStartMode.Automatic;
             return installer;
         }
-        private ServiceProcessInstaller GetServiceProcessInstaller()
+        private ServiceProcessInstaller GetserviceProcessInstaller()
         {
             ServiceProcessInstaller installer = new ServiceProcessInstaller();
             installer.Account = ServiceAccount.LocalSystem;
@@ -51,7 +51,7 @@ namespace Service.Win.Service
         }
         void ProjectInstaller_AfterInstall(object sender, InstallEventArgs e)
         {
-            using (ServiceController sc = new ServiceController(this.GetServiceInstaller().ServiceName))
+            using (ServiceController sc = new ServiceController(this.GetserviceInstaller().ServiceName))
             {
                 sc.Start();
             }

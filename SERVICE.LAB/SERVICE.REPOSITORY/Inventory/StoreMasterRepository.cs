@@ -19,7 +19,7 @@ namespace Service.Repository.Inventory
         //Get StoreMaster
         public List<StoreMasterResponseDTO> GetStoreMasterDetails(StoreMasterRequestDTO storeMasterRequest)
         {
-            List<StoreMasterResponseDTO> objResult = new List<StoreMasterResponseDTO>();
+            List<StoreMasterResponseDTO> Objresult = new List<StoreMasterResponseDTO>();
             try
             {
                 using (var context = new MasterContext(_config.GetConnectionString(ConfigKeys.DefaultConnection)))
@@ -29,7 +29,7 @@ namespace Service.Repository.Inventory
                     var _Venuebranchno = new SqlParameter("Venuebranchno", storeMasterRequest.Venuebranchno);
                     var _PageIndex = new SqlParameter("PageIndex", storeMasterRequest.PageIndex);
 
-                    objResult = context.GetStoreMasterDetails.FromSqlRaw(
+                    Objresult = context.GetStoreMasterDetails.FromSqlRaw(
                     "Execute dbo.pro_GetStoremaster @StoreID,@VenueNo,@VenueBranchNo,@PageIndex", _StoreID,_VenueNo, _Venuebranchno, _PageIndex).ToList();
                 }
             }
@@ -37,11 +37,11 @@ namespace Service.Repository.Inventory
             {
                 MyDevException.Error(ex, "StoreMasterRepository.GetStoreMasterDetails", ExceptionPriority.Low, ApplicationType.REPOSITORY, storeMasterRequest.VenueNo, 0, 0);
             }
-            return objResult;
+            return Objresult;
         }
         public List<StoreDetails> GetAllStoreByBranch(int VenueNo, int VenueBranchNo)
         {
-            List<StoreDetails> objResult = new List<StoreDetails>();
+            List<StoreDetails> Objresult = new List<StoreDetails>();
             try
             {
                 using (var context = new MasterContext(_config.GetConnectionString(ConfigKeys.DefaultConnection)))
@@ -49,7 +49,7 @@ namespace Service.Repository.Inventory
                     var _VenueNo = new SqlParameter("VenueNo", VenueNo);
                     var _Venuebranchno = new SqlParameter("Venuebranchno", VenueBranchNo);
 
-                    objResult = context.GetAllStoreByBranch.FromSqlRaw(
+                    Objresult = context.GetAllStoreByBranch.FromSqlRaw(
                     "Execute dbo.pro_GetStoreDetailsbyBranchNo @VenueNo,@VenueBranchNo", _VenueNo, _Venuebranchno).ToList();
                 }
             }
@@ -57,7 +57,7 @@ namespace Service.Repository.Inventory
             {
                 MyDevException.Error(ex, "StoreMasterRepository.GetAllStoreByBranch", ExceptionPriority.Low, ApplicationType.REPOSITORY, VenueNo, 0, 0);
             }
-            return objResult;
+            return Objresult;
         }
         public StoreMasterInsertResponseDTO InsertStoreMaster(StoreMasterInsertDTO req)
         {

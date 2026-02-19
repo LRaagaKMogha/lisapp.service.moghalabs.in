@@ -25,16 +25,16 @@ namespace Service.API.SERVICE.Controllers
         [Route("getdetails")]
         public IEnumerable<GetIPSettingResponse> GetIpSettings(int venueNo, int venueBranchNo, int pageIndex, int IPSettingNo)
         {
-            List<GetIPSettingResponse> objresult = new List<GetIPSettingResponse>();
+            List<GetIPSettingResponse> Objresult = new List<GetIPSettingResponse>();
             try
             {
-                objresult = _ipSettingMasterRepository.GetIpSettings(venueNo, venueBranchNo, pageIndex, IPSettingNo);
+                Objresult = _ipSettingMasterRepository.GetIpSettings(venueNo, venueBranchNo, pageIndex, IPSettingNo);
             }
             catch (Exception ex)
             {
                 MyDevException.Error(ex, "GetTariffMasterDetails", ExceptionPriority.Low, ApplicationType.APPSERVICE, venueNo, venueBranchNo, 0);
             }
-            return objresult;
+            return Objresult;
         }
         #endregion
 
@@ -44,16 +44,16 @@ namespace Service.API.SERVICE.Controllers
         [Route("edit")]
         public IEnumerable<RCPriceList> GetEditIpSettings(int venueNo, int venueBranchNo, int physicianNo, int rcNo)
         {
-            List<RCPriceList> objresult = new List<RCPriceList>();
+            List<RCPriceList> Objresult = new List<RCPriceList>();
             try
             {
-                objresult = _ipSettingMasterRepository.GetEditIpSettings(venueNo, venueBranchNo, physicianNo, rcNo);
+                Objresult = _ipSettingMasterRepository.GetEditIpSettings(venueNo, venueBranchNo, physicianNo, rcNo);
             }
             catch (Exception ex)
             {
                 MyDevException.Error(ex, "GetEditIpSettings", ExceptionPriority.Low, ApplicationType.APPSERVICE, venueNo, venueBranchNo, 0);
             }
-            return objresult;
+            return Objresult;
         }
 
         #endregion

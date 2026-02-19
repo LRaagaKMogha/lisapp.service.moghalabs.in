@@ -7,70 +7,70 @@ using System.Threading.Tasks;
 
 namespace Service.Model.Audit
 {
-    [DtoMapping(typeof(orgresponse))]
-    public class TblOrganismMapping : DtoToTableMapping<orgresponse>
+    [DtoMapping(typeof(Orgresponse))]
+    public class TblOrganismMapping : DtoToTableMapping<Orgresponse>
     {
         public override void SetUp()
         {
             TableName = "tbl_Organism";
-            EntityIdProperty = nameof(orgresponse.organismno);
+            EntityIdProperty = nameof(Orgresponse.organismno);
             SubMenuCode = "Organism";
             AddProperty(x => x.organismshortcode, "OrganismCode");
             AddProperty(x => x.organismgroupno, "OrganismTypeNo");
-            IgnoreProperties = new List<System.Linq.Expressions.Expression<Func<orgresponse, object>>>
+            IgnoreProperties = new List<System.Linq.Expressions.Expression<Func<Orgresponse, object>>>
             {
                 x => x.userno
             };
         }
     }
 
-    [DtoMapping(typeof(orgtyperesponse))]
-    public class TblOrgTypeMapping : DtoToTableMapping<orgtyperesponse>
+    [DtoMapping(typeof(Orgtyperesponse))]
+    public class TblOrgTypeMapping : DtoToTableMapping<Orgtyperesponse>
     {
         public override void SetUp()
         {
             TableName = "tbl_OrganismType";
-            EntityIdProperty = nameof(orgtyperesponse.organismtypeno);
+            EntityIdProperty = nameof(Orgtyperesponse.organismtypeno);
             SubMenuCode = "Organism Type";
-            IgnoreProperties = new List<System.Linq.Expressions.Expression<Func<orgtyperesponse, object>>>
+            IgnoreProperties = new List<System.Linq.Expressions.Expression<Func<Orgtyperesponse, object>>>
             {
                 x => x.pageIndex, x => x.TotalRecords, x => x.currentseqNo
             };
         }
     }
 
-    [DtoMapping(typeof(antiresponse))]
-    public class TblAntibioticMapping : DtoToTableMapping<antiresponse>
+    [DtoMapping(typeof(Antiresponse))]
+    public class TblAntibioticMapping : DtoToTableMapping<Antiresponse>
     {
         public override void SetUp()
         {
             TableName = "tbl_Antibiotic";
-            EntityIdProperty = nameof(antiresponse.antibioticno);
+            EntityIdProperty = nameof(Antiresponse.antibioticno);
             SubMenuCode = "Antibiotic";
-            IgnoreProperties = new List<System.Linq.Expressions.Expression<Func<antiresponse, object>>>
+            IgnoreProperties = new List<System.Linq.Expressions.Expression<Func<Antiresponse, object>>>
             {
                 x => x.pageIndex, x => x.TotalRecords, x => x.newseqno
             };
         }
     }
 
-    [DtoMapping(typeof(orgAntinsertresponse))]
-    public class TblOrgTypeAntibioticMapping : DtoToTableMapping<orgAntinsertresponse>
+    [DtoMapping(typeof(OrgAntinsertresponse))]
+    public class TblOrgtypeantibioticMapping : DtoToTableMapping<OrgAntinsertresponse>
     {
         public override void SetUp()
         {
             TableName = "tbl_OrganismTypeAntibioticMap";
-            EntityIdProperty = nameof(orgAntinsertresponse.organismAntibioticMapNo);
+            EntityIdProperty = nameof(OrgAntinsertresponse.organismAntibioticMapNo);
             SubMenuCode = "Organism Type - Antibiotic";
-            IgnoreProperties = new List<System.Linq.Expressions.Expression<Func<orgAntinsertresponse, object>>>
+            IgnoreProperties = new List<System.Linq.Expressions.Expression<Func<OrgAntinsertresponse, object>>>
             {
                 x => x.userno
             };
         }
     }
 
-    [DtoMapping(typeof(lstorgAntiRange))]
-    public class TblOrgAntibioticRangeMapping : DtoToTableMapping<lstorgAntiRange>
+    [DtoMapping(typeof(LstorgAntiRange))]
+    public class TblOrgAntibioticRangeMapping : DtoToTableMapping<LstorgAntiRange>
     {
         public override void SetUp()
         {
@@ -85,7 +85,7 @@ namespace Service.Model.Audit
             dto => dto.organismAntibioticRangeNo.ToString()
             );
             AddProperty(x => x.interprange, "DisplayRR", x => new { ControlType = "Display Range" });
-            IgnoreProperties = new List<System.Linq.Expressions.Expression<Func<lstorgAntiRange, object>>>
+            IgnoreProperties = new List<System.Linq.Expressions.Expression<Func<LstorgAntiRange, object>>>
             {
                 x => x.antibioticname, x => x.sequenceNo
             };

@@ -23,7 +23,7 @@ namespace Service.API.SERVICE.Controllers
             }
             return true;
         }
-        public static ErrorResponse InsertOrgtypemaster(orgtyperesponse orgtyinsertreq)
+        public static ErrorResponse InsertOrgtypemaster(Orgtyperesponse orgtyinsertreq)
         {
             ErrorResponse errorResponse = new ErrorResponse();
             List<string> errors = new List<string>();
@@ -45,7 +45,7 @@ namespace Service.API.SERVICE.Controllers
         }
 
         // Organism Master //
-        public static ErrorResponse InsertOrgmaster(orgresponse orginsertreq)
+        public static ErrorResponse InsertOrgmaster(Orgresponse orginsertreq)
         {
             ErrorResponse errorResponse = new ErrorResponse();
             List<string> errors = new List<string>();
@@ -69,7 +69,7 @@ namespace Service.API.SERVICE.Controllers
         }
 
         // Antibiotic //
-        public static ErrorResponse Insertantimaster(antiresponse antinsertreq)
+        public static ErrorResponse Insertantimaster(Antiresponse antinsertreq)
         {
             ErrorResponse errorResponse = new ErrorResponse();
             List<string> errors = new List<string>();
@@ -91,7 +91,7 @@ namespace Service.API.SERVICE.Controllers
         }
 
         // Organism Type Antibiotic Mapping //
-        public static ErrorResponse InsertorgAntimaster(orgAntinsertresponse orgAntinsertreq)
+        public static ErrorResponse InsertorgAntimaster(OrgAntinsertresponse orgAntinsertreq)
         {
             ErrorResponse errorResponse = new ErrorResponse();
             List<string> errors = new List<string>();
@@ -120,13 +120,13 @@ namespace Service.API.SERVICE.Controllers
             ErrorResponse errorResponse = new ErrorResponse();
             List<string> errors = new List<string>();
 
-            if (req.lstorgAntiRange == null || req.lstorgAntiRange.Count == 0)
+            if (req.LstorgAntiRange == null || req.LstorgAntiRange.Count == 0)
             {
                 errors.Add("Organism Antibiotic Range list is required");
             }
             else
             {
-                foreach (var item in req.lstorgAntiRange)
+                foreach (var item in req.LstorgAntiRange)
                 {
                     if (item.organismno == 0)
                     {

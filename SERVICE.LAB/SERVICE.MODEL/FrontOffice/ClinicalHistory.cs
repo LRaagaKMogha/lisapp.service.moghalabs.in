@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
 
 namespace Service.Model
 {
@@ -9,8 +7,7 @@ namespace Service.Model
         public int PatientVisitNo { get; set; }
         public int GroupNo { get; set; }
         public string GroupName { get; set; }
-        public List<ClinicalHistoryMaster> ClinicalHistoryMasters { get; set; }
-      
+        public List<ClinicalHistoryMaster> ClinicalHistoryMasters { get; set; }      
     }
     public class ClinicalHistoryMaster
     {      
@@ -18,7 +15,6 @@ namespace Service.Model
         public string MasterName { get; set; }
         public string MasterValue { get; set; }
         public string ControlType { get; set; }
-
     }
     public class ClinicalHistoryResponse
     {
@@ -29,7 +25,6 @@ namespace Service.Model
         public string MasterName { get; set; }
         public string ControlType { get; set; }
         public string MasterValue { get; set; }
-
     }
     public class InsertClinicalHistory
     {
@@ -38,17 +33,14 @@ namespace Service.Model
         public int UserNo { get; set; }
         public int VenueNo { get; set; }
         public int VenueBranchNo { get; set; }
-
     }
     public class InsertSkinHistory
     {
         public int PatientVisitNo { get; set; }
-        public string? ApptNo { get; set; }
-        public List<ClinicalHistory>? ClinicalHistories { get; set; }
+        public string ApptNo { get; set; }
+        public List<ClinicalHistory> ClinicalHistories { get; set; }
         public int UserNo { get; set; }
         public int VenueNo { get; set; }
         public int VenueBranchNo { get; set; }
-
     }
-
 }

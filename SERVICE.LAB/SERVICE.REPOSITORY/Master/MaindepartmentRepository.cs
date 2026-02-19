@@ -39,7 +39,7 @@ namespace Service.Repository
         }
         public MainDepartmentMasterResponse InsertMainDepartmentmaster(TblMainDepartment tblmaindepartment)        
         {
-            MainDepartmentMasterResponse objresult = new MainDepartmentMasterResponse();
+            MainDepartmentMasterResponse Objresult = new MainDepartmentMasterResponse();
             try
             {
                 using (var context = new LIMSContext(_config.GetConnectionString(ConfigKeys.DefaultConnection)))
@@ -53,7 +53,7 @@ namespace Service.Repository
                     var _sequenceno = new SqlParameter("sequenceno", tblmaindepartment?.sequenceno);
                     var _status = new SqlParameter("status", tblmaindepartment?.status);
 
-                    objresult = context.InsertMainDepartment.FromSqlRaw(
+                    Objresult = context.InsertMainDepartment.FromSqlRaw(
                     "Execute dbo.pro_InsertMainDepartment @maindeptno,@venueno,@userno,@departmentname," +
                     "@displayname,@shortcode, @sequenceno,@status",
                     _maindeptno, _venueno, _userno, _departmentname ,_displayname ,
@@ -64,7 +64,7 @@ namespace Service.Repository
             {           
                MyDevException.Error(ex, "MainDepartmentRepository.InsertMainDepartmentdetails - " + tblmaindepartment.maindeptno.ToString(), ExceptionPriority.Low, ApplicationType.REPOSITORY, tblmaindepartment.venueno,0, 0);
             }
-            return objresult;
+            return Objresult;
         }
     }
 }

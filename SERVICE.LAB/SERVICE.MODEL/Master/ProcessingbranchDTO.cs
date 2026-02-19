@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 
 namespace Service.Model
 {
@@ -13,7 +12,6 @@ namespace Service.Model
         public int deptNo { get; set; }
         public int testNo { get; set; }
     }
-
     public partial class responsebranch
     {
         public int totalRecords { get; set; }
@@ -31,7 +29,7 @@ namespace Service.Model
         public string venuebranchName { get; set; }
         public string venueName { get; set; }
     }
-    public partial class insertbranch
+    public partial class Insertbranch
     {
         public int processingBranchMapNo { get; set; }
         public int billedBranchNo { get; set; }
@@ -41,12 +39,9 @@ namespace Service.Model
         public Int16 venueNo { get; set; }
         public bool status { get; set; }
         public int userNo { get; set; }
-
     }
     public class Storeprocessingbranch
     {
         public int processingBranchMapNo { get; set; }
     }
-
-
 }

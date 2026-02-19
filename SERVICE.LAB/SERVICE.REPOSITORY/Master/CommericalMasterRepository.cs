@@ -18,7 +18,7 @@ namespace Service.Repository
 
         public List<CommericalGetRes> Getcompanymaster(CommericalGetReq getReq)
         {
-            List<CommericalGetRes> objresult = new List<CommericalGetRes>();
+            List<CommericalGetRes> Objresult = new List<CommericalGetRes>();
             try
             {
                 using (var context = new MasterContext(_config.GetConnectionString(ConfigKeys.DefaultConnection)))
@@ -27,7 +27,7 @@ namespace Service.Repository
                     var _pageIndex = new SqlParameter("pageIndex", getReq?.pageIndex);
                     var _venueNo = new SqlParameter("venueNo", getReq?.venueNo);
                     
-                    objresult = context.Getcompany.FromSqlRaw(
+                    Objresult = context.Getcompany.FromSqlRaw(
                     "Execute dbo.pro_GetCompanyDetails @venueNo,@CompanyNo,@pageIndex",
                     _venueNo, _CompanyNo, _pageIndex).ToList();
                 }
@@ -36,12 +36,12 @@ namespace Service.Repository
             {
                 MyDevException.Error(ex, "CommericalRepository.Getcompanymaster" + getReq.CompanyNo.ToString(), ExceptionPriority.Low, ApplicationType.REPOSITORY, getReq.venueNo,0, 0);
             }
-            return objresult;
+            return Objresult;
         }
 
         public CommericalInsRes Insertcompanymaster(CommericalInsReq insReq)
         {
-            CommericalInsRes objresult = new CommericalInsRes();
+            CommericalInsRes Objresult = new CommericalInsRes();
             try
             {
                 using (var context = new MasterContext(_config.GetConnectionString(ConfigKeys.DefaultConnection)))
@@ -62,18 +62,18 @@ namespace Service.Repository
                     _VenueNo, _CompanyNo, _CompanyName, _EmailID, _MobileNo,
                     _SeqNo, _Status, _userNo, _venueBranchno).AsEnumerable().FirstOrDefault();
                     
-                    objresult.CompanyNo = obj?.CompanyNo ?? 0;
+                    Objresult.CompanyNo = obj?.CompanyNo ?? 0;
                 }
             }
             catch (Exception ex)
             {
                 MyDevException.Error(ex, "CommericalRepository.Insertcompanymaster" + insReq.CompanyNo.ToString(), ExceptionPriority.Low, ApplicationType.REPOSITORY, insReq.VenueNo, insReq.venueBranchno, 0);
             }
-            return objresult;
+            return Objresult;
         }
         public List<GSTGetRes> GetGSTMaster(GSTGetReq getReq)
         {
-            List<GSTGetRes> objresult = new List<GSTGetRes>();
+            List<GSTGetRes> Objresult = new List<GSTGetRes>();
             try
             {
                 using (var context = new MasterContext(_config.GetConnectionString(ConfigKeys.DefaultConnection)))
@@ -82,7 +82,7 @@ namespace Service.Repository
                     var _VenueNo = new SqlParameter("VenueNo", getReq?.VenueNo);
                     var _pageIndex = new SqlParameter("pageIndex", getReq?.pageIndex);
                     
-                    objresult = context.GetGST.FromSqlRaw(
+                    Objresult = context.GetGST.FromSqlRaw(
                     "Execute dbo.Pro_GetGSTTaxmaster @TaxMastNo,@VenueNo,@pageIndex",
                     _TaxMastNo,_VenueNo, _pageIndex).ToList();
                 }
@@ -91,11 +91,11 @@ namespace Service.Repository
             {
                 MyDevException.Error(ex, "CommericalRepository.GetGSTMaster" + getReq.TaxMastNo.ToString(), ExceptionPriority.Low, ApplicationType.REPOSITORY, getReq.VenueNo, 0, 0);
             }
-            return objresult;
+            return Objresult;
         }
         public GSTInsRes InsertGSTMaster(GSTInsReq insReq)
         {
-            GSTInsRes objresult = new GSTInsRes();
+            GSTInsRes Objresult = new GSTInsRes();
             try
             {
                 using (var context = new MasterContext(_config.GetConnectionString(ConfigKeys.DefaultConnection)))
@@ -113,14 +113,14 @@ namespace Service.Repository
                     "Execute dbo.Pro_InsertGSTTaxMaster @TaxMastNo,@Description,@Percentage,@FromDate,@ToDate,@VenueNo,@Status,@userNo",
                     _TaxMastNo, _Description, _Percentage, _FromDate, _ToDate, _VenueNo,_Status, _userNo).AsEnumerable().FirstOrDefault();
                     
-                    objresult.TaxMastNo = obj?.TaxMastNo ?? 0;
+                    Objresult.TaxMastNo = obj?.TaxMastNo ?? 0;
                 }
             }
             catch (Exception ex)
             {
                 MyDevException.Error(ex, "CommericalRepository.Insertcompanymaster" + insReq.TaxMastNo.ToString(), ExceptionPriority.Low, ApplicationType.REPOSITORY, insReq.VenueNo, 0, 0);
             }
-            return objresult;
+            return Objresult;
         }
     }
 }

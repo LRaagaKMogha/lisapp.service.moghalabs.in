@@ -51,7 +51,7 @@ namespace Service.Model
         public string MId { get; set; }
         public int VNo { get; set; }
         public int vbNo { get; set; }
-        public List<BulkTestResultDTO> lsttest { get; set; }
+        public List<BulkTestResultDTO> Lsttest { get; set; }
     }
     public class BulkTestResultDTO
     {
@@ -134,8 +134,8 @@ namespace Service.Model
         public bool isformulaparameter { get; set; }
         public int formulaserviceno { get; set; }
         public string formulaservicetype { get; set; }
-        public List<formulajson> formulajson { get; set; }
-        public List<formulaparameterjson> formulaparameterjson { get; set; }
+        public List<Formulajson> Formulajson { get; set; }
+        public List<Formulaparameterjson> Formulaparameterjson { get; set; }
         public int age {  get; set; }
         public string ageType { get; set; }
         public string gender {  get; set; }
@@ -166,8 +166,8 @@ namespace Service.Model
         public bool isformulaparameter { get; set; }
         public int formulaserviceno { get; set; }
         public string formulaservicetype { get; set; }
-        public string formulajson { get; set; }
-        public string formulaparameterjson { get; set; }
+        public string Formulajson { get; set; }
+        public string Formulaparameterjson { get; set; }
         public int age { get; set; }
         public string ageType { get; set; }
         public string gender { get; set; }

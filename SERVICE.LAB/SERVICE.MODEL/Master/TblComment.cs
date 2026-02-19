@@ -16,8 +16,8 @@ namespace Service.Model
     {
         public int? CommentsMastNo { get; set; }
         public Int16 CategoryNo { get; set; }
-        public string? ShortCode { get; set; }
-        public string? Description { get; set; }
+        public string ShortCode { get; set; }
+        public string Description { get; set; }
         public int seqNo { get; set; }
         public bool? Status { get; set; }
         public Int16 VenueNo { get; set; }
@@ -36,8 +36,8 @@ namespace Service.Model
     {
         public int CommentsMastNo { get; set; }
         public Int16 CategoryNo { get; set; }
-        public string? ShortCode { get; set; }
-        public string? Description { get; set; }
+        public string ShortCode { get; set; }
+        public string Description { get; set; }
         public int SeqNo { get; set; }
         public bool? Status { get; set; }
         public Int16 VenueNo { get; set; }
@@ -50,7 +50,7 @@ namespace Service.Model
     {
         public Int16 CategoryNo { get; set; }
         public Int16 SubCatyNo { get; set; }
-        public string? SubCatyDesc { get; set; }
+        public string SubCatyDesc { get; set; }
         public Int16 DeptNo { get; set; }
         public int SeqNo { get; set; }
         public bool? Status { get; set; }
@@ -87,13 +87,11 @@ namespace Service.Model
     {
         public Int16 SubCatyNo { get; set; }
     }
-
     public partial class GetNationRaceReq
     {
         public int CommonNo { get; set; }
         public string Type { get; set; }
         public int? pageIndex { get; set; }
-
     }
     public partial class GetNationRaceRes
     {
@@ -103,7 +101,6 @@ namespace Service.Model
         public Int64 Id { get; set; }
         public string Description { get; set; }
         public bool? Status { get; set; }
-
     }
     public partial class InsNationRaceReq
     {
@@ -111,13 +108,11 @@ namespace Service.Model
         public string Type { get; set; }
         public string Description { get; set; }
         public bool? Status { get; set; }
-
     }
     public partial class InsNationRaceRes
     {
         public int CommonNo { get; set; }
         public int LastPageIndex { get; set; }  
-
     }
     public partial class TemplateComment
     {
@@ -125,25 +120,23 @@ namespace Service.Model
         public int PatientVisitNo { get; set; }
         public Int16 TestNo { get; set; }
         public int CommentNo { get; set; }
-        public string? CommentShortCode { get; set; }
-        public string? CommentDesc { get; set; }
+        public string CommentShortCode { get; set; }
+        public string CommentDesc { get; set; }
         public Int16 VenueNo { get; set; }
         public int VenueBranchno { get; set; }
         public int UserNo { get; set; }
-        public string? Type { get; set; }
-        public string? PageCode { get; set; }
+        public string Type { get; set; }
+        public string PageCode { get; set; }
     }
-
     public partial class TemplateCommentRes
     {
         public long CH_QcNo { get; set; }
         public int PatientVisitNo { get; set; }
         public Int16 TestNo { get; set; }
         public int CommentNo { get; set; }
-        public string? CommentShortCode { get; set; }
-        public string? CommentDesc { get; set; }
+        public string CommentShortCode { get; set; }
+        public string CommentDesc { get; set; }
     }
-
     public partial class InsertBankMasterr
     {
         public int BankID { get; set; }
@@ -157,12 +150,10 @@ namespace Service.Model
         public string PostalCode { get; set; }
         public int CreatedBy { get; set; }
         public int VenueNo { get; set; }
-        //public string VenueBranchNo { get; set; }
         public bool? Status {  get; set; }
         public string StatusCode { get; set; }
         public int PageIndex { get; set; }
     }
-
     public partial class BankMasterResponse
     {
         public int BankID { get; set; }
@@ -176,7 +167,6 @@ namespace Service.Model
         public string PostalCode { get; set; }
         public int CreatedBy { get; set; }
         public int VenueNo { get; set; }
-        //public int VenueBranchNo { get; set; }
         public bool? Status { get; set; }
         public int PageIndex { get; set; }
         public int TotalRecords { get; set; }
@@ -198,15 +188,12 @@ namespace Service.Model
         public int CreatedBy { get; set; }
         public int VenueNo { get; set; }
         public bool? Status { get; set; }
-
     }
     public partial class InsertBankMasteres
     {
         public int BankID { get; set; }
         public bool? Status { get; set; }
-
     }
-
     public partial class InsertBankbranchreq
     {
         public int BranchID { get; set; }
@@ -239,12 +226,10 @@ namespace Service.Model
         public int TotalRecords { get; set; }
         public string BankName { get; set; }
     }
-
     public partial class GetBankbranchreq
     {
         public int BranchID { get; set; }
         public int VenueNo { get; set; }
         public int PageIndex { get; set; }
     }
-
 }

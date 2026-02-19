@@ -28,16 +28,16 @@ namespace Service.API.SERVICE.Controllers
         [Route("api/Master/GetCommonMasterList")]
         public List<CommonMasterDto> GetCommonMasterList(int VenueNo, int VenueBranchNo, string MasterKey)
         {
-            List<CommonMasterDto> objresult = new List<CommonMasterDto>();
+            List<CommonMasterDto> Objresult = new List<CommonMasterDto>();
             try
             {
-                objresult = _IMasterRepository.GetCommonMasterList(VenueNo, VenueBranchNo, MasterKey);
+                Objresult = _IMasterRepository.GetCommonMasterList(VenueNo, VenueBranchNo, MasterKey);
             }
             catch (Exception ex)
             {
                 MyDevException.Error(ex, "MasterController.GetCommonMasterList-" + MasterKey, ExceptionPriority.Low, ApplicationType.APPSERVICE, VenueNo, VenueBranchNo, 0);
             }
-            return objresult;
+            return Objresult;
         }
         /// <summary>
         /// GetConfigurationList
@@ -49,16 +49,16 @@ namespace Service.API.SERVICE.Controllers
         [Route("api/Master/GetConfigurationList")]       
         public List<ConfigurationDto> GetConfigurationList(int venueno, int venuebranchno)
         {
-            List<ConfigurationDto> objresult = new List<ConfigurationDto>();
+            List<ConfigurationDto> Objresult = new List<ConfigurationDto>();
             try
             {
-                objresult = _IMasterRepository.GetConfigurationList(venueno, venuebranchno);
+                Objresult = _IMasterRepository.GetConfigurationList(venueno, venuebranchno);
             }
             catch (Exception ex)
             {
                 MyDevException.Error(ex, "MasterController.GetConfigurationList", ExceptionPriority.Low, ApplicationType.APPSERVICE, venueno, venuebranchno, 0);
             }
-            return objresult;
+            return Objresult;
         }
         /// <summary>
         /// Get Venue details List
@@ -69,32 +69,32 @@ namespace Service.API.SERVICE.Controllers
         [Route("api/Master/GetVenueDetails")]
         public List<CommonMasterDto> GetVenueDetails(int VenueNo, int VenueBranchNo, string MasterKey)
         {
-            List<CommonMasterDto> objresult = new List<CommonMasterDto>();
+            List<CommonMasterDto> Objresult = new List<CommonMasterDto>();
             try
             {
-                objresult = _IMasterRepository.GetVenueDetails(VenueNo, VenueBranchNo, MasterKey);
+                Objresult = _IMasterRepository.GetVenueDetails(VenueNo, VenueBranchNo, MasterKey);
             }
             catch (Exception ex)
             {
                 MyDevException.Error(ex, "MasterController.GetVenueDetails", ExceptionPriority.Low, ApplicationType.APPSERVICE, VenueNo, VenueBranchNo, 0);
             }
-            return objresult;
+            return Objresult;
         }
 
         [HttpGet]
         [Route("api/Master/GetDepartmentList")]
         public List<TblDepartment> GetDepartmentList(int VenueNo, int VenueBranchNo)
         {
-            List<TblDepartment> objresult = new List<TblDepartment>();
+            List<TblDepartment> Objresult = new List<TblDepartment>();
             try
             {
-                objresult = _IMasterRepository.GetDepartmentList(VenueNo, VenueBranchNo);
+                Objresult = _IMasterRepository.GetDepartmentList(VenueNo, VenueBranchNo);
             }
             catch (Exception ex)
             {
                 MyDevException.Error(ex, "MasterController.GetDepartmentList" , ExceptionPriority.Low, ApplicationType.APPSERVICE, VenueNo, VenueBranchNo, 0);
             }
-            return objresult;
+            return Objresult;
         }
 
 
@@ -102,80 +102,80 @@ namespace Service.API.SERVICE.Controllers
         [Route("api/Master/GetMethodList")]
         public List<TblMethod> GetMethodList(int VenueNo, int VenueBranchNo)
         {
-            List<TblMethod> objresult = new List<TblMethod>();
+            List<TblMethod> Objresult = new List<TblMethod>();
             try
             {
-                objresult = _IMasterRepository.GetMethodList(VenueNo, VenueBranchNo);
+                Objresult = _IMasterRepository.GetMethodList(VenueNo, VenueBranchNo);
             }
             catch (Exception ex)
             {
                 MyDevException.Error(ex, "MasterController.GetMethodList" , ExceptionPriority.Low, ApplicationType.APPSERVICE, VenueNo, VenueBranchNo, 0);
             }
-            return objresult;
+            return Objresult;
         }
 
         [HttpGet]
         [Route("api/Master/GetUnitsList")]
         public List<TblUnits> GetUnitsList(int VenueNo, int VenueBranchNo)
         {
-            List<TblUnits> objresult = new List<TblUnits>();
+            List<TblUnits> Objresult = new List<TblUnits>();
             try
             {
-                objresult = _IMasterRepository.GetUnitsList(VenueNo, VenueBranchNo);
+                Objresult = _IMasterRepository.GetUnitsList(VenueNo, VenueBranchNo);
             }
             catch (Exception ex)
             {
                 MyDevException.Error(ex, "MasterController.GetUnitsList", ExceptionPriority.Low, ApplicationType.APPSERVICE, VenueNo, VenueBranchNo, 0);
             }
-            return objresult;
+            return Objresult;
         }
 
         [HttpGet]
         [Route("api/Master/GetOrganismList")]
         public List<TblOrganism> GetOrganismList(int VenueNo, int VenueBranchNo)
         {
-            List<TblOrganism> objresult = new List<TblOrganism>();
+            List<TblOrganism> Objresult = new List<TblOrganism>();
             try
             {
-                objresult = _IMasterRepository.GetOrganismList(VenueNo, VenueBranchNo);
+                Objresult = _IMasterRepository.GetOrganismList(VenueNo, VenueBranchNo);
             }
             catch (Exception ex)
             {
                 MyDevException.Error(ex, "MasterController.GetOrganismList", ExceptionPriority.Low, ApplicationType.APPSERVICE, VenueNo, VenueBranchNo, 0);
             }
-            return objresult;
+            return Objresult;
         }
 
         [HttpGet]
         [Route("api/Master/GetOrgTypeAntiMapList")]
-        public List<lstotdrugmap> GetOrgTypeAntiMapList(int VenueNo, int VenueBranchNo)
+        public List<Lstotdrugmap> GetOrgTypeAntiMapList(int VenueNo, int VenueBranchNo)
         {
-            List<lstotdrugmap> objresult = new List<lstotdrugmap>();
+            List<Lstotdrugmap> Objresult = new List<Lstotdrugmap>();
             try
             {
-                objresult = _IMasterRepository.GetOrgTypeAntiMapList(VenueNo, VenueBranchNo);
+                Objresult = _IMasterRepository.GetOrgTypeAntiMapList(VenueNo, VenueBranchNo);
             }
             catch (Exception ex)
             {
                 MyDevException.Error(ex, "MasterController.GetOrgTypeAntiMapList", ExceptionPriority.Low, ApplicationType.APPSERVICE, VenueNo, VenueBranchNo, 0);
             }
-            return objresult;
+            return Objresult;
         }
 
         [HttpGet]
         [Route("api/Master/GetTemplateList")]
         public List<TblTemplate> GetTemplateList(int VenueNo, int VenueBranchNo)
         {
-            List<TblTemplate> objresult = new List<TblTemplate>();
+            List<TblTemplate> Objresult = new List<TblTemplate>();
             try
             {
-                objresult = _IMasterRepository.GetTemplateList(VenueNo, VenueBranchNo);
+                Objresult = _IMasterRepository.GetTemplateList(VenueNo, VenueBranchNo);
             }
             catch (Exception ex)
             {
                 MyDevException.Error(ex, "MasterController.GetTemplateList", ExceptionPriority.Low, ApplicationType.APPSERVICE, VenueNo, VenueBranchNo, 0);
             }
-            return objresult;
+            return Objresult;
         }
         //single configuration 
         [HttpGet]
@@ -214,16 +214,16 @@ namespace Service.API.SERVICE.Controllers
         [Route("api/Master/GetRefTypeList")]
         public List<RefTypeCommonMasterDto> GetRefTypeList(int VenueNo, int VenueBranchNo)
         {
-            List<RefTypeCommonMasterDto> objresult = new List<RefTypeCommonMasterDto>();
+            List<RefTypeCommonMasterDto> Objresult = new List<RefTypeCommonMasterDto>();
             try
             {
-                objresult = _IMasterRepository.GetRefTypeList(VenueNo, VenueBranchNo);
+                Objresult = _IMasterRepository.GetRefTypeList(VenueNo, VenueBranchNo);
             }
             catch (Exception ex)
             {
                 MyDevException.Error(ex, "MasterController.GetRefTypeList", ExceptionPriority.Low, ApplicationType.APPSERVICE, VenueNo, VenueBranchNo, 0);
             }
-            return objresult;
+            return Objresult;
         }
 
         [HttpPost]

@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace Service.Model.Sample
 {
@@ -48,11 +47,11 @@ namespace Service.Model.Sample
         public int AppointmentCategory { get; set; }
         public int AppointmentMode { get; set; }
         public int BilledBranchNo { get; set; }
-        public string? MobileNo { get; set; }
-        public string? PatientName { get; set; }
-        public string? AppointmentNo { get; set; }
-        public string? PhysicianName { get; set; }
-        public string? SpecializationName { get; set; }
+        public string MobileNo { get; set; }
+        public string PatientName { get; set; }
+        public string AppointmentNo { get; set; }
+        public string PhysicianName { get; set; }
+        public string SpecializationName { get; set; }
         public int BookingType { get; set; }
         public int ResourceNo { get; set; }
         public int BookingStatus { get; set; }
@@ -102,14 +101,9 @@ namespace Service.Model.Sample
         public int VenueBranchNo { get; set; }
         public int VenueNo { get; set; }
     }
-
     public class GetHcDocumentsDetailsResponse
     {
         public int HCPatientNo { get; set; }
         public string HCPatientID { get; set; }
     }
 }
-
-
-
-

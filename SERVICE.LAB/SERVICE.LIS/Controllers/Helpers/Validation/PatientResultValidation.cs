@@ -11,7 +11,7 @@ namespace Service.API.SERVICE.Controllers
     public class PatientResultValidation
     {
         // Result Entry & Result Validation //
-        public static ErrorResponse GetResultVisit(requestresultvisit req)
+        public static ErrorResponse GetResultVisit(Requestresultvisit req)
         {
             ErrorResponse errorResponse = new ErrorResponse();
             List<string> errors = new List<string>();
@@ -34,20 +34,20 @@ namespace Service.API.SERVICE.Controllers
         }
 
         // Insert Result Entry & Result Validation //
-        public static ErrorResponse InsertResult(objresult req)
+        public static ErrorResponse InsertResult(Objresult req)
         {
             ErrorResponse errorResponse = new ErrorResponse();
             List<string> errors = new List<string>();
             StringBuilder orderlistnos = new StringBuilder();
 
             // Formula Validation //
-            if (req.lstvisit.Count > 0)
+            if (req.Lstvisit.Count > 0)
             {
-                foreach (var visit in req.lstvisit)
+                foreach (var visit in req.Lstvisit)
                 {
-                    foreach (var order in visit.lstorderlist)
+                    foreach (var order in visit.Lstorderlist)
                     {
-                        foreach (var detail in order.lstorderdetail)
+                        foreach (var detail in order.Lstorderdetail)
                         {
                             if (detail.isformulaparameter == true)
                             {
@@ -69,9 +69,9 @@ namespace Service.API.SERVICE.Controllers
 
             // Result Save Validation (Entry & Validation) //
             var isAbnormalorCriticalResultsAvail = 0;
-            foreach (var vst in req.lstvisit)
+            foreach (var vst in req.Lstvisit)
             {
-                foreach (var ol in vst.lstorderlist)
+                foreach (var ol in vst.Lstorderlist)
                 {
                     if (ol.ischecked == true)
                     {
@@ -96,15 +96,15 @@ namespace Service.API.SERVICE.Controllers
                         ol.ischecked = false;
                     }
 
-                    foreach (var od in ol.lstorderdetail)
+                    foreach (var od in ol.Lstorderdetail)
                     {
                         if (od.resulttype != "CU" && od.resulttype != "TE")
                         {
-                            var lst = vst.lstorderlist.Where(s => s.ischecked == true).ToList();
-                            var lst1 = vst.lstorderlist.Where(s => s.risrerun == true).ToList();
-                            var lst2 = vst.lstorderlist.Where(s => s.risrecollect == true).ToList();
-                            var lst3 = vst.lstorderlist.Where(s => s.risrecheck == true).ToList();
-                            var lst4 = vst.lstorderlist.Where(s => s.isnoresult == true).ToList();
+                            var lst = vst.Lstorderlist.Where(s => s.ischecked == true).ToList();
+                            var lst1 = vst.Lstorderlist.Where(s => s.risrerun == true).ToList();
+                            var lst2 = vst.Lstorderlist.Where(s => s.risrecollect == true).ToList();
+                            var lst3 = vst.Lstorderlist.Where(s => s.risrecheck == true).ToList();
+                            var lst4 = vst.Lstorderlist.Where(s => s.isnoresult == true).ToList();
 
                             if (lst.Count == 0 && lst1.Count == 0 && lst2.Count == 0 && lst3.Count == 0 && (lst4 == null || (lst4.Count == 0 && lst4 != null)))
                             {
@@ -152,11 +152,11 @@ namespace Service.API.SERVICE.Controllers
             return errorResponse;
         }
 
-        public static bool FunCalFormula(lstvisit v, lstorderlist ol, lstorderdetail od, List<string> errors)
+        public static bool FunCalFormula(Lstvisit v, Lstorderlist ol, Lstorderdetail od, List<string> errors)
         {
             if (od.isformulaparameter == true)
             {
-                foreach (var param in od.formulaparameterjson)
+                foreach (var param in od.Formulaparameterjson)
                 {
                     int formulaserviceno = param.serviceno;
                     string formulaservicetype = param.servicetype;
@@ -164,15 +164,15 @@ namespace Service.API.SERVICE.Controllers
                     int ftindex = 0;
                     if (formulaservicetype == "T")
                     {
-                        ftindex = ol.lstorderdetail.FindIndex(service => service.testno == formulaserviceno);
+                        ftindex = ol.Lstorderdetail.FindIndex(service => service.testno == formulaserviceno);
                     }
                     else if (formulaservicetype == "S")
                     {
-                        ftindex = ol.lstorderdetail.FindIndex(service => service.subtestno == formulaserviceno);
+                        ftindex = ol.Lstorderdetail.FindIndex(service => service.subtestno == formulaserviceno);
                     }
 
-                    var formulaDetail = ol.lstorderdetail[ftindex];
-                    var formulajson = formulaDetail.formulajson;
+                    var formulaDetail = ol.Lstorderdetail[ftindex];
+                    var Formulajson = formulaDetail.Formulajson;
                     int decimalpoint = formulaDetail.decimalpoint;
                     bool isroundoff = formulaDetail.isroundoff;
                     bool isresval = false;
@@ -180,19 +180,19 @@ namespace Service.API.SERVICE.Controllers
                     decimal a = 0;
                     decimal val = 0;
 
-                    foreach (var formula in formulajson)
+                    foreach (var formula in Formulajson)
                     {
                         val = 0;
                         if (formula.value == 0)
                         {
-                            var plst = new List<lstorderdetail>();
+                            var plst = new List<Lstorderdetail>();
                             if (formula.parameterservicetype == "T")
                             {
-                                plst = ol.lstorderdetail.Where(service => service.testno == formula.parameterserviceno).ToList();
+                                plst = ol.Lstorderdetail.Where(service => service.testno == formula.parameterserviceno).ToList();
                             }
                             else if (formula.parameterservicetype == "S")
                             {
-                                plst = ol.lstorderdetail.Where(service => service.subtestno == formula.parameterserviceno).ToList();
+                                plst = ol.Lstorderdetail.Where(service => service.subtestno == formula.parameterserviceno).ToList();
                             }
                             if (decimal.TryParse(plst[0].result, out var parsedResult))
                             {
@@ -275,7 +275,7 @@ namespace Service.API.SERVICE.Controllers
         }
 
         // MB Result Entry & Result Validation //
-        public static ErrorResponse InsertResultMB(objresultmb req)
+        public static ErrorResponse InsertResultMB(Objresultmb req)
         {
             ErrorResponse errorResponse = new ErrorResponse();
             List<string> errors = new List<string>();
@@ -313,7 +313,7 @@ namespace Service.API.SERVICE.Controllers
         }
 
         // Template Result Entry & Result Validation //
-        public static ErrorResponse InsertResultTemplate(objresulttemplate req)
+        public static ErrorResponse InsertResultTemplate(Objresulttemplate req)
         {
             ErrorResponse errorResponse = new ErrorResponse();
             List<string> errors = new List<string>();

@@ -17,7 +17,7 @@ namespace Service.Repository.Inventory
         public ParameterAnalyserRepositoty(IConfiguration config) { _config = config; }
         public List<GetParameterAnalyserResponse> GetAllParameterAnalyser(GetAllParameterAnalyserRequest request)
         {
-            List<GetParameterAnalyserResponse> objresult = new List<GetParameterAnalyserResponse>();
+            List<GetParameterAnalyserResponse> Objresult = new List<GetParameterAnalyserResponse>();
             try
             {
                 using (var context = new MasterContext(_config.GetConnectionString(ConfigKeys.DefaultConnection)))
@@ -32,7 +32,7 @@ namespace Service.Repository.Inventory
                     var _userNo = new SqlParameter("UserNo", request.userno);
                     var _pageIndex = new SqlParameter("PageIndex", request.pageIndex);
 
-                    objresult = context.GetParameterAnalyserDTO.FromSqlRaw(
+                    Objresult = context.GetParameterAnalyserDTO.FromSqlRaw(
                     "Execute dbo.pro_GetAllParameterAnalyser @VenueNo,@VenueBranchNo,@BranchNo,@AnalyserNo,@ParameterNo,@TestNo,@SubTestNo,@UserNo,@PageIndex",
                     _venueNo, _venueBranchNo, _branchNo, _analyserNo, _parameterNo, _testNo, _subTestNo, _userNo, _pageIndex).ToList();
                 }
@@ -41,7 +41,7 @@ namespace Service.Repository.Inventory
             {
                 MyDevException.Error(ex, "ParameterAnalyserRepositoty.GetAllParameterAnalyser", ExceptionPriority.High, ApplicationType.REPOSITORY, request.venueno, (int)request.venuebranchno, (int)request.masterNo);
             }
-            return objresult;
+            return Objresult;
         }
         public CommonAdminResponse InsertParameterAnalyser(InsertParameterAnalyser insertParameterAnalyser)
         {
@@ -58,11 +58,11 @@ namespace Service.Repository.Inventory
                     var _ConsumptionXML = new SqlParameter("ConsumptionXML", consumptionXML);
                     var _UserNo = new SqlParameter("UserNo", insertParameterAnalyser?.createdby);
 
-                    var objresult = context.CreateParameterAnalyserDTO.FromSqlRaw(
+                    var Objresult = context.CreateParameterAnalyserDTO.FromSqlRaw(
                     "Execute dbo.Pro_InsertParameterAnalyser @VenueNo,@VenueBranchNo,@ConsumptionXML,@UserNo",
                     _VenueNo, _VenueBranchNo, _ConsumptionXML, _UserNo).ToList();
                     
-                    response = objresult[0];
+                    response = Objresult[0];
                 }
             }
             catch (Exception ex)

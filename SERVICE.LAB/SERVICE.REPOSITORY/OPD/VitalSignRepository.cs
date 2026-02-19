@@ -95,7 +95,7 @@ namespace Service.Repository
         }
 
         #region Allergy Details
-        public List<GetAllergyResponse> GetAllergyDetails(GetAllergyRequest RequestItem)
+        public List<GetAllergyResponse> GetAllergydetails(GetAllergyRequest RequestItem)
         {
             List<GetAllergyResponse> result = new List<GetAllergyResponse>();
             try
@@ -107,20 +107,20 @@ namespace Service.Repository
                     var _Patientno = new SqlParameter("patientno", RequestItem?.patientno);
                     var _OPDAppointmentno = new SqlParameter("OPDAppointmentNo", RequestItem?.OPDAppointmentNo);
 
-                    result = context.GetAllergyDetails.FromSqlRaw(
-                    "Execute dbo.pro_GetAllergyDetails @venueno,@venuebno,@patientno,@opdAppointmentNo",
+                    result = context.GetAllergydetails.FromSqlRaw(
+                    "Execute dbo.pro_GetAllergydetails @venueno,@venuebno,@patientno,@opdAppointmentNo",
                     _VenueNo, _VenueBranchNo,_Patientno, _OPDAppointmentno).ToList();
                 }
             }
             catch (Exception ex)
             {
-                MyDevException.Error(ex, "VitalSignRepository.GetAllergyDetails", ExceptionPriority.High, ApplicationType.REPOSITORY, RequestItem?.venueno, RequestItem?.venuebno, RequestItem?.userno);
+                MyDevException.Error(ex, "VitalSignRepository.GetAllergydetails", ExceptionPriority.High, ApplicationType.REPOSITORY, RequestItem?.venueno, RequestItem?.venuebno, RequestItem?.userno);
             }
             return result;
         }
-        public SaveAllergyResponse SaveAllergyDetails(SaveAllergyRequest objDTO)
+        public SaveAllergyResponse SaveAllergydetails(SaveAllergyRequest objDTO)
         {
-            var vitalSignXml = objDTO?.lstAllergyDetails;
+            var vitalSignXml = objDTO?.lstAllergydetails;
             CommonHelper commonUtility = new CommonHelper();
             var vitalSignlist = commonUtility.ToXML(vitalSignXml);
             SaveAllergyResponse result = new SaveAllergyResponse();
@@ -136,14 +136,14 @@ namespace Service.Repository
                     var _OPDPatientno = new SqlParameter("opdpatientno", objDTO?.opdpatientno);
                     var _OPDPatientAppointmentNo = new SqlParameter("OPDPatientAppointmentNo", objDTO?.OPDPatientAppointmentNo);
 
-                    result = context.SaveAllergyDetails.FromSqlRaw(
-                   "Execute dbo.pro_InsertAllergyDetails @allergyxml,@venueno,@venuebno,@userno,@patientno,@opdpatientNo, @OPDPatientAppointmentNo",
+                    result = context.SaveAllergydetails.FromSqlRaw(
+                   "Execute dbo.pro_InsertAllergydetails @allergyxml,@venueno,@venuebno,@userno,@patientno,@opdpatientNo, @OPDPatientAppointmentNo",
                    _Allergyxml, _VenueNo, _VenueBranchNo, _UserNo, _Patientno, _OPDPatientno, _OPDPatientAppointmentNo).AsEnumerable().FirstOrDefault();
                 }
             }
             catch (Exception ex)
             {
-                MyDevException.Error(ex, "VitalSignRepository.SaveAllergyDetails", ExceptionPriority.High, ApplicationType.REPOSITORY, objDTO?.venueno, objDTO?.venuebno, objDTO?.userno);
+                MyDevException.Error(ex, "VitalSignRepository.SaveAllergydetails", ExceptionPriority.High, ApplicationType.REPOSITORY, objDTO?.venueno, objDTO?.venuebno, objDTO?.userno);
             }
             return result;
         }
@@ -265,8 +265,8 @@ namespace Service.Repository
                         var _VaccinatedBy = new SqlParameter("VaccinatedBy", item.VaccinatedBy);
 
                         context.Database.ExecuteSqlRaw(
-                            "EXEC dbo.pro_SaveVaccineRecord @PatientNo,@IsAdult, @VaccineId, @DateOfVaccination, @DueDate, @VaccinatedBy",
-                            _PatientNo, _IsAdult, _VaccineId, _DateOfVaccination, _DueDate, _VaccinatedBy);
+                        "EXEC dbo.pro_SaveVaccineRecord @PatientNo,@IsAdult, @VaccineId, @DateOfVaccination, @DueDate, @VaccinatedBy",
+                        _PatientNo, _IsAdult, _VaccineId, _DateOfVaccination, _DueDate, _VaccinatedBy);
                     }
                 }
             }
@@ -275,7 +275,6 @@ namespace Service.Repository
                 MyDevException.Error(ex, "SaveVaccineRecord", ExceptionPriority.High, ApplicationType.REPOSITORY, 0, 0, 0);
             }
         }
-
         public lstPatientLatestVisit GetPatientLatestVisit(GetLatestPatientVisitRequest req)
         {
             lstPatientLatestVisit result = null;
@@ -287,9 +286,9 @@ namespace Service.Repository
                     var patientNoParam = new SqlParameter("@PatientNo", req.PatientNo);
 
                     result = context.lstPatientLatestVisit
-                        .FromSqlRaw("EXEC dbo.pro_GetLatestPatientVisitsVaccine @PatientNo", patientNoParam)
-                        .AsEnumerable()
-                        .FirstOrDefault();
+                    .FromSqlRaw("EXEC dbo.pro_GetLatestPatientVisitsVaccine @PatientNo", patientNoParam)
+                    .AsEnumerable()
+                    .FirstOrDefault();
                 }
             }
             catch (Exception ex)

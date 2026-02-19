@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace Service.Model
 {
@@ -56,10 +54,9 @@ namespace Service.Model
     public class GetTariffupdateResponse
     {
         public int Id { get; set; }
-        public string? JsonData { get; set; }
-        public string? ColumnName { get; set; }
+        public string JsonData { get; set; }
+        public string ColumnName { get; set; }
     }
-
     public class GetContractMasterListRequest
     {
         public int pageIndex { get; set; }
@@ -71,8 +68,7 @@ namespace Service.Model
         public int ServiceNo { get; set; }
         public int IsApproval { get; set; }
         public string ServiceType { get; set; }
-        public int ismodified { get; set; }
-        
+        public int ismodified { get; set; }        
     }
 }
 

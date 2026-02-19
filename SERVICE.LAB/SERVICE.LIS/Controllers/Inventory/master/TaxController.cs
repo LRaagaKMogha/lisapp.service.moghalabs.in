@@ -40,10 +40,10 @@ namespace Service.API.SERVICE.Controllers
         [Route("api/Tax/Inserttaxmaster")]
         public TaxMasterResponse Inserttaxmaster(TblTax tbltax)
         {
-            TaxMasterResponse objresult = new TaxMasterResponse();
+            TaxMasterResponse Objresult = new TaxMasterResponse();
             try
             {
-                objresult = _taxRepository.Inserttaxmaster(tbltax);
+                Objresult = _taxRepository.Inserttaxmaster(tbltax);
                 string _CacheKey = CacheKeys.CommonMaster + "TAX" + tbltax.venueNo + tbltax.venueBranchno;
                 MemoryCacheRepository.RemoveItem(_CacheKey);
             }
@@ -51,7 +51,7 @@ namespace Service.API.SERVICE.Controllers
             {
                 MyDevException.Error(ex, "TaxController.Inserttaxmaster" + tbltax.taxNo.ToString(), ExceptionPriority.Low, ApplicationType.APPSERVICE, tbltax.venueNo, tbltax.venueBranchno, tbltax.userNo);
             }
-            return objresult;
+            return Objresult;
         }
 
         [CustomAuthorize("INVMASTERS")]
@@ -76,10 +76,10 @@ namespace Service.API.SERVICE.Controllers
         [Route("api/Tax/InsertHSNmaster")]
         public HSNMasterResponse InsertHSNmaster(TblHSN tblhsn)
         {
-            HSNMasterResponse objresult = new HSNMasterResponse();
+            HSNMasterResponse Objresult = new HSNMasterResponse();
             try
             {
-                objresult = _taxRepository.InsertHSNmaster(tblhsn);
+                Objresult = _taxRepository.InsertHSNmaster(tblhsn);
                 string _CacheKey = CacheKeys.CommonMaster + "HSNCODE" + tblhsn.venueNo + tblhsn.venueBranchno;
                 MemoryCacheRepository.RemoveItem(_CacheKey);
             }
@@ -87,7 +87,7 @@ namespace Service.API.SERVICE.Controllers
             {
                 MyDevException.Error(ex, "TaxController.InsertHSNmaster" + tblhsn.HSNNo.ToString(), ExceptionPriority.Low, ApplicationType.APPSERVICE, tblhsn.venueNo, tblhsn.venueBranchno, tblhsn.userNo);
             }
-            return objresult;
+            return Objresult;
         }
 
         [CustomAuthorize("INVMASTERS")]
@@ -112,16 +112,16 @@ namespace Service.API.SERVICE.Controllers
         [Route("api/Tax/InsertHSNRangeMaster")]
         public HSNInsertResponse InsertHSNRangeMaster(TblInsertHSNRange tblhsnrange)
         {
-            HSNInsertResponse objresult = new HSNInsertResponse();
+            HSNInsertResponse Objresult = new HSNInsertResponse();
             try
             {
-                objresult = _taxRepository.InsertHSNRangeMaster(tblhsnrange);
+                Objresult = _taxRepository.InsertHSNRangeMaster(tblhsnrange);
             }
             catch (Exception ex)
             {
                 MyDevException.Error(ex, "TaxController.InsertHSNRangeMaster" + tblhsnrange.HSNRangeNo.ToString(), ExceptionPriority.Low, ApplicationType.APPSERVICE, tblhsnrange.venueNo, tblhsnrange.venueBranchno, tblhsnrange.userNo);
             }
-            return objresult;
+            return Objresult;
         }
     }
 }

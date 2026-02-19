@@ -1,8 +1,6 @@
 ﻿using Service.Common;
 using Service.Model.Integration;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata.Internal;
-using System.Diagnostics.Contracts;
 
 namespace Service.Model.EF
 {
@@ -23,25 +21,25 @@ namespace Service.Model.EF
         public DbSet<TestAdditionalInformation> TestAdditionalInformation { get; set; }
         public DbSet<MassRegistrationList> MassRegistrationList { get; set; }
         public DbSet<IntegrationOrderDetails> IntegrationOrderDetails { get; set; }
-        public DbSet<MassRegistration> MassRegistrations { get; set; }
+        public DbSet<massregistration> MassRegistrations { get; set; }
         public DbSet<MassRegistrationSample> MassRegistrationSamples { get; set; }
-        public DbSet<IntegrationOrderVisitDetails> IntegrationOrderVisitDetails { get; set; }
-        public DbSet<IntegrationOrderPatientDetails> IntegrationOrderPatientDetails { get; set; }
-        public DbSet<IntegrationOrderClientDetails> IntegrationOrderClientDetails { get; set; }
-        public DbSet<IntegrationOrderDoctorDetails> IntegrationOrderDoctorDetails { get; set; }
+        public DbSet<IntegrationOrderVisitDetails> IntegrationOrderVisitdetails { get; set; }
+        public DbSet<IntegrationOrderPatientDetails> IntegrationOrderPatientdetails { get; set; }
+        public DbSet<IntegrationOrderClientDetails> IntegrationOrderClientdetails { get; set; }
+        public DbSet<IntegrationOrderDoctorDetails> IntegrationOrderDoctordetails { get; set; }
         public DbSet<IntegrationOrderTestDetails> IntegrationOrderTestDetails { get; set; }
         public DbSet<IntegrationOrderWardDetails> IntegrationOrderWardDetails { get; set; }
-        public DbSet<IntegrationOrderAllergyDetails> IntegrationOrderAllergyDetails { get; set; }
+        public DbSet<IntegrationOrderAllergyDetails> IntegrationOrderAllergydetails { get; set; }
 
         public DbSet<PatientTransactions> PatientTransactions {  get; set; }
         public DbSet<OrderTransaction> OrderTransactions { get; set; }
         public DbSet<OrderDetails> OrderDetails { get; set; }
         public DbSet<OrderList> OrderList { get; set; }
-        public virtual DbSet<orderresponse> MassRegistration { get; set; }
+        public virtual DbSet<orderresponse> massregistration { get; set; }
 
         public virtual DbSet<TestMasterDetails> GetTestDetails { get; set; }
-        public virtual DbSet<labresponsedetails> GetPDFReportDetails { get; set; }
-        public virtual DbSet<labtestdetails> GetPDFReportTestDetails { get; set; }
+        public virtual DbSet<Labresponsedetails> GetPDFReportDetails { get; set; }
+        public virtual DbSet<Labtestdetails> GetPDFReportTestDetails { get; set; }
 
         public virtual DbSet<IntegrationVisitDetails> GetIntegrationVisitDetails { get; set; }
 
@@ -103,12 +101,12 @@ namespace Service.Model.EF
             modelBuilder.Entity<MassRegistrationList>(entity =>
             {
                 entity.HasNoKey();
-                entity.ToTable("pro_GetMassRegistration");
+                entity.ToTable("pro_Getmassregistration");
             });
 
-            modelBuilder.Entity<MassRegistration>(entity =>
+            modelBuilder.Entity<massregistration>(entity =>
             {
-                entity.ToTable("tbl_MassRegistration");
+                entity.ToTable("tbl_massregistration");
                 entity.HasNoDiscriminator().HasKey(da => da.MassRegistrationNo);
 
                 entity.Property(x => x.MassFileNo).IsRequired(false);
@@ -129,7 +127,7 @@ namespace Service.Model.EF
 
             modelBuilder.Entity<MassRegistrationSample>(entity =>
             {
-                entity.ToTable("tbl_MassRegistrationSample");
+                entity.ToTable("tbl_massregistrationSample");
                 entity.HasNoDiscriminator().HasKey(da => da.MassRegistrationSampleNo);
                 entity.Property(x => x.BarCodeNo).IsRequired(false);
             });
@@ -311,7 +309,7 @@ namespace Service.Model.EF
             });
             modelBuilder.Entity<IntegrationOrderVisitDetails>(entity =>
             {
-                entity.ToTable("tbl_IntegrationOrderVisitDetails");
+                entity.ToTable("tbl_IntegrationOrderVisitdetails");
                 entity.HasNoDiscriminator().HasKey(da => da.Id);
                 entity.Property(x => x.Status).IsRequired(false);
                 entity.Property(x => x.CreatedOn).IsRequired(false);
@@ -328,7 +326,7 @@ namespace Service.Model.EF
             });
             modelBuilder.Entity<IntegrationOrderPatientDetails>(entity =>
             {
-                entity.ToTable("tbl_IntegrationOrderPatientDetails");
+                entity.ToTable("tbl_IntegrationOrderPatientdetails");
                 entity.HasNoDiscriminator().HasKey(da => da.Id);
                 entity.Property(x => x.Status).IsRequired(false);
                 entity.Property(x => x.CreatedOn).IsRequired(false);
@@ -347,7 +345,7 @@ namespace Service.Model.EF
             });
             modelBuilder.Entity<IntegrationOrderClientDetails>(entity =>
             {
-                entity.ToTable("tbl_IntegrationOrderClientDetails");
+                entity.ToTable("tbl_IntegrationOrderClientdetails");
                 entity.HasNoDiscriminator().HasKey(da => da.Id);
                 entity.Property(x => x.Status).IsRequired(false);
                 entity.Property(x => x.CreatedOn).IsRequired(false);
@@ -364,7 +362,7 @@ namespace Service.Model.EF
             });
             modelBuilder.Entity<IntegrationOrderDoctorDetails>(entity =>
             {
-                entity.ToTable("tbl_IntegrationOrderDoctorDetails");
+                entity.ToTable("tbl_IntegrationOrderDoctordetails");
                 entity.HasNoDiscriminator().HasKey(da => da.Id);
                 entity.Property(x => x.doctormcr).IsRequired(false);
                 entity.Property(x => x.doctorname).IsRequired(false);
@@ -407,7 +405,7 @@ namespace Service.Model.EF
             });
             modelBuilder.Entity<IntegrationOrderWardDetails>(entity =>
             {
-                entity.ToTable("tbl_IntegrationOrderWardDetails");
+                entity.ToTable("tbl_IntegrationOrderWarddetails");
                 entity.HasNoDiscriminator().HasKey(da => da.Id);
                 entity.Property(x => x.nursingOU).IsRequired(false);
                 entity.Property(x => x.room).IsRequired(false);
@@ -423,7 +421,7 @@ namespace Service.Model.EF
             });
             modelBuilder.Entity<IntegrationOrderAllergyDetails>(entity =>
             {
-                entity.ToTable("tbl_IntegrationOrderAllergyDetails");
+                entity.ToTable("tbl_IntegrationOrderAllergydetails");
                 entity.HasNoDiscriminator().HasKey(da => da.Id);
                 entity.Property(x => x.Allergy).IsRequired(false);
                 entity.Property(x => x.Status).IsRequired(false);
@@ -442,13 +440,13 @@ namespace Service.Model.EF
                 entity.ToTable("Pro_GetTestDetails");
             });
 
-            modelBuilder.Entity<labresponsedetails>(entity =>
+            modelBuilder.Entity<Labresponsedetails>(entity =>
             {
                 entity.HasNoKey();
                 entity.Ignore("reportdetails");
                 entity.ToTable("Pro_GetPDFReportDetails");
             });
-            modelBuilder.Entity<labtestdetails>(entity =>
+            modelBuilder.Entity<Labtestdetails>(entity =>
             {
                 entity.HasNoKey();
                 entity.ToTable("Pro_GetPDFReportTestDetails");
@@ -457,7 +455,7 @@ namespace Service.Model.EF
             modelBuilder.Entity<IntegrationVisitDetails>(entity =>
             {
                 entity.HasNoKey();
-                entity.ToTable("Pro_GetIntegrationVisitDetails");
+                entity.ToTable("Pro_GetIntegrationVisitdetails");
             });
             modelBuilder.Entity<IntegrationVisitTestDetails>(entity =>
             {
@@ -468,7 +466,7 @@ namespace Service.Model.EF
             modelBuilder.Entity<MassRegistrationResponse>(entity =>
             {
                 entity.HasNoKey();
-                entity.ToTable("Pro_UpdateLabAccessionNoMassRegistration");
+                entity.ToTable("Pro_UpdateLabAccessionNomassregistration");
             });
 
 

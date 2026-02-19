@@ -23,13 +23,13 @@ namespace Service.API.SERVICE.Controllers.Samples
     [Route("api/WorkList/GetWorkListDetails")]
     public ActionResult<WorkListResponse> GetWorkListDetails(WorkListRequest RequestItem)
     {
-      List<WorkListResponse> objresult = new List<WorkListResponse>();
+      List<WorkListResponse> Objresult = new List<WorkListResponse>();
       try
       {
         var _errormsg = SampleMaintainenceValidation.GetWorkListDetails(RequestItem);
         if (!_errormsg.status)
         {
-          objresult = _workListRepository.GetWorkList(RequestItem);
+          Objresult = _workListRepository.GetWorkList(RequestItem);
         }
         else
           return BadRequest(_errormsg);
@@ -38,20 +38,20 @@ namespace Service.API.SERVICE.Controllers.Samples
       {
         MyDevException.Error(ex, "WorkListController.GetWorkListDetails", ExceptionPriority.Low, ApplicationType.APPSERVICE, RequestItem.VenueNo, RequestItem.VenueBranchNo, 0);
       }
-      return Ok(objresult);
+      return Ok(Objresult);
     }
 
     [HttpPost]
     [Route("api/WorkList/GetHistoWorkListDetails")]
     public ActionResult<HistoWorlkListRes> GetHistoWorkListDetails(WorkListRequest RequestItem)
     {
-      List<HistoWorlkListRes> objresult = new List<HistoWorlkListRes>();
+      List<HistoWorlkListRes> Objresult = new List<HistoWorlkListRes>();
       try
       {
         var _errormsg = SampleMaintainenceValidation.GetHistoWorkListDetails(RequestItem);
         if (!_errormsg.status)
         {
-          objresult = _workListRepository.GetHistoWorkList(RequestItem);
+          Objresult = _workListRepository.GetHistoWorkList(RequestItem);
         }
         else
           return BadRequest(_errormsg);
@@ -60,20 +60,20 @@ namespace Service.API.SERVICE.Controllers.Samples
       {
         MyDevException.Error(ex, "WorkListController.GetWorkListDetails", ExceptionPriority.Low, ApplicationType.APPSERVICE, RequestItem.VenueNo, RequestItem.VenueBranchNo, 0);
       }
-      return Ok(objresult);
+      return Ok(Objresult);
     }
 
     [HttpPost]
     [Route("api/WorkList/InsertWorkListHistory")]
     public ActionResult<WorkListHistoryRes> InsertWorkListHistory(WorkListHistoryReq Req)
     {
-      List<WorkListHistoryRes> objresult = new List<WorkListHistoryRes>();
+      List<WorkListHistoryRes> Objresult = new List<WorkListHistoryRes>();
       try
       {
         var _errormsg = SampleMaintainenceValidation.InsertWorkListHistory(Req);
         if (!_errormsg.status)
         {
-          objresult = _workListRepository.InsertWorkListHistory(Req);
+          Objresult = _workListRepository.InsertWorkListHistory(Req);
         }
         else
           return BadRequest(_errormsg);
@@ -82,20 +82,20 @@ namespace Service.API.SERVICE.Controllers.Samples
       {
         MyDevException.Error(ex, "WorkListController.InsertWorkListHistory", ExceptionPriority.Low, ApplicationType.APPSERVICE, Req.VenueNo, Req.VenueBranchNo, 0);
       }
-      return Ok(objresult);
+      return Ok(Objresult);
     }
 
     [HttpPost]
     [Route("api/WorkList/GetWorkListHistory")]
     public ActionResult<GetWorkListHistoryRes> GetWorkListHistory(GetWorkListHistoryReq Req)
     {
-      List<GetWorkListHistoryRes> objresult = new List<GetWorkListHistoryRes>();
+      List<GetWorkListHistoryRes> Objresult = new List<GetWorkListHistoryRes>();
       try
       {
         var _errormsg = SampleMaintainenceValidation.GetWorkListHistory(Req);
         if (!_errormsg.status)
         {
-          objresult = _workListRepository.GetWorkListHistory(Req);
+          Objresult = _workListRepository.GetWorkListHistory(Req);
         }
         else
           return BadRequest(_errormsg);
@@ -104,55 +104,55 @@ namespace Service.API.SERVICE.Controllers.Samples
       {
         MyDevException.Error(ex, "WorkListController.GetWorkListHistory", ExceptionPriority.Low, ApplicationType.APPSERVICE, Req.VenueNo, Req.VenueBranchNo, 0);
       }
-      return Ok(objresult);
+      return Ok(Objresult);
     }
 
     [HttpPost]
     [Route("api/WorkList/GetUserDeptDetails")]
     public List<UserDeptmentDetails> GetUserDeptDetails(getUserNo Req)
     {
-      List<UserDeptmentDetails> objresult = new List<UserDeptmentDetails>();
+      List<UserDeptmentDetails> Objresult = new List<UserDeptmentDetails>();
       try
       {
-        objresult = _workListRepository.GetUserDeptDetails(Req);
+        Objresult = _workListRepository.GetUserDeptDetails(Req);
       }
       catch (Exception ex)
       {
         MyDevException.Error(ex, "WorkListController.GetUserDeptDetails", ExceptionPriority.Low, ApplicationType.APPSERVICE, Req.venueNo, Req.venueBranchNo, 0);
       }
-      return objresult;
+      return Objresult;
     }
     [HttpPost]
     [Route("api/WorkList/GetSubTestCheck")]
     public SingleTestCheckRes GetTestCheck(SingleTestCheck Req)
     {
-      SingleTestCheckRes objresult = new SingleTestCheckRes();
+      SingleTestCheckRes Objresult = new SingleTestCheckRes();
       try
       {
-        objresult = _workListRepository.getTestCheck(Req);
+        Objresult = _workListRepository.getTestCheck(Req);
       }
       catch (Exception ex)
       {
         MyDevException.Error(ex, "WorkListController.GetSubTestCheck", ExceptionPriority.Low, ApplicationType.APPSERVICE, Req.venueNo, Req.venueBranchNo, 0);
 
       }
-      return objresult;
+      return Objresult;
     }
     [HttpPost]
     [Route("api/WorkList/GetDenguTest")]
     public List<DenguTestRes> GetDenguTest(DenguTestReq Req)
     {
-        List<DenguTestRes> objresult = new List<DenguTestRes>();
+        List<DenguTestRes> Objresult = new List<DenguTestRes>();
         try
         {
-            objresult = _workListRepository.getDenguTest(Req);
+            Objresult = _workListRepository.getDenguTest(Req);
         }
         catch (Exception ex)
         {
             MyDevException.Error(ex, "WorkListController.GetDenguTest", ExceptionPriority.Low, ApplicationType.APPSERVICE, Req.venuno, Req.venueBranchNo, 0);
 
         }
-        return objresult;
+        return Objresult;
     }
   }
 }

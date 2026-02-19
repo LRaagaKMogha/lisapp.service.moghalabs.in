@@ -23,9 +23,9 @@ namespace Service.API.SERVICE.Controllers
 
         [HttpPost]
         [Route("api/VendorMaster/GetVendorMaster")]
-        public List<responsegetvendor> GetVendorMaster(requestvendor req)
+        public List<Responsegetvendor> GetVendorMaster(Requestvendor req)
         {
-            List<responsegetvendor> lst = new List<responsegetvendor>();
+            List<Responsegetvendor> lst = new List<Responsegetvendor>();
             try
             {
                 lst = _VendorMasterRepository.GetVendorMaster(req);
@@ -39,17 +39,17 @@ namespace Service.API.SERVICE.Controllers
         
         [HttpPost]
         [Route("api/VendorMaster/InsertVendorMaster")]
-        public ActionResult<StoreVendorMaster> InsertVendorMaster(responsevendor obj1)
+        public ActionResult<StoreVendorMaster> InsertVendorMaster(Responsevendor obj1)
         {
-            StoreVendorMaster objresult = new StoreVendorMaster();
+            StoreVendorMaster Objresult = new StoreVendorMaster();
             try
             {
-                using(var auditScoped = new AuditScope<responsevendor>(obj1, _AuditService))
+                using(var auditScoped = new AuditScope<Responsevendor>(obj1, _AuditService))
                 {
                     var _errormsg = VendorMasterValidation.InsertVendorMaster(obj1);
                     if (!_errormsg.status)
                     {
-                        objresult = _VendorMasterRepository.InsertVendorMaster(obj1);
+                        Objresult = _VendorMasterRepository.InsertVendorMaster(obj1);
                         string _CacheKey = CacheKeys.CommonMaster + "VENDOR" + obj1.venueno + obj1.venuebranchno;
                         MemoryCacheRepository.RemoveItem(_CacheKey);
                     }
@@ -61,14 +61,14 @@ namespace Service.API.SERVICE.Controllers
             {
                 MyDevException.Error(ex, "VendorController.InsertVendorMaster" + obj1.vendorno.ToString(), ExceptionPriority.Low, ApplicationType.REPOSITORY, obj1.venueno, obj1.venuebranchno, 0);
             }
-            return Ok(objresult);
+            return Ok(Objresult);
         }
         
         [HttpPost]
         [Route("api/VendorMaster/GetVendorvsContactmaster")]
-        public List<getcontactlst> GetVendorvsContactmaster(getcontact creq)
+        public List<Getcontactlst> GetVendorvsContactmaster(Getcontact creq)
         {
-            List<getcontactlst> Contactlst = new List<getcontactlst>();
+            List<Getcontactlst> Contactlst = new List<Getcontactlst>();
             try
             {
                 Contactlst = _VendorMasterRepository.GetVendorvsContactmaster(creq);
@@ -82,12 +82,12 @@ namespace Service.API.SERVICE.Controllers
         
         [HttpPost]
         [Route("api/VendorMaster/InsertVendorContactmaster")]
-        public ActionResult InsertVendorContactmaster(savecontact creq1)
+        public ActionResult InsertVendorContactmaster(Savecontact creq1)
         {
             int VendorContactNo = 0;
             try
             {
-                using(var auditScoped = new AuditScope<getcontactlst>(creq1.getcontactlst, _AuditService))
+                using(var auditScoped = new AuditScope<Getcontactlst>(creq1.Getcontactlst, _AuditService))
                 {
                     var _errormsg = VendorMasterValidation.InsertVendorContactmaster(creq1);
                     if (!_errormsg.status)
@@ -107,9 +107,9 @@ namespace Service.API.SERVICE.Controllers
        
         [HttpPost]
         [Route("api/VendorMaster/GetVendorvsServices")]
-        public List<getservicelst> GetVendorvsservices(getservice sobj)
+        public List<Getservicelst> GetVendorvsservices(Getservice sobj)
         {
-            List<getservicelst> servicelst = new List<getservicelst>();
+            List<Getservicelst> servicelst = new List<Getservicelst>();
             try
             {
                 servicelst = _VendorMasterRepository.GetVendorvsservices(sobj);
@@ -123,12 +123,12 @@ namespace Service.API.SERVICE.Controllers
         
         [HttpPost]
         [Route("api/VendorMaster/InsertVendorVsServices")]
-        public ActionResult InsertVendorService(saveservice serviceobj)
+        public ActionResult InsertVendorService(Saveservice serviceobj)
         {
             int VendorServiceNo = 0;
             try
             {
-                using(var auditScoped = new AuditScope<getservicelst>(serviceobj.getservicelst, _AuditService))
+                using(var auditScoped = new AuditScope<Getservicelst>(serviceobj.Getservicelst, _AuditService))
                 {
                     var _errormsg = VendorMasterValidation.InsertVendorService(serviceobj);
                     if (!_errormsg.status)

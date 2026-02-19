@@ -19,7 +19,7 @@ namespace Service.Repository.Inventory
         
         public List<GetStockProductListResponse> GetProductListByDepartment(int venueNo, int venueBranchNo, int branchNo,int StoreNo)
         {
-            List<GetStockProductListResponse> objresult = new List<GetStockProductListResponse>();
+            List<GetStockProductListResponse> Objresult = new List<GetStockProductListResponse>();
             try
             {              
                 using (var context = new MasterContext(_config.GetConnectionString(ConfigKeys.DefaultConnection)))
@@ -29,7 +29,7 @@ namespace Service.Repository.Inventory
                     var _BranchNo = new SqlParameter("BranchNo", branchNo);
                     var _StoreNo = new SqlParameter("StoreNo", StoreNo);
 
-                    objresult = context.GetProductListByDeapartmentDTO.FromSqlRaw(
+                    Objresult = context.GetProductListByDeapartmentDTO.FromSqlRaw(
                     "Execute dbo.pro_GetStockUploadProducts @VenueNo,@VenueBranchNo,@BranchNo,@StoreNo",
                     _VenueNo, _VenueBranchNo, _BranchNo, _StoreNo).ToList();
                 }
@@ -38,7 +38,7 @@ namespace Service.Repository.Inventory
             {
                 MyDevException.Error(ex, "StockUploadReposistory.GetProductListByDepartment", ExceptionPriority.High, ApplicationType.REPOSITORY, venueNo, venueBranchNo, branchNo);
             }
-            return objresult;
+            return Objresult;
         }
         public CommonAdminResponse InsertStockUpload(InsertStockUploadRequest insertStockUpload)
         {
@@ -56,11 +56,11 @@ namespace Service.Repository.Inventory
                     var _StockUploadXML = new SqlParameter("ProductStockXML", StockUploadXML);
                     var _UserNo = new SqlParameter("UserNo", insertStockUpload?.createdby);
 
-                    var objresult = context.CreateStockUploadDTO.FromSqlRaw(
+                    var Objresult = context.CreateStockUploadDTO.FromSqlRaw(
                     "Execute dbo.Pro_InsertProductStock @VenueNo, @VenueBranchNo, @ProductStockXML, @UserNo",
                     _VenueNo, _VenueBranchNo, _StockUploadXML, _UserNo).ToList();
                     
-                    response = objresult[0];
+                    response = Objresult[0];
                 }
             }
             catch (Exception ex)
@@ -71,7 +71,7 @@ namespace Service.Repository.Inventory
         }
         public List<GetProductMainbyDeptRes> GetProductSubyMaindept(GetProductMainbyDeptReq Req)
         {
-            List<GetProductMainbyDeptRes> objresult = new List<GetProductMainbyDeptRes>();
+            List<GetProductMainbyDeptRes> Objresult = new List<GetProductMainbyDeptRes>();
             try
             {
                 using (var context = new MasterContext(_config.GetConnectionString(ConfigKeys.DefaultConnection)))
@@ -81,7 +81,7 @@ namespace Service.Repository.Inventory
                     var _StoreNo = new SqlParameter("StoreNo", Req?.StoreNo);
                     var _BranchNo = new SqlParameter("BranchNo", Req?.BranchNo);
 
-                    objresult = context.GetProductSubyMaindept.FromSqlRaw(
+                    Objresult = context.GetProductSubyMaindept.FromSqlRaw(
                     "Execute dbo.pro_GetProductSubandMaindept @VenueNo,@VenueBranchNo,@StoreNo,@BranchNo",
                     _VenueNo, _VenueBranchNo, _StoreNo, _BranchNo).ToList();
                 }
@@ -90,7 +90,7 @@ namespace Service.Repository.Inventory
             {
                 MyDevException.Error(ex, "StockUploadReposistory.GetProductSubyMaindept", ExceptionPriority.High, ApplicationType.REPOSITORY, Req.VenueNo,Req.VenueBranchNo, Req.StoreNo);
             }
-            return objresult;
+            return Objresult;
         }
     }
 }

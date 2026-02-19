@@ -73,7 +73,7 @@ namespace Service.Model
         public string CustomerName { get; set; }
         public int InvoiceVisitsNo { get; set; }
     }
-    public partial class objInvoiceCreate
+    public partial class ObjInvoiceCreate
     {
         public int invoiceNo { get; set; }
         public int customerNo { get; set; }
@@ -98,7 +98,7 @@ namespace Service.Model
         public string todate { get; set; }
         public string datetype {  get; set; }
     }
-    public partial class objInvoiceCreditNote
+    public partial class ObjInvoiceCreditNote
     {
         public string invoiceNo { get; set; }
         public int venueBranchNo { get; set; }
@@ -106,17 +106,17 @@ namespace Service.Model
         public int userNo { get; set; }
         public List<lstCreditNoteVisit> lstCreditNoteVisit { get; set; }
     }
-    public partial class rtninvoice
+    public partial class Rtninvoice
     {
         public int invoiceNo { get; set; }
         public string receiptNo { get; set; }
     }
-    public partial class rtninvoiceCredit
+    public partial class RtninvoiceCredit
     {
         public string CreditNo { get; set; }
         public string receiptNo { get; set; }
     }
-    public partial class lstCustomerInvoice
+    public partial class LstCustomerInvoice
     {
         public int rowNo { get; set; }
         public bool isChecked { get; set; }
@@ -146,22 +146,15 @@ namespace Service.Model
         public bool dueFlag { get; set; }
         public bool isTDSCollected { get; set; }
     }
-    public partial class objInvoice
+    public partial class ObjInvoice
     {
         public int rowNo { get; set; }
         public int invoiceNo { get; set; }
         public int customerNo { get; set; }
         public string receiptNo { get; set; }
-        //public string generateDTTM { get; set; }
-        //public int generateBy { get; set; }
-        //public decimal billGross { get; set; }
-        //public decimal billDiscount { get; set; }
-        //public decimal billNet { get; set; }
-        //public decimal billCollected { get; set; }
         public decimal invoiceGross { get; set; }
         public decimal invoiceDiscount { get; set; }
         public decimal invoiceNet { get; set; }
-        // public string notes { get; set; }
         public decimal totalPaymentDiscount { get; set; }
         public decimal totalPaymentCollected { get; set; }
         public decimal totalTDS { get; set; }
@@ -171,7 +164,7 @@ namespace Service.Model
         public decimal advanceOpeningBalance { get; set; }
         public decimal creditNotesBalance { get; set; }
     }
-    public partial class objInvoicePayment
+    public partial class ObjInvoicePayment
     {
         public int rowNo { get; set; }
         public int invoiceNo { get; set; }
@@ -210,7 +203,7 @@ namespace Service.Model
         public decimal Amount { get; set; }
         public string Description { get; set; }
     }
-    public partial class rtninvoicePayment
+    public partial class RtninvoicePayment
     {
         public int invoicePaymentNo { get; set; }
         public string receiptNo { get; set; }
@@ -235,7 +228,7 @@ namespace Service.Model
         public decimal excess { get; set; }
         public string paymentDescription { get; set; }
     }
-    public partial class objInvoiceCancel
+    public partial class ObjInvoiceCancel
     {
         public int invoiceNo { get; set; }
         public int customerNo { get; set; }

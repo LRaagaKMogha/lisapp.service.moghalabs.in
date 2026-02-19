@@ -24,46 +24,46 @@ namespace Service.API.SERVICE.Controllers
         [Route("api/ClientBranchSamplePickup/GetClientBranchSamplePickup")]
         public List<ClientBranchSamplePickupResponse> ClientBranchSamplePickup(ClientBranchSamplePickupRequest RequestItem)
         {
-            List<ClientBranchSamplePickupResponse> objresult = new List<ClientBranchSamplePickupResponse>();
+            List<ClientBranchSamplePickupResponse> Objresult = new List<ClientBranchSamplePickupResponse>();
             try
             {
-                objresult = _IClientBranchSamplePickupRepository.GetClientBranchSamplePickup(RequestItem);
+                Objresult = _IClientBranchSamplePickupRepository.GetClientBranchSamplePickup(RequestItem);
             }
             catch (Exception ex)
             {
                 MyDevException.Error(ex, "ClientBranchSamplePickupController.GetClientBranchSamplePickup", ExceptionPriority.High, ApplicationType.APPSERVICE, RequestItem.VenueNo, RequestItem.VenueBranchNo, 0);
             }
-            return objresult;
+            return Objresult;
         }
         [HttpPost]
         [Route("api/ClientBranchSamplePickup/InsertClientBranchSamplePickup")]
         public ClientBranchSamplePickupInsertResponse InsertClientBranchSamplePickup(ClientBranchSamplePickupInsertRequest request)
         {
-            ClientBranchSamplePickupInsertResponse objResult = new ClientBranchSamplePickupInsertResponse();
+            ClientBranchSamplePickupInsertResponse Objresult = new ClientBranchSamplePickupInsertResponse();
             try
             {
-                objResult = _IClientBranchSamplePickupRepository.InsertClientBranchSamplePickup(request);
+                Objresult = _IClientBranchSamplePickupRepository.InsertClientBranchSamplePickup(request);
             }
             catch (Exception ex)
             {
                 MyDevException.Error(ex, "ClientBranchSamplePickupController.InsertClientBranchSamplePickup", ExceptionPriority.High, ApplicationType.APPSERVICE, request.VenueNo, request.VenueBranchNo, request.UserNo);
             }
-            return objResult;
+            return Objresult;
         }
         [HttpPost]
         [Route("api/ClientBranchSamplePickup/InsertRiderClientBranchSamplePickup")]
         public ClientBranchSamplePickupRiderInsertResponse InsertRiderClientBranchSamplePickup(ClientBranchSamplePickupRiderInsertRequest request)
         {
-            ClientBranchSamplePickupRiderInsertResponse objResult = new ClientBranchSamplePickupRiderInsertResponse();
+            ClientBranchSamplePickupRiderInsertResponse Objresult = new ClientBranchSamplePickupRiderInsertResponse();
             try
             {
-                objResult = _IClientBranchSamplePickupRepository.InsertRiderClientBranchSamplePickup(request);
+                Objresult = _IClientBranchSamplePickupRepository.InsertRiderClientBranchSamplePickup(request);
             }
             catch (Exception ex)
             {
                 MyDevException.Error(ex, "ClientBranchSamplePickupController.InsertRiderClientBranchSamplePickup", ExceptionPriority.High, ApplicationType.APPSERVICE, request.VenueNo, request.VenueBranchNo, request.UserNo);
             }
-            return objResult;
+            return Objresult;
         }
     }
 }

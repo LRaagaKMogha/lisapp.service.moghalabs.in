@@ -10,7 +10,7 @@ namespace Service.API.SERVICE.Controllers
     public class BulkResultValidation
     {
         // Bulk Result (Entry & Validation) //
-        public static ErrorResponse GetBulkResultEtry(analyserrequestresult req)
+        public static ErrorResponse GetBulkResultEtry(AnalyserRequestresult req)
         {
             ErrorResponse errorResponse = new ErrorResponse();
             List<string> errors = new List<string>();
@@ -33,7 +33,7 @@ namespace Service.API.SERVICE.Controllers
         }
 
         // Bulk Result (Entry & Validation) //
-        public static ErrorResponse SaveBulkResultEtry(List<objbulkresult> req)
+        public static ErrorResponse SaveBulkResultEtry(List<Objbulkresult> req)
         {
             ErrorResponse errorResponse = new ErrorResponse();
             List<string> errors = new List<string>();
@@ -122,11 +122,11 @@ namespace Service.API.SERVICE.Controllers
             return errorResponse;
         }
 
-        public static bool FunCalFormula(lstvisit v, lstorderlist ol, lstorderdetail od, List<string> errors)
+        public static bool FunCalFormula(Lstvisit v, Lstorderlist ol, Lstorderdetail od, List<string> errors)
         {
             if (od.isformulaparameter == true)
             {
-                foreach (var param in od.formulaparameterjson)
+                foreach (var param in od.Formulaparameterjson)
                 {
                     int formulaserviceno = param.serviceno;
                     string formulaservicetype = param.servicetype;
@@ -134,15 +134,15 @@ namespace Service.API.SERVICE.Controllers
                     int ftindex = 0;
                     if (formulaservicetype == "T")
                     {
-                        ftindex = ol.lstorderdetail.FindIndex(service => service.testno == formulaserviceno);
+                        ftindex = ol.Lstorderdetail.FindIndex(service => service.testno == formulaserviceno);
                     }
                     else if (formulaservicetype == "S")
                     {
-                        ftindex = ol.lstorderdetail.FindIndex(service => service.subtestno == formulaserviceno);
+                        ftindex = ol.Lstorderdetail.FindIndex(service => service.subtestno == formulaserviceno);
                     }
 
-                    var formulaDetail = ol.lstorderdetail[ftindex];
-                    var formulajson = formulaDetail.formulajson;
+                    var formulaDetail = ol.Lstorderdetail[ftindex];
+                    var Formulajson = formulaDetail.Formulajson;
                     int decimalpoint = formulaDetail.decimalpoint;
                     bool isroundoff = formulaDetail.isroundoff;
                     bool isresval = false;
@@ -150,19 +150,19 @@ namespace Service.API.SERVICE.Controllers
                     decimal a = 0;
                     decimal val = 0;
 
-                    foreach (var formula in formulajson)
+                    foreach (var formula in Formulajson)
                     {
                         val = 0;
                         if (formula.value == 0)
                         {
-                            var plst = new List<lstorderdetail>();
+                            var plst = new List<Lstorderdetail>();
                             if (formula.parameterservicetype == "T")
                             {
-                                plst = ol.lstorderdetail.Where(service => service.testno == formula.parameterserviceno).ToList();
+                                plst = ol.Lstorderdetail.Where(service => service.testno == formula.parameterserviceno).ToList();
                             }
                             else if (formula.parameterservicetype == "S")
                             {
-                                plst = ol.lstorderdetail.Where(service => service.subtestno == formula.parameterserviceno).ToList();
+                                plst = ol.Lstorderdetail.Where(service => service.subtestno == formula.parameterserviceno).ToList();
                             }
                             if (decimal.TryParse(plst[0].result, out var parsedResult))
                             {

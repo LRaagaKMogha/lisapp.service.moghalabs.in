@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Service.Model.Master
 {
@@ -15,7 +12,6 @@ namespace Service.Model.Master
         public int PageIndex { get; set; }
         public int PageSize { get; set; }
     }
-
     public class GetTestTemplateMasterRes
     {
         public int RowNo { get; set; }
@@ -39,7 +35,6 @@ namespace Service.Model.Master
         public int IsApproval { get; set; }
         public int? TemplateApprovalNo { get; set; }
     }
-
     public class TemplateItemDto
     {
         public int templateNo { get; set; }
@@ -77,7 +72,6 @@ namespace Service.Model.Master
         public string templateName { get; set; }    
         public int userNo { get; set; }             
     }
-
     public class TemplatePathRes
     {
         public int status { get; set; }
@@ -111,7 +105,7 @@ namespace Service.Model.Master
     //GetTestTemplatTextMaster
     public class GetTestTemplateTextMasterReq
     {
-        public string? pageCode { get; set; }
+        public string pageCode { get; set; }
         public int deptNo { get; set; }
         public int maindeptNo { get; set; }
         public int testNo { get; set; }
@@ -155,5 +149,4 @@ namespace Service.Model.Master
         public string CreatedBy { get; set; }
         public DateTime CreatedOn { get; set; }
     }
-
 }

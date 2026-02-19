@@ -47,15 +47,15 @@ namespace Service.Model.EF
         public virtual DbSet<TblPhysicianSearch> Physiciandetails { get; set; }
         public virtual DbSet<TblPatient> TblPatient { get; set; }
         public virtual DbSet<UserDashBoardMasterResponse> UserDashBoardMasterDTO { get; set; }
-        public virtual DbSet<userbranchlist> userbranchlistDTO { get; set; }
-        public virtual DbSet<DoctorDetails> DoctorDetails { get; set; }
+        public virtual DbSet<Userbranchlist> userbranchlistDTO { get; set; }
+        public virtual DbSet<Doctordetails> Doctordetails { get; set; }
         public virtual DbSet<PatientNotifyLogResponse> InsertPatientNotifyLogDetails { get; set; }
         public virtual DbSet<PatientNotifyLog> GetPatientNotifyLog { get; set; }
         public virtual DbSet<ClinicalSummary> GetPatientClinicalSummary { get; set; }
         public virtual DbSet<QueueOrderDTO> GetQueueOrder { get; set; }
         public virtual DbSet<FrontOffficeQueueResponse> QueueResponse { get; set; }
         public virtual DbSet<TestPrePrintDetailsResponse> TestPrePrintDetails { get; set; }
-        public virtual DbSet<ExternalVisitDetailsResponse> CheckExternalVistIdExists { get; set; }
+        public virtual DbSet<ExternalVisitdetailsResponse> CheckExternalVistIdExists { get; set; }
         public virtual DbSet<CreateManageSampleResponse> CreateManageSamples { get; set; }
         public virtual DbSet<FrontOffficeValidatetest> validatetestresult { get; set; }
         public virtual DbSet<CustomerCurrentBalance> CustomerCurrentBalance { get; set; }
@@ -82,7 +82,7 @@ namespace Service.Model.EF
         public virtual DbSet<SaveDiscountApprovalResponse> InsertDiscountApprovalDetails { get; set; }
         public virtual DbSet<UserResponseDTO> tblUserResetPassEF { get; set; }
         public virtual DbSet<CommonAdminResponse> ValidateNricNo { get; set; }
-        public virtual DbSet<MassRegistrationResponse> MassRegistrationResponse { get; set; }
+        public virtual DbSet<MassRegistrationResponse> massregistrationResponse { get; set; }
         public virtual DbSet<MassFileDTO> GetMassFileResponse { get; set; }
         public virtual DbSet<massPatientBarcode> massPatientBarcodeResponse { get; set; }
         public virtual DbSet<CommonAdminResponse> ValidatePTTTestDTO { get; set; }
@@ -90,7 +90,7 @@ namespace Service.Model.EF
         public virtual DbSet<CommonAdminResponse> InsertClinicalHistories { get; set; }
         public virtual DbSet<PatientVisitPatternIDGenRes> GetVisitPatternID { get; set; }
         public virtual DbSet<Tblloyal> getloyalcard { get; set; }
-        public virtual DbSet<ExternalupdateCommonResponse> UpdateHCPatientDetails { get; set; }
+        public virtual DbSet<ExternalupdateCommonResponse> UpdateHCPatientdetails { get; set; }
         public virtual DbSet<UpdateStatusApptDateResponse> UpdateStatusApptDate { get; set; }
         public virtual DbSet<PreBookingtDTO> GetPreBookingDetails { get; set; }
         public virtual DbSet<PreBookingtResponse> PreBookingtResponse { get; set; }
@@ -571,7 +571,7 @@ namespace Service.Model.EF
                 entity.Property(e => e.DashBoardMasterNo).HasColumnName("DashBoardMasterNo");
             });
 
-            modelBuilder.Entity<DoctorDetails>(entity =>
+            modelBuilder.Entity<Doctordetails>(entity =>
             {
                 entity.HasKey(e => e.DoctorId);
                 entity.ToTable("Pro_InsertPhysician");
@@ -601,7 +601,7 @@ namespace Service.Model.EF
                 entity.ToTable("pro_GetTestPrePrintDetails");
                 entity.Property(e => e.ID).HasColumnName("ID");
             });
-            modelBuilder.Entity<ExternalVisitDetailsResponse>(entity =>
+            modelBuilder.Entity<ExternalVisitdetailsResponse>(entity =>
             {
                 entity.HasKey(e => e.Outpt);
                 entity.ToTable("pro_CheckExternalVistIdExists");
@@ -626,7 +626,7 @@ namespace Service.Model.EF
                 entity.ToTable("Pro_UpdateQueueOrder");
                 entity.Property(e => e.patientvisitNo).HasColumnName("patientvisitNo");
             });
-            modelBuilder.Entity<userbranchlist>(entity =>
+            modelBuilder.Entity<Userbranchlist>(entity =>
             {
                 entity.HasKey(e => e.Row_Num);
                 entity.ToTable("Pro_GetUserBranchMapping");
@@ -677,7 +677,7 @@ namespace Service.Model.EF
             modelBuilder.Entity<ExternalSampleList>(entity =>
             {
                 entity.HasKey(e => e.Row_Num);
-                entity.ToTable("Pro_HCGetPatientDetails");
+                entity.ToTable("Pro_HCGetPatientdetails");
                 entity.Property(e => e.Row_Num).HasColumnName("Row_Num");
             });
             modelBuilder.Entity<ExternalBookingResponse>(entity =>
@@ -788,7 +788,7 @@ namespace Service.Model.EF
             modelBuilder.Entity<MassRegistrationResponse>(entity =>
             {
                 entity.HasKey(e => e.result);
-                entity.ToTable("pro_InsertMassRegistration");
+                entity.ToTable("pro_Insertmassregistration");
                 entity.Property(e => e.result).HasColumnName("result");
             });
             modelBuilder.Entity<CommonAdminResponse>(entity =>

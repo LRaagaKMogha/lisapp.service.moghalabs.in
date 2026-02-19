@@ -138,16 +138,16 @@ namespace Service.API.SERVICE.Controllers
         [Route("api/User/GetUserMenuMapping")]
         public List<UserModuleDTO> GetUserMenuMapping(int VenueNo, int VenueBranchNo, int userno, int MenuLoadUserNo)
         {
-            List<UserModuleDTO> objresult = new List<UserModuleDTO>();
+            List<UserModuleDTO> Objresult = new List<UserModuleDTO>();
             try
             {
-                objresult = _IUserRepository.GetUserMenuMapping(VenueNo, VenueBranchNo, userno, MenuLoadUserNo);
+                Objresult = _IUserRepository.GetUserMenuMapping(VenueNo, VenueBranchNo, userno, MenuLoadUserNo);
             }
             catch (Exception ex)
             {
                 MyDevException.Error(ex, "UserController.GetUserMenuMapping", ExceptionPriority.High, ApplicationType.APPSERVICE, VenueNo, VenueBranchNo, userno);
             }
-            return objresult;
+            return Objresult;
         }
 
         [CustomAuthorize("LIMSUserMgmt")]
@@ -155,16 +155,16 @@ namespace Service.API.SERVICE.Controllers
         [Route("api/User/GetUserTask")]
         public List<UserModuleDTO> GetUserTask(int VenueNo, int VenueBranchNo, int userno, int MenuLoadUserNo)
         {
-            List<UserModuleDTO> objresult = new List<UserModuleDTO>();
+            List<UserModuleDTO> Objresult = new List<UserModuleDTO>();
             try
             {
-                objresult = _IUserRepository.GetUserMenuMapping(VenueNo, VenueBranchNo, userno, MenuLoadUserNo);
+                Objresult = _IUserRepository.GetUserMenuMapping(VenueNo, VenueBranchNo, userno, MenuLoadUserNo);
             }
             catch (Exception ex)
             {
                 MyDevException.Error(ex, "UserController.GetUserTask", ExceptionPriority.High, ApplicationType.APPSERVICE, VenueNo, VenueBranchNo, userno);
             }
-            return objresult;
+            return Objresult;
         }
 
         [CustomAuthorize("LIMSUserMgmt")]
@@ -211,16 +211,16 @@ namespace Service.API.SERVICE.Controllers
         [Route("api/User/GetPageMenuList")]
         public List<NavDTO> GetPageMenuList(int VenueNo, int VenueBranchNo, int userno, int logintype)
         {
-            List<NavDTO> objresult = new List<NavDTO>();
+            List<NavDTO> Objresult = new List<NavDTO>();
             try
             {
-                objresult = _IUserRepository.GetPageMenuList(VenueNo, VenueBranchNo, userno, logintype);
+                Objresult = _IUserRepository.GetPageMenuList(VenueNo, VenueBranchNo, userno, logintype);
             }
             catch (Exception ex)
             {
                 MyDevException.Error(ex, "UserController.GetPageMenuList", ExceptionPriority.High, ApplicationType.APPSERVICE, VenueNo, VenueBranchNo, userno);
             }
-            return objresult;
+            return Objresult;
         }
 
         [CustomAuthorize("LIMSDEFAULT")]
@@ -232,6 +232,12 @@ namespace Service.API.SERVICE.Controllers
             try
             {
                 var user = HttpContext.Items["User"] as UserClaimsIdentity;
+
+                if(user == null){
+                    Unauthorized();
+                    return result;
+                }
+
                 if (user.UserNo == req.UserNo)
                 {
                     result = _IUserRepository.ChangePassword(req);
@@ -256,8 +262,14 @@ namespace Service.API.SERVICE.Controllers
         {
             int result = 0;
             var user = HttpContext.Items["User"] as UserClaimsIdentity;
+
             try
             {
+                if(user == null){
+                    Unauthorized();
+                    return result;
+                }
+
                 if (_IUserRepository.ValidateActionMenu(user.UserNo, VenueNo, "PRS") == 0) //PRS - Password reset
                 {
                     Unauthorized();
@@ -295,9 +307,9 @@ namespace Service.API.SERVICE.Controllers
         [CustomAuthorize("LIMSDEFAULT")]
         [HttpGet]
         [Route("api/User/GetUserBranchList")]
-        public List<userbranchlist> GetUserBranchList(int VenueNo, int VenueBranchNo, int userno)
+        public List<Userbranchlist> GetUserBranchList(int VenueNo, int VenueBranchNo, int userno)
         {
-            List<userbranchlist> result = new List<userbranchlist>();
+            List<Userbranchlist> result = new List<Userbranchlist>();
             try
             {
                 result = _IUserRepository.GetUserBranchList(userno, VenueNo, VenueBranchNo);
@@ -318,6 +330,12 @@ namespace Service.API.SERVICE.Controllers
             try
             {
                 var reqClone = JsonConvert.DeserializeObject<ReqRoleMenu>(JsonConvert.SerializeObject(Useritem));
+
+                if(reqClone == null)
+                {
+                    return BadRequest("Invalid request data.");
+                }
+
                 using (var auditScope = new AuditScope<ReqRoleMenu>(reqClone, _auditService, "ROLEMENU", new string[] { "Role Menu Save" }))
                 {
                     var _errormsg = UserValidation.InsertRoleMenuMapping(Useritem);
@@ -361,8 +379,12 @@ namespace Service.API.SERVICE.Controllers
             try
             {
                 var user = HttpContext.Items["User"] as UserClaimsIdentity;
-                var token = HttpContext.Request.Headers["Authorization"].FirstOrDefault()?.Split(" ").Last();
-                _IUserRepository.UpdateSession(user.UserNo, user.VenueNo, user.VenueBranchNo, token ?? "");
+
+                if (user != null)
+                {
+                    var token = HttpContext.Request.Headers["Authorization"].FirstOrDefault()?.Split(" ").Last();
+                    _IUserRepository.UpdateSession(user.UserNo, user.VenueNo, user.VenueBranchNo, token ?? "");
+                }
             }
             catch (Exception ex)
             {
@@ -375,16 +397,16 @@ namespace Service.API.SERVICE.Controllers
         [Route("api/User/getusermenucode")]
         public List<UserRoleNameDTO> GetUserMenuCode(int userno, int VenueNo, int VenueBranchNo, int LoginType)
         {
-            List<UserRoleNameDTO> objresult = new List<UserRoleNameDTO>();
+            List<UserRoleNameDTO> Objresult = new List<UserRoleNameDTO>();
             try
             {
-                objresult = _IUserRepository.GetUserMenuCode(VenueNo, VenueBranchNo, userno, LoginType);
+                Objresult = _IUserRepository.GetUserMenuCode(VenueNo, VenueBranchNo, userno, LoginType);
             }
             catch (Exception ex)
             {
                 MyDevException.Error(ex, "UserController.getusermenucode", ExceptionPriority.High, ApplicationType.APPSERVICE, VenueNo, VenueBranchNo, userno);
             }
-            return objresult;
+            return Objresult;
         }
         
         [AllowAnonymous]

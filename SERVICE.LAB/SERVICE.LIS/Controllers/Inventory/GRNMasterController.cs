@@ -25,16 +25,16 @@ namespace Service.API.SERVICE.Controllers.Inventory
         [Route("api/GRNMaster/GetAllGRN")]
         public List<GetAllGRNResponse> GetAllGRN(GetAllGRNRequest masterRequest)
         {
-            List<GetAllGRNResponse> objresult = new List<GetAllGRNResponse>();
+            List<GetAllGRNResponse> Objresult = new List<GetAllGRNResponse>();
             try
             {
-                objresult = _GRNMasterRepository.GetAllGRN(masterRequest).ToList();
+                Objresult = _GRNMasterRepository.GetAllGRN(masterRequest).ToList();
             }
             catch (Exception ex)
             {
                 MyDevException.Error(ex, "GRNMasterController.GetAllGRN", ExceptionPriority.Medium, ApplicationType.APPSERVICE, masterRequest.venueno, (int)masterRequest.venuebranchno, (int)masterRequest.masterNo);
             }
-            return objresult;
+            return Objresult;
         }
 
         [CustomAuthorize("INVOPERATIONS")]
@@ -42,16 +42,16 @@ namespace Service.API.SERVICE.Controllers.Inventory
         [Route("api/GRNMaster/GetPOBySupplierDetails")]
         public List<GetPOBySupplierResponse> GetPOBySupplierDetails(int venueNo, int venueBranchNo, int supplierNo)
         {
-            List<GetPOBySupplierResponse> objresult = new List<GetPOBySupplierResponse>();
+            List<GetPOBySupplierResponse> Objresult = new List<GetPOBySupplierResponse>();
             try
             {
-                objresult = _GRNMasterRepository.GetPOBySupplierDetails(venueNo, venueBranchNo, supplierNo).ToList();
+                Objresult = _GRNMasterRepository.GetPOBySupplierDetails(venueNo, venueBranchNo, supplierNo).ToList();
             }
             catch (Exception ex)
             {
                 MyDevException.Error(ex, "GRNMasterController.GetPOBySupplierDetails", ExceptionPriority.Medium, ApplicationType.APPSERVICE, venueNo, venueBranchNo, supplierNo);
             }
-            return objresult;
+            return Objresult;
         }
 
         [CustomAuthorize("INVOPERATIONS")]
@@ -59,16 +59,16 @@ namespace Service.API.SERVICE.Controllers.Inventory
         [Route("api/GRNMaster/GetProductByPO")]
         public List<GetProductsByPOResponse> GetProductByPO(int venueNo, int venueBranchNo, int poNumber)
         {
-            List<GetProductsByPOResponse> objresult = new List<GetProductsByPOResponse>();
+            List<GetProductsByPOResponse> Objresult = new List<GetProductsByPOResponse>();
             try
             {
-                objresult = _GRNMasterRepository.GetProductByPO(venueNo, venueBranchNo, poNumber).ToList();
+                Objresult = _GRNMasterRepository.GetProductByPO(venueNo, venueBranchNo, poNumber).ToList();
             }
             catch (Exception ex)
             {
                 MyDevException.Error(ex, "GRNMasterController.GetProductByPO", ExceptionPriority.Medium, ApplicationType.APPSERVICE, venueNo, venueBranchNo, poNumber);
             }
-            return objresult;
+            return Objresult;
         }
 
         [CustomAuthorize("INVOPERATIONS")]
@@ -93,16 +93,16 @@ namespace Service.API.SERVICE.Controllers.Inventory
         [Route("api/GRNMaster/GetGRNOCDetailsById")]
         public List<otherChargeModal> GetGRNOCDetailsById(int venueNo, int venueBranchNo, int grnMasterNo)
         {
-            List<otherChargeModal> objresult = new List<otherChargeModal>();
+            List<otherChargeModal> Objresult = new List<otherChargeModal>();
             try
             {
-                objresult = _GRNMasterRepository.GetGRNOCDetailsById(venueNo, venueBranchNo, grnMasterNo).ToList();
+                Objresult = _GRNMasterRepository.GetGRNOCDetailsById(venueNo, venueBranchNo, grnMasterNo).ToList();
             }
             catch (Exception ex)
             {
                 MyDevException.Error(ex, "GRNMasterController.GetGRNOCDetailsById", ExceptionPriority.Medium, ApplicationType.APPSERVICE, venueNo, venueBranchNo, 0);
             }
-            return objresult;
+            return Objresult;
         }
 
         [CustomAuthorize("INVOPERATIONS")]
@@ -110,16 +110,16 @@ namespace Service.API.SERVICE.Controllers.Inventory
         [Route("api/GRNMaster/GetGRNProductDetails")]
         public List<GetProductsByPOResponse> GetGRNProductDetails(int venueNo, int venueBranchNo, int grnMasterNo)
         {
-            List<GetProductsByPOResponse> objresult = new List<GetProductsByPOResponse>();
+            List<GetProductsByPOResponse> Objresult = new List<GetProductsByPOResponse>();
             try
             {
-                objresult = _GRNMasterRepository.GetGRNProductDetails(venueNo, venueBranchNo, grnMasterNo).ToList();
+                Objresult = _GRNMasterRepository.GetGRNProductDetails(venueNo, venueBranchNo, grnMasterNo).ToList();
             }
             catch (Exception ex)
             {
                 MyDevException.Error(ex, "GRNMasterController.GetGRNProductDetails", ExceptionPriority.Medium, ApplicationType.APPSERVICE, venueNo, venueBranchNo, grnMasterNo);
             }
-            return objresult;
+            return Objresult;
         }
 
         [CustomAuthorize("INVOPERATIONS")]
@@ -127,16 +127,16 @@ namespace Service.API.SERVICE.Controllers.Inventory
         [Route("api/GRNMaster/UpdateInvoiceDetails")]
         public CommonAdminResponse UpdateInvoiceDetails(InvoiceUpdateRequest req)
         {
-            CommonAdminResponse objresult = new CommonAdminResponse();
+            CommonAdminResponse Objresult = new CommonAdminResponse();
             try
             {
-                objresult = _GRNMasterRepository.UpdateInvoiceDetails(req);
+                Objresult = _GRNMasterRepository.UpdateInvoiceDetails(req);
             }
             catch (Exception ex)
             {
                 MyDevException.Error(ex, "GRNMasterController.UpdateInvoiceDetails", ExceptionPriority.Medium, ApplicationType.APPSERVICE, req.VenueNo, req.BranchNo, req.UserNo);
             }
-            return objresult;
+            return Objresult;
         }
     }
 }

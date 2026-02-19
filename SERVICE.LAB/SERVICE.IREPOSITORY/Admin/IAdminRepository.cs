@@ -8,13 +8,13 @@ namespace Service.IRepository
     {
         CommonAdminResponse DeleteVisitId(DeleteVisitRequest deleteVisitRequest);
         CommonAdminResponse UpdateCustomerDetails(UpdateCustomerDetails RequestItem);
-        List<SearchVisitDetailsResponse> SearchVisitId(DeleteVisitRequest deleteVisitRequest);
+        List<SearchVisitdetailsResponse> SearchVisitId(DeleteVisitRequest deleteVisitRequest);
         List<SearchUpdateDatesResponse> SearchUpdateDates(DeleteVisitRequest deleteVisitRequest);
         CommonAdminResponse UpdateOrderDates(UpdateOrderDatesRequest RequestItem);
         List<ResponseDataScrollText> SearchScrollText(RequestDataScrollText reqItem);
         List<PaymentMode> GetPaymentMode(GetPaymentModeRequest RequestItem);
         SavePaymentModeResponse UpdateVisitPaymentModes(SavePaymentModeRequest RequestItem);
-        List<responsehistory> DeleteHistory(visitRequest obj);
+        List<Responsehistory> DeleteHistory(visitRequest obj);
     }
 }
 

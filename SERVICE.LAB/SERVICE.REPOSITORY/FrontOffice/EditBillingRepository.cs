@@ -12,6 +12,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using System.Xml.Linq;
+using System.Threading.Tasks;
 
 namespace Service.Repository
 {
@@ -25,10 +26,11 @@ namespace Service.Repository
         /// </summary>
         /// <param name="objDTO"></param>
         /// <returns></returns>
-        public FrontOffficeResponse InsertEditBilling(FrontOffficeDTO objDTO)
+        public async Task<FrontOffficeResponse> InsertEditBilling(FrontOffficeDTO objDTO)
         {
             int PatientVisitNo = 0;
-            FrontOffficeResponse result = new FrontOffficeResponse(); ;
+            FrontOffficeResponse result = new FrontOffficeResponse();
+
             try
             {
                 using (var context = new FrontOfficeContext(_config.GetConnectionString(ConfigKeys.DefaultConnection)))
@@ -110,7 +112,7 @@ namespace Service.Repository
                     var _IsPregnant = new SqlParameter("IsPregnant", objDTO.IsPregnant);
                     var _Remarks = new SqlParameter("Remarks", objDTO.Remarks.ValidateEmpty());
 
-                    var editBillingResponse = context.EditBillingPatientDTO.FromSqlRaw(
+                    var editBillingResponse = await context.EditBillingPatientDTO.FromSqlRaw(
                     "Execute dbo.Pro_InsertEditBilling @PatientNo,@VisitNo,@TitleCode,@FirstName,@MiddleName,@LastName,@DOB,@Gender,@Age,@AgeType,@ageDays,@ageMonths,@ageYears,@MobileNumber,@AltMobileNumber," +
                     "@EmailID,@SecondaryEmailID,@Address,@CountryNo,@StateNo,@CityNo,@AreaName,@Pincode,@SecondaryAddress," +
                     "@URNID,@URNType,@RefferralTypeNo,@CustomerNo,@PhysicianNo,@RiderNo,@MarketingNo,@IsStat,@ClinicalHistory,@registeredType,@VenueNo,@VenueBranchNo,@UserID," +
@@ -124,15 +126,18 @@ namespace Service.Repository
                     _IsEmail, _IsSMS, _ExternalVisitID, _VaccinationType, _VaccinationDate, _NURNID, _NURNType, _Deliverymode,
                     _ExternalVisitIdentity, _WardNo, _WardName, _maritalStatus, _isAutoWhatsApp, _NRICNumber,
                     _AllergyInfo, _PatientBlock, _PatientUnitNo, _PatientFloor, _PatientBuilding, _PatientHomeNo, _PhysicianNo2, _VipIndication, _BedNo, _NationalityNo, _RaceNo,
-                    _CompanyNo, _CaseNumber, _AlternateIdType, _AlternateId, _PatientOfficeNumber, _IsPregnant, _Remarks).AsEnumerable().FirstOrDefault();
+                    _CompanyNo, _CaseNumber, _AlternateIdType, _AlternateId, _PatientOfficeNumber, _IsPregnant, _Remarks)
+                    .FirstOrDefaultAsync();
 
                     PatientVisitNo = editBillingResponse != null ? editBillingResponse.patientvisitno : 0;
+                    
                     //Check if exists or not mobileno and passportno in  Client portal 
                     if (PatientVisitNo == -4)
                     {
                         result.patientvisitno = PatientVisitNo;
                         return result;
                     }
+
                     XDocument ServiceXML = new XDocument(new XElement("Orders", from Item in objDTO.Orders
                                                                                 select
                      new XElement("ServiceList",
@@ -176,12 +181,14 @@ namespace Service.Repository
                     var _PVenueBranchNo = new SqlParameter("VenueBranchNo", objDTO.VenueBranchNo);
                     var _PUserID = new SqlParameter("UserID", objDTO.UserNo.ToString());
 
-                    result = context.EditBillingTransaction.FromSqlRaw(
+                    var transactionResponse = await context.EditBillingTransaction.FromSqlRaw(
                    "Execute dbo.Pro_InsertEditBillingOrders @PatientVisitNo,@orderxml,@paymentxml,@NetAmount,@GrossAmount,@discountno,@DiscountAmount," +
                    "@DiscountApprovedBy,@DueAmount,@CollectedAmount,@VenueNo,@VenueBranchNo,@UserID",
                    _PatientVisitNo, _orderxml, _paymentxml, _NetAmount, _GrossAmount, _discountno, _DiscountAmount, _DiscountApprovedBy,
-                   _DueAmount, _CollectedAmount, _PVenueNo, _PVenueBranchNo, _PUserID).AsEnumerable().FirstOrDefault();
+                   _DueAmount, _CollectedAmount, _PVenueNo, _PVenueBranchNo, _PUserID)
+                    .FirstOrDefaultAsync();
 
+                    result = transactionResponse;
                     // PushMessage(result.patientvisitno, objDTO.VenueNo, objDTO.VenueBranchNo, objDTO.UserNo, Password);
                 }
             }
@@ -194,11 +201,11 @@ namespace Service.Repository
                     var _PUserID = new SqlParameter("UserNo", objDTO.UserNo.ToString());
                     var _PVenueNo = new SqlParameter("VenueNo", objDTO.VenueNo);
                     var _PVenueBranchNo = new SqlParameter("VenueBranchNo", objDTO.VenueBranchNo);
+                    
                     context.FrontOffficeReset.FromSqlRaw(
-                         "Execute dbo.pro_ResetRegistration @PatientVisitNo,@UserNo,@VenueNo,@VenueBranchNo",
-                         _PatientVisitNo, _PUserID, _PVenueNo, _PVenueBranchNo).FirstOrDefault();
+                    "Execute dbo.pro_ResetRegistration @PatientVisitNo,@UserNo,@VenueNo,@VenueBranchNo",
+                    _PatientVisitNo, _PUserID, _PVenueNo, _PVenueBranchNo).FirstOrDefault();
                 }
-
             }
             return result;
         }
@@ -207,9 +214,9 @@ namespace Service.Repository
         /// Get Patient Details
         /// </summary>
         /// <returns></returns>
-        public GetEditPatientDetailsFinalResponse GetEditPatientDetails(long visitNo, int VenueNo, int VenueBranchNo)
+        public async Task<GetEditPatientDetailsFinalResponse> GetEditPatientDetails(long visitNo, int VenueNo, int VenueBranchNo)
         {
-            List<GetEditPatientDetailsResponse> objresult = new List<GetEditPatientDetailsResponse>();
+            List<GetEditPatientDetailsResponse> Objresult = new List<GetEditPatientDetailsResponse>();
             GetEditPatientDetailsFinalResponse finalResponse = new GetEditPatientDetailsFinalResponse();
             EditBillServiceDetails editBillService = new EditBillServiceDetails();
             List<EditBillServiceDetails> lstEditBillService = new List<EditBillServiceDetails>();
@@ -218,31 +225,28 @@ namespace Service.Repository
 
             try
             {
-
                 using (var context = new LIMSContext(_config.GetConnectionString(ConfigKeys.DefaultConnection)))
                 {
-
                     var _VenueNo = new SqlParameter("VenueNo", VenueNo.ToString());
                     var _VenueBranchNo = new SqlParameter("VenueBranchNo", VenueBranchNo.ToString());
                     var _VisitNo = new SqlParameter("VisitNo", visitNo);
 
-
-                    var exists = context.GetBillInvoiceExists.FromSqlRaw(
-                        "Execute dbo.Pro_CheckBillExistsInInvoice @VenueNo,@VenueBranchNo,@VisitNo",
-                     _VenueNo, _VenueBranchNo, _VisitNo).ToList();
+                    var exists = await context.GetBillInvoiceExists.FromSqlRaw(
+                    "Execute dbo.Pro_CheckBillExistsInInvoice @VenueNo,@VenueBranchNo,@VisitNo",
+                    _VenueNo, _VenueBranchNo, _VisitNo).ToListAsync();
 
                     finalResponse.IsExistsInvoice = exists.FirstOrDefault().IsExists;
 
                     if(finalResponse.IsExistsInvoice) { return finalResponse; }
 
-                    var response = context.GetEditBillingPatientDetailsDTO.FromSqlRaw(
-                        "Execute dbo.Pro_GetEditBillingPatientDetails @VenueNo,@VenueBranchNo,@VisitNo",
-                     _VenueNo, _VenueBranchNo, _VisitNo).ToList();
+                    var response = await context.GetEditBillingPatientdetailsDTO.FromSqlRaw(
+                    "Execute dbo.Pro_GetEditBillingPatientdetails @VenueNo,@VenueBranchNo,@VisitNo",
+                    _VenueNo, _VenueBranchNo, _VisitNo).ToListAsync();
 
-                    objresult = response;
+                    Objresult = response;
 
-                    string patientDetails = JsonConvert.SerializeObject(objresult.FirstOrDefault());
-                    finalResponse = JsonConvert.DeserializeObject<GetEditPatientDetailsFinalResponse>(patientDetails);
+                    string Patientdetails = JsonConvert.SerializeObject(Objresult.FirstOrDefault());
+                    finalResponse = JsonConvert.DeserializeObject<GetEditPatientDetailsFinalResponse>(Patientdetails);
 
                     foreach (var patientdetail in response)
                     {
@@ -283,9 +287,6 @@ namespace Service.Repository
 
                     lstGetEditBillPaymentDetails = paymentResponse;
                     finalResponse.payments = lstGetEditBillPaymentDetails;
-
-                    
-
                 }
             }
             catch (Exception ex)
@@ -294,10 +295,9 @@ namespace Service.Repository
             }
             return finalResponse;
         }
-
         public dynamic ValidatePTTTest(int ServiceNo, string ServiceType, int VisitNo, int VenueNo, int VenueBranchNo)
         {
-            int objresult = 0;
+            int Objresult = 0;
             try
             {
                 using (var context = new FrontOfficeContext(_config.GetConnectionString(ConfigKeys.DefaultConnection)))
@@ -307,19 +307,19 @@ namespace Service.Repository
                     var _VisitNo = new SqlParameter("VisitNo", VisitNo);
                     var _VenueNo = new SqlParameter("VenueNo", VenueNo);
                     var _VenueBranchNo = new SqlParameter("VenueBranchNo", VenueBranchNo);
+                    
                     var finalResult = context.ValidatePTTTestDTO.FromSqlRaw(
-                        "Execute dbo.pro_ValidatePTTTest @VenueNo,@VenueBranchNo,@ServiceNo,@ServiceType,@VisitNo",
+                    "Execute dbo.pro_ValidatePTTTest @VenueNo,@VenueBranchNo,@ServiceNo,@ServiceType,@VisitNo",
                     _VenueNo, _VenueBranchNo, _ServiceNo, _ServiceType, _VisitNo).ToList();
 
-                    objresult = finalResult.FirstOrDefault().status;
+                    Objresult = finalResult.FirstOrDefault().status;
                 }
             }
             catch (Exception ex)
             {
                 MyDevException.Error(ex, "EditBillingRepository.ValidatePTTTest/ServiceNo/ServiceType/VisitNo - " + ServiceNo + "/" + ServiceType + "/" + VisitNo, ExceptionPriority.High, ApplicationType.REPOSITORY, VenueNo, VenueBranchNo, 0);
             }
-            return objresult;
+            return Objresult;
         }
-
     }
 }

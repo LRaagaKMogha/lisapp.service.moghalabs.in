@@ -41,7 +41,7 @@ namespace Service.API.SERVICE.Controllers
         [Route("api/Comment/Insertcommentmaster")]
         public ActionResult<CommentInsRes> Insertcommentmaster(CommentInsReq insReq)
         {
-            CommentInsRes objresult = new CommentInsRes();
+            CommentInsRes Objresult = new CommentInsRes();
             try
             {
                 using(var auditScoped = new AuditScope<CommentInsReq>(insReq, _auditService))
@@ -49,7 +49,7 @@ namespace Service.API.SERVICE.Controllers
                     var _errormsg = MiscellaneousMasterValidation.Insertcommentmaster(insReq);
                     if (!_errormsg.status)
                     {
-                        objresult = _commentRepository.Insertcommentmaster(insReq);
+                        Objresult = _commentRepository.Insertcommentmaster(insReq);
                         string _CacheKey = CacheKeys.CommonMaster + "CONTAINER" + insReq.VenueNo + insReq.venueBranchno;
                         _commentRepository.Insertcommentmaster(insReq);
                         MemoryCacheRepository.RemoveItem(_CacheKey);
@@ -66,7 +66,7 @@ namespace Service.API.SERVICE.Controllers
             {
                 MyDevException.Error(ex, "CommentController.Insertcommentmaster - " + insReq.CommentsMastNo.ToString(), ExceptionPriority.Low, ApplicationType.REPOSITORY, insReq.VenueNo, insReq.venueBranchno, 0);
             }
-            return Ok(objresult);
+            return Ok(Objresult);
         }
 
         [HttpPost]
@@ -89,7 +89,7 @@ namespace Service.API.SERVICE.Controllers
         [Route("api/Comment/InsertNationRace")]
         public ActionResult<InsNationRaceRes> InsertNationRace(InsNationRaceReq insReq)
         {
-            InsNationRaceRes objresult = new InsNationRaceRes();
+            InsNationRaceRes Objresult = new InsNationRaceRes();
             try
             {
                 using (var auditScoped = new AuditScope<InsNationRaceReq>(insReq, _auditService))
@@ -97,7 +97,7 @@ namespace Service.API.SERVICE.Controllers
                     var _errormsg = MiscellaneousMasterValidation.InsertNationRace(insReq);
                     if (!_errormsg.status)
                     {
-                        objresult = _commentRepository.InsertNationRace(insReq);
+                        Objresult = _commentRepository.InsertNationRace(insReq);
                     }
                     else
                         return BadRequest(_errormsg);
@@ -107,23 +107,23 @@ namespace Service.API.SERVICE.Controllers
             {
                 MyDevException.Error(ex, "CommentController.InsertNationRace - " + insReq.CommonNo.ToString(), ExceptionPriority.Low, ApplicationType.REPOSITORY, insReq.CommonNo, 0, 0);
             }
-            return Ok(objresult);
+            return Ok(Objresult);
         }
 
         [HttpPost]
         [Route("api/Comment/TemplateInsertcomment")]
         public List<TemplateCommentRes> TemplateInsertcomment(TemplateComment Req)
         {
-            List<TemplateCommentRes> objresult = new List<TemplateCommentRes>();
+            List<TemplateCommentRes> Objresult = new List<TemplateCommentRes>();
             try
             {
-                objresult = _commentRepository.TemplateInsertcomment(Req);
+                Objresult = _commentRepository.TemplateInsertcomment(Req);
             }
             catch (Exception ex)
             {
                 MyDevException.Error(ex, "CommentController.TemplateInsertcomment" + Req.CH_QcNo.ToString(), ExceptionPriority.Low, ApplicationType.REPOSITORY, Req.VenueNo, Req.VenueBranchno, 0);
             }
-            return objresult;
+            return Objresult;
         }
 
         [HttpPost]

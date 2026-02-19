@@ -19,7 +19,7 @@ namespace Service.Repository
 
         public List<TblProductType> Getproducttypemaster(ProductTypeMasterRequest protypRequest)
         {
-            List<TblProductType> objresult = new List<TblProductType>();
+            List<TblProductType> Objresult = new List<TblProductType>();
             try
             {
                 using (var context = new MasterContext(_config.GetConnectionString(ConfigKeys.DefaultConnection)))
@@ -28,7 +28,7 @@ namespace Service.Repository
                     var _venueNo = new SqlParameter("venueNo", protypRequest?.venueNo);
                     var _pageIndex = new SqlParameter("pageIndex", protypRequest?.pageIndex);
 
-                    objresult = context.Getproducttype.FromSqlRaw(
+                    Objresult = context.Getproducttype.FromSqlRaw(
                     "Execute dbo.pro_GetproductType @productTypeno, @venueNo,@pageIndex",
                     _productTypeno, _venueNo, _pageIndex).ToList();
                 }
@@ -37,12 +37,12 @@ namespace Service.Repository
             {
                 MyDevException.Error(ex, "ProductTypeRepository.Getproducttypemaster" + protypRequest.productTypeno.ToString(), ExceptionPriority.Low, ApplicationType.REPOSITORY, protypRequest.venueNo, protypRequest.venueBranchno, 0);
             }
-            return objresult;
+            return Objresult;
         }
 
         public ProductTypeMasterResponse Insertproducttypemaster(TblProductType tblProtyp)
         {
-            ProductTypeMasterResponse objresult = new ProductTypeMasterResponse();
+            ProductTypeMasterResponse Objresult = new ProductTypeMasterResponse();
             try
             {
                 using (var context = new MasterContext(_config.GetConnectionString(ConfigKeys.DefaultConnection)))
@@ -60,18 +60,18 @@ namespace Service.Repository
                     "@status,@venueNo,@userNo,@VenueBranchNo",
                     _productTypeno, _productTypename, _sequenceNo, _status,_venueNo, _userNo, _venueBranchno).ToList();
 
-                    objresult.productTypeno = obj[0].productTypeno;
+                    Objresult.productTypeno = obj[0].productTypeno;
                 }
             }
             catch (Exception ex)
             {
                 MyDevException.Error(ex, "ProductTypeRepository.Insertproducttypemaster" + tblProtyp.productTypeno.ToString(), ExceptionPriority.Low, ApplicationType.REPOSITORY, tblProtyp.venueNo, tblProtyp.venueBranchno, tblProtyp.userNo);
             }
-            return objresult;
+            return Objresult;
         }
         public List<TblProductCategory> GetProductCategory(ProductcategoryRequest ProductcategoryRequest)
         {
-            List<TblProductCategory> objresult = new List<TblProductCategory>();
+            List<TblProductCategory> Objresult = new List<TblProductCategory>();
             try
             {
                 using (var context = new MasterContext(_config.GetConnectionString(ConfigKeys.DefaultConnection)))
@@ -80,7 +80,7 @@ namespace Service.Repository
                     var _venueNo = new SqlParameter("venueNo", ProductcategoryRequest?.venueNo);
                     var _pageIndex = new SqlParameter("pageIndex", ProductcategoryRequest?.pageIndex);
 
-                    objresult = context.GetProductCategory.FromSqlRaw(
+                    Objresult = context.GetProductCategory.FromSqlRaw(
                     "Execute dbo.pro_GetProductCategory @categoryNo,@venueNo,@pageIndex",
                     _categoryNo, _venueNo, _pageIndex).ToList();
                 }
@@ -89,11 +89,11 @@ namespace Service.Repository
             {
                 MyDevException.Error(ex, "ProductTypeRepository.GetProductCategory" + ProductcategoryRequest.categoryNo.ToString(), ExceptionPriority.Low, ApplicationType.REPOSITORY, ProductcategoryRequest.venueNo,0, 0);
             }
-            return objresult;
+            return Objresult;
         }
         public ProductcategoryResponse InsertproductCategory(TblProductCategory TblProductCategory)
         {
-            ProductcategoryResponse objresult = new ProductcategoryResponse();
+            ProductcategoryResponse Objresult = new ProductcategoryResponse();
             try
             {
                 using (var context = new MasterContext(_config.GetConnectionString(ConfigKeys.DefaultConnection)))
@@ -110,14 +110,14 @@ namespace Service.Repository
                     "Execute dbo.pro_InsertProductCategory @categoryNo,@categoryCode,@categoryName,@venueNo,@venueBranchNo,@categorystatus,@userNo",
                     _categoryNo,_categoryCode,_categoryName,_venueNo,_venueBranchno,_categorystatus, _userNo).ToList();
 
-                    objresult.categoryNo = obj[0].categoryNo;
+                    Objresult.categoryNo = obj[0].categoryNo;
                 }
             }
             catch (Exception ex)
             {
                 MyDevException.Error(ex, "ProductTypeRepository.InsertproductCategory" + TblProductCategory.categoryNo.ToString(), ExceptionPriority.Low, ApplicationType.REPOSITORY, TblProductCategory.venueNo, TblProductCategory.venueBranchno, TblProductCategory.userNo);
             }
-            return objresult;
+            return Objresult;
         }
     }
 }

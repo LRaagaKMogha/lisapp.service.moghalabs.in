@@ -40,17 +40,17 @@ namespace Service.API.SERVICE.Controllers
         [Route("api/Qcmaster/InsertqcmasterDetails")]
         public QcMasterResponse InsertqcmasterDetails(saveqcDTO req)
         {
-            QcMasterResponse objresult = new QcMasterResponse();
+            QcMasterResponse Objresult = new QcMasterResponse();
             try
             {
-                objresult = _QcmasterRepository.InsertqcmasterDetails(req);
+                Objresult = _QcmasterRepository.InsertqcmasterDetails(req);
 
             }
             catch (Exception ex)
             {
                 MyDevException.Error(ex, "QcmasterRepository.InsertqcmasterDetails", ExceptionPriority.Low, ApplicationType.APPSERVICE, req.venueNo, 0, 0);
             }
-            return objresult;
+            return Objresult;
         }
         [HttpPost]
         [Route("api/Qcmaster/EditqcmasterDetails")]

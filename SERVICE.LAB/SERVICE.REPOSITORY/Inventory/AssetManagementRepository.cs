@@ -50,13 +50,13 @@ namespace Service.Repository
                     var _pageIndex = new SqlParameter("pageIndex", objManuDTO.pageIndex);
                     var _Status = new SqlParameter("Status", objManuDTO.Status);
 
-                    var objResult = context.CreateManufacturerMasterDTO.FromSqlRaw(
+                    var Objresult = context.CreateManufacturerMasterDTO.FromSqlRaw(
                     "Execute dbo.Pro_InsertInventoryInstrument @InstrumentsNo,@InstrumentsName,@venueNo,@venueBranchno,@userNo,@branchNo,@DepartmentNo,@InstallationDate,@ModificationDate, @Remark," +
                     "@ManufacturerName,@ContactPersonName,@MobileNo,@CallCenterContactNumber,@Email,@RequestRaised,@ResolvedDate,@RequestRemarks,@AssetNo,@MachineSerialNo,@pageIndex,@Status",
                     _InstrumentsNo,_InstrumentsName,_venueNo, _venueBranchno, _userNo, _branchNo, _DepartmentNo , _InstallationDate, _ModificationDate, _Remark,// _DocumentPath,
                     _manufacturerName, _ContactPersonName,_MobileNo,_CallCenterContactNumber,_Email,_RequestRaised,_ResolvedDate,_RequestRemarks, _Assetno, _machineSerialNo, _pageIndex,_Status).ToList();
 
-                    response = objResult[0];
+                    response = Objresult[0];
                 }
             }
             catch (Exception ex)
@@ -67,7 +67,7 @@ namespace Service.Repository
         }
         public List<GetAssetManagementResponse> GetInstrumentDetail(AssetManagementRequest masterRequest)
         {
-            List<GetAssetManagementResponse> objResult = new List<GetAssetManagementResponse>();
+            List<GetAssetManagementResponse> Objresult = new List<GetAssetManagementResponse>();
             try
             {
                 using (var context = new MasterContext(_config.GetConnectionString(ConfigKeys.DefaultConnection)))
@@ -80,7 +80,7 @@ namespace Service.Repository
                     var _status = new SqlParameter("Status", masterRequest.status);
                     var _pageIndex = new SqlParameter("pageIndex", masterRequest.pageIndex);
 
-                    objResult = context.GetInstrumentDetail.FromSqlRaw(
+                    Objresult = context.GetInstrumentDetail.FromSqlRaw(
                     "Execute dbo.Pro_GetInventoryInstrument @InstrumentsNo, @VenueNo, @VenueBranchNo, @branchNo, @DepartmentNo, @Status,  @pageIndex",
                     _InstrumentsNo, _VenueNo, _VenueBranchNo, _branchNo, _DepartmentNo, _status, _pageIndex).ToList();
                 }
@@ -89,7 +89,7 @@ namespace Service.Repository
             {
                 MyDevException.Error(ex, "GetInstrumentDetail", ExceptionPriority.Low, ApplicationType.REPOSITORY, masterRequest.venueNo, 0, 0);
             }
-            return objResult;
+            return Objresult;
         }
     }
 }

@@ -25,7 +25,6 @@ namespace Service.Repository
             {
                 using (var context = new LIMSContext(_config.GetConnectionString(ConfigKeys.DefaultConnection)))
                 {
-
                     var _VenueNo = new SqlParameter("VenueNo", RequestItem.VenueNo);
                     var _VenueBranchNo = new SqlParameter("VenueBranchNo", RequestItem.VenueBranchNo);
                     var _VisitNo = new SqlParameter("VisitID", RequestItem.VisitId);
@@ -42,22 +41,19 @@ namespace Service.Repository
             }
             return response;
         }
-
-        public List<SearchVisitDetailsResponse> SearchVisitId(DeleteVisitRequest RequestItem)
+        public List<SearchVisitdetailsResponse> SearchVisitId(DeleteVisitRequest RequestItem)
         {
-            List<SearchVisitDetailsResponse> lstPatientInfoResponse = new List<SearchVisitDetailsResponse>();
+            List<SearchVisitdetailsResponse> lstPatientInfoResponse = new List<SearchVisitdetailsResponse>();
             try
             {
                 using (var context = new LIMSContext(_config.GetConnectionString(ConfigKeys.DefaultConnection)))
                 {
-
                     var _VenueNo = new SqlParameter("VenueNo", RequestItem.VenueNo);
                     var _VenueBranchNo = new SqlParameter("VenueBranchNo", RequestItem.VenueBranchNo);
                     var _VisitNo = new SqlParameter("@VisitId", RequestItem.VisitId);
 
-                    lstPatientInfoResponse = context.SearchVisitIdDTO.FromSqlRaw("Execute dbo.Pro_GetVisitDetails @VenueNo,@VenueBranchNo, @VisitID",
+                    lstPatientInfoResponse = context.SearchVisitIdDTO.FromSqlRaw("Execute dbo.Pro_GetVisitdetails @VenueNo,@VenueBranchNo, @VisitID",
                    _VenueNo, _VenueBranchNo, _VisitNo).ToList();
-
                 }
             }
             catch (Exception ex)
@@ -66,8 +62,6 @@ namespace Service.Repository
             }
             return lstPatientInfoResponse;
         }
-
-
         public List<SearchUpdateDatesResponse> SearchUpdateDates(DeleteVisitRequest RequestItem)
         {
             List<SearchUpdateDatesResponse> lstPatientInfoResponse = new List<SearchUpdateDatesResponse>();
@@ -75,14 +69,12 @@ namespace Service.Repository
             {
                 using (var context = new LIMSContext(_config.GetConnectionString(ConfigKeys.DefaultConnection)))
                 {
-
                     var _VenueNo = new SqlParameter("VenueNo", RequestItem.VenueNo);
                     var _VenueBranchNo = new SqlParameter("VenueBranchNo", RequestItem.VenueBranchNo);
                     var _VisitNo = new SqlParameter("@VisitId", RequestItem.VisitId);
 
                     lstPatientInfoResponse = context.SearchUpdateDatesDTO.FromSqlRaw("Execute dbo.Pro_SearchUpdateDates @VenueNo,@VenueBranchNo, @VisitID",
                    _VenueNo, _VenueBranchNo, _VisitNo).ToList();
-
                 }
             }
             catch (Exception ex)
@@ -91,8 +83,6 @@ namespace Service.Repository
             }
             return lstPatientInfoResponse;
         }
-
-
         public CommonAdminResponse UpdateCustomerDetails(UpdateCustomerDetails RequestItem)
         {
             CommonAdminResponse response = new CommonAdminResponse();
@@ -119,7 +109,6 @@ namespace Service.Repository
             }
             return response;
         }
-
         public CommonAdminResponse UpdateOrderDates(UpdateOrderDatesRequest RequestItem)
         {
             CommonAdminResponse response = new CommonAdminResponse();
@@ -136,7 +125,7 @@ namespace Service.Repository
                     var _ApprovedDT = new SqlParameter("ApprovedDT", RequestItem.ApprovedDT.Replace("T", " "));
 
                     var lstResponse = context.UpdateOrderDatesDTO.FromSqlRaw("Execute dbo.Pro_UpdateOrderDates @VenueNo,@VenueBranchNo,@UserNo,@VisitID,@RegistrationDT,@CollectionDT,@ApprovedDT",
-                     _VenueNo, _VenueBranchNo, _UserNo, _VisitNo, _RegistrationDT, _CollectionDT, _ApprovedDT).ToList();
+                    _VenueNo, _VenueBranchNo, _UserNo, _VisitNo, _RegistrationDT, _CollectionDT, _ApprovedDT).ToList();
                     response = lstResponse[0];
                 }
             }
@@ -146,7 +135,6 @@ namespace Service.Repository
             }
             return response;
         }
-
         public List<ResponseDataScrollText> SearchScrollText(RequestDataScrollText reqItem)
         {
             List<ResponseDataScrollText> lstInfoResponse = new List<ResponseDataScrollText>();
@@ -154,14 +142,12 @@ namespace Service.Repository
             {
                 using (var context = new LIMSContext(_config.GetConnectionString(ConfigKeys.DefaultConnection)))
                 {
-
                     var _venueNo = new SqlParameter("VenueNo", reqItem.venueNo);
                     var _venueBranchNo = new SqlParameter("VenueBranchNo", reqItem.venueBranchNo);
                     var _userNo = new SqlParameter("UserNo", reqItem.userNo);
 
                     lstInfoResponse = context.SearchScrollTextDTO.FromSqlRaw("Execute dbo.Pro_GetScrollTextDetails @VenueNo,@VenueBranchNo, @UserNo",
                    _venueNo, _venueBranchNo, _userNo).ToList();
-
                 }
             }
             catch (Exception ex)
@@ -169,11 +155,10 @@ namespace Service.Repository
                 MyDevException.Error(ex, "AdminRepository.SearchScrollText", ExceptionPriority.Medium, ApplicationType.REPOSITORY, reqItem.venueNo, reqItem.venueBranchNo, 0);
             }
             return lstInfoResponse;
-
         }
-        public List<responsehistory> DeleteHistory(visitRequest obj)
+        public List<Responsehistory> DeleteHistory(visitRequest obj)
         {
-            List<responsehistory> lst = new List<responsehistory>();
+            List<Responsehistory> lst = new List<Responsehistory>();
             try
             {
                 using (var context = new LIMSContext(_config.GetConnectionString(ConfigKeys.DefaultConnection)))
@@ -181,19 +166,19 @@ namespace Service.Repository
                     var _visitID = new SqlParameter("visitID", obj.visitId.ValidateEmpty());
                     var _VenueNo = new SqlParameter("VenueNo", obj?.venueNo);
                     var _VenueBranchNo = new SqlParameter("VenueBranchNo", obj?.venueBranchNo);
-                    var _Status = new SqlParameter("@Status", obj.status == null ? false : obj.status);
+                    var _Status = new SqlParameter("@Status", obj.status);
                     var _patientID = new SqlParameter("@patientID", obj.patientID.ValidateEmpty());
                     var _MobileNumber = new SqlParameter("@MobileNumber", obj.MobileNumber.ValidateEmpty());
-                    var _ReferalType = new SqlParameter("@RefferalType", obj.ReferalType == null ? 1 : obj.ReferalType);
-                    var _CustomerNo = new SqlParameter("@CustomerNo", obj.CustomerNo == null ? 0 : obj.CustomerNo);
-                    var _physicianNo = new SqlParameter("@PhysicianNo", obj.PhysicianNo == null ? 0 : obj.PhysicianNo);
+                    var _ReferalType = new SqlParameter("@RefferalType", obj.ReferalType);
+                    var _CustomerNo = new SqlParameter("@CustomerNo", obj.CustomerNo);
+                    var _physicianNo = new SqlParameter("@PhysicianNo", obj.PhysicianNo);
                     var _type = new SqlParameter("@type", obj.type.ValidateEmpty());
                     var _fromdate = new SqlParameter("@fromdate", obj.fromdate.ValidateEmpty());
                     var _todate = new SqlParameter("@todate", obj.todate.ValidateEmpty());
-                    var _userNo = new SqlParameter("@userNo", obj.userNo == null ? 0 : obj.userNo);
-                    var _branchNo = new SqlParameter("@branchNo", obj.branchNo == null ? 0 : obj.branchNo);
-                    var _visitNo = new SqlParameter("@visitNo", obj.visitNo == null ? 0 : obj.visitNo);
-                    var _pageIndex = new SqlParameter("pageIndex", obj.pageIndex == null ? 1 : obj.pageIndex);
+                    var _userNo = new SqlParameter("@userNo", obj.userNo);
+                    var _branchNo = new SqlParameter("@branchNo", obj.branchNo);
+                    var _visitNo = new SqlParameter("@visitNo", obj.visitNo);
+                    var _pageIndex = new SqlParameter("pageIndex", obj.pageIndex);
 
                     lst = context.DeleteHistory.FromSqlRaw("Execute dbo.pro_DeleteHistory @visitID,@VenueNo,@VenueBranchNo,@Status,@PatientID,@MobileNumber,@RefferalType,@CustomerNo,@PhysicianNo,@Type,@Fromdate,@ToDate,@userNo,@branchNo,@visitNo,@pageIndex",
                     _visitID, _VenueNo, _VenueBranchNo, _Status, _patientID, _MobileNumber, _ReferalType, _CustomerNo, _physicianNo, _type, _fromdate, _todate, _userNo, _branchNo, _visitNo, _pageIndex).ToList();
@@ -205,6 +190,7 @@ namespace Service.Repository
             }
             return lst;
         }
+
         #region Paymode changes
         public List<PaymentMode> GetPaymentMode(GetPaymentModeRequest RequestItem)
         {
@@ -218,7 +204,7 @@ namespace Service.Repository
                     var _VisitNo = new SqlParameter("VisitID", RequestItem.VisitId);
 
                     var lstResponse = context.GetPaymentMode.FromSqlRaw("Execute dbo.Pro_GetVisitPaymentModes @VenueNo,@VenueBranchNo,@VisitId",
-                     _VenueNo, _VenueBranchNo, _VisitNo).ToList();
+                    _VenueNo, _VenueBranchNo, _VisitNo).ToList();
                     response = lstResponse;
                 }
             }

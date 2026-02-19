@@ -22,7 +22,7 @@ namespace Service.Repository
         /// <returns></returns>
         public List<GetmultiPriceListResponse> GetMultiPriceListDetails(GetmultiPriceListRequest getRequest)
         {
-            List<GetmultiPriceListResponse> objresult = new List<GetmultiPriceListResponse>();
+            List<GetmultiPriceListResponse> Objresult = new List<GetmultiPriceListResponse>();
             try
             {
                 using (var context = new MasterContext(_config.GetConnectionString(ConfigKeys.DefaultConnection)))
@@ -33,7 +33,7 @@ namespace Service.Repository
                     var _RateListNo = new SqlParameter("rateListNo", getRequest.rateListNo);
                     var _serviceNo = new SqlParameter("serviceNo", getRequest.serviceNo);
 
-                    objresult = context.GetMultiPriceListDTO.FromSqlRaw(
+                    Objresult = context.GetMultiPriceListDTO.FromSqlRaw(
                     "Execute dbo.pro_GetMultiPriceListDetails @VenueNo,@VenueBranchNo,@departmentNo,@rateListNo,@serviceNo",
                     _VenueNo, _VenueBranchNo, _DepartmentNo, _RateListNo, _serviceNo).ToList();
                 }
@@ -42,7 +42,7 @@ namespace Service.Repository
             {
                 MyDevException.Error(ex, "GetMultiPriceListDetails", ExceptionPriority.High, ApplicationType.REPOSITORY, getRequest.venueNo, getRequest.venueBranchNo, getRequest.userNo);
             }
-            return objresult;
+            return Objresult;
         }
 
         /// <summary>

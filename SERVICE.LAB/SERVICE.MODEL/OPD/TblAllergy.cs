@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 
 namespace Service.Model
 {
@@ -32,7 +31,6 @@ namespace Service.Model
         public int PageIndex { get; set; }
         public int TotalRecords { get; set; }
     }
-
     public partial class lstAllergyType
     {
         public Int16 AllergyTypeNo { get; set; }
@@ -44,12 +42,11 @@ namespace Service.Model
         public int PageIndex { get; set; }
         public int TotalRecords { get; set; }
     }
-
     public partial class TblAllergyMaster
     {
         public Int16 AllergyMasterNo { get; set; }
         public Int16 AllergyTypeNo { get; set; }
-        public string? Description { get; set; }
+        public string Description { get; set; }
         public byte AlgySequenceNo { get; set; }
         public bool? AlgyStatus { get; set; }
         public Int16 VenueNo { get; set; }
@@ -75,13 +72,12 @@ namespace Service.Model
         public int PageIndex { get; set; }
         public int TotalRecords { get; set; }
     }
-
     public partial class lstAllergyMaster
     {
         public Int16 AllergyMasterNo { get; set; }
         public Int16 AllergyTypeNo { get; set; }
-        public string? AllergyDescription { get; set; }
-        public string? Description { get; set; }
+        public string AllergyDescription { get; set; }
+        public string Description { get; set; }
         public byte AlgySequenceNo { get; set; }
         public bool? AlgyStatus { get; set; }
         public Int16 VenueNo { get; set; }
@@ -89,7 +85,6 @@ namespace Service.Model
         public int PageIndex { get; set; }
         public int TotalRecords { get; set; }
     }
-
     public partial class reqOPDReasonMaster
     {
         public Int16 OPDReasonMastNo { get; set; }
@@ -101,13 +96,12 @@ namespace Service.Model
         public int PageIndex { get; set; }
         public int TotalRecords { get; set; }
     }
-
     public partial class lstOPDReasonMaster
     {
         public Int16 OPDReasonMastNo { get; set; }
         public Int16 TypeNo { get; set; }
-        public string? Description { get; set; }
-        public string? ShortDesc { get; set; }
+        public string Description { get; set; }
+        public string ShortDesc { get; set; }
         public Int16 SeqNo { get; set; }
         public bool? Status { get; set; }
         public Int16 VenueNo { get; set; }
@@ -116,13 +110,12 @@ namespace Service.Model
         public int PageIndex { get; set; }
         public int TotalRecords { get; set; }
     }
-
     public partial class TblOPDReasonMaster
     {
         public Int16 OPDReasonMastNo { get; set; }
         public Int16 TypeNo { get; set; }
-        public string? Description { get; set; }
-        public string? ShortDesc { get; set; }
+        public string Description { get; set; }
+        public string ShortDesc { get; set; }
         public Int16 SeqNo { get; set; }
         public bool? Status { get; set; }
         public Int16 VenueNo { get; set; }
@@ -171,5 +164,4 @@ namespace Service.Model
         public int? CreatedBy { get; set; }
         public int? ModifiedBy { get; set; }
     }
-
 }

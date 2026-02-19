@@ -102,23 +102,23 @@ namespace Service.Repository
                     var _VenueNo = new SqlParameter("VenueNo", results.VenueNo);
                     var _VenueBranchNo = new SqlParameter("VenueBranchNo", results.VenueBranchNo);
                     var _MobileNumber = new SqlParameter("MobileNumber", results.MobileNumber);
-                    List<ExternalPatientTempResponse> objresult = context.HCPatientTempResponse.FromSqlRaw(
+                    List<ExternalPatientTempResponse> Objresult = context.HCPatientTempResponse.FromSqlRaw(
                         "Execute dbo.Pro_GetHCTransaction @BookingID,@type,@UserNo,@VenueNo,@VenueBranchNo,@MobileNumber",
                     _BookingID, _type, _UserNo, _VenueNo, _VenueBranchNo, _MobileNumber).ToList();
 
-                    if (objresult.Count > 0)
+                    if (Objresult.Count > 0)
                     {
                         int oldBookingNo = 0;
                         int newBookingNo = 0;
                         result.lstPatientResponse = new List<ExternalPatientResponse>();
-                        foreach (var hclist in objresult)
+                        foreach (var hclist in Objresult)
                         {
                             ExternalPatientResponse item = new ExternalPatientResponse();
-                            List<LstTestDetail> LstTestDetail = new List<LstTestDetail>();
-                            List<LstTestSampleWise> LstTestSampleWise = new List<LstTestSampleWise>();
+                            List<LsttestDetail> LsttestDetail = new List<LsttestDetail>();
+                            List<LsttestSampleWise> LsttestSampleWise = new List<LsttestSampleWise>();
 
                             newBookingNo = hclist.BookingNo;
-                            var TestItem = objresult.Where(x => x.BookingNo == newBookingNo).Select(x => new { x.TestNo, x.TestName, x.Amount, x.SampleName, x.ContainerName, x.TestType, x.SampleNo, x.TestCode }).ToList();
+                            var TestItem = Objresult.Where(x => x.BookingNo == newBookingNo).Select(x => new { x.TestNo, x.TestName, x.Amount, x.SampleName, x.ContainerName, x.TestType, x.SampleNo, x.TestCode }).ToList();
                             if (newBookingNo != oldBookingNo)
                             {
                                 item.BookingNo = hclist.BookingNo;
@@ -159,7 +159,7 @@ namespace Service.Repository
                                     newTestNo = Item.TestNo;
                                     if (oldTestNo != newTestNo)
                                     {
-                                        LstTestDetail objTest = new LstTestDetail()
+                                        LsttestDetail Objtest = new LsttestDetail()
                                         {
                                             BookingId = hclist.BookingId,
                                             BookingNo = hclist.BookingNo,
@@ -172,7 +172,7 @@ namespace Service.Repository
                                             SampleName = Item.SampleName,
                                             ContainerName = Item.ContainerName
                                         };
-                                        LstTestSampleWise objsample = new LstTestSampleWise()
+                                        LsttestSampleWise objsample = new LsttestSampleWise()
                                         {
                                             BookingId = hclist.BookingId,
                                             BookingNo = hclist.BookingNo,
@@ -186,20 +186,20 @@ namespace Service.Repository
                                             ContainerName = Item.ContainerName
                                         };
                                         oldTestNo = newTestNo;
-                                        LstTestDetail.Add(objTest);
-                                        LstTestSampleWise.Add(objsample);
+                                        LsttestDetail.Add(Objtest);
+                                        LsttestSampleWise.Add(objsample);
                                     }
-                                    item.NoofTest = LstTestDetail.Count;
-                                    item.TotalTestAmount = LstTestDetail.Sum(x => x.Amount);
-                                    item.lstTestDetails = LstTestDetail;
-                                    item.lstTestSampleWise = LstTestSampleWise;
+                                    item.NoofTest = LsttestDetail.Count;
+                                    item.TotalTestAmount = LsttestDetail.Sum(x => x.Amount);
+                                    item.LsttestDetails = LsttestDetail;
+                                    item.LsttestSampleWise = LsttestSampleWise;
                                 }
                                 result.lstPatientResponse.Add(item);
                             }
                         }
                         result.Status = 1;
                         result.Message = "Data Fetched Successfully";
-                        result.TotalCountTest = objresult.Count;
+                        result.TotalCountTest = Objresult.Count;
 
                     }
                     else
@@ -435,7 +435,7 @@ namespace Service.Repository
                 {
                     IFrontOfficeRepository _frontOfficeRepository = new FrontOfficeRepository(_config);
                     FrontOffficeDTO objDTO = new FrontOffficeDTO();
-                    List<FrontOfficeOrderList> objTestlst = new List<FrontOfficeOrderList>();
+                    List<FrontOfficeOrderList> Objtestlst = new List<FrontOfficeOrderList>();
                     objDTO.Orders = new List<FrontOfficeOrderList>();
                     int oldTestNo = 0;
                     int newTestNo = 0;
@@ -444,8 +444,8 @@ namespace Service.Repository
                         newTestNo = Item.ServiceNo;
                         if (oldTestNo != newTestNo)
                         {
-                            var testlist = _frontOfficeRepository.GetServiceDetails(Item.ServiceNo, Item.ServiceType, bookingitem[index].CustomerNo, results.VenueNo, results.VenueBranchNo, 0, 0);
-                            FrontOfficeOrderList objTest = new FrontOfficeOrderList()
+                            var testlist = _frontOfficeRepository.GetserviceDetails(Item.ServiceNo, Item.ServiceType, bookingitem[index].CustomerNo, results.VenueNo, results.VenueBranchNo, 0, 0);
+                            FrontOfficeOrderList Objtest = new FrontOfficeOrderList()
                             {
                                 TestNo = Item.ServiceNo,
                                 TestName = Item.ServiceName,
@@ -454,9 +454,9 @@ namespace Service.Repository
                                 RateListNo = testlist.RateListNo
                             };
                             oldTestNo = newTestNo;
-                            objTestlst.Add(objTest);
+                            Objtestlst.Add(Objtest);
                         }
-                        objDTO.Orders = objTestlst;
+                        objDTO.Orders = Objtestlst;
                     }
                     objDTO.Payments = new List<FrontOfficePayment>();
                     List<FrontOfficePayment> lstpay = new List<FrontOfficePayment>();
@@ -548,7 +548,7 @@ namespace Service.Repository
         }
         public List<ExternalSampleList> GetBarcodeSampleDetails(string BookingID, long visitNo, int VenueNo, int VenueBranchNo)
         {
-            List<ExternalSampleList> objresult = new List<ExternalSampleList>();
+            List<ExternalSampleList> Objresult = new List<ExternalSampleList>();
             try
             {
                 using (var context = new FrontOfficeContext(_config.GetConnectionString(ConfigKeys.DefaultConnection)))
@@ -557,8 +557,8 @@ namespace Service.Repository
                     var _VenueBranchNo = new SqlParameter("VenueBranchNo", VenueBranchNo.ToString());
                     var _VisitNo = new SqlParameter("VisitNo", visitNo);
                     var _BookingID = new SqlParameter("BookingID", BookingID);
-                    objresult = context.ExternalSampleList.FromSqlRaw(
-                        "Execute dbo.Pro_HCGetPatientDetails @VenueNo,@VenueBranchNo,@VisitNo,@BookingID",
+                    Objresult = context.ExternalSampleList.FromSqlRaw(
+                        "Execute dbo.Pro_HCGetPatientdetails @VenueNo,@VenueBranchNo,@VisitNo,@BookingID",
                      _VenueNo, _VenueBranchNo, _VisitNo, _BookingID).ToList();
                 }
             }
@@ -566,7 +566,7 @@ namespace Service.Repository
             {
                 MyDevException.Error(ex, "ExternalAPIRepository.GetBarcodeSampleDetails/visitNo-" + visitNo, ExceptionPriority.High, ApplicationType.REPOSITORY, VenueNo, VenueBranchNo, 0);
             }
-            return objresult;
+            return Objresult;
         }
         public ExternalCommonResponse SignOut(ExternalSignout results)
         {
@@ -616,9 +616,9 @@ namespace Service.Repository
             return result;
         }
 
-        public ExternalApiServiceResponse GetServiceDetails(ExternalServiceRequest serviceRequest)
+        public ExternalApiServiceResponse GetserviceDetails(ExternalServiceRequest serviceRequest)
         {
-            ExternalApiServiceResponse objresult = new ExternalApiServiceResponse();
+            ExternalApiServiceResponse Objresult = new ExternalApiServiceResponse();
             try
             {
                 using (var context = new FrontOfficeContext(_config.GetConnectionString(ConfigKeys.DefaultConnection)))
@@ -629,31 +629,31 @@ namespace Service.Repository
                     var _PhysicianNo = new SqlParameter("PhysicianNo", serviceRequest.PhysicianNo);
                     var _PageIndex = new SqlParameter("PageIndex", serviceRequest.PageIndex);
                     var _ServiceName = new SqlParameter("ServiceName", serviceRequest.ServiceName);
-                    objresult.lstService = context.ExternalServiceResponse.FromSqlRaw(
+                    Objresult.Lstservice = context.ExternalServiceResponse.FromSqlRaw(
                         "Execute dbo.pro_HCServiceDetails @VenueNo,@VenueBranchNo,@ClientNo,@PhysicianNo,@PageIndex,@ServiceName",
                      _VenueNo, _VenueBranchNo, _ClientNo, _PhysicianNo, _PageIndex, _ServiceName).ToList();
-                    if (objresult.lstService.Count > 0)
+                    if (Objresult.Lstservice.Count > 0)
                     {
-                        objresult.Status = 1;
-                        objresult.Message = "Records fetched Successfully";
+                        Objresult.Status = 1;
+                        Objresult.Message = "Records fetched Successfully";
                     }
                     else
                     {
-                        objresult.Status = 0;
-                        objresult.Message = "No Records found";
+                        Objresult.Status = 0;
+                        Objresult.Message = "No Records found";
                     }
                 }
 
             }
             catch (Exception ex)
             {
-                MyDevException.Error(ex, "ExternalAPIRepository.GetServiceDetails", ExceptionPriority.Medium, ApplicationType.REPOSITORY, serviceRequest.VenueNo, serviceRequest.VenueBranchNo, 0);
+                MyDevException.Error(ex, "ExternalAPIRepository.GetserviceDetails", ExceptionPriority.Medium, ApplicationType.REPOSITORY, serviceRequest.VenueNo, serviceRequest.VenueBranchNo, 0);
             }
-            return objresult;
+            return Objresult;
         }
         public List<ExternalHCAppointment> GetHCAppointsList(CommonFilterRequestDTO RequestItem)
         {
-            List<ExternalHCAppointment> objresult = new List<ExternalHCAppointment>();
+            List<ExternalHCAppointment> Objresult = new List<ExternalHCAppointment>();
             try
             {
                 using (var context = new FrontOfficeContext(_config.GetConnectionString(ConfigKeys.DefaultConnection)))
@@ -665,7 +665,7 @@ namespace Service.Repository
                     var _VenueBranchNo = new SqlParameter("VenueBranchNo", RequestItem.VenueBranchNo);
                     var _pageIndex = new SqlParameter("PageIndex", RequestItem.pageIndex);
                     var _Registertype = new SqlParameter("Registertype", RequestItem.Registertype);
-                    objresult = context.ExternalHCAppointment.FromSqlRaw(
+                    Objresult = context.ExternalHCAppointment.FromSqlRaw(
                             "Execute dbo.Pro_GetHCAppointment @FROMDate,@ToDate,@Type,@VenueNo,@VenueBranchNo,@PageIndex,@Registertype",
                         _FromDate, _ToDate, _Type, _VenueNo, _VenueBranchNo, _pageIndex, _Registertype).ToList();
 
@@ -676,7 +676,7 @@ namespace Service.Repository
             {
                 MyDevException.Error(ex, "ExternalAPIRepository.GetHCAppointsList", ExceptionPriority.Medium, ApplicationType.REPOSITORY, RequestItem.VenueNo, RequestItem.VenueBranchNo, 0);
             }
-            return objresult;
+            return Objresult;
         }
 
         public ExternalCommonResponse InsertBooking(ExternalBookingDto objDTO)
@@ -749,7 +749,7 @@ namespace Service.Repository
         }
         public ExternalCommonResponse UpdateRiderStatus(ExternalRiderStatusRequest results)
         {
-            ExternalCommonResponse objresult = new ExternalCommonResponse();
+            ExternalCommonResponse Objresult = new ExternalCommonResponse();
             try
             {
                 using (var context = new FrontOfficeContext(_config.GetConnectionString(ConfigKeys.DefaultConnection)))
@@ -763,19 +763,19 @@ namespace Service.Repository
                     context.ExternalRiderStatus.FromSqlRaw(
                         "Execute dbo.Pro_UpdateRiderStatus @VenueNo,@VenueBranchNo,@UserNo,@RiderNo,@BookingId,@IsOffline",
                      _VenueNo, _VenueBranchNo, _UserNo, _RiderNo, _BookingId, _IsOffline).AsEnumerable().FirstOrDefault();
-                    objresult.Status = 1;
-                    objresult.Message = "Rider Status Updated Successfully";
+                    Objresult.Status = 1;
+                    Objresult.Message = "Rider Status Updated Successfully";
                 }
             }
             catch (Exception ex)    
             {
                 MyDevException.Error(ex, "ExternalAPIRepository.UpdateRiderStatus", ExceptionPriority.Medium, ApplicationType.REPOSITORY, results.VenueNo, results.VenueBranchNo, results.UserNo);
             }
-            return objresult;
+            return Objresult;
         }
         public ExternalCommonResponse UpdatePatientStatus(ExternalPatientStatusRequest results)
         {
-            ExternalCommonResponse objresult = new ExternalCommonResponse();
+            ExternalCommonResponse Objresult = new ExternalCommonResponse();
             try
             {
                 using (var context = new FrontOfficeContext(_config.GetConnectionString(ConfigKeys.DefaultConnection)))
@@ -789,18 +789,18 @@ namespace Service.Repository
                     context.ExternalPatientStatus.FromSqlRaw(
                         "Execute dbo.Pro_UpdatePatientStatus @VenueNo,@VenueBranchNo,@UserNo,@Reason,@BookingID,@BookingStatus",
                      _VenueNo, _VenueBranchNo, _UserNo, _Reason, _BookingID, _BookingStatus).FirstOrDefault();
-                    objresult.Status = 1;
-                    objresult.Message = "Patient Status Updated Successfully";
+                    Objresult.Status = 1;
+                    Objresult.Message = "Patient Status Updated Successfully";
                 }
             }
             catch (Exception ex)
             {
                 MyDevException.Error(ex, "ExternalAPIRepository.UpdatePatientStatus", ExceptionPriority.Medium, ApplicationType.REPOSITORY, results.VenueNo, results.VenueBranchNo, 0);
             }
-            return objresult;
+            return Objresult;
         }
 
-        public ExternalupdateCommonResponse UpdateHCPatientDetails(UpdateHcpatient results)
+        public ExternalupdateCommonResponse UpdateHCPatientdetails(UpdateHcpatient results)
         {
             ExternalupdateCommonResponse result = new ExternalupdateCommonResponse();
 
@@ -829,7 +829,7 @@ namespace Service.Repository
                     var _VenueNo = new SqlParameter("VenueNo", results.VenueNo);
                     var _VenueBranchNo = new SqlParameter("VenueBranchNo", results.VenueBranchNo);
                     var _userNo = new SqlParameter("userNo", results.userNo.ToString());
-                    result = context.UpdateHCPatientDetails.FromSqlRaw(
+                    result = context.UpdateHCPatientdetails.FromSqlRaw(
                     "Execute dbo.Pro_UpdateHcPatientBIO @bioHCPatientNo,@biotitleCode,@fName,@mName,@lName,@biodOB,@biogender,@bioage,@bioAgeType,@biomobileNumber,@bioemailID," +
                     "@bioaddress,@VenueNo,@VenueBranchNo,@userNo",
                     _bioHCPatientNo, _biotitleCode, _fName, _mName, _lName, _biodOB, _biogender, _bioage, _bioAgeType, _biomobileNumber, _bioemailID,
@@ -845,7 +845,7 @@ namespace Service.Repository
 
         public UpdateStatusApptDateResponse UpdateStatusApptDate(UpdateStatusApptDateRequest results)
         {
-            UpdateStatusApptDateResponse objresult = new UpdateStatusApptDateResponse();
+            UpdateStatusApptDateResponse Objresult = new UpdateStatusApptDateResponse();
             try
             {
                 using (var context = new FrontOfficeContext(_config.GetConnectionString(ConfigKeys.DefaultConnection)))
@@ -861,20 +861,20 @@ namespace Service.Repository
                     context.UpdateStatusApptDate.FromSqlRaw(
                         "Execute dbo.Pro_UpdateStatusApptDate @HCPatientNo,@AppointDDTM,@IsCancelled,@VenueNo,@VenueBranchNo,@UserNo,@ApptDateChangeDesc,@CancelledDesc",
                      _HCPatientNo,_AppointDDTM,_IsCancelled,_VenueNo,_VenueBranchNo,_UserNo,_ApptDateChangeDesc,_CancelledDesc).AsEnumerable().FirstOrDefault();
-                    objresult.Status = 1;
-                    objresult.Message = results.AppointDDTM != null && results.AppointDDTM != "" ? "Appointment Date got changed Successfully": "Appointment got cancelled Successfully";
+                    Objresult.Status = 1;
+                    Objresult.Message = results.AppointDDTM != null && results.AppointDDTM != "" ? "Appointment Date got changed Successfully": "Appointment got cancelled Successfully";
                 }
             }
             catch (Exception ex)
             {
                 MyDevException.Error(ex, "ExternalAPIRepository.UpdateStatusApptDate", ExceptionPriority.Medium, ApplicationType.REPOSITORY, results.VenueNo, results.VenueBranchNo, results.UserNo);
             }
-            return objresult;
+            return Objresult;
         }
 
         public List<TestSlotBookingDTO> GetSlotBooking(CommonFilterRequestDTO RequestItem)
         {
-            List<TestSlotBookingDTO> objresult = new List<TestSlotBookingDTO>();
+            List<TestSlotBookingDTO> Objresult = new List<TestSlotBookingDTO>();
             try
             {
                 using (var context = new FrontOfficeContext(_config.GetConnectionString(ConfigKeys.DefaultConnection)))
@@ -885,7 +885,7 @@ namespace Service.Repository
                     var _VenueNo = new SqlParameter("VenueNo", RequestItem.VenueNo);
                     var _VenueBranchNo = new SqlParameter("VenueBranchNo", RequestItem.VenueBranchNo);
                     var _pageIndex = new SqlParameter("PageIndex", RequestItem.pageIndex);
-                    objresult = context.TestSlotBookingDTO.FromSqlRaw(
+                    Objresult = context.TestSlotBookingDTO.FromSqlRaw(
                             "Execute dbo.Pro_GetSlotBooking @FROMDate,@ToDate,@Type,@VenueNo,@VenueBranchNo,@PageIndex",
                         _FromDate, _ToDate, _Type, _VenueNo, _VenueBranchNo, _pageIndex).ToList();
 
@@ -896,7 +896,7 @@ namespace Service.Repository
             {
                 MyDevException.Error(ex, "ExternalAPIRepository.GetSlotBooking", ExceptionPriority.Medium, ApplicationType.REPOSITORY, RequestItem.VenueNo, RequestItem.VenueBranchNo, 0);
             }
-            return objresult;
+            return Objresult;
         }
         public TestSlotCommonResponse InsertTestSlotBooking(ExternalBookingDTO objDTO)
         {
@@ -913,34 +913,34 @@ namespace Service.Repository
                     var _LastName = new SqlParameter("LastName", objDTO.LastName.ValidateEmpty());
                     var _DOB = new SqlParameter("DOB", objDTO.DOB.ValidateEmpty());
                     var _Gender = new SqlParameter("Gender", objDTO.Gender.ValidateEmpty());
-                    var _Age = new SqlParameter("Age", objDTO.Age == null ? 0 : objDTO.Age);
+                    var _Age = new SqlParameter("Age", objDTO.Age);
                     var _AgeType = new SqlParameter("AgeType", objDTO.AgeType.Substring(0, 1));
                     var _MobileNumber = new SqlParameter("MobileNumber", objDTO.MobileNumber.ValidateEmpty());
                     var _AltMobileNumber = new SqlParameter("WhatsappNo", objDTO.WhatsappNo.ValidateEmpty());
                     var _EmailID = new SqlParameter("EmailID", objDTO.EmailID.ValidateEmpty());
                     var _Address = new SqlParameter("Address", objDTO.Address.ValidateEmpty());
-                    var _CountryNo = new SqlParameter("CountryNo", objDTO.CountryNo == null ? 0 : objDTO.CountryNo);
-                    var _StateNo = new SqlParameter("StateNo", objDTO.StateNo == null ? 0 : objDTO.StateNo);
-                    var _CityNo = new SqlParameter("CityNo", objDTO.CityNo == null ? 0 : objDTO.CityNo);
+                    var _CountryNo = new SqlParameter("CountryNo", objDTO.CountryNo);
+                    var _StateNo = new SqlParameter("StateNo", objDTO.StateNo);
+                    var _CityNo = new SqlParameter("CityNo", objDTO.CityNo);
                     var _AreaName = new SqlParameter("AreaName", objDTO.AreaName.ValidateEmpty());
                     var _Pincode = new SqlParameter("Pincode", objDTO.Pincode.ValidateEmpty());
                     var _VenueNo = new SqlParameter("VenueNo", objDTO.VenueNo);
                     var _VenueBranchNo = new SqlParameter("VenueBranchNo", objDTO.VenueBranchNo);
                     var _UserID = new SqlParameter("userNo", objDTO.UserNo.ToString());
-                    var _ReferralTypeNo = new SqlParameter("ReferralTypeNo", objDTO.RefferralTypeNo == null ? 1 : objDTO.RefferralTypeNo);
-                    var _CustomerNo = new SqlParameter("CustomerNo", objDTO.CustomerNo == null ? 0 : objDTO.CustomerNo);
-                    var _PhysicianNo = new SqlParameter("PhysicianNo", objDTO.PhysicianNo == null ? 0 : objDTO.PhysicianNo);
+                    var _ReferralTypeNo = new SqlParameter("ReferralTypeNo", objDTO.RefferralTypeNo);
+                    var _CustomerNo = new SqlParameter("CustomerNo", objDTO.CustomerNo);
+                    var _PhysicianNo = new SqlParameter("PhysicianNo", objDTO.PhysicianNo);
                     var _registeredDateTime = new SqlParameter("registeredDateTime", objDTO.registeredDateTime.ValidateEmpty());
 
                     XDocument TestXML = new XDocument(new XElement("TestXML", from Item in objDTO.lstCartList
                                                                               select
                      new XElement("TestList",
-                     new XElement("TestNo", Item.TestNo == null ? 0 : Item.TestNo),
+                     new XElement("TestNo", Item.TestNo),
                      new XElement("TestCode", Item.TestCode.ValidateEmpty()),
                      new XElement("TestName", Item.TestName.ValidateEmpty()),
                      new XElement("TestType", Item.TestType.ValidateEmpty()),
-                     new XElement("RateListNo", Item.RateListNo == null ? 0 : Item.RateListNo),
-                     new XElement("Amount", Item.Amount == null ? 0 : Item.Amount),
+                     new XElement("RateListNo", Item.RateListNo),
+                     new XElement("Amount", Item.Amount),
                       new XElement("Remarks", Item.Remarks.ValidateEmpty())
                      )));
 
@@ -951,9 +951,6 @@ namespace Service.Repository
                    "@EmailID,@Address,@CountryNo,@StateNo,@CityNo,@AreaName,@Pincode,@TestXML,@VenueNo,@VenueBranchNo,@userNo,@CustomerNo,@PhysicianNo,@ReferralTypeNo,@registeredDateTime",
                    _TitleCode, _FirstName, _MiddleName, _LastName, _DOB, _Gender, _Age, _AgeType, _MobileNumber, _AltMobileNumber, _EmailID,
                     _Address, _CountryNo, _StateNo, _CityNo, _AreaName, _Pincode, _TestXML, _VenueNo, _VenueBranchNo, _UserID, _CustomerNo, _PhysicianNo, _ReferralTypeNo, _registeredDateTime).AsEnumerable().FirstOrDefault();
-                    //result.Status = 1;
-                    //result.Message = "Appointment Booked Successfully";
-                    //result.BookingID = _result.result;
                 }
             }
             catch (Exception ex)
@@ -962,7 +959,6 @@ namespace Service.Repository
             }
             return result;
         }
-
         public SlotBookingupdateCResponse UpdateSlotBooking(UpdateHcpatient results)
         {
             SlotBookingupdateCResponse result = new SlotBookingupdateCResponse();

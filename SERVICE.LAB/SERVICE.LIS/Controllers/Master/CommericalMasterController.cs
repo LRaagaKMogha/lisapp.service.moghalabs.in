@@ -41,7 +41,7 @@ namespace Service.API.SERVICE.Controllers
         [Route("api/Commerical/Insertcompanymaster")]
         public ActionResult<CommericalInsRes> Insertcompanymaster(CommericalInsReq insReq)
         {
-            CommericalInsRes objresult = new CommericalInsRes();
+            CommericalInsRes Objresult = new CommericalInsRes();
             try
             {
                 using(var auditScoped = new AuditScope<CommericalInsReq>(insReq, _auditService))
@@ -49,7 +49,7 @@ namespace Service.API.SERVICE.Controllers
                     var _errormsg = CommercialMasterValidation.Insertcompanymaster(insReq);
                     if (!_errormsg.status)
                     {
-                        objresult = _commericalRepository.Insertcompanymaster(insReq);
+                        Objresult = _commericalRepository.Insertcompanymaster(insReq);
                     }
                     else
                         return BadRequest(_errormsg);
@@ -59,7 +59,7 @@ namespace Service.API.SERVICE.Controllers
             {
                 MyDevException.Error(ex, "CommericalController.Insertcompanymaster - " + insReq.CompanyNo.ToString(), ExceptionPriority.Low, ApplicationType.REPOSITORY, insReq.VenueNo, insReq.venueBranchno, 0);
             }
-            return Ok(objresult);
+            return Ok(Objresult);
         }
 
         [HttpPost]
@@ -82,7 +82,7 @@ namespace Service.API.SERVICE.Controllers
         [Route("api/Commerical/InsertGSTMaster")]
         public ActionResult<GSTInsRes> InsertGSTMaster(GSTInsReq insReq)
         {
-            GSTInsRes objresult = new GSTInsRes();
+            GSTInsRes Objresult = new GSTInsRes();
             try
             {
                 using(var auditScoped = new AuditScope<GSTInsReq>(insReq, _auditService)) 
@@ -90,7 +90,7 @@ namespace Service.API.SERVICE.Controllers
                     var _errormsg = CommercialMasterValidation.InsertGSTMaster(insReq);
                     if (!_errormsg.status)
                     {
-                        objresult = _commericalRepository.InsertGSTMaster(insReq);
+                        Objresult = _commericalRepository.InsertGSTMaster(insReq);
                     }
                     else
                         return BadRequest(_errormsg);
@@ -100,7 +100,7 @@ namespace Service.API.SERVICE.Controllers
             {
                 MyDevException.Error(ex, "CommericalController.InsertGSTMaster - " + insReq.TaxMastNo.ToString(), ExceptionPriority.Low, ApplicationType.REPOSITORY, insReq.VenueNo, 0, 0);
             }
-            return Ok(objresult);
+            return Ok(Objresult);
         }
     }
 }

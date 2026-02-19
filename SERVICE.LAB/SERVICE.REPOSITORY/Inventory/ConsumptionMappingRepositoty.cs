@@ -17,7 +17,7 @@ namespace Service.Repository.Inventory
         public ConsumptionMappingRepositoty(IConfiguration config) { _config = config; }
         public List<GetConsumptionMappingResponse> GetAllConsumptionMapping(GetAllConsumptionMappingRequest request)
         {
-            List<GetConsumptionMappingResponse> objresult = new List<GetConsumptionMappingResponse>();
+            List<GetConsumptionMappingResponse> Objresult = new List<GetConsumptionMappingResponse>();
             try
             {
                 using (var context = new MasterContext(_config.GetConnectionString(ConfigKeys.DefaultConnection)))
@@ -32,7 +32,7 @@ namespace Service.Repository.Inventory
                     var _unitNo = new SqlParameter("UnitNo",request.UnitNo);
                     var _productNo = new SqlParameter("ProductNo", request.ProductNo);
 
-                    objresult = context.GetConsumptionMappingDTO.FromSqlRaw(
+                    Objresult = context.GetConsumptionMappingDTO.FromSqlRaw(
                     "Execute dbo.pro_GetAllConsumptionMapping @VenueNo,@VenueBranchNo,@MasterNo,@UserNo,@PageIndex,@AnalyzerMasterNo,@AnalyzerParamNo,@UnitNo,@ProductNo",
                     _venueNo, _venueBranchNo, _consumptionNo, _userNo, _pageIndex, _analyzerMasterNo, _parameterNo, _unitNo, _productNo).ToList();
                 }
@@ -41,7 +41,7 @@ namespace Service.Repository.Inventory
             {
                 MyDevException.Error(ex, "ConsumptionMappingRepositoty.GetAllConsumptionMapping", ExceptionPriority.High, ApplicationType.REPOSITORY, request.venueno, (int)request.venuebranchno, (int)request.masterNo);
             }
-            return objresult;
+            return Objresult;
         }
 
         public CommonAdminResponse InsertConsumptionMapping(InsertConsumptionMapping insertConsumption)
@@ -61,11 +61,11 @@ namespace Service.Repository.Inventory
                     var _ConsumptionXML = new SqlParameter("ConsumptionXML", consumptionXML);
                     var _UserNo = new SqlParameter("UserNo", insertConsumption?.Createdby);
 
-                    var objresult = context.CreateConsumptionMappingDTO.FromSqlRaw(
+                    var Objresult = context.CreateConsumptionMappingDTO.FromSqlRaw(
                     "Execute dbo.Pro_InsertConsumptionMappingMaster @VenueNo,@VenueBranchNo,@ConsumptionXML,@UserNo",
                     _VenueNo, _VenueBranchNo, _ConsumptionXML, _UserNo).ToList();
                     
-                    response = objresult[0];
+                    response = Objresult[0];
                 }
             }
             catch (Exception ex)

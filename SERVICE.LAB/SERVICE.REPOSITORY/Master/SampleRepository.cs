@@ -41,14 +41,14 @@ namespace Service.Repository
             }
             catch (Exception ex)
             {
-                throw;
+                MyDevException.Error(ex, "InsertSampleDetails1", ExceptionPriority.Low, ApplicationType.REPOSITORY, Sampleitem.VenueNo, Sampleitem.VenueBranchNo, Sampleitem.CreatedBy);
             }
 
             return result;
         }
         public List<TblSample> GetSampleDetails1(GetCommonMasterRequest sampleMasterRequest)
         {
-            List<TblSample> objresult = new List<TblSample>();
+            List<TblSample> Objresult = new List<TblSample>();
             try
             {
                 using (var context = new LIMSContext(_config.GetConnectionString(ConfigKeys.DefaultConnection)))
@@ -56,11 +56,11 @@ namespace Service.Repository
 
                     if (sampleMasterRequest.masterNo > 0)
                     {
-                        objresult = context.TblSamples.Where(x => x.VenueNo == sampleMasterRequest.venueno && x.VenueBranchNo == sampleMasterRequest.venuebranchno && x.SampleNo == sampleMasterRequest.masterNo).ToList();
+                        Objresult = context.TblSamples.Where(x => x.VenueNo == sampleMasterRequest.venueno && x.VenueBranchNo == sampleMasterRequest.venuebranchno && x.SampleNo == sampleMasterRequest.masterNo).ToList();
                     }
                     else
                     {
-                        objresult = context.TblSamples.Where(x => x.VenueNo == sampleMasterRequest.venueno && x.VenueBranchNo == sampleMasterRequest.venuebranchno).ToList();
+                        Objresult = context.TblSamples.Where(x => x.VenueNo == sampleMasterRequest.venueno && x.VenueBranchNo == sampleMasterRequest.venuebranchno).ToList();
                     }
 
                 }
@@ -69,11 +69,11 @@ namespace Service.Repository
             {
                 MyDevException.Error(ex, "GetSampleDetails1", ExceptionPriority.Low, ApplicationType.REPOSITORY, sampleMasterRequest.venueno, sampleMasterRequest.venuebranchno, 0);
             }
-            return objresult;
+            return Objresult;
         }
         public List<TblSample> GetSampleDetails(GetCommonMasterRequest sampleMasterRequest)
         {
-            List<TblSample> objresult = new List<TblSample>();
+            List<TblSample> Objresult = new List<TblSample>();
             try
             {
                 using (var context = new LIMSContext(_config.GetConnectionString(ConfigKeys.DefaultConnection)))
@@ -84,7 +84,7 @@ namespace Service.Repository
                     var _venuebranchno = new SqlParameter("VenueBranchNo", sampleMasterRequest?.venuebranchno);
                     var _pageIndex = new SqlParameter("pageIndex", sampleMasterRequest?.pageIndex);
 
-                    objresult = context.GetSampleDetails.FromSqlRaw(
+                    Objresult = context.GetSampleDetails.FromSqlRaw(
                         "Execute dbo.pro_GetSample @SampleNo,@venueNo,@venueBranchNo,@pageIndex",
                         _SampleNo, _venueno, _venuebranchno, _pageIndex).ToList();
 
@@ -94,11 +94,11 @@ namespace Service.Repository
             {
                 MyDevException.Error(ex, "SampleRepository.GetSampleDetails" + sampleMasterRequest.SampleNo.ToString(), ExceptionPriority.Low, ApplicationType.REPOSITORY, sampleMasterRequest.venueno, sampleMasterRequest.venuebranchno, 0);
             }
-            return objresult;
+            return Objresult;
         }
         public List<sampleMasterResponse> InsertSampleDetails(TblSample Sampleitem)
         {
-            List<sampleMasterResponse> objresult = new List<sampleMasterResponse>();
+            List<sampleMasterResponse> Objresult = new List<sampleMasterResponse>();
             try
             {
                 using (var context = new LIMSContext(_config.GetConnectionString(ConfigKeys.DefaultConnection)))
@@ -117,7 +117,7 @@ namespace Service.Repository
                     var _sequenceNo = new SqlParameter("SequenceNo",Sampleitem?.SequenceNo);
 
 
-                    objresult = context.InsertSampleDetails.FromSqlRaw(
+                    Objresult = context.InsertSampleDetails.FromSqlRaw(
                         "Execute dbo.pro_InsertSample @SampleNo,@SampleName,@SampleDisplayText,@SampleVolume,@Prefix,@Suffix,@Status,@userno,@venueNo,@venueBranchNo,@SequenceNo",
                         _SampleNo, _SampleName, _SampleDisplayText, _SampleVolume, _Prefix, _Suffix, _Status, _userno, _venueno, _venuebranchno,_sequenceNo).ToList();
 
@@ -127,16 +127,16 @@ namespace Service.Repository
             {
                 MyDevException.Error(ex, "SampleRepository.InsertSampleDetails" + Sampleitem.SampleNo.ToString(), ExceptionPriority.Low, ApplicationType.REPOSITORY, Sampleitem.VenueNo, Sampleitem.VenueBranchNo, 0);
             }
-            return objresult;
+            return Objresult;
         }
         public List<TblSample> SearchSampleDetails(string SampleName)
         {
-            List<TblSample> objresult = new List<TblSample>();
+            List<TblSample> Objresult = new List<TblSample>();
             try
             {
                 using (var context = new LIMSContext(_config.GetConnectionString(ConfigKeys.DefaultConnection)))
                 {
-                    objresult = context.TblSamples.Where(s => s.SampleName == SampleName).ToList();
+                    Objresult = context.TblSamples.Where(s => s.SampleName == SampleName).ToList();
 
                 }
             }
@@ -144,7 +144,7 @@ namespace Service.Repository
             {
                 MyDevException.Error(ex, "SearchSampleDetails - " + SampleName, ExceptionPriority.Low, ApplicationType.REPOSITORY, 0, 0, 0);
             }
-            return objresult;
+            return Objresult;
         }
     }
 }

@@ -1,16 +1,17 @@
-﻿using Service.IRepository.Audit;
+﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
+using RtfPipe.Tokens;
 using Service.Common;
+using Service.IRepository.Audit;
 using Service.Model;
 using Service.Model.Audit;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
+using Service.Model.EF.Common;
 using Shared.Audit;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
-using Service.Model.EF.Common;
 
 namespace Service.Repository.Audit
 {
@@ -38,11 +39,10 @@ namespace Service.Repository.Audit
                     response = await query.ToListAsync();
                 }
             }
-            catch(Exception exp)
+            catch(Exception ex)
             {
-
+                MyDevException.Error(ex, "AuditRepository.GetAuditDetails", ExceptionPriority.Low, ApplicationType.APPSERVICE, user.VenueNo, user.VenueBranchNo, 0);
             }
-            
             return response;
         }
     }

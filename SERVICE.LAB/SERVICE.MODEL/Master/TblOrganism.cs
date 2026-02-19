@@ -21,14 +21,11 @@ namespace Service.Model
         public int? ModifiedBy { get; set; }
     }
 
-    public partial class lstotdrugmap
+    public partial class Lstotdrugmap
     {
         public int organismantibioticmapno { get; set; }
         public int organismtypeno { get; set; }
-     //   public int antibioticno { get; set; }
-        public string antibioticmccode { get; set; }
-       // public string antibioticname { get; set; }
-      //  public int sequenceno { get; set; }
+        public string antibioticmccode { get; set; } 
         public int VenueNo { get; set; }
         public int VenueBranchNo { get; set; }
         public bool? Status { get; set; }
