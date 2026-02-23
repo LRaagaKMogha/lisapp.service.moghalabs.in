@@ -1,14 +1,15 @@
-﻿using Service.Model;
+﻿using ErrorOr;
+using Microsoft.Data.SqlClient;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
+using Service.Common;
+using Service.IRepository;
+using Service.Model;
 using Service.Model.EF;
+using Service.Model.Master;
 using System;
 using System.Collections.Generic;
-using Microsoft.Data.SqlClient;
 using System.Linq;
-using Service.IRepository;
-using Microsoft.EntityFrameworkCore;
-using Service.Common;
-using Microsoft.Extensions.Configuration;
-using Service.Model.Master;
 using System.Xml.Linq;
 
 namespace Service.Repository
@@ -347,7 +348,10 @@ namespace Service.Repository
                     var _venuebranchno = new SqlParameter("VenueBranchNo", venuebranchno);
                     var _configKey = new SqlParameter("ConfigKey", configkey);
 
-                    objOutput = context.GetSingleConfiguration.FromSqlRaw("Execute dbo.pro_GetSingleConfiguration @VenueNo, @VenueBranchNo, @ConfigKey", _venueno, _venuebranchno, _configKey).AsEnumerable()?.SingleOrDefault();
+                    objOutput = context.GetSingleConfiguration.FromSqlRaw("Execute dbo.pro_GetSingleConfiguration @VenueNo, @VenueBranchNo, @ConfigKey", _venueno, _venuebranchno, _configKey)
+                        .AsEnumerable()?.SingleOrDefault();
+
+                    return objOutput ?? new ConfigurationDto();
                 }
             }
             catch (Exception ex)

@@ -27,7 +27,7 @@ namespace Service.Repository
                 {
                     using (var context = new FrontOfficeContext(_config.GetConnectionString(ConfigKeys.DefaultConnection)))
                     {
-                        var userresult = context.TblCustomer.Where(a => a.UserName == req.LoginName && a.Status == true && a.VenueBranchNo == req.VenueBranchNo && (a.IsFranchisee == 0 || a.IsFranchisee == null)).Select(x => new { x.CustomerName, x.CustomerNo, x.Password, x.VenueBranchNo, x.VenueNo }).FirstOrDefault();
+                        var userresult = context.TblCustomer.Where(a => a.UserName == req.LoginName && a.Status == true && a.VenueNo == req.VenueNo && (a.IsFranchisee == 0 || a.IsFranchisee == null)).Select(x => new { x.CustomerName, x.CustomerNo, x.Password, x.VenueBranchNo, x.VenueNo }).FirstOrDefault();
 
                         if (userresult != null)
                         {
@@ -53,8 +53,6 @@ namespace Service.Repository
                                     objsessionitem.UserNo = result.UserNo;
                                     objsessionitem.LoginType = req.LoginType;
                                     objsessionitem.LogInDateTime = DateTime.Now;
-                                    objsessionitem.ClientSysteminfo = req.ClientSysteminfo;
-                                    objsessionitem.Ipaddress = req.Ipaddress;
                                     objsessionitem.VenueNo = result.VenueNo;
                                     objsessionitem.VenueBranchNo = result.VenueBranchNo;
                                     objsessionitem.Status = true;
@@ -83,7 +81,7 @@ namespace Service.Repository
                 {
                     using (var context = new FrontOfficeContext(_config.GetConnectionString(ConfigKeys.DefaultConnection)))
                     {
-                        var usersubresult = context.tblCustomerSubUser.Where(a => a.LoginName == req.LoginName && a.Status == true && a.VenueBranchNo == req.VenueBranchNo).Select(x => new { x.Email, x.PhoneNo, x.UserName, x.LoginName, x.CustomerSubUserNo, x.CustomerNo, x.Password, x.VenueBranchNo, x.VenueNo }).FirstOrDefault();
+                        var usersubresult = context.tblCustomerSubUser.Where(a => a.LoginName == req.LoginName && a.Status == true && a.VenueNo == req.VenueNo).Select(x => new { x.Email, x.PhoneNo, x.UserName, x.LoginName, x.CustomerSubUserNo, x.CustomerNo, x.Password, x.VenueBranchNo, x.VenueNo }).FirstOrDefault();
                         if (usersubresult != null)
                         {
                             var encodingPassword = CommonSecurity.EncodePassword(req.Password, CommonSecurity.GeneratePassword(1));
@@ -108,8 +106,6 @@ namespace Service.Repository
                                     objsessionitem.UserNo = result.UserNo;
                                     objsessionitem.LoginType = req.LoginType;
                                     objsessionitem.LogInDateTime = DateTime.Now;
-                                    objsessionitem.ClientSysteminfo = req.ClientSysteminfo;
-                                    objsessionitem.Ipaddress = req.Ipaddress;
                                     objsessionitem.VenueNo = result.VenueNo;
                                     objsessionitem.VenueBranchNo = result.VenueBranchNo;
                                     objsessionitem.Status = true;
@@ -265,8 +261,6 @@ namespace Service.Repository
                                     objsessionitem.UserNo = result.UserNo;
                                     objsessionitem.LoginType = req.LoginType;
                                     objsessionitem.LogInDateTime = DateTime.Now;
-                                    objsessionitem.ClientSysteminfo = req.ClientSysteminfo;
-                                    objsessionitem.Ipaddress = req.Ipaddress;
                                     objsessionitem.VenueNo = result.VenueNo;
                                     objsessionitem.VenueBranchNo = result.VenueBranchNo;
                                     objsessionitem.Status = true;
@@ -338,7 +332,7 @@ namespace Service.Repository
                 {
                     using (var context = new FrontOfficeContext(_config.GetConnectionString(ConfigKeys.DefaultConnection)))
                     {
-                        var userresult = context.TblCustomer.Where(a => a.UserName == req.LoginName && a.Status == true && a.VenueBranchNo == req.VenueBranchNo && a.IsFranchisee == 1).Select(x => new { x.CustomerName, x.CustomerNo, x.Password, x.VenueBranchNo, x.VenueNo }).FirstOrDefault();
+                        var userresult = context.TblCustomer.Where(a => a.UserName == req.LoginName && a.Status == true && a.VenueNo == req.VenueNo && a.IsFranchisee == 1).Select(x => new { x.CustomerName, x.CustomerNo, x.Password, x.VenueBranchNo, x.VenueNo }).FirstOrDefault();
                         if (userresult != null)
                         {
                             var encodingPassword = CommonSecurity.EncodePassword(req.Password, CommonSecurity.GeneratePassword(1));
@@ -360,8 +354,6 @@ namespace Service.Repository
                                     objsessionitem.UserNo = result.UserNo;
                                     objsessionitem.LoginType = req.LoginType;
                                     objsessionitem.LogInDateTime = DateTime.Now;
-                                    objsessionitem.ClientSysteminfo = req.ClientSysteminfo;
-                                    objsessionitem.Ipaddress = req.Ipaddress;
                                     objsessionitem.VenueNo = result.VenueNo;
                                     objsessionitem.VenueBranchNo = result.VenueBranchNo;
                                     objsessionitem.Status = true;
@@ -390,7 +382,7 @@ namespace Service.Repository
 
                     using (var context = new FrontOfficeContext(_config.GetConnectionString(ConfigKeys.DefaultConnection)))
                     {
-                        var userresult = context.TblPhysician.Where(a => a.physicianusername == req.LoginName && a.Status == true && a.VenueBranchNo == req.VenueBranchNo).Select(x => new { x.physicianusername, x.PhysicianNo, x.Password, x.VenueBranchNo, x.VenueNo }).FirstOrDefault();
+                        var userresult = context.TblPhysician.Where(a => a.physicianusername == req.LoginName && a.Status == true && a.VenueNo == req.VenueNo).Select(x => new { x.physicianusername, x.PhysicianNo, x.Password, x.VenueBranchNo, x.VenueNo }).FirstOrDefault();
 
                         if (userresult != null)
                         {
@@ -508,8 +500,6 @@ namespace Service.Repository
                                         objsessionitem.UserNo = result.UserNo;
                                         objsessionitem.LoginType = req.LoginType;
                                         objsessionitem.LogInDateTime = DateTime.Now;
-                                        objsessionitem.ClientSysteminfo = req.ClientSysteminfo;
-                                        objsessionitem.Ipaddress = req.Ipaddress;
                                         objsessionitem.VenueNo = result.VenueNo;
                                         objsessionitem.VenueBranchNo = result.VenueBranchNo;
                                         objsessionitem.Status = true;
@@ -527,7 +517,6 @@ namespace Service.Repository
                                     }
                                 }
                             }
-
                         }
                         else
                         {
@@ -1009,22 +998,7 @@ namespace Service.Repository
 
                                 MemoryCacheRepository.AddItem(_CacheKey, Objresult, Convert.ToInt32(cachetime));
                             }
-                        }   
-
-
-
-
-
-
-
-
-
-
-
-                           
-
-
-                           
+                        }  
                     }
                 }
             }
@@ -1416,12 +1390,10 @@ namespace Service.Repository
             }
             return result;
         }
-
         public bool ValidateUserMenuCode(int UserNo, int VenueNo, int VenueBranchNo, string menuCode)
         {
             return true;
         }
-
         public List<UserRoleNameDTO> GetUserMenuCode(int UserNo, int VenueNo, int VenueBranchNo, int LoginType)
         {
             List<UserRoleNameDTO> Objresult = new List<UserRoleNameDTO>();

@@ -8,9 +8,7 @@ namespace Service.Model
         public string LoginName { get; set; }
         public string Password { get; set; }
         public int LoginType { get; set; }
-        public string Ipaddress { get; set; }
-        public int VenueBranchNo { get; set; }
-        public string ClientSysteminfo { get; set; }
+        public int VenueNo { get; set; }
     }
     public partial class UserResponseEntity
     {

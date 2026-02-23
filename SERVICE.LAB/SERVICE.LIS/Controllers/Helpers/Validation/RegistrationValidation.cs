@@ -5,7 +5,6 @@ using System.Collections.Generic;
 using System.Text.RegularExpressions;
 using System.Data;
 using System.Linq;
-using Microsoft.Extensions.Configuration;
 using Service.IRepository;
 
 namespace Service.API.SERVICE.Controllers
@@ -174,7 +173,9 @@ namespace Service.API.SERVICE.Controllers
 
             var objConfigValue = _IMasterRepository.GetSingleConfiguration(objDTO.VenueNo, objDTO.VenueBranchNo, "IsPrscrUpldMandatory");
 
-            if (objConfigValue.ConfigValue == 1 && objDTO.RefferralTypeNo == 3 && (pdforimgupload == null || pdforimgupload.Count == 0))
+            int isMandatory = objConfigValue?.ConfigValue ?? 0;
+
+            if (isMandatory == 1 && objDTO.RefferralTypeNo == 3 && (pdforimgupload == null || pdforimgupload.Count == 0))
             {
                 errors.Add("Prescription upload is mandatory");
             }

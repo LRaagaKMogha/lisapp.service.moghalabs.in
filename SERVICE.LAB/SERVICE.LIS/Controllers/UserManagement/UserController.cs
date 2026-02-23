@@ -1,13 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using Service.IRepository;
-using Service.Common;
-using Service.Model;
-using Microsoft.AspNetCore.Authorization;
+﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using System.Linq;
-using Shared.Audit;
+using Microsoft.Extensions.Configuration;
 using Newtonsoft.Json;
+using Service.Common;
+using Service.IRepository;
+using Service.Model;
+using Shared.Audit;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Service.API.SERVICE.Controllers
 {
@@ -18,11 +19,13 @@ namespace Service.API.SERVICE.Controllers
         private readonly IJWTManagerRepository _jWTManager;
         private readonly IUserRepository _IUserRepository;
         private readonly IAuditService _auditService;
-        public UserController(IUserRepository noteRepository, IJWTManagerRepository jWTManager, IAuditService auditService)
+        private IConfiguration _config;
+        public UserController(IUserRepository noteRepository, IJWTManagerRepository jWTManager, IAuditService auditService, IConfiguration config)
         {
             this._jWTManager = jWTManager;
             _IUserRepository = noteRepository;
             _auditService = auditService;
+            _config = config;
         }
 
         [AllowAnonymous]
@@ -33,6 +36,14 @@ namespace Service.API.SERVICE.Controllers
             UserResponseEntity result = new UserResponseEntity();
             try
             {
+                var licenseKey = _config["License:Key"];
+
+                if (!LicenseValidator.Validate(licenseKey))
+                {
+                    result.ResponseStatus = -2; // License validation failed
+                    return result;
+                }                
+
                 result = _IUserRepository.UserLogIn(req, _jWTManager);
                 if (result.ResponseStatus == 0 || result.ResponseStatus == -1)
                 {
