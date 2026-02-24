@@ -936,7 +936,7 @@ namespace Service.Repository
                     var _OldServiceNo = new SqlParameter("OldServiceNo", req?.OldServiceNo);
 
                     var lst = context.InsertGroupPackage.FromSqlRaw(
-                    "Execute dbo.pro_InsertGroupPackage @pageCode,@serviceNo,@groupXML,@grouptestXML,@userno,@venueno,@venuebranchno,@IsApproval,@IsReject,@RejectReason,@OldServiceNo",
+                    "Execute dbo.pro_InsertGroupPackage @pageCode, @serviceNo, @groupXML, @grouptestXML, @userno, @venueno, @venuebranchno, @IsApproval, @IsReject, @RejectReason, @OldServiceNo",
                     _pageCode, _serviceNo, _groupXML, _grouptestXML, _userno, _venueno, _venuebranchno, _IsApproval, _IsReject, _RejectReason, _OldServiceNo).ToList();
                     
                     serviceNo = lst[0].testNo;
@@ -1312,7 +1312,7 @@ namespace Service.Repository
                     var _venuebranchno = new SqlParameter("venuebranchno", req.venueBranchNo);
                     
                     var obj = context.GetCheckTestcodeExists.FromSqlRaw(
-                    "Execute dbo.pro_GetAlreadyExisitingTestCode @testNo,@testCode,@testtype,@venueno,@venuebranchno",
+                    "Execute dbo.pro_GetAlreadyExisitingTestCode @testNo, @testCode, @testtype, @venueno, @venuebranchno",
                     _testNo, _testCode, _testtype, _venueno, _venuebranchno).ToList();
                     
                     if (obj != null)

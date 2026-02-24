@@ -171,7 +171,7 @@ namespace Service.API.SERVICE.Controllers
                                                     || d.FileType.Equals("png", StringComparison.OrdinalIgnoreCase)).ToList()
                                  : new List<BulkFileUpload>();
 
-            var objConfigValue = _IMasterRepository.GetSingleConfiguration(objDTO.VenueNo, objDTO.VenueBranchNo, "IsPrscrUpldMandatory");
+            var objConfigValue = _IMasterRepository?.GetSingleConfiguration(objDTO.VenueNo, objDTO.VenueBranchNo, "IsPrscrUpldMandatory");
 
             int isMandatory = objConfigValue?.ConfigValue ?? 0;
 
