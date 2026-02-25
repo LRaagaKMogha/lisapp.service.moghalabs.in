@@ -30,7 +30,7 @@ namespace Service.API.SERVICE.Controllers
 
         [AllowAnonymous]
         [HttpPost]
-        [Route("api/User/authenticate")]
+        [Route("api/User/userlogin")]
         public UserResponseEntity UserLogIn(UserRequestEntity req)
         {
             UserResponseEntity result = new UserResponseEntity();
@@ -52,7 +52,7 @@ namespace Service.API.SERVICE.Controllers
             }
             catch (Exception ex)
             {
-                MyDevException.Error(ex, "UserController.UserLogIn/LoginName-" + req.LoginName, ExceptionPriority.High, ApplicationType.APPSERVICE, 0, 0, 0);
+                MyDevException.Error(ex, "UserController.userlogin/LoginName - " + req.LoginName, ExceptionPriority.High, ApplicationType.APPSERVICE, 0, 0, 0);
             }
             return result;
         }
@@ -384,7 +384,7 @@ namespace Service.API.SERVICE.Controllers
 
         [CustomAuthorize("LIMSDEFAULT")]
         [HttpGet]
-        [Route("api/User/Logout")]
+        [Route("api/User/userlogout")]
         public void Logout()
         {
             try
@@ -399,7 +399,7 @@ namespace Service.API.SERVICE.Controllers
             }
             catch (Exception ex)
             {
-                MyDevException.Error(ex, "UserController.Logout", ExceptionPriority.High, ApplicationType.APPSERVICE, 0, 0, 0);
+                MyDevException.Error(ex, "UserController.userlogout", ExceptionPriority.High, ApplicationType.APPSERVICE, 0, 0, 0);
             }
         }
 

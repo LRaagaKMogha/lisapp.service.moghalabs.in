@@ -190,7 +190,6 @@ namespace Service.Repository
                 MyDevException.Error(ex, "CommonRepository.getApprovallist", ExceptionPriority.Low, ApplicationType.REPOSITORY, 0, 0, 0);
             }
             return lst;
-
         }
         public SaveCriticalResultNotifyRes SaveCriticalResultNotify(SaveCriticalResultsReq req)
         {
