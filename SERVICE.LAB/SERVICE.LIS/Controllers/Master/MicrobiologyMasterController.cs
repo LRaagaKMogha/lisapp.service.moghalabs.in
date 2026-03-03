@@ -243,9 +243,9 @@ namespace Service.API.SERVICE.Controllers
 
         [HttpPost]
         [Route("api/MicrobiologyMaster/Insertorgantimaster")]
-        public ActionResult<OrgAntinsertresponse> InsertorgAntimaster(OrgAntinsertresponse orgAntinsertreq)
+        public ActionResult<OrgAntiInsertResponse> InsertorgAntimaster(OrgAntinsertresponse orgAntinsertreq)
         {
-            OrgAntinsertresponse Objresult = new OrgAntinsertresponse();
+            OrgAntiInsertResponse Objresult = new OrgAntiInsertResponse();
             try
             {
                 using (var auditScoped = new AuditScope<OrgAntinsertresponse>(orgAntinsertreq, _auditService))

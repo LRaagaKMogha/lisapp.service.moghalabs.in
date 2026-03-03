@@ -580,7 +580,7 @@ namespace Service.Model
         public string includeinstruction { get; set; }
         public string FromDate { get; set; }
         public string ToDate { get; set; }
-        public List<Lstgrppkgservice> Lstgrppkgservice { get; set; }
+        public List<Lstgrppkgservice> lstgrppkgservice { get; set; }
         public bool isSecondReview { get; set; }
         public string testCode { get; set; }
         public string languageText { get; set; }

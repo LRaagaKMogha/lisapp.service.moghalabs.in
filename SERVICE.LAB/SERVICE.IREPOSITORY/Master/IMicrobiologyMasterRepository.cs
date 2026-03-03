@@ -16,6 +16,6 @@ namespace Service.IRepository
         List<Antiresponse> GetAntimaster(Antireq Antireq);
         Antinsertresponse Insertantimaster(Antiresponse antinsertreq);
         List<OrgAntiresponse> GetorgAntimaster(OrgAntirequest reqorgAnti);
-        OrgAntinsertresponse InsertorgAntimaster(OrgAntinsertresponse orgAntinsertreq);
+        OrgAntiInsertResponse InsertorgAntimaster(OrgAntinsertresponse orgAntinsertreq);
     }
 }

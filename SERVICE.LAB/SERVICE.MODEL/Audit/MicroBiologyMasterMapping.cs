@@ -60,7 +60,7 @@ namespace Service.Model.Audit
         public override void SetUp()
         {
             TableName = "tbl_OrganismTypeAntibioticMap";
-            EntityIdProperty = nameof(OrgAntinsertresponse.organismAntibioticMapNo);
+            EntityIdProperty = nameof(OrgAntinsertresponse.OrganismAntibioticMapNo);
             SubMenuCode = "Organism Type - Antibiotic";
             IgnoreProperties = new List<System.Linq.Expressions.Expression<Func<OrgAntinsertresponse, object>>>
             {

@@ -478,7 +478,7 @@ namespace Service.API.SERVICE.Controllers
                 errors.Add("Service Name is required");
             if (req.pageCode.Equals("PKGMAS") && string.IsNullOrEmpty(req.displayName) || req.displayName.TrimStart() == string.Empty)
                 errors.Add("Display Name is required");
-            if (req.Lstgrppkgservice == null || req.Lstgrppkgservice.Count < 1)
+            if (req.lstgrppkgservice == null || req.lstgrppkgservice.Count < 1)
             {
                 if (req.pageCode.Equals("GRPMAS"))
                     errors.Add("Add more than two tests");
@@ -517,16 +517,16 @@ namespace Service.API.SERVICE.Controllers
             }
 
             // Validate for duplicate services
-            if (req.Lstgrppkgservice != null)
+            if (req.lstgrppkgservice != null)
             {
-                for (int i = 0; i < req.Lstgrppkgservice.Count; i++)
+                for (int i = 0; i < req.lstgrppkgservice.Count; i++)
                 {
-                    var v = req.Lstgrppkgservice[i];
+                    var v = req.lstgrppkgservice[i];
                     if (v.serviceNo > 0)
                     {
                         if (req.pageCode == "GRPMAS")
                         {
-                            var isduplicate = req.Lstgrppkgservice.Where(x => x.serviceNo == v.serviceNo && x.serviceType == v.serviceType).ToList();
+                            var isduplicate = req.lstgrppkgservice.Where(x => x.serviceNo == v.serviceNo && x.serviceType == v.serviceType).ToList();
                             if (isduplicate.Count > 1)
                             {
                                 errors.Add("This service already exists");
@@ -535,7 +535,7 @@ namespace Service.API.SERVICE.Controllers
                         }
                         else if (req.pageCode == "PKGMAS")
                         {
-                            var isduplicate = req.Lstgrppkgservice.Where(x => x.serviceNo == v.serviceNo && x.serviceType == v.serviceType).ToList();
+                            var isduplicate = req.lstgrppkgservice.Where(x => x.serviceNo == v.serviceNo && x.serviceType == v.serviceType).ToList();
                             if (isduplicate.Count > 1)
                             {
 

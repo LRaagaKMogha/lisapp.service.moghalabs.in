@@ -898,7 +898,7 @@ namespace Service.Repository
                     {
                         obj.Specimen = "";
                     }
-                    obj.Lstgrppkgservice = JsonConvert.DeserializeObject<List<Lstgrppkgservice>>(lst[0].grppkgtests);
+                    obj.lstgrppkgservice = JsonConvert.DeserializeObject<List<Lstgrppkgservice>>(lst[0].grppkgtests);
                 }
             }
             catch (Exception ex)
@@ -913,11 +913,11 @@ namespace Service.Repository
             CommonHelper commonUtility = new CommonHelper();
 
             string grouptestXML = "";
-            if (req.Lstgrppkgservice?.Count > 0)
+            if (req.lstgrppkgservice?.Count > 0)
             {
-                grouptestXML = commonUtility.ToXML(req.Lstgrppkgservice);
+                grouptestXML = commonUtility.ToXML(req.lstgrppkgservice);
             }
-            req.Lstgrppkgservice?.Clear();
+            req.lstgrppkgservice?.Clear();
             string groupXML = commonUtility.ToXML(req);
             try
             {
@@ -1704,7 +1704,7 @@ namespace Service.Repository
                         {
                             obj.Specimen = "";
                         }
-                        obj.Lstgrppkgservice = JsonConvert.DeserializeObject<List<Lstgrppkgservice>>(lst[0].grppkgtests);
+                        obj.lstgrppkgservice = JsonConvert.DeserializeObject<List<Lstgrppkgservice>>(lst[0].grppkgtests);
                     }
                 }
             }

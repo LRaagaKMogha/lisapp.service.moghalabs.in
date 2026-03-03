@@ -182,13 +182,19 @@ namespace Service.Model
     {
         public int venueno { get; set; }
         public int venuebranchno { get; set; }
-        public int organismAntibioticMapNo { get; set; }
         public int organismTypeNo { get; set; }
         public int antibioticno { get; set; }
         public int sequenceno { get; set; }
         public bool status { get; set; }
         public int userno { get; set; }
         public int organismNo { get; set; }
+        public int OrganismAntibioticMapNo { get; set; }
+        public int LastPageIndex { get; set; }
+    }
+    public partial class OrgAntiInsertResponse
+    {
+        public int OrganismAntibioticMapNo { get; set; }
+        public int LastPageIndex { get; set; }
     }
     public partial class OrgAntirequest
     {
@@ -200,10 +206,5 @@ namespace Service.Model
         public int antibioticno { get; set; }
         public int pageIndex { get; set; }
         public int seqnoNew { get; set; }
-    }
-    public partial class OrgAntinsertresponse
-    {
-        public int OrganismAntibioticMapNo { get; set; }
-        public int LastPageIndex { get; set; }
     }
 }

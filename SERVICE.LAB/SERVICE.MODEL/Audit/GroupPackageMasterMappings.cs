@@ -50,9 +50,9 @@ namespace Service.Model.Audit
             AddProperty(x => x.FromDate, "FromDate", value => new { MasterKey = "From Date" });
             AddProperty(x => x.ToDate, "ToDate", value => new { MasterKey = "To Date" });
             AddProperty(x => x.loincNo, "loincNo", value => new { MasterKey = "LOINC" });
-            AddProperty(x => x.Lstgrppkgservice, "", null, dto =>
+            AddProperty(x => x.lstgrppkgservice, "", null, dto =>
             {
-                return dto.Lstgrppkgservice.Select(test =>
+                return dto.lstgrppkgservice.Select(test =>
                 {
                     return new { serviceName = test.serviceName, childSequenceNo = test.childsequenceNo };
                 }).ToList();
@@ -102,9 +102,9 @@ namespace Service.Model.Audit
             AddProperty(x => x.isdisplayinreport, "isdisplayinreport", value => new { Toggle = "Yes/No", Label = "Display Name In Report" });
             AddProperty(x => x.loincNo, "loincNo", value => new { MasterKey = "LOINC" });
 
-            AddProperty(x => x.Lstgrppkgservice, "", null, dto =>
+            AddProperty(x => x.lstgrppkgservice, "", null, dto =>
             {
-                return dto.Lstgrppkgservice.Select(test =>
+                return dto.lstgrppkgservice.Select(test =>
                 {
                     return new { serviceName = test.serviceName, childSequenceNo = test.childsequenceNo };
                 }).ToList();

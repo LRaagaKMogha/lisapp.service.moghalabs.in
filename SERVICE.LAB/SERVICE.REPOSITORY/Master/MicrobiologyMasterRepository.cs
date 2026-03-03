@@ -298,16 +298,16 @@ namespace Service.Repository
             }
             return lst;
         }
-        public OrgAntinsertresponse InsertorgAntimaster(OrgAntinsertresponse orgAntinsertreq)
+        public OrgAntiInsertResponse InsertorgAntimaster(OrgAntinsertresponse orgAntinsertreq)
         {
-            OrgAntinsertresponse Objresult = new OrgAntinsertresponse();
+            OrgAntiInsertResponse Objresult = new OrgAntiInsertResponse();
             try
             {
                 using (var context = new MasterContext(_config.GetConnectionString(ConfigKeys.DefaultConnection)))
                 {
                     var _venueno = new SqlParameter("venueno", orgAntinsertreq?.venueno);
                     var _venuebranchno = new SqlParameter("venuebranchno", orgAntinsertreq?.venuebranchno);
-                    var _organismAntibioticMapNo = new SqlParameter("organismAntibioticMapNo", orgAntinsertreq?.organismAntibioticMapNo);
+                    var _organismAntibioticMapNo = new SqlParameter("organismAntibioticMapNo", orgAntinsertreq?.OrganismAntibioticMapNo);
                     var _organismTypeNo = new SqlParameter("organismTypeNo", orgAntinsertreq?.organismTypeNo);
                     var _antibioticno = new SqlParameter("antibioticno", orgAntinsertreq?.antibioticno);
                     var _sequenceno = new SqlParameter("sequenceno", orgAntinsertreq?.sequenceno);
@@ -316,13 +316,14 @@ namespace Service.Repository
                     var _organismNo = new SqlParameter("organismNo", orgAntinsertreq?.organismNo);
 
                     Objresult = context.Insertantiorg.FromSqlRaw(
-                    "Execute dbo.pro_InsertOrganismtypeandantibioticmaster @venueno,@venuebranchno,@organismAntibioticMapNo,@organismTypeNo,@antibioticno,@organismNo,@sequenceno,@status,@userno",
+                    "Execute dbo.pro_InsertOrganismtypeandantibioticmaster " +
+                    "@venueno, @venuebranchno, @organismAntibioticMapNo, @organismTypeNo, @antibioticno, @organismNo, @sequenceno, @status, @userno",
                     _venueno, _venuebranchno, _organismAntibioticMapNo, _organismTypeNo, _antibioticno, _organismNo, _sequenceno, _status, _userno).AsEnumerable().FirstOrDefault();
                 }
             }
             catch (Exception ex)
             {
-                MyDevException.Error(ex, "MicrobiologyMasterRepository.InsertorgAntimaster" + orgAntinsertreq.antibioticno.ToString(), ExceptionPriority.Low, ApplicationType.REPOSITORY, orgAntinsertreq.venueno, orgAntinsertreq.venuebranchno, orgAntinsertreq.userno);
+                MyDevException.Error(ex, "MicrobiologyMasterRepository.InsertorgAntimaster - " + orgAntinsertreq.antibioticno.ToString(), ExceptionPriority.Low, ApplicationType.REPOSITORY, orgAntinsertreq.venueno, orgAntinsertreq.venuebranchno, orgAntinsertreq.userno);
             }
             return Objresult;
         }

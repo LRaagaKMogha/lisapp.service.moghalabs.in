@@ -175,7 +175,7 @@ namespace Service.Model.EF
         public virtual DbSet<Antiresponse> Getantibiotic { get; set; }
         public virtual DbSet<Antinsertresponse> Insertantimaster { get; set; }
         public virtual DbSet<OrgAntiresponse> Getantirog { get; set; }
-        public virtual DbSet<OrgAntinsertresponse> Insertantiorg { get; set; }
+        public virtual DbSet<OrgAntiInsertResponse> Insertantiorg { get; set; }
         public virtual DbSet<TblHSN> GetHSNMasters { get; set; }
         public virtual DbSet<HSNMasterResponse> InsertHSNmaster { get; set; }
         public virtual DbSet<TblHSNRange> GetHSNRangeMaster { get; set; }
@@ -1221,11 +1221,11 @@ namespace Service.Model.EF
                 entity.Property(e => e.organismAntibioticMapNo).HasColumnName("organismAntibioticMapNo");
             });
 
-            modelBuilder.Entity<OrgAntinsertresponse>(entity =>
+            modelBuilder.Entity<OrgAntiInsertResponse>(entity =>
             {
-                entity.HasKey(e => e.organismAntibioticMapNo);
+                entity.HasKey(e => e.OrganismAntibioticMapNo);
                 entity.ToTable("pro_InsertOrganismtypeandantibioticmaster");
-                entity.Property(e => e.organismAntibioticMapNo).HasColumnName("organismAntibioticMapNo");
+                entity.Property(e => e.OrganismAntibioticMapNo).HasColumnName("organismAntibioticMapNo");
             });
 
             modelBuilder.Entity<TblHSN>(entity =>
