@@ -1,6 +1,6 @@
 ﻿namespace Service.Win.Service
 {
-    partial class JobSchedulerManager
+    partial class SyncServiceManager
     {
         /// <summary> 
         /// Required designer variable.

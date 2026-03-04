@@ -1,16 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Configuration;
 using Newtonsoft.Json;
 using System.IO;
-using Dev.Win.Common;
-using DevExpress.Data.Browsing;
+using Service.Win.Common;
 
-namespace DEV.Windows.Repository
+namespace Service.Win.Repository
 {
     public class ArchiveTransaction
     {

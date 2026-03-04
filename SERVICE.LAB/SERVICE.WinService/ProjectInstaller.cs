@@ -8,10 +8,6 @@ using System.ServiceProcess;
 namespace Service.Win.Service
 {
     /// <summary>
-    /// Service Manager
-    /// Date(24/March/2017)
-    /// createdby: senthilkumard
-    /// </summary>
     [RunInstaller(true)]
     public partial class ProjectInstaller : System.Configuration.Install.Installer
     {

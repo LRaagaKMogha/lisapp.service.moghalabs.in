@@ -10,11 +10,10 @@ namespace Service.Win.Service
         {
             InitializeComponent();
         }
-        #region class variables
 
+        #region class variables
         private bool isReady;
         private System.Threading.Timer MailTimer;
-
         #endregion
 
         #region Gets invoked when a service is started

@@ -1,21 +1,21 @@
 ﻿using System;
 using System.ServiceProcess;
 using System.Configuration;
+using Service.Win.Repository;
+using Service.Win.Common;
 
-namespace Dev.WinService
+namespace Service.Win.Service
 {
-
     partial class SyncServiceManager : ServiceBase
     {
         public SyncServiceManager()
         {
             InitializeComponent();
         }
-        #region class variables
 
+        #region class variables
         private bool isReady;
         private System.Threading.Timer MailTimer;
-
         #endregion
 
         #region Gets invoked when a service is started
@@ -43,7 +43,6 @@ namespace Dev.WinService
 
             }
         }
-
         #endregion
 
         #region Gets invoked when a service is stopped
@@ -65,14 +64,12 @@ namespace Dev.WinService
 
                 // Call GC to release the memory used by the resources 
                 System.GC.Collect();
-
             }
             catch (Exception ex)
             {
 
             }
         }
-
         #endregion
 
         #region This method will be called by the Timer class in regular intervals
@@ -84,8 +81,9 @@ namespace Dev.WinService
         {
             try
             {
-                // NotificationHelper objNotificationHelper = new NotificationHelper();
-                // objNotificationHelper.CallMessageService();
+                NotificationHelper objNotificationHelper = new NotificationHelper();
+                Logger.LogWrite("Calling CallMessageService method of NotificationHelper class.");
+                objNotificationHelper.CallMessageService();
 
                 // ICMRExternalService objICMRExternalService = new ICMRExternalService();
                 //objICMRExternalService.PushService();

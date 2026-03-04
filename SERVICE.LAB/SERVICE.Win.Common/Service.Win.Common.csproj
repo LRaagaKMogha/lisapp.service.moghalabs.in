@@ -47,8 +47,11 @@
     <Compile Include="Common\CommonSecurity.cs" />
     <Compile Include="ExceptionLogger\Logger.cs" />
     <Compile Include="Model\BloodBankBarCode.cs" />
+    <Compile Include="Model\EMIDModel.cs" />
+    <Compile Include="Model\ExternalModel.cs" />
     <Compile Include="Model\ExternalOrderDTO.cs" />
     <Compile Include="Model\NotificationDTO.cs" />
+    <Compile Include="Model\PatientReport.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup />

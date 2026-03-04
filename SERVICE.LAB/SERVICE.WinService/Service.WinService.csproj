@@ -15,21 +15,6 @@
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <TargetFrameworkProfile />
     <IsWebBootstrapper>false</IsWebBootstrapper>
-    <PublishUrl>D:\PUBLISH\windowservice\</PublishUrl>
-    <Install>true</Install>
-    <InstallFrom>Disk</InstallFrom>
-    <UpdateEnabled>false</UpdateEnabled>
-    <UpdateMode>Foreground</UpdateMode>
-    <UpdateInterval>7</UpdateInterval>
-    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
-    <UpdatePeriodically>false</UpdatePeriodically>
-    <UpdateRequired>false</UpdateRequired>
-    <MapFileExtensions>true</MapFileExtensions>
-    <ApplicationRevision>0</ApplicationRevision>
-    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
-    <UseApplicationTrust>false</UseApplicationTrust>
-    <PublishWizardCompleted>true</PublishWizardCompleted>
-    <BootstrapperEnabled>true</BootstrapperEnabled>
     <SccProjectName>
     </SccProjectName>
     <SccLocalPath>
@@ -40,6 +25,21 @@
     </SccProvider>
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
+    <PublishUrl>D:\PUBLISH\windowservice\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>1</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <PublishWizardCompleted>true</PublishWizardCompleted>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -122,6 +122,12 @@
     <Compile Include="JobSchedulerManager.Designer.cs">
       <DependentUpon>JobSchedulerManager.cs</DependentUpon>
     </Compile>
+    <Compile Include="SyncServiceManager.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="SyncServiceManager.Designer.cs">
+      <DependentUpon>SyncServiceManager.cs</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -145,6 +151,16 @@
     <EmbeddedResource Include="ProjectInstaller.resx">
       <DependentUpon>ProjectInstaller.cs</DependentUpon>
     </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\SERVICE.Win.Common\Service.Win.Common.csproj">
+      <Project>{8772EC1C-224F-4DA6-9C8F-5D2C1C5D86CE}</Project>
+      <Name>Service.Win.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SERVICE.Windows.Repository\Service.Windows.Repository.csproj">
+      <Project>{BE4F8A41-7B9A-47D2-BE5C-208DBDC58858}</Project>
+      <Name>Service.Windows.Repository</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

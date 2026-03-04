@@ -12,7 +12,8 @@ namespace Service.Win.Service
             ServiceBase[] ServicesToRun;
             ServicesToRun = new ServiceBase[]
             {               
-               new JobSchedulerManager()
+               //new JobSchedulerManager()
+               new SyncServiceManager()
             };
             ServiceBase.Run(ServicesToRun);
         }

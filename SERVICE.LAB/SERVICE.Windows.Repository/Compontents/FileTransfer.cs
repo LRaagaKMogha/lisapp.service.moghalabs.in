@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Service.Win.Repository.Compontents
+namespace DEV.Windows.Repository.Compontents
 {
     public class FileTransfer
     {
