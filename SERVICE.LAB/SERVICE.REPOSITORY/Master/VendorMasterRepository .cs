@@ -104,10 +104,10 @@ namespace Service.Repository
         }
         public int InsertVendorContactmaster(Savecontact creq1)
         {
-
             CommonHelper commonUtility = new CommonHelper();
             string SavecontactXML = commonUtility.ToXML(creq1.Getcontactlst);
             int i = 0;
+            
             try
             {
                 using (var context = new MasterContext(_config.GetConnectionString(ConfigKeys.DefaultConnection)))
