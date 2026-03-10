@@ -1177,9 +1177,9 @@ namespace Service.Repository
                     obj.languagecode = lst[0].languagecode;
                     obj.RestrictedValue = lst[0].RestrictedValue;
                     obj.IsNoPrintInRpt = lst[0].IsNoPrintInRpt;
-                    obj.Lsttestrefrange = JsonConvert.DeserializeObject<List<Lsttestrefrange>>(lst[0].testrefrange);
-                    obj.LsttestPickList = JsonConvert.DeserializeObject<List<LsttestPickList>>(lst[0].testPickList);
-                    obj.Lsttestanalyrange = JsonConvert.DeserializeObject<List<Lsttestanalyrange>>(lst[0].testanlyrange);
+                    obj.lsttestrefrange = JsonConvert.DeserializeObject<List<Lsttestrefrange>>(lst[0].testrefrange);
+                    obj.lsttestPickList = JsonConvert.DeserializeObject<List<LsttestPickList>>(lst[0].testPickList);
+                    obj.lsttestanalyrange = JsonConvert.DeserializeObject<List<Lsttestanalyrange>>(lst[0].testanlyrange);
                     obj.testCode = lst[0].testCode;
                 }
             }
@@ -1190,27 +1190,29 @@ namespace Service.Repository
             return obj;
         }
         public int InsertSubTest(Objsubtest req)
-        {
-            int subTestNo = 0;
+        {            
             CommonHelper commonUtility = new CommonHelper();
 
+            int subTestNo = 0;
             string testRRXML = "";
             string testAMRXML = "";
-            if (req.Lsttestrefrange.Count > 0)
-            {
-                testRRXML = commonUtility.ToXML(req.Lsttestrefrange);
-            }
             string testPLXML = "";
-            if (req.LsttestPickList.Count > 0)
+
+            if (req.lsttestrefrange.Count > 0)
             {
-                testPLXML = commonUtility.ToXML(req.LsttestPickList);
-            }
-            if (req.Lsttestanalyrange != null && req.Lsttestanalyrange.Count > 0)
+                testRRXML = commonUtility.ToXML(req.lsttestrefrange);
+            }            
+            if (req.lsttestPickList.Count > 0)
             {
-                testAMRXML = commonUtility.ToXML(req.Lsttestanalyrange);
+                testPLXML = commonUtility.ToXML(req.lsttestPickList);
             }
-            req.Lsttestrefrange.Clear();
-            req.LsttestPickList.Clear();
+            if (req.lsttestanalyrange != null && req.lsttestanalyrange.Count > 0)
+            {
+                testAMRXML = commonUtility.ToXML(req.lsttestanalyrange);
+            }
+
+            req.lsttestrefrange.Clear();
+            req.lsttestPickList.Clear();
             string testXML = commonUtility.ToXML(req);
 
             try

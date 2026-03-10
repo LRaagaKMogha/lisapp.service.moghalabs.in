@@ -728,8 +728,9 @@ namespace Service.Model
         public int venueNo { get; set; }
         public int venueBranchNo { get; set; }
         public int userNo { get; set; }
-        public List<Lsttestrefrange> Lsttestrefrange { get; set; }
-        public List<LsttestPickList> LsttestPickList { get; set; }
+        public List<Lsttestrefrange> lsttestrefrange { get; set; }
+        public List<LsttestPickList> lsttestPickList { get; set; }
+        public List<Lsttestanalyrange> lsttestanalyrange { get; set; }
         public string languageText { get; set; }
         public bool isExtraSubTest { get; set; }
         public bool IsDeltaApproval { get; set; }
@@ -738,7 +739,6 @@ namespace Service.Model
         public Int16 languagecode { get; set; }
         public string testCode { get; set; }
         public bool IsNoPrintInRpt { get; set; }
-        public List<Lsttestanalyrange> Lsttestanalyrange { get; set; }
     }
     public class SaveFormulaRequest
     {

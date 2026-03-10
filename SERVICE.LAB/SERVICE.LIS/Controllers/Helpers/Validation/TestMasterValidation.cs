@@ -405,11 +405,11 @@ namespace Service.API.SERVICE.Controllers
                _csvcheck.IsMatch(req.testShortName.ToSubstring(req.testShortName == null ? 0 : req.testShortName.Length)))
                 errors.Add("Special character not allowed");
 
-            if (req.Lsttestrefrange != null && req.Lsttestrefrange.Any())
+            if (req.lsttestrefrange != null && req.lsttestrefrange.Any())
             {
-                var agetodaysinvalidlst = req.Lsttestrefrange.Where(j => j.ageToType == "D" && j.ageTo > 73048).ToList();
-                var agetoyearsinvalidlst = req.Lsttestrefrange.Where(j => j.ageToType == "Y" && j.ageTo > 200).ToList();
-                var agetomonthsinvalidlst = req.Lsttestrefrange.Where(j => j.ageToType == "M" && j.ageTo > 2400).ToList();
+                var agetodaysinvalidlst = req.lsttestrefrange.Where(j => j.ageToType == "D" && j.ageTo > 73048).ToList();
+                var agetoyearsinvalidlst = req.lsttestrefrange.Where(j => j.ageToType == "Y" && j.ageTo > 200).ToList();
+                var agetomonthsinvalidlst = req.lsttestrefrange.Where(j => j.ageToType == "M" && j.ageTo > 2400).ToList();
 
                 if (agetodaysinvalidlst.Any() || agetoyearsinvalidlst.Any() || agetomonthsinvalidlst.Any())
                 {
@@ -441,9 +441,9 @@ namespace Service.API.SERVICE.Controllers
                 req.DeltaRange = Math.Round(req.DeltaRange, 2);
             }
 
-            if (req.Lsttestrefrange != null && req.Lsttestrefrange.Any())
+            if (req.lsttestrefrange != null && req.lsttestrefrange.Any())
             {
-                var ageTestRef = req.Lsttestrefrange.Where(i => i.ageFrom < 0 && i.ageTo < 0).ToList();
+                var ageTestRef = req.lsttestrefrange.Where(i => i.ageFrom < 0 && i.ageTo < 0).ToList();
 
                 if (ageTestRef.Any())
                 {
