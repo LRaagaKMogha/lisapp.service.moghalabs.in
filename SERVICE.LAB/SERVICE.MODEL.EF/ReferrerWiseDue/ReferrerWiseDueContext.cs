@@ -21,7 +21,7 @@ namespace Service.Model.EF.ReferrerWiseDue
         {
             if (!optionsBuilder.IsConfigured)
             {
-                optionsBuilder.UseSqlServer(EncryptionHelper.Decrypt(_connectionString));
+                optionsBuilder.UseSqlServer(EncryptionHelper.DecryptSecret(_connectionString));
             }
         }
 

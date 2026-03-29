@@ -24,7 +24,7 @@ namespace Service.Model.EF.DocumentUpload
         {
             if (!optionsBuilder.IsConfigured)
             {
-                optionsBuilder.UseSqlServer(EncryptionHelper.Decrypt(_connectionstring));
+                optionsBuilder.UseSqlServer(EncryptionHelper.DecryptSecret(_connectionstring));
             }
         }
 

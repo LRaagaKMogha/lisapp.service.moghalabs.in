@@ -1,5 +1,18 @@
 ﻿using AspNetCoreRateLimit;
-using AutoMapper;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
+using Microsoft.Data.SqlClient;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
+using Microsoft.IdentityModel.Tokens;
+using Microsoft.OpenApi.Models;
+using Serilog;
+using Service.API.SERVICE;
+using Service.Common;
 using Service.IRepository;
 using Service.IRepository.Audit;
 using Service.IRepository.FrontOffice;
@@ -9,36 +22,24 @@ using Service.IRepository.Master;
 using Service.IRepository.PatientInfo;
 using Service.IRepository.Samples;
 using Service.IRepository.UserManagement;
-using Service.API.SERVICE;
-using Service.Common;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
-using Microsoft.IdentityModel.Tokens;
-using Microsoft.OpenApi.Models;
-using Serilog;
+using Service.Repository;
+using Service.Repository.Audit;
+using Service.Repository.FrontOffice;
+using Service.Repository.FrontOffice.ReferrerWiseDue;
+using Service.Repository.Integration.externalservices;
+using Service.Repository.Inventory;
+using Service.Repository.Inventory.Report;
+using Service.Repository.Master;
+using Service.Repository.PatientInfo;
+using Service.Repository.Samples;
+using Service.Repository.UserManagement;
+using Shared;
 using Shared.Audit;
 using System;
 using System.Collections.Generic;
 using System.Data;
-using Microsoft.Data.SqlClient;
 using System.IO;
 using System.Text;
-using Service.Repository;
-using Service.Repository.UserManagement;
-using Service.Repository.Master;
-using Service.Repository.Inventory;
-using Service.Repository.Integration.externalservices;
-using Service.Repository.Audit;
-using Service.Repository.Samples;
-using Service.Repository.FrontOffice;
-using Service.Repository.FrontOffice.ReferrerWiseDue;
-using Service.Repository.Inventory.Report;
-using Service.Repository.PatientInfo;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -141,13 +142,12 @@ builder.Services.AddSingleton<IProcessingStrategy, AsyncKeyLockProcessingStrateg
 builder.Services.AddInMemoryRateLimiting();
 
 // AutoMapper and DTO mapping
-builder.Services.AddSingleton<IMapper>(AutoMapperConfiguration.Configure());
-DtoMappingRegistry.RegisterMappingsFromAssemblies(AppDomain.CurrentDomain.GetAssemblies());
+builder.Services.AddAutoMapper(cfg => { }, typeof(MappingProfile).Assembly);
 
 // Dependency Injection
 builder.Services.AddHttpContextAccessor();
 builder.Services.AddScoped<IDbConnection>(sp => new SqlConnection(
-    EncryptionHelper.Decrypt(config.GetConnectionString(ConfigKeys.DefaultConnection)) + ";MultipleActiveResultSets=True;"));
+    EncryptionHelper.DecryptSecret(config.GetConnectionString(ConfigKeys.DefaultConnection)) + ";MultipleActiveResultSets=True;"));
 
 // Register your services here
 builder.Services.AddScoped<IAuditService, AuditService>();
@@ -262,6 +262,29 @@ if (!string.IsNullOrEmpty(basePath))
     });
 }
 
+app.UseExceptionHandler(errorApp =>
+{
+    errorApp.Run(async context =>
+    {
+        var exceptionHandlerPathFeature =
+            context.Features.Get<Microsoft.AspNetCore.Diagnostics.IExceptionHandlerPathFeature>();
+
+        var exception = exceptionHandlerPathFeature?.Error;
+
+        context.Response.StatusCode = 500;
+        context.Response.ContentType = "application/json";
+
+        var result = System.Text.Json.JsonSerializer.Serialize(new
+        {
+            message = "An unexpected error occurred",
+            detail = exception?.Message,   // remove in production if needed
+            path = exceptionHandlerPathFeature?.Path
+        });
+
+        await context.Response.WriteAsync(result);
+    });
+});
+
 // Middleware
 if (app.Environment.IsDevelopment())
 {
@@ -287,7 +310,7 @@ app.UseSwaggerUI(c =>
     c.RoutePrefix = "swagger";
 });
 
-app.UseMiddleware<JwtMiddleware>();
+app.UseMiddleware<Service.API.SERVICE.JwtMiddleware>();
 app.UseMiddleware<SecurityMiddleWare>();
 app.MapControllers();
 

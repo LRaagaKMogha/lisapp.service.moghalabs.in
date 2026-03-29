@@ -21,7 +21,7 @@ namespace BloodBankManagement.Services.Reports
             DataTable result = new DataTable();
             try
             {
-                using (SqlConnection oConnection = new SqlConnection(EncryptionHelper.Decrypt(_connectionstring)))
+                using (SqlConnection oConnection = new SqlConnection(EncryptionHelper.DecryptSecret(_connectionstring)))
                 {
                     using (SqlCommand oCommand = new SqlCommand())
                     {

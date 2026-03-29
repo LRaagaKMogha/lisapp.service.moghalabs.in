@@ -30,8 +30,8 @@
 	<!-- ================= COMMON PACKAGES ================= -->
 	<ItemGroup>
 		<PackageReference Include="AspNetCoreRateLimit" Version="5.0.0" />
-		<!--<PackageReference Include="AutoMapper" Version="16.1.1" />
-		<PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="12.0.1" />-->
+		<PackageReference Include="AutoMapper" Version="16.1.1" />
+		<!--<PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="12.0.1" />-->
 		<PackageReference Include="Hangfire" Version="1.8.15" />
 		<PackageReference Include="Hangfire.SqlServer" Version="1.8.15" />
 		<PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="8.0.19" />
@@ -43,8 +43,8 @@
 		<PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="8.0.0" />
 		<PackageReference Include="PdfSharp" Version="6.0.0" />
 		<PackageReference Include="Serilog.AspNetCore" Version="8.0.0" />
-		<PackageReference Include="Swashbuckle.AspNetCore" Version="8.0.0" />
-		<PackageReference Include="Swashbuckle.AspNetCore.Swagger" Version="8.0.0" />
+		<PackageReference Include="Swashbuckle.AspNetCore" Version="8.1.4" />
+		<PackageReference Include="Swashbuckle.AspNetCore.Swagger" Version="8.1.4" />
 		<PackageReference Include="System.ComponentModel.Annotations" Version="5.0.0" />
 		<PackageReference Include="System.Data.SqlClient" Version="4.9.0" />
 		<PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="8.0.1" />
@@ -54,10 +54,12 @@
 
 	<!-- ================= PROJECT REFERENCES ================= -->
 	<ItemGroup>
+		<ProjectReference Include="..\SERVICE.BLOODBANK\BloodBank\Shared\Shared.csproj" />
 		<ProjectReference Include="..\Service.IRepository\Service.IRepository.csproj" />
 		<ProjectReference Include="..\Service.Model\Service.Model.csproj" />
 		<ProjectReference Include="..\Service.Repository\Service.Repository.csproj" />
 		<ProjectReference Include="..\Service.Model.EF\Service.Model.EF.csproj" />
+		<ProjectReference Include="..\SERVICE.SHARED\Service.Shared.csproj" />
 	</ItemGroup>
 
 </Project>

@@ -48,7 +48,7 @@ namespace Service.Common
         {
             try
             {
-                using (SqlConnection oConnection = new SqlConnection(EncryptionHelper.Decrypt(System.Configuration.ConfigurationManager.AppSettings["ConnectionString"] ?? string.Empty)))
+                using (SqlConnection oConnection = new SqlConnection(EncryptionHelper.DecryptSecret(System.Configuration.ConfigurationManager.AppSettings["ConnectionString"] ?? string.Empty)))
                 {
                     oConnection.Open();
                     using (SqlCommand oCommand = new SqlCommand())

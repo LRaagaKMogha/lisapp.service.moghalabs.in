@@ -21,7 +21,7 @@ namespace Service.Model.EF.External.CommonReports
         {
             if (!optionsBuilder.IsConfigured)
             {
-                optionsBuilder.UseSqlServer(EncryptionHelper.Decrypt(_connectionstring));
+                optionsBuilder.UseSqlServer(EncryptionHelper.DecryptSecret(_connectionstring));
             }
         }
 

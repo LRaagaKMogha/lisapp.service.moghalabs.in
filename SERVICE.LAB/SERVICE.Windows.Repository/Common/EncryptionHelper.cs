@@ -8,7 +8,7 @@ namespace Service.Win.Repository
 {
     public static class EncryptionHelper
     {
-        public static string Encrypt(string plainText)
+        public static string EncryptSecret(string plainText)
         {
             string EncryptionKey = ConfigurationManager.AppSettings["MKey"].ToString();
             string saltString = ConfigurationManager.AppSettings["Salt"].ToString();
@@ -31,7 +31,7 @@ namespace Service.Win.Repository
             }
             return plainText;
         }
-        public static string Decrypt(string plainText)
+        public static string DecryptSecret(string plainText)
         {
             string EncryptionKey = ConfigurationManager.AppSettings["MKey"].ToString();
             string saltString = ConfigurationManager.AppSettings["Salt"].ToString();

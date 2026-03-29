@@ -20,7 +20,7 @@ namespace Service.Model.EF.External.WhatsAppChatBot
         {
             if (!optionsBuilder.IsConfigured)
             {
-                optionsBuilder.UseSqlServer(EncryptionHelper.Decrypt(_connectionstring));
+                optionsBuilder.UseSqlServer(EncryptionHelper.DecryptSecret(_connectionstring));
             }
         }
         protected override void OnModelCreating(ModelBuilder modelBuilder)

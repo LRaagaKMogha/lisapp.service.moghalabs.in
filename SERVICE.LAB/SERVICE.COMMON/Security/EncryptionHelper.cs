@@ -8,7 +8,7 @@ namespace Service.Common
 {
     public static class EncryptionHelper
     {
-        public static string Encrypt(string plainText)
+        public static string EncryptSecret(string plainText)
         {
             string encryptionKey = ConfigurationManager.AppSettings["MKey"]
                 ?? throw new InvalidOperationException("Encryption key (MKey) is missing in AppSettings.");
@@ -41,7 +41,7 @@ namespace Service.Common
             }
             return plainText;
         }
-        public static string Decrypt(string plainText)
+        public static string DecryptSecret(string plainText)
         {
             if(plainText == null)
             {

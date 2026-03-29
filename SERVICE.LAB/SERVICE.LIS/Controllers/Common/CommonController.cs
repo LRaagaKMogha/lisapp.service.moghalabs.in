@@ -108,11 +108,11 @@ namespace Service.API.SERVICE.Controllers
         }
         #endregion
 
-        #region gethelper 
+        #region GetSecurityHelper 
         [AllowAnonymous]
         [HttpPost]
-        [Route("api/Common/gethelper")]
-        public ActionResult<string> gethelper(LstFilter plaintext)
+        [Route("api/Common/GetSecurityHelper")]
+        public ActionResult<string> GetSecurityHelper(LstFilter plaintext)
         {
             string result = string.Empty;
             try
@@ -121,15 +121,15 @@ namespace Service.API.SERVICE.Controllers
                     return BadRequest("filterValue is required.");
 
                 if (plaintext.filterCode == "E")
-                    result = EncryptionHelper.Encrypt(plaintext.filterValue);
+                    result = EncryptionHelper.EncryptSecret(plaintext.filterValue);
                 else if (plaintext.filterCode == "D")
-                    result = EncryptionHelper.Decrypt(plaintext.filterValue);
+                    result = EncryptionHelper.DecryptSecret(plaintext.filterValue);
                 else
                     result = "something went wrong";
             }
             catch (Exception ex)
             {
-                MyDevException.Error(ex, "CommonController.gethelper", ExceptionPriority.Low, ApplicationType.APPSERVICE, 0, 0, 0);
+                MyDevException.Error(ex, "CommonController.GetSecurityHelper", ExceptionPriority.Low, ApplicationType.APPSERVICE, 0, 0, 0);
             }
             return result;
         }

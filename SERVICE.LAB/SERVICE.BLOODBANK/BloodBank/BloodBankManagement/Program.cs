@@ -21,6 +21,7 @@ using BloodBankManagement.Services.Integration;
 using Microsoft.Data.SqlClient;
 using Shared.Audit;
 using System.Data;
+using Microsoft.Extensions.DependencyInjection;
 
 var builder = WebApplication.CreateBuilder(args);
 {
@@ -47,9 +48,8 @@ var builder = WebApplication.CreateBuilder(args);
             return new BadRequestObjectResult(problems);
         };
     });
-    services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
-    DtoMappingRegistry.RegisterMappingsFromAssemblies(AppDomain.CurrentDomain.GetAssemblies());
-    services.AddScoped<IDbConnection>(sp => new SqlConnection(EncryptionHelper.Decrypt(builder.Configuration.GetConnectionString("WebApiDatabase")) + ";MultipleActiveResultSets=True;"));
+    services.AddAutoMapper(cfg => { }, typeof(AutoMapperProfile).Assembly);
+    services.AddScoped<IDbConnection>(sp => new SqlConnection(EncryptionHelper.DecryptSecret(builder.Configuration.GetConnectionString("WebApiDatabase")) + ";MultipleActiveResultSets=True;"));
     services.AddScoped<IAuditService, AuditService>();
     services.Configure<AppSettings>(builder.Configuration.GetSection("AppSettings"));
     services.AddScoped<IBloodBankRegistrationService, BloodBankRegistrationService>();

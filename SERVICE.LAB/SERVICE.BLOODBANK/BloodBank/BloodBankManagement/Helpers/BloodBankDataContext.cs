@@ -17,7 +17,7 @@ namespace BloodBankManagement.Helpers
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer(EncryptionHelper.Decrypt(Configuration.GetConnectionString("WebApiDatabase")), options =>
+            optionsBuilder.UseSqlServer(EncryptionHelper.DecryptSecret(Configuration.GetConnectionString("WebApiDatabase")), options =>
             {
             });
         }
