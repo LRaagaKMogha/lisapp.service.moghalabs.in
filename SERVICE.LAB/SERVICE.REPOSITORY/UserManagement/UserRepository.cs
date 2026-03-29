@@ -8,8 +8,6 @@ using Service.Model.EF;
 using Microsoft.Data.SqlClient;
 using Service.Common;
 using Microsoft.Extensions.Configuration;
-using System.DirectoryServices;
-using DirectoryEntry = System.DirectoryServices.DirectoryEntry;
 using OtpNet;
 
 namespace Service.Repository
@@ -137,72 +135,6 @@ namespace Service.Repository
                        
                         if (userresult != null)
                         {
-                            //if ((bool)userresult.Isadaccess)
-                            //{
-                            //    MasterRepository _IMasterRepository = new MasterRepository(_config);
-                            //    var LDAPURL = _IMasterRepository.GetSingleAppSetting("LDAPURL").ConfigValue;
-                                
-                            //    try
-                            //    {
-                            //        DirectoryEntry dr = new DirectoryEntry(LDAPURL, req.LoginName, req.Password);
-                            //        DirectorySearcher ds = new DirectorySearcher(dr);
-                            //        var adresult = ds.FindOne();
-
-                            //        if (adresult != null)
-                            //        {
-                            //            if (string.IsNullOrEmpty(userresult.PhoneNo))
-                            //            {
-                            //                result.ResponseStatus = 3;
-                            //                result.Token = userresult.ladpsecretkey;
-                            //                result.UserName = userresult.UserName;
-                            //                result.UserNo = userresult.UserNo;
-                            //                result.VenueNo = userresult.VenueNo;
-                            //                result.VenueBranchNo = userresult.VenueBranchNo;
-                            //                result.DomainCode = "0";
-                            //            }
-                            //            else if (string.IsNullOrEmpty(userresult.ladpsecretkey))
-                            //            {
-                            //                var userdata = context.TblUser.Where(user => user.UserNo == userresult.UserNo).FirstOrDefault();
-                            //                userdata.LoginAttempt = 0;
-                            //                userdata.ladpsecretkey = Base32Encoding.ToString(KeyGeneration.GenerateRandomKey(20));
-                            //                context.Update(userdata);
-                            //                context.SaveChanges();
-                            //                if ((bool)userresult.IsadmultifactorAccess)
-                            //                {
-                            //                    string SMSURL = _IMasterRepository.GetSingleAppSetting("SMSURL").ConfigValue;
-                            //                    if (!string.IsNullOrEmpty(SMSURL) && !string.IsNullOrEmpty(userresult.PhoneNo))
-                            //                    {
-                            //                        CommonHelper.SendSMS(SMSURL, userresult.ladpsecretkey, userresult.PhoneNo);
-                            //                    }
-                            //                }
-                            //                result.ResponseStatus = 2;
-                            //                result.Token = userdata.ladpsecretkey;
-                            //                result.UserName = userresult.UserName;
-                            //                result.UserNo = userresult.UserNo;
-                            //                result.VenueNo = userresult.VenueNo;
-                            //                result.VenueBranchNo = userresult.VenueBranchNo;
-                            //                result.DomainCode = "0";
-                            //            }
-                            //            else
-                            //            {
-                            //                result.ResponseStatus = 2;
-                            //                result.Token = userresult.ladpsecretkey;
-                            //                result.UserName = userresult.UserName;
-                            //                result.UserNo = userresult.UserNo;
-                            //                result.VenueNo = userresult.VenueNo;
-                            //                result.VenueBranchNo = userresult.VenueBranchNo;
-                            //                result.DomainCode = "1";
-                            //            }
-                            //        }
-                            //    }
-                            //    catch (Exception ex)
-                            //    {
-                            //        result.ResponseStatus = -1;
-                            //        MyDevException.Error(ex, "UserRepository.UserLogIn/LoginName - " + req.LoginName, ExceptionPriority.High, ApplicationType.REPOSITORY, 0, 0, 0);
-                            //    }
-                            //    return result;
-                            //}
-
                             var encodingPassword = CommonSecurity.EncodePassword(req.Password, CommonSecurity.GeneratePassword(1));
                             if (userresult.Password == encodingPassword)
                             {
@@ -750,7 +682,7 @@ namespace Service.Repository
                     var _menuLoadUserNo = new SqlParameter("MenuLoadUserNo", MenuLoadUserNo);
                     
                     var menulst = context.UserMenuMappingEF.FromSqlRaw(
-                    "Execute dbo.Pro_GetUserMenuMapping @VenueNo,@VenueBranchNo,@userno, @MenuLoadUserNo", 
+                    "Execute dbo.Pro_GetUserMenuMapping @VenueNo, @VenueBranchNo, @userno, @MenuLoadUserNo", 
                     _venueno, _venuebranchno, _userno, _menuLoadUserNo).ToList();
 
                     int oldModuleNo = 0;
@@ -916,7 +848,7 @@ namespace Service.Repository
                     var _MenuUserNo = new SqlParameter("MenuUserNo", Useritem.MenuUserNo);
 
                     var resultdata = context.UserInsertMenuEF.FromSqlRaw(
-                    "Execute dbo.pro_InsertMenuMapping @MenuXML,@UserNo,@CreatedBy,@VenueBranchNo,@VenueNo,@MenuUserNo",
+                    "Execute dbo.pro_InsertMenuMapping @MenuXML, @UserNo, @CreatedBy, @VenueBranchNo, @VenueNo, @MenuUserNo",
                     _MenuXML, _UserNo, _CreatedBy, _VenueBranchNo, _VenueNo, _MenuUserNo).AsEnumerable().FirstOrDefault();
                     
                     result = resultdata?.UserNo ?? 0;
