@@ -9,7 +9,7 @@ namespace Service.Repository
     {
         public static IMapper Configure()
         {
-            var mapperConfig = new MapperConfiguration(cfg =>
+            var mapperConfig = new MapperConfiguration((IMapperConfigurationExpression cfg) =>
             {
                 cfg.CreateMap<IntegrationOrderVisitDetails, IntegrationOrderVisitDetailsResponse>();
                 cfg.CreateMap<IntegrationOrderPatientDetails, IntegrationOrderPatientDetailsResponse>();
