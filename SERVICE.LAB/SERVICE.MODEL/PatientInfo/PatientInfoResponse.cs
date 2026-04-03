@@ -59,6 +59,7 @@ namespace Service.Model.PatientInfo
         public bool IsDue { get; set; }
         public bool IsStat { get; set; }
         public int NotifyCount { get; set; }
+        public Byte NotifyType { get; set; }
         public bool IsPatientEdit { get; set; }
         public string CollectionCenterCode { get; set; }
         public string externalvisitid { get; set; }
@@ -96,6 +97,7 @@ namespace Service.Model.PatientInfo
         public bool IsShowDocument { get; set; }
         [NotMapped]
         public bool IsShowSendOutDocument { get; set; }
+        public bool IsShowHCDocument { get; set; }
         public string BranchName { get; set; }
         public string marketingExec { get; set; }
         public string collectionExec { get; set; }

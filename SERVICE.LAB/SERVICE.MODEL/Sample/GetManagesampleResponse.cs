@@ -22,9 +22,7 @@ namespace Service.Model.Sample
         public bool IsStat { get; set; }
         public List<SampleDetails> sampleDetails { get; set; }
         public int TATFlag { get; set; }
-        public bool IsRejected { get; set; }    
-        public string IncludeInstruction { get; set; }
-        public bool IsIncludeInstruction { get; set; }
+        public bool IsRejected { get; set; }
         public string IDnumber { get; set; }
         public bool IsVipIndication { get; set; }
     }
@@ -44,7 +42,6 @@ namespace Service.Model.Sample
         public string higTempValue { get; set; }
         public bool collectatsource { get; set; }
         public int specimenQty { get; set; }
-
         public int fastingOrNonfasting { get; set; }
     }
     public class TestDetails
@@ -61,6 +58,8 @@ namespace Service.Model.Sample
         public bool isnotgiven { get; set; }
         public bool isbarcodenotreq { get; set; }
         public int ServiceNo { get; set; }
+        public bool IsTestInstruction { get; set; }
+        public string TestInstruction { get; set; }
     }
     public class BarcodePrintResponse
     {

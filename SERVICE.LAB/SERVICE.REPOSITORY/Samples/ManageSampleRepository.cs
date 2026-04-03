@@ -44,8 +44,10 @@ namespace Service.Repository
                     var _PatientNo = new SqlParameter("PatientNo", RequestItem?.PatientNo);
 
                     var Objresult = context.GetManageSampleDTO.FromSqlRaw(
-                    "Execute dbo.Pro_Getmanagesample @FromDate, @ToDate, @Type, @VenueNo, @VenueBranchNo, @VisitNo, @RefferalType, @CustomerNo, @PhysicianNo, @PageIndex, @PageCode, @OrderStatus, @RouteNo, @FranchiseNo, @specimenQty, @PatientNo",
-                    _FromDate, _ToDate, _Type, _VenueNo, _VenueBranchNo, _VisitNo, _RefferalType, _CustomerNo, _PhysicianNo, _PageIndex, _PageCode, _OrderStatus, _RouteNo, _FranchiseNo, _specimenQty, _PatientNo).ToList();
+                    "Execute dbo.Pro_Getmanagesample @FromDate, @ToDate, @Type, @VenueNo, @VenueBranchNo, @VisitNo, @RefferalType, " +
+                    "@CustomerNo, @PhysicianNo, @PageIndex, @PageCode, @OrderStatus, @RouteNo, @FranchiseNo, @specimenQty, @PatientNo",
+                    _FromDate, _ToDate, _Type, _VenueNo, _VenueBranchNo, _VisitNo, _RefferalType, 
+                    _CustomerNo, _PhysicianNo, _PageIndex, _PageCode, _OrderStatus, _RouteNo, _FranchiseNo, _specimenQty, _PatientNo).ToList();
 
                     int oldVisitNo = 0;
                     int newVisitNO = 0;
@@ -84,8 +86,6 @@ namespace Service.Repository
                             getManagesampleResponse.IsStat = obj.IsStat;
                             getManagesampleResponse.TATFlag = obj.TATFlag;
                             getManagesampleResponse.IsRejected = obj.IsRejected;
-                            getManagesampleResponse.IncludeInstruction = obj.IncludeInstruction;
-                            getManagesampleResponse.IsIncludeInstruction = obj.IsincludeInstruction;
                             getManagesampleResponse.IDnumber = obj.IDnumber;
                             getManagesampleResponse.IsVipIndication = obj.IsVipIndication;
                            
@@ -122,7 +122,7 @@ namespace Service.Repository
                                     lstSample.Add(sampleDetails);
 
                                     var testDetailsById = Objresult.Where(x => x.VisitNo == newVisitNO && x.SampleNo == newSampleNo && x.ContainerNo == sample.ContainerNo)//same sample with different container name, should be separate
-                                        .Select(x => new { x.TestName, x.TestNo, x.SampleNo, x.OrderCode, x.OrderListNo, x.ServiceNo, x.OrdersNo, x.OrderType, x.IsSelectMultiSample, x.multiSampleTestno }).ToList();
+                                        .Select(x => new { x.TestName, x.TestNo, x.SampleNo, x.OrderCode, x.OrderListNo, x.ServiceNo, x.OrdersNo, x.OrderType, x.IsSelectMultiSample, x.multiSampleTestno, x.IsTestInstruction, x.TestInstruction }).ToList();
                                     oldTestNo = 0;
                                    
                                     foreach (var test in testDetailsById)
@@ -170,7 +170,9 @@ namespace Service.Repository
                                                 OrdersNo = test.OrdersNo,
                                                 OrderType = test.OrderType,
                                                 ServiceNo = test.ServiceNo,
-                                                lstMultiSamples = lstMultiSample
+                                                lstMultiSamples = lstMultiSample,
+                                                IsTestInstruction = test.IsTestInstruction,
+                                                TestInstruction = test.TestInstruction
                                             };
                                             oldTestNo = newTestNo;
                                             LsttestDetails.Add(testDetails);

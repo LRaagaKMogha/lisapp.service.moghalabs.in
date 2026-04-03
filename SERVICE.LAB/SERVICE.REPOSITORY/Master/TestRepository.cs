@@ -378,8 +378,10 @@ namespace Service.Repository
                     var _OldServiceNo = new SqlParameter("OldServiceNo", req?.OldServiceNo);
 
                     var lst = context.InsertTest.FromSqlRaw(
-                    "Execute dbo.pro_InsertTest @testno,@testXML,@testRRXML,@testAMRXML,@testPLXML,@userno,@venueno,@venuebranchno,@testMultiSampleList,@IsApproval,@IsReject,@RejectReason,@OldServiceNo",
-                    _testno, _testXML, _testRRXML, _testAMRXML, _testPLXML, _userno, _venueno, _venuebranchno, _testMultiSampleList, _IsApproval, _IsReject, _RejectReason, _OldServiceNo).ToList();
+                    "Execute dbo.pro_InsertTest @testno, @testXML, @testRRXML, @testAMRXML, @testPLXML, " +
+                    "@userno, @venueno, @venuebranchno, @testMultiSampleList, @IsApproval, @IsReject, @RejectReason, @OldServiceNo",
+                    _testno, _testXML, _testRRXML, _testAMRXML, _testPLXML, 
+                    _userno, _venueno, _venuebranchno, _testMultiSampleList, _IsApproval, _IsReject, _RejectReason, _OldServiceNo).ToList();
 
                     testno = lst[0].testNo;
                     //

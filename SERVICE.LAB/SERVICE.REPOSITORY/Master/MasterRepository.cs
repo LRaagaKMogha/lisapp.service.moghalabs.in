@@ -33,14 +33,16 @@ namespace Service.Repository
             {
                 string _CacheKey = CacheKeys.CommonMaster + MasterKey + venueno + venuebranchno;
                 Objresult = MemoryCacheRepository.GetCacheItem<List<CommonMasterDto>>(_CacheKey);
-                if (Objresult == null || MasterKey == "MediaLab" || MasterKey == "ANALYZER" || MasterKey == "PARAMNAME" || MasterKey == "PRODUCTMASTER" || MasterKey == "CountryName" || MasterKey == "StateName" || MasterKey == "CityName" || MasterKey == "countrymaster" || Objresult.Count()==0)
+                if (Objresult == null || MasterKey == "MediaLab" || MasterKey == "ANALYZER" || MasterKey == "PARAMNAME" || MasterKey == "PRODUCTMASTER" || MasterKey == "CountryName" || MasterKey == "StateName" || MasterKey == "CityName" || MasterKey == "countrymaster" || Objresult.Count() == 0)
                 {
                     using (var context = new MasterContext(_config.GetConnectionString(ConfigKeys.DefaultConnection)))
                     {
                         var _venueno = new SqlParameter("venueno", venueno);
                         var _venuebranchno = new SqlParameter("venuebranchno", venuebranchno);
                         var _MasterKey = new SqlParameter("MasterKey", MasterKey);
-                        Objresult = context.CommonMasterDTO.FromSqlRaw("Execute dbo.pro_CommonDetails @MasterKey,@venueno,@venuebranchno", _MasterKey, _venueno, _venuebranchno).ToList();
+                        
+                        Objresult = context.CommonMasterDTO.FromSqlRaw("Execute dbo.pro_CommonDetails @MasterKey, @venueno, @venuebranchno", _MasterKey, _venueno, _venuebranchno).ToList();
+                        
                         objAppSettingResponse = new AppSettingResponse();
                         string AppCacheMemoryTime = "CacheMemoryTime";
                         objAppSettingResponse = _IMasterRepository.GetSingleAppSetting(AppCacheMemoryTime);

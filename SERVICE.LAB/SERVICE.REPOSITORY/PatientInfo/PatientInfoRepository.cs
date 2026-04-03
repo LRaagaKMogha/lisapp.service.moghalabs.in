@@ -35,7 +35,7 @@ namespace Service.Repository.PatientInfo
             {
                 using (var context = new LIMSContext(_config.GetConnectionString(ConfigKeys.DefaultConnection)))
                 {
-                    var _FromDate = new SqlParameter("FROMDate", RequestItem.FromDate);
+                    var _FromDate = new SqlParameter("FromDate", RequestItem.FromDate);
                     var _ToDate = new SqlParameter("ToDate", RequestItem.ToDate);
                     var _Type = new SqlParameter("Type", RequestItem.Type);
                     var _VenueNo = new SqlParameter("VenueNo", RequestItem.VenueNo);
@@ -60,8 +60,8 @@ namespace Service.Repository.PatientInfo
                     var _MultiDeptNo = new SqlParameter("MultiDeptNo", RequestItem.multiDeptNo);
 
                     lstPatientInfoResponse = context.GetPatientInfoDTO.FromSqlRaw(
-                    "Execute dbo.Pro_GetPatientInfo @FROMDate,@ToDate,@Type,@VenueNo,@VenueBranchNo,@CustomerNo,@PatientNo,@VisitNo,@RefferalType,@FilterCustomerNo,@PhysicianNo," +
-                    "@DepartmentNo,@ServiceNo,@ServiceType,@OrderStatus,@isSTATFilter,@PageIndex,@loginType,@UserNo,@RouteNo,@maindeptNo, @MultiFieldsSearch,@MultiDeptNo",
+                    "Execute dbo.Pro_GetPatientInfo @FromDate, @ToDate, @Type, @VenueNo, @VenueBranchNo, @CustomerNo, @PatientNo,@VisitNo,@RefferalType,@FilterCustomerNo,@PhysicianNo," +
+                    "@DepartmentNo, @ServiceNo, @ServiceType, @OrderStatus, @isSTATFilter, @PageIndex, @loginType, @UserNo, @RouteNo, @maindeptNo, @MultiFieldsSearch,@MultiDeptNo",
                     _FromDate, _ToDate, _Type, _VenueNo, _VenueBranchNo, _CustomerNo, _PatientNo, _VisitNo, _RefferalType, _FilterCustomerNo, _PhysicianNo, _DepartmentNo,
                     _ServiceNo, _ServiceType, _OrderStatus, _isSTATFilter, _pageIndex, _loginType, _userNo, _routeNo, _maindeptNo, _MultiFieldsSearch,_MultiDeptNo).ToList();                   
 
@@ -69,6 +69,7 @@ namespace Service.Repository.PatientInfo
                     {
                         SetDocumentShowDetails(RequestItem, patientinfo, "UploadPathInit", "Document");
                         SetDocumentShowDetails(RequestItem, patientinfo, "ResultAckUpload", "SendOutDocument");
+                        SetDocumentShowDetails(RequestItem, patientinfo, "HCPrescriptionPath", "HCDocument");
                     }
                 }
             }
@@ -123,12 +124,14 @@ namespace Service.Repository.PatientInfo
             return lstPatientListInfoResponse;
         }
 
-        private void SetDocumentShowDetails(CommonFilterRequestDTO RequestItem, PatientInfoResponse patientinfo,string UploadPath,string DocumentName)
+        private void SetDocumentShowDetails(CommonFilterRequestDTO RequestItem, PatientInfoResponse patientinfo, string UploadPath, string DocumentName)
         {
             MasterRepository _IMasterRepository = new MasterRepository(_config);
             AppSettingResponse objAppSettingResponse = new AppSettingResponse();
             objAppSettingResponse = new AppSettingResponse();
-            string AppUploadPathInit = UploadPath;//"UploadPathInit";
+            string AppUploadPathInit = UploadPath;
+            string folderName = string.Empty;
+
             objAppSettingResponse = _IMasterRepository.GetSingleAppSetting(AppUploadPathInit);
             string uplodpathinit = objAppSettingResponse != null && objAppSettingResponse.ConfigValue != null && objAppSettingResponse.ConfigValue != ""
                 ? objAppSettingResponse.ConfigValue : "";
@@ -140,7 +143,6 @@ namespace Service.Repository.PatientInfo
             var serviceno = patientinfo.TestNo;
             var visitnumber = patientinfo?.VisitNo.ToString();
 
-            string folderName = string.Empty;
             if (DocumentName == "Document")
             {
                 folderName = venueNo + "\\" + venuebNo + "\\" + visitId;
@@ -149,13 +151,18 @@ namespace Service.Repository.PatientInfo
             {
                 if (UploadPath == "ResultAckUpload")
                 {
-                    folderName = venueNo  + "\\" + visitnumber + "\\" + serviceno;
+                    folderName = venueNo + "\\" + visitnumber + "\\" + serviceno;
+                }
+                else if (UploadPath == "HCPrescriptionPath")
+                {
+                    folderName = venueNo + "\\" + visitnumber;
                 }
                 else
                 {
                     folderName = venueNo + "\\" + venuebNo + "\\" + visitId + "\\" + serviceno;
                 }
             }
+
             string newPath = Path.Combine(Pathinit, folderName);
             if (Directory.Exists(newPath))
             {
@@ -166,6 +173,10 @@ namespace Service.Repository.PatientInfo
                     {
                         patientinfo.IsShowDocument = true;
                     }
+                    else if (DocumentName == "HCDocument")
+                    {
+                        patientinfo.IsShowHCDocument = true;
+                    }
                     else
                     {
                         patientinfo.IsShowSendOutDocument = true;
@@ -173,7 +184,6 @@ namespace Service.Repository.PatientInfo
                 }
             }
         }
-
         public List<CustomSearchResponse> GetCustomSearch(CommonSearchRequest searchRequest)
         {
             List<CustomSearchResponse> lstCustomSearch = new List<CustomSearchResponse>();

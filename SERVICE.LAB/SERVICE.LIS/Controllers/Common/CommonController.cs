@@ -137,7 +137,7 @@ namespace Service.API.SERVICE.Controllers
 
         #region Critical Result Notification        
         [HttpPost]
-        [Route("api/Common/getCriticalResultNotify")]
+        [Route("api/Common/GetCriticalResultNotificationList")]
         public List<GetCriticalResultsResponse> GetCriticalResultNotify(GetCriticalResultsReq req)
         {
             List<GetCriticalResultsResponse> lst = new List<GetCriticalResultsResponse>();

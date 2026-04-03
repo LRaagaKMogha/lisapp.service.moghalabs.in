@@ -39,8 +39,8 @@ namespace Service.Model.Sample
         public bool IsSelectMultiSample { get; set; }
         public bool IsRejected { get; set; }
         public bool collectatsource { get; set; }
-        public string IncludeInstruction { get; set; }
-        public bool IsincludeInstruction { get; set; }
+        public string TestInstruction { get; set; }
+        public bool IsTestInstruction { get; set; }
         public int specimenQty { get; set; }
         public int multiSampleTestno { get; set; }
         public string IDnumber { get; set; }

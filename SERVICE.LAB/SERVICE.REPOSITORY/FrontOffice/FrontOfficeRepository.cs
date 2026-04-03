@@ -694,9 +694,10 @@ namespace Service.Repository
                     var _IsFasting = new SqlParameter("IsFasting", objDTO.isFasting);
                     var _ExternalPatientID = new SqlParameter("ExternalPatientID", objDTO.ExternalPatientID.ValidateEmpty());
                     var _OPDAppoinmentNo = new SqlParameter("OPDAppoinmentNo", objDTO?.OPDAppoinmentNo.ValidateEmpty());
-                    //var _loyalcardno = new SqlParameter("loyalcardno", objDTO?.loyalcardno.ValidateEmpty());
+
                     var FrontOffficePatientResponse = context.FrontOffficePatient.FromSqlRaw(
-                    "Execute dbo.Pro_InsertPatientRegistration @PatientNo,@TitleCode,@FirstName,@MiddleName,@LastName,@DOB,@Gender,@Age,@AgeType,@ageDays,@ageMonths,@ageYears,@MobileNumber,@AltMobileNumber," +
+                    "Execute dbo.Pro_InsertPatientRegistration " +
+                    "@PatientNo,@TitleCode,@FirstName,@MiddleName,@LastName,@DOB,@Gender,@Age,@AgeType,@ageDays,@ageMonths,@ageYears,@MobileNumber,@AltMobileNumber," +
                     "@EmailID,@SecondaryEmailID,@Address,@CountryNo,@StateNo,@CityNo,@AreaName,@Pincode,@SecondaryAddress," +
                     "@URNID,@URNType,@RefferralTypeNo,@CustomerNo,@PhysicianNo,@RiderNo,@MarketingNo,@RouteNo,@IsStat,@ClinicalHistory,@registeredType,@VenueNo,@VenueBranchNo,@UserID,@Pass," +
                     "@registrationDT,@IsAutoEmail,@IsAutoSMS,@IsSelf,@ExtenalVisitID,@VaccinationType,@VaccinationDate,@IsFranchise,@NURNID,@NURNType,@Deliverymode,@ExternalVisitIdentity," +
@@ -704,14 +705,14 @@ namespace Service.Repository
                     "@PatientBuilding,@PatientHomeNo,@PhysicianNo2,@VipIndication,@BedNo,@NationalityNo,@RaceNo,@CompanyNo,@CaseNumber,@AlternateIdType, " +
                     "@AlternateId,@PatientOfficeNumber,@IsPregnant,@Remarks,@HomePhoneNo,@ClinicalDiagnosis,@ClinicalDiagnosisOthers,@SampleCollectionDT," +
                     "@InternalComments, @HCPatientNo, @IsFasting, @ExternalPatientID",
-                    _PatientNo, _TitleCode, _FirstName, _MiddleName, _LastName, _DOB, _Gender, _Age, _AgeType, _AgeDays, _AgeMonths, _AgeYears, _MobileNumber, _AltMobileNumber, _EmailID,
-                    _SecondaryEmailID, _Address, _CountryNo, _StateNo, _CityNo, _AreaName, _Pincode, _SecondaryAddress, _URNID, _URNType, _RefferralTypeNo,
-                    _CustomerNo, _PhysicianNo, _RiderNo, _MarketingNo, _RouteNo, _IsStat, _ClinicalHistory, _registeredType, _VenueNo, _VenueBranchNo, _UserID, _Password, _registrationDT,
-                    _IsEmail, _IsSMS, _isSelf, _ExternalVisitID, _VaccinationType, _VaccinationDate, _IsFranchise, _NURNID, _NURNType, _Deliverymode,
-                    _ExternalVisitIdentity, _WardNo, _WardName, _maritalStatus, _isAutoWhatsApp, _NRICNumber,
-                    _AllergyInfo, _PatientBlock, _PatientUnitNo, _PatientFloor, _PatientBuilding, _PatientHomeNo, _PhysicianNo2, _VipIndication, _BedNo, _NationalityNo, _RaceNo,
-                    _CompanyNo, _CaseNumber, _AlternateIdType, _AlternateId, _PatientOfficeNumber, _IsPregnant, _Remarks, _HomePhoneNo, _ClinicalDiagnosis, _ClinicalDiagnosisOthers,
-                    _SampleCollectionDT, _InternalComments, _HCPatientNo, _IsFasting, _ExternalPatientID).AsEnumerable().ToList();
+                    _PatientNo, _TitleCode, _FirstName, _MiddleName, _LastName, _DOB, _Gender, _Age, _AgeType, _AgeDays, _AgeMonths, _AgeYears, _MobileNumber, _AltMobileNumber, 
+                    _EmailID, _SecondaryEmailID, _Address, _CountryNo, _StateNo, _CityNo, _AreaName, _Pincode, _SecondaryAddress, 
+                    _URNID, _URNType, _RefferralTypeNo, _CustomerNo, _PhysicianNo, _RiderNo, _MarketingNo, _RouteNo, _IsStat, _ClinicalHistory, _registeredType, _VenueNo, _VenueBranchNo, _UserID, _Password, 
+                    _registrationDT, _IsEmail, _IsSMS, _isSelf, _ExternalVisitID, _VaccinationType, _VaccinationDate, _IsFranchise, _NURNID, _NURNType, _Deliverymode, _ExternalVisitIdentity, 
+                    _WardNo, _WardName, _maritalStatus, _isAutoWhatsApp, _NRICNumber, _AllergyInfo, _PatientBlock, _PatientUnitNo, _PatientFloor, 
+                    _PatientBuilding, _PatientHomeNo, _PhysicianNo2, _VipIndication, _BedNo, _NationalityNo, _RaceNo, _CompanyNo, _CaseNumber, _AlternateIdType, 
+                    _AlternateId, _PatientOfficeNumber, _IsPregnant, _Remarks, _HomePhoneNo, _ClinicalDiagnosis, _ClinicalDiagnosisOthers, _SampleCollectionDT,
+                    _InternalComments, _HCPatientNo, _IsFasting, _ExternalPatientID).AsEnumerable().ToList();
 
                     PatientVisitNo = FrontOffficePatientResponse[0].patientvisitno;
                     //Check if exists or not mobileno and passportno in  Client portal 
