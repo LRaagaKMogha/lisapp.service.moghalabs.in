@@ -1,0 +1,10 @@
+﻿Error: System.NullReferenceException: Object reference not set to an instance of an object.
+   at DevExpress.VisualStudioInterop.Base.Helpers.ProjectHelper.AddReference(IProject project, String assemblyName, Boolean throwOnError)
+   at DevExpress.DataAccess.Design.VSHelper.AddReferences(IServiceProvider serviceProvider, String[] references)
+   at DevExpress.DataAccess.Design.VSSqlDataSourceDesigner.Initialize(IComponent component)
+   at System.ComponentModel.Design.DesignerHost.AddToContainerPostProcess(IComponent component, String name, IContainer containerToAddTo)
+   at System.ComponentModel.Design.DesignerHost.PerformAdd(IComponent component, String name)
+   at DevExpress.XtraReports.Design.DesignToolHelper.AddReportComponents(XtraReport dest, IDesignerHost designerHost, XtraReport source)
+   at DevExpress.XtraReports.Import.ReportConverterRunner.<>c__DisplayClass4_0.<Run>b__0()
+   at DevExpress.XtraReports.Design.TransactionHelper.<>c__DisplayClass3_0.<PerformInTransaction>b__0()
+   at DevExpress.XtraReports.Design.TransactionHelper.PerformInTransaction(String description, Func`1 func)
