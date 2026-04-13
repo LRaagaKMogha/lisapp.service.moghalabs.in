@@ -22,6 +22,7 @@ namespace Service.Repository
         {
             var tokenHandler = new JwtSecurityTokenHandler();
             var tokenKey = Encoding.UTF8.GetBytes(_config["JWT:Key"]);
+
             var claims = new List<Claim>()
             {
              new Claim("IsAdmin", users.IsAdmin.ToString()),
@@ -31,14 +32,17 @@ namespace Service.Repository
              new Claim("UserNo", users.UserNo.ToString()),
              new Claim("UserName", users.UserName),
              new Claim("IsProvisional", users.IsProvisional.ToString())
-              };
+            };
+
             users.lstUserRoleName?.ForEach(role => claims.Add(new Claim(ClaimTypes.Role, role.RoleName.ToString())));
+            
             var tokenDescriptor = new SecurityTokenDescriptor
             {
                 Subject = new ClaimsIdentity(claims),
                 Expires = DateTime.UtcNow.AddDays(30),
                 SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(tokenKey), SecurityAlgorithms.HmacSha256Signature)
             };
+
             var refreshToken = GenerateRefreshToken();
 
             var token = tokenHandler.CreateToken(tokenDescriptor);

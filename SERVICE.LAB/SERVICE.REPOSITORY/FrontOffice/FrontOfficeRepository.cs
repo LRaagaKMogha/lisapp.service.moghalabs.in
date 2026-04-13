@@ -100,8 +100,9 @@ namespace Service.Repository
                     var _Pincode = new SqlParameter("Pincode", PinCode);
 
                     var result = context.GetDetailsByPincodeDTO.FromSqlRaw(
-                        "Execute dbo.Pro_GetDetailsByPinCode @VenueNo, @VenueBranchNo, @Pincode",
-                     _VenueNo, _VenueBranchNo, _Pincode).ToList();
+                    "Execute dbo.Pro_GetDetailsByPinCode @VenueNo, @VenueBranchNo, @Pincode",
+                    _VenueNo, _VenueBranchNo, _Pincode).ToList();
+                    
                     Objresult = result?.AsEnumerable()?.FirstOrDefault();
                 }
             }
@@ -158,7 +159,7 @@ namespace Service.Repository
                     Objresult = context.CustomerList.FromSqlRaw(
                     "Execute dbo.Pro_GetSearchCustomer @VenueNo, @VenueBranchNo, @UserNo, @IsFranchisee, " +
                     "@ExcludePostpaid, @ExcludePrepaid, @ExcludeCash, @IsApproval, @IsClinic, @ClientType, @IsMapping",
-                     _VenueNo, _VenueBranchNo, _UserNo, _IsFranchisee, _ExcludePostpaid, _ExcludePrepaid, _ExcludeCash, _IsApproval, _IsClinical, _clientType,_IsMapping).ToList();
+                    _VenueNo, _VenueBranchNo, _UserNo, _IsFranchisee, _ExcludePostpaid, _ExcludePrepaid, _ExcludeCash, _IsApproval, _IsClinical, _clientType,_IsMapping).ToList();
                 }
             }
             catch (Exception ex)
@@ -179,19 +180,19 @@ namespace Service.Repository
             {
                 using (var context = new FrontOfficeContext(_config.GetConnectionString(ConfigKeys.DefaultConnection)))
                 {
-
                     var _VenueNo = new SqlParameter("VenueNo", VenueNo);
                     var _VenueBranchNo = new SqlParameter("VenueBranchNo", VenueBranchNo);
+                    
                     var result = context.CustomerList.FromSqlRaw(
-                         "Execute dbo.Pro_GetSearchCustomer @VenueNo,@VenueBranchNo",
-                      _VenueNo, _VenueBranchNo).ToList();
+                    "Execute dbo.Pro_GetSearchCustomer @VenueNo,@VenueBranchNo",
+                    _VenueNo, _VenueBranchNo).ToList();
 
                     Objresult = result.Where(a => a.customerNo == Customerno).AsEnumerable()?.FirstOrDefault();
                 }
             }
             catch (Exception ex)
             {
-                MyDevException.Error(ex, "FrontOfficeRepository.GetCustomerDetails/Customerno-" + Customerno, ExceptionPriority.High, ApplicationType.REPOSITORY, VenueNo, VenueBranchNo, 0);
+                MyDevException.Error(ex, "FrontOfficeRepository.GetCustomerDetails/Customerno - " + Customerno, ExceptionPriority.High, ApplicationType.REPOSITORY, VenueNo, VenueBranchNo, 0);
             }
             return Objresult;
         }
@@ -209,10 +210,10 @@ namespace Service.Repository
                     var _Customerno = new SqlParameter("Customerno", Customerno);
                     var _VenueNo = new SqlParameter("VenueNo", VenueNo);
                     var _VenueBranchNo = new SqlParameter("VenueBranchNo", VenueBranchNo);
+                    
                     Objresult = context.CustomerCurrentBalance.FromSqlRaw(
-                        "Execute dbo.Pro_GetCustomerBalance @Customerno,@VenueNo,@VenueBranchNo",
-                     _Customerno, _VenueNo, _VenueBranchNo).AsEnumerable()?.FirstOrDefault();
-
+                    "Execute dbo.Pro_GetCustomerBalance @Customerno,@VenueNo,@VenueBranchNo",
+                    _Customerno, _VenueNo, _VenueBranchNo).AsEnumerable()?.FirstOrDefault();
                 }
             }
             catch (Exception ex)
@@ -233,14 +234,12 @@ namespace Service.Repository
             {
                 using (var context = new FrontOfficeContext(_config.GetConnectionString(ConfigKeys.DefaultConnection)))
                 {
-                    //Objresult = context.TblDiscount.Where(a => a.VenueNo == VenueNo
-                    //&& a.VenueBranchNo == VenueBranchNo).ToList();
                     var _VenueNo = new SqlParameter("VenueNo", VenueNo);
                     var _VenueBranchNo = new SqlParameter("VenueBranchNo", VenueBranchNo);                                        
 
                     Objresult = context.GetDiscountMaster.FromSqlRaw(
-                         "Execute dbo.pro_GetDiscountMaster_All @VenueNo,@VenueBranchNo",
-                      _VenueNo, _VenueBranchNo).ToList();
+                    "Execute dbo.pro_GetDiscountMaster_All @VenueNo, @VenueBranchNo",
+                    _VenueNo, _VenueBranchNo).ToList();
                 }
             }
             catch (Exception ex)
@@ -281,15 +280,14 @@ namespace Service.Repository
             {
                 using (var context = new FrontOfficeContext(_config.GetConnectionString(ConfigKeys.DefaultConnection)))
                 {
-
                     var _VenueNo = new SqlParameter("VenueNo", VenueNo);
                     var _VenueBranchNo = new SqlParameter("VenueBranchNo", VenueBranchNo);
                     var _physicianName = new SqlParameter("physicianName", physicianName.ValidateEmpty());
                     var _type = new SqlParameter("type", type);
                     
                     Objresult = context.Physiciandetails.FromSqlRaw(
-                         "Execute dbo.Pro_SearchPhysicianDetail @VenueNo,@VenueBranchNo,@physicianName,@type",
-                      _VenueNo, _VenueBranchNo, _physicianName, _type).ToList();
+                    "Execute dbo.Pro_SearchPhysicianDetail @VenueNo,@VenueBranchNo,@physicianName,@type",
+                    _VenueNo, _VenueBranchNo, _physicianName, _type).ToList();
                 }
             }
             catch (Exception ex)
@@ -311,6 +309,7 @@ namespace Service.Repository
             {
                 string _CacheKey = CacheKeys.ServiceList + VenueNo;// + VenueBranchNo;
                 Objresult = MemoryCacheRepository.GetCacheItem<List<ServiceSearchDTO>>(_CacheKey);
+                
                 if (Objresult == null)
                 {
                     using (var context = new FrontOfficeContext(_config.GetConnectionString(ConfigKeys.DefaultConnection)))
@@ -318,9 +317,10 @@ namespace Service.Repository
                         var _VenueNo = new SqlParameter("VenueNo", VenueNo);
                         var _VenueBranchNo = new SqlParameter("VenueBranchNo", VenueBranchNo);
                         var _IsApproval = new SqlParameter("IsApproval", IsApproval);
+                        
                         Objresult = context.ServiceSearchDTO.FromSqlRaw(
-                            "Execute dbo.pro_SearchService @VenueNo,@VenueBranchNo,@IsApproval",
-                         _VenueNo, _VenueBranchNo, _IsApproval).ToList();
+                        "Execute dbo.pro_SearchService @VenueNo,@VenueBranchNo,@IsApproval",
+                        _VenueNo, _VenueBranchNo, _IsApproval).ToList();
                     }
                 }
             }
@@ -341,9 +341,10 @@ namespace Service.Repository
                     var _VenueBranchNo = new SqlParameter("VenueBranchNo", VenueBranchNo);
                     var _ServiceNo = new SqlParameter("ServiceNo", ServiceNo);
                     var _PatientVisitNo = new SqlParameter("PatientVisitNo", PatientVisitNo);
+                    
                     Objresult = context.GetOptionalSelectedInPackages.FromSqlRaw(
-                        "Execute dbo.Pro_GetOptionalSelectedInPackages @VenueNo,@VenueBranchNo,@ServiceNo,@PatientVisitNo",
-                        _VenueNo, _VenueBranchNo, _ServiceNo, _PatientVisitNo).ToList();
+                    "Execute dbo.Pro_GetOptionalSelectedInPackages @VenueNo,@VenueBranchNo,@ServiceNo,@PatientVisitNo",
+                    _VenueNo, _VenueBranchNo, _ServiceNo, _PatientVisitNo).ToList();
                 }
             }
             catch (Exception ex)
@@ -359,6 +360,7 @@ namespace Service.Repository
             {
                 string _CacheKey = CacheKeys.tblGroupList + VenueNo + VenueBranchNo;
                 Objresult = MemoryCacheRepository.GetCacheItem<List<GroupTestDTO>>(_CacheKey);
+                
                 if (Objresult == null)
                 {
                     using (var context = new FrontOfficeContext(_config.GetConnectionString(ConfigKeys.DefaultConnection)))
@@ -367,9 +369,10 @@ namespace Service.Repository
                         var _VenueBranchNo = new SqlParameter("VenueBranchNo", VenueBranchNo);
                         var _ServiceNo = new SqlParameter("ServiceNo", ServiceNo);
                         var _ServiceType = new SqlParameter("ServiceType", ServiceType);
+                        
                         Objresult = context.GroupServiceDTO.FromSqlRaw(
-                            "Execute dbo.pro_GrouptestDetails @VenueNo,@VenueBranchNo,@ServiceNo,@ServiceType",
-                         _VenueNo, _VenueBranchNo, _ServiceNo, _ServiceType).ToList();
+                        "Execute dbo.pro_GrouptestDetails @VenueNo,@VenueBranchNo,@ServiceNo,@ServiceType",
+                        _VenueNo, _VenueBranchNo, _ServiceNo, _ServiceType).ToList();
                     }
                 }
             }
@@ -382,6 +385,7 @@ namespace Service.Repository
         public FrontOffficeValidatetest getvalidatetest(List<ServiceParamDTO> req)
         {
             FrontOffficeValidatetest Objresult = new FrontOffficeValidatetest();
+            
             try
             {
                 XElement XMLNode = new XElement("ServiceXML", req.Select(kv => new XElement("Service",
@@ -392,10 +396,10 @@ namespace Service.Repository
                     var _VenueNo = new SqlParameter("VenueNo", req[0].venueNo);
                     var _VenueBranchNo = new SqlParameter("VenueBranchNo", req[0].venueBranchNo);
                     var _ServiceXML = new SqlParameter("ServiceXML", XMLNode.ToString());
+                    
                     Objresult = context.validatetestresult.FromSqlRaw(
-                        "Execute dbo.pro_ValidateService @VenueNo,@VenueBranchNo,@ServiceXML",
-                     _VenueNo, _VenueBranchNo, _ServiceXML).AsEnumerable()?.FirstOrDefault();
-
+                    "Execute dbo.pro_ValidateService @VenueNo,@VenueBranchNo,@ServiceXML",
+                    _VenueNo, _VenueBranchNo, _ServiceXML).AsEnumerable()?.FirstOrDefault();
                 }
             }
             catch (Exception ex)
@@ -432,7 +436,6 @@ namespace Service.Repository
         }
         public List<CreateManageSampleResponse> PrePrintManageSample(List<PrePrintBarcodeRequest> createManageSample)
         {
-            //CreateManageSampleRequest sampleRequest = new CreateManageSampleRequest();
             List<CreateManageSampleResponse> response = new List<CreateManageSampleResponse>();
             CommonHelper commonUtility = new CommonHelper();
             string strXML = commonUtility.ToXML(createManageSample);
@@ -446,12 +449,11 @@ namespace Service.Repository
                     var _UserNo = new SqlParameter("UserNo", createManageSample?.FirstOrDefault()?.userNo);
                     var _TenantID = new SqlParameter("VenueNo", createManageSample?.FirstOrDefault()?.venueNo);
                     var _pagecode = new SqlParameter("pagecode", createManageSample?.FirstOrDefault()?.pagecode);
-
                     var _TenantBranchID = new SqlParameter("VenueBranchNo", createManageSample?.FirstOrDefault()?.venueBranchNo);
+                    
                     response = context.CreateManageSamples.FromSqlRaw(
-                        "Execute dbo.Pro_PrePrintBarcodeInsertSamples @SampleXML,@CreatedBy,@VenueBranchNo,@VenueNo,@UserNo,@pagecode",
+                    "Execute dbo.Pro_PrePrintBarcodeInsertSamples @SampleXML,@CreatedBy,@VenueBranchNo,@VenueNo,@UserNo,@pagecode",
                     _SampleXML, _CreatedBy, _UserNo, _TenantID, _TenantBranchID, _pagecode).ToList();
-
                 }
             }
             catch (Exception ex)
@@ -473,8 +475,9 @@ namespace Service.Repository
                     var _UserNo = new SqlParameter("UserNo", req.UserNo);
                     var _VenueNo = new SqlParameter("VenueNo", req.VenueNo);
                     var _VenueBranchNo = new SqlParameter("VenueBranchNo", req.VenueBranchNo);
+                    
                     lstresult = context.TestPrePrintDetails.FromSqlRaw(
-                        "Execute dbo.pro_GetTestPrePrintDetails @VenueNo,@VenueBranchNo,@UserNo,@ServiceNo,@ServiceType",
+                    "Execute dbo.pro_GetTestPrePrintDetails @VenueNo,@VenueBranchNo,@UserNo,@ServiceNo,@ServiceType",
                     _VenueNo, _VenueBranchNo, _UserNo, _ServiceNo, _ServiceType).ToList();
 
                     foreach (var obj in lstresult)
@@ -500,6 +503,7 @@ namespace Service.Repository
                         objResponse.UnitsNo = obj.UnitsNo;
                         objResponse.IsMultiSampleSelect = obj.IsMultiSampleSelect;
                         objResponse.lstMultiSampleList = new List<MultiSampleList>();
+                        
                         if (objResponse.IsMultiSampleSelect)
                         {
                             GetMultiplsSampleRequest objSampRequest = new GetMultiplsSampleRequest();
@@ -507,10 +511,7 @@ namespace Service.Repository
                             objSampRequest.VenueNo = req.VenueNo;
                             objSampRequest.VenueBranchNo = req.VenueBranchNo;
                             objSampRequest.Type = req.ServiceType.ToString();
-                            //GetMultiplsSampleResponse objSampResponse = new GetMultiplsSampleResponse();
-                            //objSampResponse = GetMultiplsSampleByTestId(objSampRequest);
-                            //objResponse.lstMultiSampleList = JsonConvert.DeserializeObject<List<MultiSamplesList>>(objSampResponse.SelectMultiSampleJson);
-
+                   
                             List<GetMultiplsSampleResponse> lstSampResponse = new List<GetMultiplsSampleResponse>();
                             lstSampResponse = GetMultiplsSampleByTestId(objSampRequest);
                             foreach (var multiSample in lstSampResponse)
@@ -548,13 +549,13 @@ namespace Service.Repository
                     var _venuebranchno = new SqlParameter("VenueBranchNo", req.VenueBranchNo);
 
                     lstMulti = context.GetMultiplsSampleByTestId.FromSqlRaw(
-                        "Execute dbo.Pro_GetMultiSampleByTestId @Type,@VenueNo,@VenueBranchNo,@TestNo",
-                           _type, _venueno, _venuebranchno, _testno).ToList();
+                    "Execute dbo.Pro_GetMultiSampleByTestId @Type,@VenueNo,@VenueBranchNo,@TestNo",
+                    _type, _venueno, _venuebranchno, _testno).ToList();
                 }
             }
             catch (Exception ex)
             {
-                MyDevException.Error(ex, "TestRepository.GetMultiplsSampleByTestId" + req.TestNo.ToString(), ExceptionPriority.Low, ApplicationType.REPOSITORY, req.VenueNo, req.VenueBranchNo, 0);
+                MyDevException.Error(ex, "TestRepository.GetMultiplsSampleByTestId - " + req.TestNo.ToString(), ExceptionPriority.Low, ApplicationType.REPOSITORY, req.VenueNo, req.VenueBranchNo, 0);
             }
             return lstMulti;
         }
@@ -571,14 +572,15 @@ namespace Service.Repository
                     var _VisitNo = new SqlParameter("VisitNo", req.VisitNo);
                     var _VenueNo = new SqlParameter("VenueNo", req.VenueNo);
                     var _VenueBranchNo = new SqlParameter("VenueBranchNo", req.VenueBranchNo);
+                    
                     Objresult = context.CheckExternalVistIdExists.FromSqlRaw(
-                        "Execute dbo.pro_CheckExternalVistIdExists @VenueNo,@VenueBranchNo,@UserNo,@Value,@ValueType,@VisitNo",
+                    "Execute dbo.pro_CheckExternalVistIdExists @VenueNo, @VenueBranchNo, @UserNo, @Value, @ValueType, @VisitNo",
                     _VenueNo, _VenueBranchNo, _UserNo, _Value, _ValueType, _VisitNo).AsEnumerable()?.FirstOrDefault();
                 }
             }
             catch (Exception ex)
             {
-                MyDevException.Error(ex, "FrontOfficeRepository.CheckExternalVistIdExists/VisitId-" + req.Value, ExceptionPriority.High, ApplicationType.REPOSITORY, req.VenueNo, req.VenueBranchNo, 0);
+                MyDevException.Error(ex, "FrontOfficeRepository.CheckExternalVistIdExists/VisitId - " + req.Value, ExceptionPriority.High, ApplicationType.REPOSITORY, req.VenueNo, req.VenueBranchNo, 0);
             }
             return Objresult;
         }
@@ -787,7 +789,8 @@ namespace Service.Repository
             }
             catch (Exception ex)
             {
-                MyDevException.Error(ex, "FrontOfficeRepository.InsertFrontOfficeMaster/PatientVisitNo-" + PatientVisitNo, ExceptionPriority.High, ApplicationType.REPOSITORY, objDTO.VenueNo, objDTO.VenueBranchNo, objDTO.UserNo);
+                MyDevException.Error(ex, "FrontOfficeRepository.InsertFrontOfficeMaster/PatientVisitNo - " + PatientVisitNo, ExceptionPriority.High, ApplicationType.REPOSITORY, objDTO.VenueNo, objDTO.VenueBranchNo, objDTO.UserNo);
+                
                 using (var context = new FrontOfficeContext(_config.GetConnectionString(ConfigKeys.DefaultConnection)))
                 {
                     var _PatientVisitNo = new SqlParameter("PatientVisitNo", PatientVisitNo);
@@ -802,7 +805,6 @@ namespace Service.Repository
             }
             return result;
         }
-
         public FrontOffficeResponse InsertFrontOfficeRegistration(FrontOffficeDTO objDTO)
         {
             int PatientVisitNo = 0;
@@ -858,6 +860,7 @@ namespace Service.Repository
                         string registrationTime = objDTO?.registrationDT?.Split('T')[1];
                         objDTO.registrationDT = registrationDate + ' ' + registrationTime;
                     }
+
                     var _registrationDT = new SqlParameter("registrationDT", objDTO.registrationDT.ValidateEmpty());
                     var _IsEmail = new SqlParameter("IsAutoEmail", objDTO.IsAutoEmail);
                     var _IsSMS = new SqlParameter("IsAutoSMS", objDTO.IsAutoSMS);
@@ -934,12 +937,14 @@ namespace Service.Repository
                     _C2PBillSMSPatient, _C2PBillEmailPatient, _C2PBillWhatsappPatient, _loyalcardno).AsEnumerable().ToList();
 
                     PatientVisitNo = FrontOffficePatientResponse[0].patientvisitno;
+
                     //Check if exists or not mobileno and passportno in  Client portal 
                     if (PatientVisitNo == -4)
                     {
                         result.patientvisitno = PatientVisitNo;
                         return result;
                     }
+
                     XDocument ServiceXML = new XDocument(new XElement("Orders", from Item in objDTO.Orders
                                                                                 select
                      new XElement("ServiceList",
@@ -968,6 +973,7 @@ namespace Service.Repository
                     new XElement("CurrencyRate", Item.CurrencyRate),
                     new XElement("CurrencyAmount", Item.CurrencyAmount)
                     )));
+
                     var vDueRemarks = objDTO.DueRemarks != null ? objDTO.DueRemarks : "";
                     var _PatientVisitNo = new SqlParameter("PatientVisitNo", PatientVisitNo);
                     var _orderxml = new SqlParameter("orderxml", ServiceXML.ToString());
@@ -1005,15 +1011,17 @@ namespace Service.Repository
             }
             catch (Exception ex)
             {
-                MyDevException.Error(ex, "FrontOfficeRepository.InsertFrontOfficeMaster/PatientVisitNo-" + PatientVisitNo, ExceptionPriority.High, ApplicationType.REPOSITORY, objDTO.VenueNo, objDTO.VenueBranchNo, objDTO.UserNo);
+                MyDevException.Error(ex, "FrontOfficeRepository.InsertFrontOfficeMaster/PatientVisitNo - " + PatientVisitNo, ExceptionPriority.High, ApplicationType.REPOSITORY, objDTO.VenueNo, objDTO.VenueBranchNo, objDTO.UserNo);
+                
                 using (var context = new FrontOfficeContext(_config.GetConnectionString(ConfigKeys.DefaultConnection)))
                 {
                     var _PatientVisitNo = new SqlParameter("PatientVisitNo", PatientVisitNo);
                     var _PUserID = new SqlParameter("UserNo", objDTO.UserNo.ToString());
                     var _PVenueNo = new SqlParameter("VenueNo", objDTO.VenueNo);
                     var _PVenueBranchNo = new SqlParameter("VenueBranchNo", objDTO.VenueBranchNo);
+                    
                     context.FrontOffficeReset.FromSqlRaw(
-                         "Execute dbo.pro_ResetRegistration @PatientVisitNo,@UserNo,@VenueNo,@VenueBranchNo",
+                         "Execute dbo.pro_ResetRegistration @PatientVisitNo, @UserNo, @VenueNo, @VenueBranchNo",
                          _PatientVisitNo, _PUserID, _PVenueNo, _PVenueBranchNo).AsEnumerable()?.FirstOrDefault();
                 }
             }
@@ -1037,8 +1045,11 @@ namespace Service.Repository
                     var _PatientVisitNo = new SqlParameter("PatientVisitNo", patientVisitNo);
                     var _venueno = new SqlParameter("VenueNo", venueno);
                     var _venuebranchno = new SqlParameter("VenueBranchNo", venuebranchno);
+                    
                     var lst = context.GetCustomerMsgDetails.FromSqlRaw(
-                   "Execute dbo.Pro_GetPatientNotification @PatientVisitNo,@VenueNo,@VenueBranchNo", _PatientVisitNo, _venueno, _venuebranchno).ToList();
+                    "Execute dbo.Pro_GetPatientNotification @PatientVisitNo, @VenueNo,@VenueBranchNo", 
+                    _PatientVisitNo, _venueno, _venuebranchno).ToList();
+                    
                     if (lst.Count > 0)
                     {
                         foreach (var item in lst)
@@ -1052,12 +1063,14 @@ namespace Service.Repository
                             objDTO.VenueBranchNo = venuebranchno;
                             objDTO.UserNo = userno;
                             objDTO.ScheduleTime = DateTime.Now;
+
                             Dictionary<string, string> objMessageItem = new Dictionary<string, string>();
                             objMessageItem.Add("#Address#", item.Address);
                             objMessageItem.Add("#UserName#", item.VisitID);
                             objMessageItem.Add("#Password#", Password);
                             objMessageItem.Add("#FullName#", item.FullName);
                             objMessageItem.Add("#URL#", URL);
+
                             objDTO.MessageItem = objMessageItem;
                             objDTO.IsAttachment = false;
                             objDTO.PatientVisitNo = patientVisitNo;
@@ -1068,7 +1081,7 @@ namespace Service.Repository
             }
             catch (Exception ex)
             {
-                MyDevException.Error(ex, "FrontOfficeRepository.PushMessage/PatientVisitNo-" + patientVisitNo, ExceptionPriority.High, ApplicationType.REPOSITORY, venueno, venuebranchno, userno);
+                MyDevException.Error(ex, "FrontOfficeRepository.PushMessage/PatientVisitNo - " + patientVisitNo, ExceptionPriority.High, ApplicationType.REPOSITORY, venueno, venuebranchno, userno);
             }
             return result;
         }
@@ -1088,21 +1101,26 @@ namespace Service.Repository
                 objdictionary.Add("UserNo", req.userNo.ToString());
                 objdictionary.Add("VenueNo", req.VenueNo.ToString());
                 objdictionary.Add("VenueBranchNo", req.VenueBranchNo.ToString());
+
                 ReportContext objReportContext = new ReportContext(_config.GetConnectionString(ConfigKeys.DefaultConnection));
                 TblReportMaster tblReportMaster = new TblReportMaster();
+                
                 using (var context = new LIMSContext(_config.GetConnectionString(ConfigKeys.DefaultConnection)))
                 {
                     if (req.print == "" || req.print == null)
                     {
                         req.print = ReportKey.PATIENTBILL;
                     }
+
                     tblReportMaster = context.TblReportMaster.Where(x => x.ReportKey == req.print && x.VenueNo == req.VenueNo
                     && x.VenueBranchNo == req.VenueBranchNo).AsEnumerable()?.FirstOrDefault();
+                    
                     if (!Directory.Exists(tblReportMaster?.ExportPath))
                     {
                         Directory.CreateDirectory(tblReportMaster?.ExportPath);
                     }
                 }
+
                 DataTable datable = objReportContext.getdatatable(objdictionary, tblReportMaster?.ProcedureName);
 
                 ReportParamDto objitem = new ReportParamDto();
@@ -1129,7 +1147,7 @@ namespace Service.Repository
             }
             catch (Exception ex)
             {
-                MyDevException.Error(ex, "FrontOfficeRepository.PrintBill/visitNo-" + req.visitNo, ExceptionPriority.High, ApplicationType.REPOSITORY, req.VenueNo, req.VenueBranchNo, req.userNo);
+                MyDevException.Error(ex, "FrontOfficeRepository.PrintBill/visitNo - " + req.visitNo, ExceptionPriority.High, ApplicationType.REPOSITORY, req.VenueNo, req.VenueBranchNo, req.userNo);
             }
             return result;
         }

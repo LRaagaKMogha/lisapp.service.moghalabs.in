@@ -51,15 +51,18 @@ namespace Service.Common
                 using (SqlConnection oConnection = new SqlConnection(EncryptionHelper.DecryptSecret(System.Configuration.ConfigurationManager.AppSettings["ConnectionString"] ?? string.Empty)))
                 {
                     oConnection.Open();
+
                     using (SqlCommand oCommand = new SqlCommand())
                     {
                         oCommand.CommandText = "pro_writelog_exception";
                         oCommand.Connection = oConnection;
                         oCommand.CommandType = CommandType.StoredProcedure;
+
                         foreach (var item in param)
                         {
                             oCommand.Parameters.AddWithValue(item.Key, item.Value);
                         }
+                        
                         oCommand.ExecuteNonQuery();
                         oConnection.Close();
                     }
@@ -98,6 +101,7 @@ namespace Service.Common
             try
             {
                 string? logBasePath = System.Configuration.ConfigurationManager.AppSettings["LogFilepath"];
+                
                 if (string.IsNullOrWhiteSpace(logBasePath)) 
                     return;
 
@@ -118,6 +122,7 @@ namespace Service.Common
                 {
                     fileStream = new FileStream(logFilePath, FileMode.Append);
                 }
+
                 streamWriter = new StreamWriter(fileStream);
                 streamWriter.WriteLine(message);
             }

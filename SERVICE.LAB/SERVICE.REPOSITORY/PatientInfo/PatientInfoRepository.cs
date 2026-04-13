@@ -60,7 +60,7 @@ namespace Service.Repository.PatientInfo
                     var _MultiDeptNo = new SqlParameter("MultiDeptNo", RequestItem.multiDeptNo);
 
                     lstPatientInfoResponse = context.GetPatientInfoDTO.FromSqlRaw(
-                    "Execute dbo.Pro_GetPatientInfo @FromDate, @ToDate, @Type, @VenueNo, @VenueBranchNo, @CustomerNo, @PatientNo,@VisitNo,@RefferalType,@FilterCustomerNo,@PhysicianNo," +
+                    "EXEC dbo.Pro_GetPatientInfo @FromDate, @ToDate, @Type, @VenueNo, @VenueBranchNo, @CustomerNo, @PatientNo,@VisitNo,@RefferalType,@FilterCustomerNo,@PhysicianNo," +
                     "@DepartmentNo, @ServiceNo, @ServiceType, @OrderStatus, @isSTATFilter, @PageIndex, @loginType, @UserNo, @RouteNo, @maindeptNo, @MultiFieldsSearch,@MultiDeptNo",
                     _FromDate, _ToDate, _Type, _VenueNo, _VenueBranchNo, _CustomerNo, _PatientNo, _VisitNo, _RefferalType, _FilterCustomerNo, _PhysicianNo, _DepartmentNo,
                     _ServiceNo, _ServiceType, _OrderStatus, _isSTATFilter, _pageIndex, _loginType, _userNo, _routeNo, _maindeptNo, _MultiFieldsSearch,_MultiDeptNo).ToList();                   

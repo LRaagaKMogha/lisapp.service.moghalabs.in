@@ -27,9 +27,11 @@ namespace Shared
         public string GenerateToken(User? user = null)
         {
             if (user == null) user = new User(true, true, 1, 1, 1, "BloodBankMasters", true);
+            
             // generate token that is valid for 7 days
             var tokenHandler = new JwtSecurityTokenHandler();
             var key = Encoding.ASCII.GetBytes(_appSettings.JWT.Key);
+            
             var tokenDescriptor = new SecurityTokenDescriptor
             {
                 Subject = new ClaimsIdentity(new[]
@@ -46,6 +48,7 @@ namespace Shared
                 Expires = DateTime.UtcNow.AddDays(1),
                 SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
             };
+
             var token = tokenHandler.CreateToken(tokenDescriptor);
             return tokenHandler.WriteToken(token);
         }
@@ -57,6 +60,7 @@ namespace Shared
 
             var tokenHandler = new JwtSecurityTokenHandler();
             var key = Encoding.ASCII.GetBytes(_appSettings.JWT.Key);
+
             try
             {
                 tokenHandler.ValidateToken(token, new TokenValidationParameters
@@ -78,6 +82,7 @@ namespace Shared
                 var userNo = Int32.Parse(jwtToken.Claims.First(x => x.Type == "UserNo").Value);
                 var userName = jwtToken.Claims.First(x => x.Type == "UserName").Value;
                 var roles = jwtToken.Claims.Where(x => x.Type == "role").Select(x => x.Value).ToList();
+                
                 // return user id from JWT token if validation successful
                 return new User(isAdmin, isSuperAdmin, venueNo, venueBranchNo, userNo, userName, isProvisional, roles);
             }

@@ -97,6 +97,7 @@ namespace Service.Model.PatientInfo
         public bool IsShowDocument { get; set; }
         [NotMapped]
         public bool IsShowSendOutDocument { get; set; }
+        [NotMapped]
         public bool IsShowHCDocument { get; set; }
         public string BranchName { get; set; }
         public string marketingExec { get; set; }

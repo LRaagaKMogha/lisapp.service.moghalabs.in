@@ -23,6 +23,7 @@ namespace Service.Common
         public static void WriteDevException(string message, string functionname, ExceptionPriority Priority, ApplicationType applicationType, int? veneueid, int? venuebranchid, int? userid)
         {
             ConfigurationHelper objconfig = new ConfigurationHelper();
+
             if (ConfigurationManager.AppSettings["EnableFileLog"] == "1")
             {
                 objconfig.Writefilelog(message);

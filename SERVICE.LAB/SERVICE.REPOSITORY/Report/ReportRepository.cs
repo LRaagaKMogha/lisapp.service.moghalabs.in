@@ -49,19 +49,7 @@ namespace Service.Repository
                 }
 
                 DataTable datable = null;
-                if (tblReportMaster?.ProcedureName != "pro_CollectionMIS_8")
-                    datable = objReportContext.getdatatable(_Dictionary, tblReportMaster?.ProcedureName);
-                else
-                {
-                    datable = objReportContext.getdatatable(_Dictionary, tblReportMaster?.ProcedureName);
-                    string dataHtml = ConvertDataTableToHTML(objReportContext.getdatatable(_Dictionary, "Pro_UserCollectionSummaryReport"));
-                    int columnNumber = 18; //Put your column X number here
-
-                    for (int i = 0; i < datable.Rows.Count; i++)
-                    {
-                        datable.Rows[i][columnNumber] = dataHtml;
-                    }
-                }
+                datable = objReportContext.getdatatable(_Dictionary, tblReportMaster?.ProcedureName);
 
                 ReportParamDto objitem = new ReportParamDto();
                 objitem.datatable = CommonExtension.DatableToDicionary(datable);
@@ -92,7 +80,7 @@ namespace Service.Repository
             }
             catch (Exception ex)
             {
-                MyDevException.Error(ex, "ReportRepository.GetReport/ReportKey-" + ReportItem.ReportKey, ExceptionPriority.High, ApplicationType.REPOSITORY, ReportItem.venueNo, ReportItem.venueBranchNo, ReportItem.userID);
+                MyDevException.Error(ex, "ReportRepository.GetReport/ReportKey - " + ReportItem.ReportKey, ExceptionPriority.High, ApplicationType.REPOSITORY, ReportItem.venueNo, ReportItem.venueBranchNo, ReportItem.userID);
             }
             return result;
         }
