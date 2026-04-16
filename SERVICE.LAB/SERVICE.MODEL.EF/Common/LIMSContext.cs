@@ -383,7 +383,7 @@ namespace Service.Model.EF
             modelBuilder.Entity<PatientInfoResponse>(entity =>
             {
                 entity.HasKey(e => e.Row_num);
-                entity.ToTable("Pro_GetPatientInfo");
+                entity.ToTable("Pro_RegistrationsInfo");
                 entity.Property(e => e.Row_num).HasColumnName("Row_num");
             });
             

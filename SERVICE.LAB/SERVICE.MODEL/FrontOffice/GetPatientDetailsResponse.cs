@@ -59,7 +59,6 @@ namespace Service.Model
         public string AlternateIdType { get; set; }
         public string AlternateId { get; set; }
         public int? NationalityNo { get; set; }
-        public string loyalcardno { get; set; }
     }
     public class GetPatientDetailsWithServices: GetPatientDetailsResponse
     {        

@@ -915,8 +915,7 @@ namespace Service.Repository
                     var _C2PBillSMSPatient = new SqlParameter("C2PBillSMSPatient", objDTO.C2PBillSMSPatient);
                     var _C2PBillEmailPatient = new SqlParameter("C2PBillEmailPatient", objDTO.C2PBillEmailPatient);
                     var _C2PBillWhatsappPatient = new SqlParameter("C2PBillWhatsappPatient", objDTO.C2PBillWhatsappPatient);
-                    var _loyalcardno = new SqlParameter("loyalcardno", objDTO.loyalcardno.ValidateEmpty());
-
+                    
                     var FrontOffficePatientResponse = context.FrontOffficeRegistration.FromSqlRaw(
                     "Execute dbo.Pro_InsertPatientRegistration @PatientNo,@TitleCode,@FirstName,@MiddleName,@LastName,@DOB,@Gender,@Age,@AgeType,@ageDays,@ageMonths,@ageYears,@MobileNumber,@AltMobileNumber," +
                     "@EmailID,@SecondaryEmailID,@Address,@CountryNo,@StateNo,@CityNo,@AreaName,@Pincode,@SecondaryAddress," +
@@ -925,7 +924,7 @@ namespace Service.Repository
                     "@WardNo,@WardName,@maritalStatus,@isAutoWhatsApp,@NRICNumber,@AllergyInfo,@PatientBlock,@PatientUnitNo,@PatientFloor," +
                     "@PatientBuilding,@PatientHomeNo,@PhysicianNo2,@VipIndication,@BedNo,@NationalityNo,@RaceNo,@CompanyNo,@CaseNumber,@AlternateIdType, " +
                     "@AlternateId,@PatientOfficeNumber,@IsPregnant,@Remarks,@HomePhoneNo,@ClinicalDiagnosis,@ClinicalDiagnosisOthers,@SampleCollectionDT," +
-                    "@InternalComments, @HCPatientNo, @IsFasting, @ExternalPatientID,@C2PReportSMSPatient,@C2PReportEmailPatient,@C2PReportWhatsappPatient,@C2PBillSMSPatient,@C2PBillEmailPatient,@C2PBillWhatsappPatient,@loyalcardno",
+                    "@InternalComments, @HCPatientNo, @IsFasting, @ExternalPatientID,@C2PReportSMSPatient,@C2PReportEmailPatient,@C2PReportWhatsappPatient,@C2PBillSMSPatient,@C2PBillEmailPatient,@C2PBillWhatsappPatient",
                     _PatientNo, _TitleCode, _FirstName, _MiddleName, _LastName, _DOB, _Gender, _Age, _AgeType, _AgeDays, _AgeMonths, _AgeYears, _MobileNumber, _AltMobileNumber, _EmailID,
                     _SecondaryEmailID, _Address, _CountryNo, _StateNo, _CityNo, _AreaName, _Pincode, _SecondaryAddress, _URNID, _URNType, _RefferralTypeNo,
                     _CustomerNo, _PhysicianNo, _RiderNo, _MarketingNo, _RouteNo, _IsStat, _ClinicalHistory, _registeredType, _VenueNo, _VenueBranchNo, _UserID, _Password, _registrationDT,
@@ -934,7 +933,7 @@ namespace Service.Repository
                     _AllergyInfo, _PatientBlock, _PatientUnitNo, _PatientFloor, _PatientBuilding, _PatientHomeNo, _PhysicianNo2, _VipIndication, _BedNo, _NationalityNo, _RaceNo,
                     _CompanyNo, _CaseNumber, _AlternateIdType, _AlternateId, _PatientOfficeNumber, _IsPregnant, _Remarks, _HomePhoneNo, _ClinicalDiagnosis, _ClinicalDiagnosisOthers,
                     _SampleCollectionDT, _InternalComments, _HCPatientNo, _IsFasting, _ExternalPatientID, _C2PReportSMSPatient, _C2PReportEmailPatient, _C2PReportWhatsappPatient,
-                    _C2PBillSMSPatient, _C2PBillEmailPatient, _C2PBillWhatsappPatient, _loyalcardno).AsEnumerable().ToList();
+                    _C2PBillSMSPatient, _C2PBillEmailPatient, _C2PBillWhatsappPatient).AsEnumerable().ToList();
 
                     PatientVisitNo = FrontOffficePatientResponse[0].patientvisitno;
 
@@ -1232,8 +1231,6 @@ namespace Service.Repository
                             Objresult.AlternateIdType = response?.FirstOrDefault()?.AlternateIdType;
                             Objresult.NationalityNo = response?.FirstOrDefault()?.NationalityNo;
                             Objresult.Amount = response.FirstOrDefault().Amount;
-                            //
-                            Objresult.loyalcardno = response.FirstOrDefault().loyalcardno;
                         }
                         foreach (var patientdetail in response)
                         {
@@ -1779,7 +1776,7 @@ namespace Service.Repository
                     var _venuebranchno = new SqlParameter("venuebranchno", req.venuebranchno);
 
                     Objresult = context.getloyalcard.FromSqlRaw(
-                        "Execute dbo.Pro_GetLoyaltyType @loyalcardno, @venueNo, @venuebranchno",
+                    "Execute dbo.Pro_GetLoyaltyType @loyalcardno, @venueNo, @venuebranchno",
                    _loyalcardno, _venueNo, _venuebranchno).ToList();
                 }
             }
@@ -1800,8 +1797,9 @@ namespace Service.Repository
                     var _PatternType = new SqlParameter("PatternType", req.PatternType);                 
                     var _VenueNo = new SqlParameter("VenueNo", req.VenueNo);
                     var _VenueBranchNo = new SqlParameter("VenueBranchNo", req.VenueBranchNo);
+                    
                     Objresult = context.GetVisitPatternID.FromSqlRaw(
-                        "Execute dbo.pro_GetPatternIDNew @PatternType,@VenueNo,@VenueBranchNo",
+                    "Execute dbo.pro_GetPatternIDNew @PatternType,@VenueNo,@VenueBranchNo",
                     _PatternType, _VenueNo, _VenueBranchNo).AsEnumerable()?.FirstOrDefault();
                 }
             }

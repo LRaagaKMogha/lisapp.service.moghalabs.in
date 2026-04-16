@@ -102,7 +102,6 @@ namespace Service.Model.PatientInfo
         public string BranchName { get; set; }
         public string marketingExec { get; set; }
         public string collectionExec { get; set; }
-        public string loyalcardno { get; set; }
     }
     public class CustomSearchResponse
     {
@@ -298,7 +297,6 @@ namespace Service.Model.PatientInfo
         public string BranchName { get; set; }
         public string marketingExec { get; set; }
         public string collectionExec { get; set; }
-        public string loyalcardno { get; set; }
     }
     public class ReportOutputhc
     {

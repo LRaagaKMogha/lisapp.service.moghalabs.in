@@ -41,7 +41,6 @@ namespace Service.Model.PatientInfo
         public Int16 BloodGroup { get; set; }
         public bool IsActive { get; set; }
         public bool IsPatientMaster { get; set; }
-        public string LoyalCardNo { get; set; }
         public int SaveType { get; set; }
     }
     public class PatientsMasterRequest
@@ -87,7 +86,6 @@ namespace Service.Model.PatientInfo
         public int VenueNo { get; set; }
         public int VenueBranchNo { get; set; }
         public int UserID { get; set; }
-        public string LoyalCardNo { get; set; }
         public int SaveType { get; set; }
     }
     public class PatientDocUpload

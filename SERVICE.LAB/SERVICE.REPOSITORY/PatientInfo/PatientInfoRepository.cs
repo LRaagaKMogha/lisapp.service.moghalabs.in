@@ -60,7 +60,7 @@ namespace Service.Repository.PatientInfo
                     var _MultiDeptNo = new SqlParameter("MultiDeptNo", RequestItem.multiDeptNo);
 
                     lstPatientInfoResponse = context.GetPatientInfoDTO.FromSqlRaw(
-                    "EXEC dbo.Pro_GetPatientInfo @FromDate, @ToDate, @Type, @VenueNo, @VenueBranchNo, @CustomerNo, @PatientNo,@VisitNo,@RefferalType,@FilterCustomerNo,@PhysicianNo," +
+                    "EXEC dbo.Pro_RegistrationsInfo @FromDate, @ToDate, @Type, @VenueNo, @VenueBranchNo, @CustomerNo, @PatientNo,@VisitNo,@RefferalType,@FilterCustomerNo,@PhysicianNo," +
                     "@DepartmentNo, @ServiceNo, @ServiceType, @OrderStatus, @isSTATFilter, @PageIndex, @loginType, @UserNo, @RouteNo, @maindeptNo, @MultiFieldsSearch,@MultiDeptNo",
                     _FromDate, _ToDate, _Type, _VenueNo, _VenueBranchNo, _CustomerNo, _PatientNo, _VisitNo, _RefferalType, _FilterCustomerNo, _PhysicianNo, _DepartmentNo,
                     _ServiceNo, _ServiceType, _OrderStatus, _isSTATFilter, _pageIndex, _loginType, _userNo, _routeNo, _maindeptNo, _MultiFieldsSearch,_MultiDeptNo).ToList();                   
@@ -440,12 +440,11 @@ namespace Service.Repository.PatientInfo
                     var _UserID = new SqlParameter("UserID", RequestItem.UserID);
                     var _SaveType = new SqlParameter("SaveType", RequestItem.SaveType);
                     var _IsActive = new SqlParameter("IsActive", RequestItem.IsActive);
-                    var _LoyalCardNo = new SqlParameter("LoyalCardNo", RequestItem.LoyalCardNo ?? (object)DBNull.Value);
                     var _Password = new SqlParameter("Pass", CommonSecurity.EncodePassword(Password, CommonSecurity.GeneratePassword(1)));
 
                     var lst = context.SavePatientsMaster.FromSqlRaw(
-                    "Execute dbo.pro_InsertPatientMaster @PatientNo,@IsPatientMaster,@TitleCode,@FirstName,@MiddleName,@LastName,@DOB,@Gender,@Age,@AgeMonths,@AgeDays,@MobileNumber,@WhatsappNumber,@LandlineNumber,@EmailID,@Address,@CountryNo,@StateNo,@CityNo,@Place,@Pincode,@RemarksHistory,@MaritalStatus,@Nationality,@BloodGroup,@VenueNo,@VenueBranchNo,@UserID,@SaveType,@IsActive,@Pass,@LoyalCardNo",
-                    _PatientNo, _IsPatientMaster, _TitleCode, _FirstName, _MiddleName, _LastName, _DOB, _Gender, _Age, _AgeMonths, _AgeDays, _MobileNumber, _WhatsappNumber, _LandlineNumber, _EmailID, _Address, _CountryNo, _StateNo, _CityNo, _Place, _Pincode, _RemarksHistory, _MaritalStatus, _Nationality, _BloodGroup, _venueno, _venuebranchno, _UserID, _SaveType, _IsActive, _Password, _LoyalCardNo).ToList();
+                    "Execute dbo.pro_InsertPatientMaster @PatientNo,@IsPatientMaster,@TitleCode,@FirstName,@MiddleName,@LastName,@DOB,@Gender,@Age,@AgeMonths,@AgeDays,@MobileNumber,@WhatsappNumber,@LandlineNumber,@EmailID,@Address,@CountryNo,@StateNo,@CityNo,@Place,@Pincode,@RemarksHistory,@MaritalStatus,@Nationality,@BloodGroup,@VenueNo,@VenueBranchNo,@UserID,@SaveType,@IsActive,@Pass",
+                    _PatientNo, _IsPatientMaster, _TitleCode, _FirstName, _MiddleName, _LastName, _DOB, _Gender, _Age, _AgeMonths, _AgeDays, _MobileNumber, _WhatsappNumber, _LandlineNumber, _EmailID, _Address, _CountryNo, _StateNo, _CityNo, _Place, _Pincode, _RemarksHistory, _MaritalStatus, _Nationality, _BloodGroup, _venueno, _venuebranchno, _UserID, _SaveType, _IsActive, _Password).ToList();
                     
                     patientno = lst[0].PatientNo;
                 }

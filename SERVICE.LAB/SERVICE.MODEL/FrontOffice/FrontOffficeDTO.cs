@@ -116,7 +116,6 @@ namespace Service.Model
         public bool? C2PBillSMSPatient { get; set; }
         public bool? C2PBillEmailPatient { get;set; }
         public bool? C2PBillWhatsappPatient { get; set; }
-        public string loyalcardno { get; set; }
     }
     public class FrontOffficePatientResponse
     {
